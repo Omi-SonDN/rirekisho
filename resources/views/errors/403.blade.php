@@ -41,8 +41,9 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">403. That's an error!!</div>
+                <div class="title">403. Forbidden!!</div>
                 <div><h3>Access denied.!!</h3></div>
+                <div>Copyright 2016<a href="#"> Ominext JSC</a></div>
             </div>
         </div>
     </body>

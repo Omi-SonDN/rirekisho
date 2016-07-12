@@ -2,8 +2,9 @@
 <title>Chỉnh sửa thông tin người dùng</title>
 <!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/uploadCV.css') }}"/-->
 @section('content')
-    <?php $key = $user->id;?>
+    <?php $key = $user->hash ;?>
     <form action="/User/{{$key}}" method="post" class="my-forms" id="profile-forms" enctype="multipart/form-data">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <fieldset id="field-box">
             <div class=" float_left" style="width: 30%;">
                 @include('xUser.profile')
@@ -37,7 +38,7 @@
                         </div>
                     </li>
                     <li >
-                        <a class="" href="{{url('User',[$user->id])}}">Đổi mật khẩu </a>
+                        <a class="" href="{{url('User',[$user->hash ,'edit'])}}">Đổi mật khẩu </a>
                     </li>
                 </ul>
 

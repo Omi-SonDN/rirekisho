@@ -108,4 +108,11 @@
     'italic' => DOMPDF_DIR . '/lib/fonts/DejaVuSerifCondensed-Italic',
     'normal' => DOMPDF_DIR . '/lib/fonts/DejaVuSerifCondensed',
   ),
+  'ipagothic' => 
+  array (
+    'bold' => DOMPDF_DIR . '/lib/fonts/ipaexg',
+    'bold_italic' => DOMPDF_DIR . '/lib/fonts/ipaexg',
+    'italic' => DOMPDF_DIR . '/lib/fonts/ipaexg',
+    'normal' => DOMPDF_DIR . '/lib/fonts/ipaexg',
+  )
 ) ?>

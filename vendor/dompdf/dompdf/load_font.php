@@ -7,8 +7,7 @@
  * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
-
-require_once "dompdf_config.inc.php";
+use FontLib\Font;
 
 /**
  * Display command line usage

@@ -11,16 +11,18 @@ class Record extends Model
         'Content', 'Date', 'Type',
     ];
     protected $hidden = [
-        'cv_id', 'remember_token',
+        'remember_token',
     ];
     public function CV()
     {
-        return $this->belongsTo('App\CV');
+        return $this->belongsTo('App\CV', 'cv_id');
     }
+    //ở dưới là accessor
     public function getJDateAttribute($value){
         $value = date_create($this->Date);
         return date_format($value, 'Y年m月');;
     }
+    //function
     public function getRole(){
          if ($this->Type == 0)$Role = "School";
             elseif ($this->Type == 1) {
@@ -30,5 +32,10 @@ class Record extends Model
                 $Role = "Cert";
             }        
         return $Role;
-    }          
+    }
+    public function getHashAttribute()
+    {
+        return $this->getKey();
+        //return Hashids::encode($this->getKey());
+    }
 }

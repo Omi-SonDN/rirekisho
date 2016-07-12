@@ -1,0 +1,2 @@
+ALTER TABLE `cv` ADD `github` VARCHAR(255) NOT NULL , ADD `linkedin` VARCHAR(255) NOT NULL ;
+UPDATE cv SET `Active` = 1;

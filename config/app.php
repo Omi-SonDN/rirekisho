@@ -145,9 +145,12 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
+        //Yajra\Datatables\DatatablesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class
         /*
         *
         */
@@ -202,8 +205,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
           'Html' => Collective\Html\HtmlFacade::class,
-          'Datatables' => Yajra\Datatables\Datatables::class,
+          //'Datatables' => Yajra\Datatables\Datatables::class,
           'PDF' => Barryvdh\DomPDF\Facade::class,
+          'Debugbar' => Barryvdh\Debugbar\Facade::class,
+          'Image' => Intervention\Image\Facades\Image::class,
+          'Hashids' => Vinkla\Hashids\Facades\Hashids::class
          
     ],
 

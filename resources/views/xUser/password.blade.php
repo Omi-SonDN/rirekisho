@@ -1,12 +1,11 @@
 @extends('xCV.template')
-<title>Chỉnh sửa thông tin người dùng</title>
+<title>Thay đổi mật khẩu </title>
 <!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/uploadCV.css') }}"/-->
 @section('content')
-
-    <?php $key = $user->id;?>
-    <form action="/User/{{$key}}/update" method="get" class="my-forms" id="profile-forms">
+    <?php $key = $user->hash ;?>
+    <form action="/User/{{$key}}/changePass" method="get" class="my-forms" id="profile-forms">
         <fieldset id="field-box">
-            <div class=" float_left" style="width: 30%;">
+            <div class=" float_left" style="width: 30%;" i>
                 @include('xUser.profile')
             </div>
             <div class=" float_left" style="width: 60%;  ">
@@ -20,7 +19,7 @@
                                 <label class="icon-right" for="Password">
                                     <i class="fa fa-edit"></i>
                                 </label>
-                                <input type="password" class="input-right" placeholder="Password" name="old_password" disabled>
+                                <input type="password" class="input-right" placeholder="Password" name="old_password">
                             </div>
                         </div>
 
@@ -32,7 +31,7 @@
                                 <label class="icon-right" for="Password">
                                     <i class="fa fa-edit"></i>
                                 </label>
-                                <input type="password" class="input-right" placeholder="Password" name="new_password" disabled>
+                                <input type="password" class="input-right" placeholder="Password" name="password">
                             </div>
                         </div>
 
@@ -44,7 +43,7 @@
                                 <label class="icon-right" for="password_confirmation">
                                     <i class="fa fa-edit"></i>
                                 </label>
-                                <input type="password" class="input-right" placeholder="Confirm Password" disabled
+                                <input type="password" class="input-right" placeholder="Confirm Password"
                                        name="password_confirmation">
                             </div>
                         </div>
@@ -63,6 +62,13 @@
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (Session::has('message') )
+                            <div class="alert alert-success">
+                                <ul>
+                                    <li>{{Session::get('message')}}</li>
                                 </ul>
                             </div>
                         @endif

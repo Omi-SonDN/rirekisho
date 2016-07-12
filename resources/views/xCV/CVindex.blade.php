@@ -24,7 +24,7 @@
       <div class="search">
         <div class="search-forms" >
           <label class="search_icon" for="text">
-            <i class="fa fa-search"></i>  
+            <i class="fa fa-search"></i>
           </label>
           <input id="table-search" class="list_search " placeholder="Search " type="text">
         </div>

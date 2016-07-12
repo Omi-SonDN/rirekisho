@@ -1,66 +1,213 @@
 /* CSS Document */
-.footer{
-	width:1349px;
-	height:45px;
-	background:#00B6F0;
-}
-.footer .leter_icon{
-	width: 30px;
-	height: 30px;
-	margin: 6px 0 0 120px;
-	padding: 4px 0px 0px 5px;
-	float: left;
-	background: #FFF;
-	border-radius: 8px;
-}
-.footer #footer_title{
-	color: #FFF;
-	font-size: 18px;
-	font-weight: bold;
-	line-height: 44px;
-	padding: 0 0 0 20px;
-	float: left;
-}
-.footer .hand_icon{
-	padding:2px 0 0 5px;
-	float:left;
-}
-.footer .input{
-	float:left;
-	margin: 8px 0 5px 11px;
-}
-.footer .input .input_class{
-	width:160px;
-	height:28px;
-	border: 1px solid #fff;
-	border-radius:4px;
-	padding: 0 8px 0 15px;
-}
-.footer .button_class{
-	color: #FFF;
-	font-size: 15px;
-	font-weight: bold;
-	width: 218px;
-	height: 32px;
-	border: none;
-	border-radius: 6px;
-	box-shadow: 0 -2px 0 #27870a inset;
-	margin: 7px 0 0 20px;
-	padding: 0px 15px 0 15px;
-	background: linear-gradient(to bottom, #58bf0f 1%, #42aa0d 100%);
-} 
-.footer p{
-	color: #919191;
-	margin:20px 0 50px 120px;
+.footer {
+    width: 1349px;
+    height: 45px;
+    background: #00B6F0;
 }
 
+.footer .leter_icon {
+    width: 30px;
+    height: 30px;
+    margin: 6px 0 0 120px;
+    padding: 4px 0px 0px 5px;
+    float: left;
+    background: #FFF;
+    border-radius: 8px;
+}
 
+.footer #footer_title {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 44px;
+    padding: 0 0 0 20px;
+    float: left;
+}
 
+.footer .hand_icon {
+    padding: 2px 0 0 5px;
+    float: left;
+}
 
+.footer .input {
+    float: left;
+    margin: 8px 0 5px 11px;
+}
 
+.footer .input .input_class {
+    width: 160px;
+    height: 28px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 0 8px 0 15px;
+}
 
+.footer .button_class {
+    color: #FFF;
+    font-size: 15px;
+    font-weight: bold;
+    width: 218px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 -2px 0 #27870a inset;
+    margin: 7px 0 0 20px;
+    padding: 0px 15px 0 15px;
+    background: linear-gradient(to bottom, #58bf0f 1%, #42aa0d 100%);
+}
 
+.footer p {
+    color: #919191;
+    margin: 20px 0 50px 120px;
+}
 
+/************************************************************************************/
+
+.burger-place {
+    top: 135px;
+    position: fixed;
+    z-index: 99;
+    margin-left: 4px;
+}
+
+.burger-icon {
+    padding: 22px 0 28px 5px;
+    display: block;
+    height: auto;
+    width: 50px;
+    border: 1px solid #6a5b91;
+    border-radius: 2px;
+    background-color: white;
+    opacity: 0.5;
+}
+
+.burger-icon:hover, .burger-icon:focus {
+    opacity: 0.75;
+
+}
+
+.burger-icon span, .burger-icon span:before, .burger-icon span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 5px;
+    width: 35px;
+    background: #6a5b91;
+    position: absolute;
+    display: block;
+    content: '';
+}
+
+.burger-icon span:before {
+    top: -10px;
+}
+
+.burger-icon span:after {
+    bottom: -10px;
+}
+
+.burger-icon span, .burger-icon span:before, .burger-icon span:after {
+    transition: all 500ms ease-in-out;
+}
+
+.burger-icon.active span {
+    background-color: transparent;
+}
+
+.burger-icon.active span:before, .burger-icon.active :after {
+    top: 0;
+}
+
+.burger-icon.active span:before {
+    transform: rotate(45deg);
+}
+
+.burger-icon.active span:after {
+    transform: rotate(-45deg);
+}
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 8; /* Stay on top */
+    left: 0;
+    margin-top: -37px;
+    border-right: 1px solid #6a5b91;
+    background-color: white; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 37px;
+    transition: 0.5s;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#push {
+    transition: margin-left .5s;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+/* The navigation menu links */
+.sidenav ul li.nav-link {
+    display: block;
+    border-bottom: 1px solid #F5F5F5;
+    /*border-bottom: 1px solid #6a5595;*/
+}
+
+.sidenav li.nav-link a {
+    text-decoration: none;
+    padding: 8px 8px 8px 22px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    font-size: 18px;
+    border: 1px solid transparent;
+}
+
+.sidenav ul li.nav-link > a:hover, .sidenav ul li.nav-link > a:focus {
+    /*background-color: #52527a;
+    color: #ffffff !important;*/
+    background-color: white;
+    border-top: 1px solid #6a5b91;
+    border-bottom: 1px solid #6a5b91;
+}
+
+.sidenav ul li.bookmark-link {
+    display: block;
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.sidenav ul li.bookmark-link a {
+    text-decoration: none;
+    padding: 8px 8px 8px 22px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    font-size: 18px;
+}
+
+.sidenav ul li.bookmark-link a:hover, .sidenav ul li.bookmark-link a:focus {
+    color: #52527a;
+}
+.sidenav ul li.track-list{
+    margin: 4px;
+    padding-top: 7px;
+}
+.sidenav ul li.track-list input{
+    font-size: 12px;font-style: normal; font-weight: 200;
+}
+
+.sidenav ul li.track-list a:visited, a:link{
+
+}
 
 
 
