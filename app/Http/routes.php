@@ -43,6 +43,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('Bookmark', 'BookmarkController', ['except' => ['store', 'destroy', 'create', 'edit']]);
     Route::resource('Record', 'RecordController');
     Route::resource('Skill', 'SkillController');
+
+    //add user - delete
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/add', ['as' => 'getadduser', 'uses' => 'UsersController@getAddUser']);
+        Route::post('/add', ['as' => 'postadduser', 'uses' => 'UsersController@postAddUser']);
+        Route::get('/{id}/del', ['as' => 'getdeluser', 'uses' => 'UsersController@getDel']);
+    });
 });
 Route::group(['middleware' => ['auth', 'App\Http\Middleware\ApplicantMiddleware']], function () {
     Route::resource('CV', 'CVController', ['except' => ['index', 'destroy', 'show']]);
@@ -53,3 +60,6 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@myLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+
+

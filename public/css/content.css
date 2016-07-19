@@ -179,7 +179,29 @@ input, textarea {
     display: none;
 } 
 
+/* **************** bqn custom content ***************** */
+.float_left .form-group label {
+    display: block;
+    color: inherit;
+    font-weight: normal;
+    text-align: left;
+    margin: 0 auto;
+}
+.float_left .form-group label.title {
+    font-size: 14px;
+    font-weight: bold;
+}
 
+.float_left > ul > li.cancel {
+    float: right;
+}
+.float_left > ul > li.cancel input {
+    margin: 0 2px;
+}
+
+.help-block {
+    color: #a94442;
+}
 
 
 

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\View;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Intervention\Image\Facades\Image;
 use Vinkla\Hashids\Facades\Hashids;
+use Hash;
+use App\Http\Requests\xUser\addUserRequest;
 
 
 class UsersController extends Controller
@@ -107,6 +109,10 @@ class UsersController extends Controller
                     ->back()
                     ->withErrors(['error' => 'Wrong Password!! Please try again.']);
             }
+        } else {
+            return redirect()
+                ->back()
+                ->with(['message' => 'No change!']);
         }
     }
 
@@ -166,7 +172,7 @@ class UsersController extends Controller
             $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
             $name = $timestamp . '-' . $file->getClientOriginalName();
             //$oldfile = public_path('img') . $user->image;
-            $oldthumb = public_path('img/thumbnail') . 'thumb_' . $user->image;
+            $oldthumb = public_path('img/thumbnail/') . 'thumb_' . $user->image;
             if (File::exists($oldthumb)) {
                 File::exists($oldthumb) && File::delete($oldthumb);
                 //File::delete($oldfile);
@@ -199,5 +205,81 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //add user
+    public function getAddUser(){
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
+        return View('xUser.UserAdd');
+    }
+    public function postAddUser(addUserRequest $request)
+    {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
+        if ($request->hasFile('txtImage')) {
+            $extension = $request->file('txtImage')->getClientOriginalExtension();
+            $file_name = substr(md5(rand()), 0, 7) . "." . $extension;
+            $request->file('txtImage')->move('img/thumbnail', 'thumb_'. $file_name);
+        } else {
+            $file_name = 'no_image.gif';
+        }
+        $_user = new User();
+        $_user->name = $request->txtName;
+        $_user->email = $request->txtEmail;
+        $_user->role= $request->rdoLevel;
+        $_user->active = 1;
+        $_user->password = Hash::make($request->txtPass);
+        $_user->image = $file_name;
+        $_user->note = '';
+
+        $_user->save();
+        return redirect()
+                 ->route('getadduser')
+                 ->with(
+                     [
+                         'flash_level' => 'success',
+                         'message' => 'Đã thêm user thành công'
+                     ]
+                 );
+    }
+    public function getDel($_id)
+    {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
+        $_id = Hashids::decode($_id)[0];
+        //
+        //Neu 2 admin thi loi... >> fix [GP: Can TK SuperAdmin]
+        //
+        if(Auth::user()->id == $_id) {
+            return redirect()
+                ->route('User.index')
+                ->with(
+                    [
+                        'flash_level' => 'warning',
+                        'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
+                    ]
+                );
+        }
+        $user = User::findOrFail($_id);
+        if($user->image) {
+            $old_del = public_path('img/thumbnail/') . 'thumb_' . $user->image;
+            if (File::exists($old_del)) {
+                File::exists($old_del) && File::delete($old_del);
+            }
+        }
+        // delete user with $_id
+        $user->delete();
+        return redirect()
+            ->route('User.index')
+            ->with(
+                [
+                    'flash_level' => 'success',
+                    'message' => 'Đã xóa user thành công!'
+                ]
+            );
     }
 }
