@@ -19,6 +19,12 @@
         <li class="tab select" data-field="updated_at" data-sort="desc" data-keyword="">
           <a>更新日</a>
         </li>
+        <li class="tab select" data-field="Status" data-sort="desc" data-keyword="">
+            <a>Status</a>
+        </li>
+        <li class="tab select" data-field="apply_to" data-sort="desc" data-keyword="">
+            <a>Apply to</a>
+        </li>
       </ul>
 
       <div class="search">
@@ -42,8 +48,12 @@
       <th data-field="worth" style="width: 15%;"><a>性別</a></th>
       <th data-field="age"><a>年齢</a></th>
       <th data-field="country"><a></a></th>
+      @can('Visitor')
+      <th data-field="apply_to" style="width: 15%;"><a>Apply to</a></th>
+      @endcan
       @can('Admin')
-      <th ></th>
+      <th data-field="status" style="width: 15%;"><a>Status</a></th>
+      <th></th>
       @endcan
     </tr>
   </thead>

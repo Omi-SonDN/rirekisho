@@ -29,10 +29,20 @@ class CV extends Model
         'notes',
         'github',
         'linkedin',
-        'Active'
+        'Active',
     ];
 
     protected $appends = ['age'];
+
+    // public function getStatusnameAttribute(){
+    //     switch ($this->Status) {
+    //         case 0: return "Chờ duyệt"; break;
+            
+    //         default:
+    //             # code...
+    //             break;
+    //     }
+    // }
 
     public function User()
     {
@@ -48,7 +58,10 @@ class CV extends Model
     {
         return $this->hasMany('App\Skill', 'cv_id');
     }
-
+    public function position()
+    {
+        return $this->belongsTo('App\Positions', 'positions', 'id');
+    }
 
     /************************** scope ********************************************/
     public function scopeActive($query)
@@ -70,7 +83,6 @@ class CV extends Model
             return "女性";
         } else return "男性";
     }
-
     public function getBDayAttribute()
     {
         $value = date_create($this->Birth_date);

@@ -11,6 +11,7 @@ use Gate;
 use PDF;
 use App\CV;
 use App\Record;
+use App\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateRequest;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -98,9 +99,10 @@ class CVController extends Controller
     public function update($id, UpdateRequest $request)//PUT
     {
         //$id = $id - 14000;
+        
         $cv = CV::findOrFail($id);
         if (Gate::denies('update-cv', $cv->user_id)) {
-            abort(403);
+            abort(403); 
         }
         if ($request->has('B_date')) {
             $cv->Birth_date = getDateDate($request->input('B_date'));
@@ -143,5 +145,13 @@ class CVController extends Controller
     {
     }
 
+    public function changeStatus(Request $request)
+    {
+        $CV = CV::findorfail($request->id);
+        $CV->status = $request->status;
+        $CV->update();
+
+        return \Illuminate\Support\Facades\Response::json($CV);
+    }
 
 }

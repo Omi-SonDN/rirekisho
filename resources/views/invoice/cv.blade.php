@@ -90,7 +90,7 @@
             </tr>
             <tr class="">
                 <td style="width:10%;"></td>
-                <td>{{$CV->BDay}} （満 {{$CV->Age}}歳） {{$CV->Jgender}}</td>
+                <td>{{$CV->BDay}} （満 {{$CV->Age}}歳） {{$CV->JGender}}</td>
 
             </tr>
             <tr class="">
