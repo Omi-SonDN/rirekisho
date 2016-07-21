@@ -34,7 +34,8 @@ class UsersController extends Controller
             abort(403);
         }
         $users = User::all();
-        $users = User::paginate(10);
+        // neu dung tablesort thi tat phan trang
+//        $users = User::paginate(10);
         return View::make('xUser.UserIndex')
             ->with('users', $users)
             ->with('count', $users->count());

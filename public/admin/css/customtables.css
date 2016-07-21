@@ -1,0 +1,87 @@
+/* tables */
+table.tablesorter {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 12pt;
+	padding: 4px;
+}
+table.tablesorter thead tr .tablesorter-header {
+	background-image: url(../img/sort_both.png);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: middle;
+    font: normal 16px Georgia, 'Times New Roman', serif;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+table.tablesorter thead tr .tablesorter-headerDesc {
+	background-image: url(../img/asc.gif);
+}
+table.tablesorter thead tr .tablesorter-headerAsc {
+	background-image: url(../img/desc.gif);
+}
+table.tablesorter thead tr .tablesorter-headerDesc, table.tablesorter thead tr .tablesorter-headerAsc {
+background-color: #8dbdd8;
+}
+
+table.tablesorter tr.data {
+    border-top: solid 1px #e1e1e1;
+}
+#datatables tbody tr.remove-me{
+    display: none;
+}
+#datatables .header, #datatables .header-none-sort {
+	height: 40px;
+    margin: 0 auto;
+	width: 0;
+	font-size: 11pt;
+	text-align: start;
+}
+table.tablesorter tr.data:hover{
+  border-bottom: solid 1px #6a5b91;
+    border-top: solid 1px #6a5b91;
+    margin-top: 2px;
+}
+
+/* ----------pagnation tablesort-------- */
+.pages-tablesorter {
+    padding-left: 0;
+    margin: 20px 0;
+    text-align: center;
+    list-style: none;
+    border: solid 1px rosybrown;
+    padding: 10px;
+    background: ghostwhite;
+}
+
+.pager .left { float: left; }
+.pager .right {
+    float: right;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+.pager .prev, .pager .next, .pagecount { cursor: pointer; }
+.pager a {
+    color: black;
+}
+.pager a.current {
+    text-decoration: none;
+    color: #0080ff;
+}

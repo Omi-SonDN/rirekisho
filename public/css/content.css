@@ -179,7 +179,7 @@ input, textarea {
     display: none;
 } 
 
-/* **************** bqn custom content ***************** */
+/* **************** bqn custom content [user] ***************** */
 .float_left .form-group label {
     display: block;
     color: inherit;
@@ -202,20 +202,3 @@ input, textarea {
 .help-block {
     color: #a94442;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
