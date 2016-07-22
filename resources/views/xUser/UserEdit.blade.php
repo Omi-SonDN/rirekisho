@@ -43,9 +43,11 @@
                 </ul>
 
                 <ul>
-                    <li>
+                    <li class="cancel">
                         <input type="submit" form="profile-forms" name="submit1" value="Thay đổi"
-                               class="float_right b-purple">
+                               class="b-purple">
+                        <input type="button" form="profile-forms" name="" value="Cancel"
+                               class="b-purple" onclick="window.location='{{\URL::route('User.index')}}'">
                     </li>
                     <li>
                         @if (count($errors) > 0)

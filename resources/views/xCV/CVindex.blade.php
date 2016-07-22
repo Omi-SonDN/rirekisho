@@ -53,7 +53,7 @@
       @endcan
       @can('Admin')
       <th data-field="status" style="width: 15%;"><a>Status</a></th>
-      <th></th>
+      <th style="width: 15%;">Hành động</th>
       @endcan
     </tr>
   </thead>

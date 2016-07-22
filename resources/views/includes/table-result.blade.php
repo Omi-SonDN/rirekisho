@@ -52,7 +52,7 @@
                     <button id="btn_send_email{{ $CV->id }}" class="btn btn-primary btn-send-email" value="{{ $CV->Status }}">Send Email {{ $CV->Status }}</button>
                 </div>
             </td>
-            <td><a href="{{url('CV',[$CV ,'edit'])}}">Sửa</a></td>
+            <td><button style="margin-left: 25px;"class="btn btn-default btn-edit"><a href="{{url('CV',[$CV ,'edit'])}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button></td>
             @endcan
         </tr>
     @endforeach
