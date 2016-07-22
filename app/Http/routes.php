@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::bind('CV', function ($id) {
         return Hashids::decode($id)[0];
     });
+
     //every one can see
     Route::get('/', function () {
         return view('about');
@@ -33,8 +34,20 @@ Route::group(['middleware' => ['auth']], function () {
     //every one see different page  
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
     Route::get('CV/{CV}/view', 'CVController@show2');
+    Route::post('CV/changeStatus','CVController@changeStatus');
     Route::get('Record/index/{type}', 'RecordController@index');
     Route::get('User/{User}/changePass', 'UsersController@changePassword');
+
+    Route::resource('positions', 'PositionsController');
+    Route::resource('groups', 'GroupsController');
+    Route::post('/groups/getUsername', [
+        'as' => 'groups.getUsername',
+        'uses' => 'GroupsController@getUsername',
+    ]);
+    Route::post('/groups/updateListMember', [
+        'as' => 'groups.updateListMember',
+        'uses' => 'GroupsController@updateListMember',
+    ]);
 
     //admin only
     Route::get('User/search', 'UsersController@search');
@@ -61,5 +74,24 @@ Route::get('auth/logout', 'Auth\AuthController@myLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-
+Route::post('emails/getEmailAddress', [
+    'as' => 'emails.getEmailAddress',
+    'uses' => 'EmailsController@getEmailAddress',
+]);
+Route::get('emails/create', [
+    'as' => 'emails.create',
+    'uses' => 'EmailsController@create',
+]);
+Route::post('emails/send', [
+    'as' => 'emails.send',
+    'uses' => 'EmailsController@send',
+]);
+Route::post('emails/createFormEmail', [
+    'as' => 'emails.createFormEmail',
+    'uses' => 'EmailsController@createFormEmail',
+]);
+Route::post('emails/sendEmail1', [
+    'as' => 'emails.sendEmail1',
+    'uses' => 'EmailsController@sendEmail1',
+]);
 

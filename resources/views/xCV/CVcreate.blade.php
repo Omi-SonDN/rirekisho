@@ -5,6 +5,7 @@
     <?php $key = $CV->hash;?>
     <form action="" method="post" class="my-forms" id="cv-forms">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" id="id" name="id" value="{{ $key }}">
         <fieldset id="field-box">
             @can('Admin')
             <ul>
@@ -68,7 +69,6 @@
                             </div>
                         </div>
                     </div>
-
                 </li>
                 <li class="">
                     <div class="float_left" style="width: 45%;">
@@ -88,22 +88,18 @@
                         </div>
                     </div>
                     <div class="float_left" style="width: 20%; margin-top:30px;">
-
                         <div class="float_left">
-                            <label for="gender0" class="radio">
-                                <input type="radio" id="gender0" editable="Rirekisho"
-                                       name="Gender" value=0 <?php if (!$CV->Gender) {
-                                    echo 'checked';
-                                }?> ><i></i>Nữ</label>
-                        </div>
-                        <div class="float_right">
-                            <label for="gender1" class="radio"><input type="radio" id="gender1" editable="Rirekisho"
-                                                                      name="Gender" value=1 <?php if ($CV->Gender) {
-                                    echo 'checked';
-                                }?>><i></i>Nam
+                            <label class="radio">
+                                <input type="radio" id="{{ $key }}" editable="Rirekisho" name="Gender" value="0" 
+                                <?php if (!$CV->Gender) { echo 'checked'; }?> ><i></i>Nữ
                             </label>
                         </div>
-
+                        <div class="float_right">
+                            <label class="radio">
+                                <input type="radio" id="{{ $key }}" editable="Rirekisho" name="Gender" value="1" 
+                                <?php if ($CV->Gender) {echo 'checked'; }?>><i></i>Nam
+                            </label>
+                        </div>
                     </div>
                 </li>
                 <li class="">
@@ -345,7 +341,6 @@
                                 <span id="linkedin-error"></span>
                             </div>
                         </div>
-
                     </div>
 
                 </li>

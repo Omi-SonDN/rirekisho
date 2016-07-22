@@ -9,6 +9,7 @@ use App\Record;
 use Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateRequest;
+use Vinkla\Hashids\Facades\Hashids;
 
 class RecordController extends Controller
 {
