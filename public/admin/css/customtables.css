@@ -85,3 +85,14 @@ table.tablesorter tr.data:hover{
     text-decoration: none;
     color: #0080ff;
 }
+
+.tablesorter input.fix-class-check {
+    opacity: 1;
+    position: relative;
+    display: block;
+    -ms-transform: scale(1.5); /* IE */
+    -moz-transform: scale(1.5); /* FF */
+    -webkit-transform: scale(1.5); /* Safari and Chrome */
+    -o-transform: scale(1.5); /* Opera */
+    margin: 0 auto;;
+}

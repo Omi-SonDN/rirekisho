@@ -46,9 +46,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if ($this->role == 0)$Role = "Applicant";
         elseif ($this->role == 1) {
             $Role = "Visitor";
-        }
-        elseif ($this->role == 2) {
+        } elseif ($this->role == 2) {
             $Role = "Admin";
+        } elseif ($this->role == 3) {
+            $Role = "SuperAdmin";
         }
         return  $Role;
     }
@@ -88,6 +89,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         if($this->getRole()== "Visitor") return "#f9f9f9";//gray
         if($this->getRole()== "Admin") return "#333333";
+        if($this->getRole()== "SuperAdmin") return "#FF7F50";
         $mod = $this->id% 19;
         $colours = [
             "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e",

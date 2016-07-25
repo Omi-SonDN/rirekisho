@@ -34,8 +34,9 @@ class UsersController extends Controller
             abort(403);
         }
         $users = User::all();
+        //dd($users);
         // neu dung tablesort thi tat phan trang
-//        $users = User::paginate(10);
+        //$users = User::paginate(10);
         return View::make('xUser.UserIndex')
             ->with('users', $users)
             ->with('count', $users->count());
@@ -225,7 +226,7 @@ class UsersController extends Controller
             $file_name = substr(md5(rand()), 0, 7) . "." . $extension;
             $request->file('txtImage')->move('img/thumbnail', 'thumb_'. $file_name);
         } else {
-            $file_name = 'no_image.gif';
+            $file_name = '';
         }
         $_user = new User();
         $_user->name = $request->txtName;
@@ -246,12 +247,19 @@ class UsersController extends Controller
                      ]
                  );
     }
-    public function getDel($_id)
+    public function getDel($listid)
     {
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        $_id = Hashids::decode($_id)[0];
+
+        $arrlist = explode(",", $listid);
+        foreach ($arrlist as $key => $val) {
+            $_id = Hashids::decode($val)[0];
+            echo "id " . $_id;
+        }
+        dd($arrlist);
+
         //
         //Neu 2 admin thi loi... >> fix [GP: Can TK SuperAdmin]
         //

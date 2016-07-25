@@ -5,24 +5,27 @@
         <div class="table_action">
             <div class="top_action"></div>
             <div class="bottom_action">
-                <ul class="tabs">
-                    <li><a href="{{route('getadduser')}}"><i class="fa fa-plus" style="margin: 0 auto;"></i> Thêm User</a></li>
-                    <li class="tab">
-                        Sắp xếp danh sách:
-                    </li>
-                    <li class="tab select" data-field="name" data-sort="asc" data-keyword="">
-                        <a>Tên </a>
-                    </li>
-                    <li class="tab select" data-field="email" data-sort="asc" data-keyword="">
-                        <a>Email </a>
-                    </li>
-                    <li class="" data-field="updated_at" data-sort="asc" data-keyword="">
-                        <a>Ngày cập nhật</a>
-                    </li>
-                    <li class="" data-field="role" data-sort="asc" data-keyword="">
-                        <a>Role</a>
-                    </li>
-                </ul>
+                <button class='btn btn-primary'><a href="{{route('getadduser')}}"><i class="fa fa-plus" style="margin: 0 auto;"></i> Thêm User</a></button>
+                <span class="active-del"></span>
+
+                {{--<ul class="tabs">--}}
+                    {{--<li class="tab">--}}
+                        {{--Sắp xếp danh sách:--}}
+                    {{--</li>--}}
+
+                    {{--<li class="tab select" data-field="name" data-sort="asc" data-keyword="">--}}
+                        {{--<a>Tên </a>--}}
+                    {{--</li>--}}
+                    {{--<li class="tab select" data-field="email" data-sort="asc" data-keyword="">--}}
+                        {{--<a>Email </a>--}}
+                    {{--</li>--}}
+                    {{--<li class="" data-field="updated_at" data-sort="asc" data-keyword="">--}}
+                        {{--<a>Ngày cập nhật</a>--}}
+                    {{--</li>--}}
+                    {{--<li class="" data-field="role" data-sort="asc" data-keyword="">--}}
+                        {{--<a>Role</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
                 <div class="search">
                     <div class="search-forms">
                         <label class="search_icon" for="text">
@@ -36,28 +39,30 @@
         </div>
         @include('includes.flash-alert')
         <div>
-            <table id="datatables" class="tablesorter">
+            <table id="datatables" class="tableuser tablesorter">
                 <thead>
-                <tr>
-                    <th class="header-none-sort filter-false">Avatar</th>
-                    <th class="header-none-sort filter-false" filter-false>#</th>
-                    <th data-field="name" ><a>Name</a></th>
-                    <th data-field="email"><a>Email</a></th>
-                    <th class="first-name filter-select" data-placeholder="Select a type">Type</th>
-                    <th class="header-none-sort filter-false">Action</th>
-                </tr>
+                    <tr>
+                        <th class="header-none-sort filter-false" filter-false>#</th>
+                        <th class="header-none-sort filter-false">Avatar</th>
+
+                        <th data-field="name" ><a>Name</a></th>
+                        <th data-field="email"><a>Email</a></th>
+                        <th class="first-name filter-select" data-placeholder="Select a type">Type</th>
+                        {{--<th class="header-none-sort"></th>--}}
+                        <th class="header-none-sort filter-false"><input class="fix-class-check checkAll" type="checkbox" /></th>
+                    </tr>
                 </thead>
                 <tbody id="list-table-body" data-reload="true">
-                @if(!$count)
+                @if(!count($users))
                     <tr class="no-record">
-                        <td colspan="5">
+                        <td colspan="6">
                             <div style="text-align: center;">There are no records to display</div>
                         </td>
                     </tr>
                 @else
-                    <?php $i = 0;?>
-                    @foreach ($users as $row)
+                    @foreach ($users as $key => $row)
                         <tr class="data">
+                            <td></td>
                             <td class="image">
                                 <div style=" position: relative;height: 100px;width: 100px;">
                                     @if($row->image!="")
@@ -74,11 +79,13 @@
                                     @endif
                                 </div>
                             </td>
-                            <td class="rank">{{++$i}}</td>
                             <td class="name"><i class="fa fa-pencil fa-fw"></i>&nbsp<a href="{{url('User',$row->hash)}}" title="Edit {{ $row->name }}">{{ $row->name }} </a></td>
                             <td class="name">{{ $row->email }}  </td>
                             <td> {{ $row->getRole() }}</td>
                             <td>
+                                <input class="fix-class-check cb-element" type="checkbox" value="{{$row->hash}}" name="arrDel[]" style="opacity: 1">
+                            {{--</td>--}}
+                            {{--<td>--}}
                                 {{--<a href="url('User',[$row->hash ])">Sửa</a>--}}{{--{{route('destroyuser')}}--}}
                                 <a href="{{route('getdeluser', $row->hash)}}" onclick="return xacnhanxoa('Bạn có chắc là xóa không!')" title="Delete {{$row->name}}"><i class="fa fa-trash-o  fa-fw"></i>&nbsp Delete</a>
                             </td>
@@ -91,6 +98,7 @@
                 </tbody>
             </table>
             <?php //echo $users->render(); ?>
+
             <!-- pagination jquery lib tablesorter -->
             <div id="" class="pager pages-tablesorter">
                 <span class="left">

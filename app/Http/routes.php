@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'user'], function () {
         Route::get('/add', ['as' => 'getadduser', 'uses' => 'UsersController@getAddUser']);
         Route::post('/add', ['as' => 'postadduser', 'uses' => 'UsersController@postAddUser']);
-        Route::get('/{id}/del', ['as' => 'getdeluser', 'uses' => 'UsersController@getDel']);
+        Route::get('/{listid}/del', ['as' => 'getdeluser', 'uses' => 'UsersController@getDel']);
     });
 });
 Route::group(['middleware' => ['auth', 'App\Http\Middleware\ApplicantMiddleware']], function () {

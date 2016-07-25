@@ -520,58 +520,58 @@ $(document).ready(function () {
 
          };*/
         /*
-         *
+         *Bngoc da chuyen vao su dung tablesorter trong admin/js/func.bqn.js
          *
          ******/
-        $('[data-table=table-user] input#table-search').bind("change blur", Search1);
-        function Search1() {
-            //$('input#table-search').bind("blur", Search);
-            var value = $(this).val();
-            var dataString = 'keyword=' + value;
-            $('input#table-search').off();
-            if (value.length >= 0) {
-                $.ajax({
-                    type: "GET",
-                    url: "/User/search",
-                    data: dataString,
-                    cache: false,
-                    success: function (html) {
-                        $(" [data-reload=true]").html(html);
-                        $("ul.pagination").hide();
-                        $("#number-result").show();
-                        $(".tabs li").attr("data-keyword", value);
-                        $('[data-table=table-user] input#table-search').bind("change blur", Search1);
-                    }
-                });
-            }
-
-        }
+        //$('[data-table=table-user] input#table-search').bind("change blur", Search1);
+        //function Search1() {
+        //    //$('input#table-search').bind("blur", Search);
+        //    var value = $(this).val();
+        //    var dataString = 'keyword=' + value;
+        //    $('input#table-search').off();
+        //    if (value.length >= 0) {
+        //        $.ajax({
+        //            type: "GET",
+        //            url: "/User/search",
+        //            data: dataString,
+        //            cache: false,
+        //            success: function (html) {
+        //                $(" [data-reload=true]").html(html);
+        //                $("ul.pagination").hide();
+        //                $("#number-result").show();
+        //                $(".tabs li").attr("data-keyword", value);
+        //                $('[data-table=table-user] input#table-search').bind("change blur", Search1);
+        //            }
+        //        });
+        //    }
+        //
+        //}
 
         //sort
-        $("[data-table=table-user] .tabs li").on('click', function () {
-            var value = $(this).attr("data-keyword");
-            var dataSort = $(this).attr("data-sort");
-            var dataField = $(this).attr("data-field");
-            var dataString = 'keyword=' + value + "&data-sort=" + dataSort + "&data-field=" + dataField;
-            if (dataSort == "desc") {
-                $(this).attr("data-sort", "asc");
-            }
-            else $(this).attr("data-sort", "desc");
-            if (1) {
-
-                $.ajax({
-                    type: "GET",
-                    url: "/User/search",
-                    data: dataString,
-                    cache: false,
-                    success: function (html) {
-                        $(" [data-reload=true]").html(html);
-                        $("ul.pagination").hide();
-                    }
-                });
-
-            }
-        });
+        //$("[data-table=table-user] .tabs li").on('click', function () {
+        //    var value = $(this).attr("data-keyword");
+        //    var dataSort = $(this).attr("data-sort");
+        //    var dataField = $(this).attr("data-field");
+        //    var dataString = 'keyword=' + value + "&data-sort=" + dataSort + "&data-field=" + dataField;
+        //    if (dataSort == "desc") {
+        //        $(this).attr("data-sort", "asc");
+        //    }
+        //    else $(this).attr("data-sort", "desc");
+        //    if (1) {
+        //
+        //        $.ajax({
+        //            type: "GET",
+        //            url: "/User/search",
+        //            data: dataString,
+        //            cache: false,
+        //            success: function (html) {
+        //                $(" [data-reload=true]").html(html);
+        //                $("ul.pagination").hide();
+        //            }
+        //        });
+        //
+        //    }
+        //});
 
 
         /***************User profile**********************/

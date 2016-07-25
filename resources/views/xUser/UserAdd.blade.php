@@ -27,17 +27,17 @@
                 <div class="clear-fix"></div> <hr>
                 <div class="form-group">
                     <label class="title">User Level</label>
-                        <label class="radio-inline">
-                            <input name="rdoLevel" value="3" type="radio">SuperAdmin
-                        </label>
+                        {{--<label class="radio-inline">--}}
+                            {{--<input name="rdoLevel" value="3" type="radio">SuperAdmin--}}
+                        {{--</label>--}}
                         <label class="radio-inline">
                             <input name="rdoLevel" value="2" type="radio">Admin
                         </label>
                         <label class="radio-inline">
-                            <input name="rdoLevel" value="1" checked="checked" type="radio">Member
+                            <input name="rdoLevel" value="1" checked="checked" type="radio">Visitor
                         </label>
                         <label class="radio-inline">
-                            <input name="rdoLevel" value="0" type="radio">Member
+                            <input name="rdoLevel" value="0" type="radio">Applicant
                         </label>
                 </div>
 

@@ -27,17 +27,17 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
         /**/
         $gate->define('Admin', function ($user) {
-            return $user->getRole() == "Admin";
+            return $user->getRole() == "Admin" || ($user->getRole() == "SuperAdmin");
         });
         /*  Visitor's 
         */
         $gate->define('Visitor', function ($user) {
-            return ($user->getRole() == "Visitor") || ($user->getRole() == "Admin");
+            return ($user->getRole() == "Visitor") || ($user->getRole() == "Admin") || ($user->getRole() == "SuperAdmin");
         });
         /*  Applicant's  
         */
         $gate->define('Applicant', function ($user) {
-            return $user->getRole() == "Applicant" || ($user->getRole() == "Admin");
+            return $user->getRole() == "Applicant" || ($user->getRole() == "Admin") || ($user->getRole() == "SuperAdmin");
         });
         /*
         *   from here are policies with parameter
