@@ -1,58 +1,60 @@
-.plus-button{
+.plus-button {
     background-color: transparent;
     border: none;
-    font-size:13px;
+    font-size: 13px;
     color: gray;
 }
-.plus-button:hover{
+
+.plus-button:hover {
     background-color: transparent;
     border: none;
-    font-size:16px;
+    font-size: 16px;
     color: purple;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .background-image {
-  /*background-image: url("../img/14028718821_8009120372_k.jpg");
-  background-image: url("../img/yosemite.jpg");*/
-  background-image: url("../img/bg.jpg");
-  background-size: cover;
-  display: block;
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
-  height: 800px;
-  left: 0;
-  position: fixed;
-  right: 0;
-  z-index: 1;
+    /*background-image: url("../img/14028718821_8009120372_k.jpg");
+    background-image: url("../img/yosemite.jpg");*/
+    background-image: url("../img/bg.jpg");
+    background-size: cover;
+    display: block;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    height: 800px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 1;
 }
 
 .content {
-  background: rgba(255, 255, 255, 0.35);
-  border-radius: 3px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
-  position: relative;
-  margin: auto;
-  z-index: 2;
-  /********/
-  padding: 10 20px;
-  top: 90px;
-  min-width: 300px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    position: relative;
+    margin: auto;
+    z-index: 2;
+    /********/
+    padding: 10px 20px;
+    top: 90px;
+    min-width: 300px;
 }
-div.content:hover,div.content:active,div.content:focus{
+
+div.content:hover, div.content:active, div.content:focus {
     background: rgba(255, 255, 255, 0.6);
 }
+
 /**************************end login*************************************/
 
 /**************************begin form*************************************/
-#field-box{
+#field-box {
     display: block;
     border-radius: 3px;
     margin: 33px 10px 15px;
-    padding: 29px 25px ;
+    padding: 29px 25px;
     border: 1px solid #ddd;
 }
-
 
 .my-forms li:after {
     content: ".";
@@ -62,18 +64,29 @@ div.content:hover,div.content:active,div.content:focus{
     line-height: 0;
     height: 0;
     overflow: hidden;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
-.my-forms label:focus{
-    color:rgb(140, 102, 153);
+
+.my-forms label:focus {
+    color: rgb(140, 102, 153);
 }
-.slide-header{
+
+.slide-header {
     width: 90%;
     border-bottom: 2px dotted gray;
     font-size: 17px;
     padding-bottom: 7px;
+    margin-bottom: 19px!important;
 }
-.tbFooter{
+
+.error-text {
+    color: darkred;
+    font-size: 12px;
+    text-transform: capitalize;
+    font-style: italic;
+}
+
+.tbFooter {
     background: #D3DCE3;
     border-top: 0;
     margin: -33px 10px 15px;
@@ -84,60 +97,69 @@ div.content:hover,div.content:active,div.content:focus{
     border-radius: 0 0 4px 5px;
     padding: 20px;
 }
-.success-status{
-   /*color: green; */
-   color:rgb(140, 102, 153);
-   font-size: 24px;
-   height: 38px;
-   line-height: 38px !important;
-   opacity: .8;
-   text-align: center;
-   top: 6px;
-   width: 42px;
-   z-index: 2;
-   right: -3px;
+
+.success-status {
+    /*color: green; */
+    color: rgb(140, 102, 153);
+    font-size: 24px;
+    height: 38px;
+    line-height: 38px !important;
+    opacity: .8;
+    text-align: center;
+    top: 6px;
+    width: 42px;
+    z-index: 2;
+    right: -3px;
 }
 
-.editable-table tbody tr{
-   height: 42px;
+.editable-table tbody tr {
+    height: 42px;
 }
 
-.profile .profile-picture{
+.profile .profile-picture {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    margin: auto;
 }
-.profile .profile-overview{
 
-}
-.display-box{
-   height:500px;
-   margin-top: 5px; 
-   position:relative;
-   border-radius: 3px;
-   border: 1px solid #ddd;
-   z-index: 10;
-   line-height: 1.7;
-   -webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
-   -moz-box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
-   box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
-   font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-}
-.top-card{
-   display: block;
-   float: left;
-   position: relative;
-   width: 250px;
-   height: 100%;
-   background :white;
-   padding:10px  5px ;
-   border-right: 1px solid #ddd;
-   overflow: scroll;
-}
-.profile-nav{
-   /*padding: 0 25px;*/ 
-   line-height: 40px;
+.profile .profile-overview {
 
 }
 
-.profile-nav .p-link{
+.display-box {
+    height: 500px;
+    margin-top: 5px;
+    position: relative;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    z-index: 10;
+    line-height: 1.7;
+    -webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
+    -moz-box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+.top-card {
+    display: block;
+    float: left;
+    position: relative;
+    width: 250px;
+    height: 100%;
+    background: white;
+    padding: 10px 5px;
+    border-right: 1px solid #ddd;
+    overflow: scroll;
+}
+
+.profile-nav {
+    /*padding: 0 25px;*/
+    line-height: 40px;
+
+}
+
+.profile-nav .p-link {
     transition: background 0.6s;
     border-top: 1px solid #F5F5F5;
     border-bottom: 1px solid rgba(0, 0, 0, .1);;
@@ -147,87 +169,112 @@ div.content:hover,div.content:active,div.content:focus{
     height: 40px;
 
 }
-.profile-nav .p-link a {
-	display: block;
-	color: gray;
-	width: 100%;
-	height: 100%;
+
+.p-box {
+    height: 1000px;
+    margin-top: 5px;
+    position: relative;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    z-index: 10;
+    line-height: 1.7;
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+
 }
-.profile-nav .p-link:hover,.p-link:focus,.p-link:active{
+
+.profile-nav .p-link a {
+    display: block;
+    color: gray;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-nav .p-link:hover, .p-link:focus, .p-link:active {
     background-color: rgba(51, 51, 51, 0.9);
 }
-.profile-nav .p-link:hover a,.p-link:focus a,.p-link:active a{
+
+.profile-nav .p-link:hover a, .p-link:focus a, .p-link:active a {
     color: white;
 }
 
-.profile-nav .p-link a i{
+.profile-nav .p-link a i {
     float: left;
     width: 50px;
     text-align: center;
     font-size: 20px;
 
 }
-#p-active{
-	color: rgb(140, 102, 153);
+
+#p-active {
+    color: rgb(140, 102, 153);
 }
-.profile-nav .p-link .li-text{
+
+.profile-nav .p-link .li-text {
     float: left;
     padding-left: 5%;
     border-left: 1px solid rgba(0, 0, 0, .1);
 }
 
-.title{
-	text-align: center;
-	font-weight: 300;
+.title {
+    text-align: center;
+    font-weight: 300;
 }
-.title h2{
-    color:rgba(0, 0, 0, 0.5);
+
+.title h2 {
+    color: rgba(0, 0, 0, 0.5);
     margin: 20px 0 10px 0;
 }
-.title h3{
+
+.title h3 {
     font-size: 18px;
     color: #aaa;
     margin: 0px 0 10px 0;
 }
 
-.basic-info{
-	float: left;
-	display: block;
-	overflow: scroll;
-	width: 70%;
-	height: 100%;
+.basic-info {
+    float: left;
+    display: block;
+    overflow: scroll;
+    width: 70%;
+    height: 100%;
 }
-.basic-info .bd{
-	padding: 25px 30px 30px;
+
+.basic-info .bd {
+    padding: 25px 30px 30px;
 }
-.basic-info .bd ul{
+
+.basic-info .bd ul {
     display: block;
     margin: 0 0 1em 0;
 }
 
-.basic-info .bd ul li:not(:last-child){
+.basic-info .bd ul li:not(:last-child) {
     margin-bottom: 2em;
     padding-bottom: 2em;
     border-bottom: 1px solid #ccc;
     min-height: 150px;
 }
-.basic-info .bd table{
-	width: 100%;
-}
-.basic-info .bd table th{
-	width: 30%;
-}
-.basic-info .bd table td{
-	width: 70%;
+
+.basic-info .bd table {
+    width: 100%;
 }
 
-.basic-info .bd table th h2{
+.basic-info .bd table th {
+    width: 30%;
+}
+
+.basic-info .bd table td {
+    width: 70%;
+}
+
+.basic-info .bd table th h2 {
     text-align: right;
     padding: 0 19px;
     clear: both;
     color: #7b90b5;
 }
-.basic-info .bd table th h4{
+
+.basic-info .bd table th h4 {
     text-align: right;
     padding: 0 19px;
     clear: both;
@@ -235,7 +282,7 @@ div.content:hover,div.content:active,div.content:focus{
     color: #7b90b5;
 }
 
-.ft{
+.ft {
     box-shadow: 0 1px 0 #fff inset;
     clear: both;
     border-top: 1px dashed #ccc;
@@ -248,9 +295,11 @@ div.content:hover,div.content:active,div.content:focus{
     margin-top: -30px;
     text-align: right;
 }
-.dropzone-container{
+
+.dropzone-container {
 
 }
+
 #dropzone {
     position: relative;
     border: 2px dashed #d4d4d4;
@@ -258,45 +307,131 @@ div.content:hover,div.content:active,div.content:focus{
     background-color: #f2f2f2;
     height: 200px;
     width: 200px;
-    text-align: center;
     color: #9a9a9a;
+    text-align: center;
 }
+
 #dropzone.hover {
-  border: 10px solid #d4d4d4;
-  color: #FE5;
+    border: 10px solid #d4d4d4;
+    color: #FE5;
 }
 
 #dropzone.dropped {
-  background: #f2f2f2;
-  border: 1px solid #d4d4d4;
+    background: #f2f2f2;
+    border: 1px solid #d4d4d4;
 }
 
-#dropzone div {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+#dropzone div.fixed-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 #dropzone img {
-  border-radius: 1px;
-  vertical-align: middle;
-  max-width: 95%;
-  max-height: 95%;
+    margin-top: auto;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+
 }
 
 #dropzone [type="file"] {
-  cursor: pointer;
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
-.dropzone-text{
-    
+
+.dropzone-text {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.dropzone-text-place {
+    display: table;
+    width: 100%;
+    height: 100%;
+    table-layout: fixed
+}
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Normal Track */
+input[type="checkbox"].ios-switch + div {
+    vertical-align: middle;
+    width: 40px;	height: 20px;
+    border: 1px solid rgba(0,0,0,.4);
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.1);
+    -webkit-transition-duration: .4s;
+    -webkit-transition-property: background-color, box-shadow;
+    box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+}
+
+/* Checked Track (Blue) */
+input[type="checkbox"].ios-switch:checked + div {
+    width: 40px;
+    background-position: 0 0;
+    background-color: #3b89ec;
+    border: 1px solid #0e62cd;
+    box-shadow: inset 0 0 0 10px rgba(59,137,259,1);
+}
+input[type="checkbox"].tinyswitch.ios-switch + div {
+    width: 34px;	height: 18px;
+}
+input[type="checkbox"].ios-switch + div > div {
+    float: left;
+    width: 18px; height: 18px;
+    border-radius: inherit;
+    background: #ffffff;
+    -webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+    -webkit-transition-duration: 0.4s;
+    -webkit-transition-property: transform, background-color, box-shadow;
+    -moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+    -moz-transition-duration: 0.4s;
+    -moz-transition-property: transform, background-color;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    margin-top: 1px;
+    margin-left: 1px;
+}
+
+/* Checked Knob (Blue Style) */
+input[type="checkbox"].ios-switch:checked + div > div {
+    -webkit-transform: translate3d(20px, 0, 0);
+    -moz-transform: translate3d(20px, 0, 0);
+    background-color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172,1);
+}
+
+/* Tiny Knob */
+input[type="checkbox"].tinyswitch.ios-switch + div > div {
+    width: 16px; height: 16px;
+    margin-top: 1px;
+}
+
+/* Checked Tiny Knob (Blue Style) */
+input[type="checkbox"].tinyswitch.ios-switch:checked + div > div {
+    -webkit-transform: translate3d(16px, 0, 0);
+    -moz-transform: translate3d(16px, 0, 0);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172,1);
+}
+input[type="checkbox"].purple.ios-switch:checked + div {
+    background-color: #b3b3d2;
+    border: 1px solid #6a5b91;
+    box-shadow: inset 0 0 0 10px #a3a3c2;
+}
+/* Green Knob */
+input[type="checkbox"].purple.ios-switch:checked + div > div {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0 0 0 1px #4a3b71;
 }
 
 

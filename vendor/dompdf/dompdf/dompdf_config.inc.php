@@ -9,6 +9,8 @@
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
+
+//
 if ( class_exists( 'DOMPDF' , false ) ) { return; }
 
 PHP_VERSION >= 5.0 or die("DOMPDF requires PHP 5.0+");
@@ -309,7 +311,7 @@ def("DOMPDF_ENABLE_CSS_FLOAT", false);
  *
  * @var bool
  */
-def("DOMPDF_ENABLE_AUTOLOAD", true);
+def("DOMPDF_ENABLE_AUTOLOAD", false);
 
 /**
  * Prepend the DOMPDF autoload function to the spl_autoload stack

@@ -9,9 +9,20 @@ var elixir = require('laravel-elixir');
  | for your Laravel application. By default, we are compiling the Sass
  | file for our application, as well as publishing vendor resources.
  |
-
-
-elixir(function(mix) {
-    mix.sass('app.scss');
-});
  */
+elixir(function (mix) {
+    mix.styles([
+            'content.css',
+            'custom.css',
+            'font.css',
+            'footer.css',
+            'header.css',
+            'index.css',
+            'my-forms.css'
+        ],
+        'public/css',
+        'public/css'
+    ).scriptsIn(
+        'public/js'
+    );
+});

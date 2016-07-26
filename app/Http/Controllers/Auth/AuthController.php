@@ -71,7 +71,6 @@ class AuthController extends Controller
 
     public function myLogout()
     {
-
         //$this->auth->logout();
         if (Auth::check()) {
             Session::flush();

@@ -42,7 +42,8 @@
         <div class="container">
             <div class="content">
                 <div class="title">404. Not found!!</div>
-                <div><h3>Access !!</h3></div>
+                <div><h3> Access denied.!!</h3></div>
+                <div>Copyright 2016<a href="#"> Ominext JSC</a></div>
             </div>
         </div>
     </body>

@@ -10,14 +10,21 @@ class DatabaseSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run()
+    /*public function run()
     {
         Model::unguard();
         $this->call(UsersTableSeeder::class);
         $this->call(CVTableSeeder::class);
         $this->call(RecordTableSeeder::class);
         Model::reguard();
+    }*/
+    public function run()
+    {
+    	Model::unguard();
+        $this->call(SkillSeeder::class);
+        Model::reguard();
     }
+    
 }
 class RecordTableSeeder extends Seeder
 {

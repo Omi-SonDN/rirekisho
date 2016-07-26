@@ -7,13 +7,17 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-	   "laravelcollective/html": "5.1.*",
+	    "laravelcollective/html": "5.1.*",
         "nicolaslopezj/searchable": "1.*",
-        "barryvdh/laravel-dompdf": "0.6.*",
         "genealabs/laravel-caffeine": "~0.2.0",
         "yajra/laravel-datatables-oracle": "^6.10",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "nesbot/carbon": "^1.21"
+        "nesbot/carbon": "^1.21",
+        "barryvdh/laravel-debugbar": "^2.2",
+        "intervention/image": "^2.3",
+        "hashids/hashids": "^1.0",
+        "barryvdh/laravel-dompdf": "^0.6.1",
+        "vinkla/hashids": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

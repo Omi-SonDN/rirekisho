@@ -1,2 +1,3 @@
 ALTER TABLE `users` ADD `active` TINYINT(1) NOT NULL DEFAULT '1' ;
 ALTER TABLE `users` ADD `image` TEXT NOT NULL ;
+

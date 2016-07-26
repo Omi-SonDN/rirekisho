@@ -3,78 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateRequest;
 use Auth;
 use App\CV;
-use App\Record;
+use App\Skill;
 use Gate;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateRequest;
+
 
 class SkillController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
-     * Show the form for creating a new resource.
+     * Store on create
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return string
      */
-    public function create()
+    public function store(Request $request) //post
     {
-        //
+        $id = Hashids::decode($request->input('id'))[0];
+        $CV = CV::findOrFail($id);
+        if (Gate::denies('update-cv', $CV->user_id)) {
+            abort(403);
+        }
+        $type = str_split_unicode($request->input('data-react'),"_");//"2_x"
+        $skill = new Skill($request->all());
+        $skill->skill_type = $type[2];
+        $CV->Skill()->save($skill);
+        return "2_".$skill->skill_type;
     }
-
     /**
-     * Store a newly created resource in storage.
+     * Update on edit
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return string
      */
-    public function store(Request $request)
+    public function update(Request $request, $id) //put
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $skill = Skill::findOrFail($id);
+        $cv = $skill->CV;
+        if (Gate::denies('update-cv', $cv->user_id)) {
+            abort(403);
+        }
+        $skill->update($request->all());
+        return "2_".$skill->skill_type;
     }
 
     /**
@@ -85,6 +58,33 @@ class SkillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $skill = Skill::findOrFail($id);
+        $cv = $skill->CV;
+        if (Gate::denies('update-cv', $cv->user_id)) {
+            abort(403);
+        }
+        $type = $skill->skill_type;
+        $skill->delete();
+        return "2_" .$type;
     }
+    
+    //unused methoods
+    public function show($id)
+    {
+
+    }
+    public function edit($id, UpdateRequest $request)
+    {
+
+    }
+    public function index($type)
+    {
+
+    }
+
+    public function create(Request $request)
+    {
+
+    }
+    
 }

@@ -8,8 +8,6 @@
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
-require_once DOMPDF_LIB_DIR . "/class.pdf.php";
-
 /**
  * Name of the font cache file
  *

@@ -2,6 +2,7 @@
 
 namespace app\Providers;
 
+use DB;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -78,7 +79,7 @@ class AuthServiceProvider extends ServiceProvider
                 return false;
             }
         });
-        // @param int $id
+        
 
     }
 }
