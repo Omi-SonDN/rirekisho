@@ -10,36 +10,139 @@ use View;
 use Gate;
 use PDF;
 use App\CV;
+use App\Status;
 use App\Record;
+use Validator;
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateRequest;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use Illuminate\Pagination\BootstrapThreePresenter;
 
 class CVController extends Controller
 {
-
     public function index(Request $request)
     {
         //TODO: sửa view
-        $CVs = CV::with('User')->active()->paginate(10);
+        //$CVs = CV::with('User')->active()->paginate(5);
+        //$CVs = CV::with('User')->paginate(5);
+        $CVs = CV::with('User')->active()->get();
+        $CVs->perPage = 5;
         return view('xCV.CVindex', compact('CVs'));
     }
 
+    /************Search orderBy Name Positions Status Age*************/
+    public function search1(Request $request)
+    {
+        if (Gate::denies('Visitor')) {
+            abort(403);
+        }
+        if ($request->has("data-sort")){
+            //$CVs = CV::with('User')->paginate(5);
+            if($request->input('data-field') == "name"){
+                $CVs = CV::with('User')->get();
+                if($request->input('data-sort') == "asc"){ 
+                    $CVs = CV::SortByNameDesc('', 'Status', 'Vị trí tuyển dụng');
+                } else $CVs = CV::SortByNameAsc('', 'Status', 'Vị trí tuyển dụng');
+               // for($i = 0; $i < $CVs->count(); $i++)
+                   // $CVs[$i] = $CVs1[$i];   
+            } else {
+                $CVs = CV::with('User')->orderBy($request->input('data-field'), $request->input('data-sort'))->get();
+            }        
+        }
+    
+        $CVs->perPage = $request->input('entrie');
+        return View::make('includes.table-result',  compact('CVs'));
+    }
+
+    /************Search Name*************/
     public function search(Request $request)
     {
         if (Gate::denies('Visitor')) {
             abort(403);
         }
-        $CV = CV::search($request->input('keyword'))->groupBy('id')->get();
 
-        if ($request->has("data-sort")) {
-            if ($request->input('data-sort') == "desc") {
-                $CV = $CV->sortBy($request->input('data-field'));
-            } else $CV = $CV->sortByDesc($request->input('data-field'));
-        }
-        return View::make('includes.table-result')->with('CVs', $CV);
+        $name = $request->input('keyword');
+        $CVs = CV::with('User')->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+
+        if ($request->has("data-sort")){
+            if($request->input('data-field') == "name"){
+                if($request->input('data-sort') == "desc"){ 
+                    $CVs = CV::SortByNameDesc($name, 'Status', 'Vị trí tuyển dụng');
+                } else $CVs = CV::SortByNameAsc($name, 'Status', 'Vị trí tuyển dụng');
+            } else {
+                $CVs = CV::with('User')->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->orderBy($request->input('data-field'), $request->input('data-sort'))->get();
+            }
+        }   
+        //$CVs->perPage = 5;
+        $CVs->perPage = $request->input('entrie');
+        return View::make('includes.table-result',  compact('CVs'));
     }
 
+    /*********Advance Search**************/
+    public function adSearch(Request $request){
+
+        if (Gate::denies('Visitor')) {
+            abort(403);
+        }
+
+        $positions = $request->input('positionsSearch');
+        $name = $request->input('nameSearch');
+        $Status = $request->input('statusSearch');
+        
+        if($Status != 'Status'){
+            $cv_status = DB::table('status')->where('status',$Status)->get();
+            $Status = $cv_status[0]->id;
+        
+            if($name != ''){
+                if($positions != 'Vị trí tuyển dụng')
+                    $CVs = CV::with('User')->where('positions', $positions)->where('status', $Status)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+                else $CVs= CV::with('User')->where('status', $Status)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+            } else {
+                if($positions != 'Vị trí tuyển dụng')
+                    $CVs = CV::with('User')->where('positions', $positions)->where('status', $Status)->get();
+                else $CVs = CV::with('User')->where('status', $Status)->get();
+            }
+        } else {
+            if($name != ''){
+                $CVs = CV::with('User')->where('positions', $positions)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+            } else {
+                $CVs = CV::with('User')->where('positions', $positions)->get();
+            }
+        }
+
+        if ($request->has("data-sort")){
+            if($request->input('data-field') == "name"){
+                if($request->input('data-sort') == "desc"){ 
+                    $CVs = CV::SortByNameDesc($name, $Status, $positions);
+                } else $CVs = CV::SortByNameAsc($name, $Status, $positions);
+            } else {
+                // if ($request->input('data-sort') == "desc") {
+                //     $CVs = $CVs->sortBy($request->input('data-field'));
+                // } else $CVs = $CVs->sortByDesc($request->input('data-field'));
+                if($Status != 'Status'){
+                    if($name != ''){
+                        if($positions != 'Vị trí tuyển dụng')
+                            $CVs = CV::with('User')->where('positions', $positions)->where('status', $Status)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->orderBy($request->input('data-field'), $request->input('data-sort'))->get();
+                        else $CVs= CV::with('User')->where('status', $Status)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->orderBy($request->input('data-field'), $request->input('data-sort'))->get();
+                    } else {
+                        if($positions != 'Vị trí tuyển dụng')
+                            $CVs = CV::with('User')->where('positions', $positions)->where('status', $Status)->get();
+                        else $CVs = CV::with('User')->where('status', $Status)->orderBy($request->input('data-field'), $request->input('data-sort'))->get();
+                    }
+                } else {
+                    if($name != ''){
+                        $CVs = CV::with('User')->where('positions', $positions)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->orderBy($request->input('data-field'), $request->input('data-sort'))->get();
+                    } else {
+                        $CVs = CV::with('User')->where('positions', $positions)->orderBy($request->input('data-field'), $request->input('data-sort'))->get();
+                    }
+                }
+            }
+        }   
+        $CVs->perPage = $request->input('entrie');
+        return View::make('includes.table-result',  compact('CVs'));
+    }
 
     public function show($id)
     {

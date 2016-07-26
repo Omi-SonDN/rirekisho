@@ -2,6 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta name="_token" content="{!! csrf_token() !!}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!---  jQuery-->
@@ -21,6 +22,7 @@
     <script src="{{ URL::asset('js/include.js')}}" defer></script>
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     <!-- local css-->
     <!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/all.css') }}"/-->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>

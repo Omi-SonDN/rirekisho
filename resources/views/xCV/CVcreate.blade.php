@@ -92,13 +92,13 @@
                         <div class="float_left">
                             <label for="gender0" class="radio">
                                 <input type="radio" id="gender0" editable="Rirekisho"
-                                       name="Gender" value=0 <?php if (!$CV->Gender) {
+                                       name="Gender" value="0" <?php if (!$CV->Gender) {
                                     echo 'checked';
                                 }?> ><i></i>Nữ</label>
                         </div>
                         <div class="float_right">
                             <label for="gender1" class="radio"><input type="radio" id="gender1" editable="Rirekisho"
-                                                                      name="Gender" value=1 <?php if ($CV->Gender) {
+                                                                      name="Gender" value="1" <?php if ($CV->Gender) {
                                     echo 'checked';
                                 }?>><i></i>Nam
                             </label>

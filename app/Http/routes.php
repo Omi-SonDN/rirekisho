@@ -8,9 +8,10 @@ Route::controllers([
 ]);
 Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']], function () {
     Route::get('CV/search', 'CVController@search');
+    Route::get('CV/search1', 'CVController@search1');
     Route::get('CV', 'CVController@index');
     Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
-
+    Route::post('CV/adSearch', 'CVController@adSearch');
 });
 Route::group(['middleware' => ['auth']], function () {
     Route::bind('User', function ($id) {
