@@ -11,7 +11,7 @@ class CV extends Model
 {
     use SearchableTrait;
 
-    protected $table = 'CV';
+    protected $table = 'cvs';
     protected $fillable = [
         'Furigana_name',
         'Last_name',
@@ -60,7 +60,7 @@ class CV extends Model
     }
     public function position()
     {
-        return $this->belongsTo('App\Positions', 'positions', 'id');
+        return $this->belongsTo('App\Positions', 'apply_to', 'id');
     }
 
     /************************** scope ********************************************/

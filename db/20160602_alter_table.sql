@@ -1,4 +1,0 @@
-ALTER TABLE `CV` CHANGE `Career` `positions` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
-ALTER TABLE `CV` ADD `notes` TEXT NOT NULL ;
-
-DROP TABLE `it_skill`;
