@@ -7,7 +7,7 @@
             <div class="bottom_action">
                 <button class='btn btn-primary'><a href="{{route('getadduser')}}"><i class="fa fa-plus" style="margin: 0 auto;"></i> Thêm User</a></button>
                 <span class="active-del"></span>
-
+                <div class="wait-modal-load"></div>
                 {{--<ul class="tabs">--}}
                     {{--<li class="tab">--}}
                         {{--Sắp xếp danh sách:--}}

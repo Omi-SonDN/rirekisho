@@ -8,6 +8,7 @@ use File;
 use Validator;
 use Illuminate\Http\Request;
 use App\User;
+use DB;
 use Gate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
@@ -33,13 +34,21 @@ class UsersController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        $users = User::all();
-        //dd($users);
+//        $users = User::all();
+        if (Auth::user()->role === 3) {
+            $arr_is = [3];
+        } elseif (Auth::user()->getRole() == 'Admin') {
+            $arr_is = [2,3];
+        } else {
+            $arr_is = null;
+        }
+        $users = User::whereNotIn('role', $arr_is)
+            ->get();
+
         // neu dung tablesort thi tat phan trang
         //$users = User::paginate(10);
         return View::make('xUser.UserIndex')
-            ->with('users', $users)
-            ->with('count', $users->count());
+            ->with('users', $users);
     }
 
     /**
@@ -188,6 +197,10 @@ class UsersController extends Controller
             $user->image = $name;
             //$file->move(public_path() . '/img/', $name);
         }
+        if ($request->has('rdoLevel')) {
+            $user->role = $request->input('rdoLevel');
+        }
+
         $user->update($request->except('image'));
         return redirect()->back()->withInput($request->all());
     }
@@ -252,43 +265,66 @@ class UsersController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-
+        if(strpos($listid, ',')) {
+            $is_check = true;
+        } else {
+            $is_check = false;
+        }
         $arrlist = explode(",", $listid);
         foreach ($arrlist as $key => $val) {
             $_id = Hashids::decode($val)[0];
-            echo "id " . $_id;
-        }
-        dd($arrlist);
 
-        //
-        //Neu 2 admin thi loi... >> fix [GP: Can TK SuperAdmin]
-        //
-        if(Auth::user()->id == $_id) {
+            $user = User::findOrFail($_id);
+            if ($user->image) {
+                $old_del = public_path('img/thumbnail/') . 'thumb_' . $user->image;
+                if (File::exists($old_del)) {
+                    File::exists($old_del) && File::delete($old_del);
+                }
+            }
+            // xoa cv lien ket
+            if ($user->CV) {
+                foreach ($user->CV->Record as $key => $dt_record) {
+                    $dt_record->destroy($dt_record->id);
+                }
+                foreach ($user->CV->Skill as $key => $dt_skill) {
+                    $dt_skill->destroy($dt_skill->id);
+                }
+
+                $user->CV->delete();
+            }
+            // xoa trong bookmark
+            DB::table('bookmarks')
+                ->where('bookmark_user_id', $_id)
+                ->delete();
+
+
+            $user->delete();
+            //
+            // kiem tra xoa [xoa anh -> skill -> Record -> cv -> ->bookmard -> acc]
+            //
+            if (Auth::user()->id == $_id) {
+                return redirect()
+                    ->route('User.index')
+                    ->with(
+                        [
+                            'flash_level' => 'warning',
+                            'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
+                        ]
+                    );
+            }
+        }
+
+        if (!$is_check) {
             return redirect()
                 ->route('User.index')
                 ->with(
                     [
-                        'flash_level' => 'warning',
-                        'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
+                        'flash_level' => 'success',
+                        'message' => 'Đã xóa user thành công!'
                     ]
                 );
+        } else {
+            return route('User.index');
         }
-        $user = User::findOrFail($_id);
-        if($user->image) {
-            $old_del = public_path('img/thumbnail/') . 'thumb_' . $user->image;
-            if (File::exists($old_del)) {
-                File::exists($old_del) && File::delete($old_del);
-            }
-        }
-        // delete user with $_id
-        $user->delete();
-        return redirect()
-            ->route('User.index')
-            ->with(
-                [
-                    'flash_level' => 'success',
-                    'message' => 'Đã xóa user thành công!'
-                ]
-            );
     }
 }

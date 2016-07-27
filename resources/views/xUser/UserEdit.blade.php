@@ -8,6 +8,26 @@
         <fieldset id="field-box">
             <div class=" float_left" style="width: 30%;">
                 @include('xUser.profile')
+                @can('SuperAdmin')
+                @if (Auth::user()->id != $user->id)
+                <div class="clear-fix"></div> <hr>
+                <div class="form-group">
+                    <label class="title">User Level</label>
+
+                    <label class="radio-inline">
+                        <input name="rdoLevel" value="2" <?php if ($user->role == 2) echo 'checked="checked"'; else echo ''; ?> type="radio">Admin
+                    </label>
+
+                    <label class="radio-inline">
+                        <input name="rdoLevel" value="1" <?php if ($user->role == 1) echo 'checked="checked"'; else echo ''; ?> type="radio">Visitor
+                    </label>
+                    <label class="radio-inline">
+                        <input name="rdoLevel" value="0" <?php if ($user->role == 0) echo 'checked="checked"'; else echo ''; ?> type="radio">Applicant
+                    </label>
+                </div>
+                @endif
+                @endcan
+
             </div>
             <div class=" float_left" style="width: 60%;  ">
                 <input name="_method" type="hidden" value="PUT">

@@ -6,6 +6,7 @@ Route::controllers([
     'auth' => '\App\Http\Controllers\Auth\AuthController',
     'password' => '\App\Http\Controllers\Auth\PasswordController',
 ]);
+// gioi han quyen voi aplication
 Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']], function () {
     Route::get('CV/search', 'CVController@search');
     Route::get('CV', 'CVController@index');
@@ -22,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::bind('CV', function ($id) {
         return Hashids::decode($id)[0];
     });
+
+    //Route::get('CV/create', ['as' => 'getCreateCv', 'uses' => 'CVController@create']);
 
     //every one can see
     Route::get('/', function () {

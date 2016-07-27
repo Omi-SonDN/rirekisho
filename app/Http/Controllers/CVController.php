@@ -138,7 +138,7 @@ class CVController extends Controller
      */
     public function create(Request $request)
     {
-
+        //return view('xCV.CVcreate');
     }
 
     public function store($id, Request $request)
@@ -153,5 +153,4 @@ class CVController extends Controller
 
         return \Illuminate\Support\Facades\Response::json($CV);
     }
-
 }

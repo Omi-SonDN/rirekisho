@@ -2,9 +2,15 @@
     <ul class="">
         @can('Applicant')
             <li class="nav-link"></li>
-            <li class="nav-link"><a href="{{url('CV',[$CV->hash,'edit'])}}">Tạo CV mới</a></li>
-            <li class="nav-link"><a href="{{url('CV',[$CV->hash])}}">Xem CV</a></li>
-            <li class="nav-link"><a href="{{url('CV',[$CV->hash,'view'])}}">Xem CV 2</a></li>
+            @if (isset($CV) && !empty($CV))
+                <li class="nav-link"><a href="{{url('CV',[$CV->hash,'edit'])}}">Tạo CV mới</a></li>
+                <li class="nav-link"><a href="{{url('CV',[$CV->hash])}}">Xem CV</a></li>
+                <li class="nav-link"><a href="{{url('CV',[$CV->hash,'view'])}}">Xem CV 2</a></li>
+            @else
+                <li class="nav-link"><a href="{{\URL::route('CV.create')}}">Tạo CV mới</a></li>
+                <li class="nav-link"><a onclick="return false" href="{{url('CV', '')}}">Xem CV</a></li>
+                <li class="nav-link"><a  onclick="return false" href="{{url('CV',['', 'view'])}}">Xem CV 2</a></li>
+            @endif
         @endcan
         @can('Visitor')
             <li class="bookmark-link">
@@ -14,7 +20,7 @@
                     </a>
                     <a data-action="reload" style="display: table-cell;color:gray;width: 10%; font-weight: 200;"
                        class="moving">
-                        <i class=" fa fa-refresh"></i>
+                        <i class="fa fa-refresh"></i>
                     </a>
                 </div>
             </li>

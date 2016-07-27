@@ -25,7 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
-        /**/
+        /*SuperAdmin*/
+        $gate->define('SuperAdmin', function ($user) {
+            return $user->getRole() == "SuperAdmin";
+        });
         $gate->define('Admin', function ($user) {
             return $user->getRole() == "Admin" || ($user->getRole() == "SuperAdmin");
         });
@@ -44,6 +47,10 @@ class AuthServiceProvider extends ServiceProvider
         */
         // @param $id
         $gate->define('update-cv', function ($user, $id) {
+
+            if($user->getRole() === 'SuperAdmin')
+                return true;
+
             if ($user->getRole() == "Applicant") {
                 return $user->id == $id;
             } else
@@ -53,6 +60,9 @@ class AuthServiceProvider extends ServiceProvider
         /* profile 
         */
         $gate->define('profile', function ($user, $id) {
+            if($user->getRole() === 'SuperAdmin')
+                return true;
+
             if ($user->getRole() == "Applicant" || $user->getRole() == "Visitor") {
                 return $user->id == $id;
             } else return ($user->getRole() == "Admin");
@@ -62,6 +72,9 @@ class AuthServiceProvider extends ServiceProvider
         *   
         */
         $gate->define('view-cv', function ($user, $cv) {
+            if($user->getRole() === 'SuperAdmin')
+                return true;
+
             if ($user->getRole() == "Applicant") {
                 return $user->id == $cv->user_id;
             } else
@@ -73,6 +86,9 @@ class AuthServiceProvider extends ServiceProvider
         *   use  in AppServiceProvider
         */
         $gate->define('get-cv', function ($user, $cv) {
+            if($user->getRole() === 'SuperAdmin')
+                return true;
+
             if ($user->getRole() == "Applicant" || $user->getRole() == "Admin") {
                 return $user->id == $cv->user_id;
             } else if ($user->getRole() == "Visitor") {

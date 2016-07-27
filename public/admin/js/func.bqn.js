@@ -333,11 +333,22 @@ function xacnhanxoa(msg) {
     }
     return false;
 }
+//reload page parameter _url
+function redirect(_url) {
+    window.location = _url;
+}
 
 $(document).ready(function ($){
+    var loop;
     var is_check;
-    $('.checkAll' ).live( 'click', function() {
 
+    $('span.right, span.right .prev, span.right .next').click(function (){
+        $('.checkAll')[0].checked =false;
+        loop =0;
+    });
+
+    $('.checkAll').live( 'click', function() {
+        loop = 0
         if($(this).is(':checked')){
             is_check =true;
         } else {
@@ -346,6 +357,7 @@ $(document).ready(function ($){
         $('tbody tr input.cb-element').each( function (){
             if(($(this).closest('.data').css('display')) != 'none') {
                 if(is_check) {
+                    ++loop;
                     $(this)[0].checked = true;
                     $('.active-del').html('<button class="btn btn-primary" onclick="multi_del_use()"><i class="fa  fa-trash-o" style="margin: 0 auto;"></i> Delete selected</button>');
                 } else {
@@ -359,11 +371,38 @@ $(document).ready(function ($){
         });
     });
 
+    $('.cb-element' ).live( 'click', function() {
+        var total = 0;
+        $('tbody tr input.cb-element').each( function () {
+            if (($(this).closest('.data').css('display')) != 'none') {
+                ++total;
+            } else {
+                $(this)[0].checked = false;
+            }
+        });
+        if ($(this)[0].checked){
+            ++loop;
+            if (loop > 1) {
+                $('.active-del').html('<button class="btn btn-primary" onclick="multi_del_use()"><i class="fa  fa-trash-o" style="margin: 0 auto;"></i> Delete selected</button>');
+            }
+        } else {
+            --loop;
+            if (loop < 2) {
+                $(".table_action span.active-del button").remove();
+            }
+        }
+        if (loop === total) {
+            $('.checkAll')[0].checked=true;
+        } else {
+            $('.checkAll')[0].checked =false;
+        }
+
+    });
 
 });
 
 function multi_del_use () {
-    //check_del_user = $("input[name='arrDel[]']:checked")
+    //var check_del_user = $("input[name='arrDel[]']:checked")
     //  .map(fuar _valuesnction(){return $(this).val();}).get();
 
     var check_del_user = $('input:checkbox:checked.cb-element').map(function () {
@@ -375,13 +414,16 @@ function multi_del_use () {
         url: "/user/" + check_del_user + "/del",
         data: "",
         cache: false,
+        beforeSend: function() {
+            $('.wait-modal-load').addClass("loading");
+        },
         success: function (data) {
-            console.log(data);
-            //$(" #" + react).load(location.href + " #" + react + ">*", function () {
-            //    resetTable();
-            //});
-
+            redirect(data);
+            //alert('Bạn đã xóa thành công!');
+            //console.log(data);
+        },
+        ajaxStop: function() {
+            $('.wait-modal-load').removeClass("loading");
         }
     });
-    alert(check_del_user);
 }

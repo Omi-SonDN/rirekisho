@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(['about','xCV.template'], function($view){
             if (Auth::check()) {
                 $user = Auth::user();
+                //dd($user->CV);
                 $cv = $user->CV;
                 $list = CV::whereHas('User', function($q) use($user)
                 {

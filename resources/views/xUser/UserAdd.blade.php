@@ -5,7 +5,7 @@
     <form action="{{action('UsersController@postAddUser')}}" method="post" class="my-forms" id="profile-forms" enctype="multipart/form-data">
         <fieldset id="field-box">
             <label slide-header="true"><h3>Thông tin tài khoản </h3></label>
-            @include('includes.flash-alert');
+            @include('includes.flash-alert')
             <hr>
             <div class="float_left" style="width: 30%;">
                 <div class="dropzone-container" style="margin: 30px 0 0 30px;">
@@ -27,12 +27,11 @@
                 <div class="clear-fix"></div> <hr>
                 <div class="form-group">
                     <label class="title">User Level</label>
-                        {{--<label class="radio-inline">--}}
-                            {{--<input name="rdoLevel" value="3" type="radio">SuperAdmin--}}
-                        {{--</label>--}}
+                        @can('SuperAdmin')
                         <label class="radio-inline">
                             <input name="rdoLevel" value="2" type="radio">Admin
                         </label>
+                        @endcan
                         <label class="radio-inline">
                             <input name="rdoLevel" value="1" checked="checked" type="radio">Visitor
                         </label>
