@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Config;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class PHPExcel extends PHPOffice_PHPExcel {
+class PHPExcel extends PHPOffice_PHPExcel
+{
 
     /**
      * Allowed autofill properties
@@ -34,7 +35,7 @@ class PHPExcel extends PHPOffice_PHPExcel {
     /**
      * Create sheet and add it to this workbook
      *
-     * @param  int|null   $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+     * @param  int|null $iSheetIndex Index where sheet should go (0,1,..., or null for last)
      * @param bool|string $title
      * @throws \PHPExcel_Exception
      * @return LaravelExcelWorksheet
@@ -74,8 +75,7 @@ class PHPExcel extends PHPOffice_PHPExcel {
         $properties = $this->getProperties();
 
         // Get fillable properties
-        foreach ($this->getAllowedProperties() as $prop)
-        {
+        foreach ($this->getAllowedProperties() as $prop) {
             // Get the method
             $method = 'set' . ucfirst($prop);
 
@@ -98,8 +98,7 @@ class PHPExcel extends PHPOffice_PHPExcel {
         $class = new \ReflectionClass(get_class($object));
 
         // Loop through all properties
-        foreach($class->getProperties() as $property)
-        {
+        foreach ($class->getProperties() as $property) {
             // Make the property public
             $property->setAccessible(true);
 

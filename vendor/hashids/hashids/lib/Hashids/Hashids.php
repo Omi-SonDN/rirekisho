@@ -60,8 +60,8 @@ class Hashids implements HashGenerator
 
         $this->_salt = $salt;
 
-        if ((int) $min_hash_length > 0) {
-            $this->_min_hash_length = (int) $min_hash_length;
+        if ((int)$min_hash_length > 0) {
+            $this->_min_hash_length = (int)$min_hash_length;
         }
 
         if ($alphabet) {
@@ -84,7 +84,7 @@ class Hashids implements HashGenerator
         $this->_seps = $this->_consistent_shuffle($this->_seps, $this->_salt);
 
         if (!$this->_seps || (strlen($this->_alphabet) / strlen($this->_seps)) > self::SEP_DIV) {
-            $seps_length = (int) ceil(strlen($this->_alphabet) / self::SEP_DIV);
+            $seps_length = (int)ceil(strlen($this->_alphabet) / self::SEP_DIV);
 
             if ($seps_length == 1) {
                 ++$seps_length;
@@ -100,7 +100,7 @@ class Hashids implements HashGenerator
         }
 
         $this->_alphabet = $this->_consistent_shuffle($this->_alphabet, $this->_salt);
-        $guard_count = (int) ceil(strlen($this->_alphabet) / self::GUARD_DIV);
+        $guard_count = (int)ceil(strlen($this->_alphabet) / self::GUARD_DIV);
 
         if (strlen($this->_alphabet) < 3) {
             $this->_guards = substr($this->_seps, 0, $guard_count);
@@ -125,7 +125,7 @@ class Hashids implements HashGenerator
         }
 
         foreach ($numbers as $number) {
-            $is_number = ctype_digit((string) $number);
+            $is_number = ctype_digit((string)$number);
 
             if (!$is_number || $number < 0 || $number > $this->_max_int_value) {
                 return $ret;
@@ -148,7 +148,7 @@ class Hashids implements HashGenerator
 
     public function encode_hex($str)
     {
-        if (!ctype_xdigit((string) $str)) {
+        if (!ctype_xdigit((string)$str)) {
             return '';
         }
 
@@ -156,7 +156,7 @@ class Hashids implements HashGenerator
         $numbers = explode(' ', $numbers);
 
         foreach ($numbers as $i => $number) {
-            $numbers[$i] = hexdec('1'.$number);
+            $numbers[$i] = hexdec('1' . $number);
         }
 
         return call_user_func_array(array($this, 'encode'), $numbers);
@@ -191,7 +191,7 @@ class Hashids implements HashGenerator
 
         $lottery = $ret = $alphabet[$numbers_hash_int % strlen($alphabet)];
         foreach ($numbers as $i => $number) {
-            $alphabet = $this->_consistent_shuffle($alphabet, substr($lottery.$this->_salt.$alphabet, 0, strlen($alphabet)));
+            $alphabet = $this->_consistent_shuffle($alphabet, substr($lottery . $this->_salt . $alphabet, 0, strlen($alphabet)));
             $ret .= $last = $this->_hash($number, $alphabet);
 
             if ($i + 1 < $numbers_size) {
@@ -205,7 +205,7 @@ class Hashids implements HashGenerator
             $guard_index = ($numbers_hash_int + ord($ret[0])) % strlen($this->_guards);
 
             $guard = $this->_guards[$guard_index];
-            $ret = $guard.$ret;
+            $ret = $guard . $ret;
 
             if (strlen($ret) < $this->_min_hash_length) {
                 $guard_index = ($numbers_hash_int + ord($ret[2])) % strlen($this->_guards);
@@ -215,10 +215,10 @@ class Hashids implements HashGenerator
             }
         }
 
-        $half_length = (int) (strlen($alphabet) / 2);
+        $half_length = (int)(strlen($alphabet) / 2);
         while (strlen($ret) < $this->_min_hash_length) {
             $alphabet = $this->_consistent_shuffle($alphabet, $alphabet);
-            $ret = substr($alphabet, $half_length).$ret.substr($alphabet, 0, $half_length);
+            $ret = substr($alphabet, $half_length) . $ret . substr($alphabet, 0, $half_length);
 
             $excess = strlen($ret) - $this->_min_hash_length;
             if ($excess > 0) {
@@ -250,8 +250,8 @@ class Hashids implements HashGenerator
             $hash_array = explode(' ', $hash_breakdown);
 
             foreach ($hash_array as $sub_hash) {
-                $alphabet = $this->_consistent_shuffle($alphabet, substr($lottery.$this->_salt.$alphabet, 0, strlen($alphabet)));
-                $ret[] = (int) $this->_unhash($sub_hash, $alphabet);
+                $alphabet = $this->_consistent_shuffle($alphabet, substr($lottery . $this->_salt . $alphabet, 0, strlen($alphabet)));
+                $ret[] = (int)$this->_unhash($sub_hash, $alphabet);
             }
 
             if ($this->_encode($ret) != $hash) {
@@ -288,11 +288,11 @@ class Hashids implements HashGenerator
         $alphabet_length = strlen($alphabet);
 
         do {
-            $hash = $alphabet[$input % $alphabet_length].$hash;
+            $hash = $alphabet[$input % $alphabet_length] . $hash;
             if ($input > $this->_lower_max_int_value && $this->_math_functions) {
                 $input = $this->_math_functions['str']($this->_math_functions['div']($input, $alphabet_length));
             } else {
-                $input = (int) ($input / $alphabet_length);
+                $input = (int)($input / $alphabet_length);
             }
         } while ($input);
 

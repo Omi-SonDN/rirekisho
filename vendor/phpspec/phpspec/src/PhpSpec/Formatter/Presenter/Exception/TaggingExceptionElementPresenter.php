@@ -87,7 +87,7 @@ final class TaggingExceptionElementPresenter implements ExceptionElementPresente
      */
     public function presentExceptionTraceMethod($class, $type, $method, array $args)
     {
-        $template = '   <trace><trace-class>%s</trace-class><trace-type>%s</trace-type>'.
+        $template = '   <trace><trace-class>%s</trace-class><trace-type>%s</trace-type>' .
             '<trace-func>%s</trace-func>(<trace-args>%s</trace-args>)</trace>';
 
         return sprintf($template, $class, $type, $method, $this->presentExceptionTraceArguments($args));

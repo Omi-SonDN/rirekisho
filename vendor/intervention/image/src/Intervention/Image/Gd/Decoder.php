@@ -93,7 +93,7 @@ class Decoder extends \Intervention\Image\AbstractDecoder
         $resource = @imagecreatefromstring($binary);
 
         if ($resource === false) {
-             throw new \Intervention\Image\Exception\NotReadableException(
+            throw new \Intervention\Image\Exception\NotReadableException(
                 "Unable to init from given binary data."
             );
         }

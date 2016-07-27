@@ -72,7 +72,7 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
      */
     public function __construct(Datatables $datatables, Factory $viewFactory)
     {
-        $this->datatables  = $datatables;
+        $this->datatables = $datatables;
         $this->viewFactory = $viewFactory;
     }
 
@@ -203,7 +203,7 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
         $this->datatables->getRequest()->merge(['length' => -1]);
 
         $response = $this->ajax();
-        $data     = $response->getData(true);
+        $data = $response->getData(true);
 
         return $data['data'];
     }
@@ -346,7 +346,7 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
     protected function getBuilderParameters()
     {
         return [
-            'order'   => [[0, 'desc']],
+            'order' => [[0, 'desc']],
             'buttons' => [
                 'create',
                 'export',

@@ -50,7 +50,7 @@ abstract class AbstractPhpSpecExceptionPresenter
     }
 
     /**
-     * @param string  $file
+     * @param string $file
      * @param integer $lineno
      * @param integer $context
      *

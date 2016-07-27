@@ -26,14 +26,16 @@ class TruncatingStringTypePresenterSpec extends ObjectBehavior
 
     function it_should_pass_short_values_directly_to_the_decorated_string_type_presenter(
         StringTypePresenter $stringTypePresenter
-    ) {
+    )
+    {
         $stringTypePresenter->present('foo')->willReturn('zfooz');
         $this->present('foo')->shouldReturn('zfooz');
     }
 
     function it_should_return_long_values_truncated(
         StringTypePresenter $stringTypePresenter
-    ) {
+    )
+    {
         $stringTypePresenter->present('some_string_longer_than_t...')
             ->willReturn('some_string_longer_than_t...');
         $this->present('some_string_longer_than_twenty_five_chars')->shouldReturn('some_string_longer_than_t...');

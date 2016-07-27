@@ -5,7 +5,8 @@ include_once 'classes/TestImportHandler.php';
 include_once 'classes/TestFile.php';
 include_once 'classes/TestFileHandler.php';
 
-class ExcelFileTest extends TestCase {
+class ExcelFileTest extends TestCase
+{
 
 
     public function testInit()
@@ -19,7 +20,7 @@ class ExcelFileTest extends TestCase {
     {
         $importer = app('TestImport');
         $file = $importer->getFile();
-        $exploded = explode('/',$file);
+        $exploded = explode('/', $file);
         $filename = end($exploded);
 
         $this->assertEquals('test.csv', $filename);

@@ -145,7 +145,7 @@ class TransportManager extends Manager
     /**
      * Set the default cache driver name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return void
      */
     public function setDefaultDriver($name)

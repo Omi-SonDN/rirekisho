@@ -62,7 +62,7 @@
                             </a>
                         </li>
                         <li class="p-link">
-                            <a  name="P-selfintro">
+                            <a name="P-selfintro">
                                 <i class="fa fa-file-text "></i>
                                 <div class="li-text">自己紹介・希望</div>
 
@@ -172,7 +172,7 @@
                                 </tr>
                             @else
                                 @foreach ($School as $Record)
-                                    <?php $r_id = $Record ; ?>
+                                    <?php $r_id = $Record; ?>
 
                                     <tr>
                                         <th><h4>{{$Record->Jdate}}</h4></th>
@@ -201,7 +201,7 @@
                                 </tr>
                             @else
                                 @foreach ($Cert as $Record)
-                                    <?php $r_id = $Record ; ?>
+                                    <?php $r_id = $Record; ?>
 
                                     <tr>
                                         <th><h4>{{$Record->Jdate}}</h4></th>
@@ -254,7 +254,7 @@
                         </tr>
                     @else
                         @foreach ($Work as $Record)
-                            <?php $r_id = $Record ; ?>
+                            <?php $r_id = $Record; ?>
 
                             <tr>
                                 <th><h4>{{$Record->Jdate}}</h4></th>
@@ -283,7 +283,7 @@
                         </tr>
                     @else
                         @foreach ($Work as $Record)
-                            <?php $r_id = $Record ; ?>
+                            <?php $r_id = $Record; ?>
 
                             <tr>
                                 <th><h4>{{$Record->Jdate}}</h4></th>

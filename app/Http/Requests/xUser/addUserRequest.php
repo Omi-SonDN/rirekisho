@@ -31,6 +31,7 @@ class addUserRequest extends Request
             //'txtImage' => 'mimes:jpg, jpeg, bmp, png',
         ];
     }
+
     public function messages()
     {
         return [

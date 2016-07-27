@@ -181,25 +181,25 @@ class Mock implements MockInterface
 
         $lastExpectation = \Mockery::parseShouldReturnArgs(
             $this, func_get_args(), function ($method) use ($self, $nonPublicMethods, $allowMockingProtectedMethods) {
-                $rm = $self->mockery_getMethod($method);
-                if ($rm) {
-                    if ($rm->isPrivate()) {
-                        throw new \InvalidArgumentException("$method() cannot be mocked as it is a private method");
-                    }
-                    if (!$allowMockingProtectedMethods && $rm->isProtected()) {
-                        throw new \InvalidArgumentException("$method() cannot be mocked as it a protected method and mocking protected methods is not allowed for this mock");
-                    }
+            $rm = $self->mockery_getMethod($method);
+            if ($rm) {
+                if ($rm->isPrivate()) {
+                    throw new \InvalidArgumentException("$method() cannot be mocked as it is a private method");
                 }
-
-                $director = $self->mockery_getExpectationsFor($method);
-                if (!$director) {
-                    $director = new \Mockery\ExpectationDirector($method, $self);
-                    $self->mockery_setExpectationsFor($method, $director);
+                if (!$allowMockingProtectedMethods && $rm->isProtected()) {
+                    throw new \InvalidArgumentException("$method() cannot be mocked as it a protected method and mocking protected methods is not allowed for this mock");
                 }
-                $expectation = new \Mockery\Expectation($self, $method);
-                $director->addExpectation($expectation);
-                return $expectation;
             }
+
+            $director = $self->mockery_getExpectationsFor($method);
+            if (!$director) {
+                $director = new \Mockery\ExpectationDirector($method, $self);
+                $self->mockery_setExpectationsFor($method, $director);
+            }
+            $expectation = new \Mockery\Expectation($self, $method);
+            $director->addExpectation($expectation);
+            return $expectation;
+        }
         );
         return $lastExpectation;
     }
@@ -339,22 +339,22 @@ class Mock implements MockInterface
     }
 
     /**public function __set($name, $value)
-    {
-        $this->_mockery_mockableProperties[$name] = $value;
-        return $this;
-    }
-
-    public function __get($name)
-    {
-        if (isset($this->_mockery_mockableProperties[$name])) {
-            return $this->_mockery_mockableProperties[$name];
-        } elseif(isset($this->{$name})) {
-            return $this->{$name};
-        }
-        throw new \InvalidArgumentException (
-            'Property ' . __CLASS__ . '::' . $name . ' does not exist on this mock object'
-        );
-    }**/
+     * {
+     * $this->_mockery_mockableProperties[$name] = $value;
+     * return $this;
+     * }
+     *
+     * public function __get($name)
+     * {
+     * if (isset($this->_mockery_mockableProperties[$name])) {
+     * return $this->_mockery_mockableProperties[$name];
+     * } elseif(isset($this->{$name})) {
+     * return $this->{$name};
+     * }
+     * throw new \InvalidArgumentException (
+     * 'Property ' . __CLASS__ . '::' . $name . ' does not exist on this mock object'
+     * );
+     * }**/
 
     /**
      * Iterate across all expectation directors and validate each
@@ -368,7 +368,8 @@ class Mock implements MockInterface
             return true;
         }
         if (isset($this->_mockery_ignoreVerification)
-            && $this->_mockery_ignoreVerification == true) {
+            && $this->_mockery_ignoreVerification == true
+        ) {
             return true;
         }
         $this->_mockery_verified = true;
@@ -676,7 +677,8 @@ class Mock implements MockInterface
         }
 
         if (isset($this->_mockery_expectations[$method])
-        && !$this->_mockery_disableExpectationMatching) {
+            && !$this->_mockery_disableExpectationMatching
+        ) {
             $handler = $this->_mockery_expectations[$method];
 
             try {

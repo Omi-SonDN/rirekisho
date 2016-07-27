@@ -64,14 +64,15 @@ final class SimpleExceptionPresenter implements ExceptionPresenter
         ExceptionElementPresenter $exceptionElementPresenter,
         CallArgumentsPresenter $callArgumentsPresenter,
         PhpSpecExceptionPresenter $phpspecExceptionPresenter
-    ) {
+    )
+    {
         $this->differ = $differ;
         $this->exceptionElementPresenter = $exceptionElementPresenter;
         $this->callArgumentsPresenter = $callArgumentsPresenter;
         $this->phpspecExceptionPresenter = $phpspecExceptionPresenter;
 
         $this->phpspecPath = dirname(dirname(__DIR__));
-        $this->runnerPath  = $this->phpspecPath.DIRECTORY_SEPARATOR.'Runner';
+        $this->runnerPath = $this->phpspecPath . DIRECTORY_SEPARATOR . 'Runner';
     }
 
     /**
@@ -142,7 +143,7 @@ final class SimpleExceptionPresenter implements ExceptionPresenter
 
         $text .= $this->presentExceptionTraceLocation($offset++, $exception->getFile(), $exception->getLine());
         $text .= $this->presentExceptionTraceFunction(
-            'throw new '.get_class($exception),
+            'throw new ' . get_class($exception),
             array($exception->getMessage())
         );
 
@@ -175,7 +176,7 @@ final class SimpleExceptionPresenter implements ExceptionPresenter
      * @param string $class
      * @param string $type
      * @param string $method
-     * @param array  $args
+     * @param array $args
      *
      * @return string
      */
@@ -186,7 +187,7 @@ final class SimpleExceptionPresenter implements ExceptionPresenter
 
     /**
      * @param string $function
-     * @param array  $args
+     * @param array $args
      *
      * @return string
      */
@@ -196,9 +197,9 @@ final class SimpleExceptionPresenter implements ExceptionPresenter
     }
 
     /**
-     * @param int    $offset
+     * @param int $offset
      * @param string $file
-     * @param int    $line
+     * @param int $line
      *
      * @return string
      */
@@ -207,7 +208,7 @@ final class SimpleExceptionPresenter implements ExceptionPresenter
         return $this->presentExceptionTraceHeader(sprintf(
             "%2d %s:%d",
             $offset,
-            str_replace(getcwd().DIRECTORY_SEPARATOR, '', $file),
+            str_replace(getcwd() . DIRECTORY_SEPARATOR, '', $file),
             $line
         ));
     }

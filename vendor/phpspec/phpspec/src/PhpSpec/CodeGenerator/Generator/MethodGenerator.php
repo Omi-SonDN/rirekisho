@@ -53,16 +53,16 @@ class MethodGenerator implements GeneratorInterface
      */
     public function __construct(IO $io, TemplateRenderer $templates, Filesystem $filesystem = null, CodeWriter $codeWriter = null)
     {
-        $this->io         = $io;
-        $this->templates  = $templates;
+        $this->io = $io;
+        $this->templates = $templates;
         $this->filesystem = $filesystem ?: new Filesystem();
         $this->codeWriter = $codeWriter ?: new TokenizedCodeWriter();
     }
 
     /**
      * @param ResourceInterface $resource
-     * @param string            $generation
-     * @param array             $data
+     * @param string $generation
+     * @param array $data
      *
      * @return bool
      */
@@ -73,18 +73,17 @@ class MethodGenerator implements GeneratorInterface
 
     /**
      * @param ResourceInterface $resource
-     * @param array             $data
+     * @param array $data
      */
     public function generate(ResourceInterface $resource, array $data = array())
     {
-        $filepath  = $resource->getSrcFilename();
-        $name      = $data['name'];
+        $filepath = $resource->getSrcFilename();
+        $name = $data['name'];
         $arguments = $data['arguments'];
 
         $argString = count($arguments)
-            ? '$argument'.implode(', $argument', range(1, count($arguments)))
-            : ''
-        ;
+            ? '$argument' . implode(', $argument', range(1, count($arguments)))
+            : '';
 
         $values = array('%name%' => $name, '%arguments%' => $argString);
         if (!$content = $this->templates->render('method', $values)) {
@@ -117,7 +116,7 @@ class MethodGenerator implements GeneratorInterface
      */
     protected function getTemplate()
     {
-        return file_get_contents(__DIR__.'/templates/method.template');
+        return file_get_contents(__DIR__ . '/templates/method.template');
     }
 
     /**

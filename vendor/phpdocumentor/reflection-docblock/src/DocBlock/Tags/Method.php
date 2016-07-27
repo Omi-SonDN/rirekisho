@@ -45,7 +45,8 @@ final class Method extends BaseTag implements Factory\StaticMethod
         Type $returnType = null,
         $static = false,
         Description $description = null
-    ) {
+    )
+    {
         Assert::stringNotEmpty($methodName);
         Assert::boolean($static);
 
@@ -53,10 +54,10 @@ final class Method extends BaseTag implements Factory\StaticMethod
             $returnType = new Void_();
         }
 
-        $this->methodName  = $methodName;
-        $this->arguments   = $this->filterArguments($arguments);
-        $this->returnType  = $returnType;
-        $this->isStatic    = $static;
+        $this->methodName = $methodName;
+        $this->arguments = $this->filterArguments($arguments);
+        $this->returnType = $returnType;
+        $this->isStatic = $static;
         $this->description = $description;
     }
 
@@ -68,9 +69,10 @@ final class Method extends BaseTag implements Factory\StaticMethod
         TypeResolver $typeResolver = null,
         DescriptionFactory $descriptionFactory = null,
         TypeContext $context = null
-    ) {
+    )
+    {
         Assert::stringNotEmpty($body);
-        Assert::allNotNull([ $typeResolver, $descriptionFactory ]);
+        Assert::allNotNull([$typeResolver, $descriptionFactory]);
 
         // 1. none or more whitespace
         // 2. optionally the keyword "static" followed by whitespace
@@ -114,19 +116,20 @@ final class Method extends BaseTag implements Factory\StaticMethod
             $/sux',
             $body,
             $matches
-        )) {
+        )
+        ) {
             return null;
         }
 
         list(, $static, $returnType, $methodName, $arguments, $description) = $matches;
 
-        $static      = $static === 'static';
-        $returnType  = $typeResolver->resolve($returnType, $context);
+        $static = $static === 'static';
+        $returnType = $typeResolver->resolve($returnType, $context);
         $description = $descriptionFactory->create($description, $context);
 
         if ('' !== $arguments) {
             $arguments = explode(',', $arguments);
-            foreach($arguments as &$argument) {
+            foreach ($arguments as &$argument) {
                 $argument = explode(' ', trim($argument));
                 if ($argument[0][0] === '$') {
                     $argumentName = substr($argument[0], 1);
@@ -139,7 +142,7 @@ final class Method extends BaseTag implements Factory\StaticMethod
                     }
                 }
 
-                $argument = [ 'name' => $argumentName, 'type' => $argumentType];
+                $argument = ['name' => $argumentName, 'type' => $argumentType];
             }
         } else {
             $arguments = [];
@@ -192,23 +195,23 @@ final class Method extends BaseTag implements Factory\StaticMethod
         }
 
         return ($this->isStatic() ? 'static ' : '')
-            . (string)$this->returnType . ' '
-            . $this->methodName
-            . '(' . implode(', ', $arguments) . ')'
-            . ($this->description ? ' ' . $this->description->render() : '');
+        . (string)$this->returnType . ' '
+        . $this->methodName
+        . '(' . implode(', ', $arguments) . ')'
+        . ($this->description ? ' ' . $this->description->render() : '');
     }
 
     private function filterArguments($arguments)
     {
         foreach ($arguments as &$argument) {
             if (is_string($argument)) {
-                $argument = [ 'name' => $argument ];
+                $argument = ['name' => $argument];
             }
-            if (! isset($argument['type'])) {
+            if (!isset($argument['type'])) {
                 $argument['type'] = new Void_();
             }
             $keys = array_keys($argument);
-            if ($keys !== [ 'name', 'type' ]) {
+            if ($keys !== ['name', 'type']) {
                 throw new \InvalidArgumentException(
                     'Arguments can only have the "name" and "type" fields, found: ' . var_export($keys, true)
                 );

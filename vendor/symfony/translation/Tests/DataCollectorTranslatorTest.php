@@ -29,32 +29,32 @@ class DataCollectorTranslatorTest extends \PHPUnit_Framework_TestCase
 
         $expectedMessages = array();
         $expectedMessages[] = array(
-              'id' => 'foo',
-              'translation' => 'foo (en)',
-              'locale' => 'en',
-              'domain' => 'messages',
-              'state' => DataCollectorTranslator::MESSAGE_DEFINED,
+            'id' => 'foo',
+            'translation' => 'foo (en)',
+            'locale' => 'en',
+            'domain' => 'messages',
+            'state' => DataCollectorTranslator::MESSAGE_DEFINED,
         );
         $expectedMessages[] = array(
-              'id' => 'bar',
-              'translation' => 'bar (fr)',
-              'locale' => 'fr',
-              'domain' => 'messages',
-              'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
+            'id' => 'bar',
+            'translation' => 'bar (fr)',
+            'locale' => 'fr',
+            'domain' => 'messages',
+            'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
         );
         $expectedMessages[] = array(
-              'id' => 'choice',
-              'translation' => 'choice',
-              'locale' => 'en',
-              'domain' => 'messages',
-              'state' => DataCollectorTranslator::MESSAGE_MISSING,
+            'id' => 'choice',
+            'translation' => 'choice',
+            'locale' => 'en',
+            'domain' => 'messages',
+            'state' => DataCollectorTranslator::MESSAGE_MISSING,
         );
         $expectedMessages[] = array(
-              'id' => 'bar_ru',
-              'translation' => 'bar (ru)',
-              'locale' => 'ru',
-              'domain' => 'messages',
-              'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
+            'id' => 'bar_ru',
+            'translation' => 'bar (ru)',
+            'locale' => 'ru',
+            'domain' => 'messages',
+            'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
         );
 
         $this->assertEquals($expectedMessages, $collector->getCollectedMessages());

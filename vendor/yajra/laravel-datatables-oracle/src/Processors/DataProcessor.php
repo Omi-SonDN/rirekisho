@@ -59,12 +59,12 @@ class DataProcessor
      */
     public function __construct($results, array $columnDef, array $templates)
     {
-        $this->results       = $results;
+        $this->results = $results;
         $this->appendColumns = $columnDef['append'];
-        $this->editColumns   = $columnDef['edit'];
+        $this->editColumns = $columnDef['edit'];
         $this->excessColumns = $columnDef['excess'];
         $this->escapeColumns = $columnDef['escape'];
-        $this->templates     = $templates;
+        $this->templates = $templates;
     }
 
     /**
@@ -77,7 +77,7 @@ class DataProcessor
     {
         $this->output = [];
         foreach ($this->results as $row) {
-            $data  = Helper::convertToArray($row);
+            $data = Helper::convertToArray($row);
             $value = $this->addColumns($data, $row);
             $value = $this->editColumns($value, $row);
             $value = $this->setupRowVariables($value, $row);
@@ -100,7 +100,7 @@ class DataProcessor
     {
         foreach ($this->appendColumns as $key => $value) {
             $value['content'] = Helper::compileContent($value['content'], $data, $row);
-            $data             = Helper::includeInArray($value, $data);
+            $data = Helper::includeInArray($value, $data);
         }
 
         return $data;
@@ -116,7 +116,7 @@ class DataProcessor
     protected function editColumns($data, $row)
     {
         foreach ($this->editColumns as $key => $value) {
-            $value['content']     = Helper::compileContent($value['content'], $data, $row);
+            $value['content'] = Helper::compileContent($value['content'], $data, $row);
             Arr::set($data, $value['name'], $value['content']);
         }
 
@@ -165,7 +165,7 @@ class DataProcessor
      */
     public function flatten(array $array)
     {
-        $return     = [];
+        $return = [];
         $exceptions = ['DT_RowId', 'DT_RowClass', 'DT_RowData', 'DT_RowAttr'];
 
         foreach ($array as $key => $value) {

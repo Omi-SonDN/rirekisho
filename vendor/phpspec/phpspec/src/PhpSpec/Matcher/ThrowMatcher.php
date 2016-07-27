@@ -45,21 +45,21 @@ class ThrowMatcher implements MatcherInterface
     private $factory;
 
     /**
-     * @param Unwrapper              $unwrapper
-     * @param PresenterInterface     $presenter
+     * @param Unwrapper $unwrapper
+     * @param PresenterInterface $presenter
      * @param ReflectionFactory|null $factory
      */
     public function __construct(Unwrapper $unwrapper, PresenterInterface $presenter, ReflectionFactory $factory = null)
     {
         $this->unwrapper = $unwrapper;
         $this->presenter = $presenter;
-        $this->factory   = $factory ?: new ReflectionFactory();
+        $this->factory = $factory ?: new ReflectionFactory();
     }
 
     /**
      * @param string $name
-     * @param mixed  $subject
-     * @param array  $arguments
+     * @param mixed $subject
+     * @param array $arguments
      *
      * @return bool
      */
@@ -70,8 +70,8 @@ class ThrowMatcher implements MatcherInterface
 
     /**
      * @param string $name
-     * @param mixed  $subject
-     * @param array  $arguments
+     * @param mixed $subject
+     * @param array $arguments
      *
      * @return DelayedCall
      */
@@ -82,8 +82,8 @@ class ThrowMatcher implements MatcherInterface
 
     /**
      * @param string $name
-     * @param mixed  $subject
-     * @param array  $arguments
+     * @param mixed $subject
+     * @param array $arguments
      *
      * @return DelayedCall
      */
@@ -93,8 +93,8 @@ class ThrowMatcher implements MatcherInterface
     }
 
     /**
-     * @param callable           $callable
-     * @param array              $arguments
+     * @param callable $callable
+     * @param array $arguments
      * @param null|object|string $exception
      *
      * @throws \PhpSpec\Exception\Example\FailureException
@@ -156,8 +156,8 @@ class ThrowMatcher implements MatcherInterface
     }
 
     /**
-     * @param callable           $callable
-     * @param array              $arguments
+     * @param callable $callable
+     * @param array $arguments
      * @param string|null|object $exception
      *
      * @throws \PhpSpec\Exception\Example\FailureException
@@ -209,7 +209,7 @@ class ThrowMatcher implements MatcherInterface
             $withProperties = '';
             if (count($invalidProperties) > 0) {
                 $withProperties = sprintf(
-                    ' with'.PHP_EOL.'%s,'.PHP_EOL,
+                    ' with' . PHP_EOL . '%s,' . PHP_EOL,
                     implode(",\n", $invalidProperties)
                 );
             }
@@ -234,8 +234,8 @@ class ThrowMatcher implements MatcherInterface
 
     /**
      * @param callable $check
-     * @param mixed    $subject
-     * @param array    $arguments
+     * @param mixed $subject
+     * @param array $arguments
      *
      * @return DelayedCall
      */
@@ -293,8 +293,8 @@ class ThrowMatcher implements MatcherInterface
 
         throw new MatcherException(
             sprintf(
-                "Wrong argument provided in throw matcher.\n".
-                "Fully qualified classname or exception instance expected,\n".
+                "Wrong argument provided in throw matcher.\n" .
+                "Fully qualified classname or exception instance expected,\n" .
                 "Got %s.",
                 $this->presenter->presentValue($arguments[0])
             )

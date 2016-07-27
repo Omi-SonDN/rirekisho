@@ -134,7 +134,7 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     public function testFactoryMethod()
     {
         $descriptionFactory = m::mock(DescriptionFactory::class);
-        $context            = new Context('');
+        $context = new Context('');
 
         $description = new Description('My Description');
         $descriptionFactory->shouldReceive('create')->with('My Description', $context)->andReturn($description);

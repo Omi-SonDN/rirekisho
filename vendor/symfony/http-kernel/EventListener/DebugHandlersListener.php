@@ -38,20 +38,20 @@ class DebugHandlersListener implements EventSubscriberInterface
     private $firstCall = true;
 
     /**
-     * @param callable|null        $exceptionHandler A handler that will be called on Exception
-     * @param LoggerInterface|null $logger           A PSR-3 logger
-     * @param array|int            $levels           An array map of E_* to LogLevel::* or an integer bit field of E_* constants
-     * @param int|null             $throwAt          Thrown errors in a bit field of E_* constants, or null to keep the current value
-     * @param bool                 $scream           Enables/disables screaming mode, where even silenced errors are logged
-     * @param string               $fileLinkFormat   The format for links to source files
+     * @param callable|null $exceptionHandler A handler that will be called on Exception
+     * @param LoggerInterface|null $logger A PSR-3 logger
+     * @param array|int $levels An array map of E_* to LogLevel::* or an integer bit field of E_* constants
+     * @param int|null $throwAt Thrown errors in a bit field of E_* constants, or null to keep the current value
+     * @param bool $scream Enables/disables screaming mode, where even silenced errors are logged
+     * @param string $fileLinkFormat The format for links to source files
      */
     public function __construct($exceptionHandler, LoggerInterface $logger = null, $levels = null, $throwAt = -1, $scream = true, $fileLinkFormat = null)
     {
         $this->exceptionHandler = $exceptionHandler;
         $this->logger = $logger;
         $this->levels = $levels;
-        $this->throwAt = is_numeric($throwAt) ? (int) $throwAt : (null === $throwAt ? null : ($throwAt ? -1 : null));
-        $this->scream = (bool) $scream;
+        $this->throwAt = is_numeric($throwAt) ? (int)$throwAt : (null === $throwAt ? null : ($throwAt ? -1 : null));
+        $this->scream = (bool)$scream;
         $this->fileLinkFormat = $fileLinkFormat ?: ini_get('xdebug.file_link_format') ?: get_cfg_var('xdebug.file_link_format');
     }
 

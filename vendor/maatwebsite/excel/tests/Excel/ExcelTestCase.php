@@ -4,7 +4,8 @@ use Mockery as m;
 use Maatwebsite\Excel\Excel;
 use Illuminate\Filesystem\Filesystem;
 
-class ExcelTestCase extends PHPUnit_Framework_TestCase {
+class ExcelTestCase extends PHPUnit_Framework_TestCase
+{
 
     /**
      * Mocks

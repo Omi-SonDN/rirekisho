@@ -37,8 +37,8 @@ trait ApplicationTrait
     /**
      * Register an instance of an object in the container.
      *
-     * @param  string  $abstract
-     * @param  object  $instance
+     * @param  string $abstract
+     * @param  object $instance
      * @return object
      */
     protected function instance($abstract, $instance)
@@ -53,7 +53,7 @@ trait ApplicationTrait
      *
      * These events will be mocked, so that handlers will not actually be executed.
      *
-     * @param  array|mixed  $events
+     * @param  array|mixed $events
      * @return $this
      */
     public function expectsEvents($events)
@@ -66,7 +66,8 @@ trait ApplicationTrait
             foreach ($events as $key => $event) {
                 if ((is_string($called) && $called === $event) ||
                     (is_string($called) && is_subclass_of($called, $event)) ||
-                    (is_object($called) && $called instanceof $event)) {
+                    (is_object($called) && $called instanceof $event)
+                ) {
                     unset($events[$key]);
                 }
             }
@@ -75,7 +76,7 @@ trait ApplicationTrait
         $this->beforeApplicationDestroyed(function () use (&$events) {
             if ($events) {
                 throw new Exception(
-                    'The following events were not fired: ['.implode(', ', $events).']'
+                    'The following events were not fired: [' . implode(', ', $events) . ']'
                 );
             }
         });
@@ -106,7 +107,7 @@ trait ApplicationTrait
      *
      * These jobs will be mocked, so that handlers will not actually be executed.
      *
-     * @param  array|mixed  $jobs
+     * @param  array|mixed $jobs
      * @return $this
      */
     protected function expectsJobs($jobs)
@@ -130,7 +131,7 @@ trait ApplicationTrait
     /**
      * Set the session to the given array.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return $this
      */
     public function withSession(array $data)
@@ -143,7 +144,7 @@ trait ApplicationTrait
     /**
      * Set the session to the given array.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return void
      */
     public function session(array $data)
@@ -162,7 +163,7 @@ trait ApplicationTrait
      */
     protected function startSession()
     {
-        if (! $this->app['session']->isStarted()) {
+        if (!$this->app['session']->isStarted()) {
             $this->app['session']->start();
         }
     }
@@ -194,8 +195,8 @@ trait ApplicationTrait
     /**
      * Set the currently logged in user for the application.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
-     * @param  string|null  $driver
+     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
+     * @param  string|null $driver
      * @return $this
      */
     public function actingAs(UserContract $user, $driver = null)
@@ -208,8 +209,8 @@ trait ApplicationTrait
     /**
      * Set the currently logged in user for the application.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
-     * @param  string|null  $driver
+     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
+     * @param  string|null $driver
      * @return void
      */
     public function be(UserContract $user, $driver = null)
@@ -220,9 +221,9 @@ trait ApplicationTrait
     /**
      * Assert that a given where condition exists in the database.
      *
-     * @param  string  $table
-     * @param  array  $data
-     * @param  string  $connection
+     * @param  string $table
+     * @param  array $data
+     * @param  string $connection
      * @return $this
      */
     protected function seeInDatabase($table, array $data, $connection = null)
@@ -243,9 +244,9 @@ trait ApplicationTrait
     /**
      * Assert that a given where condition does not exist in the database.
      *
-     * @param  string  $table
-     * @param  array  $data
-     * @param  string  $connection
+     * @param  string $table
+     * @param  array $data
+     * @param  string $connection
      * @return $this
      */
     protected function missingFromDatabase($table, array $data, $connection = null)
@@ -256,9 +257,9 @@ trait ApplicationTrait
     /**
      * Assert that a given where condition does not exist in the database.
      *
-     * @param  string  $table
-     * @param  array  $data
-     * @param  string  $connection
+     * @param  string $table
+     * @param  array $data
+     * @param  string $connection
      * @return $this
      */
     protected function dontSeeInDatabase($table, array $data, $connection = null)
@@ -269,9 +270,9 @@ trait ApplicationTrait
     /**
      * Assert that a given where condition does not exist in the database.
      *
-     * @param  string  $table
-     * @param  array  $data
-     * @param  string  $connection
+     * @param  string $table
+     * @param  array $data
+     * @param  string $connection
      * @return $this
      */
     protected function notSeeInDatabase($table, array $data, $connection = null)
@@ -292,7 +293,7 @@ trait ApplicationTrait
     /**
      * Seed a given database connection.
      *
-     * @param  string  $class
+     * @param  string $class
      * @return void
      */
     public function seed($class = 'DatabaseSeeder')
@@ -303,8 +304,8 @@ trait ApplicationTrait
     /**
      * Call artisan command and return code.
      *
-     * @param  string  $command
-     * @param  array  $parameters
+     * @param  string $command
+     * @param  array $parameters
      * @return int
      */
     public function artisan($command, $parameters = [])

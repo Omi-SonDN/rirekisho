@@ -43,9 +43,9 @@ class DataTransformer
         foreach ($columns->all() as $column) {
             if ($column[$type]) {
                 $title = $column['title'];
-                $data  = array_get($row, $column['data']);
+                $data = array_get($row, $column['data']);
                 if ($type == 'exportable') {
-                    $data  = $this->decodeContent($data);
+                    $data = $this->decodeContent($data);
                     $title = $this->decodeContent($title);
                 }
 

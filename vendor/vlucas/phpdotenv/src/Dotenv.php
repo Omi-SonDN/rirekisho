@@ -28,11 +28,11 @@ class Dotenv
             $file = '.env';
         }
 
-        $filePath = rtrim($path, '/').'/'.$file;
+        $filePath = rtrim($path, '/') . '/' . $file;
         if (!is_readable($filePath) || !is_file($filePath)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    'Dotenv: Environment file %s not found or not readable. '.
+                    'Dotenv: Environment file %s not found or not readable. ' .
                     'Create file with your environment settings at %s',
                     $file,
                     $filePath
@@ -68,7 +68,7 @@ class Dotenv
      *
      * The environment variable value is stripped of single and double quotes.
      *
-     * @param string      $name
+     * @param string $name
      * @param string|null $value
      *
      * @return void
@@ -93,7 +93,7 @@ class Dotenv
      *
      * You can also pass through an set of allowed values for the environment variable.
      *
-     * @param mixed    $environmentVariables
+     * @param mixed $environmentVariables
      * @param string[] $allowedValues
      *
      * @throws \RuntimeException
@@ -102,7 +102,7 @@ class Dotenv
      */
     public static function required($environmentVariables, array $allowedValues = array())
     {
-        $environmentVariables = (array) $environmentVariables;
+        $environmentVariables = (array)$environmentVariables;
         $missingEnvironmentVariables = array();
 
         foreach ($environmentVariables as $environmentVariable) {
@@ -239,7 +239,7 @@ class Dotenv
                     if (is_null($nestedVariable)) {
                         return $matchedPatterns[0];
                     } else {
-                        return  $nestedVariable;
+                        return $nestedVariable;
                     }
                 },
                 $value

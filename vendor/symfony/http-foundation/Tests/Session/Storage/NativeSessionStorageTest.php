@@ -36,7 +36,7 @@ class NativeSessionStorageTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->iniSet('session.save_handler', 'files');
-        $this->iniSet('session.save_path', $this->savePath = sys_get_temp_dir().'/sf2test');
+        $this->iniSet('session.save_path', $this->savePath = sys_get_temp_dir() . '/sf2test');
         if (!is_dir($this->savePath)) {
             mkdir($this->savePath);
         }
@@ -45,7 +45,7 @@ class NativeSessionStorageTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         session_write_close();
-        array_map('unlink', glob($this->savePath.'/*'));
+        array_map('unlink', glob($this->savePath . '/*'));
         if (is_dir($this->savePath)) {
             rmdir($this->savePath);
         }
@@ -178,7 +178,7 @@ class NativeSessionStorageTest extends \PHPUnit_Framework_TestCase
         $gco = array();
 
         foreach ($temp as $key => $value) {
-            $gco['cookie_'.$key] = $value;
+            $gco['cookie_' . $key] = $value;
         }
 
         $this->assertEquals($options, $gco);

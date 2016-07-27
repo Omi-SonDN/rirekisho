@@ -20,7 +20,8 @@ class CallArgumentsPresenterSpec extends ObjectBehavior
 
     function it_should_return_empty_string_if_there_are_no_method_prophecies(
         UnexpectedCallException $exception, ObjectProphecy $objectProphecy
-    ) {
+    )
+    {
         $exception->getObjectProphecy()->willReturn($objectProphecy);
         $exception->getArguments()->shouldBeCalled();
         $exception->getMethodName()->willReturn('method');
@@ -33,7 +34,8 @@ class CallArgumentsPresenterSpec extends ObjectBehavior
     function it_should_return_empty_string_if_method_prophecies_all_contain_calls(
         UnexpectedCallException $exception, ObjectProphecy $objectProphecy, MethodProphecy $prophecy,
         Call $call, ArgumentsWildcard $wildcard
-    ) {
+    )
+    {
         $exception->getObjectProphecy()->willReturn($objectProphecy);
         $exception->getArguments()->shouldBeCalled();
         $exception->getMethodName()->willReturn('method');
@@ -49,7 +51,8 @@ class CallArgumentsPresenterSpec extends ObjectBehavior
     function it_should_return_empty_string_if_argument_counts_do_not_match(
         UnexpectedCallException $exception, ObjectProphecy $objectProphecy, MethodProphecy $prophecy,
         ArgumentsWildcard $wildcard
-    ) {
+    )
+    {
         $exception->getObjectProphecy()->willReturn($objectProphecy);
         $exception->getArguments()->willReturn(array('a', 'b'));
         $exception->getMethodName()->shouldBeCalled();

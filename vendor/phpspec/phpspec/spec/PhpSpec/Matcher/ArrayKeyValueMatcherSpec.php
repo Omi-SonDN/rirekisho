@@ -87,7 +87,7 @@ class ArrayKeyValueMatcherSpec extends ObjectBehavior
 
     function it_matches_array_without_specified_key()
     {
-        $this->shouldNotThrow()->duringNegativeMatch('haveKeyWithValue', array(1,2,3), array('abc', 123));
+        $this->shouldNotThrow()->duringNegativeMatch('haveKeyWithValue', array(1, 2, 3), array('abc', 123));
     }
 
     function it_matches_array_with_invalid_key_value()

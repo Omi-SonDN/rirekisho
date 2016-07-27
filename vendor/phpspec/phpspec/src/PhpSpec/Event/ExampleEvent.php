@@ -24,7 +24,7 @@ class ExampleEvent extends Event implements EventInterface
     /**
      * Spec passed
      */
-    const PASSED  = 0;
+    const PASSED = 0;
 
     /**
      * Spec is pending
@@ -39,12 +39,12 @@ class ExampleEvent extends Event implements EventInterface
     /**
      * Spec failed
      */
-    const FAILED  = 3;
+    const FAILED = 3;
 
     /**
      * Spec is broken
      */
-    const BROKEN  = 4;
+    const BROKEN = 4;
 
     /**
      * @var ExampleNode
@@ -67,20 +67,21 @@ class ExampleEvent extends Event implements EventInterface
     private $exception;
 
     /**
-     * @param ExampleNode  $example
-     * @param float|null   $time
+     * @param ExampleNode $example
+     * @param float|null $time
      * @param integer|null $result
-     * @param \Exception   $exception
+     * @param \Exception $exception
      */
     public function __construct(
         ExampleNode $example,
         $time = null,
         $result = null,
         \Exception $exception = null
-    ) {
-        $this->example   = $example;
-        $this->time      = $time;
-        $this->result    = $result;
+    )
+    {
+        $this->example = $example;
+        $this->time = $time;
+        $this->result = $result;
         $this->exception = $exception;
     }
 

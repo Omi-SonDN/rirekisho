@@ -54,7 +54,7 @@ class ViewCollector extends TwigCollector
     {
         $name = $view->getName();
         $path = $view->getPath();
-        
+
         if (!is_object($path)) {
             if ($path) {
                 $path = ltrim(str_replace(base_path(), '', realpath($path)), '/');

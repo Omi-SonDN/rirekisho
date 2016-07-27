@@ -153,9 +153,11 @@ class MockConfigurationTest extends \PHPUnit_Framework_TestCase
 interface TestTraversableInterface extends \Traversable
 {
 }
+
 interface TestTraversableInterface2 extends \Traversable, \Iterator
 {
 }
+
 interface TestTraversableInterface3 extends \Traversable, \IteratorAggregate
 {
 }

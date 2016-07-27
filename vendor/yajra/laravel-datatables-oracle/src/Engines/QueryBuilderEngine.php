@@ -37,12 +37,12 @@ class QueryBuilderEngine extends BaseEngine
      */
     protected function init($request, $builder, $type = 'builder')
     {
-        $this->request    = $request;
+        $this->request = $request;
         $this->query_type = $type;
-        $this->columns    = $builder->columns;
+        $this->columns = $builder->columns;
         $this->connection = $builder->getConnection();
-        $this->prefix     = $this->connection->getTablePrefix();
-        $this->database   = $this->connection->getDriverName();
+        $this->prefix = $this->connection->getTablePrefix();
+        $this->database = $this->connection->getDriverName();
         if ($this->isDebugging()) {
             $this->connection->enableQueryLog();
         }
@@ -94,13 +94,13 @@ class QueryBuilderEngine extends BaseEngine
         $myQuery = clone $this->query;
         // if its a normal query ( no union, having and distinct word )
         // replace the select with static text to improve performance
-        if (! Str::contains(Str::lower($myQuery->toSql()), ['union', 'having', 'distinct', 'order by', 'group by'])) {
+        if (!Str::contains(Str::lower($myQuery->toSql()), ['union', 'having', 'distinct', 'order by', 'group by'])) {
             $row_count = $this->wrap('row_count');
             $myQuery->select($this->connection->raw("'1' as {$row_count}"));
         }
 
         return $this->connection->table($this->connection->raw('(' . $myQuery->toSql() . ') count_row_table'))
-                                ->setBindings($myQuery->getBindings())->count();
+            ->setBindings($myQuery->getBindings())->count();
     }
 
     /**
@@ -109,7 +109,8 @@ class QueryBuilderEngine extends BaseEngine
      * @param string $column
      * @return string
      */
-    protected function wrap($column) {
+    protected function wrap($column)
+    {
         return $this->connection->getQueryGrammar()->wrap($column);
     }
 
@@ -123,7 +124,7 @@ class QueryBuilderEngine extends BaseEngine
         $this->query->where(
             function ($query) {
                 $globalKeyword = $this->setupKeyword($this->request->keyword());
-                $queryBuilder  = $this->getQueryBuilder($query);
+                $queryBuilder = $this->getQueryBuilder($query);
 
                 foreach ($this->request->searchableColumnIndex() as $index) {
                     $columnName = $this->getColumnName($index);
@@ -136,7 +137,7 @@ class QueryBuilderEngine extends BaseEngine
                         $columnDef = $this->columnDef['filter'][$columnName];
                         // check if global search should be applied for the specific column
                         $applyGlobalSearch = count($columnDef['parameters']) == 0 || end($columnDef['parameters']) !== false;
-                        if (! $applyGlobalSearch) {
+                        if (!$applyGlobalSearch) {
                             continue;
                         }
 
@@ -155,10 +156,10 @@ class QueryBuilderEngine extends BaseEngine
                         }
                     } else {
                         if (count(explode('.', $columnName)) > 1) {
-                            $eagerLoads     = $this->getEagerLoads();
-                            $parts          = explode('.', $columnName);
+                            $eagerLoads = $this->getEagerLoads();
+                            $parts = explode('.', $columnName);
                             $relationColumn = array_pop($parts);
-                            $relation       = implode('.', $parts);
+                            $relation = implode('.', $parts);
                             if (in_array($relation, $eagerLoads)) {
                                 $this->compileRelationSearch(
                                     $queryBuilder,
@@ -217,8 +218,8 @@ class QueryBuilderEngine extends BaseEngine
      */
     protected function parameterize()
     {
-        $args       = func_get_args();
-        $keyword    = count($args) > 2 ? $args[2] : $args[1];
+        $args = func_get_args();
+        $keyword = count($args) > 2 ? $args[2] : $args[1];
         $parameters = Helper::buildParameters($args);
         $parameters = Helper::replacePatternWithKeyword($parameters, $keyword, '$1');
 
@@ -271,10 +272,10 @@ class QueryBuilderEngine extends BaseEngine
     {
         $column = strstr($column, '(') ? $this->connection->raw($column) : $column;
         $column = $this->castColumn($column);
-        $sql    = $column . ' LIKE ?';
+        $sql = $column . ' LIKE ?';
 
         if ($this->isCaseInsensitive()) {
-            $sql     = 'LOWER(' . $column . ') LIKE ?';
+            $sql = 'LOWER(' . $column . ') LIKE ?';
             $keyword = Str::lower($keyword);
         }
 
@@ -286,7 +287,7 @@ class QueryBuilderEngine extends BaseEngine
             $keyword = "%$keyword%";
         }
 
-        $query->{$relation .'WhereRaw'}($sql, [$keyword]);
+        $query->{$relation . 'WhereRaw'}($sql, [$keyword]);
     }
 
     /**
@@ -317,7 +318,7 @@ class QueryBuilderEngine extends BaseEngine
         $columns = $this->request->get('columns', []);
 
         foreach ($columns as $index => $column) {
-            if (! $this->request->isColumnSearchable($index)) {
+            if (!$this->request->isColumnSearchable($index)) {
                 continue;
             }
 
@@ -344,10 +345,10 @@ class QueryBuilderEngine extends BaseEngine
                 }
             } else {
                 if (count(explode('.', $column)) > 1) {
-                    $eagerLoads     = $this->getEagerLoads();
-                    $parts          = explode('.', $column);
+                    $eagerLoads = $this->getEagerLoads();
+                    $parts = explode('.', $column);
                     $relationColumn = array_pop($parts);
-                    $relation       = implode('.', $parts);
+                    $relation = implode('.', $parts);
                     if (in_array($relation, $eagerLoads)) {
                         $column = $this->joinEagerLoadedColumn($relation, $relationColumn);
                     }
@@ -404,10 +405,10 @@ class QueryBuilderEngine extends BaseEngine
     protected function regexColumnSearch($column, $keyword)
     {
         if ($this->isOracleSql()) {
-            $sql = ! $this->isCaseInsensitive() ? 'REGEXP_LIKE( ' . $column . ' , ? )' : 'REGEXP_LIKE( LOWER(' . $column . ') , ?, \'i\' )';
+            $sql = !$this->isCaseInsensitive() ? 'REGEXP_LIKE( ' . $column . ' , ? )' : 'REGEXP_LIKE( LOWER(' . $column . ') , ?, \'i\' )';
             $this->query->whereRaw($sql, [$keyword]);
         } else {
-            $sql = ! $this->isCaseInsensitive() ? $column . ' REGEXP ?' : 'LOWER(' . $column . ') REGEXP ?';
+            $sql = !$this->isCaseInsensitive() ? $column . ' REGEXP ?' : 'LOWER(' . $column . ') REGEXP ?';
             $this->query->whereRaw($sql, [Str::lower($keyword)]);
         }
     }
@@ -433,7 +434,7 @@ class QueryBuilderEngine extends BaseEngine
             }
 
             if (isset($this->columnDef['order'][$column])) {
-                $method     = $this->columnDef['order'][$column]['method'];
+                $method = $this->columnDef['order'][$column]['method'];
                 $parameters = $this->columnDef['order'][$column]['parameters'];
                 $this->compileColumnQuery(
                     $this->getQueryBuilder(),
@@ -444,10 +445,10 @@ class QueryBuilderEngine extends BaseEngine
                 );
             } else {
                 if (count(explode('.', $column)) > 1) {
-                    $eagerLoads     = $this->getEagerLoads();
-                    $parts          = explode('.', $column);
+                    $eagerLoads = $this->getEagerLoads();
+                    $parts = explode('.', $column);
                     $relationColumn = array_pop($parts);
-                    $relation       = implode('.', $parts);
+                    $relation = implode('.', $parts);
 
                     if (in_array($relation, $eagerLoads)) {
                         $column = $this->joinEagerLoadedColumn($relation, $relationColumn);
@@ -469,39 +470,39 @@ class QueryBuilderEngine extends BaseEngine
     protected function joinEagerLoadedColumn($relation, $relationColumn)
     {
         $joins = [];
-        foreach ((array) $this->getQueryBuilder()->joins as $key => $join) {
+        foreach ((array)$this->getQueryBuilder()->joins as $key => $join) {
             $joins[] = $join->table;
         }
 
         $model = $this->query->getRelation($relation);
         if ($model instanceof BelongsToMany) {
-            $pivot   = $model->getTable();
+            $pivot = $model->getTable();
             $pivotPK = $model->getForeignKey();
             $pivotFK = $model->getQualifiedParentKeyName();
 
-            if (! in_array($pivot, $joins)) {
+            if (!in_array($pivot, $joins)) {
                 $this->getQueryBuilder()->leftJoin($pivot, $pivotPK, '=', $pivotFK);
             }
 
             $related = $model->getRelated();
-            $table   = $related->getTable();
+            $table = $related->getTable();
             $tablePK = $related->getForeignKey();
             $tableFK = $related->getQualifiedKeyName();
 
-            if (! in_array($table, $joins)) {
+            if (!in_array($table, $joins)) {
                 $this->getQueryBuilder()->leftJoin($table, $pivot . '.' . $tablePK, '=', $tableFK);
             }
         } else {
             $table = $model->getRelated()->getTable();
             if ($model instanceof HasOne) {
                 $foreign = $model->getForeignKey();
-                $other   = $model->getQualifiedParentKeyName();
+                $other = $model->getQualifiedParentKeyName();
             } else {
                 $foreign = $model->getQualifiedForeignKey();
-                $other   = $model->getQualifiedOtherKeyName();
+                $other = $model->getQualifiedOtherKeyName();
             }
 
-            if (! in_array($table, $joins)) {
+            if (!in_array($table, $joins)) {
                 $this->getQueryBuilder()->leftJoin($table, $foreign, '=', $other);
             }
         }
@@ -519,7 +520,7 @@ class QueryBuilderEngine extends BaseEngine
     public function paging()
     {
         $this->query->skip($this->request['start'])
-                    ->take((int) $this->request['length'] > 0 ? $this->request['length'] : 10);
+            ->take((int)$this->request['length'] > 0 ? $this->request['length'] : 10);
     }
 
     /**

@@ -68,18 +68,19 @@ class Caller
         ExceptionFactory $exceptions,
         Wrapper $wrapper,
         AccessInspectorInterface $accessInspector = null
-    ) {
-        $this->wrappedObject    = $wrappedObject;
-        $this->example          = $example;
-        $this->dispatcher       = $dispatcher;
-        $this->wrapper          = $wrapper;
+    )
+    {
+        $this->wrappedObject = $wrappedObject;
+        $this->example = $example;
+        $this->dispatcher = $dispatcher;
+        $this->wrapper = $wrapper;
         $this->exceptionFactory = $exceptions;
-        $this->accessInspector  = $accessInspector ?: new MagicAwareAccessInspector(new VisibilityAccessInspector());
+        $this->accessInspector = $accessInspector ?: new MagicAwareAccessInspector(new VisibilityAccessInspector());
     }
 
     /**
      * @param string $method
-     * @param array  $arguments
+     * @param array $arguments
      *
      * @return Subject
      *
@@ -93,7 +94,7 @@ class Caller
             throw $this->callingMethodOnNonObject($method);
         }
 
-        $subject   = $this->wrappedObject->getInstance();
+        $subject = $this->wrappedObject->getInstance();
         $unwrapper = new Unwrapper();
         $arguments = $unwrapper->unwrapAll($arguments);
 
@@ -106,7 +107,7 @@ class Caller
 
     /**
      * @param string $property
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return mixed
      *
@@ -140,7 +141,7 @@ class Caller
     public function get($property)
     {
         if ($this->lookingForConstants($property) && $this->constantDefined($property)) {
-            return constant($this->wrappedObject->getClassName().'::'.$property);
+            return constant($this->wrappedObject->getClassName() . '::' . $property);
         }
 
         if (null === $this->getWrappedObject()) {
@@ -240,7 +241,7 @@ class Caller
     /**
      * @param object $subject
      * @param string $method
-     * @param array  $arguments
+     * @param array $arguments
      *
      * @return Subject
      */
@@ -341,7 +342,7 @@ class Caller
 
     /**
      * @param string $method
-     * @param array  $arguments
+     * @param array $arguments
      *
      * @return \PhpSpec\Exception\Fracture\MethodNotFoundException|\PhpSpec\Exception\Fracture\MethodNotVisibleException
      */
@@ -416,7 +417,7 @@ class Caller
     private function lookingForConstants($property)
     {
         return null !== $this->wrappedObject->getClassName() &&
-            $property === strtoupper($property);
+        $property === strtoupper($property);
     }
 
     /**
@@ -426,6 +427,6 @@ class Caller
      */
     public function constantDefined($property)
     {
-        return defined($this->wrappedObject->getClassName().'::'.$property);
+        return defined($this->wrappedObject->getClassName() . '::' . $property);
     }
 }

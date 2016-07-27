@@ -49,6 +49,7 @@ Feature: Developer generates a method
       }
 
       """
+
   Scenario: Generating a method in a class with psr4 prefix
     Given the spec file "spec/MyNamespace/PrefixSpec.php" contains:
       """
@@ -102,6 +103,7 @@ Feature: Developer generates a method
       }
 
       """
+
   Scenario: Generating a constructor in a file with existing methods places the constructor first
     Given the spec file "spec/MyNamespace/ConstructorSpec.php" contains:
       """

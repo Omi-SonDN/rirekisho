@@ -3,11 +3,12 @@
 use Illuminate\Foundation\Application;
 use Maatwebsite\Excel\Excel;
 
-abstract class NewExcelFile extends File {
+abstract class NewExcelFile extends File
+{
 
     /**
      * @param Application $app
-     * @param Excel       $excel
+     * @param Excel $excel
      */
     public function __construct(Application $app, Excel $excel)
     {
@@ -26,8 +27,8 @@ abstract class NewExcelFile extends File {
      */
     public function handleExport()
     {
-        return $this->handle( 
-            get_class($this) 
+        return $this->handle(
+            get_class($this)
         );
     }
 
@@ -49,7 +50,7 @@ abstract class NewExcelFile extends File {
     /**
      * Dynamically call methods
      * @param  string $method
-     * @param  array  $params
+     * @param  array $params
      * @return mixed
      */
     public function __call($method, $params)

@@ -40,18 +40,17 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreatingAGenericTag()
     {
-        $expectedTagName         = 'unknown-tag';
+        $expectedTagName = 'unknown-tag';
         $expectedDescriptionText = 'This is a description';
-        $expectedDescription     = new Description($expectedDescriptionText);
-        $context                 = new Context('');
+        $expectedDescription = new Description($expectedDescriptionText);
+        $context = new Context('');
 
         $descriptionFactory = m::mock(DescriptionFactory::class);
         $descriptionFactory
             ->shouldReceive('create')
             ->once()
             ->with($expectedDescriptionText, $context)
-            ->andReturn($expectedDescription)
-        ;
+            ->andReturn($expectedDescription);
 
         $tagFactory = new StandardTagFactory(m::mock(FqsenResolver::class));
         $tagFactory->addService($descriptionFactory, DescriptionFactory::class);
@@ -73,7 +72,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreatingASpecificTag()
     {
-        $context    = new Context('');
+        $context = new Context('');
         $tagFactory = new StandardTagFactory(m::mock(FqsenResolver::class));
 
         /** @var Author $tag */
@@ -92,13 +91,12 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testAnEmptyContextIsCreatedIfNoneIsProvided()
     {
-        $fqsen              = '\Tag';
-        $resolver           = m::mock(FqsenResolver::class)
+        $fqsen = '\Tag';
+        $resolver = m::mock(FqsenResolver::class)
             ->shouldReceive('resolve')
             ->with('Tag', m::type(Context::class))
             ->andReturn(new Fqsen($fqsen))
-            ->getMock()
-        ;
+            ->getMock();
         $descriptionFactory = m::mock(DescriptionFactory::class);
         $descriptionFactory->shouldIgnoreMissing();
 
@@ -121,7 +119,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassingYourOwnSetOfTagHandlers()
     {
-        $context    = new Context('');
+        $context = new Context('');
         $tagFactory = new StandardTagFactory(m::mock(FqsenResolver::class), ['user' => Author::class]);
 
         /** @var Author $tag */
@@ -142,8 +140,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete(
             'For some reason this test fails; once I have access to a RegEx analyzer I will have to test the regex'
-        )
-        ;
+        );
         $tagFactory = new StandardTagFactory(m::mock(FqsenResolver::class));
         $tagFactory->create('@user[myuser');
     }
@@ -155,7 +152,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddParameterToServiceLocator()
     {
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
         $tagFactory->addParameter('myParam', 'myValue');
 
@@ -163,8 +160,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
             [FqsenResolver::class => $resolver, 'myParam' => 'myValue'],
             'serviceLocator',
             $tagFactory
-        )
-        ;
+        );
     }
 
     /**
@@ -175,7 +171,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $service = new PassthroughFormatter();
 
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
         $tagFactory->addService($service);
 
@@ -183,8 +179,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
             [FqsenResolver::class => $resolver, PassthroughFormatter::class => $service],
             'serviceLocator',
             $tagFactory
-        )
-        ;
+        );
     }
 
     /**
@@ -194,9 +189,9 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
     public function testInjectConcreteServiceForInterfaceToServiceLocator()
     {
         $interfaceName = Formatter::class;
-        $service       = new PassthroughFormatter();
+        $service = new PassthroughFormatter();
 
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
         $tagFactory->addService($service, $interfaceName);
 
@@ -204,8 +199,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
             [FqsenResolver::class => $resolver, $interfaceName => $service],
             'serviceLocator',
             $tagFactory
-        )
-        ;
+        );
     }
 
     /**
@@ -217,7 +211,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisteringAHandlerForANewTag()
     {
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
 
         $tagFactory->registerTagHandler('my-tag', Author::class);
@@ -235,7 +229,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerRegistrationFailsIfProvidedTagNameIsNotAString()
     {
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
 
         $tagFactory->registerTagHandler([], Author::class);
@@ -249,7 +243,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerRegistrationFailsIfProvidedTagNameIsEmpty()
     {
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
 
         $tagFactory->registerTagHandler('', Author::class);
@@ -263,7 +257,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerRegistrationFailsIfProvidedTagNameIsNamespaceButNotFullyQualified()
     {
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
 
         $tagFactory->registerTagHandler('Name\Spaced\Tag', Author::class);
@@ -277,7 +271,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerRegistrationFailsIfProvidedHandlerIsNotAString()
     {
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
 
         $tagFactory->registerTagHandler('my-tag', []);
@@ -291,7 +285,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerRegistrationFailsIfProvidedHandlerIsEmpty()
     {
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
 
         $tagFactory->registerTagHandler('my-tag', '');
@@ -305,7 +299,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerRegistrationFailsIfProvidedHandlerIsNotAnExistingClassName()
     {
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
 
         $tagFactory->registerTagHandler('my-tag', 'IDoNotExist');
@@ -319,7 +313,7 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerRegistrationFailsIfProvidedHandlerDoesNotImplementTheTagInterface()
     {
-        $resolver   = m::mock(FqsenResolver::class);
+        $resolver = m::mock(FqsenResolver::class);
         $tagFactory = new StandardTagFactory($resolver);
 
         $tagFactory->registerTagHandler('my-tag', 'stdClass');
@@ -335,15 +329,14 @@ class StandardTagFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturntagIsMappedCorrectly()
     {
-        $context    = new Context('');
+        $context = new Context('');
 
         $descriptionFactory = m::mock(DescriptionFactory::class);
         $descriptionFactory
             ->shouldReceive('create')
             ->once()
             ->with('', $context)
-            ->andReturn(new Description(''))
-        ;
+            ->andReturn(new Description(''));
 
         $typeResolver = new TypeResolver();
 

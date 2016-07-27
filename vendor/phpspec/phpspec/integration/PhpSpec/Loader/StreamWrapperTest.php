@@ -24,7 +24,7 @@ class StreamWrapperTest extends \PHPUnit_Framework_Testcase
      */
     function it_loads_a_spec_with_no_typehints()
     {
-        require StreamWrapper::wrapPath(__DIR__.'/examples/ExampleSpec.php');
+        require StreamWrapper::wrapPath(__DIR__ . '/examples/ExampleSpec.php');
 
         $reflection = new \ReflectionClass('integration\PhpSpec\Loader\examples\ExampleSpec');
         $method = $reflection->getMethod('it_requires_a_stdclass');

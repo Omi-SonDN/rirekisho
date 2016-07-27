@@ -92,9 +92,9 @@ class PluralizationRulesTest extends \PHPUnit_Framework_TestCase
     /**
      * We validate only on the plural coverage. Thus the real rules is not tested.
      *
-     * @param string $nplural       plural expected
-     * @param array  $matrix        containing langcodes and their plural index values.
-     * @param bool   $expectSuccess
+     * @param string $nplural plural expected
+     * @param array $matrix containing langcodes and their plural index values.
+     * @param bool $expectSuccess
      */
     protected function validateMatrix($nplural, $matrix, $expectSuccess = true)
     {
@@ -103,7 +103,7 @@ class PluralizationRulesTest extends \PHPUnit_Framework_TestCase
             if ($expectSuccess) {
                 $this->assertEquals($nplural, count($indexes), "Langcode '$langCode' has '$nplural' plural forms.");
             } else {
-                $this->assertNotEquals((int) $nplural, count($indexes), "Langcode '$langCode' has '$nplural' plural forms.");
+                $this->assertNotEquals((int)$nplural, count($indexes), "Langcode '$langCode' has '$nplural' plural forms.");
             }
         }
     }

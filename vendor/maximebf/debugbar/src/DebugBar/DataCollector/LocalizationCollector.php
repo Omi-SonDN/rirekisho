@@ -38,8 +38,8 @@ class LocalizationCollector extends DataCollector implements Renderable
     public function collect()
     {
         return array(
-          'locale' => $this->getLocale(),
-          'domain' => $this->getDomain(),
+            'locale' => $this->getLocale(),
+            'domain' => $this->getDomain(),
         );
     }
 
@@ -53,11 +53,11 @@ class LocalizationCollector extends DataCollector implements Renderable
         return array(
             'domain' => array(
                 'icon' => 'bookmark',
-                'map'  => 'localization.domain',
+                'map' => 'localization.domain',
             ),
             'locale' => array(
                 'icon' => 'flag',
-                'map'  => 'localization.locale',
+                'map' => 'localization.locale',
             )
         );
     }

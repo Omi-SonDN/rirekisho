@@ -75,9 +75,9 @@ final class MyTag extends BaseTag implements StaticMethod
      * > it no longer matches the interface. This is why you often see the default tags check that an optional argument
      * > is not null nonetheless.
      *
-     * @param string             $body
+     * @param string $body
      * @param DescriptionFactory $descriptionFactory
-     * @param Context|null       $context The Context is used to resolve Types and FQSENs, although optional
+     * @param Context|null $context The Context is used to resolve Types and FQSENs, although optional
      *                                    it is highly recommended to pass it. If you omit it then it is assumed that
      *                                    the DocBlock is in the global namespace and has no `use` statements.
      *
@@ -131,5 +131,5 @@ $customTagObjects = $docblock->getTagsByName('my-tag');
 
 // As an experiment: let's reconstitute the DocBlock and observe that because we added a __toString() method
 // to the tag class that we can now also see it.
-$serializer              = new Serializer();
+$serializer = new Serializer();
 $reconstitutedDocComment = $serializer->getDocComment($docblock);

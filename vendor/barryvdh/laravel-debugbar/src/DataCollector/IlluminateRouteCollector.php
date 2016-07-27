@@ -49,22 +49,22 @@ class IlluminateRouteCollector extends DataCollector implements Renderable
             return array();
         }
         $uri = head($route->methods()) . ' ' . $route->uri();
-		$action = $route->getAction();
+        $action = $route->getAction();
 
         $result = array(
-    	   'uri' => $uri ?: '-',
+            'uri' => $uri ?: '-',
         );
 
         $result = array_merge($result, $action);
 
 
         if (isset($action['controller']) && strpos($action['controller'], '@') !== false) {
-			list($controller, $method) = explode('@', $action['controller']);
-			if(class_exists($controller) && method_exists($controller, $method)) {
-			    $reflector = new \ReflectionMethod($controller, $method);
-			}
+            list($controller, $method) = explode('@', $action['controller']);
+            if (class_exists($controller) && method_exists($controller, $method)) {
+                $reflector = new \ReflectionMethod($controller, $method);
+            }
             unset($result['uses']);
-		} elseif (isset($action['uses']) && $action['uses'] instanceof \Closure) {
+        } elseif (isset($action['uses']) && $action['uses'] instanceof \Closure) {
             $reflector = new \ReflectionFunction($action['uses']);
             $result['uses'] = $this->formatVar($result['uses']);
         }
@@ -74,10 +74,9 @@ class IlluminateRouteCollector extends DataCollector implements Renderable
             $result['file'] = $filename . ':' . $reflector->getStartLine() . '-' . $reflector->getEndLine();
         }
 
-		if ($middleware = $this->getMiddleware($route)) {
-		    $result['middleware'] = $middleware;
-		}
-
+        if ($middleware = $this->getMiddleware($route)) {
+            $result['middleware'] = $middleware;
+        }
 
 
         return $result;

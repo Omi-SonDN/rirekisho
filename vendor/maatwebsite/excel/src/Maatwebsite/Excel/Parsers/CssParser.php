@@ -15,7 +15,8 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class CssParser {
+class CssParser
+{
 
     /**
      * @var CssToInlineStyles
@@ -58,8 +59,7 @@ class CssParser {
         $this->cssInliner->setUseInlineStylesBlock(true);
 
         // Loop through all stylesheets
-        foreach($this->links as $link)
-        {
+        foreach ($this->links as $link) {
             $css = file_get_contents($link);
             $this->cssInliner->setCSS($css);
         }
@@ -80,8 +80,7 @@ class CssParser {
         // Get all stylesheet tags
         $tags = $this->getStyleSheetTags();
 
-        foreach ($tags as $node)
-        {
+        foreach ($tags as $node) {
             $this->links[] = $this->getCleanStyleSheetLink($node);
         }
 

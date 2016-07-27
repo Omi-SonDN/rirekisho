@@ -52,8 +52,9 @@ class OptionsConfig
         $reRunEnabled,
         $fakingEnabled,
         $bootstrapPath
-    ) {
-        $this->stopOnFailureEnabled  = $stopOnFailureEnabled;
+    )
+    {
+        $this->stopOnFailureEnabled = $stopOnFailureEnabled;
         $this->codeGenerationEnabled = $codeGenerationEnabled;
         $this->reRunEnabled = $reRunEnabled;
         $this->fakingEnabled = $fakingEnabled;

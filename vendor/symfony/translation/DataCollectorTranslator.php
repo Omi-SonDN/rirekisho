@@ -107,8 +107,8 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
     /**
      * @param string|null $locale
      * @param string|null $domain
-     * @param string      $id
-     * @param string      $trans
+     * @param string $id
+     * @param string $trans
      */
     private function collectMessage($locale, $domain, $id, $translation)
     {
@@ -116,7 +116,7 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
             $domain = 'messages';
         }
 
-        $id = (string) $id;
+        $id = (string)$id;
         $catalogue = $this->translator->getCatalogue($locale);
         $locale = $catalogue->getLocale();
         if ($catalogue->defines($id, $domain)) {

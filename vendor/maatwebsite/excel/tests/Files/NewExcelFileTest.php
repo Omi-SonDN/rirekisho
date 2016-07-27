@@ -5,7 +5,8 @@ include_once 'classes/TestExportHandler.php';
 include_once 'classes/TestNewFile.php';
 include_once 'classes/TestNewFileHandler.php';
 
-class NewExcelFileTest extends TestCase {
+class NewExcelFileTest extends TestCase
+{
 
 
     public function testInit()

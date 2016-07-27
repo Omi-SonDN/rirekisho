@@ -23,6 +23,8 @@ class CVController extends Controller
     {
         //TODO: sửa view
         $CVs = CV::with('User')->active()->paginate(10);
+        //echo "<pre>";
+        //dd($CVs->position);echo "</pre>";
         return view('xCV.CVindex', compact('CVs'));
     }
 
@@ -99,10 +101,10 @@ class CVController extends Controller
     public function update($id, UpdateRequest $request)//PUT
     {
         //$id = $id - 14000;
-        
+
         $cv = CV::findOrFail($id);
         if (Gate::denies('update-cv', $cv->user_id)) {
-            abort(403); 
+            abort(403);
         }
         if ($request->has('B_date')) {
             $cv->Birth_date = getDateDate($request->input('B_date'));

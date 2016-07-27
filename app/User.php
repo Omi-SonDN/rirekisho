@@ -18,22 +18,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use Authenticatable, CanResetPassword;
     use SearchableTrait;
     protected $fillable = [
-    'name', 'email', 'password', 'image',
+        'name', 'email', 'password', 'image',
     ];
     protected $hidden = [
-    'password', 'remember_token','id'
+        'password', 'remember_token', 'id'
     ];
 
     public function CV()
     {
         return $this->hasOne('App\CV');
     }
+
     public function Bookmark()
     {
         return $this->belongsToMany('App\User', 'bookmarks', 'user_id', 'bookmark_user_id')
             ->withPivot(['id', 'notes'])
             ->withTimestamps();
     }
+
     public function User()
     {
         return $this->belongsToMany('App\User', 'bookmarks', 'bookmark_user_id', 'user_id')
@@ -43,26 +45,28 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function getRole()
     {
-        if ($this->role == 0)$Role = "Applicant";
+        if ($this->role == 0) $Role = "Applicant";
         elseif ($this->role == 1) {
             $Role = "Visitor";
-        }
-        elseif ($this->role == 2) {
+        } elseif ($this->role == 2) {
             $Role = "Admin";
         }
-        return  $Role;
+        return $Role;
     }
+
     /*******scope*********/
     public function scopeVisitor($query)
     {
         //in test
         return $query->where('role', '=', 1);
     }
+
     public function scopeApplicant($query)
     {
         //in test
         return $query->where('role', '=', 0);
     }
+
     /*******rules ********/
     public static $rules = array(
         //Auth Controller
@@ -75,7 +79,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'email' => 'required|email|max:255',
         'password' => 'required|min:4',
     );
-   /*----------search rules ------------*/
+    /*----------search rules ------------*/
     protected $searchable = [
         'columns' => [
             'users.id' => 5,
@@ -84,11 +88,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         ],
 
     ];
+
     public function getThemeColor()
     {
-        if($this->getRole()== "Visitor") return "#f9f9f9";//gray
-        if($this->getRole()== "Admin") return "#333333";
-        $mod = $this->id% 19;
+        if ($this->getRole() == "Visitor") return "#f9f9f9";//gray
+        if ($this->getRole() == "Admin") return "#333333";
+        $mod = $this->id % 19;
         $colours = [
             "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e",
             "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
@@ -97,10 +102,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         ];
         return $colours[$mod];
     }
+
     public function getTextColor()
     {
-        if($this->getRole()== "Applicant") return "white";
-        $mod = $this->id% 19;
+        if ($this->getRole() == "Applicant") return "white";
+        $mod = $this->id % 19;
         $colours = [
             "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e",
             "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
@@ -109,10 +115,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         ];
         return $colours[$mod];
     }
+
     public function getRouteKey()
     {
         return Hashids::encode($this->getKey());
     }
+
     public function getHashAttribute()
     {
         //return $this->getKey();

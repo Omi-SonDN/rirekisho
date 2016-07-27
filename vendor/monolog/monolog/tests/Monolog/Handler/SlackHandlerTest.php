@@ -77,7 +77,7 @@ class SlackHandlerTest extends TestCase
         fseek($this->res, 0);
         $content = fread($this->res, 1024);
 
-        $this->assertRegexp('/color%22%3A%22'.$expectedColor.'/', $content);
+        $this->assertRegexp('/color%22%3A%22' . $expectedColor . '/', $content);
     }
 
     public function testWriteContentWithPlainTextMessage()
@@ -93,14 +93,14 @@ class SlackHandlerTest extends TestCase
     public function provideLevelColors()
     {
         return array(
-            array(Logger::DEBUG,    '%23e3e4e6'),   // escaped #e3e4e6
-            array(Logger::INFO,     'good'),
-            array(Logger::NOTICE,   'good'),
-            array(Logger::WARNING,  'warning'),
-            array(Logger::ERROR,    'danger'),
+            array(Logger::DEBUG, '%23e3e4e6'),   // escaped #e3e4e6
+            array(Logger::INFO, 'good'),
+            array(Logger::NOTICE, 'good'),
+            array(Logger::WARNING, 'warning'),
+            array(Logger::ERROR, 'danger'),
             array(Logger::CRITICAL, 'danger'),
-            array(Logger::ALERT,    'danger'),
-            array(Logger::EMERGENCY,'danger'),
+            array(Logger::ALERT, 'danger'),
+            array(Logger::EMERGENCY, 'danger'),
         );
     }
 

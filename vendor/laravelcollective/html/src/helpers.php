@@ -6,8 +6,8 @@ if (!function_exists('link_to')) {
      *
      * @param string $url
      * @param string $title
-     * @param array  $attributes
-     * @param bool   $secure
+     * @param array $attributes
+     * @param bool $secure
      *
      * @return string
      */
@@ -23,8 +23,8 @@ if (!function_exists('link_to_asset')) {
      *
      * @param string $url
      * @param string $title
-     * @param array  $attributes
-     * @param bool   $secure
+     * @param array $attributes
+     * @param bool $secure
      *
      * @return string
      */
@@ -40,8 +40,8 @@ if (!function_exists('link_to_route')) {
      *
      * @param string $name
      * @param string $title
-     * @param array  $parameters
-     * @param array  $attributes
+     * @param array $parameters
+     * @param array $attributes
      *
      * @return string
      */
@@ -57,8 +57,8 @@ if (!function_exists('link_to_action')) {
      *
      * @param string $action
      * @param string $title
-     * @param array  $parameters
-     * @param array  $attributes
+     * @param array $parameters
+     * @param array $attributes
      *
      * @return string
      */

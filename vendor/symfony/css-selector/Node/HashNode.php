@@ -33,7 +33,7 @@ class HashNode extends AbstractNode
 
     /**
      * @param NodeInterface $selector
-     * @param string        $id
+     * @param string $id
      */
     public function __construct(NodeInterface $selector, $id)
     {

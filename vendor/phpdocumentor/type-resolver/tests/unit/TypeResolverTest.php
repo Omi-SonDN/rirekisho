@@ -31,9 +31,9 @@ class TypeResolverTest extends \PHPUnit_Framework_TestCase
      * @covers ::resolve
      * @covers ::<private>
      *
-     * @uses phpDocumentor\Reflection\Types\Context
-     * @uses phpDocumentor\Reflection\Types\Array_
-     * @uses phpDocumentor\Reflection\Types\Object_
+     * @uses         phpDocumentor\Reflection\Types\Context
+     * @uses         phpDocumentor\Reflection\Types\Array_
+     * @uses         phpDocumentor\Reflection\Types\Object_
      *
      * @dataProvider provideKeywords
      */
@@ -53,10 +53,10 @@ class TypeResolverTest extends \PHPUnit_Framework_TestCase
      * @covers ::resolve
      * @covers ::<private>
      *
-     * @uses phpDocumentor\Reflection\Types\Context
-     * @uses phpDocumentor\Reflection\Types\Object_
-     * @uses phpDocumentor\Reflection\Fqsen
-     * @uses phpDocumentor\Reflection\FqsenResolver
+     * @uses         phpDocumentor\Reflection\Types\Context
+     * @uses         phpDocumentor\Reflection\Types\Object_
+     * @uses         phpDocumentor\Reflection\Fqsen
+     * @uses         phpDocumentor\Reflection\FqsenResolver
      *
      * @dataProvider provideFqcn
      */
@@ -389,7 +389,7 @@ class TypeResolverTest extends \PHPUnit_Framework_TestCase
     {
         return [
             'namespace' => ['\phpDocumentor\Reflection'],
-            'class'     => ['\phpDocumentor\Reflection\DocBlock'],
+            'class' => ['\phpDocumentor\Reflection\DocBlock'],
         ];
     }
 }

@@ -86,11 +86,11 @@ class Router implements RouterInterface, RequestMatcherInterface
     /**
      * Constructor.
      *
-     * @param LoaderInterface $loader   A LoaderInterface instance
-     * @param mixed           $resource The main resource to load
-     * @param array           $options  An array of options
-     * @param RequestContext  $context  The context
-     * @param LoggerInterface $logger   A logger instance
+     * @param LoaderInterface $loader A LoaderInterface instance
+     * @param mixed $resource The main resource to load
+     * @param array $options An array of options
+     * @param RequestContext $context The context
+     * @param LoggerInterface $logger A logger instance
      */
     public function __construct(LoaderInterface $loader, $resource, array $options = array(), RequestContext $context = null, LoggerInterface $logger = null)
     {
@@ -149,8 +149,8 @@ class Router implements RouterInterface, RequestMatcherInterface
     /**
      * Sets an option.
      *
-     * @param string $key   The key
-     * @param mixed  $value The value
+     * @param string $key The key
+     * @param mixed $value The value
      *
      * @throws \InvalidArgumentException
      */
@@ -283,7 +283,7 @@ class Router implements RouterInterface, RequestMatcherInterface
         $expressionLanguageProviders = $this->expressionLanguageProviders;
         $that = $this; // required for PHP 5.3 where "$this" cannot be use()d in anonymous functions. Change in Symfony 3.0.
 
-        $cache = $this->getConfigCacheFactory()->cache($this->options['cache_dir'].'/'.$class.'.php',
+        $cache = $this->getConfigCacheFactory()->cache($this->options['cache_dir'] . '/' . $class . '.php',
             function (ConfigCacheInterface $cache) use ($that, $class, $baseClass, $expressionLanguageProviders) {
                 $dumper = $that->getMatcherDumperInstance();
                 if (method_exists($dumper, 'addExpressionLanguageProvider')) {
@@ -323,7 +323,7 @@ class Router implements RouterInterface, RequestMatcherInterface
             $class = $this->options['generator_cache_class'];
             $baseClass = $this->options['generator_base_class'];
             $that = $this; // required for PHP 5.3 where "$this" cannot be use()d in anonymous functions. Change in Symfony 3.0.
-            $cache = $this->getConfigCacheFactory()->cache($this->options['cache_dir'].'/'.$class.'.php',
+            $cache = $this->getConfigCacheFactory()->cache($this->options['cache_dir'] . '/' . $class . '.php',
                 function (ConfigCacheInterface $cache) use ($that, $class, $baseClass) {
                     $dumper = $that->getGeneratorDumperInstance();
 

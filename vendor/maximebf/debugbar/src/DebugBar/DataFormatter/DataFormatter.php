@@ -31,7 +31,7 @@ class DataFormatter implements DataFormatterInterface
                 // A negative depth means "end of dump"
                 if ($depth >= 0) {
                     // Adds a two spaces indentation to the line
-                    $output .= str_repeat('  ', $depth).$line."\n";
+                    $output .= str_repeat('  ', $depth) . $line . "\n";
                 }
             }
         );

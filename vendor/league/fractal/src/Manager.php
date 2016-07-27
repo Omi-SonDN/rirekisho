@@ -65,8 +65,8 @@ class Manager
      * Main method to kick this all off. Make a resource then pass it over, and use toArray()
      *
      * @param ResourceInterface $resource
-     * @param string            $scopeIdentifier
-     * @param Scope             $parentScopeInstance
+     * @param string $scopeIdentifier
+     * @param Scope $parentScopeInstance
      *
      * @return Scope
      */
@@ -95,7 +95,7 @@ class Manager
      */
     public function getIncludeParams($include)
     {
-        if (! isset($this->includeParams[$include])) {
+        if (!isset($this->includeParams[$include])) {
             return;
         }
 
@@ -121,7 +121,7 @@ class Manager
      */
     public function getSerializer()
     {
-        if (! $this->serializer) {
+        if (!$this->serializer) {
             $this->setSerializer(new DataArraySerializer());
         }
 
@@ -144,9 +144,9 @@ class Manager
             $includes = explode(',', $includes);
         }
 
-        if (! is_array($includes)) {
+        if (!is_array($includes)) {
             throw new \InvalidArgumentException(
-                'The parseIncludes() method expects a string or an array. '.gettype($includes).' given'
+                'The parseIncludes() method expects a string or an array. ' . gettype($includes) . ' given'
             );
         }
 
@@ -244,7 +244,7 @@ class Manager
             $parsed[] = $part;
 
             while (count($nested) > 0) {
-                $part .= '.'.array_shift($nested);
+                $part .= '.' . array_shift($nested);
                 $parsed[] = $part;
             }
         }

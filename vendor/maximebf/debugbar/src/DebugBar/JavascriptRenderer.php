@@ -149,12 +149,12 @@ class JavascriptRenderer
             }
         }
         if (array_key_exists('disable_controls', $options)) {
-            foreach ((array) $options['disable_controls'] as $name) {
+            foreach ((array)$options['disable_controls'] as $name) {
                 $this->disableControl($name);
             }
         }
         if (array_key_exists('ignore_collectors', $options)) {
-            foreach ((array) $options['ignore_collectors'] as $name) {
+            foreach ((array)$options['ignore_collectors'] as $name) {
                 $this->ignoreCollector($name);
             }
         }
@@ -532,17 +532,17 @@ class JavascriptRenderer
      * Add assets to render in the head
      *
      * @param array $cssFiles An array of filenames
-     * @param array $jsFiles  An array of filenames
+     * @param array $jsFiles An array of filenames
      * @param string $basePath Base path of those files
-     * @param string $baseUrl  Base url of those files
+     * @param string $baseUrl Base url of those files
      */
     public function addAssets($cssFiles, $jsFiles, $basePath = null, $baseUrl = null)
     {
         $this->additionalAssets[] = array(
             'base_path' => $basePath,
             'base_url' => $baseUrl,
-            'css' => (array) $cssFiles,
-            'js' => (array) $jsFiles
+            'css' => (array)$cssFiles,
+            'js' => (array)$jsFiles
         );
         return $this;
     }
@@ -588,8 +588,8 @@ class JavascriptRenderer
             $root = $this->getRelativeRoot($relativeTo,
                 $this->makeUriRelativeTo($basePath, $this->basePath),
                 $this->makeUriRelativeTo($baseUrl, $this->baseUrl));
-            $cssFiles = array_merge($cssFiles, $this->makeUriRelativeTo((array) $assets['css'], $root));
-            $jsFiles = array_merge($jsFiles, $this->makeUriRelativeTo((array) $assets['js'], $root));
+            $cssFiles = array_merge($cssFiles, $this->makeUriRelativeTo((array)$assets['css'], $root));
+            $jsFiles = array_merge($jsFiles, $this->makeUriRelativeTo((array)$assets['js'], $root));
         }
 
         return $this->filterAssetArray(array($cssFiles, $jsFiles), $type);
@@ -799,7 +799,7 @@ class JavascriptRenderer
     public function replaceTagInBuffer($here = true, $initialize = true, $renderStackedData = true, $head = false)
     {
         $render = ($head ? $this->renderHead() : "")
-                . $this->render($initialize, $renderStackedData);
+            . $this->render($initialize, $renderStackedData);
 
         $current = ($here && ob_get_level() > 0) ? ob_get_clean() : self::REPLACEABLE_TAG;
 

@@ -17,8 +17,8 @@ class ImageServiceProviderLumen extends ServiceProvider
 
         // merge default config
         $this->mergeConfigFrom(
-          __DIR__.'/../../config/config.php',
-          'image'
+            __DIR__ . '/../../config/config.php',
+            'image'
         );
 
         // create image

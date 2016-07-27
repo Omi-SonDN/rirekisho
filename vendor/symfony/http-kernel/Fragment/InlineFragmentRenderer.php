@@ -32,7 +32,7 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
     /**
      * Constructor.
      *
-     * @param HttpKernelInterface      $kernel     A HttpKernelInterface instance
+     * @param HttpKernelInterface $kernel A HttpKernelInterface instance
      * @param EventDispatcherInterface $dispatcher A EventDispatcherInterface instance
      */
     public function __construct(HttpKernelInterface $kernel, EventDispatcherInterface $dispatcher = null)
@@ -122,7 +122,7 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
             if ($trustedHeaderName = Request::getTrustedHeaderName(Request::HEADER_CLIENT_IP)) {
                 $currentXForwardedFor = $request->headers->get($trustedHeaderName, '');
 
-                $server['HTTP_'.$trustedHeaderName] = ($currentXForwardedFor ? $currentXForwardedFor.', ' : '').$request->getClientIp();
+                $server['HTTP_' . $trustedHeaderName] = ($currentXForwardedFor ? $currentXForwardedFor . ', ' : '') . $request->getClientIp();
             }
         } catch (\InvalidArgumentException $e) {
             // Do nothing

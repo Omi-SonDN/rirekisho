@@ -21,7 +21,7 @@ abstract class SerializerAbstract
      * Serialize a collection.
      *
      * @param string $resourceKey
-     * @param array  $data
+     * @param array $data
      *
      * @return array
      */
@@ -31,7 +31,7 @@ abstract class SerializerAbstract
      * Serialize an item.
      *
      * @param string $resourceKey
-     * @param array  $data
+     * @param array $data
      *
      * @return array
      */
@@ -41,7 +41,7 @@ abstract class SerializerAbstract
      * Serialize the included data.
      *
      * @param ResourceInterface $resource
-     * @param array             $data
+     * @param array $data
      *
      * @return array
      */
@@ -78,7 +78,7 @@ abstract class SerializerAbstract
     {
         // If the serializer does not want the includes to be side-loaded then
         // the included data must be merged with the transformed data.
-        if (! $this->sideloadIncludes()) {
+        if (!$this->sideloadIncludes()) {
             return array_merge($transformedData, $includedData);
         }
 
@@ -111,8 +111,8 @@ abstract class SerializerAbstract
     /**
      * Hook for the serializer to modify the final list of includes.
      *
-     * @param array             $includedData
-     * @param array             $data
+     * @param array $includedData
+     * @param array $data
      *
      * @return array
      */

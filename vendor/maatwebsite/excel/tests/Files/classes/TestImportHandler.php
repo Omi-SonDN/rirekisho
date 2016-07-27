@@ -2,7 +2,8 @@
 
 use Maatwebsite\Excel\Files\ImportHandler;
 
-class TestImportHandler implements ImportHandler {
+class TestImportHandler implements ImportHandler
+{
 
     /**
      * Handle

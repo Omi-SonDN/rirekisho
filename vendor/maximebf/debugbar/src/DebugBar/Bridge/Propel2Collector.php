@@ -74,7 +74,8 @@ class Propel2Collector extends DataCollector implements Renderable, AssetProvide
             'query',
             'execute'
         )
-    ) {
+    )
+    {
         if ($connection instanceof ProfilerConnectionWrapper) {
             $connection->setLogMethods($logMethods);
 
@@ -145,7 +146,7 @@ class Propel2Collector extends DataCollector implements Renderable, AssetProvide
             $duration = null;
             $memory = null;
 
-            $isSuccess = ( LogLevel::INFO === strtolower($record['level_name']) );
+            $isSuccess = (LogLevel::INFO === strtolower($record['level_name']));
 
             $detailsCount = count($config['details']);
             $parameters = explode($config['outerGlue'], $record['message'], $detailsCount + 1);
@@ -241,12 +242,12 @@ class Propel2Collector extends DataCollector implements Renderable, AssetProvide
             return false === $statement['is_success'];
         }));
         $accumulatedDuration = array_reduce($statements, function ($accumulatedDuration, $statement) {
-        
+
             $time = isset($statement['duration']) ? $statement['duration'] : 0;
             return $accumulatedDuration += $time;
         });
         $memoryUsage = array_reduce($statements, function ($memoryUsage, $statement) {
-        
+
             $time = isset($statement['memory']) ? $statement['memory'] : 0;
             return $memoryUsage += $time;
         });
@@ -267,12 +268,12 @@ class Propel2Collector extends DataCollector implements Renderable, AssetProvide
      */
     public function getName()
     {
-        $additionalName  = '';
+        $additionalName = '';
         if ($this->getLogger() !== $this->getDefaultLogger()) {
-            $additionalName = ' ('.$this->getLogger()->getName().')';
+            $additionalName = ' (' . $this->getLogger()->getName() . ')';
         }
 
-        return 'propel2'.$additionalName;
+        return 'propel2' . $additionalName;
     }
 
     /**
@@ -287,8 +288,8 @@ class Propel2Collector extends DataCollector implements Renderable, AssetProvide
                 'map' => $this->getName(),
                 'default' => '[]'
             ),
-            $this->getName().':badge' => array(
-                'map' => $this->getName().'.nb_statements',
+            $this->getName() . ':badge' => array(
+                'map' => $this->getName() . '.nb_statements',
                 'default' => 0
             ),
         );

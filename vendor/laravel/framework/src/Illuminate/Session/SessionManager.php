@@ -10,7 +10,7 @@ class SessionManager extends Manager
     /**
      * Call a custom driver creator.
      *
-     * @param  string  $driver
+     * @param  string $driver
      * @return mixed
      */
     protected function callCustomCreator($driver)
@@ -139,7 +139,7 @@ class SessionManager extends Manager
     /**
      * Create an instance of a cache driven driver.
      *
-     * @param  string  $driver
+     * @param  string $driver
      * @return \Illuminate\Session\Store
      */
     protected function createCacheBased($driver)
@@ -150,7 +150,7 @@ class SessionManager extends Manager
     /**
      * Create the cache based session handler instance.
      *
-     * @param  string  $driver
+     * @param  string $driver
      * @return \Illuminate\Session\CacheBasedSessionHandler
      */
     protected function createCacheHandler($driver)
@@ -163,7 +163,7 @@ class SessionManager extends Manager
     /**
      * Build the session instance.
      *
-     * @param  \SessionHandlerInterface  $handler
+     * @param  \SessionHandlerInterface $handler
      * @return \Illuminate\Session\Store
      */
     protected function buildSession($handler)
@@ -200,7 +200,7 @@ class SessionManager extends Manager
     /**
      * Set the default session driver name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return void
      */
     public function setDefaultDriver($name)

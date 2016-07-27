@@ -2,10 +2,11 @@
 
 use Maatwebsite\Excel\Files\ExcelFile;
 
-class TestFile extends ExcelFile {
+class TestFile extends ExcelFile
+{
 
-    protected $delimiter  = ',';
-    protected $enclosure  = '"';
+    protected $delimiter = ',';
+    protected $enclosure = '"';
     protected $lineEnding = '\r\n';
 
     /**

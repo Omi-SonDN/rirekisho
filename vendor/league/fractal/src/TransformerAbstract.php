@@ -132,9 +132,9 @@ abstract class TransformerAbstract
      *
      * @internal
      *
-     * @param Scope  $scope
-     * @param mixed  $data
-     * @param array  $includedData
+     * @param Scope $scope
+     * @param mixed $data
+     * @param array $includedData
      * @param string $include
      *
      * @return array
@@ -144,7 +144,8 @@ abstract class TransformerAbstract
         $data,
         $includedData,
         $include
-    ) {
+    )
+    {
         if ($resource = $this->callIncludeMethod($scope, $include, $data)) {
             $childScope = $scope->embedChildScope($include, $resource);
 
@@ -159,9 +160,9 @@ abstract class TransformerAbstract
      *
      * @internal
      *
-     * @param Scope  $scope
+     * @param Scope $scope
      * @param string $includeName
-     * @param mixed  $data
+     * @param mixed $data
      *
      * @throws \Exception
      *
@@ -173,7 +174,7 @@ abstract class TransformerAbstract
         $params = $scope->getManager()->getIncludeParams($scopeIdentifier);
 
         // Check if the method name actually exists
-        $methodName = 'include'.str_replace(' ', '', ucwords(str_replace('_', ' ', str_replace('-', ' ', $includeName))));
+        $methodName = 'include' . str_replace(' ', '', ucwords(str_replace('_', ' ', str_replace('-', ' ', $includeName))));
 
         $resource = call_user_func([$this, $methodName], $data, $params);
 
@@ -181,7 +182,7 @@ abstract class TransformerAbstract
             return false;
         }
 
-        if (! $resource instanceof ResourceAbstract) {
+        if (!$resource instanceof ResourceAbstract) {
             throw new \Exception(sprintf(
                 'Invalid return value from %s::%s(). Expected %s, received %s.',
                 __CLASS__,
@@ -239,9 +240,9 @@ abstract class TransformerAbstract
     /**
      * Create a new item resource object.
      *
-     * @param mixed                        $data
+     * @param mixed $data
      * @param TransformerAbstract|callable $transformer
-     * @param string                       $resourceKey
+     * @param string $resourceKey
      *
      * @return Item
      */
@@ -253,9 +254,9 @@ abstract class TransformerAbstract
     /**
      * Create a new collection resource object.
      *
-     * @param mixed                        $data
+     * @param mixed $data
      * @param TransformerAbstract|callable $transformer
-     * @param string                       $resourceKey
+     * @param string $resourceKey
      *
      * @return Collection
      */

@@ -38,17 +38,17 @@ class JUnitFormatter extends BasicFormatter
 
     /** @var array */
     protected $jUnitStatuses = array(
-        ExampleEvent::PASSED  => 'passed',
+        ExampleEvent::PASSED => 'passed',
         ExampleEvent::PENDING => 'pending',
         ExampleEvent::SKIPPED => 'skipped',
-        ExampleEvent::FAILED  => 'failed',
-        ExampleEvent::BROKEN  => 'broken',
+        ExampleEvent::FAILED => 'failed',
+        ExampleEvent::BROKEN => 'broken',
     );
 
     /** @var array */
     protected $resultTags = array(
-        ExampleEvent::FAILED  => 'failure',
-        ExampleEvent::BROKEN  => 'error',
+        ExampleEvent::FAILED => 'failure',
+        ExampleEvent::BROKEN => 'error',
         ExampleEvent::SKIPPED => 'skipped',
     );
 
@@ -137,13 +137,13 @@ class JUnitFormatter extends BasicFormatter
         if (in_array($event->getResult(), array(ExampleEvent::BROKEN, ExampleEvent::FAILED))) {
             $exception = $event->getException();
             $testCaseNode .= sprintf(
-                '>'."\n".
-                '<%s type="%s" message="%s" />'."\n".
-                '<system-err>'."\n".
-                '<![CDATA['."\n".
-                '%s'."\n".
-                ']]>'."\n".
-                '</system-err>'."\n".
+                '>' . "\n" .
+                '<%s type="%s" message="%s" />' . "\n" .
+                '<system-err>' . "\n" .
+                '<![CDATA[' . "\n" .
+                '%s' . "\n" .
+                ']]>' . "\n" .
+                '</system-err>' . "\n" .
                 '</testcase>',
                 $this->resultTags[$event->getResult()],
                 get_class($exception),
@@ -152,8 +152,8 @@ class JUnitFormatter extends BasicFormatter
             );
         } elseif (ExampleEvent::SKIPPED === $event->getResult()) {
             $testCaseNode .= sprintf(
-                '>'."\n".
-                '\<skipped><![CDATA[ %s ]]>\</skipped>'."\n".
+                '>' . "\n" .
+                '\<skipped><![CDATA[ %s ]]>\</skipped>' . "\n" .
                 '</testcase>',
                 htmlspecialchars($event->getException()->getMessage())
             );
@@ -170,8 +170,8 @@ class JUnitFormatter extends BasicFormatter
     public function afterSpecification(SpecificationEvent $event)
     {
         $this->testSuiteNodes[] = sprintf(
-            '<testsuite name="%s" time="%F" tests="%s" failures="%s" errors="%s" skipped="%s">'."\n".
-            '%s'."\n".
+            '<testsuite name="%s" time="%F" tests="%s" failures="%s" errors="%s" skipped="%s">' . "\n" .
+            '%s' . "\n" .
             '</testsuite>',
             $event->getTitle(),
             $event->getTime(),
@@ -212,13 +212,13 @@ class JUnitFormatter extends BasicFormatter
      */
     protected function initTestCaseNodes()
     {
-        $this->testCaseNodes       = array();
+        $this->testCaseNodes = array();
         $this->exampleStatusCounts = array(
-            ExampleEvent::PASSED  => 0,
+            ExampleEvent::PASSED => 0,
             ExampleEvent::PENDING => 0,
             ExampleEvent::SKIPPED => 0,
-            ExampleEvent::FAILED  => 0,
-            ExampleEvent::BROKEN  => 0,
+            ExampleEvent::FAILED => 0,
+            ExampleEvent::BROKEN => 0,
         );
     }
 }

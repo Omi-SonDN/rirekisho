@@ -35,7 +35,7 @@ class SeedCommand extends Command
     /**
      * Create a new database seed command instance.
      *
-     * @param  \Illuminate\Database\ConnectionResolverInterface  $resolver
+     * @param  \Illuminate\Database\ConnectionResolverInterface $resolver
      * @return void
      */
     public function __construct(Resolver $resolver)
@@ -52,7 +52,7 @@ class SeedCommand extends Command
      */
     public function fire()
     {
-        if (! $this->confirmToProceed()) {
+        if (!$this->confirmToProceed()) {
             return;
         }
 

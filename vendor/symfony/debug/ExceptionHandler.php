@@ -52,8 +52,8 @@ class ExceptionHandler
     /**
      * Registers the exception handler.
      *
-     * @param bool        $debug          Enable/disable debug mode, where the stack trace is displayed
-     * @param string|null $charset        The charset used by exception messages
+     * @param bool $debug Enable/disable debug mode, where the stack trace is displayed
+     * @param string|null $charset The charset used by exception messages
      * @param string|null $fileLinkFormat The IDE link template
      *
      * @return ExceptionHandler The registered exception handler
@@ -188,9 +188,9 @@ class ExceptionHandler
         if (!headers_sent()) {
             header(sprintf('HTTP/1.0 %s', $exception->getStatusCode()));
             foreach ($exception->getHeaders() as $name => $value) {
-                header($name.': '.$value, false);
+                header($name . ': ' . $value, false);
             }
-            header('Content-Type: text/html; charset='.$this->charset);
+            header('Content-Type: text/html; charset=' . $this->charset);
         }
 
         echo $this->decorate($this->getContent($exception), $this->getStylesheet($exception));
@@ -383,7 +383,7 @@ EOF;
         $file = preg_match('#[^/\\\\]*$#', $path, $file) ? $file[0] : $path;
 
         if ($linkFormat = $this->fileLinkFormat) {
-            $link = strtr($this->escapeHtml($linkFormat), array('%f' => $path, '%l' => (int) $line));
+            $link = strtr($this->escapeHtml($linkFormat), array('%f' => $path, '%l' => (int)$line));
 
             return sprintf(' in <a href="%s" title="Go to source">%s line %d</a>', $link, $file, $line);
         }
@@ -411,11 +411,11 @@ EOF;
             } elseif ('null' === $item[0]) {
                 $formattedValue = '<em>null</em>';
             } elseif ('boolean' === $item[0]) {
-                $formattedValue = '<em>'.strtolower(var_export($item[1], true)).'</em>';
+                $formattedValue = '<em>' . strtolower(var_export($item[1], true)) . '</em>';
             } elseif ('resource' === $item[0]) {
                 $formattedValue = '<em>resource</em>';
             } else {
-                $formattedValue = str_replace("\n", '', var_export($this->escapeHtml((string) $item[1]), true));
+                $formattedValue = str_replace("\n", '', var_export($this->escapeHtml((string)$item[1]), true));
             }
 
             $result[] = is_int($key) ? $formattedValue : sprintf("'%s' => %s", $key, $formattedValue);
@@ -431,7 +431,7 @@ EOF;
      */
     protected static function utf8Htmlize($str)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.7 and will be removed in 3.0.', E_USER_DEPRECATED);
+        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.7 and will be removed in 3.0.', E_USER_DEPRECATED);
 
         return htmlspecialchars($str, ENT_QUOTES | (PHP_VERSION_ID >= 50400 ? ENT_SUBSTITUTE : 0), 'UTF-8');
     }

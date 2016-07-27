@@ -23,7 +23,7 @@ class SkillSeeder extends Seeder
                 'skill_type' => 0,
                 'study_time' => 6,
                 'work_time' => 3,
-                'name' => $a[array_rand($a,1)],
+                'name' => $a[array_rand($a, 1)],
                 'cv_id' => $v->id
             ]);
         }
@@ -32,7 +32,7 @@ class SkillSeeder extends Seeder
                 'skill_type' => 1,
                 'study_time' => 9,
                 'work_time' => 5,
-                'name' => $b[array_rand($b,1)],
+                'name' => $b[array_rand($b, 1)],
                 'cv_id' => $v->id
             ]);
         }

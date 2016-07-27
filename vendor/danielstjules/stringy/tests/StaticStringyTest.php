@@ -6,7 +6,7 @@ use Stringy\StaticStringy as S;
 
 class StaticStringyTestCase extends CommonTest
 {
-	/**
+    /**
      * @dataProvider indexOfProvider()
      */
     public function testIndexOf($expected, $str, $subStr, $offset = 0, $encoding = null)

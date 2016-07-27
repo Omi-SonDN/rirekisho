@@ -6,42 +6,42 @@
  * http://flashcanvas.net/
  */
 
-(function(doc) {
+(function (doc) {
 
-var scripts = doc.getElementsByTagName("script");
-var script  = scripts[scripts.length - 1];
-var url     = script.getAttribute("src").replace(/[^\/]+$/, "save.php");
+    var scripts = doc.getElementsByTagName("script");
+    var script = scripts[scripts.length - 1];
+    var url = script.getAttribute("src").replace(/[^\/]+$/, "save.php");
 
-window.canvas2png = function(canvas, filename) {
-    var tagName = canvas.tagName.toLowerCase();
-    if (tagName !== "canvas") {
-        return;
-    }
-
-    if (typeof FlashCanvas !== "undefined") {
-        FlashCanvas.saveImage(canvas, filename);
-    } else {
-        var action = url;
-        if (filename) {
-            action += "?filename=" + filename;
+    window.canvas2png = function (canvas, filename) {
+        var tagName = canvas.tagName.toLowerCase();
+        if (tagName !== "canvas") {
+            return;
         }
 
-        var form  = doc.createElement("form");
-        var input = doc.createElement("input");
+        if (typeof FlashCanvas !== "undefined") {
+            FlashCanvas.saveImage(canvas, filename);
+        } else {
+            var action = url;
+            if (filename) {
+                action += "?filename=" + filename;
+            }
 
-        form.setAttribute("action", action);
-        form.setAttribute("method", "post");
+            var form = doc.createElement("form");
+            var input = doc.createElement("input");
 
-        input.setAttribute("type",  "hidden");
-        input.setAttribute("name",  "dataurl");
-        input.setAttribute("value", canvas.toDataURL());
+            form.setAttribute("action", action);
+            form.setAttribute("method", "post");
 
-        doc.body.appendChild(form);
-        form.appendChild(input);
-        form.submit();
-        form.removeChild(input);
-        doc.body.removeChild(form);
+            input.setAttribute("type", "hidden");
+            input.setAttribute("name", "dataurl");
+            input.setAttribute("value", canvas.toDataURL());
+
+            doc.body.appendChild(form);
+            form.appendChild(input);
+            form.submit();
+            form.removeChild(input);
+            doc.body.removeChild(form);
+        }
     }
-}
 
 })(document);

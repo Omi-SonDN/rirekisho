@@ -27,12 +27,12 @@ class PSR0Resource implements ResourceInterface
     private $locator;
 
     /**
-     * @param array       $parts
+     * @param array $parts
      * @param PSR0Locator $locator
      */
     public function __construct(array $parts, PSR0Locator $locator)
     {
-        $this->parts   = $parts;
+        $this->parts = $parts;
         $this->locator = $locator;
     }
 
@@ -49,7 +49,7 @@ class PSR0Resource implements ResourceInterface
      */
     public function getSpecName()
     {
-        return $this->getName().'Spec';
+        return $this->getName() . 'Spec';
     }
 
     /**
@@ -58,14 +58,14 @@ class PSR0Resource implements ResourceInterface
     public function getSrcFilename()
     {
         if ($this->locator->isPSR4()) {
-            return $this->locator->getFullSrcPath().implode(DIRECTORY_SEPARATOR, $this->parts).'.php';
+            return $this->locator->getFullSrcPath() . implode(DIRECTORY_SEPARATOR, $this->parts) . '.php';
         }
 
-        $nsParts   = $this->parts;
+        $nsParts = $this->parts;
         $classname = array_pop($nsParts);
-        $parts     = array_merge($nsParts, explode('_', $classname));
+        $parts = array_merge($nsParts, explode('_', $classname));
 
-        return $this->locator->getFullSrcPath().implode(DIRECTORY_SEPARATOR, $parts).'.php';
+        return $this->locator->getFullSrcPath() . implode(DIRECTORY_SEPARATOR, $parts) . '.php';
     }
 
     /**
@@ -76,7 +76,7 @@ class PSR0Resource implements ResourceInterface
         $nsParts = $this->parts;
         array_pop($nsParts);
 
-        return rtrim($this->locator->getSrcNamespace().implode('\\', $nsParts), '\\');
+        return rtrim($this->locator->getSrcNamespace() . implode('\\', $nsParts), '\\');
     }
 
     /**
@@ -84,7 +84,7 @@ class PSR0Resource implements ResourceInterface
      */
     public function getSrcClassname()
     {
-        return $this->locator->getSrcNamespace().implode('\\', $this->parts);
+        return $this->locator->getSrcNamespace() . implode('\\', $this->parts);
     }
 
     /**
@@ -93,16 +93,16 @@ class PSR0Resource implements ResourceInterface
     public function getSpecFilename()
     {
         if ($this->locator->isPSR4()) {
-            return $this->locator->getFullSpecPath().
-                implode(DIRECTORY_SEPARATOR, $this->parts).'Spec.php';
+            return $this->locator->getFullSpecPath() .
+            implode(DIRECTORY_SEPARATOR, $this->parts) . 'Spec.php';
         }
 
-        $nsParts   = $this->parts;
+        $nsParts = $this->parts;
         $classname = array_pop($nsParts);
-        $parts     = array_merge($nsParts, explode('_', $classname));
+        $parts = array_merge($nsParts, explode('_', $classname));
 
-        return $this->locator->getFullSpecPath().
-            implode(DIRECTORY_SEPARATOR, $parts).'Spec.php';
+        return $this->locator->getFullSpecPath() .
+        implode(DIRECTORY_SEPARATOR, $parts) . 'Spec.php';
     }
 
     /**
@@ -113,7 +113,7 @@ class PSR0Resource implements ResourceInterface
         $nsParts = $this->parts;
         array_pop($nsParts);
 
-        return rtrim($this->locator->getSpecNamespace().implode('\\', $nsParts), '\\');
+        return rtrim($this->locator->getSpecNamespace() . implode('\\', $nsParts), '\\');
     }
 
     /**
@@ -121,6 +121,6 @@ class PSR0Resource implements ResourceInterface
      */
     public function getSpecClassname()
     {
-        return $this->locator->getSpecNamespace().implode('\\', $this->parts).'Spec';
+        return $this->locator->getSpecNamespace() . implode('\\', $this->parts) . 'Spec';
     }
 }

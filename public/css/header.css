@@ -88,22 +88,26 @@
     border-left: 1px solid #6a5b91;
     border-right: 1px solid #6a5b91;
 }
-.navbar-header a:link, .navbar-header a:visited{
+
+.navbar-header a:link, .navbar-header a:visited {
     text-decoration: none;
     color: #666699;
     margin-bottom: 1px;
 }
-.nav li{
+
+.nav li {
     /*border-left: 1px solid #6a5b91;*/
     margin-bottom: 1px;
 }
+
 .nav a:link, .nav a:visited {
     text-decoration: none;
     color: #666699;
     border: 1px solid transparent;
 }
-.navbar{
-    border: 0px solid transparent;/*override bootstrap*/
+
+.navbar {
+    border: 0px solid transparent; /*override bootstrap*/
 }
 
 .nav .dropdown-menu li {

@@ -16,7 +16,7 @@ if (!empty($field)) {
     <?php $i = 0;?>
     @foreach ($filtered as $Record)
 
-        <?php $r_id = $Record->hash ; ?>
+        <?php $r_id = $Record->hash; ?>
         <tr id="{{$r_id}}">
             <td>{{++$i}}</td>
 
@@ -43,36 +43,36 @@ if (!empty($field)) {
         </tr>
     @endforeach
 @endif
-    </tbody>
+</tbody>
 
-        <?php $cv_id = $key;?>
+<?php $cv_id = $key;?>
 
-        <tfoot>
-        <tr>
-            <td colspan="5" style="height:45px;">
-                <div class="error-box error-text float_left">
-                    <span id="1_{{$type}}_1_0"></span>
-                </div>
+<tfoot>
+<tr>
+    <td colspan="5" style="height:45px;">
+        <div class="error-box error-text float_left">
+            <span id="1_{{$type}}_1_0"></span>
+        </div>
 
-                <input class="plus-button float_right" type="button" name="increase"
-                       value="+ Thêm"/>
-            </td>
-        </tr>
-        <tr class="first last odd" newrow="Record" id="{{$cv_id}}" data-react="1_{{$type}}_1"
-            style="display:none;">
-            <td></td>
-            <td>
-                <input name="Year" type="text" style="height: 25px;">
-            </td>
-            <td>
-                <input name="Month" type="text" style="height: 25px;">
-            </td>
-            <td>
-                <input type="text" style="height: 25px;" name="Content">
-            </td>
-            <td class="last">
-                <input class="float_right plus-button" type="button" name="save" value="Lưu"/>
-            </td>
-        </tr>
+        <input class="plus-button float_right" type="button" name="increase"
+               value="+ Thêm"/>
+    </td>
+</tr>
+<tr class="first last odd" newrow="Record" id="{{$cv_id}}" data-react="1_{{$type}}_1"
+    style="display:none;">
+    <td></td>
+    <td>
+        <input name="Year" type="text" style="height: 25px;">
+    </td>
+    <td>
+        <input name="Month" type="text" style="height: 25px;">
+    </td>
+    <td>
+        <input type="text" style="height: 25px;" name="Content">
+    </td>
+    <td class="last">
+        <input class="float_right plus-button" type="button" name="save" value="Lưu"/>
+    </td>
+</tr>
 
-        </tfoot>
+</tfoot>

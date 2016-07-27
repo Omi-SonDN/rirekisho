@@ -80,7 +80,8 @@ class CallArgumentsPresenter
     private function findFirstUnexpectedArgumentsCallProphecy(
         array $methodProphecies,
         UnexpectedCallException $exception
-    ) {
+    )
+    {
         $objectProphecy = $exception->getObjectProphecy();
 
         foreach ($methodProphecies as $methodProphecy) {
@@ -136,7 +137,7 @@ class CallArgumentsPresenter
     private function generateArgumentsDifferenceText(array $actualArguments, array $expectedArguments)
     {
         $text = '';
-        foreach($actualArguments as $i => $actualArgument) {
+        foreach ($actualArguments as $i => $actualArgument) {
             $expectedArgument = $expectedArguments[$i];
             $actualArgument = is_null($actualArgument) ? 'null' : $actualArgument;
             $expectedArgument = is_null($expectedArgument) ? 'null' : $expectedArgument;

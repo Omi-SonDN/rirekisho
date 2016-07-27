@@ -14,18 +14,19 @@ use Illuminate\Http\Response;
  * @package laravel-dompdf
  * @author Barry vd. Heuvel
  */
-class PDF{
+class PDF
+{
 
-    /** @var \DOMPDF  */
+    /** @var \DOMPDF */
     protected $dompdf;
 
-    /** @var \Illuminate\Contracts\Config\Repository  */
+    /** @var \Illuminate\Contracts\Config\Repository */
     protected $config;
 
-    /** @var \Illuminate\Filesystem\Filesystem  */
+    /** @var \Illuminate\Filesystem\Filesystem */
     protected $files;
 
-    /** @var \Illuminate\Contracts\View\Factory  */
+    /** @var \Illuminate\Contracts\View\Factory */
     protected $view;
 
     protected $rendered = false;
@@ -40,7 +41,8 @@ class PDF{
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Illuminate\View\Factory $view
      */
-    public function __construct(DOMPDF $dompdf, ConfigRepository $config, Filesystem $files, ViewFactory $view){
+    public function __construct(DOMPDF $dompdf, ConfigRepository $config, Filesystem $files, ViewFactory $view)
+    {
         $this->dompdf = $dompdf;
         $this->config = $config;
         $this->files = $files;
@@ -49,9 +51,9 @@ class PDF{
         $this->showWarnings = $this->config->get('dompdf.show_warnings', false);
 
         //To prevent old configs from not working..
-        if($this->config->has('dompdf.paper')){
+        if ($this->config->has('dompdf.paper')) {
             $this->paper = $this->config->get('dompdf.paper');
-        }else{
+        } else {
             $this->paper = DOMPDF_DEFAULT_PAPER_SIZE;
         }
 
@@ -63,7 +65,8 @@ class PDF{
      *
      * @return \DOMPDF
      */
-    public function getDomPDF(){
+    public function getDomPDF()
+    {
         return $this->dompdf;
     }
 
@@ -74,9 +77,10 @@ class PDF{
      * @param string $orientation
      * @return $this
      */
-    public function setPaper($paper, $orientation=null){
+    public function setPaper($paper, $orientation = null)
+    {
         $this->paper = $paper;
-        if($orientation){
+        if ($orientation) {
             $this->orientation = $orientation;
         }
         return $this;
@@ -88,7 +92,8 @@ class PDF{
      * @param string $orientation
      * @return static
      */
-    public function setOrientation($orientation){
+    public function setOrientation($orientation)
+    {
         $this->orientation = $orientation;
         return $this;
     }
@@ -99,7 +104,8 @@ class PDF{
      * @param bool $warnings
      * @return $this
      */
-    public function setWarnings($warnings){
+    public function setWarnings($warnings)
+    {
         $this->showWarnings = $warnings;
         return $this;
     }
@@ -111,7 +117,8 @@ class PDF{
      * @param string $encoding Not used yet
      * @return static
      */
-    public function loadHTML($string, $encoding = null){
+    public function loadHTML($string, $encoding = null)
+    {
         $string = $this->convertEntities($string);
         $this->dompdf->load_html($string, $encoding);
         $this->rendered = false;
@@ -124,7 +131,8 @@ class PDF{
      * @param string $file
      * @return static
      */
-    public function loadFile($file){
+    public function loadFile($file)
+    {
         $this->dompdf->load_html_file($file);
         $this->rendered = false;
         return $this;
@@ -139,7 +147,8 @@ class PDF{
      * @param string $encoding Not used yet
      * @return static
      */
-    public function loadView($view, $data = array(), $mergeData = array(), $encoding = null){
+    public function loadView($view, $data = array(), $mergeData = array(), $encoding = null)
+    {
         $html = $this->view->make($view, $data, $mergeData)->render();
         return $this->loadHTML($html, $encoding);
     }
@@ -149,8 +158,9 @@ class PDF{
      *
      * @return string The rendered PDF as string
      */
-    public function output(){
-        if(!$this->rendered){
+    public function output()
+    {
+        if (!$this->rendered) {
             $this->render();
         }
         return $this->dompdf->output();
@@ -162,7 +172,8 @@ class PDF{
      * @param $filename
      * @return static
      */
-    public function save($filename){
+    public function save($filename)
+    {
         $this->files->put($filename, $this->output());
         return $this;
     }
@@ -173,12 +184,13 @@ class PDF{
      * @param string $filename
      * @return \Illuminate\Http\Response
      */
-    public function download($filename = 'document.pdf' ){
+    public function download($filename = 'document.pdf')
+    {
         $output = $this->output();
         return new Response($output, 200, array(
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' =>  'attachment; filename="'.$filename.'"'
-            ));
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"'
+        ));
     }
 
     /**
@@ -187,19 +199,21 @@ class PDF{
      * @param string $filename
      * @return \Illuminate\Http\Response
      */
-    public function stream($filename = 'document.pdf' ){
+    public function stream($filename = 'document.pdf')
+    {
         $output = $this->output();
         return new Response($output, 200, array(
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' =>  'inline; filename="'.$filename.'"',
+            'Content-Disposition' => 'inline; filename="' . $filename . '"',
         ));
     }
 
     /**
      * Render the PDF
      */
-    protected function render(){
-        if(!$this->dompdf){
+    protected function render()
+    {
+        if (!$this->dompdf) {
             throw new Exception('DOMPDF not created yet');
         }
 
@@ -207,15 +221,15 @@ class PDF{
 
         $this->dompdf->render();
 
-        if ( $this->showWarnings ) {
+        if ($this->showWarnings) {
             global $_dompdf_warnings;
-            if(count($_dompdf_warnings)){
+            if (count($_dompdf_warnings)) {
                 $warnings = '';
-                foreach ($_dompdf_warnings as $msg){
+                foreach ($_dompdf_warnings as $msg) {
                     $warnings .= $msg . "\n";
                 }
                 // $warnings .= $this->dompdf->get_canvas()->get_cpdf()->messages;
-                if(!empty($warnings)){
+                if (!empty($warnings)) {
                     throw new Exception($warnings);
                 }
             }
@@ -224,12 +238,13 @@ class PDF{
     }
 
 
-    protected function convertEntities($subject){
+    protected function convertEntities($subject)
+    {
         $entities = array(
             '€' => '&#0128;',
         );
 
-        foreach($entities as $search => $replace){
+        foreach ($entities as $search => $replace) {
             $subject = str_replace($search, $replace, $subject);
         }
         return $subject;

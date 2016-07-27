@@ -33,7 +33,7 @@ class DescriptionFactoryTest extends \PHPUnit_Framework_TestCase
         $tagFactory = m::mock(TagFactory::class);
         $tagFactory->shouldReceive('create')->never();
 
-        $factory     = new DescriptionFactory($tagFactory);
+        $factory = new DescriptionFactory($tagFactory);
         $description = $factory->create($contents, new Context(''));
 
         $this->assertSame($contents, $description->render());
@@ -50,7 +50,7 @@ class DescriptionFactoryTest extends \PHPUnit_Framework_TestCase
         $tagFactory = m::mock(TagFactory::class);
         $tagFactory->shouldReceive('create')->never();
 
-        $factory     = new DescriptionFactory($tagFactory);
+        $factory = new DescriptionFactory($tagFactory);
         $description = $factory->create($contents, new Context(''));
 
         $this->assertSame($expected, $description->render());
@@ -67,16 +67,15 @@ class DescriptionFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testDescriptionCanParseAStringWithInlineTag()
     {
-        $contents   = 'This is text for a {@link http://phpdoc.org/ description} that uses an inline tag.';
-        $context    = new Context('');
+        $contents = 'This is text for a {@link http://phpdoc.org/ description} that uses an inline tag.';
+        $context = new Context('');
         $tagFactory = m::mock(TagFactory::class);
         $tagFactory->shouldReceive('create')
             ->once()
             ->with('@link http://phpdoc.org/ description', $context)
-            ->andReturn(new Link('http://phpdoc.org/', new Description('description')))
-        ;
+            ->andReturn(new Link('http://phpdoc.org/', new Description('description')));
 
-        $factory     = new DescriptionFactory($tagFactory);
+        $factory = new DescriptionFactory($tagFactory);
         $description = $factory->create($contents, $context);
 
         $this->assertSame($contents, $description->render());
@@ -93,16 +92,15 @@ class DescriptionFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testDescriptionCanParseAStringStartingWithInlineTag()
     {
-        $contents   = '{@link http://phpdoc.org/ This} is text for a description that starts with an inline tag.';
-        $context    = new Context('');
+        $contents = '{@link http://phpdoc.org/ This} is text for a description that starts with an inline tag.';
+        $context = new Context('');
         $tagFactory = m::mock(TagFactory::class);
         $tagFactory->shouldReceive('create')
             ->once()
             ->with('@link http://phpdoc.org/ This', $context)
-            ->andReturn(new Link('http://phpdoc.org/', new Description('This')))
-        ;
+            ->andReturn(new Link('http://phpdoc.org/', new Description('This')));
 
-        $factory     = new DescriptionFactory($tagFactory);
+        $factory = new DescriptionFactory($tagFactory);
         $description = $factory->create($contents, $context);
 
         $this->assertSame($contents, $description->render());
@@ -115,7 +113,7 @@ class DescriptionFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testIfSuperfluousStartingSpacesAreRemoved()
     {
-        $factory         = new DescriptionFactory(m::mock(TagFactory::class));
+        $factory = new DescriptionFactory(m::mock(TagFactory::class));
         $descriptionText = <<<DESCRIPTION
 This is a multiline
   description that you commonly

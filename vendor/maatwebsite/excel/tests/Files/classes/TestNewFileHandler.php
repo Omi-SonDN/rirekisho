@@ -2,7 +2,8 @@
 
 use Maatwebsite\Excel\Files\ExportHandler;
 
-class TestNewFileHandler implements ExportHandler {
+class TestNewFileHandler implements ExportHandler
+{
 
     /**
      * Handle

@@ -1,13 +1,13 @@
 $(document).ready(function () {
     var url = '';
-    
+
     $("#recipient").tagit({
         singleField: true,
         singleFieldNode: $('#recipient'),
         allowSpaces: false,
         removeConfirmation: true,
         placeholderText: "Recipients",
-        
+
         tagSource: function (request, response) {
             $.ajax({
                 url: url + "/emails/getEmailAddress",
@@ -21,8 +21,9 @@ $(document).ready(function () {
                             value: item.email
                         };
                     }));
-                    
+
                 }
             });
-        }});
+        }
     });
+});

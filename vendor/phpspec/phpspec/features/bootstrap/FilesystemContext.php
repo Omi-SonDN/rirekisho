@@ -117,7 +117,7 @@ class FilesystemContext implements Context, MatchersProviderInterface
      */
     public function theConfigFileInFolderContains($folder, PyStringNode $contents)
     {
-        $this->theFileContains($folder.DIRECTORY_SEPARATOR.'phpspec.yml', $contents);
+        $this->theFileContains($folder . DIRECTORY_SEPARATOR . 'phpspec.yml', $contents);
     }
 
     /**

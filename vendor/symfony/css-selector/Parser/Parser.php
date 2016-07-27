@@ -77,7 +77,7 @@ class Parser implements ParserInterface
                 throw SyntaxErrorException::stringAsFunctionArgument();
             }
 
-            return (int) $string;
+            return (int)$string;
         };
 
         switch (true) {
@@ -95,7 +95,7 @@ class Parser implements ParserInterface
         $first = isset($split[0]) ? $split[0] : null;
 
         return array(
-            $first ? ('-' === $first || '+' === $first ? $int($first.'1') : $int($first)) : 1,
+            $first ? ('-' === $first || '+' === $first ? $int($first . '1') : $int($first)) : 1,
             isset($split[1]) && $split[1] ? $int($split[1]) : 0,
         );
     }
@@ -169,7 +169,7 @@ class Parser implements ParserInterface
      * Parses next simple node (hash, class, pseudo, negation).
      *
      * @param TokenStream $stream
-     * @param bool        $insideNegation
+     * @param bool $insideNegation
      *
      * @return array
      *
@@ -326,7 +326,7 @@ class Parser implements ParserInterface
      * Parses next attribute node.
      *
      * @param Node\NodeInterface $selector
-     * @param TokenStream        $stream
+     * @param TokenStream $stream
      *
      * @return Node\AttributeNode
      *
@@ -368,7 +368,7 @@ class Parser implements ParserInterface
             } elseif ($next->isDelimiter(array('^', '$', '*', '~', '|', '!'))
                 && $stream->getPeek()->isDelimiter(array('='))
             ) {
-                $operator = $next->getValue().'=';
+                $operator = $next->getValue() . '=';
                 $stream->getNext();
             } else {
                 throw SyntaxErrorException::unexpectedToken('operator', $next);
@@ -380,7 +380,7 @@ class Parser implements ParserInterface
 
         if ($value->isNumber()) {
             // if the value is a number, it's casted into a string
-            $value = new Token(Token::TYPE_STRING, (string) $value->getValue(), $value->getPosition());
+            $value = new Token(Token::TYPE_STRING, (string)$value->getValue(), $value->getPosition());
         }
 
         if (!($value->isIdentifier() || $value->isString())) {

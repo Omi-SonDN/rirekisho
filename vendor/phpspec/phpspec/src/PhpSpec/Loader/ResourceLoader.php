@@ -39,7 +39,7 @@ class ResourceLoader
     }
 
     /**
-     * @param string       $locator
+     * @param string $locator
      * @param integer|null $line
      *
      * @return Suite
@@ -89,7 +89,7 @@ class ResourceLoader
     }
 
     /**
-     * @param int              $line
+     * @param int $line
      * @param ReflectionMethod $method
      *
      * @return bool

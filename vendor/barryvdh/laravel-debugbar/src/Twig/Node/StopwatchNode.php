@@ -13,7 +13,8 @@ class StopwatchNode extends \Twig_Node
         \Twig_Node_Expression_AssignName $var,
         $lineno = 0,
         $tag = null
-    ) {
+    )
+    {
         parent::__construct(array('body' => $body, 'name' => $name, 'var' => $var), array(), $lineno, $tag);
     }
 

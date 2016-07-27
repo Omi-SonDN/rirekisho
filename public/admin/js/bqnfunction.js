@@ -2,21 +2,21 @@
 $(document).ready(function ($) {
 
     $.tablesorter.customPagerControls({
-        table          : $table,                   // point at correct table (string or jQuery object)
-        pager          : $pager,                   // pager wrapper (string or jQuery object)
-        pageSize       : '.left a',                // container for page sizes
-        currentPage    : '.right a',               // container for page selectors
-        ends           : 2,                        // number of pages to show of either end
-        aroundCurrent  : 1,                        // number of pages surrounding the current page
-        link           : '<a href="#">{page}</a>', // page element; use {page} to include the page number
-        currentClass   : 'current',                // current page class name
-        adjacentSpacer : ' | ',                    // spacer for page numbers next to each other
-        distanceSpacer : ' \u2026 ',               // spacer for page numbers away from each other (ellipsis &amp;hellip;)
-        addKeyboard    : true                      // add left/right keyboard arrows to change current page
+        table: $table,                   // point at correct table (string or jQuery object)
+        pager: $pager,                   // pager wrapper (string or jQuery object)
+        pageSize: '.left a',                // container for page sizes
+        currentPage: '.right a',               // container for page selectors
+        ends: 2,                        // number of pages to show of either end
+        aroundCurrent: 1,                        // number of pages surrounding the current page
+        link: '<a href="#">{page}</a>', // page element; use {page} to include the page number
+        currentClass: 'current',                // current page class name
+        adjacentSpacer: ' | ',                    // spacer for page numbers next to each other
+        distanceSpacer: ' \u2026 ',               // spacer for page numbers away from each other (ellipsis &amp;hellip;)
+        addKeyboard: true                      // add left/right keyboard arrows to change current page
     });
 
-    var $table =  $('#datatables');
-    var $pager =  $('.pager');
+    var $table = $('#datatables');
+    var $pager = $('.pager');
 
     $table
         .tablesorter({
@@ -63,7 +63,7 @@ $(document).ready(function ($) {
             sortForce: null,
             // initial sort order of the columns
             // [[columnIndex, sortDirection], ... ]
-            sortList: [ [4, 1]],
+            sortList: [[4, 1]],
             // default sort that is added to the end of the users sort
             // selection.
             sortAppend: null,
@@ -118,12 +118,12 @@ $(document).ready(function ($) {
             cancelSelection: true,
             // Delay in milliseconds before the filter widget starts searching; This option prevents searching for
             // every character while typing and should make searching large tables faster.
-            filter_searchDelay : 300,
-            widgetOptions : {
+            filter_searchDelay: 300,
+            widgetOptions: {
                 //if false disable search
                 filter_columnFilters: true,
-                filter_reset : '.reset',
-                zebra : ["even", "odd"],
+                filter_reset: '.reset',
+                zebra: ["even", "odd"],
                 filter_startsWith: false,
                 filter_childRows: true
             },
@@ -134,7 +134,7 @@ $(document).ready(function ($) {
             // n = normalized value returned by the column parser
             // f = search filter input value
             // i = column index
-            filter_functions : {
+            filter_functions: {
                 //0 : function(c, data) {}
             },
 
@@ -145,19 +145,19 @@ $(document).ready(function ($) {
             container: $pager,
             output: 'showing: {startRow} to {endRow} of {totalRows} rows',
             size: 10,
-        //
-        //    // if true, the table will remain the same height no matter how many
-        //    // records are displayed. The space is made up by an empty
-        //    // table row set to a height to compensate; default is false
+            //
+            //    // if true, the table will remain the same height no matter how many
+            //    // records are displayed. The space is made up by an empty
+            //    // table row set to a height to compensate; default is false
             fixedHeight: true,
-        //
-        //    // remove rows from the table to speed up the sort of large tables.
-        //    // setting this to false, only hides the non-visible rows; needed
-        //    // if you plan to add/remove rows with the pager enabled.
+            //
+            //    // remove rows from the table to speed up the sort of large tables.
+            //    // setting this to false, only hides the non-visible rows; needed
+            //    // if you plan to add/remove rows with the pager enabled.
             removeRows: false,
-        //
-        //    // css class names of pager arrows
-        //    // next page arrow
+            //
+            //    // css class names of pager arrows
+            //    // next page arrow
             cssNext: '.next',
             // previous page arrow
             cssPrev: '.prev',
@@ -177,23 +177,23 @@ $(document).ready(function ($) {
             cssDisabled: 'disabled'
         });
 
-        //set up pager controls
-        $('.pager .left a').on('click', function () {
-            $(this)
-                .addClass('current')
-                .siblings()
-                .removeClass('current');
-            $table.trigger('pagesize', $(this).html());
-            return false;
-        });
-        $('.pager .right .pagecount').on('click', 'a', function(){
-            $(this)
-                .addClass('current')
-                .siblings()
-                .removeClass('current');
-            $table.trigger('pageSet', $(this).html());
-            return false;
-        });
+    //set up pager controls
+    $('.pager .left a').on('click', function () {
+        $(this)
+            .addClass('current')
+            .siblings()
+            .removeClass('current');
+        $table.trigger('pagesize', $(this).html());
+        return false;
+    });
+    $('.pager .right .pagecount').on('click', 'a', function () {
+        $(this)
+            .addClass('current')
+            .siblings()
+            .removeClass('current');
+        $table.trigger('pageSet', $(this).html());
+        return false;
+    });
 
     /* thông báo 3s*/
     $("div.alert, span.help-block").delay(3000).slideUp();

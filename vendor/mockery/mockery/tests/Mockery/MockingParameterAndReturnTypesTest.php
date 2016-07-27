@@ -19,7 +19,7 @@
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
 
-declare(strict_types=1); // Use strict types to ensure exact types are returned or passed
+declare(strict_types = 1); // Use strict types to ensure exact types are returned or passed
 
 namespace test\Mockery;
 

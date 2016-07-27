@@ -4,7 +4,8 @@ use Illuminate\Foundation\Application;
 use Maatwebsite\Excel\Excel;
 use Maatwebsite\Excel\Exceptions\LaravelExcelException;
 
-abstract class File {
+abstract class File
+{
 
     /**
      * @var Application
@@ -25,7 +26,7 @@ abstract class File {
 
     /**
      * @param Application $app
-     * @param Excel       $excel
+     * @param Excel $excel
      */
     public function __construct(Application $app, Excel $excel)
     {

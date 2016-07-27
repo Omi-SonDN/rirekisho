@@ -7,7 +7,8 @@ use Mockery as m;
 use Maatwebsite\Excel\Readers\LaravelExcelReader;
 use Maatwebsite\Excel\Classes;
 
-class XlsxReaderTest extends TestCase {
+class XlsxReaderTest extends TestCase
+{
 
     /**
      * Import trait

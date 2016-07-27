@@ -23,7 +23,7 @@
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- local css-->
-    <!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/all.css') }}"/-->
+<!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/all.css') }}"/-->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
 
@@ -32,16 +32,24 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/footer.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/custom.css') }}"/>
     <!--CSS lib tablesorter -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/bower_components/datatables-sort/css/tablesorter.pager.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/admin/bower_components/datatables-sort/css/tablesorter.pager.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('/admin/css/customtables.css') }}"/>
     <!--CSS theme tablesorter -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/bower_components/datatables-sort/css/theme.bootstrap.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/bower_components/datatables-sort/css/theme.blue.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/bower_components/datatables-sort/css/theme.dark.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/bower_components/datatables-sort/css/theme.default.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/bower_components/datatables-sort/css/theme.dropbox.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/bower_components/datatables-sort/css/theme.grey.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/bower_components/datatables-sort/css/theme.jui.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/admin/bower_components/datatables-sort/css/theme.bootstrap.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/admin/bower_components/datatables-sort/css/theme.blue.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/admin/bower_components/datatables-sort/css/theme.dark.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/admin/bower_components/datatables-sort/css/theme.default.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/admin/bower_components/datatables-sort/css/theme.dropbox.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/admin/bower_components/datatables-sort/css/theme.grey.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/admin/bower_components/datatables-sort/css/theme.jui.min.css') }}"/>
 
 </head>
 <body>
@@ -69,10 +77,14 @@
 <!-- DataTables JavaScript -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 {{--<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/js/jquery-latest.js')}}"></script>--}}
-<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/js/jquery.tablesorter.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/js/jquery.tablesorter.widgets.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/addons/pager/jquery.tablesorter.pager.js')}}"></script>
-<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/js/pager-custom-controls.js')}}"></script>
+<script type="text/javascript"
+        src="{{asset('/admin/bower_components/datatables-sort/js/jquery.tablesorter.min.js')}}"></script>
+<script type="text/javascript"
+        src="{{asset('/admin/bower_components/datatables-sort/js/jquery.tablesorter.widgets.min.js')}}"></script>
+<script type="text/javascript"
+        src="{{asset('/admin/bower_components/datatables-sort/addons/pager/jquery.tablesorter.pager.js')}}"></script>
+<script type="text/javascript"
+        src="{{asset('/admin/bower_components/datatables-sort/js/pager-custom-controls.js')}}"></script>
 <!-- Giet xung dot :))  [$ Jquery]-->
 {{--<script type="text/javascript"> jQuery.noConflict(); </script>--}}
 

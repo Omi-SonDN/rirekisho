@@ -19,9 +19,9 @@ class PHP_Timer
      * @var array
      */
     private static $times = array(
-      'hour'   => 3600000,
-      'minute' => 60000,
-      'second' => 1000
+        'hour' => 3600000,
+        'minute' => 60000,
+        'second' => 1000
     );
 
     /**
@@ -55,7 +55,7 @@ class PHP_Timer
     /**
      * Formats the elapsed time as a string.
      *
-     * @param  float  $time
+     * @param  float $time
      * @return string
      */
     public static function secondsToTimeString($time)

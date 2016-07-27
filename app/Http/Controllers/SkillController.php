@@ -27,12 +27,13 @@ class SkillController extends Controller
         if (Gate::denies('update-cv', $CV->user_id)) {
             abort(403);
         }
-        $type = str_split_unicode($request->input('data-react'),"_");//"2_x"
+        $type = str_split_unicode($request->input('data-react'), "_");//"2_x"
         $skill = new Skill($request->all());
         $skill->skill_type = $type[2];
         $CV->Skill()->save($skill);
-        return "2_".$skill->skill_type;
+        return "2_" . $skill->skill_type;
     }
+
     /**
      * Update on edit
      *
@@ -47,13 +48,13 @@ class SkillController extends Controller
             abort(403);
         }
         $skill->update($request->all());
-        return "2_".$skill->skill_type;
+        return "2_" . $skill->skill_type;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -65,18 +66,20 @@ class SkillController extends Controller
         }
         $type = $skill->skill_type;
         $skill->delete();
-        return "2_" .$type;
+        return "2_" . $type;
     }
-    
+
     //unused methoods
     public function show($id)
     {
 
     }
+
     public function edit($id, UpdateRequest $request)
     {
 
     }
+
     public function index($type)
     {
 
@@ -86,5 +89,5 @@ class SkillController extends Controller
     {
 
     }
-    
+
 }

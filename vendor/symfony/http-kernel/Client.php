@@ -33,10 +33,10 @@ class Client extends BaseClient
     /**
      * Constructor.
      *
-     * @param HttpKernelInterface $kernel    An HttpKernel instance
-     * @param array               $server    The server parameters (equivalent of $_SERVER)
-     * @param History             $history   A History instance to store the browser history
-     * @param CookieJar           $cookieJar A CookieJar instance to store the cookies
+     * @param HttpKernelInterface $kernel An HttpKernel instance
+     * @param array $server The server parameters (equivalent of $_SERVER)
+     * @param History $history A History instance to store the browser history
+     * @param CookieJar $cookieJar A CookieJar instance to store the cookies
      */
     public function __construct(HttpKernelInterface $kernel, array $server = array(), History $history = null, CookieJar $cookieJar = null)
     {
@@ -117,7 +117,7 @@ require_once '$requirePath';
 \$request = unserialize('$request');
 EOF;
 
-        return $code.$this->getHandleScript();
+        return $code . $this->getHandleScript();
     }
 
     protected function getHandleScript()

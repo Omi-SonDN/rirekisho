@@ -208,13 +208,13 @@ class Request
     /**
      * Constructor.
      *
-     * @param array           $query      The GET parameters
-     * @param array           $request    The POST parameters
-     * @param array           $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
-     * @param array           $cookies    The COOKIE parameters
-     * @param array           $files      The FILES parameters
-     * @param array           $server     The SERVER parameters
-     * @param string|resource $content    The raw body data
+     * @param array $query The GET parameters
+     * @param array $request The POST parameters
+     * @param array $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
+     * @param array $cookies The COOKIE parameters
+     * @param array $files The FILES parameters
+     * @param array $server The SERVER parameters
+     * @param string|resource $content The raw body data
      */
     public function __construct(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
     {
@@ -226,13 +226,13 @@ class Request
      *
      * This method also re-initializes all properties.
      *
-     * @param array           $query      The GET parameters
-     * @param array           $request    The POST parameters
-     * @param array           $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
-     * @param array           $cookies    The COOKIE parameters
-     * @param array           $files      The FILES parameters
-     * @param array           $server     The SERVER parameters
-     * @param string|resource $content    The raw body data
+     * @param array $query The GET parameters
+     * @param array $request The POST parameters
+     * @param array $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
+     * @param array $cookies The COOKIE parameters
+     * @param array $files The FILES parameters
+     * @param array $server The SERVER parameters
+     * @param string|resource $content The raw body data
      */
     public function initialize(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
     {
@@ -295,13 +295,13 @@ class Request
      * The information contained in the URI always take precedence
      * over the other information (server and parameters).
      *
-     * @param string $uri        The URI
-     * @param string $method     The HTTP method
-     * @param array  $parameters The query (GET) or request (POST) parameters
-     * @param array  $cookies    The request cookies ($_COOKIE)
-     * @param array  $files      The request files ($_FILES)
-     * @param array  $server     The server parameters ($_SERVER)
-     * @param string $content    The raw body data
+     * @param string $uri The URI
+     * @param string $method The HTTP method
+     * @param array $parameters The query (GET) or request (POST) parameters
+     * @param array $cookies The request cookies ($_COOKIE)
+     * @param array $files The request files ($_FILES)
+     * @param array $server The server parameters ($_SERVER)
+     * @param string $content The raw body data
      *
      * @return Request A Request instance
      */
@@ -343,7 +343,7 @@ class Request
 
         if (isset($components['port'])) {
             $server['SERVER_PORT'] = $components['port'];
-            $server['HTTP_HOST'] = $server['HTTP_HOST'].':'.$components['port'];
+            $server['HTTP_HOST'] = $server['HTTP_HOST'] . ':' . $components['port'];
         }
 
         if (isset($components['user'])) {
@@ -365,7 +365,7 @@ class Request
                 if (!isset($server['CONTENT_TYPE'])) {
                     $server['CONTENT_TYPE'] = 'application/x-www-form-urlencoded';
                 }
-                // no break
+            // no break
             case 'PATCH':
                 $request = $parameters;
                 $query = array();
@@ -391,7 +391,7 @@ class Request
             $queryString = http_build_query($query, '', '&');
         }
 
-        $server['REQUEST_URI'] = $components['path'].('' !== $queryString ? '?'.$queryString : '');
+        $server['REQUEST_URI'] = $components['path'] . ('' !== $queryString ? '?' . $queryString : '');
         $server['QUERY_STRING'] = $queryString;
 
         return self::createRequestFromFactory($query, $request, array(), $cookies, $files, $server, $content);
@@ -414,12 +414,12 @@ class Request
     /**
      * Clones a request and overrides some of its parameters.
      *
-     * @param array $query      The GET parameters
-     * @param array $request    The POST parameters
+     * @param array $query The GET parameters
+     * @param array $request The POST parameters
      * @param array $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
-     * @param array $cookies    The COOKIE parameters
-     * @param array $files      The FILES parameters
-     * @param array $server     The SERVER parameters
+     * @param array $cookies The COOKIE parameters
+     * @param array $files The FILES parameters
+     * @param array $server The SERVER parameters
      *
      * @return Request The duplicated request
      */
@@ -498,8 +498,8 @@ class Request
         }
 
         return
-            sprintf('%s %s %s', $this->getMethod(), $this->getRequestUri(), $this->server->get('SERVER_PROTOCOL'))."\r\n".
-            $this->headers."\r\n".
+            sprintf('%s %s %s', $this->getMethod(), $this->getRequestUri(), $this->server->get('SERVER_PROTOCOL')) . "\r\n" .
+            $this->headers . "\r\n" .
             $content;
     }
 
@@ -523,7 +523,7 @@ class Request
             if (in_array($key, array('CONTENT_TYPE', 'CONTENT_LENGTH'))) {
                 $_SERVER[$key] = implode(', ', $value);
             } else {
-                $_SERVER['HTTP_'.$key] = implode(', ', $value);
+                $_SERVER['HTTP_' . $key] = implode(', ', $value);
             }
         }
 
@@ -598,7 +598,7 @@ class Request
      *
      * Setting an empty value allows to disable the trusted header for the given key.
      *
-     * @param string $key   The header key
+     * @param string $key The header key
      * @param string $value The header name
      *
      * @throws \InvalidArgumentException
@@ -663,7 +663,7 @@ class Request
             // PHP also converts "+" to spaces when filling the global _GET or when using the function parse_str. This is why we use urldecode and then normalize to
             // RFC 3986 with rawurlencode.
             $parts[] = isset($keyValuePair[1]) ?
-                rawurlencode(urldecode($keyValuePair[0])).'='.rawurlencode(urldecode($keyValuePair[1])) :
+                rawurlencode(urldecode($keyValuePair[0])) . '=' . rawurlencode(urldecode($keyValuePair[1])) :
                 rawurlencode(urldecode($keyValuePair[0]));
             $order[] = urldecode($keyValuePair[0]);
         }
@@ -714,9 +714,9 @@ class Request
      * It is better to explicitly get request parameters from the appropriate
      * public property instead (query, attributes, request).
      *
-     * @param string $key     the key
-     * @param mixed  $default the default value if the parameter key does not exist
-     * @param bool   $deep    is parameter deep in multidimensional array
+     * @param string $key the key
+     * @param mixed $default the default value if the parameter key does not exist
+     * @param bool $deep is parameter deep in multidimensional array
      *
      * @return mixed
      */
@@ -832,7 +832,7 @@ class Request
                 unset($clientIps[$key]);
 
                 // Fallback to this when the client IP falls into the range of trusted proxies
-                if (null ===  $firstTrustedIp) {
+                if (null === $firstTrustedIp) {
                     $firstTrustedIp = $clientIp;
                 }
             }
@@ -983,7 +983,7 @@ class Request
             }
 
             if (false !== $pos) {
-                return (int) substr($host, $pos + 1);
+                return (int)substr($host, $pos + 1);
             }
 
             return 'https' === $this->getScheme() ? 443 : 80;
@@ -1045,7 +1045,7 @@ class Request
             return $this->getHost();
         }
 
-        return $this->getHost().':'.$port;
+        return $this->getHost() . ':' . $port;
     }
 
     /**
@@ -1072,7 +1072,7 @@ class Request
      */
     public function getSchemeAndHttpHost()
     {
-        return $this->getScheme().'://'.$this->getHttpHost();
+        return $this->getScheme() . '://' . $this->getHttpHost();
     }
 
     /**
@@ -1085,10 +1085,10 @@ class Request
     public function getUri()
     {
         if (null !== $qs = $this->getQueryString()) {
-            $qs = '?'.$qs;
+            $qs = '?' . $qs;
         }
 
-        return $this->getSchemeAndHttpHost().$this->getBaseUrl().$this->getPathInfo().$qs;
+        return $this->getSchemeAndHttpHost() . $this->getBaseUrl() . $this->getPathInfo() . $qs;
     }
 
     /**
@@ -1100,7 +1100,7 @@ class Request
      */
     public function getUriForPath($path)
     {
-        return $this->getSchemeAndHttpHost().$this->getBaseUrl().$path;
+        return $this->getSchemeAndHttpHost() . $this->getBaseUrl() . $path;
     }
 
     /**
@@ -1147,14 +1147,14 @@ class Request
         }
 
         $targetDirs[] = $targetFile;
-        $path = str_repeat('../', count($sourceDirs)).implode('/', $targetDirs);
+        $path = str_repeat('../', count($sourceDirs)) . implode('/', $targetDirs);
 
         // A reference to the same base directory or an empty subdirectory must be prefixed with "./".
         // This also applies to a segment with a colon character (e.g., "file:colon") that cannot be used
         // as the first segment of a relative-path reference, as it would be mistaken for a scheme name
         // (see http://tools.ietf.org/html/rfc3986#section-4.2).
         return !isset($path[0]) || '/' === $path[0]
-            || false !== ($colonPos = strpos($path, ':')) && ($colonPos < ($slashPos = strpos($path, '/')) || false === $slashPos)
+        || false !== ($colonPos = strpos($path, ':')) && ($colonPos < ($slashPos = strpos($path, '/')) || false === $slashPos)
             ? "./$path" : $path;
     }
 
@@ -1347,10 +1347,10 @@ class Request
         }
 
         foreach (static::$formats as $format => $mimeTypes) {
-            if (in_array($mimeType, (array) $mimeTypes)) {
+            if (in_array($mimeType, (array)$mimeTypes)) {
                 return $format;
             }
-            if (null !== $canonicalMimeType && in_array($canonicalMimeType, (array) $mimeTypes)) {
+            if (null !== $canonicalMimeType && in_array($canonicalMimeType, (array)$mimeTypes)) {
                 return $format;
             }
         }
@@ -1359,7 +1359,7 @@ class Request
     /**
      * Associates a format with mime types.
      *
-     * @param string       $format    The format
+     * @param string $format The format
      * @param string|array $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
      */
     public function setFormat($format, $mimeTypes)
@@ -1610,7 +1610,7 @@ class Request
                         if ($i === 0) {
                             $lang = strtolower($codes[0]);
                         } else {
-                            $lang .= '_'.strtoupper($codes[$i]);
+                            $lang .= '_' . strtoupper($codes[$i]);
                         }
                     }
                 }
@@ -1718,7 +1718,7 @@ class Request
             // IIS 5.0, PHP as CGI
             $requestUri = $this->server->get('ORIG_PATH_INFO');
             if ('' != $this->server->get('QUERY_STRING')) {
-                $requestUri .= '?'.$this->server->get('QUERY_STRING');
+                $requestUri .= '?' . $this->server->get('QUERY_STRING');
             }
             $this->server->remove('ORIG_PATH_INFO');
         }
@@ -1756,7 +1756,7 @@ class Request
             $baseUrl = '';
             do {
                 $seg = $segs[$index];
-                $baseUrl = '/'.$seg.$baseUrl;
+                $baseUrl = '/' . $seg . $baseUrl;
                 ++$index;
             } while ($last > $index && (false !== $pos = strpos($path, $baseUrl)) && 0 != $pos);
         }
@@ -1769,9 +1769,9 @@ class Request
             return $prefix;
         }
 
-        if ($baseUrl && false !== $prefix = $this->getUrlencodedPrefix($requestUri, rtrim(dirname($baseUrl), '/'.DIRECTORY_SEPARATOR).'/')) {
+        if ($baseUrl && false !== $prefix = $this->getUrlencodedPrefix($requestUri, rtrim(dirname($baseUrl), '/' . DIRECTORY_SEPARATOR) . '/')) {
             // directory portion of $baseUrl matches
-            return rtrim($prefix, '/'.DIRECTORY_SEPARATOR);
+            return rtrim($prefix, '/' . DIRECTORY_SEPARATOR);
         }
 
         $truncatedRequestUri = $requestUri;
@@ -1792,7 +1792,7 @@ class Request
             $baseUrl = substr($requestUri, 0, $pos + strlen($baseUrl));
         }
 
-        return rtrim($baseUrl, '/'.DIRECTORY_SEPARATOR);
+        return rtrim($baseUrl, '/' . DIRECTORY_SEPARATOR);
     }
 
     /**
@@ -1847,7 +1847,7 @@ class Request
             return $requestUri;
         }
 
-        return (string) $pathInfo;
+        return (string)$pathInfo;
     }
 
     /**

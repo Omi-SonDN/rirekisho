@@ -8,15 +8,16 @@
         <input type="hidden" id="id" name="id" value="{{ $key }}">
         <fieldset id="field-box">
             @can('Admin')
-            <ul>
-                <li style="">
-                    <span class="" id="">Note:  </span>
-                    <input class="" style="width: 90%;line-height: 28px;margin-top:10px;" id="{{$key}}" editable="Rirekisho" name="notes" value="{{$CV->notes}}">
+                <ul>
+                    <li style="">
+                        <span class="" id="">Note:  </span>
+                        <input class="" style="width: 90%;line-height: 28px;margin-top:10px;" id="{{$key}}"
+                               editable="Rirekisho" name="notes" value="{{$CV->notes}}">
                     <span class="success-status" id="s_notes_{{$key}}" style="display:none;">
                         <i class="fa fa-pencil-square-o"></i>
                     </span>
-                </li>
-            </ul>
+                    </li>
+                </ul>
             @endcan
             <label slide-header=true class="slide-header">
                 I. Thông tin cá nhân
@@ -90,14 +91,18 @@
                     <div class="float_left" style="width: 20%; margin-top:30px;">
                         <div class="float_left">
                             <label class="radio">
-                                <input type="radio" id="{{ $key }}" editable="Rirekisho" name="Gender" value="0" 
-                                <?php if (!$CV->Gender) { echo 'checked'; }?> ><i></i>Nữ
+                                <input type="radio" id="{{ $key }}" editable="Rirekisho" name="Gender" value="0"
+                                <?php if (!$CV->Gender) {
+                                    echo 'checked';
+                                }?> ><i></i>Nữ
                             </label>
                         </div>
                         <div class="float_right">
                             <label class="radio">
-                                <input type="radio" id="{{ $key }}" editable="Rirekisho" name="Gender" value="1" 
-                                <?php if ($CV->Gender) {echo 'checked'; }?>><i></i>Nam
+                                <input type="radio" id="{{ $key }}" editable="Rirekisho" name="Gender" value="1"
+                                <?php if ($CV->Gender) {
+                                    echo 'checked';
+                                }?>><i></i>Nam
                             </label>
                         </div>
                     </div>

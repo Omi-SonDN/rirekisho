@@ -41,58 +41,58 @@ class TranslationDataCollectorTest extends \PHPUnit_Framework_TestCase
     {
         $collectedMessages = array(
             array(
-                  'id' => 'foo',
-                  'translation' => 'foo (en)',
-                  'locale' => 'en',
-                  'domain' => 'messages',
-                  'state' => DataCollectorTranslator::MESSAGE_DEFINED,
+                'id' => 'foo',
+                'translation' => 'foo (en)',
+                'locale' => 'en',
+                'domain' => 'messages',
+                'state' => DataCollectorTranslator::MESSAGE_DEFINED,
             ),
             array(
-                  'id' => 'bar',
-                  'translation' => 'bar (fr)',
-                  'locale' => 'fr',
-                  'domain' => 'messages',
-                  'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
+                'id' => 'bar',
+                'translation' => 'bar (fr)',
+                'locale' => 'fr',
+                'domain' => 'messages',
+                'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
             ),
             array(
-                  'id' => 'choice',
-                  'translation' => 'choice',
-                  'locale' => 'en',
-                  'domain' => 'messages',
-                  'state' => DataCollectorTranslator::MESSAGE_MISSING,
+                'id' => 'choice',
+                'translation' => 'choice',
+                'locale' => 'en',
+                'domain' => 'messages',
+                'state' => DataCollectorTranslator::MESSAGE_MISSING,
             ),
             array(
-                  'id' => 'choice',
-                  'translation' => 'choice',
-                  'locale' => 'en',
-                  'domain' => 'messages',
-                  'state' => DataCollectorTranslator::MESSAGE_MISSING,
+                'id' => 'choice',
+                'translation' => 'choice',
+                'locale' => 'en',
+                'domain' => 'messages',
+                'state' => DataCollectorTranslator::MESSAGE_MISSING,
             ),
         );
         $expectedMessages = array(
             array(
-                  'id' => 'foo',
-                  'translation' => 'foo (en)',
-                  'locale' => 'en',
-                  'domain' => 'messages',
-                  'state' => DataCollectorTranslator::MESSAGE_DEFINED,
-                  'count' => 1,
+                'id' => 'foo',
+                'translation' => 'foo (en)',
+                'locale' => 'en',
+                'domain' => 'messages',
+                'state' => DataCollectorTranslator::MESSAGE_DEFINED,
+                'count' => 1,
             ),
             array(
-                  'id' => 'bar',
-                  'translation' => 'bar (fr)',
-                  'locale' => 'fr',
-                  'domain' => 'messages',
-                  'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
-                  'count' => 1,
+                'id' => 'bar',
+                'translation' => 'bar (fr)',
+                'locale' => 'fr',
+                'domain' => 'messages',
+                'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
+                'count' => 1,
             ),
             array(
-                  'id' => 'choice',
-                  'translation' => 'choice',
-                  'locale' => 'en',
-                  'domain' => 'messages',
-                  'state' => DataCollectorTranslator::MESSAGE_MISSING,
-                  'count' => 2,
+                'id' => 'choice',
+                'translation' => 'choice',
+                'locale' => 'en',
+                'domain' => 'messages',
+                'state' => DataCollectorTranslator::MESSAGE_MISSING,
+                'count' => 2,
             ),
         );
 
@@ -113,8 +113,7 @@ class TranslationDataCollectorTest extends \PHPUnit_Framework_TestCase
         $translator = $this
             ->getMockBuilder('Symfony\Component\Translation\DataCollectorTranslator')
             ->disableOriginalConstructor()
-            ->getMock()
-        ;
+            ->getMock();
 
         return $translator;
     }

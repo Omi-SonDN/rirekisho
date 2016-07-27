@@ -118,15 +118,14 @@ class UsesTest extends \PHPUnit_Framework_TestCase
     public function testFactoryMethod()
     {
         $descriptionFactory = m::mock(DescriptionFactory::class);
-        $resolver           = m::mock(FqsenResolver::class);
-        $context            = new Context('');
+        $resolver = m::mock(FqsenResolver::class);
+        $context = new Context('');
 
-        $fqsen       = new Fqsen('\DateTime');
+        $fqsen = new Fqsen('\DateTime');
         $description = new Description('My Description');
 
         $descriptionFactory
-            ->shouldReceive('create')->with('My Description', $context)->andReturn($description)
-        ;
+            ->shouldReceive('create')->with('My Description', $context)->andReturn($description);
         $resolver->shouldReceive('resolve')->with('DateTime', $context)->andReturn($fqsen);
 
         $fixture = Uses::create('DateTime My Description', $resolver, $descriptionFactory, $context);

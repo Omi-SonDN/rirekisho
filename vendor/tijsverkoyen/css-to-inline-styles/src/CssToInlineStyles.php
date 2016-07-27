@@ -102,7 +102,7 @@ class CssToInlineStyles
     public function convert($outputXHTML = false)
     {
         // redefine
-        $outputXHTML = (bool) $outputXHTML;
+        $outputXHTML = (bool)$outputXHTML;
 
         // validate
         if ($this->html == null) {
@@ -196,7 +196,7 @@ class CssToInlineStyles
                     // any styles defined before?
                     if ($stylesAttribute !== null) {
                         // get value for the styles attribute
-                        $definedStyles = (string) $stylesAttribute->value;
+                        $definedStyles = (string)$stylesAttribute->value;
 
                         // split into properties
                         $definedProperties = $this->splitIntoProperties($definedStyles);
@@ -208,7 +208,7 @@ class CssToInlineStyles
                             }
 
                             // split into chunks
-                            $chunks = (array) explode(':', trim($property), 2);
+                            $chunks = (array)explode(':', trim($property), 2);
 
                             // validate
                             if (!isset($chunks[1])) {
@@ -238,7 +238,7 @@ class CssToInlineStyles
 
                     // build chunks
                     foreach ($properties as $key => $values) {
-                        foreach ((array) $values as $value) {
+                        foreach ((array)$values as $value) {
                             $propertyChunks[] = $key . ': ' . $value . ';';
                         }
                     }
@@ -275,7 +275,7 @@ class CssToInlineStyles
                         }
 
                         // split into chunks
-                        $chunks = (array) explode(':', trim($property), 2);
+                        $chunks = (array)explode(':', trim($property), 2);
 
                         // validate
                         if (!isset($chunks[1])) {
@@ -293,7 +293,7 @@ class CssToInlineStyles
                     // any styles defined before?
                     if ($stylesAttribute !== null) {
                         // get value for the styles attribute
-                        $definedStyles = (string) $stylesAttribute->value;
+                        $definedStyles = (string)$stylesAttribute->value;
 
                         // split into properties
                         $definedProperties = $this->splitIntoProperties($definedStyles);
@@ -306,7 +306,7 @@ class CssToInlineStyles
                             }
 
                             // split into chunks
-                            $chunks = (array) explode(':', trim($property), 2);
+                            $chunks = (array)explode(':', trim($property), 2);
 
                             // validate
                             if (!isset($chunks[1])) {
@@ -328,7 +328,7 @@ class CssToInlineStyles
 
                     // build chunks
                     foreach ($properties as $key => $values) {
-                        foreach ((array) $values as $value) {
+                        foreach ((array)$values as $value) {
                             $propertyChunks[] = $key . ': ' . $value . ';';
                         }
                     }
@@ -389,8 +389,9 @@ class CssToInlineStyles
      * @param string $styles ex: 'color:blue;font-size:12px;'
      * @return array an array of strings containing css property ex: array('color:blue','font-size:12px')
      */
-    private function splitIntoProperties($styles) {
-        $properties = (array) explode(';', $styles);
+    private function splitIntoProperties($styles)
+    {
+        $properties = (array)explode(';', $styles);
 
         for ($i = 0; $i < count($properties); $i++) {
             // If next property begins with base64,
@@ -422,7 +423,7 @@ class CssToInlineStyles
     private function processCSS()
     {
         // init vars
-        $css = (string) $this->css;
+        $css = (string)$this->css;
         $cssRules = array();
 
         // remove newlines
@@ -442,7 +443,7 @@ class CssToInlineStyles
         }
 
         // rules are splitted by }
-        $rules = (array) explode('}', $css);
+        $rules = (array)explode('}', $css);
 
         // init var
         $i = 1;
@@ -464,7 +465,7 @@ class CssToInlineStyles
             $cssProperties = trim($chunks[1]);
 
             // split multiple selectors
-            $selectors = (array) explode(',', $selectors);
+            $selectors = (array)explode(',', $selectors);
 
             // loop selectors
             foreach ($selectors as $selector) {
@@ -521,7 +522,7 @@ class CssToInlineStyles
         // loop properties
         foreach ($properties as $property) {
             // split into chunks
-            $chunks = (array) explode(':', $property, 2);
+            $chunks = (array)explode(':', $property, 2);
 
             // validate
             if (!isset($chunks[1])) {
@@ -555,7 +556,7 @@ class CssToInlineStyles
      */
     public function setCleanup($on = true)
     {
-        $this->cleanup = (bool) $on;
+        $this->cleanup = (bool)$on;
     }
 
     /**
@@ -566,7 +567,7 @@ class CssToInlineStyles
      */
     public function setCSS($css)
     {
-        $this->css = (string) $css;
+        $this->css = (string)$css;
     }
 
     /**
@@ -579,7 +580,7 @@ class CssToInlineStyles
      */
     public function setEncoding($encoding)
     {
-        $this->encoding = (string) $encoding;
+        $this->encoding = (string)$encoding;
     }
 
     /**
@@ -590,7 +591,7 @@ class CssToInlineStyles
      */
     public function setHTML($html)
     {
-        $this->html = (string) $html;
+        $this->html = (string)$html;
     }
 
     /**
@@ -602,7 +603,7 @@ class CssToInlineStyles
      */
     public function setUseInlineStylesBlock($on = true)
     {
-        $this->useInlineStylesBlock = (bool) $on;
+        $this->useInlineStylesBlock = (bool)$on;
     }
 
     /**
@@ -614,7 +615,7 @@ class CssToInlineStyles
      */
     public function setStripOriginalStyleTags($on = true)
     {
-        $this->stripOriginalStyleTags = (bool) $on;
+        $this->stripOriginalStyleTags = (bool)$on;
     }
 
     /**
@@ -627,7 +628,7 @@ class CssToInlineStyles
      */
     public function setExcludeMediaQueries($on = true)
     {
-        $this->excludeMediaQueries = (bool) $on;
+        $this->excludeMediaQueries = (bool)$on;
     }
 
     /**

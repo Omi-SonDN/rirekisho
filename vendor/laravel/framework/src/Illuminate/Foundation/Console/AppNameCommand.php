@@ -48,8 +48,8 @@ class AppNameCommand extends Command
     /**
      * Create a new key generator command.
      *
-     * @param  \Illuminate\Foundation\Composer  $composer
-     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param  \Illuminate\Foundation\Composer $composer
+     * @param  \Illuminate\Filesystem\Filesystem $files
      * @return void
      */
     public function __construct(Composer $composer, Filesystem $files)
@@ -96,8 +96,8 @@ class AppNameCommand extends Command
     protected function setAppDirectoryNamespace()
     {
         $files = Finder::create()
-                            ->in($this->laravel['path'])
-                            ->name('*.php');
+            ->in($this->laravel['path'])
+            ->name('*.php');
 
         foreach ($files as $file) {
             $this->replaceNamespace($file->getRealPath());
@@ -107,19 +107,19 @@ class AppNameCommand extends Command
     /**
      * Replace the App namespace at the given path.
      *
-     * @param  string  $path
+     * @param  string $path
      * @return void
      */
     protected function replaceNamespace($path)
     {
         $search = [
-            'namespace '.$this->currentRoot.';',
-            $this->currentRoot.'\\',
+            'namespace ' . $this->currentRoot . ';',
+            $this->currentRoot . '\\',
         ];
 
         $replace = [
-            'namespace '.$this->argument('name').';',
-            $this->argument('name').'\\',
+            'namespace ' . $this->argument('name') . ';',
+            $this->argument('name') . '\\',
         ];
 
         $this->replaceIn($path, $search, $replace);
@@ -133,15 +133,15 @@ class AppNameCommand extends Command
     protected function setBootstrapNamespaces()
     {
         $search = [
-            $this->currentRoot.'\\Http',
-            $this->currentRoot.'\\Console',
-            $this->currentRoot.'\\Exceptions',
+            $this->currentRoot . '\\Http',
+            $this->currentRoot . '\\Console',
+            $this->currentRoot . '\\Exceptions',
         ];
 
         $replace = [
-            $this->argument('name').'\\Http',
-            $this->argument('name').'\\Console',
-            $this->argument('name').'\\Exceptions',
+            $this->argument('name') . '\\Http',
+            $this->argument('name') . '\\Console',
+            $this->argument('name') . '\\Exceptions',
         ];
 
         $this->replaceIn($this->getBootstrapPath(), $search, $replace);
@@ -155,7 +155,7 @@ class AppNameCommand extends Command
     protected function setComposerNamespace()
     {
         $this->replaceIn(
-            $this->getComposerPath(), str_replace('\\', '\\\\', $this->currentRoot).'\\\\', str_replace('\\', '\\\\', $this->argument('name')).'\\\\'
+            $this->getComposerPath(), str_replace('\\', '\\\\', $this->currentRoot) . '\\\\', str_replace('\\', '\\\\', $this->argument('name')) . '\\\\'
         );
     }
 
@@ -181,13 +181,13 @@ class AppNameCommand extends Command
     protected function setAppConfigNamespaces()
     {
         $search = [
-            $this->currentRoot.'\\Providers',
-            $this->currentRoot.'\\Http\\Controllers\\',
+            $this->currentRoot . '\\Providers',
+            $this->currentRoot . '\\Http\\Controllers\\',
         ];
 
         $replace = [
-            $this->argument('name').'\\Providers',
-            $this->argument('name').'\\Http\\Controllers\\',
+            $this->argument('name') . '\\Providers',
+            $this->argument('name') . '\\Http\\Controllers\\',
         ];
 
         $this->replaceIn($this->getConfigPath('app'), $search, $replace);
@@ -201,7 +201,7 @@ class AppNameCommand extends Command
     protected function setAuthConfigNamespace()
     {
         $this->replaceIn(
-            $this->getAuthConfigPath(), $this->currentRoot.'\\User', $this->argument('name').'\\User'
+            $this->getAuthConfigPath(), $this->currentRoot . '\\User', $this->argument('name') . '\\User'
         );
     }
 
@@ -213,7 +213,7 @@ class AppNameCommand extends Command
     protected function setServicesConfigNamespace()
     {
         $this->replaceIn(
-            $this->getServicesConfigPath(), $this->currentRoot.'\\User', $this->argument('name').'\\User'
+            $this->getServicesConfigPath(), $this->currentRoot . '\\User', $this->argument('name') . '\\User'
         );
     }
 
@@ -237,16 +237,16 @@ class AppNameCommand extends Command
     protected function setDatabaseFactoryNamespaces()
     {
         $this->replaceIn(
-            $this->laravel->databasePath().'/factories/ModelFactory.php', $this->currentRoot, $this->argument('name')
+            $this->laravel->databasePath() . '/factories/ModelFactory.php', $this->currentRoot, $this->argument('name')
         );
     }
 
     /**
      * Replace the given string in the given file.
      *
-     * @param  string  $path
-     * @param  string|array  $search
-     * @param  string|array  $replace
+     * @param  string $path
+     * @param  string|array $search
+     * @param  string|array $replace
      * @return void
      */
     protected function replaceIn($path, $search, $replace)
@@ -261,7 +261,7 @@ class AppNameCommand extends Command
      */
     protected function getBootstrapPath()
     {
-        return $this->laravel->basePath().'/bootstrap/app.php';
+        return $this->laravel->basePath() . '/bootstrap/app.php';
     }
 
     /**
@@ -271,18 +271,18 @@ class AppNameCommand extends Command
      */
     protected function getComposerPath()
     {
-        return $this->laravel->basePath().'/composer.json';
+        return $this->laravel->basePath() . '/composer.json';
     }
 
     /**
      * Get the path to the given configuration file.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return string
      */
     protected function getConfigPath($name)
     {
-        return $this->laravel['path.config'].'/'.$name.'.php';
+        return $this->laravel['path.config'] . '/' . $name . '.php';
     }
 
     /**
@@ -312,7 +312,7 @@ class AppNameCommand extends Command
      */
     protected function getPhpSpecConfigPath()
     {
-        return $this->laravel->basePath().'/phpspec.yml';
+        return $this->laravel->basePath() . '/phpspec.yml';
     }
 
     /**

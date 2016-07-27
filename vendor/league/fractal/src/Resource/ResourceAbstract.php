@@ -44,9 +44,9 @@ abstract class ResourceAbstract implements ResourceInterface
     /**
      * Create a new resource instance.
      *
-     * @param mixed           $data
+     * @param mixed $data
      * @param callable|string $transformer
-     * @param string          $resourceKey
+     * @param string $resourceKey
      *
      * @return void
      */
@@ -75,9 +75,9 @@ abstract class ResourceAbstract implements ResourceInterface
      */
     public function setData($data)
     {
-         $this->data = $data;
+        $this->data = $data;
 
-         return $this;
+        return $this;
     }
 
     /**
@@ -153,7 +153,7 @@ abstract class ResourceAbstract implements ResourceInterface
      * Set the meta data.
      *
      * @param string $metaKey
-     * @param mixed  $metaValue
+     * @param mixed $metaValue
      *
      * @return $this
      */

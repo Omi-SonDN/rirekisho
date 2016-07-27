@@ -2,7 +2,8 @@
 
 include_once 'classes/CsvTestImport.php';
 
-class CsvExcelFileTest extends TestCase {
+class CsvExcelFileTest extends TestCase
+{
 
 
     public function testInit()

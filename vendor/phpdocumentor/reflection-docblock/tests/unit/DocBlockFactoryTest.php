@@ -50,7 +50,7 @@ class DocBlockFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $fixture = new DocBlockFactory(m::mock(DescriptionFactory::class), m::mock(TagFactory::class));
 
-        $docBlock       = '/** This is a DocBlock */';
+        $docBlock = '/** This is a DocBlock */';
         $classReflector = m::mock(\ReflectionClass::class);
         $classReflector->shouldReceive('getDocComment')->andReturn($docBlock);
         $docblock = $fixture->create($classReflector);
@@ -111,7 +111,7 @@ class DocBlockFactoryTest extends \PHPUnit_Framework_TestCase
     public function testSummaryAndDescriptionAreSeparated($given, $summary, $description)
     {
         $tagFactory = m::mock(TagFactory::class);
-        $fixture    = new DocBlockFactory(new DescriptionFactory($tagFactory), $tagFactory);
+        $fixture = new DocBlockFactory(new DescriptionFactory($tagFactory), $tagFactory);
 
         $docblock = $fixture->create($given);
 
@@ -128,7 +128,7 @@ class DocBlockFactoryTest extends \PHPUnit_Framework_TestCase
     public function testDescriptionsRetainFormatting()
     {
         $tagFactory = m::mock(TagFactory::class);
-        $fixture    = new DocBlockFactory(new DescriptionFactory($tagFactory), $tagFactory);
+        $fixture = new DocBlockFactory(new DescriptionFactory($tagFactory), $tagFactory);
 
         $given = <<<DOCBLOCK
 /**
@@ -165,7 +165,7 @@ DESCRIPTION;
   multiline description.
 TAG;
 
-        $tag        = m::mock(Tag::class);
+        $tag = m::mock(Tag::class);
         $tagFactory = m::mock(TagFactory::class);
         $tagFactory->shouldReceive('create')->with($tagString, m::type(Context::class))->andReturn($tag);
 

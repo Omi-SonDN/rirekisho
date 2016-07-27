@@ -111,7 +111,8 @@ class SymfonyRequestCollector extends DataCollector implements DataCollectorInte
 
         foreach ($data['request_server'] as $key => $value) {
             if (str_is('*_KEY', $key) || str_is('*_PASSWORD', $key)
-                    || str_is('*_SECRET', $key) || str_is('*_PW', $key)) {
+                || str_is('*_SECRET', $key) || str_is('*_PW', $key)
+            ) {
                 $data['request_server'][$key] = '******';
             }
         }
@@ -139,7 +140,7 @@ class SymfonyRequestCollector extends DataCollector implements DataCollectorInte
 
         if (0 !== $expires) {
             if (is_numeric($expires)) {
-                $expires = (int) $expires;
+                $expires = (int)$expires;
             } elseif ($expires instanceof \DateTime) {
                 $expires = $expires->getTimestamp();
             } else {

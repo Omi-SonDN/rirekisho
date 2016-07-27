@@ -66,7 +66,7 @@ abstract class AbstractDecoder
         }
 
         throw new \Intervention\Image\Exception\NotReadableException(
-            "Unable to init from given url (".$url.")."
+            "Unable to init from given url (" . $url . ")."
         );
     }
 
@@ -166,7 +166,7 @@ abstract class AbstractDecoder
      */
     public function isUrl()
     {
-        return (bool) filter_var($this->data, FILTER_VALIDATE_URL);
+        return (bool)filter_var($this->data, FILTER_VALIDATE_URL);
     }
 
     /**
@@ -310,6 +310,6 @@ abstract class AbstractDecoder
      */
     public function __toString()
     {
-        return (string) $this->data;
+        return (string)$this->data;
     }
 }

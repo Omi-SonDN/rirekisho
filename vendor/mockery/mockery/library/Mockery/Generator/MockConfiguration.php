@@ -139,7 +139,8 @@ class MockConfiguration
          */
         if ($this->getTargetClass()
             && $this->getTargetClass()->implementsInterface("Serializable")
-            && $this->getTargetClass()->hasInternalAncestor()) {
+            && $this->getTargetClass()->hasInternalAncestor()
+        ) {
             $methods = array_filter($methods, function ($method) {
                 return $method->getName() !== "unserialize";
             });

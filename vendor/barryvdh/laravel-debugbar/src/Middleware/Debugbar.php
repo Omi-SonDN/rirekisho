@@ -38,8 +38,8 @@ class Debugbar
     /**
      * Handle an incoming request.
      *
-     * @param  Request  $request
-     * @param  Closure  $next
+     * @param  Request $request
+     * @param  Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -70,7 +70,7 @@ class Debugbar
      */
     protected function handleException($passable, Exception $e)
     {
-        if (! $this->container->bound(ExceptionHandler::class) || ! $passable instanceof Request) {
+        if (!$this->container->bound(ExceptionHandler::class) || !$passable instanceof Request) {
             throw $e;
         }
 

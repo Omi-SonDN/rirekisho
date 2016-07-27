@@ -78,9 +78,9 @@ namespace phpDocumentor\Reflection\Types {
         {
             $fixture = new ContextFactory();
             $expected = [
-                'm'               => 'Mockery',
-                'DocBlock'        => 'phpDocumentor\Reflection\DocBlock',
-                'Tag'             => 'phpDocumentor\Reflection\DocBlock\Tag',
+                'm' => 'Mockery',
+                'DocBlock' => 'phpDocumentor\Reflection\DocBlock',
+                'Tag' => 'phpDocumentor\Reflection\DocBlock\Tag',
                 'phpDocumentor' => 'phpDocumentor',
                 'ReflectionClass' => 'ReflectionClass'
             ];
@@ -173,7 +173,7 @@ class Bar
 {
 }
 PHP
-);
+            );
             $fixture = new ContextFactory();
             $context = $fixture->createFromReflector(new \ReflectionClass('Foo\Bar'));
 
@@ -183,6 +183,7 @@ PHP
 }
 
 namespace phpDocumentor\Reflection\Types\Mock {
+
     // the following import should not show in the tests above
     use phpDocumentor\Reflection\DocBlock\Description;
 }

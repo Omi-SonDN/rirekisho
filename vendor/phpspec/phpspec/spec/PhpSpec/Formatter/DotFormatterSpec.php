@@ -30,7 +30,8 @@ class DotFormatterSpec extends ObjectBehavior
         ExampleEvent $event,
         IO $io,
         StatisticsCollector $stats
-    ) {
+    )
+    {
         $event->getResult()->willReturn(ExampleEvent::PASSED);
 
         $this->afterExample($event);
@@ -42,7 +43,8 @@ class DotFormatterSpec extends ObjectBehavior
         ExampleEvent $event,
         IO $io,
         StatisticsCollector $stats
-    ) {
+    )
+    {
         $event->getResult()->willReturn(ExampleEvent::PENDING);
 
         $this->afterExample($event);
@@ -54,7 +56,8 @@ class DotFormatterSpec extends ObjectBehavior
         ExampleEvent $event,
         IO $io,
         StatisticsCollector $stats
-    ) {
+    )
+    {
         $event->getResult()->willReturn(ExampleEvent::SKIPPED);
 
         $this->afterExample($event);
@@ -66,7 +69,8 @@ class DotFormatterSpec extends ObjectBehavior
         ExampleEvent $event,
         IO $io,
         StatisticsCollector $stats
-    ) {
+    )
+    {
         $event->getResult()->willReturn(ExampleEvent::FAILED);
 
         $this->afterExample($event);
@@ -78,7 +82,8 @@ class DotFormatterSpec extends ObjectBehavior
         ExampleEvent $event,
         IO $io,
         StatisticsCollector $stats
-    ) {
+    )
+    {
         $event->getResult()->willReturn(ExampleEvent::BROKEN);
 
         $this->afterExample($event);
@@ -91,7 +96,8 @@ class DotFormatterSpec extends ObjectBehavior
         SuiteEvent $suiteEvent,
         IO $io,
         StatisticsCollector $stats
-    ) {
+    )
+    {
         $exampleEvent->getResult()->willReturn(ExampleEvent::PASSED);
         $suiteEvent->getSuite()->willReturn(range(1, 100));
         $stats->getEventsCount()->willReturn(50);
@@ -110,7 +116,8 @@ class DotFormatterSpec extends ObjectBehavior
         SpecificationNode $specification,
         ExampleNode $example,
         ReflectionFunctionAbstract $reflectionFunction
-    ) {
+    )
+    {
         $reflectionFunction->getStartLine()->willReturn(37);
         $example->getFunctionReflection()->willReturn($reflectionFunction);
         $example->getTitle()->willReturn('it tests something');
@@ -126,11 +133,11 @@ class DotFormatterSpec extends ObjectBehavior
         $stats->getTotalSpecs()->willReturn(1);
 
         $stats->getCountsHash()->willReturn(array(
-            'passed'  => 0,
+            'passed' => 0,
             'pending' => 1,
             'skipped' => 0,
-            'failed'  => 0,
-            'broken'  => 0,
+            'failed' => 0,
+            'broken' => 0,
         ));
 
         $this->afterSuite($event);
@@ -143,7 +150,8 @@ class DotFormatterSpec extends ObjectBehavior
         SuiteEvent $event,
         IO $io,
         StatisticsCollector $stats
-    ) {
+    )
+    {
         $stats->getEventsCount()->willReturn(1);
         $stats->getFailedEvents()->willReturn(array());
         $stats->getBrokenEvents()->willReturn(array());
@@ -153,11 +161,11 @@ class DotFormatterSpec extends ObjectBehavior
         $event->getTime()->willReturn(12.345);
 
         $stats->getCountsHash()->willReturn(array(
-            'passed'  => 1,
+            'passed' => 1,
             'pending' => 0,
             'skipped' => 0,
-            'failed'  => 2,
-            'broken'  => 0,
+            'failed' => 2,
+            'broken' => 0,
         ));
 
         $this->afterSuite($event);

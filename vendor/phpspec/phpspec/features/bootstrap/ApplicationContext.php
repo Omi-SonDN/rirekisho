@@ -97,7 +97,7 @@ class ApplicationContext implements Context, MatchersProviderInterface
      */
     public function iRunPhpspec($formatter = null, $option = null, $interactive = null, $spec = null)
     {
-        $arguments = array (
+        $arguments = array(
             'command' => 'run',
             'spec' => $spec
         );
@@ -118,15 +118,15 @@ class ApplicationContext implements Context, MatchersProviderInterface
      * @When I run phpspec and answer :answer when asked if I want to generate the code
      * @When I run phpspec with the option :option and (I) answer :answer when asked if I want to generate the code
      */
-    public function iRunPhpspecAndAnswerWhenAskedIfIWantToGenerateTheCode($answer, $option=null)
+    public function iRunPhpspecAndAnswerWhenAskedIfIWantToGenerateTheCode($answer, $option = null)
     {
-        $arguments = array (
+        $arguments = array(
             'command' => 'run'
         );
 
         $this->addOptionToArguments($option, $arguments);
 
-        $this->prompter->setAnswer($answer=='y');
+        $this->prompter->setAnswer($answer == 'y');
 
         $this->lastExitCode = $this->tester->run($arguments, array('interactive' => true));
     }
@@ -136,12 +136,12 @@ class ApplicationContext implements Context, MatchersProviderInterface
      */
     public function iRunPhpspecAndAnswerToBothQuestions($answer)
     {
-        $arguments = array (
+        $arguments = array(
             'command' => 'run'
         );
 
-        $this->prompter->setAnswer($answer=='y');
-        $this->prompter->setAnswer($answer=='y');
+        $this->prompter->setAnswer($answer == 'y');
+        $this->prompter->setAnswer($answer == 'y');
 
         $this->lastExitCode = $this->tester->run($arguments, array('interactive' => true));
     }
@@ -278,12 +278,12 @@ class ApplicationContext implements Context, MatchersProviderInterface
      */
     public function iRunPhpspecWithConfigAndAnswerIfIWantToGenerateTheCode($config, $answer)
     {
-        $arguments = array (
+        $arguments = array(
             'command' => 'run',
             '--config' => $config
         );
 
-        $this->prompter->setAnswer($answer=='y');
+        $this->prompter->setAnswer($answer == 'y');
 
         $this->lastExitCode = $this->tester->run($arguments, array('interactive' => true));
     }
@@ -306,7 +306,7 @@ class ApplicationContext implements Context, MatchersProviderInterface
      */
     public function iRunPhpspecWithTheSpec($spec)
     {
-        $arguments = array (
+        $arguments = array(
             'command' => 'run',
             1 => $spec
         );
@@ -319,7 +319,7 @@ class ApplicationContext implements Context, MatchersProviderInterface
      */
     public function iRunPhpspecWithTheSpecAndTheConfig($spec, $config)
     {
-        $arguments = array (
+        $arguments = array(
             'command' => 'run',
             1 => $spec,
             '--config' => $config

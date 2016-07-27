@@ -44,7 +44,7 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Add a Route instance to the collection.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param  \Illuminate\Routing\Route $route
      * @return \Illuminate\Routing\Route
      */
     public function add(Route $route)
@@ -59,24 +59,24 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Add the given route to the arrays of routes.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param  \Illuminate\Routing\Route $route
      * @return void
      */
     protected function addToCollections($route)
     {
-        $domainAndUri = $route->domain().$route->getUri();
+        $domainAndUri = $route->domain() . $route->getUri();
 
         foreach ($route->methods() as $method) {
             $this->routes[$method][$domainAndUri] = $route;
         }
 
-        $this->allRoutes[$method.$domainAndUri] = $route;
+        $this->allRoutes[$method . $domainAndUri] = $route;
     }
 
     /**
      * Add the route to any look-up tables if necessary.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param  \Illuminate\Routing\Route $route
      * @return void
      */
     protected function addLookups($route)
@@ -119,8 +119,8 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Add a route to the controller action dictionary.
      *
-     * @param  array  $action
-     * @param  \Illuminate\Routing\Route  $route
+     * @param  array $action
+     * @param  \Illuminate\Routing\Route $route
      * @return void
      */
     protected function addToActionList($action, $route)
@@ -131,7 +131,7 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Find the first route matching a given request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Routing\Route
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
@@ -145,7 +145,7 @@ class RouteCollection implements Countable, IteratorAggregate
         // by the consumer. Otherwise we will check for routes with another verb.
         $route = $this->check($routes, $request);
 
-        if (! is_null($route)) {
+        if (!is_null($route)) {
             return $route->bind($request);
         }
 
@@ -164,7 +164,7 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Determine if any routes match on another HTTP verb.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     protected function checkForAlternateVerbs($request)
@@ -177,7 +177,7 @@ class RouteCollection implements Countable, IteratorAggregate
         $others = [];
 
         foreach ($methods as $method) {
-            if (! is_null($this->check($this->get($method), $request, false))) {
+            if (!is_null($this->check($this->get($method), $request, false))) {
                 $others[] = $method;
             }
         }
@@ -188,8 +188,8 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Get a route (if necessary) that responds when other available methods are present.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  array  $methods
+     * @param  \Illuminate\Http\Request $request
+     * @param  array $methods
      * @return \Illuminate\Routing\Route
      *
      * @throws \Symfony\Component\Routing\Exception\MethodNotAllowedHttpException
@@ -208,7 +208,7 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Throw a method not allowed HTTP exception.
      *
-     * @param  array  $others
+     * @param  array $others
      * @return void
      *
      * @throws \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
@@ -221,9 +221,9 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Determine if a route in the array matches the request.
      *
-     * @param  array  $routes
-     * @param  \Illuminate\http\Request  $request
-     * @param  bool  $includingMethod
+     * @param  array $routes
+     * @param  \Illuminate\http\Request $request
+     * @param  bool $includingMethod
      * @return \Illuminate\Routing\Route|null
      */
     protected function check(array $routes, $request, $includingMethod = true)
@@ -236,7 +236,7 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Get all of the routes in the collection.
      *
-     * @param  string|null  $method
+     * @param  string|null $method
      * @return array
      */
     protected function get($method = null)
@@ -251,18 +251,18 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Determine if the route collection contains a given named route.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return bool
      */
     public function hasNamedRoute($name)
     {
-        return ! is_null($this->getByName($name));
+        return !is_null($this->getByName($name));
     }
 
     /**
      * Get a route instance by its name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return \Illuminate\Routing\Route|null
      */
     public function getByName($name)
@@ -273,7 +273,7 @@ class RouteCollection implements Countable, IteratorAggregate
     /**
      * Get a route instance by its controller action.
      *
-     * @param  string  $action
+     * @param  string $action
      * @return \Illuminate\Routing\Route|null
      */
     public function getByAction($action)

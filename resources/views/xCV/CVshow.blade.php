@@ -162,7 +162,7 @@
                                 </tr>
                             @else
                                 @foreach ($School as $Record)
-                                    <?php $r_id = $Record ; ?>
+                                    <?php $r_id = $Record; ?>
 
                                     <tr>
                                         <th><h4>{{$Record->Jdate}}</h4></th>
@@ -192,7 +192,7 @@
                                 </tr>
                             @else
                                 @foreach ($Cert as $Record)
-                                    <?php $r_id = $Record ; ?>
+                                    <?php $r_id = $Record; ?>
 
                                     <tr>
                                         <th><h4>{{$Record->Jdate}}</h4></th>
@@ -221,7 +221,7 @@
                                 </tr>
                             @else
                                 @foreach ($Work as $Record)
-                                    <?php $r_id = $Record ; ?>
+                                    <?php $r_id = $Record; ?>
 
                                     <tr>
                                         <th><h4>{{$Record->Jdate}}</h4></th>
@@ -278,7 +278,7 @@
                     <li id="S-skill">
                         <table>
                             <tr>
-                                <th colspan="2" ><h2 style="text-align: left;">Programing language</h2></th>
+                                <th colspan="2"><h2 style="text-align: left;">Programing language</h2></th>
                             </tr>
                             <?php
                             $Skill = $skills->filter(function ($item) {

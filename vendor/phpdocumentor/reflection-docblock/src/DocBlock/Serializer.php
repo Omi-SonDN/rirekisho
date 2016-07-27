@@ -36,8 +36,8 @@ class Serializer
      * Create a Serializer instance.
      *
      * @param int $indent The number of times the indent string is repeated.
-     * @param string   $indentString    The string to indent the comment with.
-     * @param bool     $indentFirstLine Whether to indent the first line.
+     * @param string $indentString The string to indent the comment with.
+     * @param bool $indentFirstLine Whether to indent the first line.
      * @param int|null $lineLength The max length of a line or NULL to disable line wrapping.
      */
     public function __construct($indent = 0, $indentString = ' ', $indentFirstLine = true, $lineLength = null)
@@ -129,7 +129,7 @@ class Serializer
     {
         foreach ($docblock->getTags() as $tag) {
             $formatter = new DocBlock\Tags\Formatter\PassthroughFormatter();
-            $tagText   = $formatter->format($tag);
+            $tagText = $formatter->format($tag);
             if ($wrapLength !== null) {
                 $tagText = wordwrap($tagText, $wrapLength);
             }

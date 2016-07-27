@@ -25,8 +25,8 @@ class InterpretingDocBlocksTest extends \PHPUnit_Framework_TestCase
     public function testInterpretingASimpleDocBlock()
     {
         /**
-         * @var DocBlock    $docblock
-         * @var string      $summary
+         * @var DocBlock $docblock
+         * @var string $summary
          * @var Description $description
          */
         include(__DIR__ . '/../../examples/01-interpreting-a-simple-docblock.php');
@@ -49,9 +49,9 @@ DESCRIPTION;
     {
         /**
          * @var DocBlock $docblock
-         * @var boolean  $hasSeeTag
-         * @var Tag[]    $tags
-         * @var See[]    $seeTags
+         * @var boolean $hasSeeTag
+         * @var Tag[] $tags
+         * @var See[] $seeTags
          */
         include(__DIR__ . '/../../examples/02-interpreting-tags.php');
 
@@ -70,11 +70,11 @@ DESCRIPTION;
     public function testDescriptionsCanEscapeAtSignsAndClosingBraces()
     {
         /**
-         * @var string      $docComment
-         * @var DocBlock    $docblock
+         * @var string $docComment
+         * @var DocBlock $docblock
          * @var Description $description
-         * @var string      $receivedDocComment
-         * @var string      $foundDescription
+         * @var string $receivedDocComment
+         * @var string $foundDescription
          */
 
         include(__DIR__ . '/../../examples/playing-with-descriptions/02-escaping.php');
@@ -91,7 +91,6 @@ Do note that an {@internal inline tag that has an opening brace ({) does not bre
 DESCRIPTION
             ,
             $foundDescription
-        )
-        ;
+        );
     }
 }

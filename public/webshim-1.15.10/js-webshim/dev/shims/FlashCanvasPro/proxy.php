@@ -32,7 +32,8 @@
  * @link       http://code.google.com/p/flashcanvas/
  */
 
-function FCgetHostName() {
+function FCgetHostName()
+{
     if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
         return $_SERVER['HTTP_X_FORWARDED_HOST'];
     } else if (isset($_SERVER['HTTP_HOST'])) {
@@ -73,9 +74,9 @@ if (!preg_match('#^https?://#', $_GET['url'])) {
 }
 
 // Percent-encode special characters in the URL
-$search  = array(  '%',   '#',   ' ');
+$search = array('%', '#', ' ');
 $replace = array('%25', '%23', '%20');
-$url     = str_replace($search, $replace, $_GET['url']);
+$url = str_replace($search, $replace, $_GET['url']);
 
 // Disable compression
 header('Content-Encoding: none');

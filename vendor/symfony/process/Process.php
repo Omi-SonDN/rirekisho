@@ -129,12 +129,12 @@ class Process
     /**
      * Constructor.
      *
-     * @param string         $commandline The command line to run
-     * @param string|null    $cwd         The working directory or null to use the working dir of the current PHP process
-     * @param array|null     $env         The environment variables or null to use the same environment as the current PHP process
-     * @param string|null    $input       The input
-     * @param int|float|null $timeout     The timeout in seconds or null to disable
-     * @param array          $options     An array of options for proc_open
+     * @param string $commandline The command line to run
+     * @param string|null $cwd The working directory or null to use the working dir of the current PHP process
+     * @param array|null $env The environment variables or null to use the same environment as the current PHP process
+     * @param string|null $input The input
+     * @param int|float|null $timeout The timeout in seconds or null to disable
+     * @param array $options An array of options for proc_open
      *
      * @throws RuntimeException When proc_open is not installed
      */
@@ -265,9 +265,9 @@ class Process
         $commandline = $this->commandline;
 
         if ('\\' === DIRECTORY_SEPARATOR && $this->enhanceWindowsCompatibility) {
-            $commandline = 'cmd /V:ON /E:ON /D /C "('.$commandline.')';
+            $commandline = 'cmd /V:ON /E:ON /D /C "(' . $commandline . ')';
             foreach ($this->processPipes->getFiles() as $offset => $filename) {
-                $commandline .= ' '.$offset.'>'.ProcessUtils::escapeArgument($filename);
+                $commandline .= ' ' . $offset . '>' . ProcessUtils::escapeArgument($filename);
             }
             $commandline .= '"';
 
@@ -279,7 +279,7 @@ class Process
             $descriptors[3] = array('pipe', 'w');
 
             // See https://unix.stackexchange.com/questions/71205/background-process-pipe-input
-            $commandline = '{ ('.$this->commandline.') <&3 3<&- 3>/dev/null & } 3<&0;';
+            $commandline = '{ (' . $this->commandline . ') <&3 3<&- 3>/dev/null & } 3<&0;';
             $commandline .= 'pid=$!; echo $pid >&3; wait $pid; code=$?; echo $code >&3; exit $code';
 
             // Workaround for the bug, when PTS functionality is enabled.
@@ -295,7 +295,7 @@ class Process
         $this->status = self::STATUS_STARTED;
 
         if (isset($descriptors[3])) {
-            $this->fallbackStatus['pid'] = (int) fgets($this->processPipes->pipes[3]);
+            $this->fallbackStatus['pid'] = (int)fgets($this->processPipes->pipes[3]);
         }
 
         if ($this->tty) {
@@ -747,7 +747,7 @@ class Process
      * Stops the process.
      *
      * @param int|float $timeout The timeout in seconds
-     * @param int       $signal  A POSIX signal to send in case the process has not stop at timeout, default is SIGKILL (9)
+     * @param int $signal A POSIX signal to send in case the process has not stop at timeout, default is SIGKILL (9)
      *
      * @return int The exit-code of the process
      */
@@ -915,7 +915,7 @@ class Process
             throw new RuntimeException('TTY mode requires /dev/tty to be readable.');
         }
 
-        $this->tty = (bool) $tty;
+        $this->tty = (bool)$tty;
 
         return $this;
     }
@@ -939,7 +939,7 @@ class Process
      */
     public function setPty($bool)
     {
-        $this->pty = (bool) $bool;
+        $this->pty = (bool)$bool;
 
         return $this;
     }
@@ -1016,7 +1016,7 @@ class Process
 
         $this->env = array();
         foreach ($env as $key => $value) {
-            $this->env[$key] = (string) $value;
+            $this->env[$key] = (string)$value;
         }
 
         return $this;
@@ -1033,7 +1033,7 @@ class Process
      */
     public function getStdin()
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.5 and will be removed in 3.0. Use the getInput() method instead.', E_USER_DEPRECATED);
+        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.5 and will be removed in 3.0. Use the getInput() method instead.', E_USER_DEPRECATED);
 
         return $this->getInput();
     }
@@ -1063,7 +1063,7 @@ class Process
      */
     public function setStdin($stdin)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.5 and will be removed in 3.0. Use the setInput() method instead.', E_USER_DEPRECATED);
+        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.5 and will be removed in 3.0. Use the setInput() method instead.', E_USER_DEPRECATED);
 
         return $this->setInput($stdin);
     }
@@ -1137,7 +1137,7 @@ class Process
      */
     public function setEnhanceWindowsCompatibility($enhance)
     {
-        $this->enhanceWindowsCompatibility = (bool) $enhance;
+        $this->enhanceWindowsCompatibility = (bool)$enhance;
 
         return $this;
     }
@@ -1165,7 +1165,7 @@ class Process
      */
     public function setEnhanceSigchildCompatibility($enhance)
     {
-        $this->enhanceSigchildCompatibility = (bool) $enhance;
+        $this->enhanceSigchildCompatibility = (bool)$enhance;
 
         return $this;
     }
@@ -1214,7 +1214,7 @@ class Process
             return $result = false;
         }
 
-        return $result = (bool) @proc_open('echo 1', array(array('pty'), array('pty'), array('pty')), $pipes);
+        return $result = (bool)@proc_open('echo 1', array(array('pty'), array('pty'), array('pty')), $pipes);
     }
 
     /**
@@ -1337,7 +1337,7 @@ class Process
      */
     private function validateTimeout($timeout)
     {
-        $timeout = (float) $timeout;
+        $timeout = (float)$timeout;
 
         if (0.0 === $timeout) {
             $timeout = null;
@@ -1352,7 +1352,7 @@ class Process
      * Reads pipes, executes callback.
      *
      * @param bool $blocking Whether to use blocking calls or not.
-     * @param bool $close    Whether to close file handles or not.
+     * @param bool $close Whether to close file handles or not.
      */
     private function readPipes($blocking, $close)
     {
@@ -1363,7 +1363,7 @@ class Process
             if (3 !== $type) {
                 $callback($type === self::STDOUT ? self::OUT : self::ERR, $data);
             } elseif (!isset($this->fallbackStatus['signaled'])) {
-                $this->fallbackStatus['exitcode'] = (int) $data;
+                $this->fallbackStatus['exitcode'] = (int)$data;
             }
         }
     }
@@ -1410,8 +1410,8 @@ class Process
         $this->exitcode = null;
         $this->fallbackStatus = array();
         $this->processInformation = null;
-        $this->stdout = fopen('php://temp/maxmemory:'.(1024 * 1024), 'wb+');
-        $this->stderr = fopen('php://temp/maxmemory:'.(1024 * 1024), 'wb+');
+        $this->stdout = fopen('php://temp/maxmemory:' . (1024 * 1024), 'wb+');
+        $this->stderr = fopen('php://temp/maxmemory:' . (1024 * 1024), 'wb+');
         $this->process = null;
         $this->latestSignal = null;
         $this->status = self::STATUS_READY;
@@ -1422,7 +1422,7 @@ class Process
     /**
      * Sends a POSIX signal to the process.
      *
-     * @param int  $signal         A valid POSIX signal (see http://www.php.net/manual/en/pcntl.constants.php)
+     * @param int $signal A valid POSIX signal (see http://www.php.net/manual/en/pcntl.constants.php)
      * @param bool $throwException Whether to throw exception in case signal failed
      *
      * @return bool True if the signal was sent successfully, false otherwise
@@ -1467,7 +1467,7 @@ class Process
             }
         }
 
-        $this->latestSignal = (int) $signal;
+        $this->latestSignal = (int)$signal;
         $this->fallbackStatus['signaled'] = true;
         $this->fallbackStatus['exitcode'] = -1;
         $this->fallbackStatus['termsig'] = $this->latestSignal;

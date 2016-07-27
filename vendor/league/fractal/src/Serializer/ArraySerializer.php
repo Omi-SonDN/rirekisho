@@ -21,7 +21,7 @@ class ArraySerializer extends SerializerAbstract
      * Serialize a collection.
      *
      * @param string $resourceKey
-     * @param array  $data
+     * @param array $data
      *
      * @return array
      */
@@ -34,7 +34,7 @@ class ArraySerializer extends SerializerAbstract
      * Serialize an item.
      *
      * @param string $resourceKey
-     * @param array  $data
+     * @param array $data
      *
      * @return array
      */
@@ -47,7 +47,7 @@ class ArraySerializer extends SerializerAbstract
      * Serialize the included data.
      *
      * @param ResourceInterface $resource
-     * @param array             $data
+     * @param array $data
      *
      * @return array
      */
@@ -81,13 +81,13 @@ class ArraySerializer extends SerializerAbstract
      */
     public function paginator(PaginatorInterface $paginator)
     {
-        $currentPage = (int) $paginator->getCurrentPage();
-        $lastPage = (int) $paginator->getLastPage();
+        $currentPage = (int)$paginator->getCurrentPage();
+        $lastPage = (int)$paginator->getLastPage();
 
         $pagination = [
-            'total' => (int) $paginator->getTotal(),
-            'count' => (int) $paginator->getCount(),
-            'per_page' => (int) $paginator->getPerPage(),
+            'total' => (int)$paginator->getTotal(),
+            'count' => (int)$paginator->getCount(),
+            'per_page' => (int)$paginator->getPerPage(),
             'current_page' => $currentPage,
             'total_pages' => $lastPage,
         ];
@@ -118,7 +118,7 @@ class ArraySerializer extends SerializerAbstract
             'current' => $cursor->getCurrent(),
             'prev' => $cursor->getPrev(),
             'next' => $cursor->getNext(),
-            'count' => (int) $cursor->getCount(),
+            'count' => (int)$cursor->getCount(),
         ];
 
         return ['cursor' => $cursor];

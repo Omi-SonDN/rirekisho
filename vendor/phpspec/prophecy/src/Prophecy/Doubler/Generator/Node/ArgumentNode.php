@@ -21,9 +21,9 @@ class ArgumentNode
     private $name;
     private $typeHint;
     private $default;
-    private $optional    = false;
+    private $optional = false;
     private $byReference = false;
-    private $isVariadic  = false;
+    private $isVariadic = false;
 
     /**
      * @param string $name
@@ -61,7 +61,7 @@ class ArgumentNode
     public function setDefault($default = null)
     {
         $this->optional = true;
-        $this->default  = $default;
+        $this->default = $default;
     }
 
     public function isOptional()

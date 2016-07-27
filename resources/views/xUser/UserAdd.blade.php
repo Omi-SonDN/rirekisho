@@ -2,7 +2,8 @@
 <title>Thêm thông tin người dùng</title>
 
 @section('content')
-    <form action="{{action('UsersController@postAddUser')}}" method="post" class="my-forms" id="profile-forms" enctype="multipart/form-data">
+    <form action="{{action('UsersController@postAddUser')}}" method="post" class="my-forms" id="profile-forms"
+          enctype="multipart/form-data">
         <fieldset id="field-box">
             <label slide-header="true"><h3>Thông tin tài khoản </h3></label>
             @include('includes.flash-alert');
@@ -15,7 +16,8 @@
                                 <span class="dropzone-text">Upload photos</span>
                             </div>
                         </div>
-                        <input id="fileInput" type="file" accept="image/png,image/jpg,image/bmp,image/jpeg" name="txtImage"/>
+                        <input id="fileInput" type="file" accept="image/png,image/jpg,image/bmp,image/jpeg"
+                               name="txtImage"/>
                     </div>
                     <i> Click to edit</i>
                     @if ($errors->has('txtImage'))
@@ -24,21 +26,22 @@
                         </span>
                     @endif
                 </div>
-                <div class="clear-fix"></div> <hr>
+                <div class="clear-fix"></div>
+                <hr>
                 <div class="form-group">
                     <label class="title">User Level</label>
-                        <label class="radio-inline">
-                            <input name="rdoLevel" value="3" type="radio">SuperAdmin
-                        </label>
-                        <label class="radio-inline">
-                            <input name="rdoLevel" value="2" type="radio">Admin
-                        </label>
-                        <label class="radio-inline">
-                            <input name="rdoLevel" value="1" checked="checked" type="radio">Member
-                        </label>
-                        <label class="radio-inline">
-                            <input name="rdoLevel" value="0" type="radio">Member
-                        </label>
+                    <label class="radio-inline">
+                        <input name="rdoLevel" value="3" type="radio">SuperAdmin
+                    </label>
+                    <label class="radio-inline">
+                        <input name="rdoLevel" value="2" type="radio">Admin
+                    </label>
+                    <label class="radio-inline">
+                        <input name="rdoLevel" value="1" checked="checked" type="radio">Member
+                    </label>
+                    <label class="radio-inline">
+                        <input name="rdoLevel" value="0" type="radio">Member
+                    </label>
                 </div>
 
             </div>
@@ -52,7 +55,8 @@
                                 <label class="icon-right" for="name">
                                     <i class="fa fa-user"></i>
                                 </label>
-                                <input required="required" type="text" placeholder="Username" class="input-right"  name="txtName" value="{!! old('txtName') !!}">
+                                <input required="required" type="text" placeholder="Username" class="input-right"
+                                       name="txtName" value="{!! old('txtName') !!}">
                                 @if ($errors->has('txtName'))
                                     <span class="help-block">
 							            {{ $errors->first('txtName') }}
@@ -68,7 +72,8 @@
                                 <label class="icon-right" for="email">
                                     <i class="fa fa-envelope-o"></i>
                                 </label>
-                                <input required="required" type="email" class="input-right" placeholder="Email" name="txtEmail" value="{!! old('txtEmail') !!}">
+                                <input required="required" type="email" class="input-right" placeholder="Email"
+                                       name="txtEmail" value="{!! old('txtEmail') !!}">
                                 @if ($errors->has('txtEmail'))
                                     <span class="help-block">
 							           {{ $errors->first('txtEmail') }}
@@ -84,7 +89,8 @@
                                 <label class="icon-right" for="Password">
                                     <i class="fa fa-key"></i>
                                 </label>
-                                <input type="password" required="required" class="input-right" placeholder="Password" name="txtPass" value="{!! old('txtPass') !!}">
+                                <input type="password" required="required" class="input-right" placeholder="Password"
+                                       name="txtPass" value="{!! old('txtPass') !!}">
                                 @if ($errors->has('txtPass'))
                                     <span class="help-block">
 							           {{ $errors->first('txtPass') }}
@@ -100,7 +106,8 @@
                                 <label class="icon-right" for="Re-Pass">
                                     <i class="fa fa-key"></i>
                                 </label>
-                                <input required="required" type="password" class="input-right" placeholder="Re-Password" name="txtRePass" value="{!! old('txtRePass') !!}">
+                                <input required="required" type="password" class="input-right" placeholder="Re-Password"
+                                       name="txtRePass" value="{!! old('txtRePass') !!}">
                                 @if ($errors->has('txtRePass'))
                                     <span class="help-block">
 							            {{ $errors->first('txtRePass') }}

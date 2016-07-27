@@ -25,17 +25,15 @@ class BookmarkController extends Controller
             abort(403);
         }
         $user_id = Auth::user()->id;
-        $list = CV::whereHas('User', function($q) use($user_id)
-        {
-            $q->whereHas('User', function($q) use($user_id)
-            {
+        $list = CV::whereHas('User', function ($q) use ($user_id) {
+            $q->whereHas('User', function ($q) use ($user_id) {
                 $q->where('user_id', $user_id);
             });
         })->get();
         if (Gate::allows('Admin')) {
             $CV = Auth::user()->CV;
         }
-        return View::make("includes.sidebar")->with(compact("list",'CV'));
+        return View::make("includes.sidebar")->with(compact("list", 'CV'));
     }
 
     /**
@@ -86,7 +84,6 @@ class BookmarkController extends Controller
     }
 
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -112,6 +109,7 @@ class BookmarkController extends Controller
             return 0;
         }
     }
+
     /**
      * Show the form for editing the specified resource.
      *

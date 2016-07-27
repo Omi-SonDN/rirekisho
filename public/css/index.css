@@ -11,7 +11,8 @@
     -o-transition: all .4s;
     transition: all .4s;
 }
-#the_list #list-table-body tr{
+
+#the_list #list-table-body tr {
     border-bottom: solid 1px #e1e1e1;
     border-top: solid 1px #e1e1e1
 }
@@ -22,11 +23,13 @@
     vertical-align: middle;
     font: normal 16px Georgia, 'Times New Roman', serif
 }
-#the_list #list-table-body tr:hover{
+
+#the_list #list-table-body tr:hover {
     border-bottom: solid 1px #6a5b91;
     border-top: solid 1px #6a5b91;
     margin-top: 2px;
 }
+
 #the_list thead tr th {
     text-align: left;
     padding: 5px 10px 5px 0;
@@ -135,6 +138,7 @@
     content: " ";
     display: block
 }
+
 /******************************table style**********************************/
 
 .table-bordered {

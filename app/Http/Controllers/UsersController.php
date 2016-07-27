@@ -22,7 +22,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-       // $this->middleware('decode');
+        // $this->middleware('decode');
     }
 
     /**
@@ -209,12 +209,14 @@ class UsersController extends Controller
     }
 
     //add user
-    public function getAddUser(){
+    public function getAddUser()
+    {
         if (Gate::denies('Admin')) {
             abort(403);
         }
         return View('xUser.UserAdd');
     }
+
     public function postAddUser(addUserRequest $request)
     {
         if (Gate::denies('Admin')) {
@@ -223,14 +225,14 @@ class UsersController extends Controller
         if ($request->hasFile('txtImage')) {
             $extension = $request->file('txtImage')->getClientOriginalExtension();
             $file_name = substr(md5(rand()), 0, 7) . "." . $extension;
-            $request->file('txtImage')->move('img/thumbnail', 'thumb_'. $file_name);
+            $request->file('txtImage')->move('img/thumbnail', 'thumb_' . $file_name);
         } else {
             $file_name = 'no_image.gif';
         }
         $_user = new User();
         $_user->name = $request->txtName;
         $_user->email = $request->txtEmail;
-        $_user->role= $request->rdoLevel;
+        $_user->role = $request->rdoLevel;
         $_user->active = 1;
         $_user->password = Hash::make($request->txtPass);
         $_user->image = $file_name;
@@ -238,14 +240,15 @@ class UsersController extends Controller
 
         $_user->save();
         return redirect()
-                 ->route('getadduser')
-                 ->with(
-                     [
-                         'flash_level' => 'success',
-                         'message' => 'Đã thêm user thành công'
-                     ]
-                 );
+            ->route('getadduser')
+            ->with(
+                [
+                    'flash_level' => 'success',
+                    'message' => 'Đã thêm user thành công'
+                ]
+            );
     }
+
     public function getDel($_id)
     {
         if (Gate::denies('Admin')) {
@@ -255,7 +258,7 @@ class UsersController extends Controller
         //
         //Neu 2 admin thi loi... >> fix [GP: Can TK SuperAdmin]
         //
-        if(Auth::user()->id == $_id) {
+        if (Auth::user()->id == $_id) {
             return redirect()
                 ->route('User.index')
                 ->with(
@@ -266,7 +269,7 @@ class UsersController extends Controller
                 );
         }
         $user = User::findOrFail($_id);
-        if($user->image) {
+        if ($user->image) {
             $old_del = public_path('img/thumbnail/') . 'thumb_' . $user->image;
             if (File::exists($old_del)) {
                 File::exists($old_del) && File::delete($old_del);

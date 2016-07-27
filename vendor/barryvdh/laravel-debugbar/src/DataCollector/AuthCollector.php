@@ -30,7 +30,7 @@ class AuthCollector extends DataCollector implements Renderable
      */
     public function setShowName($showName)
     {
-        $this->showName = (bool) $showName;
+        $this->showName = (bool)$showName;
     }
 
     /**

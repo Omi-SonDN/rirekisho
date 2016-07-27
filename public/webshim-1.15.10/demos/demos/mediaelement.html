@@ -1,175 +1,190 @@
 <!DOCTYPE HTML>
 <html>
 
-	<head>
-		<meta http-equiv="x-ua-compatible" content="IE=edge" >
-		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 
-		<title>Webshim - mediaelement polyfill and extension</title>
-		
-		
-		<link href="../css/styles.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../css/prism.css" />
-
-		<style>
-			/* add basic styles */
-			.mediaplayer {
-				position: relative;
-				height: 0;
-				width: 100%;
-				padding-bottom: 56.25%; /* 16/9 */
-			}
-
-			.mediaplayer video,
-			.mediaplayer .polyfill-video {
-				position: absolute;
-				top: 0;
-				left: 0;
-				height: 100%;
-				width: 100%;
-			}
-
-			.touchevents .mediaplayer {
-				font-size: 24px;
-			}
-
-			@media (pointer:coarse), (-moz-touch-enabled), (-webkit-touch-enabled), (touch-enabled) {
-				.mediaplayer {
-					font-size: 24px;
-				}
-			}
-
-			.media-playlist,
-			.container .media-playlist{
-				margin: 0 0 20px;
-				padding: 5px 0;
-				list-style: none;
-			}
-
-			.media-playlist li {
-				overflow: hidden;
-				margin: 5px 0;
-				padding: 5px;
-				border-radius: 5px;
-				background: #f1f1f1;
-				cursor: pointer;
-				border: 4px solid #eee;
-			}
-
-			.media-playlist li.selected-item {
-				background: #eee;
-				border: 4px solid #666;
-			}
-
-			.media-playlist img {
-				display: block;
-				float: left;
-				width: 120px;
-				height: auto;
-				margin: 0 10px 2px 0;
-			}
-
-			.media-playlist h3 {
-				margin: 0 0 5px;
-				padding: 0;
-			}
-		</style>
- 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-
-		<script src="../../js-webshim/minified/polyfiller.js"></script>
-
-		<script>
-			webshim.setOptions('mediaelement', {
-				replaceUI: 'auto',
-				plugins: ['playlist']
-			});
-
-			webshim.polyfill('mediaelement');
-		</script>
-		<script>
-			webshim.ready('jquery', function(){
-				if('ontouchstart' in window){
-					$('html').addClass('touchevents');
-				}
-			});
-		</script>
-		<script>
-			webshim.ready('playlist', function(){
-				var playlist = $('.mediaplayer')
-					.eq(0)
-					.jmeFn('addPlaylist', 'mediaelement/playlist.json', {showcontrols: true, autoplay: true, ajax: {dataType: 'json'}})
-				;
-
-				playlist.render(function($playlist, $player){
-					$playlist.insertAfter($player);
-				});
-			});
-		</script>
-        <script src="../demo-js/demo.js" async=""></script>
-	</head>
-
-	<body>
-
-		<div id="sidebar" class="interface">
-
-			<a class="toc_title" href="../index.html"> Webshim <span class="version">(<span class="ws-version">1.15.10</span>)</span></a>
-			<ul class="toc_section">
-				<li>
-					&raquo; <a href="https://github.com/aFarkas/webshim">GitHub Repository</a>
-				</li>
-			</ul>
-
-			<a class="toc_title" href="#introduction"> mediaelement Introduction </a>
+    <title>Webshim - mediaelement polyfill and extension</title>
 
 
-			<ul class="toc_section">
-				
-				<li>
-					– <a href="#Custom-ui-controls">Custom controls for audio/video element.</a>
-				</li>
+    <link href="../css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/prism.css"/>
+
+    <style>
+        /* add basic styles */
+        .mediaplayer {
+            position: relative;
+            height: 0;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16/9 */
+        }
+
+        .mediaplayer video,
+        .mediaplayer .polyfill-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .touchevents .mediaplayer {
+            font-size: 24px;
+        }
+
+        @media (pointer: coarse), (-moz-touch-enabled), (-webkit-touch-enabled), (touch-enabled) {
+            .mediaplayer {
+                font-size: 24px;
+            }
+        }
+
+        .media-playlist,
+        .container .media-playlist {
+            margin: 0 0 20px;
+            padding: 5px 0;
+            list-style: none;
+        }
+
+        .media-playlist li {
+            overflow: hidden;
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 5px;
+            background: #f1f1f1;
+            cursor: pointer;
+            border: 4px solid #eee;
+        }
+
+        .media-playlist li.selected-item {
+            background: #eee;
+            border: 4px solid #666;
+        }
+
+        .media-playlist img {
+            display: block;
+            float: left;
+            width: 120px;
+            height: auto;
+            margin: 0 10px 2px 0;
+        }
+
+        .media-playlist h3 {
+            margin: 0 0 5px;
+            padding: 0;
+        }
+    </style>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script src="../../js-webshim/minified/polyfiller.js"></script>
+
+    <script>
+        webshim.setOptions('mediaelement', {
+            replaceUI: 'auto',
+            plugins: ['playlist']
+        });
+
+        webshim.polyfill('mediaelement');
+    </script>
+    <script>
+        webshim.ready('jquery', function () {
+            if ('ontouchstart' in window) {
+                $('html').addClass('touchevents');
+            }
+        });
+    </script>
+    <script>
+        webshim.ready('playlist', function () {
+            var playlist = $('.mediaplayer')
+                            .eq(0)
+                            .jmeFn('addPlaylist', 'mediaelement/playlist.json', {
+                                showcontrols: true,
+                                autoplay: true,
+                                ajax: {dataType: 'json'}
+                            })
+                    ;
+
+            playlist.render(function ($playlist, $player) {
+                $playlist.insertAfter($player);
+            });
+        });
+    </script>
+    <script src="../demo-js/demo.js" async=""></script>
+</head>
+
+<body>
+
+<div id="sidebar" class="interface">
+
+    <a class="toc_title" href="../index.html"> Webshim <span class="version">(<span
+            class="ws-version">1.15.10</span>)</span></a>
+    <ul class="toc_section">
+        <li>
+            &raquo; <a href="https://github.com/aFarkas/webshim">GitHub Repository</a>
+        </li>
+    </ul>
+
+    <a class="toc_title" href="#introduction"> mediaelement Introduction </a>
 
 
-				<li>
-					- <a href="#Configuring-Controlbar">Configuring the controls</a>
-				</li>
-				<li>
-					- <a href="#Simple-Video-Overlays">Adding simple Overlays to the mediaplayer</a>
-				</li>
+    <ul class="toc_section">
 
-			</ul>
-
-			<a class="toc_title" href="#Creating-Controls">Creating new mediaelement plugins and controls</a>
-
-			<a class="toc_title" href="#existing-plugins">Existing Plugins</a>
-			<ul class="toc_section">
-
-				<li>
-					- <a href="#Playlist">Playlist-Plugin</a>
-				</li>
-
-			</ul>
-
-		</div>
-
-		<div class="container">
-
-			<p>
-				<img id="logo" src="../images/webshim2.png" alt="webshim" />
-			</p>
+        <li>
+            – <a href="#Custom-ui-controls">Custom controls for audio/video element.</a>
+        </li>
 
 
-			<h2 id="introduction" class="header">Introduction</h2>
+        <li>
+            - <a href="#Configuring-Controlbar">Configuring the controls</a>
+        </li>
+        <li>
+            - <a href="#Simple-Video-Overlays">Adding simple Overlays to the mediaplayer</a>
+        </li>
 
-			<p>Webshim's <code class="i">mediaelement</code> feature implements the base features to view and control video and audio elements using HTML5 markup and DOM properties/methods. It also implements flv and streaming capabilities including youtube playback in all browsers.</p>
-			<p>This document does not describe how to use those native/polyfilled features. It only describes the extensions build on top of the standard.</p>
+    </ul>
 
-			<h2 id="Custom-ui-controls" class="header">Custom video controls for video and audio elements</h2>
-			<p>Custom controls for audio/video elements can controlled through the <code>replaceUI</code> option. This option can be set to <code>true</code>, <code>false</code> or <code>"auto"</code>. If the string <code>"auto"</code> was used the custom controls are only loaded and replaced for devices with some CSS3 support (i.e.: not IE8) and where the following media query matches: <code>(min-device-width: 719px)</code> (i.e. not smartphones, but tablets).</p>
+    <a class="toc_title" href="#Creating-Controls">Creating new mediaelement plugins and controls</a>
+
+    <a class="toc_title" href="#existing-plugins">Existing Plugins</a>
+    <ul class="toc_section">
+
+        <li>
+            - <a href="#Playlist">Playlist-Plugin</a>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="container">
+
+    <p>
+        <img id="logo" src="../images/webshim2.png" alt="webshim"/>
+    </p>
+
+
+    <h2 id="introduction" class="header">Introduction</h2>
+
+    <p>Webshim's <code class="i">mediaelement</code> feature implements the base features to view and control video and
+        audio elements using HTML5 markup and DOM properties/methods. It also implements flv and streaming capabilities
+        including youtube playback in all browsers.</p>
+    <p>This document does not describe how to use those native/polyfilled features. It only describes the extensions
+        build on top of the standard.</p>
+
+    <h2 id="Custom-ui-controls" class="header">Custom video controls for video and audio elements</h2>
+    <p>Custom controls for audio/video elements can controlled through the <code>replaceUI</code> option. This option
+        can be set to <code>true</code>, <code>false</code> or <code>"auto"</code>. If the string <code>"auto"</code>
+        was used the custom controls are only loaded and replaced for devices with some CSS3 support (i.e.: not IE8) and
+        where the following media query matches: <code>(min-device-width: 719px)</code> (i.e. not smartphones, but
+        tablets).</p>
 <pre><code class="language-javascript">
 webshim.setOptions('mediaelement', {replaceUI: 'auto'});
 webshim.polyfill('mediaelement');
 </code></pre>
-			<p>The controls are only added inside elements with a class <code>.mediaplayer</code> (This can be configured through the <code>selector</code> option).. While webshims might load basic styling for the custom controls. The basic styling of this wrapper element including the video element itself has to be done in the normal stylesheet:</p>
+    <p>The controls are only added inside elements with a class <code>.mediaplayer</code> (This can be configured
+        through the <code>selector</code> option).. While webshims might load basic styling for the custom controls. The
+        basic styling of this wrapper element including the video element itself has to be done in the normal
+        stylesheet:</p>
 
 <pre><code class="language-markup">
 &lt;style&gt;
@@ -214,9 +229,10 @@ webshim.polyfill('mediaelement');
 	&lt;/video&gt;
 &lt;/div&gt;
 </code></pre>
-			<h2 id="Configuring-Controlbar">Configure the controlbar</h2>
-			<p>All controls option can be configured thorugh the <code>jme</code> option object (spelled Jamie = jQuery mediaelement).</p>
-			<p>For exmaple the <code>.mediaplayer</code> selector can be changed through the <code>selector</code> option.</p>
+    <h2 id="Configuring-Controlbar">Configure the controlbar</h2>
+    <p>All controls option can be configured thorugh the <code>jme</code> option object (spelled Jamie = jQuery
+        mediaelement).</p>
+    <p>For exmaple the <code>.mediaplayer</code> selector can be changed through the <code>selector</code> option.</p>
 <pre><code class="language-javascript">
 webshim.setOptions('mediaelement', {
 	jme: {
@@ -226,11 +242,14 @@ webshim.setOptions('mediaelement', {
 });
 webshim.polyfill('mediaelement');
 </code></pre>
-			<p>While the controls are fully styleable through CSS, the markup can be controlled by changing the <code>barTemplate</code> option:</p>
+    <p>While the controls are fully styleable through CSS, the markup can be controlled by changing the <code>barTemplate</code>
+        option:</p>
 
-			<iframe class="fiddle-example" style="height: 360px;" src="http://jsfiddle.net/trixta/5Jwhb/embedded/js,result,html,css"></iframe>
-			<h2 id="Simple-Video-Overlays">Add overlays to the mediaplayer</h2>
-			<p>Adding new overlays to a mediaplayer, for example to add share buttons (like, twitter), a logo or title and credits for a given video or audio source is easy without writing any JS code.</p>
+    <iframe class="fiddle-example" style="height: 360px;"
+            src="http://jsfiddle.net/trixta/5Jwhb/embedded/js,result,html,css"></iframe>
+    <h2 id="Simple-Video-Overlays">Add overlays to the mediaplayer</h2>
+    <p>Adding new overlays to a mediaplayer, for example to add share buttons (like, twitter), a logo or title and
+        credits for a given video or audio source is easy without writing any JS code.</p>
 <pre><code class="language-javascript">
 &lt;style&gt;
 	.mediaplayer .logo {
@@ -256,12 +275,15 @@ webshim.polyfill('mediaelement');
 &lt;/div&gt;
 </code></pre>
 
-			<p>Here is a simple example creating a title and a social bookmark/share menu:</p>
-			<iframe class="fiddle-example" style="height: 360px;" src="http://jsfiddle.net/trixta/k5WyV/embedded/result,html,css,js"></iframe>
-			<h2 id="Creating-Controls">Creating new Plugins and Controls</h2>
-			<p>Creating new plugins/controls for the jme mediaplayer is quite easy using the <code>$.jme.registerPlugin</code> method. Due to the fact, that jme is loaded async, the plugin registration has to be wrapped inside a <code>webshim.ready('jme', function(){});</code> call.</p>
-			<p>Let's create a control, which jumps the timeline by 10 seconds forward:</p>
-			<p>First we will create a simple plugin and in the second step we will add it to the controlbar.</p>
+    <p>Here is a simple example creating a title and a social bookmark/share menu:</p>
+    <iframe class="fiddle-example" style="height: 360px;"
+            src="http://jsfiddle.net/trixta/k5WyV/embedded/result,html,css,js"></iframe>
+    <h2 id="Creating-Controls">Creating new Plugins and Controls</h2>
+    <p>Creating new plugins/controls for the jme mediaplayer is quite easy using the <code>$.jme.registerPlugin</code>
+        method. Due to the fact, that jme is loaded async, the plugin registration has to be wrapped inside a <code>webshim.ready('jme',
+            function(){});</code> call.</p>
+    <p>Let's create a control, which jumps the timeline by 10 seconds forward:</p>
+    <p>First we will create a simple plugin and in the second step we will add it to the controlbar.</p>
 
 <pre><code class="language-javascript">
 webshim.setOptions('mediaelement', {
@@ -280,7 +302,10 @@ webshim.ready('jme', function(){
 	});
 });
 </code></pre>
-			<p>The <code>_create</code> method of the plugin gets automatically passed your control element, the video/audio element and the .mediaplayer wrapper element. JME will automatically detect all elements with this class inside your mediaplayer and runs your create method on them. This means the code above will let your write the following HTML:</p>
+    <p>The <code>_create</code> method of the plugin gets automatically passed your control element, the video/audio
+        element and the .mediaplayer wrapper element. JME will automatically detect all elements with this class inside
+        your mediaplayer and runs your create method on them. This means the code above will let your write the
+        following HTML:</p>
 <pre><code class="language-markup">
 &lt;style&gt;
 	.jump-10 {
@@ -301,7 +326,8 @@ webshim.ready('jme', function(){
 	&lt;/video&gt;
 &lt;/div>
 </code></pre>
-			<p>To add your new control to the JME's controlbar, simply extend the <code>barTemplate</code> with your new named JME plugin.</p>
+    <p>To add your new control to the JME's controlbar, simply extend the <code>barTemplate</code> with your new named
+        JME plugin.</p>
 
 <pre><code class="language-javascript">
 webshim.setOptions('mediaelement', {
@@ -337,12 +363,14 @@ webshim.ready('jme', function(){
 });
 </code></pre>
 
-			<p>Here you find the full featured running example for a JME controlbar plugin:</p>
+    <p>Here you find the full featured running example for a JME controlbar plugin:</p>
 
-			<iframe class="fiddle-example" style="height: 360px;" src="http://jsfiddle.net/trixta/tzg5Y/embedded/js,result,html,css"></iframe>
+    <iframe class="fiddle-example" style="height: 360px;"
+            src="http://jsfiddle.net/trixta/tzg5Y/embedded/js,result,html,css"></iframe>
 
-			<h2 id="existing-plugins">Activating existing plugins</h2>
-			<p>Webshim also comes with some predefined plugins. All plugins can be loaded/activated thourgh the <code>plugins</code> option, which takes an array of plugins to be automatically loaded.</p>
+    <h2 id="existing-plugins">Activating existing plugins</h2>
+    <p>Webshim also comes with some predefined plugins. All plugins can be loaded/activated thourgh the
+        <code>plugins</code> option, which takes an array of plugins to be automatically loaded.</p>
 <pre><code class="language-javascript">
 webshim.setOptions('mediaelement', {
 	replaceUI: 'auto',
@@ -354,7 +382,8 @@ webshim.setOptions('mediaelement', {
 webshim.polyfill('mediaelement');
 </code></pre>
 
-			<p>In case a mediaplayer plugin adds some JS APIs, the code using those has to be wrapper inside a <code>webshim.ready('plugin-name', function(){});</code></p>
+    <p>In case a mediaplayer plugin adds some JS APIs, the code using those has to be wrapper inside a <code>webshim.ready('plugin-name',
+        function(){});</code></p>
 <pre><code class="language-javascript">
 webshim.setOptions('mediaelement', {
 	replaceUI: 'auto',
@@ -370,10 +399,12 @@ webshim.ready('plugin-name', function(){
 	$('.mediaplayer').jmeFn('pluginMethod');
 });
 </code></pre>
-			<h2 id="Playlist">Creating a playlist</h2>
-			<p>Webshims fully implements the mediaelement API, so that a developer can dynamically change the src property of a video element (using $.prop/$.attr) or create new source elements after the ended event has occurred.</p>
-			<p>But Webshim also comes with a great <code>playlist</code> plugin, which makes it easy to create multiple playlist for a mediaplayer.</p>
-			<p>Activating the <code>playlist</code> is simple:</p>
+    <h2 id="Playlist">Creating a playlist</h2>
+    <p>Webshims fully implements the mediaelement API, so that a developer can dynamically change the src property of a
+        video element (using $.prop/$.attr) or create new source elements after the ended event has occurred.</p>
+    <p>But Webshim also comes with a great <code>playlist</code> plugin, which makes it easy to create multiple playlist
+        for a mediaplayer.</p>
+    <p>Activating the <code>playlist</code> is simple:</p>
 
 <pre><code class="language-javascript">
 webshim.setOptions('mediaelement', {
@@ -387,8 +418,10 @@ webshim.polyfill('mediaelement');
 </code></pre>
 
 
-		<p>To create a new playlist for a mediaplayer simply call <code>$.jmeFn('addPlaylist')</code> on the mediaplayer object.</p>
-		<p>The <code>addPlaylist</code> method requires at least a valid data source and an optional option object and returns the generated playlist instance:</p>
+    <p>To create a new playlist for a mediaplayer simply call <code>$.jmeFn('addPlaylist')</code> on the mediaplayer
+        object.</p>
+    <p>The <code>addPlaylist</code> method requires at least a valid data source and an optional option object and
+        returns the generated playlist instance:</p>
 <pre><code class="language-javascript">
 webshim.ready('playlist', function(){
 	$('.mediaplayer').jmeFn('addPlaylist',
@@ -409,7 +442,7 @@ webshim.ready('playlist', function(){
 	);
 });
 </code></pre>
-			<p>Another example:</p>
+    <p>Another example:</p>
 <pre><code class="language-javascript">
 webshim.setOptions('mediaelement', {
 	replaceUI: 'auto',
@@ -449,23 +482,33 @@ webshim.ready('playlist', function(){
 
 });
 </code></pre>
-			<div class="mediaplayer-wrapper">
-				<div class="mediaplayer videoplayer">
-					<video controls preload="none"></video>
-				</div>
-			</div>
+    <div class="mediaplayer-wrapper">
+        <div class="mediaplayer videoplayer">
+            <video controls preload="none"></video>
+        </div>
+    </div>
 
-		</div>
-		<script type="text/javascript">
-			//http://blog.jsdelivr.com/2013/06/jsdelivr-weekly-news.html
-			if(location.hostname == 'afarkas.github.io'){
-				(function(w, d) { var a = function() { var a = d.createElement('script'); a.type = 'text/javascript';
-					a.async = 'async'; a.src = '//' + ((w.location.protocol === 'https:') ? 's3.amazonaws.com/cdx-radar/' :
-							'radar.cedexis.com/') + '01-11475-radar10.min.js'; d.body.appendChild(a); };
-					if (w.addEventListener) { w.addEventListener('load', a, false); }
-					else if (w.attachEvent) { w.attachEvent('onload', a); }
-				}(window, document));
-			}
-		</script>
-	</body>
+</div>
+<script type="text/javascript">
+    //http://blog.jsdelivr.com/2013/06/jsdelivr-weekly-news.html
+    if (location.hostname == 'afarkas.github.io') {
+        (function (w, d) {
+            var a = function () {
+                var a = d.createElement('script');
+                a.type = 'text/javascript';
+                a.async = 'async';
+                a.src = '//' + ((w.location.protocol === 'https:') ? 's3.amazonaws.com/cdx-radar/' :
+                                'radar.cedexis.com/') + '01-11475-radar10.min.js';
+                d.body.appendChild(a);
+            };
+            if (w.addEventListener) {
+                w.addEventListener('load', a, false);
+            }
+            else if (w.attachEvent) {
+                w.attachEvent('onload', a);
+            }
+        }(window, document));
+    }
+</script>
+</body>
 </html>
