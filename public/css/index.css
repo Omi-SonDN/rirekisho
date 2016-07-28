@@ -223,6 +223,55 @@ th {
     cursor: pointer;
 }
 
+/************table.dataTable***********/
+table.dataTable {
+    width:100%;
+    margin:0 auto;
+    clear:both;
+    border-collapse:separate;
+    border-spacing:0
+}
+table.dataTable thead .sorting {
+    background-image:url("../img/sort.png")
+}
+table.dataTable thead .sorting_asc {
+    background-image:url("../img/sort_asc.png")
+}
+table.dataTable thead .sorting_desc {
+    background-image:url("../img/sort_desc.png")
+}
+table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTable thead .sorting_desc,table.dataTable thead .sorting_asc_disabled,table.dataTable thead .sorting_desc_disabled {
+    background-repeat:no-repeat;
+    background-position:center right;
+    color: #666699;
+    font-size: 13pt
+}
+table.dataTable #list-table-body tr{
+    border-bottom: solid 1px #e1e1e1;
+    border-top: solid 1px #e1e1e1
+}
+
+table.dataTable #list-table-body tr td {
+    padding: 10px 10px 5px 0;
+    border-bottom: solid 1px #e1e1e1;
+    vertical-align: middle;
+    font: normal 16px Georgia, 'Times New Roman', serif
+}
+table.dataTable #list-table-body tr:hover{
+    border-bottom: solid 1px #6a5b91;
+    border-top: solid 1px #6a5b91;
+    margin-top: 2px;
+}
+table.dataTable thead tr th {
+    text-align: left;
+    padding: 5px 10px 5px 0;
+    font: bold 12px 'Helvetica Neue', sans-serif;
+    color: #333;
+    background: #f1f1f1;
+    border-bottom: solid 5px #fff;
+    white-space: nowrap;
+}
+
 
 
 

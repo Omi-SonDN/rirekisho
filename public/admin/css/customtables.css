@@ -103,3 +103,43 @@ table.tablesorter tr.data:hover {
     text-decoration: none;
     color: #0080ff;
 }
+
+.tablesorter input.fix-class-check {
+    opacity: 1;
+    position: relative;
+    display: block;
+    -ms-transform: scale(1.5); /* IE */
+    -moz-transform: scale(1.5); /* FF */
+    -webkit-transform: scale(1.5); /* Safari and Chrome */
+    -o-transform: scale(1.5); /* Opera */
+    margin: 0 auto;;
+}
+
+.wait-modal-load {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+    url('http://i.stack.imgur.com/FhHRx.gif') 50% 50% no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+.bottom_action div.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+.bottom_action div.loading {
+    display: block;
+}
+
+.bottom_action > button > a {
+    color: #ffffff;
+    font-width: bold;
+}

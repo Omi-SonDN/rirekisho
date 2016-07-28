@@ -22,7 +22,7 @@
             <label slide-header=true class="slide-header">
                 I. Thông tin cá nhân
                 @can('Admin')
-                    <div class=" float_right">
+                    <div class="float_right">
                         Active &nbsp &nbsp
                         <input type="checkbox" class="ios-switch tinyswitch purple" id="{{$key}}"
                                name="Active" editable="Rirekisho"

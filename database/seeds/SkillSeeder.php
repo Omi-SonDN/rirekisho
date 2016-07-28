@@ -14,7 +14,7 @@ class SkillSeeder extends Seeder
     public function run()
     {
         DB::table('it_skill')->delete();
-        $CVs = DB::table('CV')->get();
+        $CVs = DB::table('cvs')->get();
         $a = array("japanese", "english", "chinese", "french");
         $b = array("C", "Java", "PHP", "Ruby");
 

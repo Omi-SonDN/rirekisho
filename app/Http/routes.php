@@ -6,10 +6,13 @@ Route::controllers([
     'auth' => '\App\Http\Controllers\Auth\AuthController',
     'password' => '\App\Http\Controllers\Auth\PasswordController',
 ]);
+// gioi han quyen voi aplication
 Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']], function () {
     Route::get('CV/search', 'CVController@search');
+    Route::get('CV/search1', 'CVController@search1');
     Route::get('CV', 'CVController@index');
     Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
+    Route::post('CV/adSearch', 'CVController@adSearch');
 
 });
 Route::group(['middleware' => ['auth']], function () {
@@ -22,6 +25,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::bind('CV', function ($id) {
         return Hashids::decode($id)[0];
     });
+
+    //Route::get('CV/create', ['as' => 'getCreateCv', 'uses' => 'CVController@create']);
 
     //every one can see
     Route::get('/', function () {
@@ -87,7 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'user'], function () {
         Route::get('/add', ['as' => 'getadduser', 'uses' => 'UsersController@getAddUser']);
         Route::post('/add', ['as' => 'postadduser', 'uses' => 'UsersController@postAddUser']);
-        Route::get('/{id}/del', ['as' => 'getdeluser', 'uses' => 'UsersController@getDel']);
+        Route::get('/{listid}/del', ['as' => 'getdeluser', 'uses' => 'UsersController@getDel']);
     });
     
     
@@ -101,7 +106,6 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@myLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
-
 
 Route::post('emails/getEmailAddress', [
     'as' => 'emails.getEmailAddress',

@@ -73,7 +73,6 @@
     @include('includes.footer')
         </footer-->
 </div>
-
 <!-- DataTables JavaScript -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 {{--<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/js/jquery-latest.js')}}"></script>--}}
@@ -88,7 +87,7 @@
 <!-- Giet xung dot :))  [$ Jquery]-->
 {{--<script type="text/javascript"> jQuery.noConflict(); </script>--}}
 
-<script type="text/javascript" src="{{ URL::asset('/admin/js/bqnfunction.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('/admin/js/func.bqn.js')}}"></script>
 </body>
 
 </html>

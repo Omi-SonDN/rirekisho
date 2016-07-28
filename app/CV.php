@@ -11,7 +11,7 @@ class CV extends Model
 {
     use SearchableTrait;
 
-    protected $table = 'CV';
+    protected $table = 'cvs';
     protected $fillable = [
         'Furigana_name',
         'Last_name',
@@ -68,13 +68,143 @@ class CV extends Model
         return $this->belongsTo('App\Status', 'Status', 'id');
     }
 
-    /************************** scope ********************************************/
     public function scopeActive($query)
     {
         return $query->where('active', 1);
     }
-    
-    /****************************** Accessor ************************************/
+
+    public function scopeSortByNameAsc($query, $name, $Status, $positions)
+    {
+        // if($name != "")
+        //     $CVs = CV::with('User')->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+        // else
+        //     $CVs = CV::with('User')->get();
+        if($Status == 'Status' && $positions == 'Vị trí tuyển dụng' && $name == '' ){
+            $CVs = CV::with('User')->get();
+        }
+        else{
+            if($Status != 'Status'){
+                if($name != ''){
+                    if($positions != 'Vị trí tuyển dụng')
+                        $CVs = CV::with('User')->where('positions', $positions)->where('status', $Status)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+                    else $CVs= CV::with('User')->where('status', $Status)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+                } else {
+                    if($positions != 'Vị trí tuyển dụng')
+                        $CVs = CV::with('User')->where('positions', $positions)->where('status', $Status)->get();
+                    else $CVs = CV::with('User')->where('status', $Status)->get();
+                }
+            } else {
+                if($name != ''){
+                    $CVs = CV::with('User')->where('positions', $positions)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+                } else {
+                    $CVs = CV::with('User')->where('positions', $positions)->get();
+                }
+            }
+        }
+
+        for ($i = 0; $i < $CVs->count(); $i++) {
+            $name = $CVs[$i]->Last_name . " " . $CVs[$i]->First_name;
+            $len = strlen($name);
+            $start = stripos($name, " ");
+            $end = strripos($name, " ");
+            $ten = substr($name, $end + 1);
+            $dem = substr($CVs[$i]->First_name, 0, $end - $len);
+            $CVs[$i]->ten = $ten;
+            $CVs[$i]->dem = $dem;
+
+        }
+        for ($i = 0; $i < $CVs->count() - 1; $i++) {
+            for ($j = $i + 1; $j < $CVs->count(); $j++) {
+                if (strnatcasecmp($CVs[$i]->ten, $CVs[$j]->ten) == 0) {
+                    if (strnatcasecmp($CVs[$i]->Last_name, $CVs[$j]->Last_name) == 0) {
+                        if (strnatcasecmp($CVs[$i]->dem, $CVs[$j]->dem) == 1) {
+                            $tm = $CVs[$i];
+                            $CVs[$i] = $CVs[$j];
+                            $CVs[$j] = $tm;
+                        }
+                    } else {
+                        if (strnatcasecmp($CVs[$i]->Last_name, $CVs[$j]->Last_name) == 1) {
+                            $tm = $CVs[$i];
+                            $CVs[$i] = $CVs[$j];
+                            $CVs[$j] = $tm;
+                        }
+                    }
+                } else {
+                    if (strnatcasecmp($CVs[$i]->ten, $CVs[$j]->ten) == 1) {
+                        $tm = $CVs[$i];
+                        $CVs[$i] = $CVs[$j];
+                        $CVs[$j] = $tm;
+                    }
+                }
+            }
+        }
+        return $CVs;
+    }
+
+    public function scopeSortByNameDesc($query, $name, $Status, $positions)
+    {
+        
+        if($Status == 'Status' && $positions == 'Vị trí tuyển dụng' && $name == '' ){
+            $CVs = CV::with('User')->get();
+        } else{
+            if($Status != 'Status'){
+                if($name != ''){
+                    if($positions != 'Vị trí tuyển dụng')
+                        $CVs = CV::with('User')->where('positions', $positions)->where('status', $Status)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+                    else $CVs= CV::with('User')->where('status', $Status)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+                } else {
+                    if($positions != 'Vị trí tuyển dụng')
+                        $CVs = CV::with('User')->where('positions', $positions)->where('status', $Status)->get();
+                    else $CVs = CV::with('User')->where('status', $Status)->get();
+                }
+            } else {
+                if($name != ''){
+                    $CVs = CV::with('User')->where('positions', $positions)->orwhere('First_name', 'like', "%{$name}%")->orwhere('Last_name', 'like', "%{$name}%")->get();
+                } else {
+                    $CVs = CV::with('User')->where('positions', $positions)->get();
+                }
+            }
+        }
+
+        for ($i = 0; $i < $CVs->count(); $i++) {
+            $name = $CVs[$i]->Last_name . " " . $CVs[$i]->First_name;
+            $len = strlen($name);
+            $start = stripos($name, " ");
+            $end = strripos($name, " ");
+            $ten = substr($name, $end + 1);
+            $dem = substr($CVs[$i]->First_name, 0, $end - $len);
+            $CVs[$i]->ten = $ten;
+            $CVs[$i]->dem = $dem;
+
+        }
+        for ($i = 0; $i < $CVs->count() - 1; $i++) {
+            for ($j = $i + 1; $j < $CVs->count(); $j++) {
+                if (strnatcasecmp($CVs[$i]->ten, $CVs[$j]->ten) == 0) {
+                    if (strnatcasecmp($CVs[$i]->Last_name, $CVs[$j]->Last_name) == 0) {
+                        if (strnatcasecmp($CVs[$i]->dem, $CVs[$j]->dem) == -1) {
+                            $tm = $CVs[$i];
+                            $CVs[$i] = $CVs[$j];
+                            $CVs[$j] = $tm;
+                        }
+                    } else {
+                        if (strnatcasecmp($CVs[$i]->Last_name, $CVs[$j]->Last_name) == -1) {
+                            $tm = $CVs[$i];
+                            $CVs[$i] = $CVs[$j];
+                            $CVs[$j] = $tm;
+                        }
+                    }
+                } else {
+                    if (strnatcasecmp($CVs[$i]->ten, $CVs[$j]->ten) == -1) {
+                        $tm = $CVs[$i];
+                        $CVs[$i] = $CVs[$j];
+                        $CVs[$j] = $tm;
+                    }
+                }
+            }
+        }
+        return $CVs;
+    }
+
     public function getNameAttribute()
     {
         if ($this->First_name != "") {
@@ -85,8 +215,17 @@ class CV extends Model
     public function getJGenderAttribute()
     {
         if ($this->Gender == 0) {
-            return "女性";
-        } else return "男性";
+            return "Nữ";
+        } else {
+            return "Nam";
+        }
+    }
+
+    public function getPositionAttribute()
+    {
+        $position = $this->positions;
+        return $position;
+
     }
 
     public function getBDayAttribute()
