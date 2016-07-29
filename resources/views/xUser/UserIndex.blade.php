@@ -8,24 +8,6 @@
                 <button class='btn btn-primary'><a href="{{route('getadduser')}}"><i class="fa fa-plus" style="margin: 0 auto;"></i> Thêm User</a></button>
                 <span class="active-del"></span>
                 <div class="wait-modal-load"></div>
-                {{--<ul class="tabs">--}}
-                    {{--<li class="tab">--}}
-                        {{--Sắp xếp danh sách:--}}
-                    {{--</li>--}}
-
-                    {{--<li class="tab select" data-field="name" data-sort="asc" data-keyword="">--}}
-                        {{--<a>Tên </a>--}}
-                    {{--</li>--}}
-                    {{--<li class="tab select" data-field="email" data-sort="asc" data-keyword="">--}}
-                        {{--<a>Email </a>--}}
-                    {{--</li>--}}
-                    {{--<li class="" data-field="updated_at" data-sort="asc" data-keyword="">--}}
-                        {{--<a>Ngày cập nhật</a>--}}
-                    {{--</li>--}}
-                    {{--<li class="" data-field="role" data-sort="asc" data-keyword="">--}}
-                        {{--<a>Role</a>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
                 <div class="search">
                     <div class="search-forms">
                         <label class="search_icon" for="text">
@@ -84,16 +66,10 @@
                             <td> {{ $row->getRole() }}</td>
                             <td>
                                 <input class="fix-class-check cb-element" type="checkbox" value="{{$row->hash}}" name="arrDel[]" style="opacity: 1">
-                            {{--</td>--}}
-                            {{--<td>--}}
-                                {{--<a href="url('User',[$row->hash ])">Sửa</a>--}}{{--{{route('destroyuser')}}--}}
                                 <a href="{{route('getdeluser', $row->hash)}}" onclick="return xacnhanxoa('Bạn có chắc là xóa không!')" title="Delete {{$row->name}}"><i class="fa fa-trash-o  fa-fw"></i>&nbsp Delete</a>
                             </td>
                         </tr>
                     @endforeach
-                    {{--<tr id="number-result" style="display: none;">--}}
-                        {{--<td colspan="5">Có {{$count }} kết quả</td>--}}
-                    {{--</tr>--}}
                 @endif
                 </tbody>
             </table>

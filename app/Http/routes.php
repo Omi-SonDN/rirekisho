@@ -26,8 +26,6 @@ Route::group(['middleware' => ['auth']], function () {
         return Hashids::decode($id)[0];
     });
 
-    //Route::get('CV/create', ['as' => 'getCreateCv', 'uses' => 'CVController@create']);
-
     //every one can see
     Route::get('/', function () {
         return view('about');

@@ -404,6 +404,7 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
     public static $classMap = array (
         'Absolute_Positioner' => __DIR__ . '/..' . '/dompdf/dompdf/include/absolute_positioner.cls.php',
         'Abstract_Renderer' => __DIR__ . '/..' . '/dompdf/dompdf/include/abstract_renderer.cls.php',
+        'AddGithubLinkedinToCvs' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_093744_add_github_linkedin_to_cvs.php',
         'AddImageToUsers' => __DIR__ . '/../..' . '/database/migrations/2016_07_18_090119_add_image_to_users.php',
         'Adobe_Font_Metrics' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Adobe_Font_Metrics.php',
         'Attribute_Translator' => __DIR__ . '/..' . '/dompdf/dompdf/include/attribute_translator.cls.php',

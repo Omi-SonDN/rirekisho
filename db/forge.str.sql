@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2016 at 11:51 AM
+-- Generation Time: Jul 29, 2016 at 11:14 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -35,7 +35,14 @@ CREATE TABLE IF NOT EXISTS `bookmarks` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `bookmarks_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `bookmarks`
+--
+
+INSERT INTO `bookmarks` (`id`, `user_id`, `bookmark_user_id`, `notes`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, '', '2016-07-27 04:54:19', '2016-07-27 04:54:19');
 
 -- --------------------------------------------------------
 
@@ -67,25 +74,29 @@ CREATE TABLE IF NOT EXISTS `cvs` (
   `version` tinyint(4) NOT NULL,
   `apply_to` tinyint(4) NOT NULL,
   `notes` text COLLATE utf8_unicode_ci NOT NULL,
+  `github` text COLLATE utf8_unicode_ci NOT NULL,
+  `linkedin` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `cvs_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=96 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=125 ;
 
 --
 -- Dumping data for table `cvs`
 --
 
-INSERT INTO `cvs` (`id`, `user_id`, `First_name`, `Last_name`, `Furigana_name`, `email`, `Photo`, `Birth_date`, `Gender`, `Address`, `Contact_information`, `Phone`, `Self_intro`, `Marriage`, `配偶者の扶養義務`, `Request`, `positions`, `Memo`, `Active`, `Status`, `version`, `apply_to`, `notes`, `created_at`, `updated_at`) VALUES
-(1, 14, 'Pham112', 'Tuoi', '', '', '', '1992-12-11', 0, 'TN', 'TN', '0986237633', '', 0, 0, ' B', 'A', '', 1, 3, 1, 0, '', '2016-07-20 00:47:03', '2016-07-20 20:51:35'),
-(89, 1, 'Linh', 'Dang', 'ダン・ミー・リン　', 'admin@123.com', '', '1994-11-02', 0, 'Cần Thơ', 'dfgdfgdfg', '075 032 3708', 'dfgdfgdf', 0, 0, ' dfgdfgfd', 'vị trí 1', '', 0, 14, 2, 0, 'fddfg', '2016-04-21 03:28:16', '2016-07-27 02:18:19'),
-(90, 2, 'Tú Phúc', 'Mai', '', 'admin1@123.com', '', '1974-01-11', 1, 'Hà Nội', '', '84-94-557-5939', 'So she went on, looking anxiously about as curious as it didn''t sound at all this time. ''I want a clean cup,'' interrupted the Gryphon. ''We can do without lobsters, you know. But do cats eat bats? Do.', 0, 0, '', 'vị trí 2', '', 0, 1, 1, 0, '', '2016-04-21 03:28:16', '2016-07-14 20:17:05'),
-(91, 9, 'Giao Cầm', 'Tiếp', '', 'admin2@123.com', '', '1987-10-05', 1, 'Cần Thơ', '', '84-75-772-1532', 'There was certainly English. ''I don''t know what to uglify is, you see, Miss, we''re doing our best, afore she comes, to--'' At this moment Five, who had been broken to pieces. ''Please, then,'' said the.', 0, 0, '', 'vị trí 3', '', 1, 4, 1, 0, '', '2016-04-21 03:28:16', '2016-07-19 20:12:40'),
-(92, 10, 'Hậu Cầm', 'Tiếp', '', 'admin3@123.com', '', '1989-01-31', 1, 'Đà Nẵng', '', '+84-98-578-1481', 'I''m sure _I_ shan''t be able! I shall think nothing of the e--e--evening, Beautiful, beauti--FUL SOUP!'' ''Chorus again!'' cried the Gryphon, with a sigh: ''he taught Laughing and Grief, they used to.', 0, 0, '', 'vị trí 4', '', 1, 4, 2, 0, '', '2016-04-21 03:28:16', '2016-07-19 18:51:29'),
-(93, 11, 'Thảo Hội', 'Quách', '', '', '', '1987-11-10', 1, 'Hải Phòng', '', '84-281-321-4411', 'Alice. ''Only a thimble,'' said Alice angrily. ''It wasn''t very civil of you to death."'' ''You are old,'' said the Caterpillar decidedly, and he poured a little nervous about this; ''for it might end, you.', 0, 0, '', 'vị trí 4', '', 1, 9, 0, 0, '', '2016-04-21 03:28:16', '2016-07-19 18:30:02'),
-(94, 12, 'Ngọc Kim', 'Bình', '', 'admin5@123.com', '', '1973-10-05', 1, 'Hà Nội', '', '(0500) 482 3944', 'I ought to have lessons to learn! Oh, I shouldn''t want YOURS: I don''t want to go through next walking about at the bottom of a book,'' thought Alice to herself, and fanned herself with one finger for.', 0, 0, '', 'vị trí 2', '', 1, 8, 0, 0, '', '2016-04-21 03:28:16', '2016-07-19 18:30:47'),
-(95, 13, 'Chiến Ngà', 'Khúc', '', 'admin4@123.com', '', '1973-02-17', 1, 'Đà Nẵng', '', '84-780-917-3589', 'And then, turning to Alice, and looking at them with large round eyes, and half of fright and half of anger, and tried to say to itself ''The Duchess! The Duchess! Oh my dear Dinah! I wonder who will.', 0, 0, '', 'vị trí 6', '', 1, 4, 0, 0, '', '2016-04-21 03:28:16', '2016-07-19 18:53:00');
+INSERT INTO `cvs` (`id`, `user_id`, `First_name`, `Last_name`, `Furigana_name`, `email`, `Photo`, `Birth_date`, `Gender`, `Address`, `Contact_information`, `Phone`, `Self_intro`, `Marriage`, `配偶者の扶養義務`, `Request`, `positions`, `Memo`, `Active`, `Status`, `version`, `apply_to`, `notes`, `github`, `linkedin`, `created_at`, `updated_at`) VALUES
+(1, 14, 'Pham112', 'Tuoi', '', '', '', '1992-12-11', 0, 'TN', 'TN', '0986237633', '', 0, 0, ' B', 'A', '', 1, 3, 1, 1, '', '', '', '2016-07-20 00:47:03', '2016-07-28 05:00:14'),
+(89, 1, 'Linh', 'Dang', 'ダン・ミー・リン　', 'admin@123.com', '', '1994-11-02', 0, 'Cần Thơ', 'dfgdfgdfg', '075 032 3708', 'dfgdfgdf', 0, 0, ' dfgdfgfd', 'vị trí 1', '', 1, 14, 2, 1, 'fddfg', '', '', '2016-04-21 03:28:16', '2016-07-27 22:15:38'),
+(90, 2, 'Tú Phúc', 'Mai', '', 'admin1@123.com', '', '1974-01-11', 0, 'Hà Nội', '', '84-94-557-5939', 'So she went on, looking anxiously about as curious as it didn''t sound at all this time. ''I want a clean cup,'' interrupted the Gryphon. ''We can do without lobsters, you know. But do cats eat bats? Do.', 0, 0, '', 'vị trí 2', '', 0, 1, 1, 2, '', '', '', '2016-04-21 03:28:16', '2016-07-14 20:17:05'),
+(91, 9, 'Giao Cầm', 'Tiếp', '', 'admin2@123.com', '', '1987-10-05', 1, 'Cần Thơ', '', '84-75-772-1532', 'There was certainly English. ''I don''t know what to uglify is, you see, Miss, we''re doing our best, afore she comes, to--'' At this moment Five, who had been broken to pieces. ''Please, then,'' said the.', 0, 0, '', 'vị trí 3', '', 1, 4, 1, 2, '', '', '', '2016-04-21 03:28:16', '2016-07-19 20:12:40'),
+(92, 10, 'Hậu Cầm', 'Tiếp', '', 'admin3@123.com', '', '1989-01-31', 1, 'Đà Nẵng', '', '+84-98-578-1481', 'I''m sure _I_ shan''t be able! I shall think nothing of the e--e--evening, Beautiful, beauti--FUL SOUP!'' ''Chorus again!'' cried the Gryphon, with a sigh: ''he taught Laughing and Grief, they used to.', 0, 0, '', 'vị trí 4', '', 1, 4, 2, 3, '', '', '', '2016-04-21 03:28:16', '2016-07-19 18:51:29'),
+(93, 11, 'Thảo Hội', 'Quách', '', '', '', '1987-11-10', 1, 'Hải Phòng', '', '84-281-321-4411', 'Alice. ''Only a thimble,'' said Alice angrily. ''It wasn''t very civil of you to death."'' ''You are old,'' said the Caterpillar decidedly, and he poured a little nervous about this; ''for it might end, you.', 0, 0, '', 'vị trí 4', '', 1, 9, 0, 1, '', '', '', '2016-04-21 03:28:16', '2016-07-19 18:30:02'),
+(94, 12, 'Ngọc Kim', 'Bình', '', 'admin5@123.com', '', '1973-10-05', 1, 'Hà Nội', '', '(0500) 482 3944', 'I ought to have lessons to learn! Oh, I shouldn''t want YOURS: I don''t want to go through next walking about at the bottom of a book,'' thought Alice to herself, and fanned herself with one finger for.', 0, 0, '', 'vị trí 2', '', 1, 8, 0, 1, '', '', '', '2016-04-21 03:28:16', '2016-07-19 18:30:47'),
+(95, 13, 'Chiến Ngà', 'Khúc', '', 'admin4@123.com', '', '1973-02-17', 0, 'Đà Nẵng', '', '84-780-917-3589', 'And then, turning to Alice, and looking at them with large round eyes, and half of fright and half of anger, and tried to say to itself ''The Duchess! The Duchess! Oh my dear Dinah! I wonder who will.', 0, 0, '', 'vị trí 6', '', 1, 4, 0, 2, '', '', '', '2016-04-21 03:28:16', '2016-07-19 18:53:00'),
+(122, 17, '', '', '', '', '', '0000-00-00', 0, '', '', '', '', 0, 0, '', '', '', 0, 0, 0, 1, '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(124, 15, 'bui ngoc', 'null', '', 'buingoc@123.com', '', '0000-00-00', 0, '', '', '', '', 0, 0, '', '', '', 0, 0, 0, 0, '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -131,27 +142,30 @@ CREATE TABLE IF NOT EXISTS `it_skill` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `it_skill_cv_id_foreign` (`cv_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=62 ;
 
 --
 -- Dumping data for table `it_skill`
 --
 
 INSERT INTO `it_skill` (`id`, `cv_id`, `skill_type`, `name`, `study_time`, `work_time`, `created_at`, `updated_at`) VALUES
-(15, 91, 0, 'Chinese', 6, 3, '2016-06-02 02:03:29', '2016-06-01 19:04:03'),
-(16, 91, 0, 'english', 6, 3, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(17, 91, 0, 'french', 6, 3, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(18, 90, 0, 'french', 6, 3, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(19, 90, 0, 'japanese', 6, 3, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(20, 90, 0, 'chinese', 6, 3, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(21, 90, 0, 'japanese', 6, 3, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(22, 95, 1, 'Java', 9, 5, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(23, 91, 1, 'Java', 9, 5, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(24, 91, 1, 'C', 9, 5, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(25, 89, 1, 'Ruby', 9, 5, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(26, 89, 1, 'Ruby', 9, 5, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(27, 90, 1, 'PHP', 9, 5, '2016-06-02 02:03:29', '2016-06-02 02:03:06'),
-(28, 91, 1, 'C', 9, 5, '2016-06-02 02:03:29', '2016-06-02 02:03:06');
+(45, 1, 0, 'english', 6, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(46, 89, 0, 'english', 6, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(47, 90, 0, 'japanese', 6, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(48, 91, 0, 'chinese', 6, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(49, 92, 0, 'french', 6, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(50, 93, 0, 'chinese', 6, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(51, 94, 0, 'english', 6, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(52, 95, 0, 'english', 6, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(53, 1, 1, 'C', 9, 5, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(54, 89, 1, 'Java', 9, 5, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(55, 90, 1, 'PHP', 9, 5, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(56, 91, 1, 'C', 9, 5, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(57, 92, 1, 'C', 9, 5, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(58, 93, 1, 'Ruby', 9, 5, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(59, 94, 1, 'C', 9, 5, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(60, 95, 1, 'C', 9, 5, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(61, 89, 1, 'BuiNgoc', 9, 6, '2016-07-27 22:10:47', '2016-07-27 22:10:47');
 
 -- --------------------------------------------------------
 
@@ -289,7 +303,6 @@ INSERT INTO `records` (`id`, `cv_id`, `Content`, `Date`, `Type`, `created_at`, `
 (273, 93, 'Công ty Đạo Thành - Hải Phòng', '2014-04-17', 1, '2016-04-21 03:28:16', '0000-00-00 00:00:00'),
 (274, 94, 'Công ty Canh Hiền - Hồ Chí Minh', '2014-04-17', 1, '2016-04-21 03:28:16', '0000-00-00 00:00:00'),
 (275, 95, 'Công ty Hà Thương - Đà Nẵng', '2014-04-17', 1, '2016-04-21 03:28:16', '0000-00-00 00:00:00'),
-(276, 89, 'Hồ Chí Minh', '2012-12-07', 2, '2016-04-21 03:28:16', '0000-00-00 00:00:00'),
 (277, 90, 'Đà Nẵng', '2012-12-07', 2, '2016-04-21 03:28:16', '0000-00-00 00:00:00'),
 (278, 91, 'Hồ Chí Minh', '2012-12-07', 2, '2016-04-21 03:28:16', '0000-00-00 00:00:00'),
 (279, 92, 'Cần Thơ', '2012-12-07', 2, '2016-04-21 03:28:16', '0000-00-00 00:00:00'),
@@ -346,7 +359,8 @@ INSERT INTO `status` (`id`, `status`, `created_at`, `updated_at`) VALUES
 (28, 'Từ chối pv lần 2', '2016-07-17 10:00:00', '0000-00-00 00:00:00'),
 (29, 'Phỏng vấn lại', '2016-07-17 10:00:00', '0000-00-00 00:00:00'),
 (30, 'Đã phỏng vấn lần 2', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(31, 'Không tới phỏng vấn lần 2', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(31, 'Không tới phỏng vấn lần 2', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(0, 'Kích hoạt CV', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -368,16 +382,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `role`, `password`, `remember_token`, `created_at`, `updated_at`, `note`, `active`, `image`) VALUES
-(1, 'LinhDang', 'admin@123.com', 2, '$2y$10$bf2/6Lk37VX0ckyEadtYLemcy0rlE.f8hK8F34tOLNoBFGrtUvMgy', 'Q0u3exA3vVlm8yFX5Hj22xONmWX7l07q8Dmyva2a2FkUqu1qStsvF0JmdEAe', '0000-00-00 00:00:00', '2016-04-21 19:48:00', '', 1, NULL),
-(2, 'Linh Dan', 'applicant@123.com', 0, '$2y$10$4aD6xaUsuOzhof0pKzxZ7u9XqDvtMhNuIiAClewF2/Vd6D6URTUey', 'QuP0Chi0JDqeYKXYx4aVmUUfgW4ZjORyVjMf5OSVBtL53boOsU9lErOgtLah', '0000-00-00 00:00:00', '2016-07-27 02:13:44', '', 1, NULL),
-(3, 'Linh Dang', 'visitor@123.com', 1, '$2y$10$dEdTnifVUJ9O9j4k.puvl.o.CaQCsaqitpX3rv6Tihe7x0Iyhytki', 'uULzbSzv0j2OucU0CTn6a21ckoXmgcf070gQu1LKGalF7Bu3ZmWJiD8X0FmK', '0000-00-00 00:00:00', '2016-04-21 18:20:04', '', 1, NULL),
+(1, 'LinhDang', 'admin@123.com', 2, '$2y$10$bf2/6Lk37VX0ckyEadtYLemcy0rlE.f8hK8F34tOLNoBFGrtUvMgy', 'GWaf9DvolmY9IHPfTOnIuEzAADh5OAPVOhnVErQVdfTuC9CcO8YRYe1uvoOD', '0000-00-00 00:00:00', '2016-07-29 02:11:16', '', 1, NULL),
+(2, 'Linh Dan', 'applicant@123.com', 0, '$2y$10$4aD6xaUsuOzhof0pKzxZ7u9XqDvtMhNuIiAClewF2/Vd6D6URTUey', 'soxe4CSRu2VwGp9O5lUYiDCxBPbMrrJrbq17ARuYoJQ88jlGvbU0f2cAed61', '0000-00-00 00:00:00', '2016-07-28 22:14:08', '', 1, NULL),
+(3, 'Linh Dang', 'visitor@123.com', 1, '$2y$10$dEdTnifVUJ9O9j4k.puvl.o.CaQCsaqitpX3rv6Tihe7x0Iyhytki', 'R44hZz1EQxrWwdsiZn8WFuyHOGDvcybHDbWfwjqiLKq4vV5uDo7V0Q6vei3g', '0000-00-00 00:00:00', '2016-07-29 02:07:15', '', 1, NULL),
 (4, 'Ned Krajcik', 'hRowe@example.org', 1, '$2y$10$ZL4W9ta6ZthdoWnbhzVkBee6VkoKBoH2DAsB97PKwRicheGfIn0xO', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 1, NULL),
 (5, 'Mr. Alan Frami', 'Treutel.Alia@example.com', 1, '$2y$10$rmltadq.z.57PymYA2XWwONM0VL1TdFYJwthUgILf2QTfDDy16d9y', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 1, NULL),
 (6, 'Bridgette Rosenbaum MD', 'Tyrique75@example.com', 1, '$2y$10$o///veq2hJiiNwWfJML0JuyP/TlN1w3wen6NvWPXQkQ4SAk8RuZF6', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 1, NULL),
@@ -389,7 +403,11 @@ INSERT INTO `users` (`id`, `name`, `email`, `role`, `password`, `remember_token`
 (12, 'Lizeth Greenfelder V', 'hPagac@example.com', 0, '$2y$10$1sNHXK2z.xh7RQHjbEq12OfHLGY6P0lwL4UpFsldHnoY/MMmDV5g2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 1, NULL),
 (13, 'Grady Gerlach PhD', 'eGoyette@example.net', 0, '$2y$10$SyanLJNmPjo9kCKWa/DA6u/mNMqQkd6A9bVhALUQ8o8fCABHwV7Yy', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 1, NULL),
 (14, 'Tuoi Pham', 'phamthituoi1112@gmail.com', 2, '$2y$10$/kRSgahd.1d/iqpkI8rp4OfMEIxj2Yn8fZpiXI8BZQT32ITHkqsUG', NULL, '2016-07-19 17:47:03', '2016-07-19 17:47:03', '', 1, NULL),
-(15, 'bui ngoc', 'buingoc@123.com', 3, '$2y$10$bf2/6Lk37VX0ckyEadtYLemcy0rlE.f8hK8F34tOLNoBFGrtUvMgy', 'npGcPdubV1Cq1KcmlciIN3zJEQEBNvOkaFCmfMxxjlo3bqQjNJlwXl1q6o4r', '0000-00-00 00:00:00', '2016-07-27 02:15:31', '', 0, NULL);
+(15, 'bui ngoc', 'buingoc@123.com', 3, '$2y$10$bf2/6Lk37VX0ckyEadtYLemcy0rlE.f8hK8F34tOLNoBFGrtUvMgy', 'q1Om5I9AwNSKmRmusFcW4DTUnTkR76nkBLzkvxqILhKnPBbQ9nMFKgCHI9it', '0000-00-00 00:00:00', '2016-07-29 02:12:01', '', 0, NULL),
+(16, 'test1', 'test1@123.com', 0, '$2y$10$bYIYt/LL4uEOhhvr2YeTTepVFug0gaP1/Lo4.bJHBp/8Z4s9VdK9G', '8GGaXfSY7a32rDOImuBbSJ8JXGrOtXGVQkRI79MI0CnlwgzP2OkpYm0Adirc', '2016-07-27 20:21:36', '2016-07-28 03:20:35', '', 0, NULL),
+(17, 'tet12@gmail.com', 'tet12@gmail.com', 0, '$2y$10$E6jUBxDIdYPsBd2ujHlAQOdCVTIW8uSL5ga90Gt/V6aoWz92lsedq', 'Vfvcl7TRtzdEejXOdE0U0jN8DTbNMAlKo0LSE2Ds7oj89yT3BT6byPiq3Tii', '2016-07-28 02:21:55', '2016-07-28 04:36:51', '', 0, NULL),
+(18, '111112@gmail.com', '111112@gmail.com', 1, '$2y$10$Si3nch6D0kp6hHxdA8Mm8eLv6IpAapP.HF0vh826BKFf/Sep9DcHS', 'RNRtIlqHVFVBsxO8p9tdXx3Z7J2Vxw77k9SMQRmztgYw5cFQEHRsX54WroSV', '2016-07-28 02:23:07', '2016-07-28 04:38:06', '', 0, NULL),
+(19, 'BuiNgoc', 'admi11n@123.com', 0, '$2y$10$fLPjxRima9Rqjh44/7zuZOHPHM5fQi9wCtKQhSb1Xs0GnrPMyFevW', 'GEoQ5OlpSUdupXTW5ce4i9eqy3VDGiQ7V1X1Fru66Vfe3oZIWtRlRf9gFU1G', '2016-07-28 02:32:10', '2016-07-28 07:38:11', '', 0, NULL);
 
 --
 -- Constraints for dumped tables

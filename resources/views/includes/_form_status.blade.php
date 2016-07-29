@@ -1,5 +1,6 @@
 <?php $the_status = array(
-	1 => [2,12,9],
+	0 => [1],
+    1 => [2,12,9],
 	2 => [3],
 	3 => [8,25],
 	4 => [],
@@ -31,12 +32,25 @@
 	30 => [14, 4],
 	31 => [4],
 ); ?>
+
 <form method="POST" name='status' class="status">
     <input type="hidden" name="id" id="id" value="{{ $CV->id }}"/>
     <input type="hidden" name="CV_status" id="CV_status{{ $CV->id }}" value="{{ $CV->Status }}"/>
     <select class="form-control status" name="status" id="status{{ $CV->id }}">
         @foreach( \App\Status::all() as $status )
-        <option value="{{$status->id}}" @if ($CV->Status == $status->id) {{ 'selected="select"'}} @endif @if(!in_array($status->id, $the_status[$CV->Status])){{'class=hidden'}} @endif >{{$status->id}}: {{$status->status}}</option>
+            @if($status->id === $CV->Status))
+                <option value="{{$status->id}}" selected="select" >{{$status->id}}: {{$status->status}}</option>
+                @foreach($the_status[$CV->Status] as $vl)
+                    @if(Auth::user()->getRole() === 'Visitor')
+                        @if ($vl === 2)
+                            <option value="{{$vl}}">{{$vl}}: {{ \App\Status::findOrFail($vl)->status }}</option>
+                        @endif
+                        @break
+                    @else
+                        <option value="{{$vl}}">{{$vl}}: {{\App\Status::findOrFail($vl)->status }}</option>
+                    @endif
+                @endforeach
+            @endif
         @endforeach
     </select>
 </form>

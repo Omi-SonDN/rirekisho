@@ -15,7 +15,7 @@ class ApplicantMiddleware
      */
     public function handle($request, Closure $next)
     {
-        
+
         if ($request->user()->getRole() == "Visitor")
         {
 

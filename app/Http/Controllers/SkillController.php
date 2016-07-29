@@ -9,6 +9,7 @@ use App\Skill;
 use Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateRequest;
+use Hashids;
 
 
 class SkillController extends Controller

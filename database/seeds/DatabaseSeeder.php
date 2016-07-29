@@ -33,7 +33,7 @@ class RecordTableSeeder extends Seeder
         DB::table('Records')->delete();
         $faker = Faker::create('vi_VN');
         $faker1 = Faker::create();
-        $CVs = DB::table('CV')->get();
+        $CVs = DB::table('cvs')->get();
 
         foreach ($CVs as $v) {
             DB::table('Records')->insert([
@@ -73,13 +73,13 @@ class CVTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('CV')->delete();
+        DB::table('cvs')->delete();
         $faker = Faker::create('vi_VN');
         $faker1 = Faker::create();
         $faker2 = Faker::create('ja_JP');
         $users = DB::table('users')->where('role', 0)->get();
         $admin = DB::table('users')->where('role', 2)->first();
-        DB::table('CV')->insert([//admin
+        DB::table('cvs')->insert([//admin
             'First_name' => 'Linh',
             'Last_name' => 'Dang',
             'Gender' => 0,
@@ -90,7 +90,7 @@ class CVTableSeeder extends Seeder
             'Self_intro' => $faker1->paragraph($nbSentences = 3, $variableNbSentences = true),
         ]);
         foreach ($users as $v) {
-            DB::table('CV')->insert([
+            DB::table('cvs')->insert([
             'First_name' => $faker->middleName.' '.$faker->firstName,
             'Last_name' => $faker->lastName,
             'Gender' => 1,
