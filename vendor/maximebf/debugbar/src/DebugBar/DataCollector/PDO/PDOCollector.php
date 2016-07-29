@@ -96,7 +96,10 @@ class PDOCollector extends DataCollector implements Renderable, AssetProvider
             $data['memory_usage'] += $pdodata['memory_usage'];
             $data['peak_memory_usage'] = max($data['peak_memory_usage'], $pdodata['peak_memory_usage']);
             $data['statements'] = array_merge($data['statements'],
-                array_map(function ($s) use ($name) { $s['connection'] = $name; return $s; }, $pdodata['statements']));
+                array_map(function ($s) use ($name) {
+                    $s['connection'] = $name;
+                    return $s;
+                }, $pdodata['statements']));
         }
 
         $data['accumulated_duration_str'] = $this->getDataFormatter()->formatDuration($data['accumulated_duration']);
@@ -122,7 +125,7 @@ class PDOCollector extends DataCollector implements Renderable, AssetProvider
                 'row_count' => $stmt->getRowCount(),
                 'stmt_id' => $stmt->getPreparedId(),
                 'prepared_stmt' => $stmt->getSql(),
-                'params' => (object) $stmt->getParameters(),
+                'params' => (object)$stmt->getParameters(),
                 'duration' => $stmt->getDuration(),
                 'duration_str' => $this->getDataFormatter()->formatDuration($stmt->getDuration()),
                 'memory' => $stmt->getMemoryUsage(),

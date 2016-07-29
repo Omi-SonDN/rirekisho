@@ -131,7 +131,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
      *     name of an existing class) or constructs an empty TestSuite
      *     with the given name.
      *
-     * @param mixed  $theClass
+     * @param mixed $theClass
      * @param string $name
      *
      * @throws PHPUnit_Framework_Exception
@@ -141,11 +141,13 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         $argumentsValid = false;
 
         if (is_object($theClass) &&
-            $theClass instanceof ReflectionClass) {
+            $theClass instanceof ReflectionClass
+        ) {
             $argumentsValid = true;
         } elseif (is_string($theClass) &&
-                 $theClass !== '' &&
-                 class_exists($theClass, false)) {
+            $theClass !== '' &&
+            class_exists($theClass, false)
+        ) {
             $argumentsValid = true;
 
             if ($name == '') {
@@ -178,7 +180,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         $constructor = $theClass->getConstructor();
 
         if ($constructor !== null &&
-            !$constructor->isPublic()) {
+            !$constructor->isPublic()
+        ) {
             $this->addTest(
                 self::warning(
                     sprintf(
@@ -223,18 +226,19 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
      * Adds a test to the suite.
      *
      * @param PHPUnit_Framework_Test $test
-     * @param array                  $groups
+     * @param array $groups
      */
     public function addTest(PHPUnit_Framework_Test $test, $groups = array())
     {
         $class = new ReflectionClass($test);
 
         if (!$class->isAbstract()) {
-            $this->tests[]  = $test;
+            $this->tests[] = $test;
             $this->numTests = -1;
 
             if ($test instanceof self &&
-                empty($groups)) {
+                empty($groups)
+            ) {
                 $groups = $test->getGroups();
             }
 
@@ -331,8 +335,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
 
         // The given file may contain further stub classes in addition to the
         // test class itself. Figure out the actual test class.
-        $classes    = get_declared_classes();
-        $filename   = PHPUnit_Util_Fileloader::checkAndLoad($filename);
+        $classes = get_declared_classes();
+        $filename = PHPUnit_Util_Fileloader::checkAndLoad($filename);
         $newClasses = array_diff(get_declared_classes(), $classes);
 
         // The diff is empty in case a parent class (with test methods) is added
@@ -350,7 +354,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         // a PEAR/PSR-0 prefixed shortname ('NameSpace_ShortName'), or as a
         // PSR-1 local shortname ('NameSpace\ShortName'). The comparison must be
         // anchored to prevent false-positive matches (e.g., 'OtherShortName').
-        $shortname      = basename($filename, '.php');
+        $shortname = basename($filename, '.php');
         $shortnameRegEx = '/(?:^|_|\\\\)' . preg_quote($shortname, '/') . '$/';
 
         foreach ($this->foundClasses as $i => $className) {
@@ -398,7 +402,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     public function addTestFiles($filenames)
     {
         if (!(is_array($filenames) ||
-             (is_object($filenames) && $filenames instanceof Iterator))) {
+            (is_object($filenames) && $filenames instanceof Iterator))
+        ) {
             throw PHPUnit_Util_InvalidArgumentHelper::factory(
                 1,
                 'array or iterator'
@@ -406,7 +411,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         }
 
         foreach ($filenames as $filename) {
-            $this->addTestFile((string) $filename);
+            $this->addTestFile((string)$filename);
         }
     }
 
@@ -434,7 +439,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
 
     /**
      * @param ReflectionClass $theClass
-     * @param string          $name
+     * @param string $name
      *
      * @return PHPUnit_Framework_Test
      *
@@ -549,7 +554,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
 
                     if ($data instanceof PHPUnit_Framework_Warning ||
                         $data instanceof PHPUnit_Framework_SkippedTestCase ||
-                        $data instanceof PHPUnit_Framework_IncompleteTestCase) {
+                        $data instanceof PHPUnit_Framework_IncompleteTestCase
+                    ) {
                         $test->addTest($data, $groups);
                     } else {
                         foreach ($data as $_dataName => $_data) {
@@ -689,7 +695,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
             foreach ($hookMethods['beforeClass'] as $beforeClassMethod) {
                 if ($this->testCase === true &&
                     class_exists($this->name, false) &&
-                    method_exists($this->name, $beforeClassMethod)) {
+                    method_exists($this->name, $beforeClassMethod)
+                ) {
                     if ($missingRequirements = PHPUnit_Util_Test::getMissingRequirements($this->name, $beforeClassMethod)) {
                         $this->markTestSuiteSkipped(implode(PHP_EOL, $missingRequirements));
                     }
@@ -737,7 +744,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
             }
 
             if ($test instanceof PHPUnit_Framework_TestCase ||
-                $test instanceof self) {
+                $test instanceof self
+            ) {
                 $test->setDisallowChangesToGlobalState($this->disallowChangesToGlobalState);
                 $test->setBackupGlobals($this->backupGlobals);
                 $test->setBackupStaticAttributes($this->backupStaticAttributes);
@@ -781,7 +789,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
      *
      * @deprecated
      *
-     * @param PHPUnit_Framework_Test       $test
+     * @param PHPUnit_Framework_Test $test
      * @param PHPUnit_Framework_TestResult $result
      */
     public function runTest(PHPUnit_Framework_Test $test, PHPUnit_Framework_TestResult $result)
@@ -852,7 +860,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     }
 
     /**
-     * @param ReflectionClass  $class
+     * @param ReflectionClass $class
      * @param ReflectionMethod $method
      */
     protected function addTestMethod(ReflectionClass $class, ReflectionMethod $method)
@@ -880,7 +888,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         $test = self::createTest($class, $name);
 
         if ($test instanceof PHPUnit_Framework_TestCase ||
-            $test instanceof PHPUnit_Framework_TestSuite_DataProvider) {
+            $test instanceof PHPUnit_Framework_TestSuite_DataProvider
+        ) {
             $test->setDependencies(
                 PHPUnit_Util_Test::getDependencies($class->getName(), $name)
             );
@@ -907,8 +916,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         // @test     on TestCase::testMethod()
         $doc_comment = $method->getDocComment();
 
-        return strpos($doc_comment, '@test')     !== false ||
-               strpos($doc_comment, '@scenario') !== false;
+        return strpos($doc_comment, '@test') !== false ||
+        strpos($doc_comment, '@scenario') !== false;
     }
 
     /**
@@ -981,7 +990,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     public function setBackupStaticAttributes($backupStaticAttributes)
     {
         if (is_null($this->backupStaticAttributes) &&
-            is_bool($backupStaticAttributes)) {
+            is_bool($backupStaticAttributes)
+        ) {
             $this->backupStaticAttributes = $backupStaticAttributes;
         }
     }

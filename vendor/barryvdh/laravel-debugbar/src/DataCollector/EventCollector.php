@@ -44,7 +44,7 @@ class EventCollector extends TimeDataCollector
                 // Format the listener to readable format
                 $listener = get_class($class) . '@' . $method;
 
-            // Handle closures
+                // Handle closures
             } elseif ($listener instanceof \Closure) {
                 $reflector = new \ReflectionFunction($listener);
 
@@ -77,7 +77,7 @@ class EventCollector extends TimeDataCollector
         $data = array();
         foreach ($params as $key => $value) {
             if (is_object($value) && Str::is('Illuminate\*\Events\*', get_class($value))) {
-                $value =  $this->prepareParams(get_object_vars($value));
+                $value = $this->prepareParams(get_object_vars($value));
             }
             $data[$key] = htmlentities($this->exporter->exportValue($value), ENT_QUOTES, 'UTF-8', false);
         }
@@ -101,16 +101,16 @@ class EventCollector extends TimeDataCollector
     public function getWidgets()
     {
         return array(
-          "events" => array(
-            "icon" => "tasks",
-            "widget" => "PhpDebugBar.Widgets.TimelineWidget",
-            "map" => "event",
-            "default" => "{}",
-          ),
-          'events:badge' => array(
-            'map' => 'event.nb_measures',
-            'default' => 0,
-          ),
+            "events" => array(
+                "icon" => "tasks",
+                "widget" => "PhpDebugBar.Widgets.TimelineWidget",
+                "map" => "event",
+                "default" => "{}",
+            ),
+            'events:badge' => array(
+                'map' => 'event.nb_measures',
+                'default' => 0,
+            ),
         );
     }
 }

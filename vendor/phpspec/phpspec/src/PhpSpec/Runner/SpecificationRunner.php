@@ -30,11 +30,11 @@ class SpecificationRunner
 
     /**
      * @param EventDispatcherInterface $dispatcher
-     * @param ExampleRunner            $exampleRunner
+     * @param ExampleRunner $exampleRunner
      */
     public function __construct(EventDispatcherInterface $dispatcher, ExampleRunner $exampleRunner)
     {
-        $this->dispatcher    = $dispatcher;
+        $this->dispatcher = $dispatcher;
         $this->exampleRunner = $exampleRunner;
     }
 

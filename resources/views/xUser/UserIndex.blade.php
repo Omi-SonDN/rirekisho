@@ -87,16 +87,16 @@
                 <span class="pagedisplay"></span>
                 <span class="right">
                     <span class="prev">
-                        <img src="http://mottie.github.com/tablesorter/addons/pager/icons/prev.png" /> Prev&nbsp;
+                        <img src="http://mottie.github.com/tablesorter/addons/pager/icons/prev.png"/> Prev&nbsp;
                     </span>
                     <span class="pagecount"></span>
                     &nbsp;<span class="next">Next
-                        <img src="http://mottie.github.com/tablesorter/addons/pager/icons/next.png" />
+                        <img src="http://mottie.github.com/tablesorter/addons/pager/icons/next.png"/>
                     </span>
             </span>
+            </div>
+
+
         </div>
-
-
-    </div>
 @stop
 

@@ -2,7 +2,7 @@
     <div id="dropzone">
         <div class="fixed-img">
             @if($user->image!="")
-                <img  src=<?php echo "/img/thumbnail/thumb_" . $user->image;?> >
+                <img src=<?php echo "/img/thumbnail/thumb_" . $user->image;?> >
             @else
                 <div class="dropzone-text-place">
                     <span class="dropzone-text">Upload photos</span>

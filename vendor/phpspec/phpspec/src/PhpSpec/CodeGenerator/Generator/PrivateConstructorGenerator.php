@@ -44,14 +44,14 @@ final class PrivateConstructorGenerator implements GeneratorInterface
     private $codeWriter;
 
     /**
-     * @param IO               $io
+     * @param IO $io
      * @param TemplateRenderer $templates
-     * @param Filesystem       $filesystem
+     * @param Filesystem $filesystem
      */
     public function __construct(IO $io, TemplateRenderer $templates, Filesystem $filesystem = null, CodeWriter $codeWriter = null)
     {
-        $this->io         = $io;
-        $this->templates  = $templates;
+        $this->io = $io;
+        $this->templates = $templates;
         $this->filesystem = $filesystem ?: new Filesystem();
         $this->codeWriter = $codeWriter ?: new TokenizedCodeWriter();
     }
@@ -74,7 +74,7 @@ final class PrivateConstructorGenerator implements GeneratorInterface
      */
     public function generate(ResourceInterface $resource, array $data)
     {
-        $filepath  = $resource->getSrcFilename();
+        $filepath = $resource->getSrcFilename();
 
         if (!$content = $this->templates->render('private-constructor', array())) {
             $content = $this->templates->renderString(
@@ -103,6 +103,6 @@ final class PrivateConstructorGenerator implements GeneratorInterface
      */
     protected function getTemplate()
     {
-        return file_get_contents(__DIR__.'/templates/private-constructor.template');
+        return file_get_contents(__DIR__ . '/templates/private-constructor.template');
     }
 }

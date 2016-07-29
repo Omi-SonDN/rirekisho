@@ -44,7 +44,7 @@ class EmailsController extends Controller
     /**
      * Send email to receiver.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function send(Request $request)
@@ -60,7 +60,7 @@ class EmailsController extends Controller
             if (!filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
                 //is group's name?
                 $group = Groups::where('name', '=', $recipient)
-                        ->with('users')->first();
+                    ->with('users')->first();
                 //yes
                 if ($group) {
                     if ($group->users->count() == 0) {
@@ -100,18 +100,18 @@ class EmailsController extends Controller
             foreach ($files as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = $file->getFilename() . '.' . $extension;
-                $file->move('public/',$filename);
+                $file->move('public/', $filename);
                 // Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
                 // $filename = $file->getFilename() . '.' . $extension;
-                $attachs[] = public_path('public/').$filename;
+                $attachs[] = public_path('public/') . $filename;
             }
 
             //send email
-            Mail::send('emails._email', ['content' => $request->content], function($m) use ($request, $recipients, $attachs) {
+            Mail::send('emails._email', ['content' => $request->content], function ($m) use ($request, $recipients, $attachs) {
                 $m->from(config('mail.username'), $request->sender)
                     ->subject($request->subject)
                     ->to($recipients);
-                foreach( $attachs as $file ){
+                foreach ($attachs as $file) {
                     $m->attach($file);
                 }
                 // for ($i = 0; $i < sizeOf($attachs); $i++) {
@@ -121,13 +121,13 @@ class EmailsController extends Controller
             });
 
             //delete file
-            foreach( $attachs as $file ){
+            foreach ($attachs as $file) {
                 unlink($file);
             }
 
             Session::flash('flash_message', 'Email has been sent.');
-            
-            if($errors) {
+
+            if ($errors) {
                 return redirect()->back()->withErrors($errors);
             } else {
                 return redirect()->back();
@@ -140,13 +140,13 @@ class EmailsController extends Controller
         });
 
         Session::flash('flash_message', 'Email has been sent.');
-        
-        if($errors){
+
+        if ($errors) {
             return redirect()->back()->withErrors($errors);
         } else {
             return redirect()->back();
         }
-        
+
     }
 
     /**
@@ -163,7 +163,7 @@ class EmailsController extends Controller
         if ($request->type != null) {
             $email = $request->email;
 
-            $data = array('email' => $email,'id'=>$request->id,'type'=>$request->type);
+            $data = array('email' => $email, 'id' => $request->id, 'type' => $request->type);
 
             return view('emails._form_email_1')->with($data);
         }
@@ -184,7 +184,7 @@ class EmailsController extends Controller
             if (!filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
                 //is group's name?
                 $group = Groups::where('name', '=', $recipient)
-                        ->with('users')->first();
+                    ->with('users')->first();
                 //yes
                 if ($group) {
                     if ($group->users->count() == 0) {
@@ -204,8 +204,6 @@ class EmailsController extends Controller
                 }
             }
         }
-
-
 
 
         //remove duplicate
@@ -234,23 +232,23 @@ class EmailsController extends Controller
 
         if (isset($request->attach[0])) {
             //upload file to server
-            $files = $request->attach;   
-            foreach ($files as $file) { 
+            $files = $request->attach;
+            foreach ($files as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = $file->getFilename() . '.' . $extension;
-                $file->move('public/',$filename);
+                $file->move('public/', $filename);
                 // Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
                 // $filename = $file->getFilename() . '.' . $extension;
-                $attachs[] = public_path('public/').$filename;
+                $attachs[] = public_path('public/') . $filename;
             }
 
             //send email
-            Mail::send('emails._email_1', $data, function($m) use ($request, $recipients, $attachs) {
+            Mail::send('emails._email_1', $data, function ($m) use ($request, $recipients, $attachs) {
                 $m->from(config('mail.username'), $request->sender)
                     ->subject($request->subject)
                     ->to($recipients);
-                foreach( $attachs as $file ){ 
-                    $m->attach($file); 
+                foreach ($attachs as $file) {
+                    $m->attach($file);
                 }
                 // for ($i = 0; $i < sizeOf($attachs); $i++) {
                 //     print_r($attachs[$i]);
@@ -259,27 +257,27 @@ class EmailsController extends Controller
             });
 
             //delete file
-            foreach( $attachs as $file ){ 
+            foreach ($attachs as $file) {
                 unlink($file);
             }
 
             Session::flash('flash_message', 'Email has been sent.');
-            $errors=false;
-            if($errors) {
+            $errors = false;
+            if ($errors) {
                 return redirect()->back()->withErrors($errors);
             } else {
                 return redirect()->back();
             }
         }
         //if status in this list
-        if(in_array($request->type,[1,2,3,9,12,26,29]))
-        Mail::send('emails._email_1', $data, function ($m) use ($request) {
-            $m->from(config('mail.username'), $request->sender);
-            $m->to($request->recipient)->subject($request->subject);
-        });
+        if (in_array($request->type, [1, 2, 3, 9, 12, 26, 29]))
+            Mail::send('emails._email_1', $data, function ($m) use ($request) {
+                $m->from(config('mail.username'), $request->sender);
+                $m->to($request->recipient)->subject($request->subject);
+            });
 
         //Session::flash('flash_message', 'Email has been sent.');
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
     /**
@@ -301,7 +299,7 @@ class EmailsController extends Controller
             ->get();
 
         $groups = Groups::select('name')
-                ->where('name', 'like', '%' . $key . '%')->get();
+            ->where('name', 'like', '%' . $key . '%')->get();
 
         foreach ($groups as $group) {
             $emails[] = ['name' => $group->name, 'email' => $group->name];

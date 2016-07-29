@@ -26,8 +26,8 @@ class UsingTagsTest extends \PHPUnit_Framework_TestCase
     {
         /**
          * @var object[] $customTagObjects
-         * @var string   $docComment
-         * @var string   $reconstitutedDocComment
+         * @var string $docComment
+         * @var string $reconstitutedDocComment
          */
         include(__DIR__ . '/../../examples/04-adding-your-own-tag.php');
 

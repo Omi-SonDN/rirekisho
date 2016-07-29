@@ -30,11 +30,11 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     /**
      * Create a new paginator instance.
      *
-     * @param  mixed  $items
-     * @param  int  $total
-     * @param  int  $perPage
-     * @param  int|null  $currentPage
-     * @param  array  $options (path, query, fragment, pageName)
+     * @param  mixed $items
+     * @param  int $total
+     * @param  int $perPage
+     * @param  int|null $currentPage
+     * @param  array $options (path, query, fragment, pageName)
      * @return void
      */
     public function __construct($items, $total, $perPage, $currentPage = null, array $options = [])
@@ -45,7 +45,7 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
 
         $this->total = $total;
         $this->perPage = $perPage;
-        $this->lastPage = (int) ceil($total / $perPage);
+        $this->lastPage = (int)ceil($total / $perPage);
         $this->path = $this->path != '/' ? rtrim($this->path, '/') : $this->path;
         $this->currentPage = $this->setCurrentPage($currentPage, $this->lastPage);
         $this->items = $items instanceof Collection ? $items : Collection::make($items);
@@ -54,8 +54,8 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     /**
      * Get the current page for the request.
      *
-     * @param  int  $currentPage
-     * @param  int  $lastPage
+     * @param  int $currentPage
+     * @param  int $lastPage
      * @return int
      */
     protected function setCurrentPage($currentPage, $lastPage)
@@ -69,7 +69,7 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
             return $lastPage > 0 ? $lastPage : 1;
         }
 
-        return $this->isValidPageNumber($currentPage) ? (int) $currentPage : 1;
+        return $this->isValidPageNumber($currentPage) ? (int)$currentPage : 1;
     }
 
     /**
@@ -117,7 +117,7 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     /**
      * Render the paginator using the given presenter.
      *
-     * @param  \Illuminate\Contracts\Pagination\Presenter|null  $presenter
+     * @param  \Illuminate\Contracts\Pagination\Presenter|null $presenter
      * @return string
      */
     public function render(Presenter $presenter = null)
@@ -139,22 +139,22 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     public function toArray()
     {
         return [
-            'total'         => $this->total(),
-            'per_page'      => $this->perPage(),
-            'current_page'  => $this->currentPage(),
-            'last_page'     => $this->lastPage(),
+            'total' => $this->total(),
+            'per_page' => $this->perPage(),
+            'current_page' => $this->currentPage(),
+            'last_page' => $this->lastPage(),
             'next_page_url' => $this->nextPageUrl(),
             'prev_page_url' => $this->previousPageUrl(),
-            'from'          => $this->firstItem(),
-            'to'            => $this->lastItem(),
-            'data'          => $this->items->toArray(),
+            'from' => $this->firstItem(),
+            'to' => $this->lastItem(),
+            'data' => $this->items->toArray(),
         ];
     }
 
     /**
      * Convert the object to its JSON representation.
      *
-     * @param  int  $options
+     * @param  int $options
      * @return string
      */
     public function toJson($options = 0)

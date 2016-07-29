@@ -20,7 +20,7 @@ class ConfigCollector extends DataCollector implements Renderable
     protected $data;
 
     /**
-     * @param array  $data
+     * @param array $data
      * @param string $name
      */
     public function __construct(array $data = array(), $name = 'config')

@@ -32,7 +32,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (! $this->app) {
+        if (!$this->app) {
             $this->refreshApplication();
         }
     }
@@ -66,7 +66,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     /**
      * Register a callback to be run before the application is destroyed.
      *
-     * @param  callable  $callback
+     * @param  callable $callback
      * @return void
      */
     protected function beforeApplicationDestroyed(callable $callback)

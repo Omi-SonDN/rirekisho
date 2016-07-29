@@ -18,15 +18,16 @@ use Maatwebsite\Excel\Exceptions\LaravelExcelException;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class Excel {
+class Excel
+{
 
     /**
      * Filter
      * @var array
      */
     protected $filters = array(
-        'registered' =>  array(),
-        'enabled'    =>  array()
+        'registered' => array(),
+        'enabled' => array()
     );
 
     /**
@@ -49,7 +50,7 @@ class Excel {
 
     /**
      * Construct Excel
-     * @param  PHPExcel           $excel
+     * @param  PHPExcel $excel
      * @param  LaravelExcelReader $reader
      * @param  LaravelExcelWriter $writer
      */
@@ -94,10 +95,10 @@ class Excel {
      *
      *  Load an existing file
      *
-     * @param  string        $file The file we want to load
+     * @param  string $file The file we want to load
      * @param  callback|null $callback
-     * @param  string|null   $encoding
-     * @param bool           $noBasePath
+     * @param  string|null $encoding
+     * @param bool $noBasePath
      * @return LaravelExcelReader
      */
     public function load($file, $callback = null, $encoding = null, $noBasePath = false)
@@ -167,8 +168,8 @@ class Excel {
     /**
      * Create a new file and share a view
      * @param  string $view
-     * @param  array  $data
-     * @param  array  $mergeData
+     * @param  array $data
+     * @param  array $mergeData
      * @return LaravelExcelWriter
      */
     public function shareView($view, $data = array(), $mergeData = array())
@@ -179,8 +180,8 @@ class Excel {
     /**
      * Create a new file and load a view
      * @param  string $view
-     * @param  array  $data
-     * @param  array  $mergeData
+     * @param  array $data
+     * @param  array $mergeData
      * @return LaravelExcelWriter
      */
     public function loadView($view, $data = array(), $mergeData = array())
@@ -196,16 +197,13 @@ class Excel {
     public function registerFilters($filters = array())
     {
         // If enabled array key exists
-        if(array_key_exists('enabled', $filters))
-        {
+        if (array_key_exists('enabled', $filters)) {
             // Set registered array
             $registered = $filters['registered'];
 
             // Filter on enabled
             $this->filter($filters['enabled']);
-        }
-        else
-        {
+        } else {
             $registered = $filters;
         }
 
@@ -216,24 +214,21 @@ class Excel {
 
     /**
      * Enable certain filters
-     * @param  string|array     $filter
+     * @param  string|array $filter
      * @param bool|false|string $class
      * @return Excel
      */
     public function filter($filter, $class = false)
     {
         // Add multiple filters
-        if(is_array($filter))
-        {
+        if (is_array($filter)) {
             $this->filters['enabled'] = !empty($this->filters['enabled']) ? array_merge($this->filters['enabled'], $filter) : $filter;
-        }
-        else
-        {
+        } else {
             // Add single filter
             $this->filters['enabled'][] = $filter;
 
             // Overrule filter class for this request
-            if($class)
+            if ($class)
                 $this->filters['registered'][$filter] = $class;
         }
 
@@ -260,15 +255,13 @@ class Excel {
     public function __call($method, $params)
     {
         // If the dynamic call starts with "with", add the var to the data array
-        if (method_exists($this->excel, $method))
-        {
+        if (method_exists($this->excel, $method)) {
             // Call the method from the excel object with the given params
             return call_user_func_array(array($this->excel, $method), $params);
         }
 
         // If reader method exists, call that one
-        if (method_exists($this->reader, $method))
-        {
+        if (method_exists($this->reader, $method)) {
             // Call the method from the reader object with the given params
             return call_user_func_array(array($this->reader, $method), $params);
         }

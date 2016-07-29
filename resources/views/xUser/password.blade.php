@@ -2,7 +2,7 @@
 <title>Thay đổi mật khẩu </title>
 <!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/uploadCV.css') }}"/-->
 @section('content')
-    <?php $key = $user->hash ;?>
+    <?php $key = $user->hash;?>
     <form action="/User/{{$key}}/changePass" method="get" class="my-forms" id="profile-forms">
         <fieldset id="field-box">
             <div class=" float_left" style="width: 30%;" i>

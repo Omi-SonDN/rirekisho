@@ -29,7 +29,7 @@ final class GenericPhpSpecExceptionPresenter extends AbstractPhpSpecExceptionPre
     }
 
     /**
-     * @param string  $file
+     * @param string $file
      * @param integer $lineno
      * @param integer $context
      *
@@ -37,16 +37,16 @@ final class GenericPhpSpecExceptionPresenter extends AbstractPhpSpecExceptionPre
      */
     protected function presentFileCode($file, $lineno, $context = 6)
     {
-        $lines  = explode(PHP_EOL, file_get_contents($file));
+        $lines = explode(PHP_EOL, file_get_contents($file));
         $offset = max(0, $lineno - ceil($context / 2));
-        $lines  = array_slice($lines, $offset, $context);
+        $lines = array_slice($lines, $offset, $context);
 
         $text = PHP_EOL;
         foreach ($lines as $line) {
             $offset++;
 
             if ($offset == $lineno) {
-                $text .= $this->exceptionElementPresenter->presentHighlight(sprintf('%4d', $offset).' '.$line);
+                $text .= $this->exceptionElementPresenter->presentHighlight(sprintf('%4d', $offset) . ' ' . $line);
             } else {
                 $text .= $this->exceptionElementPresenter->presentCodeLine(sprintf('%4d', $offset), $line);
             }

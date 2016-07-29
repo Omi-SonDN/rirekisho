@@ -28,7 +28,7 @@ $(document).ready(function () {
     });
 
     //delete task and remove it from list
-    $('#pos-list').on('click', '.delete-pos',function(){
+    $('#pos-list').on('click', '.delete-pos', function () {
         var position_id = $(this).val();
         var my_url = url + 'positions/' + position_id;
 
@@ -87,7 +87,7 @@ $(document).ready(function () {
             dataType: 'json',
             type: type,
             success: function (data) {
-                console.log(data);        
+                console.log(data);
 
                 var pos = '<tr id="pos' + data.id + '">';
                 pos += '<td>' + data.name + '</td>';

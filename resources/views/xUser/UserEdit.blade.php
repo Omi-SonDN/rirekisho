@@ -2,7 +2,7 @@
 <title>Chỉnh sửa thông tin người dùng</title>
 <!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/uploadCV.css') }}"/-->
 @section('content')
-    <?php $key = $user->hash ;?>
+    <?php $key = $user->hash;?>
     <form action="/User/{{$key}}" method="post" class="my-forms" id="profile-forms" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <fieldset id="field-box">
@@ -40,7 +40,7 @@
                                 <label class="icon-right" for="name">
                                     <i class="fa fa-user"></i>
                                 </label>
-                                <input type="text" class="input-right"  name="name"
+                                <input type="text" class="input-right" name="name"
                                        value="{{$user->name }}">
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </li>
-                    <li >
+                    <li>
                         <a class="" href="{{url('User',[$user->hash ,'edit'])}}">Đổi mật khẩu </a>
                     </li>
                 </ul>

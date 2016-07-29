@@ -38,7 +38,7 @@ class PagerfantaPaginatorAdapter implements PaginatorInterface
      * Create a new pagerfanta pagination adapter.
      *
      * @param \Pagerfanta\Pagerfanta $paginator
-     * @param callable               $routeGenerator
+     * @param callable $routeGenerator
      *
      * @return void
      */

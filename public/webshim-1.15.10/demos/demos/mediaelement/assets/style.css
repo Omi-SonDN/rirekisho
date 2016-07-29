@@ -11,12 +11,12 @@ body {
 }
 
 body * {
-    line-height:1.22em;
+    line-height: 1.22em;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: Georgia, "Times New Roman", Times, serif;
-    color:#4088b8;
+    color: #4088b8;
     clear: both;
 }
 

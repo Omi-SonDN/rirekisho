@@ -22,7 +22,8 @@ class MethodNotFoundListenerSpec extends ObjectBehavior
         SuiteEvent $suiteEvent,
         ExampleEvent $exampleEvent,
         NameCheckerInterface $nameChecker
-    ) {
+    )
+    {
         $io->writeln(Argument::any())->willReturn();
         $io->askConfirmation(Argument::any())->willReturn();
 
@@ -53,7 +54,8 @@ class MethodNotFoundListenerSpec extends ObjectBehavior
         $suiteEvent,
         $io,
         NameCheckerInterface $nameChecker
-    ) {
+    )
+    {
         $exception = new MethodNotFoundException('Error', new \stdClass(), 'bar');
 
         $exampleEvent->getException()->willReturn($exception);
@@ -81,7 +83,8 @@ class MethodNotFoundListenerSpec extends ObjectBehavior
         $suiteEvent,
         IO $io,
         NameCheckerInterface $nameChecker
-    ) {
+    )
+    {
         $this->callAfterExample($exampleEvent, $nameChecker, 'throw', false);
 
         $io->writeBrokenCodeBlock("I cannot generate the method 'throw' for you because it is a reserved keyword", 2)->shouldBeCalled();
@@ -94,7 +97,8 @@ class MethodNotFoundListenerSpec extends ObjectBehavior
         SuiteEvent $suiteEvent,
         IO $io,
         NameCheckerInterface $nameChecker
-    ) {
+    )
+    {
         $this->callAfterExample($exampleEvent, $nameChecker, 'throw', false);
         $this->callAfterExample($exampleEvent, $nameChecker, 'foo');
 

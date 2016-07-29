@@ -2,13 +2,14 @@
 
 use Maatwebsite\Excel\Files\ExcelFile;
 
-class CsvTestImport extends ExcelFile {
+class CsvTestImport extends ExcelFile
+{
 
     /**
      * Custom delimiter
      * @var string
      */
-    protected $delimiter  = ';';
+    protected $delimiter = ';';
 
     /**
      * Get file to import

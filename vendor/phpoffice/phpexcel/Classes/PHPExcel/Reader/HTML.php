@@ -65,39 +65,39 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
      */
     protected $_formats = array(
         'h1' => array('font' => array('bold' => true,
-                'size' => 24,
-            ),
+            'size' => 24,
+        ),
         ), //	Bold, 24pt
         'h2' => array('font' => array('bold' => true,
-                'size' => 18,
-            ),
+            'size' => 18,
+        ),
         ), //	Bold, 18pt
         'h3' => array('font' => array('bold' => true,
-                'size' => 13.5,
-            ),
+            'size' => 13.5,
+        ),
         ), //	Bold, 13.5pt
         'h4' => array('font' => array('bold' => true,
-                'size' => 12,
-            ),
+            'size' => 12,
+        ),
         ), //	Bold, 12pt
         'h5' => array('font' => array('bold' => true,
-                'size' => 10,
-            ),
+            'size' => 10,
+        ),
         ), //	Bold, 10pt
         'h6' => array('font' => array('bold' => true,
-                'size' => 7.5,
-            ),
+            'size' => 7.5,
+        ),
         ), //	Bold, 7.5pt
         'a' => array('font' => array('underline' => true,
-                'color' => array('argb' => PHPExcel_Style_Color::COLOR_BLUE,
-                ),
+            'color' => array('argb' => PHPExcel_Style_Color::COLOR_BLUE,
             ),
+        ),
         ), //	Blue underlined
         'hr' => array('borders' => array('bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN,
-                    'color' => array(\PHPExcel_Style_Color::COLOR_BLACK,
-                    ),
-                ),
+            'color' => array(\PHPExcel_Style_Color::COLOR_BLACK,
             ),
+        ),
+        ),
         ), //	Bottom border
     );
 
@@ -121,7 +121,8 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
         //	Reading 2048 bytes should be enough to validate that the format is HTML
         $data = fread($this->_fileHandle, 2048);
         if ((strpos($data, '<') !== FALSE) &&
-                (strlen($data) !== strlen(strip_tags($data)))) {
+            (strlen($data) !== strlen(strip_tags($data)))
+        ) {
             return TRUE;
         }
 
@@ -131,7 +132,7 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
     /**
      * Loads PHPExcel from file
      *
-     * @param  string                    $pFilename
+     * @param  string $pFilename
      * @return PHPExcel
      * @throws PHPExcel_Reader_Exception
      */
@@ -210,7 +211,7 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
             //	TODO
             $this->_dataArray[$row][$column] = 'RICH TEXT: ' . $cellContent;
         }
-        $cellContent = (string) '';
+        $cellContent = (string)'';
     }
 
     protected function _processDomElement(DOMNode $element, $sheet, &$row, &$column, &$cellContent, $format = null)
@@ -450,8 +451,8 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
     /**
      * Loads PHPExcel from file into PHPExcel instance
      *
-     * @param  string                    $pFilename
-     * @param  PHPExcel                  $objPHPExcel
+     * @param  string $pFilename
+     * @param  PHPExcel $objPHPExcel
      * @return PHPExcel
      * @throws PHPExcel_Reader_Exception
      */
@@ -488,7 +489,7 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
         $content = '';
         $this->_processDomElement($dom, $objPHPExcel->getActiveSheet(), $row, $column, $content);
 
-		// Return
+        // Return
         return $objPHPExcel;
     }
 
@@ -505,7 +506,7 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
     /**
      * Set sheet index
      *
-     * @param  int                  $pValue Sheet index
+     * @param  int $pValue Sheet index
      * @return PHPExcel_Reader_HTML
      */
     public function setSheetIndex($pValue = 0)
@@ -515,16 +516,16 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
         return $this;
     }
 
-	/**
-	 * Scan theXML for use of <!ENTITY to prevent XXE/XEE attacks
-	 *
-	 * @param 	string 		$xml
-	 * @throws PHPExcel_Reader_Exception
-	 */
-	public function securityScan($xml)
-	{
+    /**
+     * Scan theXML for use of <!ENTITY to prevent XXE/XEE attacks
+     *
+     * @param    string $xml
+     * @throws PHPExcel_Reader_Exception
+     */
+    public function securityScan($xml)
+    {
         $pattern = '/\\0?' . implode('\\0?', str_split('<!ENTITY')) . '\\0?/';
-        if (preg_match($pattern, $xml)) { 
+        if (preg_match($pattern, $xml)) {
             throw new PHPExcel_Reader_Exception('Detected use of ENTITY in XML, spreadsheet file load() aborted to prevent XXE/XEE attacks');
         }
         return $xml;

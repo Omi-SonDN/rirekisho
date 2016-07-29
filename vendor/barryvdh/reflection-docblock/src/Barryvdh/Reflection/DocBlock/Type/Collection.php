@@ -54,14 +54,15 @@ class Collection extends \ArrayObject
      * Registers the namespace and aliases; uses that to add and expand the
      * given types.
      *
-     * @param string[] $types    Array containing a list of types to add to this
+     * @param string[] $types Array containing a list of types to add to this
      *     container.
-     * @param Context  $location The current invoking location.
+     * @param Context $location The current invoking location.
      */
     public function __construct(
         array $types = array(),
         Context $context = null
-    ) {
+    )
+    {
         $this->context = null === $context ? new Context() : $context;
 
         foreach ($types as $type) {
@@ -101,7 +102,7 @@ class Collection extends \ArrayObject
         if (!is_string($type)) {
             throw new \InvalidArgumentException(
                 'A type should be represented by a string, received: '
-                .var_export($type, true)
+                . var_export($type, true)
             );
         }
 
@@ -114,10 +115,10 @@ class Collection extends \ArrayObject
             }
         }
     }
-    
+
     /**
      * Returns a string representation of the collection.
-     * 
+     *
      * @return string The resolved types across the collection, separated with
      *     {@link self::OPERATOR_OR}.
      */
@@ -157,7 +158,7 @@ class Collection extends \ArrayObject
 
         if ($this->isRelativeType($type) && !$this->isTypeAKeyword($type)) {
 
-            if($this->shouldBeAbsolute($type)){
+            if ($this->shouldBeAbsolute($type)) {
                 return self::OPERATOR_NAMESPACE . $type;
             }
 
@@ -167,7 +168,8 @@ class Collection extends \ArrayObject
             // if the first segment is not an alias; prepend namespace name and
             // return
             if (!isset($namespace_aliases[$type_parts[0]]) &&
-                !isset($namespace_aliases[strstr($type_parts[0], '::', true)])) {
+                !isset($namespace_aliases[strstr($type_parts[0], '::', true)])
+            ) {
                 $namespace = $this->context->getNamespace();
                 if ('' !== $namespace) {
                     $namespace .= self::OPERATOR_NAMESPACE;
@@ -228,7 +230,7 @@ class Collection extends \ArrayObject
     protected function isRelativeType($type)
     {
         return ($type[0] !== self::OPERATOR_NAMESPACE)
-            || $this->isTypeAKeyword($type);
+        || $this->isTypeAKeyword($type);
     }
 
     /**
@@ -239,7 +241,8 @@ class Collection extends \ArrayObject
      *
      * @return bool
      */
-    protected function shouldBeAbsolute($type){
+    protected function shouldBeAbsolute($type)
+    {
         return class_exists($type);
     }
 }

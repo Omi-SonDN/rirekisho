@@ -808,7 +808,7 @@ class ResponseTest extends ResponseTestCase
     {
         $response = new Response();
         $response->setContent($content);
-        $this->assertEquals((string) $content, $response->getContent());
+        $this->assertEquals((string)$content, $response->getContent());
     }
 
     /**

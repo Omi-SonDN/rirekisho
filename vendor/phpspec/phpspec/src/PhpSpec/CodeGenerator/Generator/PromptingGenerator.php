@@ -53,15 +53,15 @@ abstract class PromptingGenerator implements GeneratorInterface
      */
     public function __construct(IO $io, TemplateRenderer $templates, Filesystem $filesystem = null, ExecutionContextInterface $executionContext = null)
     {
-        $this->io         = $io;
-        $this->templates  = $templates;
+        $this->io = $io;
+        $this->templates = $templates;
         $this->filesystem = $filesystem ?: new Filesystem();
         $this->executionContext = $executionContext ?: new JsonExecutionContext();
     }
 
     /**
      * @param ResourceInterface $resource
-     * @param array             $data
+     * @param array $data
      */
     public function generate(ResourceInterface $resource, array $data = array())
     {
@@ -97,7 +97,7 @@ abstract class PromptingGenerator implements GeneratorInterface
 
     /**
      * @param ResourceInterface $resource
-     * @param string            $filepath
+     * @param string $filepath
      *
      * @return string
      */
@@ -105,7 +105,7 @@ abstract class PromptingGenerator implements GeneratorInterface
 
     /**
      * @param ResourceInterface $resource
-     * @param string            $filepath
+     * @param string $filepath
      *
      * @return string
      */
@@ -146,7 +146,7 @@ abstract class PromptingGenerator implements GeneratorInterface
 
     /**
      * @param ResourceInterface $resource
-     * @param string            $filepath
+     * @param string $filepath
      */
     private function generateFileAndRenderTemplate(ResourceInterface $resource, $filepath)
     {

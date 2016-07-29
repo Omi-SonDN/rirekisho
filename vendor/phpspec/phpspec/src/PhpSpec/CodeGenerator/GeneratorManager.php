@@ -39,8 +39,8 @@ class GeneratorManager
 
     /**
      * @param ResourceInterface $resource
-     * @param string            $name
-     * @param array             $data
+     * @param string $name
+     * @param array $data
      *
      * @return mixed
      * @throws \InvalidArgumentException

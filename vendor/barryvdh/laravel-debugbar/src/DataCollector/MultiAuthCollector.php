@@ -29,10 +29,10 @@ class MultiAuthCollector extends AuthCollector
         $data = [];
         $names = '';
 
-        foreach($this->guards as $guardName) {
+        foreach ($this->guards as $guardName) {
             $user = $this->auth->guard($guardName)->user();
             $data['guards'][$guardName] = $this->getUserInformation($user);
-            if(!is_null($user)) {
+            if (!is_null($user)) {
                 $names .= $guardName . ": " . $data['guards'][$guardName]['name'] . ', ';
             }
         }
@@ -47,7 +47,7 @@ class MultiAuthCollector extends AuthCollector
 
         return $data;
     }
-    
+
     /**
      * @{inheritDoc}
      */

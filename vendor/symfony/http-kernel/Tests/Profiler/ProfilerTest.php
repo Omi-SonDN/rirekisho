@@ -66,7 +66,7 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
             @unlink($this->tmp);
         }
 
-        $this->storage = new FileProfilerStorage('file:'.$this->tmp);
+        $this->storage = new FileProfilerStorage('file:' . $this->tmp);
         $this->storage->purge();
     }
 

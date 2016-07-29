@@ -108,7 +108,7 @@ class TracedStatement
                 $sql = str_replace($k, $v, $sql);
             } else {
                 $p = strpos($sql, '?');
-                $sql = substr($sql, 0, $p) . $v. substr($sql, $p + 1);
+                $sql = substr($sql, 0, $p) . $v . substr($sql, $p + 1);
             }
         }
         return $sql;

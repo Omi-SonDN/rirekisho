@@ -45,7 +45,7 @@ Feature: Developer runs the specs
     When I run phpspec
     Then the suite should pass
 
-    @issue214
+  @issue214
   Scenario: Letgo is executed after successful spec
     Given the spec file "spec/Runner/SpecExample3/MarkdownSpec.php" contains:
       """
@@ -88,7 +88,7 @@ Feature: Developer runs the specs
     When I run phpspec
     Then I should see "Letgo is called"
 
-    @issue214
+  @issue214
   Scenario: Letgo is executed after exception is thrown
     Given the spec file "spec/Runner/SpecExample4/MarkdownSpec.php" contains:
       """

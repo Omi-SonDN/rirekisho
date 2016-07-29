@@ -6,7 +6,7 @@ use Illuminate\Http\Response;
 
 class OpenHandlerController extends BaseController
 {
-   
+
     public function handle()
     {
         $debugbar = $this->debugbar;

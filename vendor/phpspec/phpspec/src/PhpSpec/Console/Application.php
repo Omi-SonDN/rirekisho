@@ -53,7 +53,7 @@ class Application extends BaseApplication
     }
 
     /**
-     * @param InputInterface  $input
+     * @param InputInterface $input
      * @param OutputInterface $output
      *
      * @return int
@@ -131,7 +131,7 @@ class Application extends BaseApplication
     }
 
     /**
-     * @param InputInterface   $input
+     * @param InputInterface $input
      * @param ServiceContainer $container
      *
      * @throws \RuntimeException
@@ -169,11 +169,11 @@ class Application extends BaseApplication
      */
     protected function parseConfigurationFile(InputInterface $input)
     {
-        $paths = array('phpspec.yml','phpspec.yml.dist');
+        $paths = array('phpspec.yml', 'phpspec.yml.dist');
 
-        if ($customPath = $input->getParameterOption(array('-c','--config'))) {
+        if ($customPath = $input->getParameterOption(array('-c', '--config'))) {
             if (!file_exists($customPath)) {
-                throw new RuntimeException('Custom configuration file not found at '.$customPath);
+                throw new RuntimeException('Custom configuration file not found at ' . $customPath);
             }
             $paths = array($customPath);
         }
@@ -181,7 +181,7 @@ class Application extends BaseApplication
         $config = $this->extractConfigFromFirstParsablePath($paths);
 
         if ($homeFolder = getenv('HOME')) {
-            $config = array_replace_recursive($this->parseConfigFromExistingPath($homeFolder.'/.phpspec.yml'), $config);
+            $config = array_replace_recursive($this->parseConfigFromExistingPath($homeFolder . '/.phpspec.yml'), $config);
         }
 
         return $config;

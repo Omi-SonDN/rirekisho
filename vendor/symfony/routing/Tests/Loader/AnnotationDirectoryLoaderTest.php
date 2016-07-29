@@ -34,15 +34,14 @@ class AnnotationDirectoryLoaderTest extends AbstractAnnotationLoaderTest
         $this->reader
             ->expects($this->any())
             ->method('getMethodAnnotations')
-            ->will($this->returnValue(array()))
-        ;
+            ->will($this->returnValue(array()));
 
-        $this->loader->load(__DIR__.'/../Fixtures/AnnotatedClasses');
+        $this->loader->load(__DIR__ . '/../Fixtures/AnnotatedClasses');
     }
 
     public function testSupports()
     {
-        $fixturesDir = __DIR__.'/../Fixtures';
+        $fixturesDir = __DIR__ . '/../Fixtures';
 
         $this->assertTrue($this->loader->supports($fixturesDir), '->supports() returns true if the resource is loadable');
         $this->assertFalse($this->loader->supports('foo.foo'), '->supports() returns true if the resource is loadable');

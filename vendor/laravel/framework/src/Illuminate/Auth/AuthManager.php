@@ -10,7 +10,7 @@ class AuthManager extends Manager
     /**
      * Create a new driver instance.
      *
-     * @param  string  $driver
+     * @param  string $driver
      * @return mixed
      */
     protected function createDriver($driver)
@@ -38,7 +38,7 @@ class AuthManager extends Manager
     /**
      * Call a custom driver creator.
      *
-     * @param  string  $driver
+     * @param  string $driver
      * @return \Illuminate\Contracts\Auth\Guard
      */
     protected function callCustomCreator($driver)
@@ -118,7 +118,7 @@ class AuthManager extends Manager
     /**
      * Set the default authentication driver name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return void
      */
     public function setDefaultDriver($name)

@@ -403,7 +403,7 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('POST', $server->getMethod());
         $this->assertEquals(['Host' => ['www.blakesimpson.co.uk']], $server->getHeaders());
-        $this->assertEquals('', (string) $server->getBody());
+        $this->assertEquals('', (string)$server->getBody());
         $this->assertEquals('1.0', $server->getProtocolVersion());
         $this->assertEquals($_COOKIE, $server->getCookieParams());
         $this->assertEquals($_POST, $server->getParsedBody());

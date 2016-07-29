@@ -18,7 +18,8 @@ use PhpSpec\Event\SuiteEvent;
 use PhpSpec\Message\CurrentExampleTracker;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class CurrentExampleListener implements EventSubscriberInterface {
+final class CurrentExampleListener implements EventSubscriberInterface
+{
 
     /**
      * @var CurrentExampleTracker

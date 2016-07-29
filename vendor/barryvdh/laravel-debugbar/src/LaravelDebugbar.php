@@ -137,7 +137,7 @@ class LaravelDebugbar extends DebugBar
         if ($this->shouldCollect('time', true)) {
             $this->addCollector(new TimeDataCollector());
 
-            if ( ! $this->isLumen()) {
+            if (!$this->isLumen()) {
                 $this->app->booted(
                     function () use ($debugbar) {
                         $startTime = $this->app['request']->server('REQUEST_TIME_FLOAT');
@@ -233,7 +233,7 @@ class LaravelDebugbar extends DebugBar
                     $this->app['log']->listen(
                         function ($level, $message, $context) use ($logger) {
                             try {
-                                $logMessage = (string) $message;
+                                $logMessage = (string)$message;
                                 if (mb_check_encoding($logMessage, 'UTF-8')) {
                                     $logMessage .= (!empty($context) ? ' ' . json_encode($context) : '');
                                 } else {
@@ -299,7 +299,7 @@ class LaravelDebugbar extends DebugBar
                         // Laravel 5.2 changed the way some core events worked. We must account for
                         // the first argument being an "event object", where arguments are passed
                         // via object properties, instead of individual arguments.
-                        if ( $query instanceof \Illuminate\Database\Events\QueryExecuted ) {
+                        if ($query instanceof \Illuminate\Database\Events\QueryExecuted) {
                             $bindings = $query->bindings;
                             $time = $query->time;
                             $connection = $query->connection;
@@ -309,7 +309,7 @@ class LaravelDebugbar extends DebugBar
                             $connection = $db->connection($connectionName);
                         }
 
-                        $queryCollector->addQuery((string) $query, $bindings, $time, $connection);
+                        $queryCollector->addQuery((string)$query, $bindings, $time, $connection);
                     }
                 );
             } catch (\Exception $e) {
@@ -360,7 +360,7 @@ class LaravelDebugbar extends DebugBar
 
         if ($this->shouldCollect('auth', false)) {
             try {
-                if($this->checkVersion('5.2')) {
+                if ($this->checkVersion('5.2')) {
                     // fix for compatibility with Laravel 5.2.*
                     $guards = array_keys($this->app['config']->get('auth.guards'));
                     $authCollector = new MultiAuthCollector($app['auth'], $guards);
@@ -385,7 +385,7 @@ class LaravelDebugbar extends DebugBar
             try {
                 $gateCollector = $this->app->make('Barryvdh\Debugbar\DataCollector\GateCollector');
                 $this->addCollector($gateCollector);
-            } catch (\Exception $e){
+            } catch (\Exception $e) {
                 // No Gate collector
             }
         }
@@ -499,14 +499,14 @@ class LaravelDebugbar extends DebugBar
             }
         }
 
-        if ($this->app->bound(SessionManager::class)){
+        if ($this->app->bound(SessionManager::class)) {
 
             /** @var \Illuminate\Session\SessionManager $sessionManager */
             $sessionManager = $app->make(SessionManager::class);
             $httpDriver = new SymfonyHttpDriver($sessionManager, $response);
             $this->setHttpDriver($httpDriver);
 
-            if ($this->shouldCollect('session') && ! $this->hasCollector('session')) {
+            if ($this->shouldCollect('session') && !$this->hasCollector('session')) {
                 try {
                     $this->addCollector(new SessionCollector($sessionManager));
                 } catch (\Exception $e) {
@@ -537,7 +537,7 @@ class LaravelDebugbar extends DebugBar
             }
         }
 
-        if ($app['config']->get('debugbar.clockwork') && ! $this->hasCollector('clockwork')) {
+        if ($app['config']->get('debugbar.clockwork') && !$this->hasCollector('clockwork')) {
 
             try {
                 $this->addCollector(new ClockworkCollector($request, $response, $sessionManager));
@@ -795,7 +795,7 @@ class LaravelDebugbar extends DebugBar
     {
         $messageLevels = array('emergency', 'alert', 'critical', 'error', 'warning', 'notice', 'info', 'debug', 'log');
         if (in_array($method, $messageLevels)) {
-            foreach($args as $arg) {
+            foreach ($args as $arg) {
                 $this->addMessage($arg, $method);
             }
         }
@@ -875,6 +875,6 @@ class LaravelDebugbar extends DebugBar
         $prefix = $this->app['config']->get('debugbar.route_prefix');
         $response->headers->set('X-Clockwork-Id', $this->getCurrentRequestId(), true);
         $response->headers->set('X-Clockwork-Version', 1, true);
-        $response->headers->set('X-Clockwork-Path', $prefix .'/clockwork/', true);
+        $response->headers->set('X-Clockwork-Path', $prefix . '/clockwork/', true);
     }
 }

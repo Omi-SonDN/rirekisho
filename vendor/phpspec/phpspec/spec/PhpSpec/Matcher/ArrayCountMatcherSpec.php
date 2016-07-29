@@ -32,7 +32,7 @@ class ArrayCountMatcherSpec extends ObjectBehavior
 
     function it_matches_proper_array_count()
     {
-        $this->shouldNotThrow()->duringPositiveMatch('haveCount', array(1,2,3), array(3));
+        $this->shouldNotThrow()->duringPositiveMatch('haveCount', array(1, 2, 3), array(3));
     }
 
     function it_matches_proper_countable_count(ArrayObject $countable)
@@ -45,7 +45,7 @@ class ArrayCountMatcherSpec extends ObjectBehavior
     function it_does_not_match_wrong_array_count()
     {
         $this->shouldThrow(new FailureException('Expected countable to have 2 items, but got 3.'))
-            ->duringPositiveMatch('haveCount', array(1,2,3), array(2));
+            ->duringPositiveMatch('haveCount', array(1, 2, 3), array(2));
     }
 
     function it_does_not_match_proper_countable_count(ArrayObject $countable)
@@ -58,7 +58,7 @@ class ArrayCountMatcherSpec extends ObjectBehavior
 
     function it_mismatches_wrong_array_count()
     {
-        $this->shouldNotThrow()->duringNegativeMatch('haveCount', array(1,2,3), array(2));
+        $this->shouldNotThrow()->duringNegativeMatch('haveCount', array(1, 2, 3), array(2));
     }
 
     function it_mismatches_wrong_countable_count(ArrayObject $countable)

@@ -197,15 +197,19 @@
 .sidenav ul li.bookmark-link a:hover, .sidenav ul li.bookmark-link a:focus {
     color: #52527a;
 }
-.sidenav ul li.track-list{
+
+.sidenav ul li.track-list {
     margin: 4px;
     padding-top: 7px;
 }
-.sidenav ul li.track-list input{
-    font-size: 12px;font-style: normal; font-weight: 200;
+
+.sidenav ul li.track-list input {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 200;
 }
 
-.sidenav ul li.track-list a:visited, a:link{
+.sidenav ul li.track-list a:visited, a:link {
 
 }
 

@@ -4,7 +4,8 @@ use PHPExcel_Settings;
 use Illuminate\Support\Facades\Config;
 use PHPExcel_CachedObjectStorageFactory;
 
-class Cache {
+class Cache
+{
 
     /**
      * PHPExcel cache class
@@ -17,17 +18,17 @@ class Cache {
      * @var array
      */
     protected $available = array(
-        'memory'     => 'cache_in_memory',
-        'gzip'       => 'cache_in_memory_gzip',
+        'memory' => 'cache_in_memory',
+        'gzip' => 'cache_in_memory_gzip',
         'serialized' => 'cache_in_memory_serialized',
-        'igbinary'   => 'cache_igbinary',
-        'discISAM'   => 'cache_to_discISAM',
-        'apc'        => 'cache_to_apc',
-        'memcache'   => 'cache_to_memcache',
-        'temp'       => 'cache_to_phpTemp',
-        'wincache'   => 'cache_to_wincache',
-        'sqlite'     => 'cache_to_sqlite',
-        'sqlite3'    => 'cache_to_sqlite3'
+        'igbinary' => 'cache_igbinary',
+        'discISAM' => 'cache_to_discISAM',
+        'apc' => 'cache_to_apc',
+        'memcache' => 'cache_to_memcache',
+        'temp' => 'cache_to_phpTemp',
+        'wincache' => 'cache_to_wincache',
+        'sqlite' => 'cache_to_sqlite',
+        'sqlite3' => 'cache_to_sqlite3'
     );
 
     /**
@@ -92,14 +93,13 @@ class Cache {
      */
     protected function addAdditionalSettings()
     {
-        switch ($this->driver)
-        {
+        switch ($this->driver) {
             case 'memcache':
 
                 // Add extra memcache settings
                 $this->settings = array_merge($this->settings, array(
                     'memcacheServer' => Config::get($this->configName . '.memcache.host', 'localhost'),
-                    'memcachePort'   => Config::get($this->configName . '.memcache.port', 11211)
+                    'memcachePort' => Config::get($this->configName . '.memcache.port', 11211)
                 ));
 
                 break;

@@ -1,20 +1,20 @@
 <li>
-        <table class="table table-striped table-bordered editable-table table-reload" id="1_1"
-               style="width: 90%;">
-            <thead>
-            <tr class="">
-                <th colspan="5">Lịch sử công việc</th>
-            </tr>
-            <tr class="">
-                <th style="width:7%;"> #</th>
-                <th style="width:13%;">Năm</th>
-                <th style="width:13%;">Tháng</th>
-                <th>Tên nơi làm việc</th>
-                <th style="width:7%;">&nbsp;</th>
-            </tr>
-            </thead>
-                @include('includes.record-edit', array('field' => 'Work','type' => 1 ))
-        </table>
+    <table class="table table-striped table-bordered editable-table table-reload" id="1_1"
+           style="width: 90%;">
+        <thead>
+        <tr class="">
+            <th colspan="5">Lịch sử công việc</th>
+        </tr>
+        <tr class="">
+            <th style="width:7%;"> #</th>
+            <th style="width:13%;">Năm</th>
+            <th style="width:13%;">Tháng</th>
+            <th>Tên nơi làm việc</th>
+            <th style="width:7%;">&nbsp;</th>
+        </tr>
+        </thead>
+        @include('includes.record-edit', array('field' => 'Work','type' => 1 ))
+    </table>
 
 </li>
 <li>

@@ -24,7 +24,7 @@ class GroupsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        
+
         $groups = Groups::orderBy('name')->paginate(10);
 
         $data = array(
@@ -47,7 +47,7 @@ class GroupsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -55,13 +55,13 @@ class GroupsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        
+
         $this->validate($request, [
             'name' => 'required|max:255|unique:groups',
         ]);
 
         $group = new Groups;
-        $group-> name = $request->name;
+        $group->name = $request->name;
         $group->save();
 
         return Response::json($group);
@@ -70,7 +70,7 @@ class GroupsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -78,10 +78,10 @@ class GroupsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        
-        $group = Groups::with(['users' => function($query) {
-                    $query->orderBy('name', 'DESC');
-                }])->findorfail($id);
+
+        $group = Groups::with(['users' => function ($query) {
+            $query->orderBy('name', 'DESC');
+        }])->findorfail($id);
 
         return Response::json($group);
     }
@@ -89,7 +89,7 @@ class GroupsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -97,7 +97,7 @@ class GroupsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        
+
         $group = Groups::findorfail($id);
 
         return Response::json($group);
@@ -106,8 +106,8 @@ class GroupsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -115,7 +115,7 @@ class GroupsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        
+
         $group = Groups::findorfail($id);
 
         if ($group->name != $request->name) {
@@ -125,7 +125,7 @@ class GroupsController extends Controller
 
             $group->name = $request->name;
         }
-        
+
         $group->update();
 
         return Response::json($group);
@@ -134,7 +134,7 @@ class GroupsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -142,17 +142,17 @@ class GroupsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        
+
         $group = Groups::findorfail($id);
 
         $group->delete();
 
         return Response::json($group);
     }
-    
+
     /**
      * get username ajax
-     * 
+     *
      * @param Request $request
      * @return type
      */
@@ -161,20 +161,20 @@ class GroupsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        
+
         $key = $request->term;
-        
+
         $Usernames = User::select('name', 'email')
-            ->where('email', 'like' , '%'.$key.'%')
-            ->orWhere('name', 'like', '%'.$key.'%')
+            ->where('email', 'like', '%' . $key . '%')
+            ->orWhere('name', 'like', '%' . $key . '%')
             ->get();
-        
+
         return Response::json($Usernames);
     }
-    
+
     /**
      * update group's member
-     * 
+     *
      * @param Request $request
      * @return int
      */
@@ -183,20 +183,19 @@ class GroupsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        
+
         //detach all member
         $group = Groups::findorfail($request->group_id);
         $group->users()->detach();
-        
+
         //attach new member
         $username = explode(',', $request->members);
-        
-        foreach ($username as $user)
-        {
+
+        foreach ($username as $user) {
             $user = User::where('name', '=', $user)->first();
             $group->users()->attach($user['id']);
         }
-        
+
         return 1;
     }
 }

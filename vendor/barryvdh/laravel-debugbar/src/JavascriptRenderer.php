@@ -43,9 +43,9 @@ class JavascriptRenderer extends BaseJavascriptRenderer
 
         $jsRoute = route('debugbar.assets.js', [
             'v' => $this->getModifiedTime('js')
-       ]);
+        ]);
 
-        $html  = "<link rel='stylesheet' type='text/css' href='{$cssRoute}'>";
+        $html = "<link rel='stylesheet' type='text/css' href='{$cssRoute}'>";
         $html .= "<script type='text/javascript' src='{$jsRoute}'></script>";
 
         if ($this->isJqueryNoConflictEnabled()) {

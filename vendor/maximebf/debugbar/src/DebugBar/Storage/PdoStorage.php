@@ -122,7 +122,7 @@ class PdoStorage implements StorageInterface
      * Get a SQL Query for a task, with the variables replaced
      *
      * @param  string $name
-     * @param  array  $vars
+     * @param  array $vars
      * @return string
      */
     protected function getSqlQuery($name, array $vars = array())

@@ -183,12 +183,12 @@ class PropelCollector extends DataCollector implements BasicLogger, Renderable, 
 
         $duration = 0;
         if (preg_match('/([0-9]+\.[0-9]+)/', $parts[1], $matches)) {
-            $duration = (float) $matches[1];
+            $duration = (float)$matches[1];
         }
 
         $memory = 0;
         if (preg_match('/([0-9]+\.[0-9]+) ([A-Z]{1,2})/', $parts[2], $matches)) {
-            $memory = (float) $matches[1];
+            $memory = (float)$matches[1];
             if ($matches[2] == 'KB') {
                 $memory *= 1024;
             } elseif ($matches[2] == 'MB') {

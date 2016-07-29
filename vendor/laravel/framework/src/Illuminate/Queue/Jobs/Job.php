@@ -72,7 +72,7 @@ abstract class Job
     /**
      * Release the job back into the queue.
      *
-     * @param  int   $delay
+     * @param  int $delay
      * @return void
      */
     public function release($delay = 0)
@@ -117,7 +117,7 @@ abstract class Job
     /**
      * Resolve and fire the job handler method.
      *
-     * @param  array  $payload
+     * @param  array $payload
      * @return void
      */
     protected function resolveAndFire(array $payload)
@@ -132,7 +132,7 @@ abstract class Job
     /**
      * Parse the job declaration into class and method.
      *
-     * @param  string  $job
+     * @param  string $job
      * @return array
      */
     protected function parseJob($job)
@@ -145,7 +145,7 @@ abstract class Job
     /**
      * Resolve the given job handler.
      *
-     * @param  string  $class
+     * @param  string $class
      * @return mixed
      */
     protected function resolve($class)
@@ -156,7 +156,7 @@ abstract class Job
     /**
      * Resolve all of the queueable entities in the given payload.
      *
-     * @param  mixed  $data
+     * @param  mixed $data
      * @return mixed
      */
     protected function resolveQueueableEntities($data)
@@ -181,7 +181,7 @@ abstract class Job
     /**
      * Resolve a single queueable entity from the resolver.
      *
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return \Illuminate\Contracts\Queue\QueueableEntity
      */
     protected function resolveQueueableEntity($value)
@@ -226,7 +226,7 @@ abstract class Job
     /**
      * Calculate the number of seconds with the given delay.
      *
-     * @param  \DateTime|int  $delay
+     * @param  \DateTime|int $delay
      * @return int
      */
     protected function getSeconds($delay)
@@ -235,7 +235,7 @@ abstract class Job
             return max(0, $delay->getTimestamp() - $this->getTime());
         }
 
-        return (int) $delay;
+        return (int)$delay;
     }
 
     /**

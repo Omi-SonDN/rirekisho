@@ -35,8 +35,7 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service
             ->expects($this->once())
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $container = new Container();
         $container->set('service.listener', $service);
@@ -56,20 +55,17 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service
             ->expects($this->once())
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $service
             ->expects($this->once())
             ->method('onEventWithPriority')
-            ->with($event)
-        ;
+            ->with($event);
 
         $service
             ->expects($this->once())
             ->method('onEventNested')
-            ->with($event)
-        ;
+            ->with($event);
 
         $container = new Container();
         $container->set('service.subscriber', $service);
@@ -91,8 +87,7 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service
             ->expects($this->once())
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $container = new Container();
         $container->set('service.listener', $service);
@@ -138,8 +133,7 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service1
             ->expects($this->exactly(2))
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $scope = new Scope('scope');
         $container = new Container();
@@ -157,8 +151,7 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service2
             ->expects($this->once())
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $container->enterScope('scope');
         $container->set('service.listener', $service2, 'scope');
@@ -188,8 +181,7 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service
             ->expects($this->once())
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $this->assertTrue($dispatcher->hasListeners());
 

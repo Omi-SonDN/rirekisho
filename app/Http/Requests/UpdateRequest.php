@@ -25,9 +25,9 @@ class UpdateRequest extends Request
     {
         $year = date('Y', strtotime("now"));
         return [
-        'Month' => 'date_format:m|numeric|between:1,12',
-        'Year' => "date_format:Y|numeric|min:1950|max:".$year,
-        'B_date' => "date|after:-60 year|before:now",
+            'Month' => 'date_format:m|numeric|between:1,12',
+            'Year' => "date_format:Y|numeric|min:1950|max:" . $year,
+            'B_date' => "date|after:-60 year|before:now",
         ];
     }
 }

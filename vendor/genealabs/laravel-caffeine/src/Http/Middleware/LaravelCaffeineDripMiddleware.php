@@ -9,7 +9,7 @@ class LaravelCaffeineDripMiddleware implements Middleware
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Closure                 $next
+     * @param  \Closure $next
      *
      * @return mixed
      */
@@ -18,7 +18,7 @@ class LaravelCaffeineDripMiddleware implements Middleware
         $content = null;
         $response = $next($request);
 
-        if (! method_exists($response, 'getOriginalContent')) {
+        if (!method_exists($response, 'getOriginalContent')) {
             return $response;
         }
 

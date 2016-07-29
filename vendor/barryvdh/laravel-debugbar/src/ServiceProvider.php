@@ -28,16 +28,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         );
 
         $this->app->singleton('debugbar', function ($app) {
-                $debugbar = new LaravelDebugbar($app);
+            $debugbar = new LaravelDebugbar($app);
 
-                if ($app->bound(SessionManager::class)) {
-                    $sessionManager = $app->make(SessionManager::class);
-                    $httpDriver = new SymfonyHttpDriver($sessionManager);
-                    $debugbar->setHttpDriver($httpDriver);
-                }
-
-                return $debugbar;
+            if ($app->bound(SessionManager::class)) {
+                $sessionManager = $app->make(SessionManager::class);
+                $httpDriver = new SymfonyHttpDriver($sessionManager);
+                $debugbar->setHttpDriver($httpDriver);
             }
+
+            return $debugbar;
+        }
         );
 
         $this->app->alias('debugbar', 'Barryvdh\Debugbar\LaravelDebugbar');
@@ -70,7 +70,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             $enabled = $this->checkAppDebug();
         }
 
-        if (! $enabled) {
+        if (!$enabled) {
             return;
         }
 
@@ -79,7 +79,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             'prefix' => $this->app['config']->get('debugbar.route_prefix'),
         ];
 
-        $this->getRouter()->group($routeConfig, function($router) {
+        $this->getRouter()->group($routeConfig, function ($router) {
             $router->get('open', [
                 'uses' => 'OpenHandlerController@handle',
                 'as' => 'debugbar.openhandler',

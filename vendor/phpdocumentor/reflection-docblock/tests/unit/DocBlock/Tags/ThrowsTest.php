@@ -118,10 +118,10 @@ class ThrowsTest extends \PHPUnit_Framework_TestCase
     public function testFactoryMethod()
     {
         $descriptionFactory = m::mock(DescriptionFactory::class);
-        $resolver           = new TypeResolver();
-        $context            = new Context('');
+        $resolver = new TypeResolver();
+        $context = new Context('');
 
-        $type        = new String_();
+        $type = new String_();
         $description = new Description('My Description');
         $descriptionFactory->shouldReceive('create')->with('My Description', $context)->andReturn($description);
 

@@ -39,7 +39,8 @@ class SpecificationGeneratorSpec extends ObjectBehavior
 
     function it_generates_spec_class_from_resource_and_puts_it_into_appropriate_folder(
         $io, $tpl, $fs, ResourceInterface $resource
-    ) {
+    )
+    {
         $resource->getSpecName()->willReturn('AppSpec');
         $resource->getSpecFilename()->willReturn('/project/spec/Acme/AppSpec.php');
         $resource->getSpecNamespace()->willReturn('spec\Acme');
@@ -47,11 +48,11 @@ class SpecificationGeneratorSpec extends ObjectBehavior
         $resource->getName()->willReturn('App');
 
         $values = array(
-            '%filepath%'  => '/project/spec/Acme/AppSpec.php',
-            '%name%'      => 'AppSpec',
+            '%filepath%' => '/project/spec/Acme/AppSpec.php',
+            '%name%' => 'AppSpec',
             '%namespace%' => 'spec\Acme',
-            '%subject%'   => 'Acme\App',
-            '%subject_class%'  => 'App'
+            '%subject%' => 'Acme\App',
+            '%subject_class%' => 'App'
         );
 
         $tpl->render('specification', $values)->willReturn(null);
@@ -66,7 +67,8 @@ class SpecificationGeneratorSpec extends ObjectBehavior
 
     function it_uses_template_provided_by_templating_system_if_there_is_one(
         $io, $tpl, $fs, ResourceInterface $resource
-    ) {
+    )
+    {
         $resource->getSpecName()->willReturn('AppSpec');
         $resource->getSpecFilename()->willReturn('/project/spec/Acme/AppSpec.php');
         $resource->getSpecNamespace()->willReturn('spec\Acme');
@@ -74,11 +76,11 @@ class SpecificationGeneratorSpec extends ObjectBehavior
         $resource->getName()->willReturn('App');
 
         $values = array(
-            '%filepath%'  => '/project/spec/Acme/AppSpec.php',
-            '%name%'      => 'AppSpec',
+            '%filepath%' => '/project/spec/Acme/AppSpec.php',
+            '%name%' => 'AppSpec',
             '%namespace%' => 'spec\Acme',
-            '%subject%'   => 'Acme\App',
-            '%subject_class%'  => 'App'
+            '%subject%' => 'Acme\App',
+            '%subject_class%' => 'App'
         );
 
         $tpl->render('specification', $values)->willReturn('template code');
@@ -109,7 +111,8 @@ class SpecificationGeneratorSpec extends ObjectBehavior
 
     function it_asks_confirmation_if_spec_already_exists(
         $io, $tpl, $fs, ResourceInterface $resource
-    ) {
+    )
+    {
         $resource->getSpecName()->willReturn('AppSpec');
         $resource->getSpecFilename()->willReturn('/project/spec/Acme/AppSpec.php');
         $resource->getSpecNamespace()->willReturn('spec\Acme');

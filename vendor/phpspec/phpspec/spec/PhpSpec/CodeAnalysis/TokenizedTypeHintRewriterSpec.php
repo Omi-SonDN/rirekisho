@@ -155,7 +155,8 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
     function it_indexes_invalid_typehints(
         TypeHintIndex $typeHintIndex,
         NamespaceResolver $namespaceResolver
-    ) {
+    )
+    {
         $e = new DisallowedScalarTypehintException();
         $namespaceResolver->analyse(Argument::any())->shouldBeCalled();
 

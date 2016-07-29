@@ -48,8 +48,8 @@ class IO implements IOInterface
     private $hasTempString = false;
 
     /**
-      * @var OptionsConfig
-      */
+     * @var OptionsConfig
+     */
     private $config;
 
     /**
@@ -63,20 +63,21 @@ class IO implements IOInterface
     private $prompter;
 
     /**
-     * @param InputInterface  $input
+     * @param InputInterface $input
      * @param OutputInterface $output
-     * @param OptionsConfig   $config
-     * @param Prompter        $prompter
+     * @param OptionsConfig $config
+     * @param Prompter $prompter
      */
     public function __construct(
         InputInterface $input,
         OutputInterface $output,
         OptionsConfig $config,
         Prompter $prompter
-    ) {
-        $this->input   = $input;
-        $this->output  = $output;
-        $this->config  = $config;
+    )
+    {
+        $this->input = $input;
+        $this->output = $output;
+        $this->config = $config;
         $this->prompter = $prompter;
     }
 
@@ -106,7 +107,7 @@ class IO implements IOInterface
         }
 
         return $this->config->isCodeGenerationEnabled()
-            && !$this->input->getOption('no-code-generation');
+        && !$this->input->getOption('no-code-generation');
     }
 
     /**
@@ -115,7 +116,7 @@ class IO implements IOInterface
     public function isStopOnFailureEnabled()
     {
         return $this->config->isStopOnFailureEnabled()
-            || $this->input->getOption('stop-on-failure');
+        || $this->input->getOption('stop-on-failure');
     }
 
     /**
@@ -135,7 +136,7 @@ class IO implements IOInterface
     }
 
     /**
-     * @param string       $message
+     * @param string $message
      * @param integer|null $indent
      */
     public function writeln($message = '', $indent = null)
@@ -144,7 +145,7 @@ class IO implements IOInterface
     }
 
     /**
-     * @param string       $message
+     * @param string $message
      * @param integer|null $indent
      */
     public function writeTemp($message, $indent = null)
@@ -177,9 +178,9 @@ class IO implements IOInterface
     }
 
     /**
-     * @param string       $message
+     * @param string $message
      * @param integer|null $indent
-     * @param bool         $newline
+     * @param bool $newline
      */
     public function write($message, $indent = null, $newline = false)
     {
@@ -195,11 +196,11 @@ class IO implements IOInterface
         }
 
         $this->output->write($message, $newline);
-        $this->lastMessage = $message.($newline ? "\n" : '');
+        $this->lastMessage = $message . ($newline ? "\n" : '');
     }
 
     /**
-     * @param string       $message
+     * @param string $message
      * @param integer|null $indent
      */
     public function overwriteln($message = '', $indent = null)
@@ -208,9 +209,9 @@ class IO implements IOInterface
     }
 
     /**
-     * @param string       $message
+     * @param string $message
      * @param integer|null $indent
-     * @param bool         $newline
+     * @param bool $newline
      */
     public function overwrite($message, $indent = null, $newline = false)
     {
@@ -241,12 +242,12 @@ class IO implements IOInterface
             $this->writeln();
         }
 
-        $this->lastMessage = $message.($newline ? "\n" : '');
+        $this->lastMessage = $message . ($newline ? "\n" : '');
     }
 
     private function getCommonPrefix($stringA, $stringB)
     {
-        for ($i = 0, $len = min(strlen($stringA), strlen($stringB)); $i<$len; $i++) {
+        for ($i = 0, $len = min(strlen($stringA), strlen($stringB)); $i < $len; $i++) {
             if ($stringA[$i] != $stringB[$i]) {
                 break;
             }
@@ -263,19 +264,19 @@ class IO implements IOInterface
 
     /**
      * @param string $question
-     * @param bool   $default
+     * @param bool $default
      *
      * @return Boolean
      */
     public function askConfirmation($question, $default = true)
     {
-        $lines   = array();
-        $lines[] = '<question>'.str_repeat(' ', $this->getBlockWidth())."</question>";
+        $lines = array();
+        $lines[] = '<question>' . str_repeat(' ', $this->getBlockWidth()) . "</question>";
         foreach (explode("\n", wordwrap($question, $this->getBlockWidth() - 4, "\n", true)) as $line) {
-            $lines[] = '<question>  '.str_pad($line, $this->getBlockWidth() - 2).'</question>';
+            $lines[] = '<question>  ' . str_pad($line, $this->getBlockWidth() - 2) . '</question>';
         }
-        $lines[] = '<question>'.str_repeat(' ', $this->getBlockWidth() - 8).'</question> <value>'.
-            ($default ? '[Y/n]' : '[y/N]').'</value> ';
+        $lines[] = '<question>' . str_repeat(' ', $this->getBlockWidth() - 8) . '</question> <value>' .
+            ($default ? '[Y/n]' : '[y/N]') . '</value> ';
 
         $formattedQuestion = implode("\n", $lines) . "\n";
 
@@ -283,7 +284,7 @@ class IO implements IOInterface
     }
 
     /**
-     * @param string  $text
+     * @param string $text
      * @param integer $indent
      *
      * @return string
@@ -292,7 +293,7 @@ class IO implements IOInterface
     {
         return implode("\n", array_map(
             function ($line) use ($indent) {
-                return str_repeat(' ', $indent).$line;
+                return str_repeat(' ', $indent) . $line;
             },
             explode("\n", $text)
         ));
@@ -355,13 +356,13 @@ class IO implements IOInterface
             $message = $this->indentText($message, $indent);
         }
 
-        $this->output->writeln("<broken-bg>".str_repeat(" ", $this->getBlockWidth())."</broken-bg>");
+        $this->output->writeln("<broken-bg>" . str_repeat(" ", $this->getBlockWidth()) . "</broken-bg>");
 
         foreach (explode("\n", $message) as $line) {
-            $this->output->writeln("<broken-bg>".str_pad($line, $this->getBlockWidth(), ' ')."</broken-bg>");
+            $this->output->writeln("<broken-bg>" . str_pad($line, $this->getBlockWidth(), ' ') . "</broken-bg>");
         }
 
-        $this->output->writeln("<broken-bg>".str_repeat(" ", $this->getBlockWidth())."</broken-bg>");
+        $this->output->writeln("<broken-bg>" . str_repeat(" ", $this->getBlockWidth()) . "</broken-bg>");
         $this->output->writeln('');
     }
 }

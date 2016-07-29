@@ -57,7 +57,7 @@ foreach ($files as $file) {
             $startLine = $e->getStartLine();
             $endLine = $e->getEndLine();
             $startColumn = $e->getStartColumn($code);
-            $endColumn   = $e->getEndColumn($code);
+            $endColumn = $e->getEndColumn($code);
             $message .= $e->getRawMessage() . " from $startLine:$startColumn to $endLine:$endColumn";
         } else {
             $message = $e->getMessage();
@@ -86,7 +86,8 @@ foreach ($files as $file) {
     }
 }
 
-function showHelp($error = '') {
+function showHelp($error = '')
+{
     if ($error) {
         echo $error . "\n\n";
     }
@@ -115,7 +116,8 @@ OUTPUT
     );
 }
 
-function parseArgs($args) {
+function parseArgs($args)
+{
     $operations = array();
     $files = array();
     $attributes = array(

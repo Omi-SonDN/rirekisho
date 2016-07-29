@@ -32,7 +32,7 @@ class HandlerEventCommand extends GeneratorCommand
     /**
      * Build the class with the given name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return string
      */
     protected function buildClass($name)
@@ -41,8 +41,8 @@ class HandlerEventCommand extends GeneratorCommand
 
         $event = $this->option('event');
 
-        if (! Str::startsWith($event, $this->laravel->getNamespace())) {
-            $event = $this->laravel->getNamespace().'Events\\'.$event;
+        if (!Str::startsWith($event, $this->laravel->getNamespace())) {
+            $event = $this->laravel->getNamespace() . 'Events\\' . $event;
         }
 
         $stub = str_replace(
@@ -64,21 +64,21 @@ class HandlerEventCommand extends GeneratorCommand
     protected function getStub()
     {
         if ($this->option('queued')) {
-            return __DIR__.'/stubs/event-handler-queued.stub';
+            return __DIR__ . '/stubs/event-handler-queued.stub';
         } else {
-            return __DIR__.'/stubs/event-handler.stub';
+            return __DIR__ . '/stubs/event-handler.stub';
         }
     }
 
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param  string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Handlers\Events';
+        return $rootNamespace . '\Handlers\Events';
     }
 
     /**

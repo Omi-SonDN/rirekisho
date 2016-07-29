@@ -56,8 +56,8 @@ class HtmlBuilder
      * Generate a link to a JavaScript file.
      *
      * @param string $url
-     * @param array  $attributes
-     * @param bool   $secure
+     * @param array $attributes
+     * @param bool $secure
      *
      * @return string
      */
@@ -65,15 +65,15 @@ class HtmlBuilder
     {
         $attributes['src'] = $this->url->asset($url, $secure);
 
-        return '<script'.$this->attributes($attributes).'></script>'.PHP_EOL;
+        return '<script' . $this->attributes($attributes) . '></script>' . PHP_EOL;
     }
 
     /**
      * Generate a link to a CSS file.
      *
      * @param string $url
-     * @param array  $attributes
-     * @param bool   $secure
+     * @param array $attributes
+     * @param bool $secure
      *
      * @return string
      */
@@ -85,7 +85,7 @@ class HtmlBuilder
 
         $attributes['href'] = $this->url->asset($url, $secure);
 
-        return '<link'.$this->attributes($attributes).'>'.PHP_EOL;
+        return '<link' . $this->attributes($attributes) . '>' . PHP_EOL;
     }
 
     /**
@@ -93,8 +93,8 @@ class HtmlBuilder
      *
      * @param string $url
      * @param string $alt
-     * @param array  $attributes
-     * @param bool   $secure
+     * @param array $attributes
+     * @param bool $secure
      *
      * @return string
      */
@@ -102,15 +102,15 @@ class HtmlBuilder
     {
         $attributes['alt'] = $alt;
 
-        return '<img src="'.$this->url->asset($url, $secure).'"'.$this->attributes($attributes).'>';
+        return '<img src="' . $this->url->asset($url, $secure) . '"' . $this->attributes($attributes) . '>';
     }
 
     /**
      * Generate a link to a Favicon file.
      *
      * @param string $url
-     * @param array  $attributes
-     * @param bool   $secure
+     * @param array $attributes
+     * @param bool $secure
      *
      * @return string
      */
@@ -122,7 +122,7 @@ class HtmlBuilder
 
         $attributes['href'] = $this->url->asset($url, $secure);
 
-        return '<link'.$this->attributes($attributes).'>'.PHP_EOL;
+        return '<link' . $this->attributes($attributes) . '>' . PHP_EOL;
     }
 
     /**
@@ -130,8 +130,8 @@ class HtmlBuilder
      *
      * @param string $url
      * @param string $title
-     * @param array  $attributes
-     * @param bool   $secure
+     * @param array $attributes
+     * @param bool $secure
      *
      * @return string
      */
@@ -143,7 +143,7 @@ class HtmlBuilder
             $title = $url;
         }
 
-        return '<a href="'.$url.'"'.$this->attributes($attributes).'>'.$this->entities($title).'</a>';
+        return '<a href="' . $url . '"' . $this->attributes($attributes) . '>' . $this->entities($title) . '</a>';
     }
 
     /**
@@ -151,7 +151,7 @@ class HtmlBuilder
      *
      * @param string $url
      * @param string $title
-     * @param array  $attributes
+     * @param array $attributes
      *
      * @return string
      */
@@ -165,8 +165,8 @@ class HtmlBuilder
      *
      * @param string $url
      * @param string $title
-     * @param array  $attributes
-     * @param bool   $secure
+     * @param array $attributes
+     * @param bool $secure
      *
      * @return string
      */
@@ -182,7 +182,7 @@ class HtmlBuilder
      *
      * @param string $url
      * @param string $title
-     * @param array  $attributes
+     * @param array $attributes
      *
      * @return string
      */
@@ -196,8 +196,8 @@ class HtmlBuilder
      *
      * @param string $name
      * @param string $title
-     * @param array  $parameters
-     * @param array  $attributes
+     * @param array $parameters
+     * @param array $attributes
      *
      * @return string
      */
@@ -211,8 +211,8 @@ class HtmlBuilder
      *
      * @param string $action
      * @param string $title
-     * @param array  $parameters
-     * @param array  $attributes
+     * @param array $parameters
+     * @param array $attributes
      *
      * @return string
      */
@@ -226,7 +226,7 @@ class HtmlBuilder
      *
      * @param string $email
      * @param string $title
-     * @param array  $attributes
+     * @param array $attributes
      *
      * @return string
      */
@@ -236,9 +236,9 @@ class HtmlBuilder
 
         $title = $title ?: $email;
 
-        $email = $this->obfuscate('mailto:').$email;
+        $email = $this->obfuscate('mailto:') . $email;
 
-        return '<a href="'.$email.'"'.$this->attributes($attributes).'>'.$this->entities($title).'</a>';
+        return '<a href="' . $email . '"' . $this->attributes($attributes) . '>' . $this->entities($title) . '</a>';
     }
 
     /**
@@ -294,10 +294,10 @@ class HtmlBuilder
         $html = "<dl{$attributes}>";
 
         foreach ($list as $key => $value) {
-            $value = (array) $value;
-            
+            $value = (array)$value;
+
             $html .= "<dt>$key</dt>";
-            
+
             foreach ($value as $v_key => $v_value) {
                 $html .= "<dd>$v_value</dd>";
             }
@@ -312,8 +312,8 @@ class HtmlBuilder
      * Create a listing HTML element.
      *
      * @param string $type
-     * @param array  $list
-     * @param array  $attributes
+     * @param array $list
+     * @param array $attributes
      *
      * @return string
      */
@@ -340,9 +340,9 @@ class HtmlBuilder
     /**
      * Create the HTML for a listing element.
      *
-     * @param mixed  $key
+     * @param mixed $key
      * @param string $type
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return string
      */
@@ -351,16 +351,16 @@ class HtmlBuilder
         if (is_array($value)) {
             return $this->nestedListing($key, $type, $value);
         } else {
-            return '<li>'.e($value).'</li>';
+            return '<li>' . e($value) . '</li>';
         }
     }
 
     /**
      * Create the HTML for a nested listing attribute.
      *
-     * @param mixed  $key
+     * @param mixed $key
      * @param string $type
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return string
      */
@@ -369,7 +369,7 @@ class HtmlBuilder
         if (is_int($key)) {
             return $this->listing($type, $value);
         } else {
-            return '<li>'.$key.$this->listing($type, $value).'</li>';
+            return '<li>' . $key . $this->listing($type, $value) . '</li>';
         }
     }
 
@@ -384,7 +384,7 @@ class HtmlBuilder
     {
         $html = [];
 
-        foreach ((array) $attributes as $key => $value) {
+        foreach ((array)$attributes as $key => $value) {
             $element = $this->attributeElement($key, $value);
 
             if (!is_null($element)) {
@@ -392,7 +392,7 @@ class HtmlBuilder
             }
         }
 
-        return count($html) > 0 ? ' '.implode(' ', $html) : '';
+        return count($html) > 0 ? ' ' . implode(' ', $html) : '';
     }
 
     /**
@@ -413,7 +413,7 @@ class HtmlBuilder
         }
 
         if (!is_null($value)) {
-            return $key.'="'.e($value).'"';
+            return $key . '="' . e($value) . '"';
         }
     }
 
@@ -438,10 +438,12 @@ class HtmlBuilder
             // the randomly obfuscated letters out of the string on the responses.
             switch (rand(1, 3)) {
                 case 1:
-                    $safe .= '&#'.ord($letter).';'; break;
+                    $safe .= '&#' . ord($letter) . ';';
+                    break;
 
                 case 2:
-                    $safe .= '&#x'.dechex(ord($letter)).';'; break;
+                    $safe .= '&#x' . dechex(ord($letter)) . ';';
+                    break;
 
                 case 3:
                     $safe .= $letter;
@@ -456,7 +458,7 @@ class HtmlBuilder
      *
      * @param string $name
      * @param string $content
-     * @param array  $attributes
+     * @param array $attributes
      *
      * @return string
      */
@@ -466,6 +468,6 @@ class HtmlBuilder
 
         $attributes = array_merge($defaults, $attributes);
 
-        return '<meta'.$this->attributes($attributes).'>'.PHP_EOL;
+        return '<meta' . $this->attributes($attributes) . '>' . PHP_EOL;
     }
 }

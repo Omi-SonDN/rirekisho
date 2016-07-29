@@ -123,11 +123,11 @@ class CallerSpec extends ObjectBehavior
 
         $exceptions->methodNotFound('spec\PhpSpec\Wrapper\Subject\ExampleClass', '__construct', array($argument))
             ->willReturn(new \PhpSpec\Exception\Fracture\MethodNotFoundException(
-                    'Method "__construct" not found.',
-                    $obj,
-                    '"ExampleClass::__construct"',
-                    array()
-                ))
+                'Method "__construct" not found.',
+                $obj,
+                '"ExampleClass::__construct"',
+                array()
+            ))
             ->shouldBeCalled();
 
         $this->shouldThrow('\PhpSpec\Exception\Fracture\MethodNotFoundException')

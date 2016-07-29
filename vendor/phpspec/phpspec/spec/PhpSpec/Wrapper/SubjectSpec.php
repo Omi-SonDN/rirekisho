@@ -30,7 +30,7 @@ class SubjectSpec extends ObjectBehavior
     }
 
     function it_passes_the_created_subject_to_expectation(WrappedObject $wrappedObject,
-        ExpectationFactory $expectationFactory, ExpectationInterface $expectation)
+                                                          ExpectationFactory $expectationFactory, ExpectationInterface $expectation)
     {
         $expectation->match(Argument::cetera())->willReturn(true);
         $wrappedObject->getClassName()->willReturn('spec\PhpSpec\Wrapper\Everything');
@@ -41,7 +41,7 @@ class SubjectSpec extends ObjectBehavior
     }
 
     function it_passes_the_existing_subject_to_expectation(Wrapper $wrapper, WrappedObject $wrappedObject, Caller $caller,
-        SubjectWithArrayAccess $arrayAccess, ExpectationFactory $expectationFactory, ExpectationInterface $expectation)
+                                                           SubjectWithArrayAccess $arrayAccess, ExpectationFactory $expectationFactory, ExpectationInterface $expectation)
     {
         $existingSubject = new \ArrayObject();
         $this->beConstructedWith($existingSubject, $wrapper, $wrappedObject, $caller, $arrayAccess, $expectationFactory);

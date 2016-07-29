@@ -5,7 +5,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Classes;
 use Maatwebsite\Excel\Writers\LaravelExcelWriter;
 
-class ExcelWriterTest extends TestCase {
+class ExcelWriterTest extends TestCase
+{
 
     /**
      * Setup
@@ -42,7 +43,7 @@ class ExcelWriterTest extends TestCase {
         $this->assertEquals($this->writer, $titleSet);
 
         // Test if title was really set
-        $this->assertEquals($this->writer->getTitle(),                  $title);
+        $this->assertEquals($this->writer->getTitle(), $title);
         $this->assertEquals($this->writer->getProperties()->getTitle(), $title);
     }
 
@@ -52,8 +53,8 @@ class ExcelWriterTest extends TestCase {
      */
     public function testSetFilename()
     {
-        $filename       = 'filename';
-        $filenameSet    = $this->writer->setFileName($filename);
+        $filename = 'filename';
+        $filenameSet = $this->writer->setFileName($filename);
         $this->assertEquals($this->writer, $filenameSet);
 
         // Test if title was really set
@@ -79,9 +80,9 @@ class ExcelWriterTest extends TestCase {
         $parser = $this->writer->getParser();
 
         // Test if parse data was set
-        $this->assertEquals($parser->getView(),         $view);
-        $this->assertEquals($parser->getData(),         $data);
-        $this->assertEquals($parser->getMergeData(),    $mergeData);
+        $this->assertEquals($parser->getView(), $view);
+        $this->assertEquals($parser->getData(), $data);
+        $this->assertEquals($parser->getMergeData(), $mergeData);
     }
 
     /**
@@ -108,7 +109,7 @@ class ExcelWriterTest extends TestCase {
         $title = 'Worksheet Title';
         $closureTitle = 'Closure Title';
 
-        $this->writer->sheet($title, function($sheet) use($closureTitle) {
+        $this->writer->sheet($title, function ($sheet) use ($closureTitle) {
             $sheet->setTitle($closureTitle);
         });
 
@@ -130,8 +131,7 @@ class ExcelWriterTest extends TestCase {
         );
 
         // Create the sheets
-        foreach($sheets as $sheetTitle)
-        {
+        foreach ($sheets as $sheetTitle) {
             $this->writer->sheet($sheetTitle);
         }
 
@@ -139,8 +139,7 @@ class ExcelWriterTest extends TestCase {
         $this->assertEquals(count($sheets), $this->writer->getSheetCount());
 
         // Test if all sheet titles where set correctly
-        foreach($sheets as $sheetTitle)
-        {
+        foreach ($sheets as $sheetTitle) {
             $this->assertContains($sheetTitle, $this->writer->getSheetNames());
         }
     }
@@ -155,14 +154,13 @@ class ExcelWriterTest extends TestCase {
         $properties = $this->excel->getAllowedProperties();
 
         // Loop through them
-        foreach($properties as $prop)
-        {
+        foreach ($properties as $prop) {
             // Set a random value
             $originalValue = rand();
 
             // Set needed set/get methods
-            $method     = 'set' . ucfirst($prop);
-            $getMethod  = 'get' . ucfirst($prop);
+            $method = 'set' . ucfirst($prop);
+            $getMethod = 'get' . ucfirst($prop);
 
             // Set the property with the random value
             call_user_func_array(array($this->writer, $method), array($originalValue));
@@ -177,11 +175,9 @@ class ExcelWriterTest extends TestCase {
 
     public function testCreateFromArray()
     {
-        $info = Excel::create('test', function ($writer)
-        {
+        $info = Excel::create('test', function ($writer) {
 
-            $writer->sheet('test', function ($sheet)
-            {
+            $writer->sheet('test', function ($sheet) {
                 $sheet->fromArray([
                     'test data'
                 ]);
@@ -194,10 +190,8 @@ class ExcelWriterTest extends TestCase {
 
     public function testNumberPrecision()
     {
-        $info = Excel::create('numbers', function ($writer)
-        {
-            $writer->sheet('test', function ($sheet)
-            {
+        $info = Excel::create('numbers', function ($writer) {
+            $writer->sheet('test', function ($sheet) {
                 $sheet->fromArray([
                     ['number' => '1234'],
                     ['number' => '1234.020'],
@@ -222,7 +216,7 @@ class ExcelWriterTest extends TestCase {
         $this->assertEquals('12345678901234567890', $results[3]['number']);
 
         $this->assertTrue(is_double($results[4]['number']));
-        $this->assertEquals((double) 1234, $results[4]['number']);
+        $this->assertEquals((double)1234, $results[4]['number']);
 
         $this->assertTrue(is_double($results[5]['number']));
         $this->assertEquals('1234.02', $results[5]['number']);

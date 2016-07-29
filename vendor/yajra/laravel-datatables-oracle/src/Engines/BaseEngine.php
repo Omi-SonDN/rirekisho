@@ -61,12 +61,12 @@ abstract class BaseEngine implements DataTableEngineContract
      * @var array
      */
     protected $columnDef = [
-        'append'    => [],
-        'edit'      => [],
-        'excess'    => ['rn', 'row_num'],
-        'filter'    => [],
-        'order'     => [],
-        'escape'    => [],
+        'append' => [],
+        'edit' => [],
+        'excess' => ['rn', 'row_num'],
+        'filter' => [],
+        'order' => [],
+        'escape' => [],
         'blacklist' => ['password', 'remember_token'],
         'whitelist' => '*',
     ];
@@ -126,10 +126,10 @@ abstract class BaseEngine implements DataTableEngineContract
      * @var array
      */
     protected $templates = [
-        'DT_RowId'    => '',
+        'DT_RowId' => '',
         'DT_RowClass' => '',
-        'DT_RowData'  => [],
-        'DT_RowAttr'  => [],
+        'DT_RowData' => [],
+        'DT_RowAttr' => [],
     ];
 
     /**
@@ -232,7 +232,7 @@ abstract class BaseEngine implements DataTableEngineContract
      */
     public function wildcardLikeString($str, $lowercase = true)
     {
-        $wild   = '%';
+        $wild = '%';
         $length = Str::length($str);
         if ($length) {
             for ($i = 0; $i < $length; $i++) {
@@ -274,15 +274,15 @@ abstract class BaseEngine implements DataTableEngineContract
      */
     public function tableNames()
     {
-        $names          = [];
-        $query          = $this->getQueryBuilder();
-        $names[]        = $query->from;
-        $joins          = $query->joins ?: [];
+        $names = [];
+        $query = $this->getQueryBuilder();
+        $names[] = $query->from;
+        $joins = $query->joins ?: [];
         $databasePrefix = $this->prefix;
         foreach ($joins as $join) {
-            $table   = preg_split('/ as /i', $join->table);
+            $table = preg_split('/ as /i', $join->table);
             $names[] = $table[0];
-            if (isset($table[1]) && ! empty($databasePrefix) && strpos($table[1], $databasePrefix) == 0) {
+            if (isset($table[1]) && !empty($databasePrefix) && strpos($table[1], $databasePrefix) == 0) {
                 $names[] = preg_replace('/^' . $databasePrefix . '/', '', $table[1]);
             }
         }
@@ -298,7 +298,7 @@ abstract class BaseEngine implements DataTableEngineContract
      */
     public function getQueryBuilder($instance = null)
     {
-        if (! $instance) {
+        if (!$instance) {
             $instance = $this->query;
         }
 
@@ -357,7 +357,7 @@ abstract class BaseEngine implements DataTableEngineContract
      */
     public function removeColumn()
     {
-        $names                     = func_get_args();
+        $names = func_get_args();
         $this->columnDef['excess'] = array_merge($this->columnDef['excess'], $names);
 
         return $this;
@@ -493,7 +493,7 @@ abstract class BaseEngine implements DataTableEngineContract
      */
     public function filterColumn($column, $method)
     {
-        $params                             = func_get_args();
+        $params = func_get_args();
         $this->columnDef['filter'][$column] = ['method' => $method, 'parameters' => array_splice($params, 2)];
 
         return $this;
@@ -553,7 +553,7 @@ abstract class BaseEngine implements DataTableEngineContract
         $this->totalRecords = $this->totalCount();
 
         if ($this->totalRecords) {
-            $this->orderRecords(! $orderFirst);
+            $this->orderRecords(!$orderFirst);
             $this->filterRecords();
             $this->orderRecords($orderFirst);
             $this->paginate();
@@ -570,7 +570,7 @@ abstract class BaseEngine implements DataTableEngineContract
      */
     public function orderRecords($skip)
     {
-        if (! $skip) {
+        if (!$skip) {
             $this->ordering();
         }
     }
@@ -615,8 +615,8 @@ abstract class BaseEngine implements DataTableEngineContract
     public function render($object = false)
     {
         $output = array_merge([
-            'draw'            => (int) $this->request['draw'],
-            'recordsTotal'    => $this->totalRecords,
+            'draw' => (int)$this->request['draw'],
+            'recordsTotal' => $this->totalRecords,
             'recordsFiltered' => $this->filteredRecords,
         ], $this->appends);
 
@@ -632,7 +632,7 @@ abstract class BaseEngine implements DataTableEngineContract
             //Get transformer reflection
             //Firs method parameter should be data/object to transform
             $reflection = new \ReflectionMethod($this->transformer, 'transform');
-            $parameter  = $reflection->getParameters()[0];
+            $parameter = $reflection->getParameters()[0];
 
             //If parameter is class assuming it requires object
             //Else just pass array by default
@@ -645,7 +645,7 @@ abstract class BaseEngine implements DataTableEngineContract
                 );
             }
 
-            $collection     = $fractal->createData($resource)->toArray();
+            $collection = $fractal->createData($resource)->toArray();
             $output['data'] = $collection['data'];
         } else {
             $output['data'] = Helper::transform($this->getProcessedData($object));
@@ -694,7 +694,7 @@ abstract class BaseEngine implements DataTableEngineContract
     public function showDebugger(array $output)
     {
         $output['queries'] = $this->connection->getQueryLog();
-        $output['input']   = $this->request->all();
+        $output['input'] = $this->request->all();
 
         return $output;
     }
@@ -708,9 +708,9 @@ abstract class BaseEngine implements DataTableEngineContract
      */
     public function overrideGlobalSearch(\Closure $callback, $parameters)
     {
-        $this->autoFilter               = false;
-        $this->isFilterApplied          = true;
-        $this->filterCallback           = $callback;
+        $this->autoFilter = false;
+        $this->isFilterApplied = true;
+        $this->filterCallback = $callback;
         $this->filterCallbackParameters = $parameters;
     }
 
@@ -886,7 +886,7 @@ abstract class BaseEngine implements DataTableEngineContract
     {
         $matches = explode(' as ', Str::lower($str));
 
-        if (! empty($matches)) {
+        if (!empty($matches)) {
             if ($wantsAlias) {
                 return array_pop($matches);
             } else {

@@ -133,9 +133,9 @@ class VarTest extends \PHPUnit_Framework_TestCase
      */
     public function testFactoryMethod()
     {
-        $typeResolver       = new TypeResolver();
+        $typeResolver = new TypeResolver();
         $descriptionFactory = m::mock(DescriptionFactory::class);
-        $context            = new Context('');
+        $context = new Context('');
 
         $description = new Description('My Description');
         $descriptionFactory->shouldReceive('create')->with('My Description', $context)->andReturn($description);

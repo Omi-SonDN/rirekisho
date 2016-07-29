@@ -21,8 +21,8 @@ namespace Faker;
  * @property string $postcode
  * @property string $address
  * @property string $country
- * @property float  $latitude
- * @property float  $longitude
+ * @property float $latitude
+ * @property float $longitude
  *
  * @property string $ean13
  * @property string $ean8
@@ -82,22 +82,22 @@ namespace Faker;
  * @property string $localIpv4
  * @property string $macAddress
  *
- * @property int       $unixTime
+ * @property int $unixTime
  * @property \DateTime $dateTime
  * @property \DateTime $dateTimeAD
- * @property string    $iso8601
+ * @property string $iso8601
  * @property \DateTime $dateTimeThisCentury
  * @property \DateTime $dateTimeThisDecade
  * @property \DateTime $dateTimeThisYear
  * @property \DateTime $dateTimeThisMonth
- * @property string    $amPm
- * @property int       $dayOfMonth
- * @property int       $dayOfWeek
- * @property int       $month
- * @property string    $monthName
- * @property int       $year
- * @property int       $century
- * @property string    $timezone
+ * @property string $amPm
+ * @property int $dayOfMonth
+ * @property int $dayOfWeek
+ * @property int $month
+ * @property string $monthName
+ * @property int $year
+ * @property int $century
+ * @property string $timezone
  * @method string date($format = 'Y-m-d', $max = 'now')
  * @method string time($format = 'H:i:s', $max = 'now')
  * @method \DateTime dateTimeBetween($startDate = '-30 years', $endDate = 'now')
@@ -113,8 +113,8 @@ namespace Faker;
  * @property boolean boolean
  * @method boolean boolean($chanceOfGettingTrue = 50)
  *
- * @property int    $randomDigit
- * @property int    $randomDigitNotNull
+ * @property int $randomDigit
+ * @property int $randomDigitNotNull
  * @property string $randomLetter
  * @property string $randomAscii
  * @method int randomNumber($nbDigits = null, $strict = false)
@@ -187,7 +187,7 @@ class Generator
         if ($seed === null) {
             mt_srand();
         } else {
-            mt_srand((int) $seed);
+            mt_srand((int)$seed);
         }
     }
 

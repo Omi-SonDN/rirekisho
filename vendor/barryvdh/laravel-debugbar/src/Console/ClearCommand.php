@@ -19,7 +19,7 @@ class ClearCommand extends Command
     public function fire()
     {
         $this->debugbar->boot();
-        
+
         if ($storage = $this->debugbar->getStorage()) {
             $storage->clear();
             $this->info('Debugbar Storage cleared!');

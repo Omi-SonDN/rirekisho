@@ -11,8 +11,8 @@
         </div>
 
         <fieldset id="" class="fix">
-                <ul class="">
-                    <li>
+            <ul class="">
+                <li>
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <ul>
@@ -39,8 +39,8 @@
                 <li class="">
                     <div class="" style="">
                         <div class="disline">
-                        <label class="fix-lable col-xs-5" for="password">Password </label>
-                        <a href="#">forgot password </a>
+                            <label class="fix-lable col-xs-5" for="password">Password </label>
+                            <a href="#">forgot password </a>
                         </div>
                         <div class="input">
                             <label class="icon-right" for="Password">
@@ -54,23 +54,23 @@
 
             </ul>
         </fieldset>
-              <div class="clr">
-                  <li class="col-md-5">
-                      <label class="checkbox">
-                          <input type="checkbox" name="remember">
-                          <i></i>
-                          Remember me.
-                      </label>
-                  </li>
-                    <li class="col-md-7">
-                        <input type="submit" form="login" name="submit" value="Đăng nhập" class="float_right b-purple col-md-12">
-                    </li>
+        <div class="clr">
+            <li class="col-md-5">
+                <label class="checkbox">
+                    <input type="checkbox" name="remember">
+                    <i></i>
+                    Remember me.
+                </label>
+            </li>
+            <li class="col-md-7">
+                <input type="submit" form="login" name="submit" value="Đăng nhập"
+                       class="float_right b-purple col-md-12">
+            </li>
 
 
-                        <a href="{{url('auth/register')}}">You don't have an account yet? Register here</a>
+            <a href="{{url('auth/register')}}">You don't have an account yet? Register here</a>
 
-           </div>
-
+        </div>
 
 
     </form>

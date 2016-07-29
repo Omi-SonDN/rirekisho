@@ -9,10 +9,12 @@
         @page {
             margin-top: 4.3em;
         }
+
         * {
             font-family: verdana, DejaVu Sans, sans-serif;
             /*font-family: ipagothic;*/
         }
+
         /*
         @font-face {
             font-family: 'ipagothic';
@@ -61,7 +63,7 @@
     </style>
 </head>
 <body>
-<?php $key = $CV ;?>
+<?php $key = $CV;?>
 <h1 style="">
     Resume
 </h1>
@@ -135,7 +137,7 @@
             @else
                 <?php $i = 0;?>
                 @foreach ($School as $Record)
-                    <?php $r_id = $Record ; ?>
+                    <?php $r_id = $Record; ?>
                     <tr class="">
                         <td>{{++$i}}</td>
 
@@ -194,7 +196,7 @@
             @else
                 <?php $i = 0;?>
                 @foreach ($Work as $Record)
-                    <?php $r_id = $Record ; ?>
+                    <?php $r_id = $Record; ?>
                     <tr class="">
                         <td>{{++$i}}</td>
 

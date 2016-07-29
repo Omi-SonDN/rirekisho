@@ -19,10 +19,10 @@ use Barryvdh\Reflection\DocBlock\Serializer as DocBlockSerializer;
 
 class Method
 {
-    /** @var \Barryvdh\Reflection\DocBlock  */
+    /** @var \Barryvdh\Reflection\DocBlock */
     protected $phpdoc;
 
-    /** @var \ReflectionMethod  */
+    /** @var \ReflectionMethod */
     protected $method;
 
     protected $output = '';
@@ -302,7 +302,7 @@ class Method
         if ($method) {
             $namespace = $method->getDeclaringClass()->getNamespaceName();
             $phpdoc = new DocBlock($method, new Context($namespace));
-            
+
             if (strpos($phpdoc->getText(), '{@inheritdoc}') !== false) {
                 //Not at the end yet, try another parent/interface..
                 return $this->getInheritDoc($method);

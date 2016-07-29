@@ -10,7 +10,8 @@
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class CellCollection extends ExcelCollection {
+class CellCollection extends ExcelCollection
+{
 
     /**
      * Create a new collection.
@@ -29,16 +30,12 @@ class CellCollection extends ExcelCollection {
      */
     public function setItems($items)
     {
-        foreach ($items as $name => $value)
-        {
+        foreach ($items as $name => $value) {
             $value = !empty($value) || is_numeric($value) ? $value : null;
 
-            if ($name && !is_numeric($name))
-            {
+            if ($name && !is_numeric($name)) {
                 $this->put($name, $value);
-            }
-            else
-            {
+            } else {
                 $this->push($value);
             }
         }
@@ -58,7 +55,7 @@ class CellCollection extends ExcelCollection {
     /**
      * Determine if an attribute exists on the model.
      *
-     * @param  string  $key
+     * @param  string $key
      * @return bool
      */
     public function __isset($key)

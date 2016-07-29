@@ -84,7 +84,8 @@ class AssertTest extends PHPUnit_Framework_TestCase
             array('resource', array(1), false),
             array('isCallable', array('strlen'), true),
             array('isCallable', array(array($this, 'getTests')), true),
-            array('isCallable', array(function () {}), true),
+            array('isCallable', array(function () {
+            }), true),
             array('isCallable', array(1234), false),
             array('isCallable', array('foobar'), false),
             array('isArray', array(array()), true),
@@ -228,16 +229,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
             array('lengthBetween', array('äbcdef', 3, 5), false, true),
             array('fileExists', array(__FILE__), true),
             array('fileExists', array(__DIR__), true),
-            array('fileExists', array(__DIR__.'/foobar'), false),
+            array('fileExists', array(__DIR__ . '/foobar'), false),
             array('file', array(__FILE__), true),
             array('file', array(__DIR__), false),
-            array('file', array(__DIR__.'/foobar'), false),
+            array('file', array(__DIR__ . '/foobar'), false),
             array('directory', array(__DIR__), true),
             array('directory', array(__FILE__), false),
-            array('directory', array(__DIR__.'/foobar'), false),
+            array('directory', array(__DIR__ . '/foobar'), false),
             // no tests for readable()/writable() for now
             array('classExists', array(__CLASS__), true),
-            array('classExists', array(__NAMESPACE__.'\Foobar'), false),
+            array('classExists', array(__NAMESPACE__ . '\Foobar'), false),
             array('subclassOf', array(__CLASS__, 'PHPUnit_Framework_TestCase'), true),
             array('subclassOf', array(__CLASS__, 'stdClass'), false),
             array('implementsInterface', array('ArrayIterator', 'Traversable'), true),
@@ -295,7 +296,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
             $this->setExpectedException('\InvalidArgumentException');
         }
 
-        call_user_func_array(array('Webmozart\Assert\Assert', 'nullOr'.ucfirst($method)), $args);
+        call_user_func_array(array('Webmozart\Assert\Assert', 'nullOr' . ucfirst($method)), $args);
     }
 
     /**
@@ -303,7 +304,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
      */
     public function testNullOrAcceptsNull($method)
     {
-        call_user_func(array('Webmozart\Assert\Assert', 'nullOr'.ucfirst($method)), null);
+        call_user_func(array('Webmozart\Assert\Assert', 'nullOr' . ucfirst($method)), null);
     }
 
     /**
@@ -324,7 +325,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
         $arg = array_shift($args);
         array_unshift($args, array($arg));
 
-        call_user_func_array(array('Webmozart\Assert\Assert', 'all'.ucfirst($method)), $args);
+        call_user_func_array(array('Webmozart\Assert\Assert', 'all' . ucfirst($method)), $args);
     }
 
     /**
@@ -345,7 +346,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
         $arg = array_shift($args);
         array_unshift($args, new ArrayIterator(array($arg)));
 
-        call_user_func_array(array('Webmozart\Assert\Assert', 'all'.ucfirst($method)), $args);
+        call_user_func_array(array('Webmozart\Assert\Assert', 'all' . ucfirst($method)), $args);
     }
 
     public function getStringConversions()

@@ -32,7 +32,7 @@ class ClearCommand extends Command
     /**
      * Create a new cache clear command instance.
      *
-     * @param  \Illuminate\Cache\CacheManager  $cache
+     * @param  \Illuminate\Cache\CacheManager $cache
      * @return void
      */
     public function __construct(CacheManager $cache)

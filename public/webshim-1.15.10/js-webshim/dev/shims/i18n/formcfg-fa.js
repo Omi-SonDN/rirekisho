@@ -51,8 +51,8 @@ webshims.formcfg.fa = {
         "d": "yy/mm/dd"
     },
     "meridian": [
-		"ب.ظ",
-		"ق.ظ"
+        "ب.ظ",
+        "ق.ظ"
     ],
     "month": {
         "currentText": "این ماه"

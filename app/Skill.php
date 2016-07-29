@@ -51,6 +51,7 @@ class Skill extends Model
         }
         return $Role;
     }
+
     public function getType($str)
     {
 
@@ -59,7 +60,7 @@ class Skill extends Model
                 $Role = 0;
                 break;
             case "ProgLang":
-                $Role = 1 ;
+                $Role = 1;
                 break;
             case "VerMan":
                 $Role = 2;
@@ -76,6 +77,7 @@ class Skill extends Model
         }
         return $Role;
     }
+
     public function getHashAttribute()
     {
         return $this->getKey();

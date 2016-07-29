@@ -21,7 +21,7 @@ trait Queueable
     /**
      * Set the desired queue for the job.
      *
-     * @param  string  $queue
+     * @param  string $queue
      * @return $this
      */
     public function onQueue($queue)
@@ -34,7 +34,7 @@ trait Queueable
     /**
      * Set the desired delay for the job.
      *
-     * @param  int  $delay
+     * @param  int $delay
      * @return $this
      */
     public function delay($delay)

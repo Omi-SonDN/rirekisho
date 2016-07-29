@@ -29,8 +29,8 @@ class ControllerDispatcher
     /**
      * Create a new controller dispatcher instance.
      *
-     * @param  \Illuminate\Routing\Router  $router
-     * @param  \Illuminate\Container\Container  $container
+     * @param  \Illuminate\Routing\Router $router
+     * @param  \Illuminate\Container\Container $container
      * @return void
      */
     public function __construct(Router $router,
@@ -43,10 +43,10 @@ class ControllerDispatcher
     /**
      * Dispatch a request to a given controller and method.
      *
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $controller
-     * @param  string  $method
+     * @param  \Illuminate\Routing\Route $route
+     * @param  \Illuminate\Http\Request $request
+     * @param  string $controller
+     * @param  string $method
      * @return mixed
      */
     public function dispatch(Route $route, Request $request, $controller, $method)
@@ -75,7 +75,7 @@ class ControllerDispatcher
     /**
      * Make a controller instance via the IoC container.
      *
-     * @param  string  $controller
+     * @param  string $controller
      * @return mixed
      */
     protected function makeController($controller)
@@ -88,16 +88,16 @@ class ControllerDispatcher
     /**
      * Call the given controller instance method.
      *
-     * @param  \Illuminate\Routing\Controller  $instance
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
+     * @param  \Illuminate\Routing\Controller $instance
+     * @param  \Illuminate\Routing\Route $route
+     * @param  \Illuminate\Http\Request $request
+     * @param  string $method
      * @return mixed
      */
     protected function callWithinStack($instance, $route, $request, $method)
     {
         $shouldSkipMiddleware = $this->container->bound('middleware.disable') &&
-                                $this->container->make('middleware.disable') === true;
+            $this->container->make('middleware.disable') === true;
 
         $middleware = $shouldSkipMiddleware ? [] : $this->getMiddleware($instance, $method);
 
@@ -105,20 +105,20 @@ class ControllerDispatcher
         // us the ability to define middlewares on controllers. We will return the given
         // response back out so that "after" filters can be run after the middlewares.
         return (new Pipeline($this->container))
-                    ->send($request)
-                    ->through($middleware)
-                    ->then(function ($request) use ($instance, $route, $method) {
-                        return $this->router->prepareResponse(
-                            $request, $this->call($instance, $route, $method)
-                        );
-                    });
+            ->send($request)
+            ->through($middleware)
+            ->then(function ($request) use ($instance, $route, $method) {
+                return $this->router->prepareResponse(
+                    $request, $this->call($instance, $route, $method)
+                );
+            });
     }
 
     /**
      * Get the middleware for the controller instance.
      *
-     * @param  \Illuminate\Routing\Controller  $instance
-     * @param  string  $method
+     * @param  \Illuminate\Routing\Controller $instance
+     * @param  string $method
      * @return array
      */
     protected function getMiddleware($instance, $method)
@@ -126,7 +126,7 @@ class ControllerDispatcher
         $results = [];
 
         foreach ($instance->getMiddleware() as $name => $options) {
-            if (! $this->methodExcludedByOptions($method, $options)) {
+            if (!$this->methodExcludedByOptions($method, $options)) {
                 $results[] = $this->router->resolveMiddlewareClassName($name);
             }
         }
@@ -137,22 +137,22 @@ class ControllerDispatcher
     /**
      * Determine if the given options exclude a particular method.
      *
-     * @param  string  $method
-     * @param  array  $options
+     * @param  string $method
+     * @param  array $options
      * @return bool
      */
     public function methodExcludedByOptions($method, array $options)
     {
-        return (isset($options['only']) && ! in_array($method, (array) $options['only'])) ||
-            (! empty($options['except']) && in_array($method, (array) $options['except']));
+        return (isset($options['only']) && !in_array($method, (array)$options['only'])) ||
+        (!empty($options['except']) && in_array($method, (array)$options['except']));
     }
 
     /**
      * Call the given controller instance method.
      *
-     * @param  \Illuminate\Routing\Controller  $instance
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  string  $method
+     * @param  \Illuminate\Routing\Controller $instance
+     * @param  \Illuminate\Routing\Route $route
+     * @param  string $method
      * @return mixed
      */
     protected function call($instance, $route, $method)
@@ -167,10 +167,10 @@ class ControllerDispatcher
     /**
      * Call the "before" filters for the controller.
      *
-     * @param  \Illuminate\Routing\Controller  $instance
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
+     * @param  \Illuminate\Routing\Controller $instance
+     * @param  \Illuminate\Routing\Route $route
+     * @param  \Illuminate\Http\Request $request
+     * @param  string $method
      * @return mixed
      */
     protected function before($instance, $route, $request, $method)
@@ -182,7 +182,7 @@ class ControllerDispatcher
                 // them until we get a response or are finished iterating through this filters.
                 $response = $this->callFilter($filter, $route, $request);
 
-                if (! is_null($response)) {
+                if (!is_null($response)) {
                     return $response;
                 }
             }
@@ -192,10 +192,10 @@ class ControllerDispatcher
     /**
      * Apply the applicable after filters to the route.
      *
-     * @param  \Illuminate\Routing\Controller  $instance
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
+     * @param  \Illuminate\Routing\Controller $instance
+     * @param  \Illuminate\Routing\Route $route
+     * @param  \Illuminate\Http\Request $request
+     * @param  string $method
      * @return mixed
      */
     protected function assignAfter($instance, $route, $request, $method)
@@ -213,7 +213,7 @@ class ControllerDispatcher
     /**
      * Get the assignable after filter for the route.
      *
-     * @param  \Closure|string  $filter
+     * @param  \Closure|string $filter
      * @return string
      */
     protected function getAssignableAfter($filter)
@@ -228,9 +228,9 @@ class ControllerDispatcher
     /**
      * Determine if the given filter applies to the request.
      *
-     * @param  array  $filter
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
+     * @param  array $filter
+     * @param  \Illuminate\Http\Request $request
+     * @param  string $method
      * @return bool
      */
     protected function filterApplies($filter, $request, $method)
@@ -247,9 +247,9 @@ class ControllerDispatcher
     /**
      * Determine if the filter fails the method constraints.
      *
-     * @param  array  $filter
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
+     * @param  array $filter
+     * @param  \Illuminate\Http\Request $request
+     * @param  string $method
      * @return bool
      */
     protected function filterFailsMethod($filter, $request, $method)
@@ -260,9 +260,9 @@ class ControllerDispatcher
     /**
      * Determine if the filter fails the "on" constraint.
      *
-     * @param  array  $filter
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
+     * @param  array $filter
+     * @param  \Illuminate\Http\Request $request
+     * @param  string $method
      * @return bool
      */
     protected function filterFailsOn($filter, $request, $method)
@@ -280,15 +280,15 @@ class ControllerDispatcher
             $on = explode('|', $on);
         }
 
-        return ! in_array(strtolower($request->getMethod()), $on);
+        return !in_array(strtolower($request->getMethod()), $on);
     }
 
     /**
      * Call the given controller filter method.
      *
-     * @param  array  $filter
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  \Illuminate\Http\Request  $request
+     * @param  array $filter
+     * @param  \Illuminate\Routing\Route $route
+     * @param  \Illuminate\Http\Request $request
      * @return mixed
      */
     protected function callFilter($filter, $route, $request)

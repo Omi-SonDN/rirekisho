@@ -1,7 +1,7 @@
 <?php
 /**
  * phpDocumentor Collection Test
- * 
+ *
  * PHP version 5.3
  *
  * @author    Mike van Riel <mike.vanriel@naenius.com>
@@ -16,7 +16,7 @@ use Barryvdh\Reflection\DocBlock\Context;
 
 /**
  * Test class for \Barryvdh\Reflection\DocBlock\Type\Collection
- * 
+ *
  * @covers Barryvdh\Reflection\DocBlock\Type\Collection
  *
  * @author    Mike van Riel <mike.vanriel@naenius.com>
@@ -29,7 +29,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Barryvdh\Reflection\DocBlock\Type\Collection::__construct
      * @covers Barryvdh\Reflection\DocBlock\Type\Collection::getContext
-     * 
+     *
      * @return void
      */
     public function testConstruct()
@@ -42,7 +42,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Barryvdh\Reflection\DocBlock\Type\Collection::__construct
-     * 
+     *
      * @return void
      */
     public function testConstructWithTypes()
@@ -53,7 +53,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Barryvdh\Reflection\DocBlock\Type\Collection::__construct
-     * 
+     *
      * @return void
      */
     public function testConstructWithNamespace()
@@ -70,7 +70,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Barryvdh\Reflection\DocBlock\Type\Collection::__construct
-     * 
+     *
      * @return void
      */
     public function testConstructWithNamespaceAliases()
@@ -85,11 +85,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param string $fixture
-     * @param array  $expected
+     * @param array $expected
      *
      * @dataProvider provideTypesToExpand
-     * @covers Barryvdh\Reflection\DocBlock\Type\Collection::add
-     * 
+     * @covers       Barryvdh\Reflection\DocBlock\Type\Collection::add
+     *
      * @return void
      */
     public function testAdd($fixture, $expected)
@@ -105,11 +105,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param string $fixture
-     * @param array  $expected
+     * @param array $expected
      *
      * @dataProvider provideTypesToExpandWithoutNamespace
-     * @covers Barryvdh\Reflection\DocBlock\Type\Collection::add
-     * 
+     * @covers       Barryvdh\Reflection\DocBlock\Type\Collection::add
+     *
      * @return void
      */
     public function testAddWithoutNamespace($fixture, $expected)
@@ -125,10 +125,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param string $fixture
-     * @param array  $expected
+     * @param array $expected
      *
      * @dataProvider provideTypesToExpandWithPropertyOrMethod
-     * @covers Barryvdh\Reflection\DocBlock\Type\Collection::add
+     * @covers       Barryvdh\Reflection\DocBlock\Type\Collection::add
      *
      * @return void
      */
@@ -146,7 +146,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Barryvdh\Reflection\DocBlock\Type\Collection::add
      * @expectedException InvalidArgumentException
-     * 
+     *
      * @return void
      */
     public function testAddWithInvalidArgument()
@@ -159,7 +159,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      * Returns the types and their expected values to test the retrieval of
      * types.
      *
-     * @param string $method    Name of the method consuming this data provider.
+     * @param string $method Name of the method consuming this data provider.
      * @param string $namespace Name of the namespace to user as basis.
      *
      * @return string[]
@@ -172,34 +172,34 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             array('int', array('int')),
             array('int ', array('int')),
             array('string', array('string')),
-            array('DocBlock', array($namespace.'DocBlock')),
-            array('DocBlock[]', array($namespace.'DocBlock[]')),
-            array(' DocBlock ', array($namespace.'DocBlock')),
+            array('DocBlock', array($namespace . 'DocBlock')),
+            array('DocBlock[]', array($namespace . 'DocBlock[]')),
+            array(' DocBlock ', array($namespace . 'DocBlock')),
             array('\My\Space\DocBlock', array('\My\Space\DocBlock')),
             array('Alias\DocBlock', array('\My\Space\Aliasing\DocBlock')),
             array(
                 'DocBlock|Tag',
-                array($namespace .'DocBlock', $namespace .'Tag')
+                array($namespace . 'DocBlock', $namespace . 'Tag')
             ),
             array(
                 'DocBlock|null',
-                array($namespace.'DocBlock', 'null')
+                array($namespace . 'DocBlock', 'null')
             ),
             array(
                 '\My\Space\DocBlock|Tag',
-                array('\My\Space\DocBlock', $namespace.'Tag')
+                array('\My\Space\DocBlock', $namespace . 'Tag')
             ),
             array(
                 'DocBlock[]|null',
-                array($namespace.'DocBlock[]', 'null')
+                array($namespace . 'DocBlock[]', 'null')
             ),
             array(
                 'DocBlock[]|int[]',
-                array($namespace.'DocBlock[]', 'int[]')
+                array($namespace . 'DocBlock[]', 'int[]')
             ),
             array(
                 'LinkDescriptor::setLink()',
-                array($namespace.'LinkDescriptor::setLink()')
+                array($namespace . 'LinkDescriptor::setLink()')
             ),
             array(
                 'Alias\LinkDescriptor::setLink()',

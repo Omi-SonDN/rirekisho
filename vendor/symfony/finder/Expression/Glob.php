@@ -68,7 +68,7 @@ class Glob implements ValueInterface
      */
     public function prepend($expr)
     {
-        $this->pattern = $expr.$this->pattern;
+        $this->pattern = $expr . $this->pattern;
 
         return $this;
     }
@@ -91,7 +91,7 @@ class Glob implements ValueInterface
     public function isExpandable()
     {
         return false !== strpos($this->pattern, '{')
-            && false !== strpos($this->pattern, '}');
+        && false !== strpos($this->pattern, '}');
     }
 
     /**

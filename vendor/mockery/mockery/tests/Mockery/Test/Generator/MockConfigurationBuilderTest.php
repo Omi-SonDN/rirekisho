@@ -37,6 +37,7 @@ class ClassWithMagicCall
     public function foo()
     {
     }
+
     public function __call($method, $args)
     {
     }

@@ -22,7 +22,7 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function register()
     {
-        $configPath = __DIR__.'/../config/dompdf.php';
+        $configPath = __DIR__ . '/../config/dompdf.php';
         $this->mergeConfigFrom($configPath, 'dompdf');
 
         $this->app->bind('dompdf', function ($app) {
@@ -51,8 +51,8 @@ class ServiceProvider extends IlluminateServiceProvider
 
     public function boot()
     {
-        if (! $this->isLumen()) {
-            $configPath = __DIR__.'/../config/dompdf.php';
+        if (!$this->isLumen()) {
+            $configPath = __DIR__ . '/../config/dompdf.php';
             $this->publishes([$configPath => config_path('dompdf.php')], 'config');
         }
 
@@ -98,7 +98,7 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     protected function define($name, $value)
     {
-        if (! defined($name)) {
+        if (!defined($name)) {
             define($name, $value);
         }
     }

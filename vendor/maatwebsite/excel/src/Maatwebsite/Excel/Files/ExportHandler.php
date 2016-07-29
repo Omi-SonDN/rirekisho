@@ -1,6 +1,7 @@
 <?php namespace Maatwebsite\Excel\Files;
 
-interface ExportHandler {
+interface ExportHandler
+{
 
     /**
      * Handle the export

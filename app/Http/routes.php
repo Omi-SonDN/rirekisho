@@ -37,11 +37,20 @@ Route::group(['middleware' => ['auth']], function () {
     //every one see different page  
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
     Route::get('CV/{CV}/view', 'CVController@show2');
-    Route::post('CV/changeStatus','CVController@changeStatus');
+    Route::post('CV/changeStatus', 'CVController@changeStatus');
     Route::get('Record/index/{type}', 'RecordController@index');
     Route::get('User/{User}/changePass', 'UsersController@changePassword');
 
+    Route::group(['prefix' => 'position','as'=>'position::'], function () {
+        Route::get('/list/{id?}',['as' => 'list','uses' =>'PositionsController@index']);
+        Route::get('/add', ['as' => 'getaddposition', 'uses' => 'PositionsController@add']);
+        Route::post('/add', ['as' => 'postaddposition', 'uses' => 'PositionsController@create']);
+        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'PositionsController@edit']);
+        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'PositionsController@update']);
+        Route::get('/{id}/delete',['as'=>'delete','uses'=>'PositionsController@delete']);
+    });
     Route::resource('positions', 'PositionsController');
+
     Route::resource('groups', 'GroupsController');
     Route::post('/groups/getUsername', [
         'as' => 'groups.getUsername',
@@ -60,12 +69,31 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('Record', 'RecordController');
     Route::resource('Skill', 'SkillController');
 
+
+
+
+    Route::group(['prefix' => 'status','as'=>'status::'], function () {
+        Route::get('/list/{id?}',['as' => 'list','uses' =>'StatusController@index']);
+        Route::get('/add', ['as' => 'getaddstatus', 'uses' => 'StatusController@add']);
+        Route::post('/add', ['as' => 'postaddstatus', 'uses' => 'StatusController@create']);
+        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'StatusController@edit']);
+        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'StatusController@update']);
+        Route::get('/{id}/delete',['as'=>'delete','uses'=>'StatusController@delete']);
+    });
+
+
+
+
+    Route::resource('status', 'StatusController');
+
     //add user - delete
     Route::group(['prefix' => 'user'], function () {
         Route::get('/add', ['as' => 'getadduser', 'uses' => 'UsersController@getAddUser']);
         Route::post('/add', ['as' => 'postadduser', 'uses' => 'UsersController@postAddUser']);
         Route::get('/{listid}/del', ['as' => 'getdeluser', 'uses' => 'UsersController@getDel']);
     });
+    
+    
 });
 Route::group(['middleware' => ['auth', 'App\Http\Middleware\ApplicantMiddleware']], function () {
     Route::resource('CV', 'CVController', ['except' => ['index', 'destroy', 'show']]);

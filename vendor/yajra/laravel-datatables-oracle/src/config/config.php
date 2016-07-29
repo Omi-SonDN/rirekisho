@@ -2,9 +2,9 @@
 
 return [
     'search' => [
-        'smart'            => true,
+        'smart' => true,
         'case_insensitive' => true,
-        'use_wildcards'    => false,
+        'use_wildcards' => false,
     ],
 
     'fractal' => [

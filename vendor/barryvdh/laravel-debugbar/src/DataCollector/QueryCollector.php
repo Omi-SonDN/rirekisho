@@ -54,7 +54,7 @@ class QueryCollector extends PDOCollector
      */
     public function setFindSource($value = true)
     {
-        $this->findSource = (bool) $value;
+        $this->findSource = (bool)$value;
     }
 
     /**
@@ -66,7 +66,7 @@ class QueryCollector extends PDOCollector
     public function setExplainSource($enabled, $types)
     {
         $this->explainQuery = $enabled;
-        if($types){
+        if ($types) {
             $this->explainTypes = $types;
         }
     }
@@ -90,7 +90,7 @@ class QueryCollector extends PDOCollector
         $bindings = $connection->prepareBindings($bindings);
 
         // Run EXPLAIN on this query (if needed)
-        if ($this->explainQuery && preg_match('/^('.implode($this->explainTypes).') /i', $query)) {
+        if ($this->explainQuery && preg_match('/^(' . implode($this->explainTypes) . ') /i', $query)) {
             $statement = $pdo->prepare('EXPLAIN ' . $query);
             $statement->execute($bindings);
             $explainResults = $statement->fetchAll(\PDO::FETCH_CLASS);
@@ -190,12 +190,12 @@ class QueryCollector extends PDOCollector
             $hints[] = '<code>LIMIT</code> without <code>ORDER BY</code> causes non-deterministic results, depending on the query execution plan';
         }
         if (preg_match('/LIKE\\s[\'"](%.*?)[\'"]/i', $query, $matches)) {
-            $hints[] = 	'An argument has a leading wildcard character: <code>' . $matches[1]. '</code>.
+            $hints[] = 'An argument has a leading wildcard character: <code>' . $matches[1] . '</code>.
 								The predicate with this argument is not sargable and cannot use an index if one exists.';
         }
         return implode("<br />", $hints);
     }
-    
+
     /**
      * Use a backtrace to search for the origin of the query.
      */
@@ -258,7 +258,7 @@ class QueryCollector extends PDOCollector
         }
         return str_replace(base_path(), '', $path);
     }
-    
+
     /**
      * Reset the queries.
      */
@@ -280,13 +280,13 @@ class QueryCollector extends PDOCollector
             $totalTime += $query['time'];
 
             $bindings = $query['bindings'];
-            if($query['hints']){
+            if ($query['hints']) {
                 $bindings['hints'] = $query['hints'];
             }
 
             $statements[] = array(
                 'sql' => $this->formatSql($query['query']),
-                'params' => (object) $bindings,
+                'params' => (object)$bindings,
                 'duration' => $query['time'],
                 'duration_str' => $this->formatDuration($query['time']),
                 'stmt_id' => $query['source'],
@@ -294,7 +294,7 @@ class QueryCollector extends PDOCollector
             );
 
             //Add the results from the explain as new rows
-            foreach($query['explain'] as $explain){
+            foreach ($query['explain'] as $explain) {
                 $statements[] = array(
                     'sql' => ' - EXPLAIN #' . $explain->id . ': `' . $explain->table . '` (' . $explain->select_type . ')',
                     'params' => $explain,

@@ -14,28 +14,32 @@ function str_split_unicode($str, $l = 0)
 
     return preg_split('//u', $str, -1, PREG_SPLIT_NO_EMPTY);
 }
+
 function create_Time($str)
 {
-    str_split_unicode($str,"/");
+    str_split_unicode($str, "/");
     $date_1 = date_create($date1);
 }
+
 function getYear($value)
 {
     $value = date_create($value);
 
-    return  date_format($value, 'Y');
+    return date_format($value, 'Y');
 }
+
 function getMonth($value)
 {
     $value = date_create($value);
 
-    return  date_format($value, 'm');
+    return date_format($value, 'm');
 }
+
 function getDateDate($value)
 {
     $value = strtotime($value);
 
-    return  date('Y-m-d',$value);
+    return date('Y-m-d', $value);
 }
 
 

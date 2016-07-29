@@ -99,7 +99,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     public function testHasArguments()
     {
         $arguments = [
-            [ 'name' => 'argument1', 'type' => new String_() ]
+            ['name' => 'argument1', 'type' => new String_()]
         ];
 
         $fixture = new Method('myMethod', $arguments);
@@ -115,7 +115,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     {
         $arguments = ['argument1'];
         $expected = [
-            [ 'name' => $arguments[0], 'type' => new Void_() ]
+            ['name' => $arguments[0], 'type' => new Void_()]
         ];
 
         $fixture = new Method('myMethod', $arguments);
@@ -129,9 +129,9 @@ class MethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testArgumentTypeCanBeInferredAsVoid()
     {
-        $arguments = [ [ 'name' => 'argument1' ] ];
+        $arguments = [['name' => 'argument1']];
         $expected = [
-            [ 'name' => $arguments[0]['name'], 'type' => new Void_() ]
+            ['name' => $arguments[0]['name'], 'type' => new Void_()]
         ];
 
         $fixture = new Method('myMethod', $arguments);
@@ -224,13 +224,13 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     public function testFactoryMethod()
     {
         $descriptionFactory = m::mock(DescriptionFactory::class);
-        $resolver           = new TypeResolver();
-        $context            = new Context('');
+        $resolver = new TypeResolver();
+        $context = new Context('');
 
-        $description  = new Description('My Description');
+        $description = new Description('My Description');
         $expectedArguments = [
-            [ 'name' => 'argument1', 'type' => new String_() ],
-            [ 'name' => 'argument2', 'type' => new Void_() ]
+            ['name' => 'argument1', 'type' => new String_()],
+            ['name' => 'argument2', 'type' => new Void_()]
         ];
 
         $descriptionFactory->shouldReceive('create')->with('My Description', $context)->andReturn($description);
@@ -252,24 +252,24 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     public function collectionReturnTypesProvider()
     {
         return [
-            ['int[]',    Array_::class, Integer::class, Compound::class],
-            ['int[][]',  Array_::class, Array_::class,  Compound::class],
+            ['int[]', Array_::class, Integer::class, Compound::class],
+            ['int[][]', Array_::class, Array_::class, Compound::class],
             ['Object[]', Array_::class, Object_::class, Compound::class],
-            ['array[]',  Array_::class, Array_::class,  Compound::class],
+            ['array[]', Array_::class, Array_::class, Compound::class],
         ];
     }
 
     /**
      * @dataProvider collectionReturnTypesProvider
      * @covers ::create
-     * @uses \phpDocumentor\Reflection\DocBlock\Tags\Method::<public>
-     * @uses \phpDocumentor\Reflection\DocBlock\Description
-     * @uses \phpDocumentor\Reflection\DocBlock\DescriptionFactory
-     * @uses \phpDocumentor\Reflection\TypeResolver
-     * @uses \phpDocumentor\Reflection\Types\Array_
-     * @uses \phpDocumentor\Reflection\Types\Compound
-     * @uses \phpDocumentor\Reflection\Types\Integer
-     * @uses \phpDocumentor\Reflection\Types\Object_
+     * @uses         \phpDocumentor\Reflection\DocBlock\Tags\Method::<public>
+     * @uses         \phpDocumentor\Reflection\DocBlock\Description
+     * @uses         \phpDocumentor\Reflection\DocBlock\DescriptionFactory
+     * @uses         \phpDocumentor\Reflection\TypeResolver
+     * @uses         \phpDocumentor\Reflection\Types\Array_
+     * @uses         \phpDocumentor\Reflection\Types\Compound
+     * @uses         \phpDocumentor\Reflection\Types\Integer
+     * @uses         \phpDocumentor\Reflection\Types\Object_
      * @param string $returnType
      * @param string $expectedType
      * @param string $expectedValueType
@@ -280,7 +280,9 @@ class MethodTest extends \PHPUnit_Framework_TestCase
         $expectedType,
         $expectedValueType = null,
         $expectedKeyType = null
-    ) { $resolver           = new TypeResolver();
+    )
+    {
+        $resolver = new TypeResolver();
         $descriptionFactory = m::mock(DescriptionFactory::class);
         $descriptionFactory->shouldReceive('create')->with('', null)->andReturn(new Description(''));
 
@@ -372,7 +374,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreationFailsIfArgumentRecordContainsInvalidEntry()
     {
-        new Method('body', [ [ 'name' => 'myName', 'unknown' => 'nah' ] ]);
+        new Method('body', [['name' => 'myName', 'unknown' => 'nah']]);
     }
 
     /**
@@ -387,10 +389,10 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     public function testCreateMethodParenthesisMissing()
     {
         $descriptionFactory = m::mock(DescriptionFactory::class);
-        $resolver           = new TypeResolver();
-        $context            = new Context('');
+        $resolver = new TypeResolver();
+        $context = new Context('');
 
-        $description  = new Description('My Description');
+        $description = new Description('My Description');
 
         $descriptionFactory->shouldReceive('create')->with('My Description', $context)->andReturn($description);
 

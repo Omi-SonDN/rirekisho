@@ -61,12 +61,12 @@ class Constraint
     /**
      * Checks if given argument is fixed in current constraint
      *
-     * @param  integer  $type
+     * @param  integer $type
      * @return boolean
      */
     public function isFixed($type)
     {
-        return (bool) ($this->fixed & (1 << $type));
+        return (bool)($this->fixed & (1 << $type));
     }
 
     /**

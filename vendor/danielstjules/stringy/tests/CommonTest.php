@@ -431,7 +431,7 @@ abstract class CommonTest extends PHPUnit_Framework_TestCase
     {
         return array(
             array(true, 'Str contains foo bar', 'foo bar'),
-            array(true, '12398!@(*%!@# @!%#*&^%',  ' @!%#*&^%'),
+            array(true, '12398!@(*%!@# @!%#*&^%', ' @!%#*&^%'),
             array(true, 'Ο συγγραφέας είπε', 'συγγραφέας', 'UTF-8'),
             array(true, 'å´¥©¨ˆßå˚ ∆∂˙©å∑¥øœ¬', 'å´¥©', true, 'UTF-8'),
             array(true, 'å´¥©¨ˆßå˚ ∆∂˙©å∑¥øœ¬', 'å˚ ∆', true, 'UTF-8'),
@@ -442,7 +442,7 @@ abstract class CommonTest extends PHPUnit_Framework_TestCase
             array(false, 'Ο συγγραφέας είπε', '  συγγραφέας ', true, 'UTF-8'),
             array(false, 'å´¥©¨ˆßå˚ ∆∂˙©å∑¥øœ¬', ' ßå˚', true, 'UTF-8'),
             array(true, 'Str contains foo bar', 'Foo bar', false),
-            array(true, '12398!@(*%!@# @!%#*&^%',  ' @!%#*&^%', false),
+            array(true, '12398!@(*%!@# @!%#*&^%', ' @!%#*&^%', false),
             array(true, 'Ο συγγραφέας είπε', 'ΣΥΓΓΡΑΦΈΑΣ', false, 'UTF-8'),
             array(true, 'å´¥©¨ˆßå˚ ∆∂˙©å∑¥øœ¬', 'Å´¥©', false, 'UTF-8'),
             array(true, 'å´¥©¨ˆßå˚ ∆∂˙©å∑¥øœ¬', 'Å˚ ∆', false, 'UTF-8'),

@@ -24,24 +24,26 @@ class AuthController extends Controller
     {
         $this->user = $user;
         $this->auth = $auth;
-        $this->middleware('guest', ['except' => ['getLogout','myLogout','logout']]);
+        $this->middleware('guest', ['except' => ['getLogout', 'myLogout', 'logout']]);
     }
+
     protected function create(array $data)
     {
         return User::create(['name' => $data ['name'], 'email' => $data ['email'],
-          'password' => bcrypt($data ['password']), ]);
+            'password' => bcrypt($data ['password']),]);
     }
 
     public function getLogin()
     {
         return view('xAuth.login');
     }
+
     public function postLogin(Request $request)
     {
         $validator = Validator::make($request->all(), User::$login_rules);
 
         if ($validator->fails()) {
-            return redirect('auth/login')->withErrors($validator)->withInput($request->except(['password'])); 
+            return redirect('auth/login')->withErrors($validator)->withInput($request->except(['password']));
         } else {
             $userdata = array('email' => $request->input('email'), 'password' => $request->input('password'));
             if (Auth::attempt($userdata)) {
@@ -61,6 +63,7 @@ class AuthController extends Controller
     {
         return view('xAuth.register');
     }
+
     public function postRegister(Request $request)
     {
         $validator = Validator::make($request->all(), User::$rules);
@@ -80,10 +83,9 @@ class AuthController extends Controller
         if (Auth::check()) {
             Session::flush();
             Auth::logout();
-             
+
             return redirect()->action('Auth\AuthController@getLogin');
-        }
-        else
+        } else
             return redirect()->action('Auth\AuthController@getLogin');
     }
 }

@@ -34,10 +34,10 @@ trait CrawlerTrait
     /**
      * Visit the given URI with a JSON request.
      *
-     * @param  string  $method
-     * @param  string  $uri
-     * @param  array  $data
-     * @param  array  $headers
+     * @param  string $method
+     * @param  string $uri
+     * @param  array $data
+     * @param  array $headers
      * @return $this
      */
     public function json($method, $uri, array $data = [], array $headers = [])
@@ -60,8 +60,8 @@ trait CrawlerTrait
     /**
      * Visit the given URI with a GET request.
      *
-     * @param  string  $uri
-     * @param  array  $headers
+     * @param  string $uri
+     * @param  array $headers
      * @return $this
      */
     public function get($uri, array $headers = [])
@@ -76,9 +76,9 @@ trait CrawlerTrait
     /**
      * Visit the given URI with a POST request.
      *
-     * @param  string  $uri
-     * @param  array  $data
-     * @param  array  $headers
+     * @param  string $uri
+     * @param  array $data
+     * @param  array $headers
      * @return $this
      */
     public function post($uri, array $data = [], array $headers = [])
@@ -93,9 +93,9 @@ trait CrawlerTrait
     /**
      * Visit the given URI with a PUT request.
      *
-     * @param  string  $uri
-     * @param  array  $data
-     * @param  array  $headers
+     * @param  string $uri
+     * @param  array $data
+     * @param  array $headers
      * @return $this
      */
     public function put($uri, array $data = [], array $headers = [])
@@ -110,9 +110,9 @@ trait CrawlerTrait
     /**
      * Visit the given URI with a PATCH request.
      *
-     * @param  string  $uri
-     * @param  array  $data
-     * @param  array  $headers
+     * @param  string $uri
+     * @param  array $data
+     * @param  array $headers
      * @return $this
      */
     public function patch($uri, array $data = [], array $headers = [])
@@ -127,9 +127,9 @@ trait CrawlerTrait
     /**
      * Visit the given URI with a DELETE request.
      *
-     * @param  string  $uri
-     * @param  array  $data
-     * @param  array  $headers
+     * @param  string $uri
+     * @param  array $data
+     * @param  array $headers
      * @return $this
      */
     public function delete($uri, array $data = [], array $headers = [])
@@ -146,7 +146,7 @@ trait CrawlerTrait
      *
      * This method allows you to fully customize the entire Request object.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return $this
      */
     public function handle(Request $request)
@@ -161,7 +161,7 @@ trait CrawlerTrait
     /**
      * Assert that the response contains JSON.
      *
-     * @param  array|null  $data
+     * @param  array|null $data
      * @return $this
      */
     protected function shouldReturnJson(array $data = null)
@@ -172,14 +172,14 @@ trait CrawlerTrait
     /**
      * Assert that the response contains JSON.
      *
-     * @param  array|null  $data
+     * @param  array|null $data
      * @return $this|null
      */
     protected function receiveJson($data = null)
     {
         $this->seeJson();
 
-        if (! is_null($data)) {
+        if (!is_null($data)) {
             return $this->seeJson($data);
         }
     }
@@ -187,7 +187,7 @@ trait CrawlerTrait
     /**
      * Assert that the response contains an exact JSON array.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return $this
      */
     public function seeJsonEquals(array $data)
@@ -204,8 +204,8 @@ trait CrawlerTrait
     /**
      * Assert that the response contains JSON.
      *
-     * @param  array|null  $data
-     * @param  bool  $negate
+     * @param  array|null $data
+     * @param  bool $negate
      * @return $this
      */
     public function seeJson(array $data = null, $negate = false)
@@ -224,7 +224,7 @@ trait CrawlerTrait
     /**
      * Assert that the response doesn't contain JSON.
      *
-     * @param  array|null  $data
+     * @param  array|null $data
      * @return $this
      */
     public function dontSeeJson(array $data = null)
@@ -235,8 +235,8 @@ trait CrawlerTrait
     /**
      * Assert that the response contains the given JSON.
      *
-     * @param  array  $data
-     * @param  bool  $negate
+     * @param  array $data
+     * @param  bool $negate
      * @return $this
      */
     protected function seeJsonContains(array $data, $negate = false)
@@ -250,7 +250,7 @@ trait CrawlerTrait
         }
 
         $actual = json_encode(Arr::sortRecursive(
-            (array) $actual
+            (array)$actual
         ));
 
         foreach (Arr::sortRecursive($data) as $key => $value) {
@@ -258,7 +258,7 @@ trait CrawlerTrait
 
             $this->{$method}(
                 Str::contains($actual, $expected),
-                ($negate ? 'Found unexpected' : 'Unable to find')." JSON fragment [{$expected}] within [{$actual}]."
+                ($negate ? 'Found unexpected' : 'Unable to find') . " JSON fragment [{$expected}] within [{$actual}]."
             );
         }
 
@@ -268,8 +268,8 @@ trait CrawlerTrait
     /**
      * Format the given key and value into a JSON string for expectation checks.
      *
-     * @param  string  $key
-     * @param  mixed  $value
+     * @param  string $key
+     * @param  mixed $value
      * @return string
      */
     protected function formatToExpectedJson($key, $value)
@@ -290,7 +290,7 @@ trait CrawlerTrait
     /**
      * Asserts that the status code of the response matches the given code.
      *
-     * @param  int  $status
+     * @param  int $status
      * @return $this
      */
     protected function seeStatusCode($status)
@@ -313,7 +313,7 @@ trait CrawlerTrait
 
         $this->assertTrue($headers->has($headerName), "Header [{$headerName}] not present on response.");
 
-        if (! is_null($value)) {
+        if (!is_null($value)) {
             $this->assertEquals(
                 $headers->get($headerName), $value,
                 "Header [{$headerName}] was found, but value [{$headers->get($headerName)}] does not match [{$value}]."
@@ -345,7 +345,7 @@ trait CrawlerTrait
 
         $this->assertTrue($exist, "Cookie [{$cookieName}] not present on response.");
 
-        if (! is_null($value)) {
+        if (!is_null($value)) {
             $this->assertEquals(
                 $cookie->getValue(), $value,
                 "Cookie [{$cookieName}] was found, but value [{$cookie->getValue()}] does not match [{$value}]."
@@ -358,7 +358,7 @@ trait CrawlerTrait
     /**
      * Define a set of server variables to be sent with the requests.
      *
-     * @param  array  $server
+     * @param  array $server
      * @return $this
      */
     protected function withServerVariables(array $server)
@@ -371,13 +371,13 @@ trait CrawlerTrait
     /**
      * Call the given URI and return the Response.
      *
-     * @param  string  $method
-     * @param  string  $uri
-     * @param  array   $parameters
-     * @param  array   $cookies
-     * @param  array   $files
-     * @param  array   $server
-     * @param  string  $content
+     * @param  string $method
+     * @param  string $uri
+     * @param  array $parameters
+     * @param  array $cookies
+     * @param  array $files
+     * @param  array $server
+     * @param  string $content
      * @return \Illuminate\Http\Response
      */
     public function call($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
@@ -401,13 +401,13 @@ trait CrawlerTrait
     /**
      * Call the given HTTPS URI and return the Response.
      *
-     * @param  string  $method
-     * @param  string  $uri
-     * @param  array   $parameters
-     * @param  array   $cookies
-     * @param  array   $files
-     * @param  array   $server
-     * @param  string  $content
+     * @param  string $method
+     * @param  string $uri
+     * @param  array $parameters
+     * @param  array $cookies
+     * @param  array $files
+     * @param  array $server
+     * @param  string $content
      * @return \Illuminate\Http\Response
      */
     public function callSecure($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
@@ -420,14 +420,14 @@ trait CrawlerTrait
     /**
      * Call a controller action and return the Response.
      *
-     * @param  string  $method
-     * @param  string  $action
-     * @param  array   $wildcards
-     * @param  array   $parameters
-     * @param  array   $cookies
-     * @param  array   $files
-     * @param  array   $server
-     * @param  string  $content
+     * @param  string $method
+     * @param  string $action
+     * @param  array $wildcards
+     * @param  array $parameters
+     * @param  array $cookies
+     * @param  array $files
+     * @param  array $server
+     * @param  string $content
      * @return \Illuminate\Http\Response
      */
     public function action($method, $action, $wildcards = [], $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
@@ -440,14 +440,14 @@ trait CrawlerTrait
     /**
      * Call a named route and return the Response.
      *
-     * @param  string  $method
-     * @param  string  $name
-     * @param  array   $routeParameters
-     * @param  array   $parameters
-     * @param  array   $cookies
-     * @param  array   $files
-     * @param  array   $server
-     * @param  string  $content
+     * @param  string $method
+     * @param  string $name
+     * @param  array $routeParameters
+     * @param  array $parameters
+     * @param  array $cookies
+     * @param  array $files
+     * @param  array $server
+     * @param  string $content
      * @return \Illuminate\Http\Response
      */
     public function route($method, $name, $routeParameters = [], $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
@@ -460,7 +460,7 @@ trait CrawlerTrait
     /**
      * Turn the given URI into a fully qualified URL.
      *
-     * @param  string  $uri
+     * @param  string $uri
      * @return string
      */
     protected function prepareUrlForRequest($uri)
@@ -469,8 +469,8 @@ trait CrawlerTrait
             $uri = substr($uri, 1);
         }
 
-        if (! Str::startsWith($uri, 'http')) {
-            $uri = $this->baseUrl.'/'.$uri;
+        if (!Str::startsWith($uri, 'http')) {
+            $uri = $this->baseUrl . '/' . $uri;
         }
 
         return trim($uri, '/');
@@ -479,7 +479,7 @@ trait CrawlerTrait
     /**
      * Transform headers array to array of $_SERVER vars with HTTP_* format.
      *
-     * @param  array  $headers
+     * @param  array $headers
      * @return array
      */
     protected function transformHeadersToServerVars(array $headers)
@@ -490,8 +490,8 @@ trait CrawlerTrait
         foreach ($headers as $name => $value) {
             $name = strtr(strtoupper($name), '-', '_');
 
-            if (! starts_with($name, $prefix) && $name != 'CONTENT_TYPE') {
-                $name = $prefix.$name;
+            if (!starts_with($name, $prefix) && $name != 'CONTENT_TYPE') {
+                $name = $prefix . $name;
             }
 
             $server[$name] = $value;

@@ -1,21 +1,21 @@
 /*!
  * custom pager controls (beta) for TableSorter 9/15/2014 (v2.17.8) - updated 3/26/2015 (v2.21.3)
-  initialize custom pager script BEFORE initializing tablesorter/tablesorter pager
-  custom pager looks like this:
-  1 | 2 … 5 | 6 | 7 … 99 | 100
-    _       _   _        _     adjacentSpacer
-        _           _          distanceSpacer
-  _____               ________ ends (2 default)
-          _________            aroundCurrent (1 default)
+ initialize custom pager script BEFORE initializing tablesorter/tablesorter pager
+ custom pager looks like this:
+ 1 | 2 … 5 | 6 | 7 … 99 | 100
+ _       _   _        _     adjacentSpacer
+ _           _          distanceSpacer
+ _____               ________ ends (2 default)
+ _________            aroundCurrent (1 default)
 
  */
 /*jshint browser:true, jquery:true, unused:false, loopfunc:true */
 /*global jQuery: false */
 
-;(function($){
-"use strict";
+;(function ($) {
+    "use strict";
 
-$.tablesorter = $.tablesorter || {};
+    $.tablesorter = $.tablesorter || {};
 
 $.tablesorter.customPagerControls = function(settings) {
     var defaults = {
@@ -88,6 +88,7 @@ $.tablesorter.customPagerControls = function(settings) {
                 .addClass(options.currentClass)
                 .siblings()
                 .removeClass(options.currentClass);
+
             $table.trigger('pageSet', $(this).attr('data-page'));
             return false;
         });

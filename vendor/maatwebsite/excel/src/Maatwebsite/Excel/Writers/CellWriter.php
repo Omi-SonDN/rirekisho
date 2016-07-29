@@ -13,7 +13,8 @@ use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class CellWriter {
+class CellWriter
+{
 
     /**
      * Current $sheet
@@ -29,7 +30,7 @@ class CellWriter {
 
     /**
      * Constructor
-     * @param array                 $cells
+     * @param array $cells
      * @param LaravelExcelWorksheet $sheet
      */
     public function __construct($cells, LaravelExcelWorksheet $sheet)
@@ -46,8 +47,7 @@ class CellWriter {
     public function setValue($value)
     {
         // Only set cell value for single cells
-        if (!str_contains($this->cells, ':'))
-        {
+        if (!str_contains($this->cells, ':')) {
             $this->sheet->setCellValue($this->cells, $value);
         }
 
@@ -125,7 +125,7 @@ class CellWriter {
 
     /**
      * Set border
-     * @param string      $top
+     * @param string $top
      * @param bool|string $right
      * @param bool|string $bottom
      * @param bool|string $left
@@ -135,13 +135,13 @@ class CellWriter {
     {
         // Set the border styles
         $styles = is_array($top) ? $top : array(
-            'top'    => array(
+            'top' => array(
                 'style' => $top
             ),
-            'left'   => array(
+            'left' => array(
                 'style' => $left,
             ),
-            'right'  => array(
+            'right' => array(
                 'style' => $right,
             ),
             'bottom' => array(
@@ -159,8 +159,8 @@ class CellWriter {
      */
     public function setTextRotation($degrees)
     {
-      $style = $this->getCellStyle()->getAlignment()->setTextRotation($degrees);
-      return $this;
+        $style = $this->getCellStyle()->getAlignment()->setTextRotation($degrees);
+        return $this;
     }
 
     /**
@@ -190,16 +190,16 @@ class CellWriter {
     /**
      * Set the color style
      * @param         $styleType
-     * @param string  $color
+     * @param string $color
      * @param boolean $type
-     * @param string  $colorType
+     * @param string $colorType
      * @return  CellWriter
      */
     protected function setColorStyle($styleType, $color, $type = false, $colorType = 'rgb')
     {
         // Set the styles
         $styles = is_array($color) ? $color : array(
-            'type'  => $type,
+            'type' => $type,
             'color' => array($colorType => str_replace('#', '', $color))
         );
 

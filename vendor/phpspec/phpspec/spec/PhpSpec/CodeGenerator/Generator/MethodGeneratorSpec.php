@@ -61,7 +61,7 @@ METHOD
 
 CODE;
         $values = array(
-            '%name%'      => 'setName',
+            '%name%' => 'setName',
             '%arguments%' => '$argument1',
         );
 

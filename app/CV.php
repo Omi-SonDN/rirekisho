@@ -37,7 +37,7 @@ class CV extends Model
     // public function getStatusnameAttribute(){
     //     switch ($this->Status) {
     //         case 0: return "Chờ duyệt"; break;
-            
+
     //         default:
     //             # code...
     //             break;
@@ -58,18 +58,21 @@ class CV extends Model
     {
         return $this->hasMany('App\Skill', 'cv_id');
     }
+
     public function position()
     {
         return $this->belongsTo('App\Positions', 'apply_to', 'id');
     }
+    public function status()
+    {
+        return $this->belongsTo('App\Status', 'Status', 'id');
+    }
 
-    /************************** scope ********************************************/
     public function scopeActive($query)
     {
         return $query->where('active', 1);
     }
 
-    /****************************** Accessor ************************************/
     public function getNameAttribute()
     {
         if ($this->First_name != "") {
@@ -162,6 +165,7 @@ class CV extends Model
     {
         return Hashids::encode($this->getKey());
     }
+
     public function getRouteKey()
     {
         return Hashids::encode($this->getKey());

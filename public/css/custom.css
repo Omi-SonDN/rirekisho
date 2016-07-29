@@ -76,7 +76,7 @@ div.content:hover, div.content:active, div.content:focus {
     border-bottom: 2px dotted gray;
     font-size: 17px;
     padding-bottom: 7px;
-    margin-bottom: 19px!important;
+    margin-bottom: 19px !important;
 }
 
 .error-text {
@@ -359,6 +359,7 @@ div.content:hover, div.content:active, div.content:focus {
     height: 100%;
     table-layout: fixed
 }
+
 input[type="checkbox"] {
     position: absolute;
     opacity: 0;
@@ -367,13 +368,14 @@ input[type="checkbox"] {
 /* Normal Track */
 input[type="checkbox"].ios-switch + div {
     vertical-align: middle;
-    width: 40px;	height: 20px;
-    border: 1px solid rgba(0,0,0,.4);
+    width: 40px;
+    height: 20px;
+    border: 1px solid rgba(0, 0, 0, .4);
     border-radius: 999px;
     background-color: rgba(0, 0, 0, 0.1);
     -webkit-transition-duration: .4s;
     -webkit-transition-property: background-color, box-shadow;
-    box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+    box-shadow: inset 0 0 0 0px rgba(0, 0, 0, 0.4);
 }
 
 /* Checked Track (Blue) */
@@ -382,20 +384,24 @@ input[type="checkbox"].ios-switch:checked + div {
     background-position: 0 0;
     background-color: #3b89ec;
     border: 1px solid #0e62cd;
-    box-shadow: inset 0 0 0 10px rgba(59,137,259,1);
+    box-shadow: inset 0 0 0 10px rgba(59, 137, 259, 1);
 }
+
 input[type="checkbox"].tinyswitch.ios-switch + div {
-    width: 34px;	height: 18px;
+    width: 34px;
+    height: 18px;
 }
+
 input[type="checkbox"].ios-switch + div > div {
     float: left;
-    width: 18px; height: 18px;
+    width: 18px;
+    height: 18px;
     border-radius: inherit;
     background: #ffffff;
-    -webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+    -webkit-transition-timing-function: cubic-bezier(.54, 1.85, .5, 1);
     -webkit-transition-duration: 0.4s;
     -webkit-transition-property: transform, background-color, box-shadow;
-    -moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+    -moz-transition-timing-function: cubic-bezier(.54, 1.85, .5, 1);
     -moz-transition-duration: 0.4s;
     -moz-transition-property: transform, background-color;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
@@ -409,12 +415,13 @@ input[type="checkbox"].ios-switch:checked + div > div {
     -webkit-transform: translate3d(20px, 0, 0);
     -moz-transform: translate3d(20px, 0, 0);
     background-color: #ffffff;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172,1);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172, 1);
 }
 
 /* Tiny Knob */
 input[type="checkbox"].tinyswitch.ios-switch + div > div {
-    width: 16px; height: 16px;
+    width: 16px;
+    height: 16px;
     margin-top: 1px;
 }
 
@@ -422,29 +429,32 @@ input[type="checkbox"].tinyswitch.ios-switch + div > div {
 input[type="checkbox"].tinyswitch.ios-switch:checked + div > div {
     -webkit-transform: translate3d(16px, 0, 0);
     -moz-transform: translate3d(16px, 0, 0);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172,1);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172, 1);
 }
+
 input[type="checkbox"].purple.ios-switch:checked + div {
     background-color: #b3b3d2;
     border: 1px solid #6a5b91;
     box-shadow: inset 0 0 0 10px #a3a3c2;
 }
+
 /* Green Knob */
 input[type="checkbox"].purple.ios-switch:checked + div > div {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0 0 0 1px #4a3b71;
 }
 
-
 /* **************** bqn custom login ***************** */
 .content {
     padding: 0px 0px;
 }
+
 .content .h3-title {
     background: #424242;
     padding: 5px 25px;
 
 }
-.content .h3-title h3{
+
+.content .h3-title h3 {
     padding: 0px 0px;
     font-size: 24px;
     /* background: beige; */
@@ -452,7 +462,8 @@ input[type="checkbox"].purple.ios-switch:checked + div > div {
     color: white;
     font-weight: 700;
 }
-.fix{
+
+.fix {
     border: none;
     padding: 0px 25px;
     margin: 25px 5px;
@@ -464,19 +475,23 @@ input[type="checkbox"].purple.ios-switch:checked + div > div {
     padding: 20px;
     /*position: absolute;*/
 }
+
 #login .clr .checkbox {
     color: #ffffff;
 }
+
 #login .clr a {
     color: #e9751a;
     /*float: left;*/
 }
+
 input.float_right.b-purple.col-md-12 {
     font-size: large;
     padding: 14px 0;
     text-transform: initial;
     font-weight: bold;
 }
+
 .disline {
     display: block;
     padding: 0 0 12px;
@@ -484,11 +499,13 @@ input.float_right.b-purple.col-md-12 {
     position: relative;
     line-height: 12px;
 }
+
 .disline a {
     float: right;
     margin-right: 20px;
     color: lightslategrey;
 }
+
 .fix-lable {
     padding: 0px 0 0 12px;
     margin: auto;

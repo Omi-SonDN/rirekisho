@@ -56,15 +56,15 @@
                     </label>
                 </li>
                 <div class="clr"></div>
-                    <li class="bottom_20px">
-                        <input type="submit" form="login" name="submit" value="Đăng nhập" class="float_right b-purple">
-                    </li>
-                    <li class="bottom_20px">
-                        hoặc
-                    </li>
-                    <li class="bottom_20px">
-                        <a href="{{url('auth/register')}}">Đăng ký</a>
-                    </li>
+                <li class="bottom_20px">
+                    <input type="submit" form="login" name="submit" value="Đăng nhập" class="float_right b-purple">
+                </li>
+                <li class="bottom_20px">
+                    hoặc
+                </li>
+                <li class="bottom_20px">
+                    <a href="{{url('auth/register')}}">Đăng ký</a>
+                </li>
             </ul>
 
         </fieldset>

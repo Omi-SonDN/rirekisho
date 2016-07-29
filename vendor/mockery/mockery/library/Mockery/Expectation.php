@@ -220,18 +220,25 @@ class Expectation implements ExpectationInterface
 
         $rm = $this->_mock->mockery_getMethod($this->_name);
         if ($rm && version_compare(PHP_VERSION, '7.0.0-dev') >= 0 && $rm->hasReturnType()) {
-            $type = (string) $rm->getReturnType();
+            $type = (string)$rm->getReturnType();
             switch ($type) {
-                case '':       return;
-                case 'string': return '';
-                case 'int':    return 0;
-                case 'float':  return 0.0;
-                case 'bool':   return false;
-                case 'array':  return array();
+                case '':
+                    return;
+                case 'string':
+                    return '';
+                case 'int':
+                    return 0;
+                case 'float':
+                    return 0.0;
+                case 'bool':
+                    return false;
+                case 'array':
+                    return array();
 
                 case 'callable':
                 case 'Closure':
-                    return function () {};
+                    return function () {
+                    };
 
                 case 'Traversable':
                 case 'Generator':
@@ -278,11 +285,11 @@ class Expectation implements ExpectationInterface
     public function validateOrder()
     {
         if ($this->_orderNumber) {
-            $this->_mock->mockery_validateOrder((string) $this, $this->_orderNumber, $this->_mock);
+            $this->_mock->mockery_validateOrder((string)$this, $this->_orderNumber, $this->_mock);
         }
         if ($this->_globalOrderNumber) {
             $this->_mock->mockery_getContainer()
-                ->mockery_validateOrder((string) $this, $this->_globalOrderNumber, $this->_mock);
+                ->mockery_validateOrder((string)$this, $this->_globalOrderNumber, $this->_mock);
         }
     }
 
@@ -313,7 +320,7 @@ class Expectation implements ExpectationInterface
             return false;
         }
         $argCount = count($args);
-        for ($i=0; $i<$argCount; $i++) {
+        for ($i = 0; $i < $argCount; $i++) {
             $param =& $args[$i];
             if (!$this->_matchArg($this->_expectedArgs[$i], $param)) {
                 return false;
@@ -339,8 +346,9 @@ class Expectation implements ExpectationInterface
         }
         if (is_string($expected) && !is_array($actual) && !is_object($actual)) {
             # push/pop an error handler here to to make sure no error/exception thrown if $expected is not a regex
-            set_error_handler(function () {});
-            $result = preg_match($expected, (string) $actual);
+            set_error_handler(function () {
+            });
+            $result = preg_match($expected, (string)$actual);
             restore_error_handler();
 
             if ($result) {

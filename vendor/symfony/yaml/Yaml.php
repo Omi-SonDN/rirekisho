@@ -39,7 +39,7 @@ class Yaml
      *  </code>
      *
      * @param string $input A string containing YAML
-     * @param int    $flags A bit field of PARSE_* constants to customize the YAML parser behavior
+     * @param int $flags A bit field of PARSE_* constants to customize the YAML parser behavior
      *
      * @return mixed The YAML converted to a PHP value
      *
@@ -84,10 +84,10 @@ class Yaml
      * The dump method, when supplied with an array, will do its best
      * to convert the array into friendly YAML.
      *
-     * @param array $array  PHP array
-     * @param int   $inline The level where you switch to inline YAML
-     * @param int   $indent The amount of spaces to use for indentation of nested nodes.
-     * @param int   $flags  A bit field of DUMP_* constants to customize the dumped YAML string
+     * @param array $array PHP array
+     * @param int $inline The level where you switch to inline YAML
+     * @param int $indent The amount of spaces to use for indentation of nested nodes.
+     * @param int $flags A bit field of DUMP_* constants to customize the dumped YAML string
      *
      * @return string A YAML string representing the original PHP array
      */

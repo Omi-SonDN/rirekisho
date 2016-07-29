@@ -22,8 +22,7 @@ class LoggingTranslatorTest extends \PHPUnit_Framework_TestCase
         $logger = $this->getMock('Psr\Log\LoggerInterface');
         $logger->expects($this->exactly(2))
             ->method('warning')
-            ->with('Translation not found.')
-        ;
+            ->with('Translation not found.');
 
         $translator = new Translator('ar');
         $loggableTranslator = new LoggingTranslator($translator, $logger);
@@ -36,8 +35,7 @@ class LoggingTranslatorTest extends \PHPUnit_Framework_TestCase
         $logger = $this->getMock('Psr\Log\LoggerInterface');
         $logger->expects($this->once())
             ->method('debug')
-            ->with('Translation use fallback catalogue.')
-        ;
+            ->with('Translation use fallback catalogue.');
 
         $translator = new Translator('ar');
         $translator->setFallbackLocales(array('en'));

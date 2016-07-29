@@ -21,6 +21,7 @@ class CVController extends Controller
 
     public function index(Request $request)
     {
+
         //TODO: sửa view
         $str_po = $str_role = array();
         if (Auth::user()->getrole() === 'Visitor') {
@@ -172,10 +173,10 @@ class CVController extends Controller
     public function update($id, UpdateRequest $request)//PUT
     {
         //$id = $id - 14000;
-        
+
         $cv = CV::findOrFail($id);
         if (Gate::denies('update-cv', $cv->user_id)) {
-            abort(403); 
+            abort(403);
         }
         if ($request->has('B_date')) {
             $cv->Birth_date = getDateDate($request->input('B_date'));

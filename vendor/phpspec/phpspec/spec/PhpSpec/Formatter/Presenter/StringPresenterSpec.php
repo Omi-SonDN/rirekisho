@@ -53,7 +53,8 @@ class StringPresenterSpec extends ObjectBehavior
 
     function it_presents_closure_as_type()
     {
-        $this->presentValue(function () {})->shouldReturn('[closure]');
+        $this->presentValue(function () {
+        })->shouldReturn('[closure]');
     }
 
     function it_presents_exception_as_class_with_constructor()

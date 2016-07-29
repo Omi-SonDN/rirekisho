@@ -60,7 +60,8 @@ class Wrapper
         EventDispatcherInterface $dispatcher,
         ExampleNode $example,
         AccessInspectorInterface $accessInspector = null
-    ) {
+    )
+    {
         $this->matchers = $matchers;
         $this->presenter = $presenter;
         $this->dispatcher = $dispatcher;

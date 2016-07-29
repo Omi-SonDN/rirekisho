@@ -79,6 +79,6 @@ class Dump extends Twig_Extension
             }
         }
 
-        return '<pre>'.$output.'</pre>';
+        return '<pre>' . $output . '</pre>';
     }
 }

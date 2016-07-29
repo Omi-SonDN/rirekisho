@@ -55,9 +55,9 @@ class Scope
     /**
      * Create a new scope instance.
      *
-     * @param Manager           $manager
+     * @param Manager $manager
      * @param ResourceInterface $resource
-     * @param string            $scopeIdentifier
+     * @param string $scopeIdentifier
      *
      * @return void
      */
@@ -73,7 +73,7 @@ class Scope
      *
      * @internal
      *
-     * @param string            $scopeIdentifier
+     * @param string $scopeIdentifier
      * @param ResourceInterface $resource
      *
      * @return \League\Fractal\Scope
@@ -159,7 +159,7 @@ class Scope
             $scopeArray = [$checkScopeSegment];
         }
 
-        $scopeString = implode('.', (array) $scopeArray);
+        $scopeString = implode('.', (array)$scopeArray);
 
         $checkAgainstArray = $this->manager->getRequestedIncludes();
 
@@ -239,7 +239,7 @@ class Scope
                 $pagination = $serializer->paginator($this->resource->getPaginator());
             }
 
-            if (! empty($pagination)) {
+            if (!empty($pagination)) {
                 $this->resource->setMetaValue(key($pagination), current($pagination));
             }
         }
@@ -286,7 +286,7 @@ class Scope
         } else {
             throw new InvalidArgumentException(
                 'Argument $resource should be an instance of League\Fractal\Resource\Item'
-                .' or League\Fractal\Resource\Collection'
+                . ' or League\Fractal\Resource\Collection'
             );
         }
 
@@ -299,7 +299,7 @@ class Scope
      * @internal
      *
      * @param SerializerAbstract $serializer
-     * @param mixed              $data
+     * @param mixed $data
      *
      * @return array
      */
@@ -324,7 +324,7 @@ class Scope
      * @internal
      *
      * @param TransformerAbstract|callable $transformer
-     * @param mixed                        $data
+     * @param mixed $data
      *
      * @return array
      */
@@ -352,7 +352,7 @@ class Scope
      * @internal
      *
      * @param \League\Fractal\TransformerAbstract $transformer
-     * @param mixed                               $data
+     * @param mixed $data
      *
      * @return array
      */
@@ -374,14 +374,14 @@ class Scope
      */
     protected function transformerHasIncludes($transformer)
     {
-        if (! $transformer instanceof TransformerAbstract) {
+        if (!$transformer instanceof TransformerAbstract) {
             return false;
         }
 
         $defaultIncludes = $transformer->getDefaultIncludes();
         $availableIncludes = $transformer->getAvailableIncludes();
 
-        return ! empty($defaultIncludes) || ! empty($availableIncludes);
+        return !empty($defaultIncludes) || !empty($availableIncludes);
     }
 
     /**

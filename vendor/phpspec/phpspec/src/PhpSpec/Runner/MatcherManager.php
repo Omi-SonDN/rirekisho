@@ -59,8 +59,8 @@ class MatcherManager
 
     /**
      * @param string $keyword
-     * @param mixed  $subject
-     * @param array  $arguments
+     * @param mixed $subject
+     * @param array $arguments
      *
      * @return MatcherInterface
      *

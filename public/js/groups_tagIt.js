@@ -1,12 +1,12 @@
 $(document).ready(function () {
     var url = '';
-    
+
     $("#members").tagit({
         singleField: true,
         allowSpaces: true,
         removeConfirmation: true,
         placeholderText: "Groups",
-        
+
         tagSource: function (request, response) {
             $.ajax({
                 url: url + "/groups/getUsername",
@@ -20,8 +20,9 @@ $(document).ready(function () {
                             value: item.name
                         };
                     }));
-                    
+
                 }
             });
-        }});
+        }
     });
+});

@@ -17,7 +17,7 @@ class Selector
      * @var string
      */
     protected $selector;
-    
+
     /**
      * @param  string $selector The CSS selector
      */
@@ -25,7 +25,7 @@ class Selector
     {
         $this->selector = $selector;
     }
-    
+
     public function toXPath()
     {
         try {
@@ -38,7 +38,7 @@ class Selector
         } catch (ExceptionInterface $e) {
             $query = null;
         }
-        
+
         return $query;
     }
 }

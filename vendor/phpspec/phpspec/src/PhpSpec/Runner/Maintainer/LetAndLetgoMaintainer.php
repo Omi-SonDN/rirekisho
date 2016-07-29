@@ -28,22 +28,22 @@ class LetAndLetgoMaintainer implements MaintainerInterface
     public function supports(ExampleNode $example)
     {
         return $example->getSpecification()->getClassReflection()->hasMethod('let')
-            || $example->getSpecification()->getClassReflection()->hasMethod('letgo')
-        ;
+        || $example->getSpecification()->getClassReflection()->hasMethod('letgo');
     }
 
     /**
-     * @param ExampleNode            $example
+     * @param ExampleNode $example
      * @param SpecificationInterface $context
-     * @param MatcherManager         $matchers
-     * @param CollaboratorManager    $collaborators
+     * @param MatcherManager $matchers
+     * @param CollaboratorManager $collaborators
      */
     public function prepare(
         ExampleNode $example,
         SpecificationInterface $context,
         MatcherManager $matchers,
         CollaboratorManager $collaborators
-    ) {
+    )
+    {
         if (!$example->getSpecification()->getClassReflection()->hasMethod('let')) {
             return;
         }
@@ -53,17 +53,18 @@ class LetAndLetgoMaintainer implements MaintainerInterface
     }
 
     /**
-     * @param ExampleNode            $example
+     * @param ExampleNode $example
      * @param SpecificationInterface $context
-     * @param MatcherManager         $matchers
-     * @param CollaboratorManager    $collaborators
+     * @param MatcherManager $matchers
+     * @param CollaboratorManager $collaborators
      */
     public function teardown(
         ExampleNode $example,
         SpecificationInterface $context,
         MatcherManager $matchers,
         CollaboratorManager $collaborators
-    ) {
+    )
+    {
         if (!$example->getSpecification()->getClassReflection()->hasMethod('letgo')) {
             return;
         }

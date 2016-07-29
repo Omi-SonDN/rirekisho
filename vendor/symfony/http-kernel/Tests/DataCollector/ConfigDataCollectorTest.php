@@ -44,14 +44,15 @@ class ConfigDataCollectorTest extends \PHPUnit_Framework_TestCase
 
         // if else clause because we don't know it
         if (((extension_loaded('eaccelerator') && ini_get('eaccelerator.enable'))
-                ||
-                (extension_loaded('apc') && ini_get('apc.enabled'))
-                ||
-                (extension_loaded('Zend OPcache') && ini_get('opcache.enable'))
-                ||
-                (extension_loaded('xcache') && ini_get('xcache.cacher'))
-                ||
-                (extension_loaded('wincache') && ini_get('wincache.ocenabled')))) {
+            ||
+            (extension_loaded('apc') && ini_get('apc.enabled'))
+            ||
+            (extension_loaded('Zend OPcache') && ini_get('opcache.enable'))
+            ||
+            (extension_loaded('xcache') && ini_get('xcache.cacher'))
+            ||
+            (extension_loaded('wincache') && ini_get('wincache.ocenabled')))
+        ) {
             $this->assertTrue($c->hasAccelerator());
         } else {
             $this->assertFalse($c->hasAccelerator());

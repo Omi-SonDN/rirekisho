@@ -85,7 +85,8 @@ final class ContextFactory
                     while ($tokens->valid() && ($braceLevel > 0 || !$firstBraceFound)) {
                         if ($tokens->current() === '{'
                             || $tokens->current()[0] === T_CURLY_OPEN
-                            || $tokens->current()[0] === T_DOLLAR_OPEN_CURLY_BRACES) {
+                            || $tokens->current()[0] === T_DOLLAR_OPEN_CURLY_BRACES
+                        ) {
                             if (!$firstBraceFound) {
                                 $firstBraceFound = true;
                             }

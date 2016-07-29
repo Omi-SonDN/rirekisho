@@ -38,7 +38,7 @@ class ZendFrameworkPaginatorAdapter implements PaginatorInterface
      * Create a new zendframework pagination adapter.
      *
      * @param \Zend\Paginator\Paginator $paginator
-     * @param callable                  $routeGenerator
+     * @param callable $routeGenerator
      *
      * @return void
      */

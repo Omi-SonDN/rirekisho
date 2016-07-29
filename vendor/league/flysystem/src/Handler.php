@@ -20,7 +20,7 @@ abstract class Handler
      * Constructor.
      *
      * @param FilesystemInterface $filesystem
-     * @param string              $path
+     * @param string $path
      */
     public function __construct(FilesystemInterface $filesystem = null, $path = null)
     {
@@ -73,7 +73,7 @@ abstract class Handler
 
         return $this;
     }
-    
+
     /**
      * Retrieve the Filesystem object.
      *
@@ -112,7 +112,7 @@ abstract class Handler
      * Plugins pass-through.
      *
      * @param string $method
-     * @param array  $arguments
+     * @param array $arguments
      *
      * @return mixed
      */

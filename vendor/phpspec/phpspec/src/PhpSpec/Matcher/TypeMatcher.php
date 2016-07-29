@@ -42,16 +42,15 @@ class TypeMatcher extends BasicMatcher
 
     /**
      * @param string $name
-     * @param mixed  $subject
-     * @param array  $arguments
+     * @param mixed $subject
+     * @param array $arguments
      *
      * @return bool
      */
     public function supports($name, $subject, array $arguments)
     {
         return in_array($name, self::$keywords)
-            && 1 == count($arguments)
-        ;
+        && 1 == count($arguments);
     }
 
     /**
@@ -67,8 +66,8 @@ class TypeMatcher extends BasicMatcher
 
     /**
      * @param string $name
-     * @param mixed  $subject
-     * @param array  $arguments
+     * @param mixed $subject
+     * @param array $arguments
      *
      * @return FailureException
      */
@@ -83,8 +82,8 @@ class TypeMatcher extends BasicMatcher
 
     /**
      * @param string $name
-     * @param mixed  $subject
-     * @param array  $arguments
+     * @param mixed $subject
+     * @param array $arguments
      *
      * @return FailureException
      */

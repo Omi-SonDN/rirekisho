@@ -33,7 +33,8 @@ class ControllerResolverTest extends \PHPUnit_Framework_TestCase
         $resolver = $this->createControllerResolver();
 
         $request = Request::create('/');
-        $request->attributes->set('_controller', $lambda = function () {});
+        $request->attributes->set('_controller', $lambda = function () {
+        });
         $controller = $resolver->getController($request);
         $this->assertSame($lambda, $controller);
     }
@@ -156,12 +157,14 @@ class ControllerResolverTest extends \PHPUnit_Framework_TestCase
 
         $request = Request::create('/');
         $request->attributes->set('foo', 'foo');
-        $controller = function ($foo) {};
+        $controller = function ($foo) {
+        };
         $this->assertEquals(array('foo'), $resolver->getArguments($request, $controller));
 
         $request = Request::create('/');
         $request->attributes->set('foo', 'foo');
-        $controller = function ($foo, $bar = 'bar') {};
+        $controller = function ($foo, $bar = 'bar') {
+        };
         $this->assertEquals(array('foo', 'bar'), $resolver->getArguments($request, $controller));
 
         $request = Request::create('/');

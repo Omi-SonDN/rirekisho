@@ -53,7 +53,7 @@ class Alias
         $this->addClass($this->root);
         $this->detectNamespace();
         $this->detectClassType();
-        
+
         if ($facade === '\Illuminate\Database\Eloquent\Model') {
             $this->usedMethods = array('decrement', 'increment');
         }
@@ -122,6 +122,7 @@ class Alias
     {
         return $this->short;
     }
+
     /**
      * Get the namespace from the alias
      *
@@ -283,7 +284,7 @@ class Alias
     /**
      * Output an error.
      *
-     * @param  string  $string
+     * @param  string $string
      * @return void
      */
     protected function error($string)
