@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Absolute_Positioner' => $vendorDir . '/dompdf/dompdf/include/absolute_positioner.cls.php',
     'Abstract_Renderer' => $vendorDir . '/dompdf/dompdf/include/abstract_renderer.cls.php',
+    'AddDescriptionToPositions' => $baseDir . '/database/migrations/2016_07_30_161137_add_description_to_positions.php',
     'AddGithubLinkedinToCvs' => $baseDir . '/database/migrations/2016_07_28_093744_add_github_linkedin_to_cvs.php',
     'AddImageToUsers' => $baseDir . '/database/migrations/2016_07_18_090119_add_image_to_users.php',
     'Adobe_Font_Metrics' => $vendorDir . '/phenx/php-font-lib/classes/Adobe_Font_Metrics.php',
@@ -660,4 +661,5 @@ return array(
     'Text_Renderer' => $vendorDir . '/dompdf/dompdf/include/text_renderer.cls.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'app\\MyLibrary\\pagination_temp' => $baseDir . '/app/MyLibrary/pagination_temp.php',
 );

@@ -486,51 +486,52 @@ $(document).ready(function () {
     }
 );
 
-/****************** search name date age status*************************/
+///****************** search name date age status*************************/
+//
+//    $(".dataTable th").on('click', function () {
+//
+//         var entries = $('#show_entries').val();
+//         var dataSort = $(this).attr("data-sort");
+//         var dataField = $(this).attr("data-field");
+//         var nameSearch = $('#nameSearch').val();
+//         var positionsSearch = $('#positionsSearch').val();
+//         var statusSearch = $('#statusSearch').val();
+//         var entrie = $('#show_entries').val();
+//
+//         var dataString = "data-sort=" + dataSort +
+//             "&data-field=" + dataField +
+//             "&nameSearch=" + nameSearch +
+//             "&positionsSearch=" + positionsSearch +
+//             "&statusSearch=" + statusSearch +
+//             "&entrie=" + entries;
+//
+//         $(".dataTable .sorting_asc").attr("class", "sorting");
+//         $(".dataTable .sorting_asc").attr("data-sort", "asc");
+//         $(".dataTable .sorting_desc").attr("class", "sorting");
+//         $(".dataTable .sorting_desc").attr("data-sort", "asc");
+//
+//         if (dataSort == "desc") {
+//             $(this).attr("data-sort", "asc");
+//             $(this).attr("class", "sorting_asc");
+//
+//         } else {
+//             $(this).attr("data-sort", "desc");
+//             $(this).attr("class", "sorting_desc");
+//         }
+//
+//         var dataSortAff = $(this).attr("data-sort");
+//
+//         $("#example").attr("data-field", dataField);
+//         $("#example").attr("data-sort", dataSortAff);
+//
+//         if (dataString) {
+//             advSearch(dataString)
+//         }
+//    });
 
-    $(".dataTable th").on('click', function () {
-
-         var entries = $('#show_entries').val();
-         var dataSort = $(this).attr("data-sort");
-         var dataField = $(this).attr("data-field");
-         var nameSearch = $('#nameSearch').val();
-         var positionsSearch = $('#positionsSearch').val();
-         var statusSearch = $('#statusSearch').val();
-         var entrie = $('#show_entries').val();
-
-         var dataString = "data-sort=" + dataSort +
-             "&data-field=" + dataField +
-             "&nameSearch=" + nameSearch +
-             "&positionsSearch=" + positionsSearch +
-             "&statusSearch=" + statusSearch +
-             "&entrie=" + entries;
-
-         $(".dataTable .sorting_asc").attr("class", "sorting");
-         $(".dataTable .sorting_asc").attr("data-sort", "asc");
-         $(".dataTable .sorting_desc").attr("class", "sorting");
-         $(".dataTable .sorting_desc").attr("data-sort", "asc");
-
-         if (dataSort == "desc") {
-             $(this).attr("data-sort", "asc");
-             $(this).attr("class", "sorting_asc");
-
-         } else {
-             $(this).attr("data-sort", "desc");
-             $(this).attr("class", "sorting_desc");
-         }
-
-         var dataSortAff = $(this).attr("data-sort");
-
-         $("#example").attr("data-field", dataField);
-         $("#example").attr("data-sort", dataSortAff);
-
-         if (dataString) {
-             advSearch(dataString)
-         }
-    });
-
+// search with button submit
     $("#submitSearch").on('click', function(){
-        var dataSort = 'desc';
+        var dataSort = 'asc';
         var dataField = 'name';
         var nameSearch = $('#nameSearch').val();
         var positionsSearch = $('#positionsSearch').val();
@@ -549,6 +550,96 @@ $(document).ready(function () {
         }
     });
 
+// search change cv
+function adSearchChange (per_page, s_name, pos, status, thead){
+
+    if (per_page) {
+        var entries = per_page.value;
+    } else {
+        var entries = $('#show_entries').val();
+    }
+
+    if (s_name) {
+        var nameSearch = s_name;
+    } else {
+        var nameSearch = $('#nameSearch').val();
+    }
+
+    if (pos) {
+        var positionsSearch = pos.value;
+    } else {
+        var positionsSearch = $('#positionsSearch').val();
+    }
+
+    if (status) {
+        var statusSearch = status.value;
+    } else {
+        var statusSearch = $('#statusSearch').val();
+    }
+    if (thead) {
+        var dataSort = $(thead).attr("data-sort");
+        var dataField = $(thead).attr("data-field");
+
+        if (dataSort == 'asc') {
+            dataSort = 'desc';
+        } else {
+            dataSort = 'asc';
+        }
+
+        $('.dataTable th').each(function() {
+            if($(this).attr('data-field') == dataField) {
+                $(this).attr("data-sort",dataSort);
+                $(this).attr("class",'sorting_'+dataSort);
+            } else {
+                $(this).attr("data-sort",'asc');
+                $(this).attr("class",'sorting');
+            }
+        });
+
+    } else {
+        var dataSort;
+        var dataField;
+        $('.dataTable th').each(function() {
+            if($(this).hasClass('sorting_asc')) {
+                dataSort = $(this).attr("data-sort");
+                dataField = $(this).attr("data-field");
+            } else if ($(this).hasClass('sorting_desc')) {
+                dataSort = $(this).attr("data-sort");
+                dataField = $(this).attr("data-field");
+            }
+        });
+        if ( !dataSort || !dataField || (dataSort  == 'undefined') || (dataField == 'undefined')) {
+            dataSort = 'asc';
+            dataField = 'name';
+
+            $('.dataTable th').each(function() {
+                if($(this).attr('data-field') == 'name') {
+                    $(this).attr("data-sort",'asc');
+                    $(this).attr("class",'sorting_asc');
+                } else {
+                    $(this).attr("data-sort",'asc');
+                    $(this).attr("class",'sorting');
+                }
+            });
+        }
+    }
+    var dataString = "data-sort=" + dataSort +
+        "&data-field=" + dataField +
+        "&nameSearch=" + nameSearch +
+        "&positionsSearch=" + positionsSearch +
+        "&statusSearch=" + statusSearch +
+        "&entrie=" + entries;
+
+    // search name 3 characters  Min lenght
+    if (nameSearch.length > 2 && s_name){
+        advSearch(dataString)
+    }else {
+        advSearch(dataString)
+    }
+
+}
+
+// function send data search CV
 function advSearch(dataString){
     $.ajax({
         type: "POST",
@@ -557,7 +648,10 @@ function advSearch(dataString){
         cache: false,
         success: function (data) {
             //console.log(data);
-            $("[data-reload=true]").html(data);
+            $("[data-reload=true]").html(data['data']);
+            $(".pagination ul").remove();
+            $(".pagination").html(data['pagination']);
+            window.history.pushState('','',data['url']);
         }
     });
 }
@@ -568,4 +662,19 @@ $('#show_entries').on('chang', function(){
 
 });
 
+// thay doi vi tri tuyen dung
+function change_positions(val, id) {
+    if (val.value) {
+        $.ajax({
+            type: "POST",
+            url: "/CV/changeStatus",
+            data: '_potions=' + val.value + '&id='+ id,
+            cache: false,
+            success: function (data) {
+                console.log(data);
+                redirect(data['url']);
+            }
+        });
+    }
+}
 

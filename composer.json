@@ -30,13 +30,15 @@
   },
   "autoload": {
     "classmap": [
-      "database"
+      "database",
+      "app/MyLibrary"
     ],
     "psr-4": {
       "App\\": "app/"
     },
     "files": [
-      "app/Http/helpers.php"
+      "app/Http/helpers.php",
+      "app/MyLibrary/Pagination_temp.php"
     ]
   },
   "autoload-dev": {

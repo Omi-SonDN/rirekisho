@@ -9,44 +9,70 @@ use Illuminate\Http\Request;
 use View;
 use Gate;
 use PDF;
+use Response;
+use App\Positions;
+use Route;
 use App\CV;
 use App\Record;
 use App\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateRequest;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use App\MyLibrary\Pagination_temp;
 
 class CVController extends Controller
 {
 
     public function index(Request $request)
     {
-
-        //TODO: sửa view
-        $str_po = $str_role = array();
-        if (Auth::user()->getrole() === 'Visitor') {
-            $str_role = [0];
-            $str_po = [1, 2];
+        if ($request->has('search') ) {
+            $s_name = $request->get('search');
+            $s_name = preg_replace('/\'/', '', $s_name);
+        } else {
+            $s_name = '';
         }
-        //$CVs = CV::with('User')->active()->paginate(10);
-        $CVs = CV::with('User')
-            ->where(function ($query) use ($str_role) {
-                if (count($str_role)) {
-                    $query->whereNotIn('status', $str_role);
-                } else {
 
-                }
-            })->where(function ($query) use ($str_po) {
-                if (count($str_po)) {
-                    $query->whereIn('status', $str_po);
-                } else {
+        if ($request->has('apply_to') ) {
+            $apply_to = (int)$request->get('apply_to');
+        }else {
+            $apply_to = null;
+        }
 
-                }
-            })
-            ->paginate(5);
+        if ($request->has('status') ) {
+            $status = (int)$request->get('status');
+        }else {
+            $status = null;
+        }
 
+        if ($request->has('data-field') ) {
+            $_field = $request->get('data-field');
+        }else {
+            $_field = 'name';
+        }
+
+        if ($request->has('data-sort') ) {
+            $_sort = $request->get('data-sort');
+        }else {
+            $_sort = 'asc';
+        }
+
+        if ($request->has('per_page') ) {
+            $_numpage = (int)$request->get('per_page');
+            if ($_numpage <= 0) $_numpage = 10;
+        }else {
+            $_numpage = 10;
+        }
+
+        list($CVs, $get_paging)= $this->paginationCV($s_name, $apply_to, $status, $_field, $_sort, $_numpage);
         $count = $CVs->count();
-        return view('xCV.CVindex', compact('CVs', 'count'));
+
+        if (Auth::user()->getRole() === 'Visitor'){
+            $_Position = Positions::actives()->get();
+        } else {
+            $_Position = Positions::all();
+        }
+
+        return view('xCV.CVindex', compact('CVs', 'count', '_numpage', 'get_paging', '_Position'));
     }
 
     /*********Advance Search**************/
@@ -55,64 +81,25 @@ class CVController extends Controller
         if (Gate::denies('Visitor')) {
             abort(403);
         }
-        if(!$per_page = $request->input('entrie')) {
-            $per_page = 10;
-        }
+
         $positions = $request->input('positionsSearch');
         $name = $request->input('nameSearch');
         $Status = $request->input('statusSearch');
 
-        if($request->input('data-sort') == "desc") {
-            $bc = 'DESC';
-        } else {
-            $bc = 'ASC';
-        }
-
-        $str_po = $str_role = $str_or = $str_and = array();
-        if ($Status != '') {
-            $str_and['status'] = $Status;
-        } else {
-            if (Auth::user()->getrole() === 'Visitor') {
-                $str_role = [1, 2];
-            }
-        }
-        if ($positions) {
-            $str_po['apply_to'] = $positions;
-        }
-        if ($name) {
-            $str_or['First_name'] = $name;
-            $str_or['Last_name'] = $name;
-        }
-        $_name ='Last_name';
-        if($request->has('data-field')) {
-            $_name = $request->input('data-field');
-            if ($_name === 'name') {
-                $_name = 'Last_name';
-            }
-        }
-
-        $CVs = CV::with('User')
-            ->where(function ($query) use ($name) {
-                if ($name) {
-                    $query->orwhere('First_name', 'like', '%' . $name . '%')
-                        ->orwhere('Last_name', 'like', '%' . $name . '%');
-                }
-            })
-            ->where($str_po)
-            ->where(function ($query) use ($str_and, $str_role) {
-                if ($str_and) {
-                    $query->where($str_and);
-                } else if ($str_role) {
-                    $query->whereIn('status', $str_role);
-                } else {
-
-                }
-            })
-            ->orderBy($_name, $bc)
-            ->paginate($per_page);
-
+        list($CVs, $get_paging)= $this->paginationCV($name, $positions, $Status, $request->input('data-field'), $request->input('data-sort'), $request->input('entrie'));
         $count = $CVs->count();
-        return View::make('includes.table-result',  compact('CVs', 'count'));
+
+        if (Auth::user()->getRole() === 'Visitor'){
+            $_Position = Positions::actives()->get();
+        } else {
+            $_Position = Positions::all();
+        }
+        return Response::json(array(
+                'data'=>view('includes.table-result', compact('CVs', 'count', '_numpage', '_Position'))->render(),
+                'pagination'=> $get_paging,
+                'url'=> \URL::action('CVController@index')
+            )
+        );
     }
 
     public function show($id)
@@ -221,10 +208,107 @@ class CVController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $CV = CV::findorfail($request->id);
+        if ($request->isMethod('post')) {
+            if ($request->has('id')) {
+                $id = $request->input('id');
+            } else {
+                $id = $request->id;
+            }
+        } else {
+            $id = $request->id;
+        }
+
+        $CV = CV::findorfail($id);
+        if ($request->has('_potions')) {
+            $CV->apply_to = $request->input('_potions');
+        }
+
         $CV->status = $request->status;
         $CV->update();
 
-        return \Illuminate\Support\Facades\Response::json($CV);
+        //return \Illuminate\Support\Facades\Response::json($CV);
+        return \Illuminate\Support\Facades\Response::json(array(
+                'CV'=> $CV,
+                'url'=> \URL::previous()
+            )
+        );
+    }
+    /// Custom by BQN
+    /// $name tim kiem theo ten
+    /// $positions  tim theo vi tri tuyen dung
+    /// $Status trang thai cua cv
+    // Mac dinh sap xep theo ten tang dan voi 10 bang ghi tren mot trang
+    public function paginationCV ($name = '', $positions = null, $Status = null, $_field = 'name', $data_sort = 'asc', $_numpage = 10)
+    {
+        if($data_sort == "desc") {
+            $bc = 'desc';
+        } else {
+            $bc = 'asc';
+        }
+
+        $str_po = $str_role = $str_or = $str_and = array();
+        if ($Status != '') {
+            $str_and['status'] = $Status;
+        } else {
+            if (Auth::user()->getrole() === 'Visitor') {
+                $str_role = [1, 2];
+            }
+        }
+        if ($positions) {
+            $str_po['apply_to'] = $positions;
+        }
+        if ($name) {
+            $name = preg_replace('/\'/', '', $name);
+            $str_or['First_name'] = $name;
+            $str_or['Last_name'] = $name;
+        }
+
+        if($_field) {
+            if ($_field == 'name') {
+                $_field = 'Last_name';
+                $none_field = 'name';
+            }else {
+                $none_field = $_field;
+            }
+        }else {
+            $_field = 'Last_name';
+            $none_field = 'name';
+        }
+
+        $CVs = CV::with('User')
+            ->where(function ($query) use ($name) {
+                if ($name) {
+                    $query->orwhere('First_name', 'like', '%' . $name . '%')
+                        ->orwhere('Last_name', 'like', '%' . $name . '%');
+                }
+            })
+            ->where($str_po)
+            ->where(function ($query) use ($str_and, $str_role) {
+                if ($str_and) {
+                    $query->where($str_and);
+                } else if ($str_role) {
+                    $query->whereIn('status', $str_role);
+                } else {
+
+                }
+            })
+            ->orderBy($_field, $bc)
+            ->paginate($_numpage);
+
+        $paging = new Pagination_temp();
+
+        $paging->class_pagination = "light-theme simple-pagination pagination";// ĐẶT CLASS CHO THÀNH PHẦN PHÂN TRANG THEO Ý MUỐN
+        $paging->class_active = "current"; // TEN CLASS Active
+        $paging->page = $CVs->currentPage();// TRANG HIỆN TẠI
+        $paging->total = $CVs->total(); // TONG SO PAGE
+        $paging->per_page=$_numpage; // SỐ RECORD TRÊN 1 TRANG default = 10
+        $paging->adjacents = 3; // SỐ PAGE  CENTER DEFAULT = 3
+        $paging->name_page ='page'; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
+        $paging->name_per_page ='per_page'; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
+        $paging->url_modify= Pagination_temp::cn_url_modify('search='.$name, 'status='.$Status, 'apply_to='.$positions, 'data-field='.$none_field, 'data-sort='.$bc, 'per_page', 'page');//	THÔNG SỐ SUA URL VOI FUNCTION CN_URL_MODIFY
+
+        //goi...
+        return array($CVs ,$paging->Load());
+
     }
 }

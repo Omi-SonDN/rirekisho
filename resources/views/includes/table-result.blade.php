@@ -9,6 +9,7 @@
         return $item->Name == null || $item->Age == "0000-00-00";
     });
     ?>
+
     @foreach($CVx as $key => $CV)
         <tr class="data{{$key}}">
             <td class="image">
@@ -28,19 +29,33 @@
                     @endif
                 </div>
             </td>
-            <td class="rank">{{$key}}</td>
+            <td class="rank">{{++$key}}</td>
             <td class="name"><a href="{{url('CV',$CV )}} ">{{ $CV->Name }} </a></td>
             <td class="worth">{{$CV->JGender or ''}}</td>
             <td data-field="age">{{$CV->Age or ''}}</td>
             @can('Visitor')
-            <td class="name" style="{{$CV->position}}"><?php $vt = DB::table('positions')->select('name')->where('id', $CV->apply_to)->first(); if(count($vt)) echo $vt->name; ?></td>
+            <td class="name" style="{{$CV->position}}">
+                <select class="form-control" name="_positions" onchange="change_positions(this, {{ $CV->id }})">
+                    <option>-- Chọn vị trí --</option>
+                    @foreach ($_Position as $position)
+                        @if(Auth::user()->getRole() === 'Visitor')
+                            @if ($position->id === $CV->apply_to)
+                                <option selected value="{{$position->id}}">{{$position->name}}</option>
+                            @endif
+                        @else
+                            <option {{($position->id === $CV->apply_to) ? 'selected' : ''}} value="{{$position->id}}">{{$position->name}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </td>
+
             <td style="">
                 <div class="status" id="status{{ $CV->id or ''}}">
                     @include('includes._form_status',['CV' => $CV])
                     @can('Admin')
-                    <input type="hidden" value="{{ $CV->id or ''}}" id="id"/>
-                    <input type="hidden" value="{{ ($CV->User->email) or ''}}" id="email"/>
-                    <button id="btn_send_email{{ $CV->id or ''}}" class="btn btn-primary btn-send-email" value="{{ $CV->Status }}">Send Email {{ $CV->Status }}</button>
+                        <input type="hidden" value="{{ $CV->id or ''}}" id="id"/>
+                        <input type="hidden" value="{{ ($CV->User->email) or ''}}" id="email"/>
+                        <button id="btn_send_email{{ $CV->id or ''}}" class="btn btn-primary btn-send-email col-lg-12" value="{{ $CV->Status }}">Send Email {{ $CV->Status }}</button>
                     @endcan
                 </div>
             </td>
@@ -54,16 +69,3 @@
             <td colspan="100%">Có {{$count}} kết quả</td>
         </tr>
 @endif
-
-<div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" id="modal-content">
-        </div>
-    </div>
-</div>
-
-<meta name="_token" content="{!! csrf_token() !!}"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="{{ asset('js/CV_changeStatus.js') }}"></script>
-<script src="{{ asset('js/email_send.js') }}"></script>

@@ -150,7 +150,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Vinkla\Hashids\HashidsServiceProvider::class
+        Vinkla\Hashids\HashidsServiceProvider::class,
         /*
         *
         */

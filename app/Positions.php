@@ -35,4 +35,9 @@ class Positions extends Model
             }
         });
     }
+    public function scopeActives($query)
+    {
+        return $query->where('active', 1);
+    }
+
 }
