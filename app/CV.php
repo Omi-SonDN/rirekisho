@@ -68,10 +68,13 @@ class CV extends Model
         return $this->belongsTo('App\Status', 'Status', 'id');
     }
 
+    /************* scope *********************/
     public function scopeActive($query)
     {
         return $query->where('active', 1);
     }
+
+    /************* scope *********************/
 
     public function getNameAttribute()
     {
@@ -115,7 +118,6 @@ class CV extends Model
      */
     public function getAgeAttribute($value)
     {
-
         $value = date_create($this->Birth_date);
         $today = date_create();
         date_timestamp_set($today, time());
@@ -126,8 +128,8 @@ class CV extends Model
     public function getJMarriageAttribute($value)
     {
         if ($this->Marriage == 0) {
-            return "無";
-        } else return "有";
+            return "Độc thân";
+        } else return "Đã kết hôn";
 
     }
 

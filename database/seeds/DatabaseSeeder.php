@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(PositionsTableSeeder::class);
 //        Model::reguard();
 //    }
+
       // buoc 2
     public function run()
     {
