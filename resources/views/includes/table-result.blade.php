@@ -36,7 +36,9 @@
             @can('Visitor')
             <td class="name" style="{{$CV->position}}">
                 <select class="form-control" name="_positions" onchange="change_positions(this, {{ $CV->id }})">
+                    @can('Admin')
                     <option>-- Chọn vị trí --</option>
+                    @endcan
                     @foreach ($_Position as $position)
                         @if(Auth::user()->getRole() === 'Visitor')
                             @if ($position->id === $CV->apply_to)
@@ -61,7 +63,7 @@
             </td>
             @endcan
             @can('Admin')
-            <td><button style="margin-left: 25px;"class="btn btn-default btn-edit"><a href="{{url('CV',[$CV ,'edit'])}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button></td>
+            <td><a href="{{url('CV',[$CV ,'edit'])}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
             @endcan
         </tr>
     @endforeach

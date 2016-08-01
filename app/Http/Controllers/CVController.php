@@ -221,18 +221,17 @@ class CVController extends Controller
         $CV = CV::findorfail($id);
         if ($request->has('_potions')) {
             $CV->apply_to = $request->input('_potions');
-        }
+            $CV->update();
+            return true;
+//          return \Response::json(array('url'=> \URL::previous()));
 
+        }
         $CV->status = $request->status;
         $CV->update();
 
-        //return \Illuminate\Support\Facades\Response::json($CV);
-        return \Illuminate\Support\Facades\Response::json(array(
-                'CV'=> $CV,
-                'url'=> \URL::previous()
-            )
-        );
+        return \Illuminate\Support\Facades\Response::json($CV);
     }
+
     /// Custom by BQN
     /// $name tim kiem theo ten
     /// $positions  tim theo vi tri tuyen dung
@@ -265,21 +264,21 @@ class CVController extends Controller
 
         if($_field) {
             if ($_field == 'name') {
-                $_field = 'Last_name';
+                $_field = 'First_name';
                 $none_field = 'name';
             }else {
                 $none_field = $_field;
             }
         }else {
-            $_field = 'Last_name';
+            $_field = 'First_name';
             $none_field = 'name';
         }
 
         $CVs = CV::with('User')
             ->where(function ($query) use ($name) {
                 if ($name) {
-                    $query->orwhere('First_name', 'like', '%' . $name . '%')
-                        ->orwhere('Last_name', 'like', '%' . $name . '%');
+                    $query->orwhere('Last_name', 'like', '%' . $name . '%')
+                        ->orwhere('First_name', 'like', '%' . $name . '%');
                 }
             })
             ->where($str_po)
@@ -295,12 +294,18 @@ class CVController extends Controller
             ->orderBy($_field, $bc)
             ->paginate($_numpage);
 
+//        if (Auth::user()->getrole() === 'Visitor') {
+//            $CVx = $CVs->reject(function ($item) {
+//                return $item->apply_to <= 0;
+//            });
+//        }
+//        dd($CVs);
         $paging = new Pagination_temp();
 
         $paging->class_pagination = "light-theme simple-pagination pagination";// ĐẶT CLASS CHO THÀNH PHẦN PHÂN TRANG THEO Ý MUỐN
         $paging->class_active = "current"; // TEN CLASS Active
         $paging->page = $CVs->currentPage();// TRANG HIỆN TẠI
-        $paging->total = $CVs->total(); // TONG SO PAGE
+        $paging->total = $CVs->total(); // TONG SO
         $paging->per_page=$_numpage; // SỐ RECORD TRÊN 1 TRANG default = 10
         $paging->adjacents = 3; // SỐ PAGE  CENTER DEFAULT = 3
         $paging->name_page ='page'; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET

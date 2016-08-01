@@ -29,8 +29,10 @@ return array(
     'CreateGroupsTable' => $baseDir . '/database/migrations/2016_07_27_081818_create_groups_table.php',
     'CreateItSkillTable' => $baseDir . '/database/migrations/2016_07_27_092211_create_it_skill_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreatePivotUsersGroupsTables' => $baseDir . '/database/migrations/2016_08_01_033755_create_pivot_users_groups_tables.php',
     'CreatePositionsTable' => $baseDir . '/database/migrations/2016_07_27_081746_create_positions_table.php',
     'CreateRecordsTable' => $baseDir . '/database/migrations/2016_07_27_081636_create_records_table.php',
+    'CreateStatusTable' => $baseDir . '/database/migrations/2016_08_01_033312_create_status_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DOMPDF' => $vendorDir . '/dompdf/dompdf/include/dompdf.cls.php',
     'DOMPDF_Exception' => $vendorDir . '/dompdf/dompdf/include/dompdf_exception.cls.php',
@@ -661,5 +663,5 @@ return array(
     'Text_Renderer' => $vendorDir . '/dompdf/dompdf/include/text_renderer.cls.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
-    'app\\MyLibrary\\pagination_temp' => $baseDir . '/app/MyLibrary/pagination_temp.php',
+    'app\\MyLibrary\\Pagination_temp' => $baseDir . '/app/MyLibrary/Pagination_temp.php',
 );

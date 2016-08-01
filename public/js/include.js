@@ -665,16 +665,20 @@ $('#show_entries').on('chang', function(){
 // thay doi vi tri tuyen dung
 function change_positions(val, id) {
     if (val.value) {
-        $.ajax({
-            type: "POST",
-            url: "/CV/changeStatus",
-            data: '_potions=' + val.value + '&id='+ id,
-            cache: false,
-            success: function (data) {
-                console.log(data);
-                redirect(data['url']);
-            }
-        });
+        var _confirm = confirm("Bạn có chắc thay đổi ví trí tuyển dụng?");
+        if (_confirm) {
+            $.ajax({
+                type: "POST",
+                url: "/CV/changeStatus",
+                data: '_potions=' + val.value + '&id=' + id,
+                cache: false,
+                success: function (data) {
+                    //redirect(data['url']);
+                }
+            });
+        } else {
+            $(val).val('-- Chọn vị trí --');
+        }
     }
 }
 

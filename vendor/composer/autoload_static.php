@@ -21,7 +21,7 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '6d394c3a532652dafb4dd296ba6a3f0b' => __DIR__ . '/../..' . '/app/Http/helpers.php',
-        '1b8510f73964b74f46d77386fc0f1998' => __DIR__ . '/../..' . '/app/MyLibrary/pagination_temp.php',
+        'fc304b78a61e53767318f55d2bf66382' => __DIR__ . '/../..' . '/app/MyLibrary/Pagination_temp.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -426,8 +426,10 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'CreateGroupsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_081818_create_groups_table.php',
         'CreateItSkillTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_092211_create_it_skill_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreatePivotUsersGroupsTables' => __DIR__ . '/../..' . '/database/migrations/2016_08_01_033755_create_pivot_users_groups_tables.php',
         'CreatePositionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_081746_create_positions_table.php',
         'CreateRecordsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_081636_create_records_table.php',
+        'CreateStatusTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_01_033312_create_status_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DOMPDF' => __DIR__ . '/..' . '/dompdf/dompdf/include/dompdf.cls.php',
         'DOMPDF_Exception' => __DIR__ . '/..' . '/dompdf/dompdf/include/dompdf_exception.cls.php',
@@ -1058,7 +1060,7 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'Text_Renderer' => __DIR__ . '/..' . '/dompdf/dompdf/include/text_renderer.cls.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
-        'app\\MyLibrary\\pagination_temp' => __DIR__ . '/../..' . '/app/MyLibrary/pagination_temp.php',
+        'app\\MyLibrary\\Pagination_temp' => __DIR__ . '/../..' . '/app/MyLibrary/Pagination_temp.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -2,6 +2,7 @@ $(document).ready(function () {
     var url = '';
 
     var the_status = [
+        [1],
         [2, 12, 9],
         [3],
         [8, 25],
@@ -75,12 +76,12 @@ $(document).ready(function () {
                     var btn_send_email = '<button id="btn_send_email' + data.id;
 
                     if (stt != 1 && stt != 2 && stt != 3 && stt != 9 && stt != 12 && stt != 26 && stt != 29) {
-                        btn_send_email += '" class="btn btn-primary btn-send-email disabled" value="';
+                        btn_send_email += '" class="btn btn-primary btn-send-email disabled col-lg-12" value="';
                         btn_send_email += data.status + '">Send Email ';
                         btn_send_email += data.status + '</button>';
                     }
                     else {
-                        btn_send_email += '" class="btn btn-primary btn-send-email" value="';
+                        btn_send_email += '" class="btn btn-primary btn-send-email col-lg-12" value="';
                         btn_send_email += data.status + '">Send Email ';
                         btn_send_email += data.status + '</button>';
                     }
