@@ -63,8 +63,16 @@ class CVController extends Controller
             $_numpage = 10;
         }
 
-        list($CVs, $get_paging)= $this->paginationCV($s_name, $apply_to, $status, $_field, $_sort, $_numpage);
-        $count = $CVs->count();
+         if ($request->has('page') ) {  
+            $_page = (int)$request->get('page'); 
+        } else{
+            $_page = 1;
+        }
+
+
+        list($CVs, $get_paging)= $this->paginationCV($s_name, $apply_to, $status, $_field, $_sort, $_page, $_numpage);
+        $count = count($CVs);
+
 
         if (Auth::user()->getRole() === 'Visitor'){
             $_Position = Positions::actives()->get();
@@ -86,8 +94,14 @@ class CVController extends Controller
         $name = $request->input('nameSearch');
         $Status = $request->input('statusSearch');
 
-        list($CVs, $get_paging)= $this->paginationCV($name, $positions, $Status, $request->input('data-field'), $request->input('data-sort'), $request->input('entrie'));
-        $count = $CVs->count();
+        if ($request->has('page') ) {  
+            $_page = (int)$request->get('page'); 
+        } else{
+            $_page = 1;
+        }
+
+        list($CVs, $get_paging)= $this->paginationCV($name, $positions, $Status, $request->input('data-field'), $request->input('data-sort'), $_page, $request->input('entrie'));
+        $count = count($CVs);
 
         if (Auth::user()->getRole() === 'Visitor'){
             $_Position = Positions::actives()->get();
@@ -122,7 +136,6 @@ class CVController extends Controller
             ->with(compact('CV', 'Records', 'skills', 'image', 'bookmark'));
 
     }
-
 
     public function show2($id)
     {
@@ -233,12 +246,12 @@ class CVController extends Controller
             )
         );
     }
-    /// Custom by BQN
+    /// Custom by BQN  
     /// $name tim kiem theo ten
     /// $positions  tim theo vi tri tuyen dung
     /// $Status trang thai cua cv
     // Mac dinh sap xep theo ten tang dan voi 10 bang ghi tren mot trang
-    public function paginationCV ($name = '', $positions = null, $Status = null, $_field = 'name', $data_sort = 'asc', $_numpage = 10)
+    public function paginationCV ($name = '', $positions = null, $Status = null, $_field = 'name', $data_sort = 'asc', $_page = 1, $_numpage = 10)
     {
         if($data_sort == "desc") {
             $bc = 'desc';
@@ -275,7 +288,7 @@ class CVController extends Controller
             $none_field = 'name';
         }
 
-        $CVs = CV::with('User')
+        $CV1 = CV::with('User')
             ->where(function ($query) use ($name) {
                 if ($name) {
                     $query->orwhere('First_name', 'like', '%' . $name . '%')
@@ -291,24 +304,57 @@ class CVController extends Controller
                 } else {
 
                 }
-            })
-            ->orderBy($_field, $bc)
-            ->paginate($_numpage);
+            })->get();
 
-        $paging = new Pagination_temp();
+        if($none_field == 'name'){
+            if($bc == 'asc')
+                $CV1 = $this->ASC($CV1);
+            else $CV1 = $this->DESC($CV1);
+        } else{
+            if($bc == 'desc')
+                $CV1 = $CV1->sortBy($none_field);
+            else $CV1 = $CV1->sortByDesc($none_field);
+        }
 
-        $paging->class_pagination = "light-theme simple-pagination pagination";// ĐẶT CLASS CHO THÀNH PHẦN PHÂN TRANG THEO Ý MUỐN
-        $paging->class_active = "current"; // TEN CLASS Active
-        $paging->page = $CVs->currentPage();// TRANG HIỆN TẠI
-        $paging->total = $CVs->total(); // TONG SO PAGE
-        $paging->per_page=$_numpage; // SỐ RECORD TRÊN 1 TRANG default = 10
-        $paging->adjacents = 3; // SỐ PAGE  CENTER DEFAULT = 3
-        $paging->name_page ='page'; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
-        $paging->name_per_page ='per_page'; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
-        $paging->url_modify= Pagination_temp::cn_url_modify('search='.$name, 'status='.$Status, 'apply_to='.$positions, 'data-field='.$none_field, 'data-sort='.$bc, 'per_page', 'page');//	THÔNG SỐ SUA URL VOI FUNCTION CN_URL_MODIFY
+        $url_modify = Pagination_temp::cn_url_modify('search='.$name, 'status='.$Status, 'apply_to='.$positions, 'data-field='.$none_field, 'data-sort='.$bc, 'per_page', 'page');
+        list ($cvs, $get_paging) = Pagination_temp::cn_arr_pagina($CV1, $url_modify, $_page, $_numpage);
 
-        //goi...
-        return array($CVs ,$paging->Load());
+        return array($cvs, $get_paging);
 
+    }
+
+    public function DESC($CVs)
+    {
+       for ($i = 0; $i < $CVs->count(); $i++) {
+            $name = $CVs[$i]->Last_name . " " . $CVs[$i]->First_name;
+            $len = strlen($name);
+            $start = stripos($name, " ");
+            $end = strripos($name, " ");
+            $ten = substr($name, $end + 1);
+            $dem = substr($CVs[$i]->First_name, 0, $end - $len);
+            $CVs[$i]->ten = $ten;
+            $CVs[$i]->dem = $dem;
+            $CVs[$i]->fullname = $CVs[$i]->ten.' '.$CVs[$i]->Last_name.' '.$CVs[$i]->dem;
+        }
+        $CVs = $CVs->sortBy('fullname');
+        return $CVs;
+    }
+
+    public function ASC($CVs)
+    {
+        for ($i = 0; $i < $CVs->count(); $i++) {
+            $name = $CVs[$i]->Last_name . " " . $CVs[$i]->First_name;
+            $len = strlen($name);
+            $start = stripos($name, " ");
+            $end = strripos($name, " ");
+            $ten = substr($name, $end + 1);
+            $dem = substr($CVs[$i]->First_name, 0, $end - $len);
+            $CVs[$i]->ten = $ten;
+            $CVs[$i]->dem = $dem;
+            $CVs[$i]->fullname = $CVs[$i]->ten.' '.$CVs[$i]->Last_name.' '.$CVs[$i]->dem;
+
+        }
+        $CVs = $CVs->sortByDesc('fullname');
+        return $CVs;
     }
 }

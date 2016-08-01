@@ -8,7 +8,7 @@ $paging = new pagination_temp();
 $paging->class_pagination = "light-theme simple-pagination pagination";// ĐẶT CLASS CHO THÀNH PHẦN PHÂN TRANG THEO Ý MUỐN
 $paging->class_active = "current"; // TEN CLASS Active
 $paging-> page = $page;// TRANG HIỆN TẠI
-$paging-> total = $total; // TONG SO PAGE
+$paging-> total = $total; // TONG SO ban ghi
 $paging-> per_page=$per_page; // SỐ RECORD TRÊN 1 TRANG default = 10
 $paging-> adjacents = $adjacents; // SỐ PAGE  CENTER DEFAULT = 3
 $paging-> name_page ='page'; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
@@ -196,5 +196,42 @@ class Pagination_temp { // PRE 1 2 3 ... 4 5 6 7 8 9 10 ... 13 14 NEXT 	// 14 PA
 
         list($ResURL) = array( $URL . ($url ? '?' . join('&', $url) : '' ), $URL, $GET );
         return $ResURL;
+    }
+
+    public static function cn_arr_pagina($array, $_url, $page, $per_page, $adjacents=3, $name_per_page='per_page',$name_page='page', $class_active='current', $class_pagination='light-theme simple-pagination pagination'){
+ 
+         //$paging-> total = $total = count($array); // TONG SO PAGE
+         //$paging-> cn_url_modify = $cn_url_modify;
+         $arr =array();
+         $paging = new Pagination_temp();
+         
+         $paging-> class_pagination = $class_pagination;// ĐẶT CLASS CHO THÀNH PHẦN PHÂN TRANG THEO Ý MUỐN
+         $paging-> class_active = $class_active; // TEN CLASS Active
+         $paging-> page = $page;  // TRANG
+        $paging-> total = $total = count($array);; // TONG SO PAGE
+        $paging-> per_page = $per_page; // SỐ RECORD TRÊN 1 TRANG default = 10
+        $paging-> adjacents = $adjacents; // SỐ PAGE  CENTER DEFAULT = 3
+        $paging-> name_page = $name_page; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
+        $paging-> name_per_page = $name_per_page; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
+        $paging-> url_modify = $_url;// THÔNG SỐ SUA URL VOI FUNCTION CN_URL_MODIFY 
+  
+         
+         if($page <= 0) $page_end = $per_page; 
+         else if($page != 0) $page_end = $per_page*$page;
+          
+         $page_frist = (--$page_end) - $per_page;
+         
+         $_id = 0;
+         //for($id = 0; $id < $total; $id++){
+         foreach($array as $key => $raw){
+          //if($id > $page_end) break;
+          if($page_frist < $_id && $_id <= $page_end) $arr[$key] = $array[$key];
+          ++$_id;
+         }
+         
+         //goi...
+         $get_paging= $paging->Load();
+         
+         return array($arr, $get_paging);
     }
 }

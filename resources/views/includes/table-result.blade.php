@@ -5,12 +5,12 @@
         </td>
     </tr>
 @else
-    <?php $CVx = $CVs->reject(function ($item) {
-        return $item->Name == null || $item->Age == "0000-00-00";
-    });
+    <?php //$CVx = $CVs->reject(function ($item) {
+        //return $item->Name == null || $item->Age == "0000-00-00";
+    //});
     ?>
 
-    @foreach($CVx as $key => $CV)
+    @foreach($CVs as $key => $CV)
         <tr class="data{{$key}}">
             <td class="image">
                 <div style=" position: relative;height: 100px;width: 100px;">

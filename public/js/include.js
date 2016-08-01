@@ -591,9 +591,13 @@ function adSearchChange (per_page, s_name, pos, status, thead){
                 $(this).attr("data-sort",dataSort);
                 $(this).attr("class",'sorting_'+dataSort);
             } else {
-                $(this).attr("data-sort",'asc');
-                $(this).attr("class",'sorting');
-            }
+                // $(this).attr("data-sort",'asc');
+                // $(this).attr("class",'sorting');
+                if($(this).attr('class') != 'ab'){
+                    $(this).attr("data-sort",'asc');
+                    $(this).attr("class",'sorting');
+                } 
+        }
         });
 
     } else {
@@ -617,10 +621,10 @@ function adSearchChange (per_page, s_name, pos, status, thead){
                     $(this).attr("data-sort",'asc');
                     $(this).attr("class",'sorting_asc');
                 } else {
-                    $(this).attr("data-sort",'asc');
-                    $(this).attr("class",'sorting');
+                        $(this).attr("data-sort",'asc');
+                        $(this).attr("class",'sorting');
                 }
-            });
+            }); 
         }
     }
     var dataString = "data-sort=" + dataSort +

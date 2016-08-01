@@ -59,8 +59,8 @@
     <table id="example" class="dataTable" data-sort="" data-field="">
         <thead>
         <tr>
-            <th style="width: 150px"></th>
-            <th style="width: 50px"></th>
+            <th class="ab" style="width: 150px"></th>
+            <th class="ab" style="width: 50px"></th>
             <th @if (Request::has('data-field') && Request::has('data-sort'))
                     @if(Request::input('data-field') == 'name')
                         @if (Request::input('data-sort') == 'asc ')
