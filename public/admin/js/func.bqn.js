@@ -232,9 +232,9 @@ $(document).ready(function ($) {
             // i = column index
             filter_functions: {
                 //0 : function(c, data) {}
-                5: function (){
-                    return "nullllllll";
-                }
+                //5: function (){
+                //    return "null";
+                //}
             },
 
             // *** send messages to console ***
@@ -276,24 +276,6 @@ $(document).ready(function ($) {
             cssDisabled: 'disabled'
         });
 
-////set up pager controls
-//$('.pager .left a').on('click', function () {
-//    $(this)
-//        .addClass('current')
-//        .siblings()
-//        .removeClass('current');
-//    $table.trigger('pagesize', $(this).html());
-//    return false;
-//});
-//$('.pager .right .pagecount').on('click', 'a', function(){
-//    $(this)
-//        .addClass('current')
-//        .siblings()
-//        .removeClass('current');
-//    $table.trigger('pageSet', $(this).html());
-//    return false;
-//});
-
     $('[data-table=table-user] input#table-search').bind("change blur", Search1);
     function Search1() {
         //$('input#table-search').bind("blur", Search);
@@ -320,11 +302,8 @@ $(document).ready(function ($) {
     }
 });
 
-   /* thông báo 3s*/
-       $("div.alert, span.help-block").delay(3000).slideUp();
-
-// checkbox or checkbox all
-
+/* thông báo 3s*/
+$("div.alert, span.help-block").delay(3000).slideUp();
 
 // xac nhan co xoa
 function xacnhanxoa(msg) {
@@ -339,7 +318,7 @@ function redirect(_url) {
 }
 
 $(document).ready(function ($){
-    var loop;
+    var loop = 0;
     var is_check;
 
     $('span.right, span.right .prev, span.right .next').click(function (){

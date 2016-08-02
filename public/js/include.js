@@ -477,188 +477,6 @@ $(document).ready(function () {
         }
 
 
-        /**********************************End editable*********************************/
-        /*$('[data-table=table-resume] input#table-search').bind("change blur", Search);
-        function Search() {
-            //$('input#table-search').bind("blur", Search);
-            var value = $(this).val();
-            var dataString = 'keyword=' + value;
-            $('input#table-saearch').off();
-            if (value.length >= 0) {
-                $.ajax({
-                    type: "GET",
-                    url: "/CV/search",
-                    data: dataString,
-                    cache: false,
-                    success: function (html) {
-                        $(" [data-reload=true]").html(html);
-                        $("ul.pagination").hide();// hide pagination
-                        $("#number-result").show();
-                        $(".tabs li").attr("data-keyword", value);
-                        $('input#table-search').bind("change blur", Search);
-                    }
-                });
-            }
-        }*/
-
-        //sort
-        // $("[data-table=table-resume] .tabs li").on('click', function () {
-        //     var value = $(this).attr("data-keyword");
-        //     var dataSort = $(this).attr("data-sort");
-        //     var dataField = $(this).attr("data-field");
-        //     var dataString = 'keyword=' + value + "&data-sort=" + dataSort + "&data-field=" + dataField;
-        //     if (dataSort == "desc") {
-        //         $(this).attr("data-sort", "asc");
-        //     }
-        //     else $(this).attr("data-sort", "desc");
-        //     if (1) {
-
-        //         $.ajax({
-        //             type: "GET",
-        //             url: "/CV/search",
-        //             data: dataString,
-        //             cache: false,
-        //             success: function (html) {
-        //                 $(" [data-reload=true]").html(html);
-        //             }
-        //         });
-
-        //     }
-        // });
-
-        /*$("[data-table=table-user] .tabs li").on('click', function()
-         {
-         var value = $(this).attr("data-keyword") ;
-         var dataSort = $(this).attr("data-sort");
-         var dataField = $(this).attr("data-field");
-         dataString = 'keyword='+value+"&data-sort="+dataSort +"&data-field="+dataField;
-
-         window.location.replace("/User/search?"+dataString);
-
-         if(dataSort == "desc"){$(this).attr("data-sort","asc");}
-         else $(this).attr("data-sort","desc");
-         });
-         $('[data-table=table-user] input#table-search').bind("change blur", Search1);
-         function Search1()
-         {
-         var value = $(this).val() ;
-         var dataString = 'keyword='+value ;
-         $('this').off();
-         if(value.length>=0)
-         {
-         window.location.replace("/User/search?"+dataString);
-         $(".tabs li").attr("data-keyword", value);
-         $('this').bind("change blur", Search1);
-
-         }
-
-         };*/
-        /*
-         *Bngoc da chuyen vao su dung tablesorter trong admin/js/func.bqn.js
-         *
-         ******/
-
-        //$('[data-table=table-user] input#table-search').bind("change blur", Search1);
-        //function Search1() {
-        //    //$('input#table-search').bind("blur", Search);
-        //    var value = $(this).val();
-        //    var dataString = 'keyword=' + value;
-        //    $('input#table-search').off();
-        //    if (value.length >= 0) {
-        //        $.ajax({
-        //            type: "GET",
-        //            url: "/User/search",
-        //            data: dataString,
-        //            cache: false,
-        //            success: function (html) {
-        //                $(" [data-reload=true]").html(html);
-        //                $("ul.pagination").hide();
-        //                $("#number-result").show();
-        //                $(".tabs li").attr("data-keyword", value);
-        //                $('[data-table=table-user] input#table-search').bind("change blur", Search1);
-        //            }
-        //        });
-        //    }
-        //
-        //}
-
-        //sort
-        //$("[data-table=table-user] .tabs li").on('click', function () {
-        //    var value = $(this).attr("data-keyword");
-        //    var dataSort = $(this).attr("data-sort");
-        //    var dataField = $(this).attr("data-field");
-        //    var dataString = 'keyword=' + value + "&data-sort=" + dataSort + "&data-field=" + dataField;
-        //    if (dataSort == "desc") {
-        //        $(this).attr("data-sort", "asc");
-        //    }
-        //    else $(this).attr("data-sort", "desc");
-        //    if (1) {
-        //
-        //        $.ajax({
-        //            type: "GET",
-        //            url: "/User/search",
-        //            data: dataString,
-        //            cache: false,
-        //            success: function (html) {
-        //                $(" [data-reload=true]").html(html);
-        //                $("ul.pagination").hide();
-        //            }
-        //        });
-        //
-        //    }
-        //});
-
-        // $('[data-table=table-user] input#table-search').bind("change blur", Search1);
-        // function Search1() {
-        //     //$('input#table-search').bind("blur", Search);
-        //     var value = $(this).val();
-        //     var dataString = 'keyword=' + value;
-        //     $('input#table-search').off();
-        //     if (value.length >= 0) {
-        //         $.ajax({
-        //             type: "GET",
-        //             url: "/User/search",
-        //             data: dataString,
-        //             cache: false,
-        //             success: function (html) {
-        //                 $(" [data-reload=true]").html(html);
-        //                 $("ul.pagination").hide();
-        //                 $("#number-result").show();
-        //                 $(".tabs li").attr("data-keyword", value);
-        //                 $('[data-table=table-user] input#table-search').bind("change blur", Search1);
-        //             }
-        //         });
-        //     }
-
-        // }
-
-        //sort
-        // $("[data-table=table-user] .tabs li").on('click', function () {
-        //     var value = $(this).attr("data-keyword");
-        //     var dataSort = $(this).attr("data-sort");
-        //     var dataField = $(this).attr("data-field");
-        //     var dataString = 'keyword=' + value + "&data-sort=" + dataSort + "&data-field=" + dataField;
-        //     if (dataSort == "desc") {
-        //         $(this).attr("data-sort", "asc");
-        //     }
-        //     else $(this).attr("data-sort", "desc");
-        //     if (1) {
-
-        //         $.ajax({
-        //             type: "GET",
-        //             url: "/User/search",
-        //             data: dataString,
-        //             cache: false,
-        //             success: function (html) {
-        //                 $(" [data-reload=true]").html(html);
-        //                 $("ul.pagination").hide();
-        //             }
-        //         });
-
-        //     }
-        // });
-
-
 
         /***************User profile**********************/
 
@@ -701,234 +519,182 @@ $(document).ready(function () {
                     $('#dropzone').find('.fixed-img').html(ext);
                 }
             });
-
-
     }
 );
 
- /***************dataTable**********************/
-$('#table-search').bind("change blur", function() {
-        //$('input#table-search').bind("blur", Search);
-        var value = $(this).val();
+///****************** search name date age status*************************/
+//
+//    $(".dataTable th").on('click', function () {
+//
+//         var entries = $('#show_entries').val();
+//         var dataSort = $(this).attr("data-sort");
+//         var dataField = $(this).attr("data-field");
+//         var nameSearch = $('#nameSearch').val();
+//         var positionsSearch = $('#positionsSearch').val();
+//         var statusSearch = $('#statusSearch').val();
+//         var entrie = $('#show_entries').val();
+//
+//         var dataString = "data-sort=" + dataSort +
+//             "&data-field=" + dataField +
+//             "&nameSearch=" + nameSearch +
+//             "&positionsSearch=" + positionsSearch +
+//             "&statusSearch=" + statusSearch +
+//             "&entrie=" + entries;
+//
+//         $(".dataTable .sorting_asc").attr("class", "sorting");
+//         $(".dataTable .sorting_asc").attr("data-sort", "asc");
+//         $(".dataTable .sorting_desc").attr("class", "sorting");
+//         $(".dataTable .sorting_desc").attr("data-sort", "asc");
+//
+//         if (dataSort == "desc") {
+//             $(this).attr("data-sort", "asc");
+//             $(this).attr("class", "sorting_asc");
+//
+//         } else {
+//             $(this).attr("data-sort", "desc");
+//             $(this).attr("class", "sorting_desc");
+//         }
+//
+//         var dataSortAff = $(this).attr("data-sort");
+//
+//         $("#example").attr("data-field", dataField);
+//         $("#example").attr("data-sort", dataSortAff);
+//
+//         if (dataString) {
+//             advSearch(dataString)
+//         }
+//    });
+
+// search with button submit
+    $("#submitSearch").on('click', function(){
+        var dataSort = 'asc';
+        var dataField = 'name';
+        var nameSearch = $('#nameSearch').val();
+        var positionsSearch = $('#positionsSearch').val();
+        var statusSearch = $('#statusSearch').val();
         var entries = $('#show_entries').val();
-        var dataField = $("#example").attr("data-field");
-        var dataSort = $("#example").attr("data-sort");
 
-        var dataString = 'keyword=' + value + "&entrie=" + entries + "&data-sort=" + dataSort + "&data-field=" + dataField;
-        //$('input#table-search').off();
-    
-        var nameclassPagiHide = $(".pagination .active").attr("nameClass");
+        var dataString = "data-sort=" + dataSort +
+            "&data-field=" + dataField +
+            "&nameSearch=" + nameSearch +
+            "&positionsSearch=" + positionsSearch +
+            "&statusSearch=" + statusSearch +
+            "&entrie=" + entries;
 
-        if(nameclassPagiHide != "pagi0"){
-            $(".pagination .active").attr("class", nameclassPagiHide);
-            $(".pagi0").attr("class", "active");
-
-            $(".pre").attr("classPage", ".data0");
-            $(".pre").attr("classPagi", ".pagi0");
-            $(".pre").attr("numberPage", "0");
-            $(".pre").attr("nameClass", "pagi0");
-
-            $(".next").attr("classPage", ".data1");
-            $(".next").attr("classPagi", ".pagi1");
-            $(".next").attr("numberPage", "1");
-            $(".next").attr("nameClass", "pagi1");              
-        }
-
-        if (value.length >= 0) {
-            $.ajax({
-                type: "GET",
-                url: "/CV/search",
-                data: dataString,
-                cache: false,
-                success: function (data) {
-                    $("[data-reload=true]").html(data);
-                    $("#number-result").show();
-                    $(".tabs li").attr("data-keyword", value);
-                    //$('#table-search').bind("change blur", Search);
-                }
-            });
+        if (dataString) {
+            advSearch(dataString)
         }
     });
 
-/****************** search name date age status*************************/
+// search change cv
+function adSearchChange (per_page, s_name, pos, status, thead){
 
- $(".dataTable th").on('click', function () {
-    var entries = $('#show_entries').val();
-    var value = $('#table-search').val();
-    var dataSort = $(this).attr("data-sort");
-    var dataField = $(this).attr("data-field");
-    var dataString = 'keyword=' + value + "&data-sort=" + dataSort + "&data-field=" + dataField + "&entrie=" + entries;
-
-    $(".dataTable .sorting_asc").attr("class", "sorting");
-    $(".dataTable .sorting_asc").attr("data-sort", "asc");
-    $(".dataTable .sorting_desc").attr("class", "sorting");
-    $(".dataTable .sorting_desc").attr("data-sort", "asc");
-
-    //$(".pagination").css("display", "none");
-    //$(".pagination1").css("display", "block");
-    var nameclassPagiHide = $(".pagination .active").attr("nameClass");
-
-    if(nameclassPagiHide != "pagi0"){
-        $(".pagination .active").attr("class", nameclassPagiHide);
-        $(".pagi0").attr("class", "active");
-
-        $(".pre").attr("classPage", ".data0");
-        $(".pre").attr("classPagi", ".pagi0");
-        $(".pre").attr("numberPage", "0");
-        $(".pre").attr("nameClass", "pagi0");
-
-        $(".next").attr("classPage", ".data1");
-        $(".next").attr("classPagi", ".pagi1");
-        $(".next").attr("numberPage", "1");
-        $(".next").attr("nameClass", "pagi1");              
+    if (per_page) {
+        var entries = per_page.value;
+    } else {
+        var entries = $('#show_entries').val();
     }
 
-    if (dataSort == "desc") {
-        $(this).attr("data-sort", "asc");
-        $(this).attr("class", "sorting_asc");
+    if (s_name) {
+        var nameSearch = s_name;
+    } else {
+        var nameSearch = $('#nameSearch').val();
+    }
+
+    if (pos) {
+        var positionsSearch = pos.value;
+    } else {
+        var positionsSearch = $('#positionsSearch').val();
+    }
+
+    if (status) {
+        var statusSearch = status.value;
+    } else {
+        var statusSearch = $('#statusSearch').val();
+    }
+    if (thead) {
+        var dataSort = $(thead).attr("data-sort");
+        var dataField = $(thead).attr("data-field");
+
+        if (dataSort == 'asc') {
+            dataSort = 'desc';
+        } else {
+            dataSort = 'asc';
+        }
+
+        $('.dataTable th').each(function() {
+            if($(this).attr('data-field') == dataField) {
+                $(this).attr("data-sort",dataSort);
+                $(this).attr("class",'sorting_'+dataSort);
+            } else {
+                // $(this).attr("data-sort",'asc');
+                // $(this).attr("class",'sorting');
+                if($(this).attr('class') != 'ab'){
+                    $(this).attr("data-sort",'asc');
+                    $(this).attr("class",'sorting');
+                } 
+        }
+        });
 
     } else {
-        $(this).attr("data-sort", "desc");
-        $(this).attr("class", "sorting_desc");
-    }
-
-    var dataSortAff = $(this).attr("data-sort");
-
-    $("#example").attr("data-field", dataField);
-    $("#example").attr("data-sort", dataSortAff);
-
-    if (1) {
-
-        $.ajax({
-            type: "GET",
-            url: "/CV/search1",
-            data: dataString,
-            cache: false,
-            /*success: function (html) {
-                console.log(html);
-                $(" [data-reload=true]").html(html);
-            },*/
-            success: function (data) {
-                console.log(data);
-                $("[data-reload=true]").html(data);
+        var dataSort;
+        var dataField;
+        $('.dataTable th').each(function() {
+            if($(this).hasClass('sorting_asc')) {
+                dataSort = $(this).attr("data-sort");
+                dataField = $(this).attr("data-field");
+            } else if ($(this).hasClass('sorting_desc')) {
+                dataSort = $(this).attr("data-sort");
+                dataField = $(this).attr("data-field");
             }
         });
+        if ( !dataSort || !dataField || (dataSort  == 'undefined') || (dataField == 'undefined')) {
+            dataSort = 'asc';
+            dataField = 'name';
 
-    }
-});
-
- /************advancedSearch************************/
-$("#advancedSearch").click(function(){
-    $("#adSearch").toggle();
-});
-
-$("#submitSearch").on('click', function(){
-    var nameclassPagiHide = $(".pagination .active").attr("nameClass");
-
-    if(nameclassPagiHide != "pagi0"){
-        $(".pagination .active").attr("class", nameclassPagiHide);
-        $(".pagi0").attr("class", "active");
-
-        $(".pre").attr("classPage", ".data0");
-        $(".pre").attr("classPagi", ".pagi0");
-        $(".pre").attr("numberPage", "0");
-        $(".pre").attr("nameClass", "pagi0");
-
-        $(".next").attr("classPage", ".data1");
-        $(".next").attr("classPagi", ".pagi1");
-        $(".next").attr("numberPage", "1");
-        $(".next").attr("nameClass", "pagi1");              
-    }
-    if (1) {
-
-        $.ajax({
-            type: "POST",
-            url: "/CV/adSearch",
-            data : {
-                'nameSearch' : $('#nameSearch').val(),
-                'positionsSearch': $('#positionsSearch').val(),
-                'statusSearch' : $('#statusSearch').val(),
-                'entrie': $('#show_entries').val(),
-                'data-sort': $("#example").attr("data-sort"),
-                'data-field' : $("#example").attr("data-field"),
-            },
-            cache: false,
-            /*success: function (html) {
-                console.log(html);
-                $(" [data-reload=true]").html(html);     
-            }*/
-            success: function (data) {
-                console.log(data);
-                //$("#list-table-body").html(data);
-                $("[data-reload=true]").html(data);
-                $("#number-result").show();
-            }
-        });
-    }
-});
-
-/*******************pagination**********************/
-
-$(".pagination li").on('click', function(){
-    var numberPage = $(this).attr("numberPage");
-    var numberPageMax = $(".pagination .next").attr("status");
-    var numberActive =  $(".pagination .active").attr("numberPage");
-    //nếu active đang ở đâu hoạc cuối thì không dk ấn per và next
-    if(numberActive != numberPage){
-        var classPageShow = $(this).attr("classPage");
-        var classPageHide = $(".pagination .active").attr("classPage");
-
-        $(classPageShow).css("display", "block");
-        $(classPageHide).css("display", "none");
-
-        var nameclassPagiHide = $(".pagination .active").attr("nameClass");
-        var classPagiShow = $(this).attr("classPagi");
-        var nameclassPagiShow = $(this).attr("nameClass");
-
-        $(".pagination .active").attr("class", nameclassPagiHide);
-        $(classPagiShow).attr("class", "active");
-
-        //per and next
-        if( numberPage == "0"){
-            $(".pagination .next").attr("classPage", ".data1");
-            $(".pagination .next").attr("classPagi", ".pagi1");
-            $(".pagination .next").attr("nameClass", "pagi1");
-            $(".pagination .next").attr("numberPage", "1");
-
-            $(".pagination .pre").attr("classPage", ".data0");
-            $(".pagination .pre").attr("classPagi", ".pagi0");
-            $(".pagination .pre").attr("nameClass", "pagi0");
-            $(".pagination .pre").attr("numberPage", "0");
-        }
-        if(numberPage == numberPageMax){
-            var numberpage = numberPage-1;
-            $(".pagination .pre").attr("classPage", ".data"+numberpage);
-            $(".pagination .pre").attr("classPagi", ".pagi"+numberpage);
-            $(".pagination .pre").attr("nameClass", "pagi"+numberpage);
-            $(".pagination .pre").attr("numberPage", numberpage);
-
-            $(".pagination .next").attr("classPage", ".data"+numberPageMax);
-            $(".pagination .next").attr("classPagi", ".pagi"+numberPageMax);
-            $(".pagination .next").attr("nameClass", "pagi"+numberPageMax);
-            $(".pagination .next").attr("numberPage", numberPageMax);
-        }
-        if( numberPage != "0" && numberPage != numberPageMax){
-            var numberPagePre = numberPage-1;
-            var numberPageNext = numberPage+1;
-
-            $(".pagination .next").attr("classPage", ".data"+numberPageNext);
-            $(".pagination .next").attr("classPagi", ".pagi"+numberPageNext);
-            $(".pagination .next").attr("nameClass", "pagi"+numberPageNext);
-            $(".pagination .next").attr("numberPage", numberPageNext);
-
-            $(".pagination .pre").attr("classPage", ".data"+numberPagePre);
-            $(".pagination .pre").attr("classPagi", ".pagi"+numberPagePre);
-            $(".pagination .pre").attr("nameClass", "pagi"+numberPagePre);
-            $(".pagination .pre").attr("numberPage", numberPagePre);
+            $('.dataTable th').each(function() {
+                if($(this).attr('data-field') == 'name') {
+                    $(this).attr("data-sort",'asc');
+                    $(this).attr("class",'sorting_asc');
+                } else {
+                        $(this).attr("data-sort",'asc');
+                        $(this).attr("class",'sorting');
+                }
+            }); 
         }
     }
-});
+    var dataString = "data-sort=" + dataSort +
+        "&data-field=" + dataField +
+        "&nameSearch=" + nameSearch +
+        "&positionsSearch=" + positionsSearch +
+        "&statusSearch=" + statusSearch +
+        "&entrie=" + entries;
 
+    // search name 3 characters  Min lenght
+    if (nameSearch.length > 2 && s_name){
+        advSearch(dataString)
+    }else {
+        advSearch(dataString)
+    }
+
+}
+
+// function send data search CV
+function advSearch(dataString){
+    $.ajax({
+        type: "POST",
+        url: "/CV/adSearch",
+        data: dataString,
+        cache: false,
+        success: function (data) {
+            //console.log(data);
+            $("[data-reload=true]").html(data['data']);
+            $(".pagination ul").remove();
+            $(".pagination").html(data['pagination']);
+            window.history.pushState('','',data['url']);
+        }
+    });
+}
 /******************** show entries *****************************/
 
 $('#show_entries').on('chang', function(){
@@ -936,4 +702,23 @@ $('#show_entries').on('chang', function(){
 
 });
 
+// thay doi vi tri tuyen dung
+function change_positions(val, id) {
+    if (val.value) {
+        var _confirm = confirm("Bạn có chắc thay đổi ví trí tuyển dụng?");
+        if (_confirm) {
+            $.ajax({
+                type: "POST",
+                url: "/CV/changeStatus",
+                data: '_potions=' + val.value + '&id=' + id,
+                cache: false,
+                success: function (data) {
+                    //redirect(data['url']);
+                }
+            });
+        } else {
+            $(val).val('-- Chọn vị trí --');
+        }
+    }
+}
 

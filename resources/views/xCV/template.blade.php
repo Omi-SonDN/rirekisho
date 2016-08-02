@@ -18,7 +18,7 @@
             document.getElementsByTagName('head')[0].appendChild(css);
         })(); </script>
     <script src="{{ URL::asset('js/include.js')}}" defer></script>
-    <script src="{{ URL::asset('js/bootstrap-datepicker.js')}}" defer></script>
+    <!-- script src="{{ URL::asset('js/bootstrap-datepicker.js')}}"></script> -->
     
 
     <!--Bootstrap CSS-->

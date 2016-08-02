@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            <button name="sendMail" class="btn btn-primary">Send mail</button>
+            <button name="sendMail" class="btn btn-primary col-lg-12">Send mail</button>
         </div>
     </form>
 @endsection

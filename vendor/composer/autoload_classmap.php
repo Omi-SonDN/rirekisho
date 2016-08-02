@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'Absolute_Positioner' => $vendorDir . '/dompdf/dompdf/include/absolute_positioner.cls.php',
     'Abstract_Renderer' => $vendorDir . '/dompdf/dompdf/include/abstract_renderer.cls.php',
+    'AddDescriptionToPositions' => $baseDir . '/database/migrations/2016_07_30_161137_add_description_to_positions.php',
+    'AddGithubLinkedinToCvs' => $baseDir . '/database/migrations/2016_07_28_093744_add_github_linkedin_to_cvs.php',
     'AddImageToUsers' => $baseDir . '/database/migrations/2016_07_18_090119_add_image_to_users.php',
     'Adobe_Font_Metrics' => $vendorDir . '/phenx/php-font-lib/classes/Adobe_Font_Metrics.php',
     'Attribute_Translator' => $vendorDir . '/dompdf/dompdf/include/attribute_translator.cls.php',
@@ -27,8 +29,10 @@ return array(
     'CreateGroupsTable' => $baseDir . '/database/migrations/2016_07_27_081818_create_groups_table.php',
     'CreateItSkillTable' => $baseDir . '/database/migrations/2016_07_27_092211_create_it_skill_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreatePivotUsersGroupsTables' => $baseDir . '/database/migrations/2016_08_01_033755_create_pivot_users_groups_tables.php',
     'CreatePositionsTable' => $baseDir . '/database/migrations/2016_07_27_081746_create_positions_table.php',
     'CreateRecordsTable' => $baseDir . '/database/migrations/2016_07_27_081636_create_records_table.php',
+    'CreateStatusTable' => $baseDir . '/database/migrations/2016_08_01_033312_create_status_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DOMPDF' => $vendorDir . '/dompdf/dompdf/include/dompdf.cls.php',
     'DOMPDF_Exception' => $vendorDir . '/dompdf/dompdf/include/dompdf_exception.cls.php',
@@ -659,4 +663,5 @@ return array(
     'Text_Renderer' => $vendorDir . '/dompdf/dompdf/include/text_renderer.cls.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'app\\MyLibrary\\Pagination_temp' => $baseDir . '/app/MyLibrary/Pagination_temp.php',
 );

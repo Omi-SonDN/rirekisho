@@ -1,6 +1,6 @@
 @extends('xCV.template')
 <title>Chỉnh sửa thông tin người dùng</title>
-<!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/uploadCV.css') }}"/-->
+<!--link rel="stylesheet" type="text/css" href="{{-- URL::asset('css/uploadCV.css') --}}"/-->
 @section('content')
     <?php $key = $user->hash;?>
     <form action="/User/{{$key}}" method="post" class="my-forms" id="profile-forms" enctype="multipart/form-data">

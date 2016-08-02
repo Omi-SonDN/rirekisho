@@ -2,15 +2,9 @@
     <ul class="">
         @can('Applicant')
             <li class="nav-link"></li>
-            @if (isset($CV) && !empty($CV))
                 <li class="nav-link"><a href="{{url('CV',[$CV->hash,'edit'])}}">Tạo CV mới</a></li>
                 <li class="nav-link"><a href="{{url('CV',[$CV->hash])}}">Xem CV</a></li>
                 <li class="nav-link"><a href="{{url('CV',[$CV->hash,'view'])}}">Xem CV 2</a></li>
-            @else
-                <li class="nav-link"><a href="{{\URL::route('CV.create')}}">Tạo CV mới</a></li>
-                <li class="nav-link"><a onclick="return false" href="{{url('CV', '')}}">Xem CV</a></li>
-                <li class="nav-link"><a  onclick="return false" href="{{url('CV',['', 'view'])}}">Xem CV 2</a></li>
-            @endif
         @endcan
         @can('Visitor')
             <li class="bookmark-link">

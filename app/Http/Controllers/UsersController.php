@@ -73,7 +73,12 @@ class UsersController extends Controller
         }
         //remove admin info
         $user = $user->reject(function ($item) {
-            return $item->getRole() == "Admin";
+            if (Auth::user()->getRole() == 'Admin') {
+                return $item->getRole() == "Admin" || $item->getRole() == "SuperAdmin";
+            }
+            if (Auth::user()->getRole() == 'SuperAdmin') {
+                return $item->getRole() == "SuperAdmin";
+            }
         });
         //partial view
         return View::make('includes.user-index')
@@ -95,6 +100,18 @@ class UsersController extends Controller
     public function changePassword($id, Request $request)
     {
         $user = User::findOrFail($id);
+        if (Auth::user()->getRole() == 'Admin') {
+            if ($user->getRole() == "SuperAdmin") {
+                return redirect()
+                    ->route('User.index')
+                    ->with(
+                        [
+                            'flash_level' => 'danger',
+                            'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
+                        ]
+                    );
+            }
+        }
         if (Gate::denies('profile', $id)) {
             abort(403);
         }
@@ -166,6 +183,18 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
+        if (Auth::user()->getRole() == 'Admin') {
+            if ($user->getRole() == "SuperAdmin") {
+                return redirect()
+                    ->route('User.index')
+                    ->with(
+                        [
+                            'flash_level' => 'danger',
+                            'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
+                        ]
+                    );
+            }
+        }
         if (Gate::denies('profile', $id)) {
             abort(403);
         }
@@ -275,8 +304,20 @@ class UsersController extends Controller
         $arrlist = explode(",", $listid);
         foreach ($arrlist as $key => $val) {
             $_id = Hashids::decode($val)[0];
-
             $user = User::findOrFail($_id);
+
+            if (Auth::user()->id == $_id || (Auth::user()->getRole() != 'SuperAdmin' && $user->getRole() == 'SuperAdmin') || (Auth::user()->getRole() != 'SuperAdmin' && $user->getRole() == 'Admin')) {
+                return redirect()
+                    ->route('User.index')
+                    ->with(
+                        [
+                            'flash_level' => 'warning',
+                            'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
+                        ]
+                    );
+            }
+
+
             if ($user->image) {
                 $old_del = public_path('img/thumbnail/') . 'thumb_' . $user->image;
                 if (File::exists($old_del)) {
@@ -304,16 +345,6 @@ class UsersController extends Controller
             //
             // kiem tra xoa [xoa anh -> skill -> Record -> cv -> ->bookmard -> acc]
             //
-            if (Auth::user()->id == $_id) {
-                return redirect()
-                    ->route('User.index')
-                    ->with(
-                        [
-                            'flash_level' => 'warning',
-                            'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
-                        ]
-                    );
-            }
         }
 
         if (!$is_check) {

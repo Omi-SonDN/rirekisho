@@ -32,7 +32,7 @@
                         <input name="subject" class="form-control" placeholder="Subject"/>
                     </div>
                 </div>
-                <button class="btn btn-primary" name="sendMail">Send mail</button>
+                <button class="btn btn-primary col-lg-12" name="sendMail">Send mail</button>
             </form>
         </div>
     </div>
@@ -92,7 +92,7 @@
                     </div>
 
                     <hr>
-                    <button class="btn btn-primary" name="sendMail">Send mail</button>
+                    <button class="btn btn-primary col-lg-12" name="sendMail">Send mail</button>
                 </div>
             </form>
         </div>
@@ -153,7 +153,7 @@
                     </div>
 
                     <hr>
-                    <button class="btn btn-primary" name="sendMail">Send mail</button>
+                    <button class="btn btn-primary col-lg-12" name="sendMail">Send mail</button>
                 </div>
             </form>
         </div>
@@ -192,7 +192,7 @@
                         <label for="subject" class="label label-default">Subject: </label>
                         <input name="subject" class="form-control" placeholder="Subject"/>
                     </div>
-                    <button class="btn btn-primary" name="sendMail">Send mail</button>
+                    <button class="btn btn-primary col-lg-12" name="sendMail">Send mail</button>
                 </div>
             </form>
         </div>
@@ -253,7 +253,7 @@
                     </div>
 
                     <hr>
-                    <button class="btn btn-primary" name="sendMail">Send mail</button>
+                    <button class="btn btn-primary col-lg-12" name="sendMail">Send mail</button>
                 </div>
             </form>
         </div>
@@ -314,7 +314,7 @@
                     </div>
 
                     <hr>
-                    <button class="btn btn-primary" name="sendMail">Send mail</button>
+                    <button class="btn btn-primary col-lg-12" name="sendMail">Send mail</button>
                 </div>
             </form>
         </div>
@@ -375,7 +375,7 @@
                     </div>
 
                     <hr>
-                    <button class="btn btn-primary" name="sendMail">Send mail</button>
+                    <button class="btn btn-primary col-lg-12" name="sendMail">Send mail</button>
                 </div>
             </form>
         </div>
@@ -436,7 +436,7 @@
                     </div>
 
                     <hr>
-                    <button class="btn btn-primary" name="sendMail">Send mail</button>
+                    <button class="btn btn-primary col-lg-12" name="sendMail">Send mail</button>
                 </div>
             </form>
         </div>

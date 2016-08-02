@@ -15,9 +15,7 @@ class ApplicantMiddleware
      */
     public function handle($request, Closure $next)
     {
-
         if ($request->user()->getRole() == "Visitor") {
-
             return response('Access denied ', 404);
         }
         return $next($request);
