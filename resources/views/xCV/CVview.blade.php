@@ -43,7 +43,6 @@
                             <a class="" name="P-info">
                                 <i class="fa fa-user " id="p-active"></i>
                                 <div class="li-text">Thông tin cá nhân</div>
-
                             </a>
                         </li>
 

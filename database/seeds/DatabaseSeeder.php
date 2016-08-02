@@ -249,7 +249,7 @@ class PositionsTableSeeder extends Seeder
             DB::table('positions')->insert([
                 'name' => 'Ví trí ' . $i,
                 'active' => '1',
-                'description' => 'Ví trí 1 ' . $i,
+                'description' => 'Ví trí ' . $i,
             ]);
         }
     }

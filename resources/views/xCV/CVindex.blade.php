@@ -18,7 +18,7 @@
 
             </select>
             <select id = "statusSearch" name="Status" onchange="adSearchChange('', '', '', this)">
-                <option value="">--Status--</option>
+                <option value="">-- Trạng thái --</option>
                 @can('Visitor')
                 <option value="1">Chờ duyệt</option>
                 <option value="2">Đồng ý phỏng vấn</option>
@@ -49,7 +49,8 @@
             <div style="float: left; width: 70px">entries</div>
         </div>
     </div>
-    <div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" id="modal-content">
             </div>
@@ -59,8 +60,8 @@
     <table id="example" class="dataTable" data-sort="" data-field="">
         <thead>
         <tr>
-            <th class="ab" style="width: 150px"></th>
-            <th class="ab" style="width: 50px"></th>
+            <th class="ab sorting" style="width: 50px">#</th>
+            <th class="ab sorting" style="width: 150px">Ảnh</th>
             <th @if (Request::has('data-field') && Request::has('data-sort'))
                     @if(Request::input('data-field') == 'name')
                         @if (Request::input('data-sort') == 'asc ')
@@ -117,7 +118,7 @@
                 @else
                     class="sorting" data-sort="asc"
                 @endif
-                onclick="adSearchChange('', '', '', '', this)" data-field="positions" style="width: 110px">Apply to</th>
+                onclick="adSearchChange('', '', '', '', this)" data-field="positions" style="width: 110px">Ví trí tuyển dụng</th>
             <th @if (Request::has('data-field') && Request::has('data-sort'))
                     @if(Request::input('data-field') == 'Status')
                         @if (Request::input('data-sort') == 'asc ')
@@ -131,7 +132,7 @@
                 @else
                     class="sorting" data-sort="asc"
                 @endif
-                onclick="adSearchChange('', '', '', '', this)" data-field="Status" style="width: 180px">Status</th>
+                onclick="adSearchChange('', '', '', '', this)" data-field="Status" style="width: 180px">Trạng thái</th>
             @endcan
             @can('Admin')
                 <th style="width: 30px;color: #666699;font-size: 13pt;">Hành động</th>
@@ -149,11 +150,11 @@
     </div>
 
 </div>
-<meta name="_token" content="{!! csrf_token() !!}" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="{{ asset('js/CV_changeStatus.js') }}"></script>
-<script src="{{ asset('js/email_send.js') }}"></script>
+{{--<meta name="_token" content="{!! csrf_token() !!}" />--}}
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>--}}
+{{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>--}}
+{{--<script type="text/javascript" src="{{ asset('js/CV_changeStatus.js') }}"></script>--}}
+{{--<script type="text/javascript" src="{{ asset('js/email_send.js') }}"></script>--}}
 
 @stop
 

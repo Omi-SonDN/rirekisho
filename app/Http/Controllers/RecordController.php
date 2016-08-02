@@ -49,7 +49,6 @@ class RecordController extends Controller
 
     public function destroy($id)
     {
-
         $record = Record::findOrFail($id);
         $cv = $record->CV;
         if (Gate::denies('update-cv', $cv->user_id)) {

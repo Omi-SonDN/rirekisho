@@ -19,10 +19,10 @@
                     </label>
 
                     <label class="radio-inline">
-                        <input name="rdoLevel" value="1" <?php if ($user->role == 1) echo 'checked="checked"'; else echo ''; ?> type="radio">Visitor
+                        <input name="rdoLevel" value="1" <?php if ($user->role == 1) echo 'checked="checked"'; else echo ''; ?> type="radio">Duyệt CV
                     </label>
                     <label class="radio-inline">
-                        <input name="rdoLevel" value="0" <?php if ($user->role == 0) echo 'checked="checked"'; else echo ''; ?> type="radio">Applicant
+                        <input name="rdoLevel" value="0" <?php if ($user->role == 0) echo 'checked="checked"'; else echo ''; ?> type="radio">Ứng viên
                     </label>
                 </div>
                 @endif

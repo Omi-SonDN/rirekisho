@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['about', 'xCV.template'], function ($view) {
+        view()->composer(['about', 'dashboard', 'xCV.template'], function ($view) {
             if (Auth::check()) {
                 $user = Auth::user();
 //                dd($user->CV);

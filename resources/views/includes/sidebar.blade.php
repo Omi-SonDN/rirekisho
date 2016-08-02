@@ -4,7 +4,6 @@
             <li class="nav-link"></li>
                 <li class="nav-link"><a href="{{url('CV',[$CV->hash,'edit'])}}">Tạo CV mới</a></li>
                 <li class="nav-link"><a href="{{url('CV',[$CV->hash])}}">Xem CV</a></li>
-                <li class="nav-link"><a href="{{url('CV',[$CV->hash,'view'])}}">Xem CV 2</a></li>
         @endcan
         @can('Visitor')
             <li class="bookmark-link">

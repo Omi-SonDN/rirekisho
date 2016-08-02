@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function ($) {
 
     var url = '';
     $('.status').on('click', '.btn-send-email:not(.disabled)', function () {

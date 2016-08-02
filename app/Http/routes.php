@@ -16,12 +16,21 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
 });
 Route::group(['middleware' => ['auth']], function () {
     Route::bind('User', function ($id) {
+        if (count(Hashids::decode($id)) == 0) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
         return Hashids::decode($id)[0];
     });
     Route::bind('Bookmark', function ($id) {
+        if (count(Hashids::decode($id)) == 0) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
         return Hashids::decode($id)[0];
     });
     Route::bind('CV', function ($id) {
+        if (count(Hashids::decode($id)) == 0) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
         return Hashids::decode($id)[0];
     });
 
@@ -35,7 +44,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     //every one see different page  
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
-    Route::get('CV/{CV}/view', 'CVController@show2');
     Route::post('CV/changeStatus', 'CVController@changeStatus');
     Route::get('Record/index/{type}', 'RecordController@index');
     Route::get('User/{User}/changePass', 'UsersController@changePassword');
@@ -68,9 +76,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('Record', 'RecordController');
     Route::resource('Skill', 'SkillController');
 
-
-
-
     Route::group(['prefix' => 'status','as'=>'status::'], function () {
         Route::get('/list/{id?}',['as' => 'list','uses' =>'StatusController@index']);
         Route::get('/add', ['as' => 'getaddstatus', 'uses' => 'StatusController@add']);
@@ -80,10 +85,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{id}/delete',['as'=>'delete','uses'=>'StatusController@delete']);
     });
 
-
-
-
     Route::resource('status', 'StatusController');
+    // thong ke user
+    Route::resource('statistics/user', 'StatisticsUserController');
 
     //add user - delete
     Route::group(['prefix' => 'user'], function () {
@@ -91,9 +95,32 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/add', ['as' => 'postadduser', 'uses' => 'UsersController@postAddUser']);
         Route::get('/{listid}/del', ['as' => 'getdeluser', 'uses' => 'UsersController@getDel']);
     });
-    
-    
+
+    Route::post('emails/getEmailAddress', [
+        'as' => 'emails.getEmailAddress',
+        'uses' => 'EmailsController@getEmailAddress',
+    ]);
+    Route::get('emails/create', [
+        'as' => 'emails.create',
+        'uses' => 'EmailsController@create',
+    ]);
+    Route::post('emails/send', [
+        'as' => 'emails.send',
+        'uses' => 'EmailsController@send',
+    ]);
+    Route::post('emails/createFormEmail', [
+        'as' => 'emails.createFormEmail',
+        'uses' => 'EmailsController@createFormEmail',
+    ]);
+    Route::post('emails/sendEmail1', [
+        'as' => 'emails.sendEmail1',
+        'uses' => 'EmailsController@sendEmail1',
+    ]);
+
+
+
 });
+
 Route::group(['middleware' => ['auth', 'App\Http\Middleware\ApplicantMiddleware']], function () {
     Route::resource('CV', 'CVController', ['except' => ['index', 'destroy', 'show']]);
 });
@@ -104,24 +131,4 @@ Route::get('auth/logout', 'Auth\AuthController@myLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::post('emails/getEmailAddress', [
-    'as' => 'emails.getEmailAddress',
-    'uses' => 'EmailsController@getEmailAddress',
-]);
-Route::get('emails/create', [
-    'as' => 'emails.create',
-    'uses' => 'EmailsController@create',
-]);
-Route::post('emails/send', [
-    'as' => 'emails.send',
-    'uses' => 'EmailsController@send',
-]);
-Route::post('emails/createFormEmail', [
-    'as' => 'emails.createFormEmail',
-    'uses' => 'EmailsController@createFormEmail',
-]);
-Route::post('emails/sendEmail1', [
-    'as' => 'emails.sendEmail1',
-    'uses' => 'EmailsController@sendEmail1',
-]);
 

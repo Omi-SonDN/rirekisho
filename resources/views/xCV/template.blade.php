@@ -4,29 +4,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!---  jQuery-->
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js" defer></script>
-    <!---  bootstrap-->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" defer></script>
-    <script type="text/javascript"> (function () {
-            var css = document.createElement('link');
-            css.href = '//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
-            css.rel = 'stylesheet';
-            css.type = 'text/css';
-            document.getElementsByTagName('head')[0].appendChild(css);
-        })(); </script>
-
-    <script src="{{ URL::asset('js/include.js')}}" defer></script>
+    <meta name="_token" content="{!! csrf_token() !!}" />
 
     <!--Bootstrap CSS-->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    {{--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">--}}
+    <link rel="stylesheet" href="{{ URL::asset('/admin/css/3.3.5-bootstrap.min.css') }}">
     <!-- local css-->
-<!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/all.css') }}"/-->
+    {{--<link rel="stylesheet" type="text/css" href=" URL::asset('css/all.css') " />--}}
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
-
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/footer.css') }}"/>
@@ -51,6 +37,15 @@
     <link rel="stylesheet" type="text/css"
           href="{{ asset('/admin/bower_components/datatables-sort/css/theme.jui.min.css') }}"/>
 
+    <script type="text/javascript"> (function () {
+            var css = document.createElement('link');
+            css.href = '//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
+            css.rel = 'stylesheet';
+            css.type = 'text/css';
+            document.getElementsByTagName('head')[0].appendChild(css);
+        })(); </script>
+
+
 </head>
 <body>
 <header>
@@ -69,10 +64,26 @@
 
     </div>
 
-<!--footer class="row simple">
-    @include('includes.footer')
-        </footer-->
+    <div class="footer col-lg-12">
+        @include('includes.footer')
+    </div>
+
 </div>
+<!---  jQuery-->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>
+{{--<script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>--}}
+<!---  bootstrap-->
+{{--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>--}}
+<script type="text/javascript" src="{{ URL::asset('/admin/js/3.3.5-bootstrap.min.js')}}"></script>
+{{--<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js" defer></script>--}}
+<script type="text/javascript" src="{{ URL::asset('/admin/js/1.15.0-jquery.validate.js')}}"></script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" defer></script>--}}
+<script type="text/javascript" src="{{ URL::asset('/admin/js/1.11.4-jquery-ui.min.js')}}"></script>
+
+<script src="{{ URL::asset('js/include.js')}}"></script>
+<script src="{{ asset('js/CV_changeStatus.js') }}"></script>
+<script src="{{ asset('js/email_send.js') }}"></script>
+
 <!-- DataTables JavaScript -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 {{--<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/js/jquery-latest.js')}}"></script>--}}

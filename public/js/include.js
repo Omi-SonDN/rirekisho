@@ -36,23 +36,19 @@ $(document).ready(function () {
         /*
          var notify = $('[notification=true]'), timer;
          $(document).ajaxStart(function () {
-
          timer && clearTimeout(timer);
          timer = setTimeout(function () {
          //notify.html("Loading...");
          notify.show();
          }, 10000);
          });
-
          $(document).ajaxStop(function () {
          clearTimeout(timer);
          notify.hide();
          });
          //noinspection JSUnresolvedFunction
          $(document).ajaxComplete(function (status, text) {
-
          });
-
          /*******************slide toggle *************************/
         var slideHeader = $('[slide-header=true]');
         slideHeader.next().hide();
@@ -66,7 +62,7 @@ $(document).ready(function () {
             }
         });
         /***************Auto-submit*******************************/
-        //TODO: type=text
+            //TODO: type=text
         $("[editable=Rirekisho]").click(function () {
 
             var key = $(this).attr('id');
@@ -239,7 +235,7 @@ $(document).ready(function () {
             }
 
         }
-
+});
         /********************************** validate ***********************************/
         var currentTime = new Date();
         var year = currentTime.getFullYear();
@@ -336,7 +332,7 @@ $(document).ready(function () {
             min: jQuery.validator.format("Bạn phải điền số lớn hơn {0}.")
         });
         /******************Editable Table********************/
-        // records table
+            // records table
         $(document).mouseup(function () {
             $(".editbox").hide();
             $(".jShow").show();
@@ -444,7 +440,7 @@ $(document).ready(function () {
 
         /***************User profile**********************/
 
-        //dropzone handle
+            //dropzone handle
         $('#dropzone')
             .on('dragover', function () {
                 $(this).addClass('hover');
@@ -483,9 +479,7 @@ $(document).ready(function () {
                     $('#dropzone').find('.fixed-img').html(ext);
                 }
             });
-    }
-);
-
+//});
 ///****************** search name date age status*************************/
 //
 //    $(".dataTable th").on('click', function () {

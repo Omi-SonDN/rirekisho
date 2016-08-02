@@ -117,6 +117,9 @@ class CVController extends Controller
         if (Gate::denies('view-cv', $CV)) {
             abort(403);
         }
+        if (empty($CV)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
         $skills = $CV->Skill;
         $Records = $CV->Record;
         $Records = $Records->sortBy("Date");
@@ -129,26 +132,6 @@ class CVController extends Controller
         return View::make('xCV.CVshow')
             ->with(compact('CV', 'Records', 'skills', 'image', 'bookmark'));
 
-    }
-
-    public function show2($id)
-    {
-        //$id = $id - 14000;
-        $CV = CV::with('User')->find($id);
-        if (Gate::denies('view-cv', $CV)) {
-            abort(403);
-        }
-        $skills = $CV->Skill;
-        $Records = $CV->Record;
-        $Records = $Records->sortBy("Date");
-        $image = $CV->User->image;
-        $bookmark = DB::table('bookmarks')
-            ->whereUserId(Auth::User()->id)
-            ->whereBookmarkUserId($CV->user_id)->first();
-        if ($bookmark === null) $bookmark = 0;
-        else $bookmark = $bookmark->id;
-        return View::make('xCV.CVview')
-            ->with(compact('CV', 'Records', 'skills', 'image', 'bookmark'));
     }
 
     public function edit($id)//Get
@@ -229,7 +212,7 @@ class CVController extends Controller
         if ($request->has('_potions')) {
             $CV->apply_to = $request->input('_potions');
             $CV->update();
-            return true;
+            return 'true';
 //          return \Response::json(array('url'=> \URL::previous()));
 
         }

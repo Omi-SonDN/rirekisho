@@ -15,15 +15,20 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse">
                     <div class="navbar-header">
-                        <a class="navbar-brand toptext" href="#">Rirekisho</a>
+                        <a class="navbar-brand toptext" href="#">Ominext JSC</a>
                     </div>
 
                     <ul class="float_right nav navbar-nav">
                         <li><a href="{{url('CV')}}">Trang chủ</a></li>
-                        @can('Admin')
+                        @can('SuperAdmin')
                             <li><a href="{{url('User')}}">User</a></li>
                             <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                             <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>
+                            <li>
+                                <ul>
+                                    <li>Thống kê</li>
+                                </ul>
+                            </li>
                         @endcan
 
                         <li><a href="{{url('auth/logout')}}">Đăng xuất</a></li>

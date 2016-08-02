@@ -67,13 +67,7 @@
                                 </ul>
                             </div>
                         @endif
-                        @if (Session::has('message') )
-                            <div class="alert alert-success">
-                                <ul>
-                                    <li>{{Session::get('message')}}</li>
-                                </ul>
-                            </div>
-                        @endif
+                        @include('includes.flash-alert')
                     </li>
                 </ul>
             </div>

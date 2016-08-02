@@ -1,4 +1,3 @@
-// tables user
 $(document).ready(function ($) {
     $.tablesorter.customPagerControls({
         size: 10,
@@ -113,10 +112,10 @@ $(document).ready(function ($) {
             // input search ///
             // bootstrap default blue green jui dropbox grey dark
             theme: 'bootstrap',
-            widgets: ['zebra', 'filter', 'numbering'],
+            widgets: ['zebra', 'filter', 'numbering', 'resizable'],
             // *** Appearance ***
             // fix the column widths
-            widthFixed: true,
+            widthFixed: false,
             // include zebra and any other widgets, options:
             // 'uitheme', 'filter', 'stickyHeaders' & 'resizable'
             // the 'columns' widget will require custom css for the
@@ -221,7 +220,8 @@ $(document).ready(function ($) {
                 filter_reset: '.reset',
                 zebra: ["even", "odd"],
                 filter_startsWith: false,
-                filter_childRows: true
+                filter_childRows: true,
+                resizable_widths : ['8%', '15%', '20%', '20%', '20%', '12%']
             },
             // Add select box to 4th column (zero-based index)
             // each option has an associated function that returns a boolean

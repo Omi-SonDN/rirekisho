@@ -7,6 +7,7 @@
 @else
     @foreach($CVs as $key => $CV)
         <tr class="data{{++$key}}">
+            <td class="rank">{{$key}}</td>
             <td class="image">
                 <div style=" position: relative;height: 100px;width: 100px;">
                     <?php $image = $CV->User->image;?>
@@ -24,7 +25,6 @@
                     @endif
                 </div>
             </td>
-            <td class="rank">{{$key}}</td>
             <td class="name"><a href="{{url('CV',$CV )}} ">{{ $CV->Name }} </a></td>
             <td class="worth">{{$CV->JGender or ''}}</td>
             <td data-field="age">{{$CV->Age or ''}}</td>

@@ -80,7 +80,7 @@ class CV extends Model
     {
         if ($this->First_name != "") {
             return $this->Last_name . " " . $this->First_name;
-        } else return 'null';
+        } else return '---';
     }
 
     public function getJGenderAttribute()

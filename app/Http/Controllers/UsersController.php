@@ -140,7 +140,7 @@ class UsersController extends Controller
         } else {
             return redirect()
                 ->back()
-                ->with(['message' => 'No change!']);
+                ->with(['flash_level' => 'warning', 'message' => 'No change!']);
         }
     }
 
