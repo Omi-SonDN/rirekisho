@@ -3,7 +3,7 @@
 @section('content')
     <!--div  class="page-title"><h3>Tạo CV mới</h3></div-->
     <?php $key = $CV->hash;?>
-    <form action="" method="post" class="my-forms" id="cv-forms">
+    <form action="" method="post" class="my-forms" id="cv-forms" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" id="id" name="id" value="{{ $key }}">
         <fieldset id="field-box">
@@ -350,7 +350,28 @@
 
                 </li>
             </ul>
-
+            <label slide-header=true class="slide-header">
+                V. File CV 
+            </label>
+            <ul slide-toggle=true>
+                <li class="">
+                    <div class="float_left" >
+                        <label for="name" class="label">File CV của bạn: </label>
+                    </div>
+                    <div >
+                        <div class="input">
+                            <input id="{{$key}}" name="attach" type="file" accept=".pdf"/>
+                            <div class="success-status float_left" id="s_attach_{{$key}}" style="display:none;">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </div>
+                            <div class="clear-fix"></div>
+                            <div class="error-box error-text float_left">
+                                <span id="attach-error"></span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </fieldset>
 
         <fieldset class="tbFooter">

@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
     <meta name="_token" content="{!! csrf_token() !!}" />
 
     <!--Bootstrap CSS-->
@@ -12,6 +13,7 @@
     <!-- local css-->
     {{--<link rel="stylesheet" type="text/css" href=" URL::asset('css/all.css') " />--}}
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/datepicker3.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>

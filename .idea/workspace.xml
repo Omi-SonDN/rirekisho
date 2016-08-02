@@ -2,34 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82d6d7e4-bf4e-4de3-bcfc-3d4340e0e5fe" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/errors/403.blade.php" afterPath="$PROJECT_DIR$/resources/views/errors/403.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/errors/404.blade.php" afterPath="$PROJECT_DIR$/resources/views/errors/404.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/errors/503.blade.php" afterPath="$PROJECT_DIR$/resources/views/errors/503.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-42-44-11822531_804987676280948_5013002333607509129_n.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-45-59-IMG20160130165714.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-49-34-IMG20160130170322 (1).jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-50-14-11822531_804987676280948_5013002333607509129_n.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-52-01-received_1642161532721884.jpeg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-59-27-IMG20160130165714.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-59-59-IMG20160130170322.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-08-06-38-R-intro.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-08-06-55-IMG20160130170322.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-08-16-11-R-intro.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-08-17-40-R-intro.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-08-01-01-59-18-R-intro.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-08-01-02-00-19-R-intro.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-08-01-02-02-01-pdf.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-08-01-02-02-23-pdf.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/thumbnail/thumb_2016-07-28-12-18-42-10155642_803897279723321_4284063851204796771_n.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap-datepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/datepicker3.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/jquery.datetimepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/jquery.datetimepicker.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/xCV/resort.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/CV.php" afterPath="$PROJECT_DIR$/app/CV.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CVController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CVController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php" afterPath="$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xCV/CVview.blade.php" afterPath="$PROJECT_DIR$/resources/views/xCV/CVview.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/RecordController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/RecordController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xUser/UserEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/xUser/UserEdit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xUser/UserIndex.blade.php" afterPath="$PROJECT_DIR$/resources/views/xUser/UserIndex.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/admin/css/customtables.css" afterPath="$PROJECT_DIR$/public/admin/css/customtables.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/email_send.js" afterPath="$PROJECT_DIR$/public/js/email_send.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/footer.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/footer.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/footer.css" afterPath="$PROJECT_DIR$/public/css/footer.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/admin/js/func.bqn.js" afterPath="$PROJECT_DIR$/public/admin/js/func.bqn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/header.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/header.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xCV/CVcreate.blade.php" afterPath="$PROJECT_DIR$/resources/views/xCV/CVcreate.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SkillController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SkillController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/forge.str.sql" afterPath="$PROJECT_DIR$/db/forge.str.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/header.css" afterPath="$PROJECT_DIR$/public/css/header.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/include.js" afterPath="$PROJECT_DIR$/public/js/include.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/positions/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/positions/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/status/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/status/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xUser/password.blade.php" afterPath="$PROJECT_DIR$/resources/views/xUser/password.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/sidebar.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/sidebar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/table-result.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/table-result.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xCV/template.blade.php" afterPath="$PROJECT_DIR$/resources/views/xCV/template.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -102,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_form_status.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="_form_status.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/includes/_form_status.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18453427" vertical-offset="0" max-vertical-offset="1281">
-              <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+            <state vertical-scroll-proportion="-8.4" vertical-offset="0" max-vertical-offset="1281">
+              <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -125,18 +128,20 @@
       <file leaf-file-name="CVController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CVController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="119.7" vertical-offset="3906" max-vertical-offset="7371">
-              <caret line="15" column="14" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="14" />
-              <folding />
+            <state vertical-scroll-proportion="12.0" vertical-offset="6135" max-vertical-offset="8610">
+              <caret line="275" column="68" selection-start-line="275" selection-start-column="68" selection-end-line="275" selection-end-column="68" />
+              <folding>
+                <element signature="e#40#49#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="template.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="template.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/xCV/template.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.9" vertical-offset="0" max-vertical-offset="2289">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.251497" vertical-offset="126" max-vertical-offset="2331">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -193,7 +198,6 @@
         <option value="$PROJECT_DIR$/resources/views/admin/statistics/user.blade.php" />
         <option value="$PROJECT_DIR$/public/admin/js/public-sort.js" />
         <option value="$PROJECT_DIR$/resources/views/includes/sidebar.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CVController.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/includes/header.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/xUser/UserIndex.blade.php" />
@@ -210,6 +214,7 @@
         <option value="$PROJECT_DIR$/public/js/email_send.js" />
         <option value="$PROJECT_DIR$/app/MyLibrary/Pagination_temp.php" />
         <option value="$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CVController.php" />
         <option value="$PROJECT_DIR$/resources/views/xCV/template.blade.php" />
       </list>
     </option>
@@ -745,11 +750,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.628125" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.628125" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4390625" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -810,6 +815,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.466666" vertical-offset="2245" max-vertical-offset="7854">
           <caret line="133" column="60" selection-start-line="133" selection-start-column="53" selection-end-line="133" selection-end-column="60" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -881,6 +887,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.5" vertical-offset="0" max-vertical-offset="1890">
           <caret line="18" column="45" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1066,7 +1073,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="6120" max-vertical-offset="14448">
           <caret line="278" column="27" selection-start-line="278" selection-start-column="27" selection-end-line="278" selection-end-column="27" />
           <folding>
-            <marker date="1470153869971" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1470157811285" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1143,26 +1150,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/xCV/template.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.9" vertical-offset="0" max-vertical-offset="2289">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/MyLibrary/Pagination_temp.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.741652" vertical-offset="4282" max-vertical-offset="4977">
           <caret line="224" column="64" selection-start-line="224" selection-start-column="64" selection-end-line="224" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CVController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="119.7" vertical-offset="3906" max-vertical-offset="7371">
-          <caret line="15" column="14" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -1185,8 +1176,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/includes/_form_status.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18453427" vertical-offset="0" max-vertical-offset="1281">
-          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        <state vertical-scroll-proportion="-8.4" vertical-offset="0" max-vertical-offset="1281">
+          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CVController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="12.0" vertical-offset="6135" max-vertical-offset="8610">
+          <caret line="275" column="68" selection-start-line="275" selection-start-column="68" selection-end-line="275" selection-end-column="68" />
+          <folding>
+            <element signature="e#40#49#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/xCV/template.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.251497" vertical-offset="126" max-vertical-offset="2331">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>

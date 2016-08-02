@@ -8,6 +8,7 @@ use DB;
 use Illuminate\Http\Request;
 use View;
 use Gate;
+use Input;
 use PDF;
 use Response;
 use App\Positions;
@@ -15,15 +16,18 @@ use Route;
 use App\CV;
 use App\Record;
 use App\Status;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateRequest;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Vinkla\Hashids\Facades\Hashids;
 use App\MyLibrary\Pagination_temp;
+
 
 class CVController extends Controller
 {
 
-    public function index(Request $request)
+   public function index(Request $request)
     {
         if ($request->has('search') ) {
             $s_name = $request->get('search');
@@ -110,6 +114,36 @@ class CVController extends Controller
         );
     }
 
+/************Search orderBy Name Positions Status Age*************/
+    public function resort1(){
+        if (Gate::denies('Visitor')) {
+            abort(403);
+        }
+        return view('xCV.resort', compact('CVs'));
+    }  
+    public function resort(){
+        if (Gate::denies('Visitor')) {
+            abort(403);
+        }
+        global $request;
+        if(!$request->startdate || !$request->enddate)
+            return view('xCV.resort');
+        $startdate = Carbon::createFromFormat('d/m/Y', trim($request->startdate) );
+        $enddate = Carbon::createFromFormat('d/m/Y', trim($request->enddate) );
+        $in = \App\CV::whereBetween('created_at',array($startdate->subDay(),$enddate))->get();
+        $out =\App\CV::whereBetween('created_at',array($startdate,$enddate))->get();
+        $out->each(function($item,$key) use($in) {
+            $in->add($item);
+        });
+        
+        $result = $in->sortBy(function($item,$key){return $item->created_at;})->groupBy(function($item,$key){
+            return $item->created_at;
+        });
+        dd($result->groupBy(function($item,$key){
+            return $item->created_at;
+        }));
+        return view('xCV.resort', compact('CVs'),['result'=>$result,'startdate'=>trim($request->startdate),'enddate'=>trim($request->enddate)]);
+    }
     public function show($id)
     {
         //$id = $id - 14000;
@@ -149,16 +183,42 @@ class CVController extends Controller
 
     public function update($id, UpdateRequest $request)//PUT
     {
-        //$id = $id - 14000;
 
+        
         $cv = CV::findOrFail($id);
         if (Gate::denies('update-cv', $cv->user_id)) {
             abort(403);
         }
+        $cv->update($request->all());
+
         if ($request->has('B_date')) {
             $cv->Birth_date = getDateDate($request->input('B_date'));
+            $cv->save();
+            exit();
         }
-        $cv->update($request->all());
+        if ($request->hasFile('attach')) {
+            $file = $request->file('attach');
+            if( $file->getClientOriginalExtension() != 'pdf'){
+                echo 'false';
+                $cv->attach = '';
+                $cv->save();
+                die();
+            }
+            $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+            $attach = $timestamp . '-' . $file->getClientOriginalName();
+            //$oldfile = public_path('attach') . $cv->attach;
+            $oldattach = public_path('files/') . 'file_' . $cv->attach;
+            if (\File::exists($oldattach)) {
+                \File::exists($oldattach) && \File::delete($oldattach);
+                //File::delete($oldfile);
+            }
+            //$cv->attach = $attach;
+            $file->move(public_path() . '/files/', $attach);
+            $cv->attach = 'public/files/'. $attach;
+            //echo url('files/'. $attach);
+            exit();
+        }
+        
     }
 
     public function getPDF($id, Request $request)
@@ -213,8 +273,7 @@ class CVController extends Controller
             $CV->apply_to = $request->input('_potions');
             $CV->update();
             return 'true';
-//          return \Response::json(array('url'=> \URL::previous()));
-
+          //return \Response::json(array('url'=> \URL::previous()));
         }
         $CV->status = $request->status;
         $CV->update();

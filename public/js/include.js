@@ -1,4 +1,14 @@
 $(document).ready(function () {
+        /****** dateitme *******/
+        $('.date-picker').datepicker();
+        $('#stardate').datepicker();
+        $('#enddate').datepicker();
+        // $('#stardate').change(function(){
+        //     $('#enddate').datepicker({startDate:$('#stardate').val()});
+        // });
+        // $('#enddate').change(function(){
+        //     $('#stardate').datepicker({endDate:$('#enddate').val()});
+        // });
         $("cv-forms").each(function () {
             $(this).data("validator").settings.success = false;
         });
@@ -64,7 +74,6 @@ $(document).ready(function () {
         /***************Auto-submit*******************************/
             //TODO: type=text
         $("[editable=Rirekisho]").click(function () {
-
             var key = $(this).attr('id');
             var name = $(this).attr("name");
             var sucess_status = $("#s_" + name + "_" + key);
@@ -112,8 +121,33 @@ $(document).ready(function () {
                 success: function (html) {
                 }
             });
-        }
+        };
 
+        $('input[type=file]').change(function (e){
+            e.preventDefault();
+            var self = $(this);
+            var data = new FormData();
+            data.append('_token', $('input[name=_token]').val());
+            data.append('attach', $('input[type=file]')[0].files[0]);
+            data.append('_method','PUT');
+
+            $.ajax({
+                type: "POST",
+                url: "/CV/" + $(this).attr('id'),
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data, html) {
+                    if( data != 'false')
+                    self.closest('.input').append('<a href="'+data+'">File</a>');
+                    else {
+                        alert("File must be pdf type!");
+                    }
+                }
+            });
+            return false;
+        });
         /*****************show CV*************************/
         $(".clickable li.p-link a").on('click', function () {
             var name = $(this).attr('name');//gets element
@@ -274,7 +308,7 @@ $(document).ready(function () {
                     },
                     linkedin: {
                         url: true
-                    }
+                    },
                 },
                 messages: {
                     Year: {
@@ -437,6 +471,8 @@ $(document).ready(function () {
                 }
             });
         }
+
+
 
         /***************User profile**********************/
 
