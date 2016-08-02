@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
                     });
                 })->take(10)->get();
                 if (Gate::allows('get-cv', $cv)) {
+
                     $view->with('CV', $cv)->with('list', $list);
                 } else {
                     $view->with('list', $list);

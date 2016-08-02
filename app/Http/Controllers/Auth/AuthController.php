@@ -68,7 +68,7 @@ class AuthController extends Controller
         $user = $this->create($request->all());
         $user->role = 0;
         $user->save();
-        $CV = DB::table('CV')->insert(['user_id' => $user->id]);
+        $CV = DB::table('cvs')->insert(['user_id' => $user->id]);
         return redirect('auth/login')->withInput($request->except(['password']));
     }
 

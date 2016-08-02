@@ -2,6 +2,7 @@ $(document).ready(function () {
     var url = '';
 
     var the_status = [
+        [1]
         [2, 12, 9],
         [3],
         [8, 25],

@@ -17,14 +17,16 @@
             css.type = 'text/css';
             document.getElementsByTagName('head')[0].appendChild(css);
         })(); </script>
-
     <script src="{{ URL::asset('js/include.js')}}" defer></script>
+    <script src="{{ URL::asset('js/bootstrap-datepicker.js')}}" defer></script>
+    
 
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- local css-->
 <!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/all.css') }}"/-->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/datepicker3.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
 
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>

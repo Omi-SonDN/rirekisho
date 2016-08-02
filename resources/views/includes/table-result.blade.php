@@ -55,7 +55,7 @@
                                 <button id="btn_send_email{{ $CVx[$h]->id }}" class="btn btn-primary btn-send-email" value="{{ $CVx[$h]->Status }}">Send Email {{ $CVx[$h]->Status }}</button>
                             </div>
                         </td>
-                        <td><button style="margin-left: 25px;"class="btn btn-default btn-edit"><a href="{{url('CV',[$CVx[$h] ,'edit'])}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button></td>
+                        <td><a style="margin-left: 25px;"class="btn btn-default btn-edit" href="{{url('CV',[$CVx[$h] ,'edit'])}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                         @endcan
                     </tr>
                     @else

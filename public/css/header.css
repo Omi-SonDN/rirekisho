@@ -99,11 +99,18 @@
     /*border-left: 1px solid #6a5b91;*/
     margin-bottom: 1px;
 }
-
+.nav li a:hover{
+    background-color: #6a5b91;
+    color: white;
+}
+.nav li a:visited:hover !important;{
+    background-color: #333;
+}
 .nav a:link, .nav a:visited {
     text-decoration: none;
     color: #666699;
     border: 1px solid transparent;
+
 }
 
 .navbar {

@@ -30,6 +30,7 @@ class CV extends Model
         'github',
         'linkedin',
         'Active',
+        'attach'
     ];
 
     protected $appends = ['age'];
