@@ -126,4 +126,3 @@ Route::post('emails/sendEmail1', [
     'as' => 'emails.sendEmail1',
     'uses' => 'EmailsController@sendEmail1',
 ]);
-

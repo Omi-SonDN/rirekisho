@@ -36,16 +36,16 @@ class CVController extends Controller
             $s_name = '';
         }
 
-        if ($request->has('apply_to') ) {
-            $apply_to = (int)$request->get('apply_to');
+        if ($request->has('positions') ) {
+            $positions = (int)$request->get('positions');
         }else {
-            $apply_to = null;
+            $positions = null;
         }
 
         if ($request->has('status') ) {
             $status = (int)$request->get('status');
         }else {
-            $status = null;
+            $status = 1;
         }
 
         if ($request->has('data-field') ) {
@@ -73,7 +73,7 @@ class CVController extends Controller
             $_page = 1;
         }
 
-        list($CVs, $_Position, $get_paging)= $this->paginationCV($s_name, $apply_to, $status, $_field, $_sort, $_page, $_numpage);
+        list($CVs, $_Position, $get_paging)= $this->paginationCV($s_name, $positions, $status, $_field, $_sort, $_page, $_numpage);
         $count = count($CVs);
 
 
@@ -139,9 +139,6 @@ class CVController extends Controller
         $result = $in->sortBy(function($item,$key){return $item->created_at;})->groupBy(function($item,$key){
             return $item->created_at;
         });
-        dd($result->groupBy(function($item,$key){
-            return $item->created_at;
-        }));
         return view('xCV.resort', compact('CVs'),['result'=>$result,'startdate'=>trim($request->startdate),'enddate'=>trim($request->enddate)]);
     }
     public function show($id)
@@ -213,6 +210,12 @@ class CVController extends Controller
             $cv->save();
             exit();
         }
+        if ($request->get('apply_to')){
+            $cv->apply_to = $request->get('apply_to');
+            $cv->positions = \App\Positions::find($cv->apply_to)->name;
+            $cv->save();
+            exit();
+        }
         if ($request->hasFile('attach')) {
             $file = $request->file('attach');
             if( $file->getClientOriginalExtension() != 'pdf'){
@@ -232,6 +235,7 @@ class CVController extends Controller
             //$cv->attach = $attach;
             $file->move(public_path() . '/files/', $attach);
             $cv->attach = 'public/files/'. $attach;
+            $cv->save();
             //echo url('files/'. $attach);
             exit();
         }
@@ -286,15 +290,27 @@ class CVController extends Controller
         }
 
         $CV = CV::findorfail($id);
-        if ($request->has('_potions')) {
-            $CV->apply_to = $request->input('_potions');
-            $CV->update();
-            return 'true';
-          //return \Response::json(array('url'=> \URL::previous()));
+        // if ($request->has('_potions')) {
+        //     $CV->apply_to = $request->input('_potions');
+        //     $CV->update();
+        //     return 'true';
+        //   //return \Response::json(array('url'=> \URL::previous()));
 
-        }
-        $CV->status = $request->status;
+        // }
+        $CV->Status = $request->status;
         $CV->update();
+        //get allow send mail info;
+        $status = \App\Status::find($request->status);
+        $CV->allow_sendmail = $status->allow_sendmail;
+        //Get next status
+        $next_status = array();
+        foreach(\App\Status::all() as $status ){
+            if( in_array($request->status,$status->previous_status) ){
+                $next_status[] = $status;
+            }
+        }
+        $CV->next_status = $next_status;
+        
 
         return \Illuminate\Support\Facades\Response::json($CV);
     }

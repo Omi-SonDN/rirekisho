@@ -94,16 +94,17 @@
     color: #666699;
     margin-bottom: 1px;
 }
-
+cho
 .nav li {
     /*border-left: 1px solid #6a5b91;*/
     margin-bottom: 1px;
 }
-.nav li a:hover{
+.nav li a:hover, .nav li.active a{
     background-color: #6a5b91;
     color: white;
 }
-.nav li a:visited:hover !important;{
+
+.nav li a:hover !important;{
     background-color: #333;
 }
 .nav a:link, .nav a:visited {

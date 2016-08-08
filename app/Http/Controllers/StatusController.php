@@ -54,6 +54,11 @@ class StatusController extends Controller
         global $request;
         $status = new Status();
         $status->status = $request->status;
+        $status->prev_status = implode(',', $request->prev_status);
+        if(count($request->infor))
+            $status->infor = implode(',', $request->infor);
+        $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
+        $status->email_template = $request->email_template;
 
         $status->save();
         return redirect()
@@ -83,7 +88,11 @@ class StatusController extends Controller
 
         $status = new Status();
         $status->status = $request->status;
-
+        $status->prev_status = implode(',', $request->prev_status);
+        if(count($request->infor))
+            $status->infor = implode(',', $request->infor);
+        $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
+        $status->email_template = $request->email_template;
         $status->save();
 
 //        Session::flash('flash_message', 'status has been saved.');
@@ -135,11 +144,19 @@ class StatusController extends Controller
             $this->validate($request, [
                 'status' => 'required|max:255|unique:status',
             ]);
-
-            $status->status = $request->status;
         }
+        
+        $status->status = $request->status;
+        $status->prev_status = implode(',', $request->prev_status);
+        if(count($request->infor))
+            $status->infor = implode(',', $request->infor);
+        else
+            $status->infor = null;
+        $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
+        $status->email_template = $request->email_template;
 
-        $status->update($request->all());
+        // $status->update($request->all());
+        $status->save();
         return redirect()
             ->route('status::list')
             ->with(
@@ -165,7 +182,12 @@ class StatusController extends Controller
         }
         //Status::destroy($id);
         $status = Status::findorfail($id);
-
+        foreach( \App\CV::all() as $cv){
+            if( $cv->Status==$id){
+                $cv->Status = 1;
+                $cv->save();
+            }
+        }
         $status->delete($id);
 
 //        Session::flash('flash_message', 'status has been deleted.');

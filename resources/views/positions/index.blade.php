@@ -26,7 +26,7 @@
                             {{ $position->name }}
                         </td>
                         <td>
-                            {{ $position->ActPosition }}
+                            {!! $position->ActPosition !!}
                         </td>
                         <td>
                             {{$position->description}}

@@ -17,6 +17,7 @@
                 @endforeach
 
             </select>
+
             <select id = "statusSearch" name="Status" onchange="adSearchChange('', '', '', this)">
                 <option value="">--Status--</option>
                 @can('Visitor')

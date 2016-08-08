@@ -1,14 +1,16 @@
 $(document).ready(function () {
+        tinymce.init({
+            selector: '.tinymce-textarea',
+            plugins: "link",
+        });
+        if( $('#prev_status').length > 0 )
+            $('#prev_status').select2();
+        if( $('#infor').length > 0 )
+            $('#infor').select2();
         /****** dateitme *******/
         $('.date-picker').datepicker();
         $('#stardate').datepicker();
         $('#enddate').datepicker();
-        // $('#stardate').change(function(){
-        //     $('#enddate').datepicker({startDate:$('#stardate').val()});
-        // });
-        // $('#enddate').change(function(){
-        //     $('#stardate').datepicker({endDate:$('#enddate').val()});
-        // });
         $("cv-forms").each(function () {
             $(this).data("validator").settings.success = false;
         });
@@ -126,6 +128,28 @@ $(document).ready(function () {
                 }
             });
         };
+        
+        $('.apply_to').click(function () {
+            var key = $(this).attr('id');
+            var name = $(this).attr("name");
+            var sucess_status = $("#s_" + name + "_" + key);
+            sucess_status.hide();
+        }).change(function () {
+            var key = $(this).attr('id');
+            var name = $(this).attr("name");
+            var sucess_status = $("#s_" + name + "_" + key);
+            if (validator.element($(this)))
+                $.ajax({
+                    type: "PUT",
+                    url: "/CV/" + key,
+                    data: $(this).serialize(),
+                    cache: false,
+                    success: function (html) {
+                        sucess_status.show(20);
+                    }
+                });
+
+        });
 
         $('input[type=file]').change(function (e){
             e.preventDefault();

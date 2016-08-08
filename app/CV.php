@@ -62,7 +62,7 @@ class CV extends Model
 
     public function position()
     {
-        return $this->belongsTo('App\Positions', 'apply_to', 'id');
+        return $this->hasOne('App\Positions', 'id', 'apply_to');
     }
     public function status()
     {
@@ -93,12 +93,12 @@ class CV extends Model
         }
     }
 
-    public function getPositionAttribute()
-    {
-        $position = $this->positions;
-        return $position;
+    // public function getPositionAttribute()
+    // {
+    //     $position = $this->positions;
+    //     return $position;
 
-    }
+    // }
 
     public function getBDayAttribute()
     {

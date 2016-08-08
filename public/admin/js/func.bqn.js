@@ -326,7 +326,7 @@ $(document).ready(function ($){
         loop =0;
     });
 
-    $('.checkAll').live( 'click', function() {
+    $('.checkAll').on( 'click', function() {
         loop = 0
         if($(this).is(':checked')){
             is_check =true;
@@ -350,7 +350,7 @@ $(document).ready(function ($){
         });
     });
 
-    $('.cb-element' ).live( 'click', function() {
+    $('.cb-element' ).on( 'click', function() {
         var total = 0;
         $('tbody tr input.cb-element').each( function () {
             if (($(this).closest('.data').css('display')) != 'none') {

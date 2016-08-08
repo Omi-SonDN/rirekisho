@@ -15,7 +15,6 @@
         </thead>
         @include('includes.record-edit', array('field' => 'Work','type' => 1 ))
     </table>
-
 </li>
 <li>
     <div>
@@ -41,18 +40,17 @@
 </li>
 <li class="">
     <div class=" float_left" style="width: 100%;">
-        <label class="label" for="positions">Vị trí ứng tuyển</label>
+        <label class="label" for="apply_to">Vị trí ứng tuyển</label>
         <div class="input">
-            <label class="icon-left" for="positions">
-                <i class="fa fa-mail-forward "></i>
-            </label>
             <!--change editable="Rirekisho" name=field_name  -->
-            <input id="{{$key}}" editable="Rirekisho" style="width: 90%;" name="positions"
-                   type="text" class="input-left float_left" placeholder="Vị trí ứng tuyển"
-                   value="{{ $CV->positions }}">
-            <!-- s_field_name_$key-->
-            <div class="success-status float_left" id="s_positions_{{$key}}" style="display:none;">
-                <i class="fa fa-pencil-square-o"></i>
+            <div class="">
+                <?php $positions = \App\Positions::where('active',1)->get(); ?>
+                <select id="{{$key}}" class="float_left apply_to" editable="Rirekisho"  name="apply_to" value="" style="height: 25px">
+                    <option>Vị trí tuyển dụng</option>
+                    @foreach( $positions as $position )
+                        <option value="{{$position->id}}" @if($position->id == $CV->apply_to) selected @endif>{{$position->name}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
     </div>

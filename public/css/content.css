@@ -126,7 +126,9 @@ a.normal_color {
 .float_right {
     float: right;
 }
-
+.form-horizontal .float_right{
+    margin: 10px 0px;
+}
 .float_left {
     float: left;
 }
@@ -135,7 +137,6 @@ a.normal_color {
     list-style: none;
     float: left;
 }
-
 .margin_top_10 {
     margin: 10px 15px 0 0;
 }

@@ -20,8 +20,8 @@ class Positions extends Model
     public function getActPositionAttribute()
     {
         if ($this->active == 0) {
-            return "Chưa kích hoạt";
-        } else return "Đã kích hoạt";
+            return "<span class='label label-default'>Chưa kích hoạt</span>";
+        } else return "<span class='label label-success'>Đã kích hoạt</span>";
     }
     //change cv.apply_to before delete position
     public static function boot()
