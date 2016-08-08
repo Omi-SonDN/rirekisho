@@ -5,9 +5,20 @@
         </td>
     </tr>
 @else
+
+    {{--@foreach($CVs as $key => $CV)--}}
+        {{--<tr class="data{{++$key}}">--}}
+            {{--<td class="rank">{{$key}}</td>--}}
+
+    <?php //$CVx = $CVs->reject(function ($item) {
+        //return $item->Name == null || $item->Age == "0000-00-00";
+    //});
+        $i = 0;
+    ?>
+
     @foreach($CVs as $key => $CV)
-        <tr class="data{{++$key}}">
-            <td class="rank">{{$key}}</td>
+        <tr class="data{{$key}}">
+            <td class="rank" style="text-align: center">{{++$i }}</td>
             <td class="image">
                 <div style=" position: relative;height: 100px;width: 100px; cursor: progress" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
                     <?php $image = $CV->User->image;?>
@@ -108,8 +119,8 @@
                 <div class="childforum forumbit_post">
                     <div class="forumrow table topx-tip-info">
                         <div> • <strong>Tiêu đề:</strong> <a href="{{\URL('CV.show', [$CV->hash])}}" title="{{ucfirst($CV->name_cv)}}">{{ucfirst($CV->name_cv)}}</a></div>
-                        <div> • <strong>Vị trí tuyển dụng:</strong> <a href="">{{ucfirst('rtllklllll')}}</a></div>
-                        <div> • <strong>Kết quả:</strong> <a href="">{{ucfirst('rtllklllll')}}</a></div>
+                        <div> • <strong>Vị trí tuyển dụng:</strong> <a href="">{{ucfirst('rtllk77777777llll')}}</a></div>
+                        <div> • <strong>Kết quả:</strong> <a href="">{{ucfirst('rtllkl7777777llll')}}</a></div>
                         <div> • <strong>Nguyện vọng:</strong> {!! $CV->Self_intro !!}</div>
                         <hr>
                         <div class="col-lg-3"> • <strong>Thể loại:</strong> {{ucfirst($CV->cvType)}}</div>

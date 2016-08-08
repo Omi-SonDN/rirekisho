@@ -66,6 +66,7 @@
             <ul class="nav collapse" id="submenu-sa">
                 <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                 <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>
+                <li><a href="{{\URL('CV/statistic')}}">Thông kê</a></li>
             </ul>
         </li>
         @endcan

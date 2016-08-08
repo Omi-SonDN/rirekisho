@@ -24,9 +24,14 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
 
     Route::get('CV', 'CVController@index');
     Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
+
     Route::post('CV/adSearch', 'CVController@adSearch');
     Route::get('CV/resort','CVController@resort1');
     Route::post('CV/resort','CVController@resort');
+
+    Route::get('CV/statistic', 'CVController@statistic');
+    Route::post('CV/statisticSearch', 'CVController@statisticSearch');
+    Route::post('CV/statisticStatus', 'CVController@statisticStatus');
 });
 
 Route::group(['middleware' => ['auth']], function () {
@@ -141,8 +146,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 });
-
-
 
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

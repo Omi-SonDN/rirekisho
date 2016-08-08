@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+        $('#startDate').datepicker();
+        $('#endDate').datepicker();
+        $("cv-forms").each(function () {
+            $(this).data("validator").settings.success = false;
+        });
+        /*************************fix navbar*************************************/
+
     tinymce.init({
         selector: '.tinymce-textarea',
         plugins: "link"
@@ -685,7 +692,7 @@ function adSearchChange(per_page, s_name, pos, status, thead) {
         });
         if (!dataSort || !dataField || (dataSort == 'undefined') || (dataField == 'undefined')) {
             dataSort = 'asc';
-            dataField = 'name';
+            dataField = 'id';
 
             $('.dataTable th').each(function () {
                 if ($(this).attr('data-field') == 'name') {
@@ -843,6 +850,7 @@ function upActNotee(is, act, note) {
     }
 }
 
+
 // get home
 function returnHome() {
     window.location.href = '/';
@@ -904,4 +912,46 @@ function getChangeLiveCv (element, id)
         }
     });
 }
+
+$('#searchStatistics').on('click', function(){
+    $key_search = $('#positionsSearch').val();    
+    $.ajax({
+        type: "POST",
+        url: "/CV/statisticSearch",
+        data : {
+            'startDate' : $('#startDate').val(),
+            'endDate' : $('#endDate').val(),
+            'key_search' : $key_search,
+        },
+        cache: false,
+        success: function (data) {
+            $('#container2').html(data);
+        }
+    });
+    
+});
+
+$('#status_statistic li a').on('click', function(){
+    var $ox = $(this).attr('status');
+
+    $('#status_statistic li.active').removeClass();
+    $(this).parent().addClass('active');
+
+    if($ox == 'position'){
+        $('.search_po_sa').show();
+    } else {
+        $('.search_po_sa').hide();
+    }
+    var dataString = "ox=" + $ox;
+    $.ajax({
+        type: "POST",
+        url: "/CV/statisticStatus",
+        data : dataString,
+        cache: false,
+        success: function (data) {
+            $('#container2').html(data);
+        }
+    });
+});
+
 

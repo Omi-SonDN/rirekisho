@@ -16,7 +16,7 @@ $(document).ready(function () {
             $('#error-frmPositions').html('');
 
             $('#myModal').modal('show');
-        });
+        }); 
     });
 
     //display modal form for creating new position
