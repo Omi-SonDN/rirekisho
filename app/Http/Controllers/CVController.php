@@ -45,7 +45,7 @@ class CVController extends Controller
         if ($request->has('status') ) {
             $status = (int)$request->get('status');
         }else {
-            $status = 1;
+            $status = '';
         }
 
         if ($request->has('data-field') ) {

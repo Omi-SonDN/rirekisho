@@ -225,7 +225,7 @@ class EmailsController extends Controller
             $rules['date'] = 'required|after:now';
         if( in_array('Time',$status->info))
             $rules['time'] = 'required';
-        if( in_array('Adddress',$status->info))
+        if( in_array('Address',$status->info))
             $rules['address'] = 'required';
 
         $this->validate($request, $rules);
@@ -242,8 +242,11 @@ class EmailsController extends Controller
 
         $message = str_replace('[First_name]', $data['cv']->First_name, $message);
         $message = str_replace('[Positions]', ($data['cv']->position)?$data['cv']->position->name:'' , $message);
+        if( in_array('Time',$status->info))
         $message = str_replace('[Time]', $request->time, $message);
+        if( in_array('Date',$status->info))
         $message = str_replace('[Date]', Carbon::createFromFormat('Y-m-d',$request->date)->format('d/m/Y'), $message);
+        if( in_array('Address',$status->info))
         $message = str_replace('[Address]', $request->address, $message);
         $data['email_content'] = $message;
         if (isset($request->attach[0])) {
