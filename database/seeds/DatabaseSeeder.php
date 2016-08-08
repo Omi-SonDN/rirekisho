@@ -10,26 +10,17 @@ class DatabaseSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    // buoc 1...
-//    public function run()
-//    {
-//        Model::unguard();
-//        $this->call(UsersTableSeeder::class);
-//        $this->call(CVTableSeeder::class);
-//        $this->call(RecordTableSeeder::class);
-//        $this->call(StatusTableSeeder::class);
-//        $this->call(PositionsTableSeeder::class);
-//        Model::reguard();
-//    }
-
-      // buoc 2
     public function run()
     {
         Model::unguard();
+        $this->call(UsersTableSeeder::class);
+        $this->call(StatusTableSeeder::class);
+        $this->call(PositionsTableSeeder::class);
+        $this->call(CVTableSeeder::class);
+        $this->call(RecordTableSeeder::class);
         $this->call(SkillSeeder::class);
         Model::reguard();
     }
-
 }
 
 class RecordTableSeeder extends Seeder
@@ -85,59 +76,26 @@ class CVTableSeeder extends Seeder
         $faker1 = Faker::create();
         $faker2 = Faker::create('ja_JP');
         $users = DB::table('users')->where('role', 0)->get();
-        $visitor = DB::table('users')->where('role', 1)->get();
-        $admin = DB::table('users')->where('role', 2)->first();
-        $superadmin = DB::table('users')->where('role', 3)->first();
-        //admin
-        DB::table('cvs')->insert([
-            'First_name' => 'Linh',
-            'Last_name' => 'Dang',
-            'Gender' => 0,
-            'Address' => $faker->city,
-            'user_id' => $admin->id,
-            'Phone' => $faker->phoneNumber,
-            'Birth_date' => "1994-11-02",
-            'Self_intro' => $faker1->paragraph($nbSentences = 3, $variableNbSentences = true),
-            'Status' => 1,
-        ]);
-        //superadmin
-        DB::table('cvs')->insert([
-            'First_name' => 'Bui',
-            'Last_name' => 'Ngoc',
-            'Gender' => 1,
-            'Address' => $faker->city,
-            'user_id' => $superadmin->id,
-            'Phone' => $faker->phoneNumber,
-            'Birth_date' => "1994-11-02",
-            'Self_intro' => $faker1->paragraph($nbSentences = 3, $variableNbSentences = true),
-            'Status' => 1,
-        ]);
+        $abc1 = DB::table('positions')->get();
+        $abc2 = DB::table('status')->get();
+        $key_positions = array_keys($abc1);
+        $key_status = array_keys($abc2);
+
         foreach ($users as $v) {
             DB::table('cvs')->insert([
-                'First_name' => $faker->middleName.' '.$faker->firstName,
-                'Last_name' => $faker->lastName,
-                'Gender' => 1,
-                'Address' => $faker->city,
-                'Phone' => $faker->phoneNumber,
+                //'First_name' => $faker->middleName.' '.$faker->firstName,
+                //'Last_name' => $faker->lastName,
+                //'Gender' => 1,
+                //'Address' => $faker->city,
+                'name_cv' => $faker->Name,
                 'user_id' => $v->id,
-                'Birth_date' => $faker->date($format = 'Y-m-d', $max = '1995-11-03'),
-                'Self_intro' => $faker2->realText($maxNbChars = 200),
+                'created_at' => $faker->date($format = 'Y-m-d', $max = '1995-11-03'),
+                'apply_to' => array_rand($key_positions),
+                'Status' => array_rand($key_status),
                 'Status' => 1,
-                //'active' => 1,
-            ]);
-        }
-        foreach ($visitor as $v) {
-            DB::table('cvs')->insert([
-                'First_name' => $faker->middleName.' '.$faker->firstName,
-                'Last_name' => $faker->lastName,
-                'Gender' => 1,
-                'Address' => $faker->city,
-                'Phone' => $faker->phoneNumber,
-                'user_id' => $v->id,
-                'Birth_date' => $faker->date($format = 'Y-m-d', $max = '1995-11-03'),
-                'Self_intro' => $faker2->realText($maxNbChars = 200),
-                'Status' => 1,
-                //'active' => 1,
+                'type_cv' => rand(0,1),
+                'live' => rand(0,1),
+                'active' => rand(0,1),
             ]);
         }
     }
@@ -148,14 +106,21 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->delete();
-        $faker = Faker::create();
-        $counter = range(1, 25);
+        $faker = Faker::create('vi_VN');
+        $counter = range(1, 15);
 
         DB::table('users')->insert([
             'name' => 'BuiNgoc[superadmin]',
             'email' => 'superadmin@123.com',
             'password' => bcrypt('secret'),
             'role' => 3,
+            'First_name' => 'Bui',
+            'Last_name' => 'Ngoc',
+            'Gender' => 1,
+            'Address' => $faker->city,
+            'Phone' => $faker->phoneNumber,
+            'Birth_date' => "1994-11-02",
+            'Self_intro' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         ]);
 
         DB::table('users')->insert([
@@ -163,27 +128,40 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@123.com',
             'password' => bcrypt('secret'),
             'role' => 2,
+            'First_name' => 'Bui',
+            'Last_name' => 'Admin',
+            'Gender' => 1,
+            'Address' => $faker->city,
+            'Phone' => $faker->phoneNumber,
+            'Birth_date' => "1993-11-02",
+            'Self_intro' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         ]);
         DB::table('users')->insert([
             'name' => 'Linh Dan[applicant]',
             'email' => 'applicant@123.com',
             'password' => bcrypt('secret'),
             'role' => 0,
+            'First_name' => 'Ung',
+            'Last_name' => 'Vien',
+            'Gender' => 1,
+            'Address' => $faker->city,
+            'Phone' => $faker->phoneNumber,
+            'Birth_date' => "1992-11-02",
+            'Self_intro' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         ]);
         DB::table('users')->insert([
             'name' => 'Linh Dang[visitor]',
             'email' => 'visitor@123.com',
             'password' => bcrypt('secret'),
             'role' => 1,
+            'First_name' => 'Kiem',
+            'Last_name' => 'Duyet',
+            'Gender' => rand(0,1),
+            'Address' => $faker->city,
+            'Phone' => $faker->phoneNumber,
+            'Birth_date' => "1991-11-02",
+            'Self_intro' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         ]);
-
-        foreach ($counter as $v) {
-            DB::table('users')->insert([
-                'name' => $faker->name,
-                'email' => $faker->safeEmail,
-                'password' => bcrypt('secret'),
-            ]);
-        }
 
         foreach ($counter as $v) {
             DB::table('users')->insert([
@@ -191,6 +169,29 @@ class UsersTableSeeder extends Seeder
                 'email' => $faker->safeEmail,
                 'password' => bcrypt('secret'),
                 'role' => 0,
+                'First_name' => $faker->middleName.' '.$faker->firstName,
+                'Last_name' => $faker->lastName,
+                'Gender' => rand(0,1),
+                'Address' => $faker->city,
+                'Phone' => $faker->phoneNumber,
+                'Birth_date' => $faker->date($format = 'Y-m-d', $max = '1995-11-03'),
+                'Self_intro' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+            ]);
+        }
+
+        for ($i = 1; $i < 7; $i++) {
+            DB::table('users')->insert([
+                'name' => $faker->name,
+                'email' => $faker->safeEmail,
+                'password' => bcrypt('secret'),
+                'role' => 1,
+                'First_name' => $faker->middleName.' '.$faker->firstName,
+                'Last_name' => $faker->lastName,
+                'Gender' => rand(0,1),
+                'Address' => $faker->city,
+                'Phone' => $faker->phoneNumber,
+                'Birth_date' => $faker->date($format = 'Y-m-d', $max = '1995-11-03'),
+                'Self_intro' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
             ]);
         }
     }
@@ -233,7 +234,6 @@ class StatusTableSeeder extends Seeder
             29 =>  array('id' => 29,'status' => 'Phỏng vấn lại'),
             30 =>  array('id' => 30,'status' => 'Đã phỏng vấn lần 2'),
             31 =>  array('id' => 31,'status' => 'Không tới phỏng vấn lần 2'),
-            32 =>  array('id' => 32,'status' => 'Kích hoạt CV')
         );
         if (count($is_check) == 0) {
             DB::table('status')->insert($arr_status);
@@ -248,7 +248,7 @@ class PositionsTableSeeder extends Seeder
         for ($i = 1; $i < 6; $i++) {
             DB::table('positions')->insert([
                 'name' => 'Ví trí ' . $i,
-                'active' => '1',
+                'active' => rand(0,1),
                 'description' => 'Ví trí ' . $i,
             ]);
         }

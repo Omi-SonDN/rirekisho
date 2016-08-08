@@ -113,6 +113,11 @@
 
 }
 
+.nav li.active a{
+    background-color: #6a5b91;
+    color: white;
+}
+
 .navbar {
     border: 0px solid transparent; /*override bootstrap*/
 }

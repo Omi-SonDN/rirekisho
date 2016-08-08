@@ -35,6 +35,7 @@ $.tablesorter.customPagerControls = function(settings) {
         $table = $(options.table),
         $pager = $(options.pager);
 
+
     $table
         .on('pagerInitialized pagerComplete', function (e, c) {
             var indx,
@@ -44,6 +45,7 @@ $.tablesorter.customPagerControls = function(settings) {
                 cur = p.page + 1,
                 start = cur > 1 ? (p.filteredPages - cur < options.aroundCurrent ? -(options.aroundCurrent + 1) + (p.filteredPages - cur) : -options.aroundCurrent) : 0,
                 end = cur < options.aroundCurrent + 1 ? options.aroundCurrent + 3 - cur : options.aroundCurrent + 1;
+
             for (indx = start; indx < end; indx++) {
                 if (cur + indx >= 1 && cur + indx < p.filteredPages) {
                     pageArray.push(cur + indx);

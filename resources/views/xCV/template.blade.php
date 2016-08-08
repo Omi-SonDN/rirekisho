@@ -72,8 +72,8 @@
 
 </div>
 <!---  jQuery-->
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>
-{{--<script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>--}}
+{{--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>--}}
+<script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
 <!---  bootstrap-->
 {{--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>--}}
 <script type="text/javascript" src="{{ URL::asset('/admin/js/3.3.5-bootstrap.min.js')}}"></script>
@@ -81,13 +81,16 @@
 <script type="text/javascript" src="{{ URL::asset('/admin/js/1.15.0-jquery.validate.js')}}"></script>
 {{--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" defer></script>--}}
 <script type="text/javascript" src="{{ URL::asset('/admin/js/1.11.4-jquery-ui.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+<script type="text/javascript" src="{{asset('/admin/js/wz_tooltip.js')}}"></script>
 
 <script src="{{ URL::asset('js/include.js')}}"></script>
 <script src="{{ asset('js/CV_changeStatus.js') }}"></script>
 <script src="{{ asset('js/email_send.js') }}"></script>
 
+
 <!-- DataTables JavaScript -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+{{--<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>--}}
 {{--<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/js/jquery-latest.js')}}"></script>--}}
 <script type="text/javascript"
         src="{{asset('/admin/bower_components/datatables-sort/js/jquery.tablesorter.min.js')}}"></script>

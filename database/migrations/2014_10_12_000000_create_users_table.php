@@ -17,8 +17,20 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('role')->default(0);
             $table->string('password', 60);
             $table->rememberToken();
-            $table->timestamps();
             $table->string('note');
+            $table->tinyInteger('active')->unsigned();
+            $table->string('image')->nullable();
+            $table->char('First_name');
+            $table->char('Last_name');
+            $table->char('Furigana_name');
+            $table->date('Birth_date');
+            $table->tinyInteger('Gender');
+            $table->text('Address');
+            $table->text('Contact_information');
+            $table->char('Phone');
+            $table->text('Self_intro');
+            $table->tinyInteger('Marriage');
+            $table->timestamps();
         });
     }
 

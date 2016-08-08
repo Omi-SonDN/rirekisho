@@ -1,136 +1,130 @@
 $(document).ready(function () {
-        /****** dateitme *******/
-        $('.date-picker').datepicker();
-        $('#stardate').datepicker();
-        $('#enddate').datepicker();
-        // $('#stardate').change(function(){
-        //     $('#enddate').datepicker({startDate:$('#stardate').val()});
-        // });
-        // $('#enddate').change(function(){
-        //     $('#stardate').datepicker({endDate:$('#enddate').val()});
-        // });
-        $("cv-forms").each(function () {
-            $(this).data("validator").settings.success = false;
-        });
-        /*************************fix navbar*************************************/
 
-        var nav = $('.navbar');
-        var num = $('body').offset().top;
-        $(window).bind('scroll', function () {
-            if ($(this).scrollTop() > num) {
-                nav.addClass("nav_fixed");
-            } else {
-                num = $('body').offset().top;
-                nav.removeClass("nav_fixed");
-            }
-        });
+    $("cv-forms").each(function () {
+        $(this).data("validator").settings.success = false;
+    });
+    /*************************fix navbar*************************************/
 
+    var nav = $('.navbar');
+    var num = $('body').offset().top;
+    $(window).bind('scroll', function () {
+        if ($(this).scrollTop() > num) {
+            nav.addClass("nav_fixed");
+        } else {
+            num = $('body').offset().top;
+            nav.removeClass("nav_fixed");
+        }
+    });
+
+    $(".burger-effect").bind("click", openNav).removeClass("active");
+
+    //$(".burger-effect").bind("click", closeNav).addClass("active");
+    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "220px";
+        document.getElementById("push").style.marginLeft = "220px";
+        $(".burger-effect").bind("click", closeNav).addClass("active");
+    }
+
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("push").style.marginLeft = "0";
         $(".burger-effect").bind("click", openNav).removeClass("active");
+    }
 
-        //$(".burger-effect").bind("click", closeNav).addClass("active");
-        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "220px";
-            document.getElementById("push").style.marginLeft = "220px";
-            $(".burger-effect").bind("click", closeNav).addClass("active");
+
+    /*
+     var notify = $('[notification=true]'), timer;
+     $(document).ajaxStart(function () {
+     timer && clearTimeout(timer);
+     timer = setTimeout(function () {
+     //notify.html("Loading...");
+     notify.show();
+     }, 10000);
+     });
+     $(document).ajaxStop(function () {
+     clearTimeout(timer);
+     notify.hide();
+     });
+     //noinspection JSUnresolvedFunction
+     $(document).ajaxComplete(function (status, text) {
+     });
+
+     /*******************slide toggle *************************/
+    var slideHeader = $('[slide-header=true]');
+    slideHeader.next().hide();
+    slideHeader.first().next().show();
+    slideHeader.click(function () {
+        var content = $(this).next();
+        if (!(content.is(":visible"))) {   //no - its hidden - slide all the other open tabs to hide 
+            $('[slide-toggle=true]').hide();
+            // open up the content needed 
+            content.slideToggle(800);
         }
-
-        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("push").style.marginLeft = "0";
-            $(".burger-effect").bind("click", openNav).removeClass("active");
-        }
-
-
-        /*
-         var notify = $('[notification=true]'), timer;
-         $(document).ajaxStart(function () {
-         timer && clearTimeout(timer);
-         timer = setTimeout(function () {
-         //notify.html("Loading...");
-         notify.show();
-         }, 10000);
-         });
-         $(document).ajaxStop(function () {
-         clearTimeout(timer);
-         notify.hide();
-         });
-         //noinspection JSUnresolvedFunction
-         $(document).ajaxComplete(function (status, text) {
-         });
-         /*******************slide toggle *************************/
-        var slideHeader = $('[slide-header=true]');
-        slideHeader.next().hide();
-        slideHeader.first().next().show();
-        slideHeader.click(function () {
-            var content = $(this).next();
-            if (!(content.is(":visible"))) {   //no - its hidden - slide all the other open tabs to hide 
-                $('[slide-toggle=true]').hide();
-                // open up the content needed 
-                content.slideToggle(800);
-            }
-        });
-        /***************Auto-submit*******************************/
-            //TODO: type=text
-        $("[editable=Rirekisho]").click(function () {
-            var key = $(this).attr('id');
-            var name = $(this).attr("name");
-            var sucess_status = $("#s_" + name + "_" + key);
-            sucess_status.hide();
-        }).change(function () {
-            var key = $(this).attr('id');
-            var name = $(this).attr("name");
-            var sucess_status = $("#s_" + name + "_" + key);
-            if (validator.element($(this)))
-                $.ajax({
-                    type: "PUT",
-                    url: "/CV/" + key,
-                    data: $(this).serialize(),
-                    cache: false,
-                    success: function (html) {
-                        sucess_status.show(20);
-                    }
-                });
-
-        });
-        /******************radio button********************/
-        $('input[type=radio][editable=Rirekisho]').change(function () {
-            var name = $(this).attr("name");
-            var dataString = name + '=' + this.value;
+    });
+    /***************Auto-submit*******************************/
+        //TODO: type=text
+    $("[editable=Rirekisho]").click(function () {
+        var key = $(this).attr('id');
+        var name = $(this).attr("name");
+        var sucess_status = $("#s_" + name + "_" + key);
+        sucess_status.hide();
+    }).change(function () {
+        var key = $(this).attr('id');
+        var name = $(this).attr("name");
+        var sucess_status = $("#s_" + name + "_" + key);
+        if (validator.element($(this)))
             $.ajax({
                 type: "PUT",
-                url: "/CV/" + $(this).attr('id'),
-                data: dataString,
+                url: "/CV/" + key,
+                data: $(this).serialize(),
+                cache: false,
                 success: function (html) {
+                    sucess_status.show(20);
                 }
             });
-        });
 
-        $('input[type=checkbox][editable=Rirekisho]').change(switchInput);
-        function switchInput() {
-            var name = $(this).attr("name");
-            var active = 0;
-            if ($(this).is(":checked")) {
-                active = 1;
+    });
+    /******************radio button********************/
+    $('input[type=radio][editable=Rirekisho]').change(function () {
+        var name = $(this).attr("name");
+        var dataString = name + '=' + this.value;
+        $.ajax({
+            type: "PUT",
+            url: "/CV/" + $(this).attr('id'),
+            data: dataString,
+            success: function (html) {
             }
-            $.ajax({
-                type: "PUT",
-                url: "/CV/" + $(this).attr('id'),
-                data: name + "=" + active,
-                success: function (html) {
-                }
-            });
-        };
+        });
+    });
 
-        $('input[type=file]').change(function (e){
-            e.preventDefault();
-            var self = $(this);
-            var data = new FormData();
-            data.append('_token', $('input[name=_token]').val());
-            data.append('attach', $('input[type=file]')[0].files[0]);
-            data.append('_method','PUT');
+    $('input[type=checkbox][editable=Rirekisho]').change(switchInput);
+    function switchInput() {
+        var name = $(this).attr("name");
+        var active = 0;
+        if ($(this).is(":checked")) {
+            active = 1;
+        }
+        $.ajax({
+            type: "PUT",
+            url: "/CV/" + $(this).attr('id'),
+            data: name + "=" + active,
+            success: function (html) {
+            }
+        });
+    };
 
+
+    $('input[type=file]').change(function (e) {
+        e.preventDefault();
+        var self = $(this);
+        var data = new FormData();
+        data.append('_token', $('input[name=_token]').val());
+        data.append('attach', $('input[type=file]')[0].files[0]);
+        data.append('_method', 'PUT');
+
+        if ($('input[type=file]').val()) {
             $.ajax({
                 type: "POST",
                 url: "/CV/" + $(this).attr('id'),
@@ -139,382 +133,390 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 success: function (data, html) {
-                    if( data != 'false')
-                    self.closest('.input').append('<a href="'+data+'">File</a>');
-                    else {
+                    if (data['is_ck'] != 'false') {
+                        $('.hasfile').html('<span class="abc">Hiên tại bạn đã có CV trên hệ thống <a href="/" target="_blank" title="Ominext JSC">Ominext JSC: ' +
+                        ' <a target="_blank" href="'+ data['url'] +'" download="'+ data['namefile'] +'" title="File CV: '+ data['namefile'] +'">'+ data['namefile'] +'</a> ' +
+                        ' <iframe src="'+ data['url'] +'" class="col-lg-12 mt8" style="margin-bottom: 30px; height:500px;" frameborder="0"></iframe>');
+
+                        $('a.appendflie').replaceWith('<a target="_blank" href="'+ data['url'] +'" class="btn appendflie"><i class="fa fa-cloud-download icon_24 icon-24"></i> TẢI VỀ</a>');
+                    } else {
                         alert("File must be pdf type!");
                     }
                 }
             });
-            return false;
-        });
-        /*****************show CV*************************/
-        $(".clickable li.p-link a").on('click', function () {
-            var name = $(this).attr('name');//gets element
-            $(".bd").hide();//hides others
-            $("#" + name).show();//show
-            $("#p-active").removeAttr('id');// removes css
-            $(this).children('i').attr("id", "p-active");
-        });
-        $(".skippable li.p-link a").on('click', function () {
-            var name = $(this).attr('href');
-            $("#p-active").removeAttr('id');
-            $(this).children('i').attr("id", "p-active");
-        });
+            //return false;
+        } else {
+            $(this).attr('value', $(this).val());
+        }
+    });
 
-        /****************bookmark*********************/
-        $("[data-action=bookmark]").bind("click", bookmark);
-        $("[data-action=deleteBookmark]").bind("click", bookmark);
-        function bookmark(e) {
-            var data = {
-                "bookmark-id": $(this).attr('data-bookmark-id')
-            };
-            var star = $('[data-action=bookmark]');
+
+    /*****************show CV*************************/
+    $(".clickable li.p-link a").on('click', function () {
+        var name = $(this).attr('name');//gets element
+        $(".bd").hide();//hides others
+        $("#" + name).show();//show
+        $("#p-active").removeAttr('id');// removes css
+        $(this).children('i').attr("id", "p-active");
+    });
+    $(".skippable li.p-link a").on('click', function () {
+        var name = $(this).attr('href');
+        $("#p-active").removeAttr('id');
+        $(this).children('i').attr("id", "p-active");
+    });
+
+    /****************bookmark*********************/
+    $("[data-action=bookmark]").bind("click", bookmark);
+    $("[data-action=deleteBookmark]").bind("click", bookmark);
+    function bookmark(e) {
+        var data = {
+            "bookmark-id": $(this).attr('data-bookmark-id')
+        };
+        var star = $('[data-action=bookmark]');
+        $.ajax({
+            type: "PUT",
+            url: "/" + "Bookmark/" + $(this).attr('data-bookmark-id'),
+            data: $.param(data),
+            cache: false,
+            success: function (html) {
+                var t = html == "1";
+                if (html == "1") {
+                    star.html("<i class='fa fa-star '></i>");
+                } else
+                    star.html("<i class='fa fa-star-o '></i>");
+                refresh();
+            }
+        });
+    }
+
+    /**************side bar*****************/
+    $("[data-action=reload]")
+        .bind("click", refresh)
+        .hover(handlerIn, handlerOut);
+    function refresh() {
+        $(" #mySidenav").load("/Bookmark" + " #mySidenav" + ">*", function () {
+            $("[data-action=reload]")//spinner
+                .bind("click", refresh)
+                .hover(handlerIn, handlerOut);
+            //$("[data-action=bookmark]").unbind("click", bookmark).bind("click", bookmark);
+            $("[data-action=deleteBookmark]").bind("click", bookmark);
+        });
+    }
+
+    function handlerIn() {
+        $(this).html('<i class=" fa fa-refresh fa-spin" style="color:#659;"></i>');
+    }
+
+    function handlerOut() {
+        $(this).html('<i class=" fa fa-refresh" ></i>');
+    }
+
+    reloadBySeconds();
+    function reloadBySeconds() {
+        var window_focus;
+        $(window).focus(function () {
+            window_focus = true;
+        }).blur(function () {
+            window_focus = false;
+        });
+        var interval;
+        last = 0;
+        //every 3s reload
+        $(document).on('click', function () {
+            var d = new Date();
+            var f = (d - last) / 1000;
+            if ((d - last) / 1000 > 3) {
+                if (window_focus) {
+                    check();
+                    last = new Date();
+                }
+            }
+        });
+        /*
+         interval = window.setTimeout(function () {
+         if (window_focus) {
+         check();
+         }
+         }, 3000);*/
+        /*
+         $(document).on('click', function () {
+         if (window_focus) {
+         check();
+         }
+         });*/
+
+    }
+
+
+    function check() {
+        var w = document.getElementById("mySidenav").offsetWidth;
+        // if sidebar is opened
+        if (w == 220)
+            refresh();
+        var star = $('[data-action=bookmark]');
+        //if star does exist
+        if (star.length) {
             $.ajax({
-                type: "PUT",
-                url: "/" + "Bookmark/" + $(this).attr('data-bookmark-id'),
-                data: $.param(data),
-                cache: false,
+                type: "GET",
+                url: "/" + "Bookmark/" + star.attr('data-bookmark-id'),
+                data: '',
                 success: function (html) {
                     var t = html == "1";
                     if (html == "1") {
                         star.html("<i class='fa fa-star '></i>");
                     } else
                         star.html("<i class='fa fa-star-o '></i>");
-                    refresh();
+
                 }
             });
         }
 
-        /**************side bar*****************/
-        $("[data-action=reload]")
-            .bind("click", refresh)
-            .hover(handlerIn, handlerOut);
-        function refresh() {
-            $(" #mySidenav").load("/Bookmark" + " #mySidenav" + ">*", function () {
-                $("[data-action=reload]")//spinner
-                    .bind("click", refresh)
-                    .hover(handlerIn, handlerOut);
-                //$("[data-action=bookmark]").unbind("click", bookmark).bind("click", bookmark);
-                $("[data-action=deleteBookmark]").bind("click", bookmark);
-            });
-        }
+    }
 
-        function handlerIn() {
-            $(this).html('<i class=" fa fa-refresh fa-spin" style="color:#659;"></i>');
-        }
+    /********************************** validate ***********************************/
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    var validator = $("#cv-forms").validate(
+        {
+            rules: {
+                Year: {
+                    required: true,
+                    digits: true,
+                    range: [1950, year]
+                },
+                Month: {
+                    required: true,
+                    digits: true,
+                    range: [1, 12]
 
-        function handlerOut() {
-            $(this).html('<i class=" fa fa-refresh" ></i>');
-        }
-
-        reloadBySeconds();
-        function reloadBySeconds() {
-            var window_focus;
-            $(window).focus(function () {
-                window_focus = true;
-            }).blur(function () {
-                window_focus = false;
-            });
-            var interval;
-            last = 0;
-            //every 3s reload
-            $(document).on('click', function () {
-                var d = new Date();
-                var f = (d - last) / 1000;
-                if ((d - last) / 1000 > 3) {
-                    if (window_focus) {
-                        check();
-                        last = new Date();
-                    }
+                },
+                Content: {
+                    required: true
+                },
+                "study_time": {
+                    required: true,
+                    digits: true,
+                    min: 1
+                },
+                "work_time": {
+                    required: true,
+                    digits: true,
+                    min: 1
+                },
+                name: {
+                    required: true
+                },
+                github: {
+                    url: true
+                },
+                linkedin: {
+                    url: true
+                },
+            },
+            messages: {
+                Year: {
+                    range: jQuery.validator.format("Năm phải lớn hơn {0} và nhỏ hơn số năm hiện tại "),
+                    required: "Bạn chưa điền đủ thông tin cho trường năm"
+                },
+                Content: {
+                    required: "Bạn chưa điền đủ thông tin cho các trường  "
+                },
+                Month: {
+                    required: "Bạn chưa điền đủ thông tin cho trường tháng "
+                },
+                name: {
+                    required: "Bạn chưa điền đủ thông tin cho trường tên kĩ năng "
+                },
+                study_time: {
+                    required: "Bạn chưa điền đủ thông tin cho trường thời gian học  "
+                },
+                work_time: {
+                    required: "Bạn chưa điền đủ thông tin cho trường thời gian làm việc "
                 }
-            });
-            /*
-             interval = window.setTimeout(function () {
-             if (window_focus) {
-             check();
-             }
-             }, 3000);*/
-            /*
-             $(document).on('click', function () {
-             if (window_focus) {
-             check();
-             }
-             });*/
-
-        }
-
-
-        function check() {
-            var w = document.getElementById("mySidenav").offsetWidth;
-            // if sidebar is opened
-            if (w == 220)
-                refresh();
-            var star = $('[data-action=bookmark]');
-            //if star does exist
-            if (star.length) {
-                $.ajax({
-                    type: "GET",
-                    url: "/" + "Bookmark/" + star.attr('data-bookmark-id'),
-                    data: '',
-                    success: function (html) {
-                        var t = html == "1";
-                        if (html == "1") {
-                            star.html("<i class='fa fa-star '></i>");
-                        } else
-                            star.html("<i class='fa fa-star-o '></i>");
-
-                    }
-                });
+            },
+            errorElement: "div",
+            errorPlacement: function (error, element) {
+                var react = element.closest('tbody').attr('data-response');
+                if (element.attr("name") == "Year" || element.attr("name") == "Month" || element.attr("name") == "Content" || element.attr("name") == "study_time" || element.attr("name") == "work_time" || element.attr("name") == "name") {
+                    error.insertAfter("#" + react + "_0");
+                } else if (element.attr("name") == "github" || element.attr("name") == "linkedin") {
+                    var name = element.attr('name');
+                    error.insertAfter("#" + name + "-error");
+                } else {
+                    error.insertAfter(element);
+                }
             }
-
-        }
-});
-        /********************************** validate ***********************************/
-        var currentTime = new Date();
-        var year = currentTime.getFullYear();
-        var validator = $("#cv-forms").validate(
-            {
-                rules: {
-                    Year: {
-                        required: true,
-                        digits: true,
-                        range: [1950, year]
-                    },
-                    Month: {
-                        required: true,
-                        digits: true,
-                        range: [1, 12]
-
-                    },
-                    Content: {
-                        required: true
-                    },
-                    "study_time": {
-                        required: true,
-                        digits: true,
-                        min: 1
-                    },
-                    "work_time": {
-                        required: true,
-                        digits: true,
-                        min: 1
-                    },
-                    name: {
-                        required: true
-                    },
-                    github: {
-                        url: true
-                    },
-                    linkedin: {
-                        url: true
-                    },
-                },
-                messages: {
-                    Year: {
-                        range: jQuery.validator.format("Năm phải lớn hơn {0} và nhỏ hơn số năm hiện tại "),
-                        required: "Bạn chưa điền đủ thông tin cho trường năm"
-                    },
-                    Content: {
-                        required: "Bạn chưa điền đủ thông tin cho các trường  "
-                    },
-                    Month: {
-                        required: "Bạn chưa điền đủ thông tin cho trường tháng "
-                    },
-                    name: {
-                        required: "Bạn chưa điền đủ thông tin cho trường tên kĩ năng "
-                    },
-                    study_time: {
-                        required: "Bạn chưa điền đủ thông tin cho trường thời gian học  "
-                    },
-                    work_time: {
-                        required: "Bạn chưa điền đủ thông tin cho trường thời gian làm việc "
-                    }
-                },
-                errorElement: "div",
-                errorPlacement: function (error, element) {
-                    var react = element.closest('tbody').attr('data-response');
-                    if (element.attr("name") == "Year" || element.attr("name") == "Month" || element.attr("name") == "Content" || element.attr("name") == "study_time" || element.attr("name") == "work_time" || element.attr("name") == "name") {
-                        error.insertAfter("#" + react + "_0");
-                    } else if (element.attr("name") == "github" || element.attr("name") == "linkedin") {
-                        var name = element.attr('name');
-                        error.insertAfter("#" + name + "-error");
-                    } else {
-                        error.insertAfter(element);
-                    }
-                }
-            });
-
-        //noinspection SpellCheckingInspection
-        jQuery.extend(jQuery.validator.messages, {
-            required: "Bạn chưa điền đủ thông tin",
-            remote: "Please fix this field.",
-            email: "Please enter a valid email address.",
-            url: "Please enter a valid URL.",
-            date: "Please enter a valid date.",
-            dateISO: "Please enter a valid date (ISO).",
-            number: "Bạn phải điền số .",
-            digits: "Bạn phải điền số.",
-            ditcard: "Please enter a valid credit card number.",
-            equalTo: "Please enter the same value again.",
-            accept: "Please enter a value with a valid extension.",
-            maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
-            minlength: jQuery.validator.format("Please enter at least {0} characters."),
-            rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
-            range: jQuery.validator.format("Điền số trong khoảng {0} đến {1}."),
-            max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
-            min: jQuery.validator.format("Bạn phải điền số lớn hơn {0}.")
-        });
-        /******************Editable Table********************/
-            // records table
-        $(document).mouseup(function () {
-            $(".editbox").hide();
-            $(".jShow").show();
         });
 
-        function resetTable() {
-            //prevent repeat binding or bind only local element
-            $('[name=increase]')
-                .unbind("click", Add)
-                .bind("click", Add);
-            $('[name=delete]')
-                .unbind("click", Delete)
-                .bind("click", Delete);
-            $('[name=edit]')
-                .unbind("click", editCell)
-                .bind("click", editCell);
-        }
+    //noinspection SpellCheckingInspection
+    jQuery.extend(jQuery.validator.messages, {
+        required: "Bạn chưa điền đủ thông tin",
+        remote: "Please fix this field.",
+        email: "Please enter a valid email address.",
+        url: "Please enter a valid URL.",
+        date: "Please enter a valid date.",
+        dateISO: "Please enter a valid date (ISO).",
+        number: "Bạn phải điền số .",
+        digits: "Bạn phải điền số.",
+        ditcard: "Please enter a valid credit card number.",
+        equalTo: "Please enter the same value again.",
+        accept: "Please enter a value with a valid extension.",
+        maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+        minlength: jQuery.validator.format("Please enter at least {0} characters."),
+        rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+        range: jQuery.validator.format("Điền số trong khoảng {0} đến {1}."),
+        max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+        min: jQuery.validator.format("Bạn phải điền số lớn hơn {0}.")
+    });
+    /******************Editable Table********************/
+        // records table
+    $(document).mouseup(function () {
+        $(".editbox").hide();
+        $(".jShow").show();
+    });
 
-        resetTable();
-        function editCell() {
-            var ID = $(this).closest('tr').attr('id');//record/skill id
-            var url = $(this).attr('data-table');
-            var cell = $(this).find("#cell_input_" + ID);
-            var cellContent = $(this).children('#cell_' + ID);
-            cellContent.hide();
-            cell.show();
-            $(this).change(function () {
-                if (validator.element(cell)) {
+    function resetTable() {
+        //prevent repeat binding or bind only local element
+        $('[name=increase]')
+            .unbind("click", Add)
+            .bind("click", Add);
+        $('[name=delete]')
+            .unbind("click", Delete)
+            .bind("click", Delete);
+        $('[name=edit]')
+            .unbind("click", editCell)
+            .bind("click", editCell);
+    }
 
-                    $.ajax({
-                        type: "PUT",
-                        url: "/" + url + "/" + ID,
-                        data: cell.serialize(),
-                        cache: false,
-                        success: function (html) {
-                            cellContent.html(cell.val());
-                            cell.hide();
-                            cellContent.show();
+    resetTable();
+    function editCell() {
+        var ID = $(this).closest('tr').attr('id');//record/skill id
+        var url = $(this).attr('data-table');
+        var cell = $(this).find("#cell_input_" + ID);
+        var cellContent = $(this).children('#cell_' + ID);
+        cellContent.hide();
+        cell.show();
+        $(this).change(function () {
+            if (validator.element(cell)) {
 
-                        }
-                    });
-                }
-
-            });
-
-        }
-
-
-        function Add(e) {
-
-            var elements = $(this).closest('tr').next().clone();
-            var dataReact = elements.attr('data-react');
-            elements.appendTo('.editable-table tbody[data-response=' + dataReact + ']');
-            elements.show();
-            elements.find("[name=save]").bind("click", Save);
-            $(this).unbind("click", Add);
-        }
-
-        function Save() {
-
-            var tr_e = $(this).closest('tr');
-            var url = tr_e.attr('newrow');
-            var tds = tr_e.children("td");
-            var input1 = tds.eq(1).children("input[type=text]");//year
-            var inputs = tr_e.find("td input[type=text]");
-            var dataString = inputs.serialize()
-                + "&id=" + tr_e.attr('id') + "&data-react=" + tr_e.attr('data-react');
-            //id - cv
-            var t = 1;
-            inputs.each(function () {
-                if (validator.element($(this)) == false) t = false;
-            });
-            if (t) {
                 $.ajax({
-                    type: "POST",
-                    url: "/" + url,
-                    data: dataString,
+                    type: "PUT",
+                    url: "/" + url + "/" + ID,
+                    data: cell.serialize(),
                     cache: false,
-                    success: function (react) {
-                        $(" #" + react).load(location.href + " #" + react + ">*", function () {
-                            resetTable();
-                        });
+                    success: function (html) {
+                        cellContent.html(cell.val());
+                        cell.hide();
+                        cellContent.show();
+
                     }
                 });
             }
-        }
 
-        function Delete() {
-            var tr_e = $(this).closest('tr'); //tr
-            var ID = tr_e.attr('id');//record id
-            var url = $(this).closest('td').prev().attr('data-table');
+        });
+
+    }
+
+
+    function Add(e) {
+
+        var elements = $(this).closest('tr').next().clone();
+        var dataReact = elements.attr('data-react');
+        elements.appendTo('.editable-table tbody[data-response=' + dataReact + ']');
+        elements.show();
+        elements.find("[name=save]").bind("click", Save);
+        $(this).unbind("click", Add);
+    }
+
+    function Save() {
+
+        var tr_e = $(this).closest('tr');
+        var url = tr_e.attr('newrow');
+        var tds = tr_e.children("td");
+        var input1 = tds.eq(1).children("input[type=text]");//year
+        var inputs = tr_e.find("td input[type=text]");
+        var dataString = inputs.serialize()
+            + "&id=" + tr_e.attr('id') + "&data-react=" + tr_e.attr('data-react');
+        //id - cv
+        var t = 1;
+        inputs.each(function () {
+            if (validator.element($(this)) == false) t = false;
+        });
+        if (t) {
             $.ajax({
-                type: "DELETE",
-                url: "/" + url + "/" + ID,
-                data: "",
+                type: "POST",
+                url: "/" + url,
+                data: dataString,
                 cache: false,
                 success: function (react) {
                     $(" #" + react).load(location.href + " #" + react + ">*", function () {
                         resetTable();
                     });
-
                 }
             });
         }
+    }
+
+    function Delete() {
+        var tr_e = $(this).closest('tr'); //tr
+        var ID = tr_e.attr('id');//record id
+        var url = $(this).closest('td').prev().attr('data-table');
+        $.ajax({
+            type: "DELETE",
+            url: "/" + url + "/" + ID,
+            data: "",
+            cache: false,
+            success: function (react) {
+                $(" #" + react).load(location.href + " #" + react + ">*", function () {
+                    resetTable();
+                });
+
+            }
+        });
+    }
 
 
+    /***************User profile**********************/
 
-        /***************User profile**********************/
+        //dropzone handle
+    $('#dropzone')
+        .on('dragover', function () {
+            $(this).addClass('hover');
+        })
+        .on('dragleave', function () {
+            $(this).removeClass('hover');
+        })
+        .find('input')
+        .on('change', function (e) {
+            var file = this.files[0];
+            $('#dropzone').removeClass('hover');
+            //validation
+            if (this.accept && $.inArray(file.type, this.accept.split(/, ?/)) == -1) {
+                return alert('File type not allowed.');
+            }
+            //noinspection JSUnusedLocalSymbols
+            var size = file.size;
+            //TODO: check image size
+            //end validation
+            $('#dropzone')
+                .addClass('dropped')
+                .find('img')
+                .remove();
+            if ((/^image\/(gif|png|jpeg|jpg)$/i).test(file.type)) {
+                var reader = new FileReader(file);
 
-            //dropzone handle
-        $('#dropzone')
-            .on('dragover', function () {
-                $(this).addClass('hover');
-            })
-            .on('dragleave', function () {
-                $(this).removeClass('hover');
-            })
-            .find('input')
-            .on('change', function (e) {
-                var file = this.files[0];
-                $('#dropzone').removeClass('hover');
-                //validation
-                if (this.accept && $.inArray(file.type, this.accept.split(/, ?/)) == -1) {
-                    return alert('File type not allowed.');
-                }
-                //noinspection JSUnusedLocalSymbols
-                var size = file.size;
-                //TODO: check image size
-                //end validation
-                $('#dropzone')
-                    .addClass('dropped')
-                    .find('img')
-                    .remove();
-                if ((/^image\/(gif|png|jpeg|jpg)$/i).test(file.type)) {
-                    var reader = new FileReader(file);
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    var data = e.target.result,
+                        $img = $('<img />').attr('src', data).fadeIn();
+                    $('#dropzone').find('.fixed-img').html($img);
+                };
 
-                    reader.readAsDataURL(file);
-                    reader.onload = function (e) {
-                        var data = e.target.result,
-                            $img = $('<img />').attr('src', data).fadeIn();
-                        $('#dropzone').find('.fixed-img').html($img);
-                    };
-
-                } else {
-                    var ext = file.name.split('.').pop();
-                    $('#dropzone').find('.fixed-img').html(ext);
-                }
-            });
+            } else {
+                var ext = file.name.split('.').pop();
+                $('#dropzone').find('.fixed-img').html(ext);
+            }
+        });
 //});
 ///****************** search name date age status*************************/
 //
@@ -560,7 +562,7 @@ $(document).ready(function () {
 //    });
 
 // search with button submit
-    $("#submitSearch").on('click', function(){
+    $("#submitSearch").on('click', function () {
         var dataSort = 'asc';
         var dataField = 'name';
         var nameSearch = $('#nameSearch').val();
@@ -579,9 +581,9 @@ $(document).ready(function () {
             advSearch(dataString)
         }
     });
-
+});
 // search change cv
-function adSearchChange (per_page, s_name, pos, status, thead){
+function adSearchChange(per_page, s_name, pos, status, thead) {
 
     if (per_page) {
         var entries = per_page.value;
@@ -616,25 +618,25 @@ function adSearchChange (per_page, s_name, pos, status, thead){
             dataSort = 'asc';
         }
 
-        $('.dataTable th').each(function() {
-            if($(this).attr('data-field') == dataField) {
-                $(this).attr("data-sort",dataSort);
-                $(this).attr("class",'sorting_'+dataSort);
+        $('.dataTable th').each(function () {
+            if ($(this).attr('data-field') == dataField) {
+                $(this).attr("data-sort", dataSort);
+                $(this).attr("class", 'sorting_' + dataSort);
             } else {
                 // $(this).attr("data-sort",'asc');
                 // $(this).attr("class",'sorting');
-                if($(this).attr('class') != 'ab'){
-                    $(this).attr("data-sort",'asc');
-                    $(this).attr("class",'sorting');
-                } 
-        }
+                if ($(this).attr('class') != 'ab') {
+                    $(this).attr("data-sort", 'asc');
+                    $(this).attr("class", 'sorting');
+                }
+            }
         });
 
     } else {
         var dataSort;
         var dataField;
-        $('.dataTable th').each(function() {
-            if($(this).hasClass('sorting_asc')) {
+        $('.dataTable th').each(function () {
+            if ($(this).hasClass('sorting_asc')) {
                 dataSort = $(this).attr("data-sort");
                 dataField = $(this).attr("data-field");
             } else if ($(this).hasClass('sorting_desc')) {
@@ -642,19 +644,19 @@ function adSearchChange (per_page, s_name, pos, status, thead){
                 dataField = $(this).attr("data-field");
             }
         });
-        if ( !dataSort || !dataField || (dataSort  == 'undefined') || (dataField == 'undefined')) {
+        if (!dataSort || !dataField || (dataSort == 'undefined') || (dataField == 'undefined')) {
             dataSort = 'asc';
             dataField = 'name';
 
-            $('.dataTable th').each(function() {
-                if($(this).attr('data-field') == 'name') {
-                    $(this).attr("data-sort",'asc');
-                    $(this).attr("class",'sorting_asc');
+            $('.dataTable th').each(function () {
+                if ($(this).attr('data-field') == 'name') {
+                    $(this).attr("data-sort", 'asc');
+                    $(this).attr("class", 'sorting_asc');
                 } else {
-                        $(this).attr("data-sort",'asc');
-                        $(this).attr("class",'sorting');
+                    $(this).attr("data-sort", 'asc');
+                    $(this).attr("class", 'sorting');
                 }
-            }); 
+            });
         }
     }
     var dataString = "data-sort=" + dataSort +
@@ -665,16 +667,16 @@ function adSearchChange (per_page, s_name, pos, status, thead){
         "&entrie=" + entries;
 
     // search name 3 characters  Min lenght
-    if (nameSearch.length > 2 && s_name){
+    if (nameSearch.length > 2 && s_name) {
         advSearch(dataString)
-    }else {
+    } else {
         advSearch(dataString)
     }
 
 }
 
 // function send data search CV
-function advSearch(dataString){
+function advSearch(dataString) {
     $.ajax({
         type: "POST",
         url: "/CV/adSearch",
@@ -685,13 +687,13 @@ function advSearch(dataString){
             $("[data-reload=true]").html(data['data']);
             $(".pagination ul").remove();
             $(".pagination").html(data['pagination']);
-            window.history.pushState('','',data['url']);
+            window.history.pushState('', '', data['url']);
         }
     });
 }
 /******************** show entries *****************************/
 
-$('#show_entries').on('chang', function(){
+$('#show_entries').on('chang', function () {
     var entries = $('#show_entries').val();
 
 });
@@ -715,4 +717,151 @@ function change_positions(val, id) {
         }
     }
 }
+$(document).ready(function () {
+    /****** dateitme *******/
+    $('.date-picker').datepicker();
+    $('#stardate').datepicker();
+    $('#enddate').datepicker();
 
+    // $('#stardate').change(function(){
+    //     $('#enddate').datepicker({startDate:$('#stardate').val()});
+    // });
+    // $('#enddate').change(function(){
+    //     $('#stardate').datepicker({endDate:$('#enddate').val()});
+    // });
+});
+
+// dang ky cv cac truong thong tin bat buoc
+function submitCVRule() {
+    $.ajax({
+        type: 'POST',
+        url: $('#cv-rule').attr('action'),
+        data: $('#cv-rule').serialize(),
+        dataType: 'json',
+        cache: false,
+        success: function (data) {
+            redirect(data['url']);
+        },
+        error: function (xhr, status, errorThrown) {
+            if (xhr.status === 422) {
+                $.each(xhr.responseJSON, function (key, value) {
+                    errorsHtml = '<div class="col-lg-8 alert-danger">' + value[0] + '</div>';
+                    $('.' + key).show().html(errorsHtml);
+                });
+            }
+        }
+    });
+}
+
+// Xoa  cv
+function getDeleteCV(id, type) {
+    if (id) {
+        $.ajax({
+            type: 'DELETE',
+            url: "/CV/" + id,
+            data: 'type_cv=' + type,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                alert(data['notes']);
+                redirect(data['url']);
+            },
+            error: function (xhr, status, errorThrown) {
+            }
+        });
+    }
+}
+
+// cap nhap lai active + notes cv
+function upActNotee(is, act, note) {
+    var is_check = document.getElementById("myCheck_" + is).checked;
+    var _notes = document.getElementById("txt_" + is).value;
+    if (is_check) {
+        var _check = 1;
+    } else {
+        var _check = 0;
+    }
+
+    if (getChanges(act) || getChanges(note)) {
+        $.ajax({
+            type: "PUT",
+            url: "/CV/" + is,
+            data: 'txtAction=' + _check + "&txtNotes=" + _notes,
+            cache: false,
+            beforeSend: function () {
+                $('.wait-modal-load').addClass("loading");
+            },
+            success: function (html) {
+                alert('Đã cập nhập thành công');
+                removeKey([act, note]);
+                //var btn_ = '<button type="button" onclick="upActNotee(\'' + is + '\',' + _check + ')" class="btn btn-default btn-sm btn-ac-note">submit</button>';
+                //$('.btn-' + is).replaceWith(btn_);
+            },
+            ajaxStop: function () {
+                $('.wait-modal-load').removeClass("loading");
+            }
+        });
+    }
+}
+
+// get home
+function returnHome() {
+    window.location.href = '/';
+}
+
+// mang toan cuc
+var arr__ActNotes = [];
+    arr__ActNotes['entrie'] = 10;
+    arr__ActNotes['page'] = 1;
+    arr__ActNotes['nameSearch'] = '';
+    arr__ActNotes['positionsSearch'] = 1;
+    arr__ActNotes['statusSearch'] = 1;
+    arr__ActNotes['data-sort'] = 'ASC';
+    arr__ActNotes['data-field'] = 'name';
+    arr__ActNotes['isAct'] = 1;
+    arr__ActNotes['isLive'] = 1;
+// is changes
+function isChanges(key, val, calfunc) {
+    arr__ActNotes[key] = val;
+
+    if (calfunc) {
+        returnHome();
+    }
+}
+
+function getChanges(getkey) {
+    if (arr__ActNotes[getkey]) {
+        return arr__ActNotes[getkey]
+    } else {
+        return false;
+    }
+}
+// xoa key trong mang
+function removeKey(rmarray) {
+    for (x in rmarray) {
+        if (arr__ActNotes[rmarray[x]]) {
+            delete arr__ActNotes[rmarray[x]];
+        }
+    }
+}
+
+// chi chu tai khoan moi co quyen
+// thay doi CV truc tuyen hay khong
+function getChangeLiveCv (element, id)
+{
+    var liveCv = (document.getElementById(element).checked) ? 1 : 0;
+    $.ajax({
+        type: "PUT",
+        url: "/CV/" + id,
+        data: 'txtLiveCv=' + liveCv,
+        cache: false,
+        success: function (data) {
+            //alert('Đã cập nhập thành công');
+            redirect(data);
+
+    //dua mod ra....
+            //var btn_ = '<button type="button" onclick="upActNotee(\'' + is + '\',' + _check + ')" class="btn btn-default btn-sm btn-ac-note">submit</button>';
+            //$('.btn-' + is).replaceWith(btn_);
+        }
+    });
+}

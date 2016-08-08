@@ -2,37 +2,73 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82d6d7e4-bf4e-4de3-bcfc-3d4340e0e5fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-42-44-11822531_804987676280948_5013002333607509129_n.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-45-59-IMG20160130165714.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-49-34-IMG20160130170322 (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-50-14-11822531_804987676280948_5013002333607509129_n.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-52-01-received_1642161532721884.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-59-27-IMG20160130165714.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-07-59-59-IMG20160130170322.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-08-06-38-R-intro.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-08-06-55-IMG20160130170322.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-08-16-11-R-intro.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-07-31-08-17-40-R-intro.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-08-01-01-59-18-R-intro.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-08-01-02-00-19-R-intro.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-08-01-02-02-01-pdf.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/2016-08-01-02-02-23-pdf.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/thumbnail/thumb_2016-07-28-12-18-42-10155642_803897279723321_4284063851204796771_n.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap-datepicker.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/datepicker3.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/jquery.datetimepicker.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/jquery.datetimepicker.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/xCV/resort.blade.php" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\database\migrations\2016_08_01_033312_create_status_table.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\database\t\2016_07_18_090119_add_image_to_users.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\database\t\2016_07_28_093744_add_github_linkedin_to_cvs.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\database\t\2016_07_30_161137_add_description_to_positions.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-07-42-44-11822531_804987676280948_5013002333607509129_n.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-07-45-59-IMG20160130165714.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-07-49-34-IMG20160130170322 (1).jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-07-50-14-11822531_804987676280948_5013002333607509129_n.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-07-52-01-received_1642161532721884.jpeg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-07-59-27-IMG20160130165714.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-07-59-59-IMG20160130170322.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-08-06-38-R-intro.pdf" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-08-06-55-IMG20160130170322.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-08-16-11-R-intro.pdf" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-07-31-08-17-40-R-intro.pdf" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-08-01-01-59-18-R-intro.pdf" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-08-01-02-00-19-R-intro.pdf" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-08-01-02-02-01-pdf.pdf" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\files\2016-08-01-02-02-23-pdf.pdf" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\public\img\thumbnail\thumb_2016-07-28-12-18-42-10155642_803897279723321_4284063851204796771_n.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\rirekisho\resources\views\xCV\CVview.blade.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_07_27_081630_create_cvs_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_07_27_081630_create_cvs_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_07_27_081746_create_positions_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_07_27_081746_create_positions_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/errors/403.blade.php" afterPath="$PROJECT_DIR$/resources/views/errors/403.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/errors/404.blade.php" afterPath="$PROJECT_DIR$/resources/views/errors/404.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/errors/503.blade.php" afterPath="$PROJECT_DIR$/resources/views/errors/503.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/ApplicantMiddleware.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/ApplicantMiddleware.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/CV.php" afterPath="$PROJECT_DIR$/app/CV.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CVController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CVController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/CV_changeStatus.js" afterPath="$PROJECT_DIR$/public/js/CV_changeStatus.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xCV/CVcreate.blade.php" afterPath="$PROJECT_DIR$/resources/views/xCV/CVcreate.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SkillController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SkillController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/forge.str.sql" afterPath="$PROJECT_DIR$/db/forge.str.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php" afterPath="$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xCV/CVshow.blade.php" afterPath="$PROJECT_DIR$/resources/views/xCV/CVshow.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Kernel.php" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PositionsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PositionsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/StatisticsUserController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/StatisticsUserController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/StatusController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/StatusController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/app/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xUser/UserEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/xUser/UserEdit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/VisitorMiddleware.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/VisitorMiddleware.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/emails/_email.blade.php" afterPath="$PROJECT_DIR$/resources/views/emails/_email.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/emails/_email_1.blade.php" afterPath="$PROJECT_DIR$/resources/views/emails/_email_1.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/_form_status.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/_form_status.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/custom.css" afterPath="$PROJECT_DIR$/public/css/custom.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/invoice/cv.blade.php" afterPath="$PROJECT_DIR$/resources/views/invoice/cv.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/email_send.js" afterPath="$PROJECT_DIR$/public/js/email_send.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/footer.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/footer.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/admin/js/func.bqn.js" afterPath="$PROJECT_DIR$/public/admin/js/func.bqn.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/header.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/header.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/header.css" afterPath="$PROJECT_DIR$/public/css/header.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/include.js" afterPath="$PROJECT_DIR$/public/js/include.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/my-forms.css" afterPath="$PROJECT_DIR$/public/css/my-forms.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/admin/bower_components/datatables-sort/js/pager-custom-controls.js" afterPath="$PROJECT_DIR$/public/admin/bower_components/datatables-sort/js/pager-custom-controls.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xUser/password.blade.php" afterPath="$PROJECT_DIR$/resources/views/xUser/password.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xCV/resort.blade.php" afterPath="$PROJECT_DIR$/resources/views/xCV/resort.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/sidebar.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/sidebar.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/table-result.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/table-result.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/xCV/template.blade.php" afterPath="$PROJECT_DIR$/resources/views/xCV/template.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -58,6 +94,44 @@
     <option name="GROUP_BY_TYPE" value="true" />
     <option name="SORT_CHILDREN" value="false" />
     <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - forge@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="forge" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="users" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - forge@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="forge" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -65,94 +139,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="table-result.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/includes/table-result.blade.php">
+      <file leaf-file-name="include.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/include.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.5666666" vertical-offset="922" max-vertical-offset="1491">
-              <caret line="49" column="52" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/positions/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.7" vertical-offset="0" max-vertical-offset="1071">
-              <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/status/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="11.833333" vertical-offset="376" max-vertical-offset="945">
-              <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CVindex.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.166667" vertical-offset="2917" max-vertical-offset="3486">
-              <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="156" selection-end-column="86" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form_status.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/includes/_form_status.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.4" vertical-offset="0" max-vertical-offset="1281">
-              <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="email_send.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/email_send.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
-              <caret line="3" column="14" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CVController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CVController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="12.0" vertical-offset="6135" max-vertical-offset="8610">
-              <caret line="275" column="68" selection-start-line="275" selection-start-column="68" selection-end-line="275" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="13764" max-vertical-offset="16065">
+              <caret line="818" column="23" selection-start-line="818" selection-start-column="23" selection-end-line="818" selection-end-column="23" />
               <folding>
-                <element signature="e#40#49#0#PHP" expanded="true" />
+                <element signature="e#23339#23735#0" expanded="false" />
+                <element signature="e#23850#23898#0" expanded="false" />
+                <element signature="n#!!block;n#change_positions#0" expanded="false" />
+                <element signature="e#24504#24882#0" expanded="false" />
+                <element signature="e#24642#24678#0" expanded="false" />
+                <element signature="n#!!block;n#submitCVRule#0" expanded="false" />
+                <element signature="n#!!block;n#getDeleteCV#0" expanded="false" />
+                <element signature="n#!!block;n#upActNotee#0" expanded="false" />
+                <marker date="1470602382803" expanded="true" signature="7619:7630" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="template.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/xCV/template.blade.php">
+      <file leaf-file-name="CVController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CVController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.251497" vertical-offset="126" max-vertical-offset="2331">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CV_changeStatus.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/CV_changeStatus.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="766" max-vertical-offset="2121">
-              <caret line="38" column="11" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="11" />
-              <folding />
+            <state vertical-scroll-proportion="0.48330405" vertical-offset="6004" max-vertical-offset="6762">
+              <caret line="650" column="32" selection-start-line="650" selection-start-column="28" selection-end-line="650" selection-end-column="32" />
+              <folding>
+                <element signature="e#40#49#0#PHP" expanded="true" />
+                <element signature="e#3232#4350#0#PHP" expanded="false" />
+                <element signature="e#5726#8631#0#PHP" expanded="false" />
+                <element signature="e#7964#8457#0#PHP" expanded="false" />
+                <element signature="e#8638#9226#0#PHP" expanded="false" />
+                <element signature="e#9232#9520#0#PHP" expanded="false" />
+                <element signature="e#9640#10198#0#PHP" expanded="false" />
+                <element signature="e#10620#12711#0#PHP" expanded="false" />
+                <element signature="e#12861#14480#0#PHP" expanded="false" />
+                <element signature="e#15411#19500#0#PHP" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,57 +188,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/database/migrations/2016_08_01_033312_create_status_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2016_08_01_033755_create_pivot_users_groups_tables.php" />
-        <option value="$PROJECT_DIR$/public/js/CV_changeStatus.js" />
-        <option value="$PROJECT_DIR$/resources/views/includes/_form_status.blade.php" />
-        <option value="$PROJECT_DIR$/app/Exceptions/Handler.php" />
-        <option value="$PROJECT_DIR$/public/admin/css/customtables.css" />
-        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" />
-        <option value="$PROJECT_DIR$/resources/views/xUser/password.blade.php" />
-        <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/public/admin/bower_components/statistics/css/morris-0.4.3.min.css" />
-        <option value="$PROJECT_DIR$/public/admin/bower_components/statistics/js/raphael-min.js" />
-        <option value="$PROJECT_DIR$/public/admin/bower_components/statistics/js/morris-0.4.3.min.js" />
-        <option value="$PROJECT_DIR$/public/admin/js/bootstrap.min.css" />
-        <option value="$PROJECT_DIR$/public/admin/js/jquery.min.js" />
-        <option value="$PROJECT_DIR$/resources/views/admin/statistics/uses.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/StatisticsUserController.php" />
-        <option value="$PROJECT_DIR$/app/CV.php" />
-        <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
-        <option value="$PROJECT_DIR$/resources/views/positions/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/status/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/errors/403.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/errors/404.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/footer.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/errors/503.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/errors/build.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/xUser/UserEdit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/errors/404.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/ApplicantMiddleware.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/VisitorMiddleware.php" />
+        <option value="db-console:/7ce33623/c02611da-4843-4841-a0df-c9b17e57fff5/" />
+        <option value="$PROJECT_DIR$/resources/views/includes/CVUploadInfo.blade.php" />
+        <option value="$PROJECT_DIR$/public/css/my-forms.css" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_08_05_063921_add_column_cvs_to_user_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/xCV/CVRuleInfoRequest.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_07_27_081746_create_positions_table.php" />
+        <option value="$PROJECT_DIR$/resources/views/emails/_email.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/emails/_email_1.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/_form_status.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/invoice/cv.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/CVFormStep.blade.php" />
+        <option value="$PROJECT_DIR$/app/User.php" />
+        <option value="$PROJECT_DIR$/public/admin/js/vietvbb_topx.js" />
+        <option value="$PROJECT_DIR$/resources/views/xCV/template.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_07_27_081630_create_cvs_table.php" />
+        <option value="$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php" />
         <option value="$PROJECT_DIR$/public/admin/js/func.bqn.js" />
         <option value="$PROJECT_DIR$/public/css/header.css" />
-        <option value="$PROJECT_DIR$/resources/views/includes/footer.blade.php" />
-        <option value="$PROJECT_DIR$/public/css/footer.css" />
-        <option value="$PROJECT_DIR$/resources/views/admin/statistics/user.blade.php" />
-        <option value="$PROJECT_DIR$/public/admin/js/public-sort.js" />
-        <option value="$PROJECT_DIR$/resources/views/includes/sidebar.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/includes/header.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/xUser/UserIndex.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/includes/table-result.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/xCV/CVview.blade.php" />
-        <option value="$PROJECT_DIR$/public/admin/js/3.3.5-bootstrap.min.js" />
-        <option value="$PROJECT_DIR$/public/admin/js/1.15.0-jquery.validate.js" />
-        <option value="$PROJECT_DIR$/public/admin/js/1.11.4-jquery-ui.min.js" />
-        <option value="$PROJECT_DIR$/public/admin/js/jquery-1.12.2.min.js" />
-        <option value="$PROJECT_DIR$/public/admin/css/bootstrap.min.css" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/RecordController.php" />
-        <option value="$PROJECT_DIR$/public/js/include.js" />
-        <option value="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/xUser/UserAdd.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/xUser/password.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/xUser/UserEdit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/CVRuleInfo.blade.php" />
+        <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
+        <option value="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" />
+        <option value="$PROJECT_DIR$/resources/views/xCV/CVshow.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/xCV/CVInfo.blade.php" />
+        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/public/js/CV_changeStatus.js" />
         <option value="$PROJECT_DIR$/public/js/email_send.js" />
-        <option value="$PROJECT_DIR$/app/MyLibrary/Pagination_temp.php" />
-        <option value="$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/CVUploadStep.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/table-result.blade.php" />
+        <option value="$PROJECT_DIR$/app/CV.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/sidebar.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/CVActionMan.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/xCV/CVStep.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/CvStepInfo.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/include.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/CVController.php" />
-        <option value="$PROJECT_DIR$/resources/views/xCV/template.blade.php" />
+        <option value="$PROJECT_DIR$/public/css/custom.css" />
+        <option value="$PROJECT_DIR$/resources/views/xCV/CVShowUpload.blade.php" />
       </list>
     </option>
   </component>
@@ -273,6 +296,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="rirekisho" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rirekisho" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rirekisho" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -356,50 +393,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="status" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="positions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="includes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -417,28 +410,6 @@
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -451,24 +422,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -500,147 +453,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Providers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rirekisho" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyLibrary" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -684,22 +497,43 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rirekisho" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rirekisho" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Exceptions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="options.lastSelected" value="preferences.lookFeel" />
+    <property name="options.lastSelected" value="database.main" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="Console.TableResult.DefaultCopyAction" value="HTML Table" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp\www\rirekisho\public\admin\bower_components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\rirekisho\database\t" />
       <recent name="C:\wamp\www\rirekisho\public\admin\css" />
       <recent name="C:\wamp\www\rirekisho\public\admin\bower_components\datatables-sort\css" />
       <recent name="C:\wamp\www\rirekisho\public\admin\ij" />
@@ -717,8 +551,17 @@
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
+    <configuration default="true" type="com.intellij.database.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
     <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
       <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
@@ -728,9 +571,6 @@
       <arguments />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -750,29 +590,55 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.628125" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6265625" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4390625" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16187595" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16868381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290469" sideWeight="0.5" order="1" side_tool="true" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296875" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="98" y="125" width="1182" height="554" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.584375" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296875" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="98" y="125" width="1182" height="554" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6265625" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4390625" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290469" sideWeight="0.5" order="1" side_tool="true" content_ui="combo" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18759455" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -792,411 +658,415 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="10" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6030928" vertical-offset="4920" max-vertical-offset="5502">
-          <caret line="251" column="41" selection-start-line="251" selection-start-column="41" selection-end-line="251" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/xUser/password.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6643234" vertical-offset="1071" max-vertical-offset="1848">
-          <caret line="69" column="56" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UsersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.466666" vertical-offset="2245" max-vertical-offset="7854">
-          <caret line="133" column="60" selection-start-line="133" selection-start-column="53" selection-end-line="133" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1237" max-vertical-offset="3927">
+          <caret line="97" column="46" selection-start-line="97" selection-start-column="44" selection-end-line="97" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmailsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.0" vertical-offset="3969" max-vertical-offset="4662">
-          <caret line="209" column="17" selection-start-line="209" selection-start-column="9" selection-end-line="209" selection-end-column="17" />
+        <state vertical-scroll-proportion="16.8" vertical-offset="5733" max-vertical-offset="6405">
+          <caret line="260" column="22" selection-start-line="260" selection-start-column="16" selection-end-line="260" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/admin/bower_components/statistics/css/morris-0.4.3.min.css">
+    <entry file="file://$PROJECT_DIR$/resources/views/invoice/cv.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03505843" vertical-offset="0" max-vertical-offset="599">
-          <caret line="1" column="90" selection-start-line="1" selection-start-column="90" selection-end-line="1" selection-end-column="90" />
+        <state vertical-scroll-proportion="-30.8" vertical-offset="441" max-vertical-offset="5397">
+          <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/admin/bower_components/statistics/js/raphael-min.js">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_07_27_081630_create_cvs_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3155259" vertical-offset="0" max-vertical-offset="599">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.7628866" vertical-offset="480" max-vertical-offset="1365">
+          <caret line="45" column="50" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/admin/bower_components/statistics/js/morris-0.4.3.min.js">
+    <entry file="file://$PROJECT_DIR$/public/admin/js/wz_tooltip.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="599">
-          <caret line="0" column="32156" selection-start-line="0" selection-start-column="32156" selection-end-line="0" selection-end-column="32156" />
+        <state vertical-scroll-proportion="-8.430717" vertical-offset="7402" max-vertical-offset="27447">
+          <caret line="112" column="10" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/CV.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/CVFormStep.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.5" vertical-offset="1890" max-vertical-offset="3759">
-          <caret line="107" column="31" selection-start-line="107" selection-start-column="23" selection-end-line="107" selection-end-column="31" />
-          <folding />
+        <state vertical-scroll-proportion="1.4797891" vertical-offset="2140" max-vertical-offset="3360">
+          <caret line="142" column="42" selection-start-line="142" selection-start-column="42" selection-end-line="142" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/User.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/UpdateRequest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.266666" vertical-offset="226" max-vertical-offset="2793">
-          <caret line="41" column="23" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.5" vertical-offset="195" max-vertical-offset="777">
+        <state vertical-scroll-proportion="-0.4072165" vertical-offset="237" max-vertical-offset="819">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/RouteServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="987">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.1" vertical-offset="0" max-vertical-offset="987">
-          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StatisticsUserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.5" vertical-offset="0" max-vertical-offset="1890">
-          <caret line="18" column="45" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/errors/503.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVcreate.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8402062" vertical-offset="510" max-vertical-offset="1092">
-          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/errors/404.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.036906853" vertical-offset="0" max-vertical-offset="3696">
-          <caret line="1" column="46" selection-start-line="1" selection-start-column="46" selection-end-line="1" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/errors/build.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.036906853" vertical-offset="0" max-vertical-offset="798">
-          <caret line="1" column="54" selection-start-line="1" selection-start-column="54" selection-end-line="1" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/errors/403.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.072164945" vertical-offset="63" max-vertical-offset="798">
-          <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/about.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7" vertical-offset="0" max-vertical-offset="252">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/xUser/UserEdit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66783834" vertical-offset="124" max-vertical-offset="2079">
-          <caret line="24" column="149" selection-start-line="24" selection-start-column="149" selection-end-line="24" selection-end-column="149" />
+        <state vertical-scroll-proportion="0.7047452" vertical-offset="7516" max-vertical-offset="8274">
+          <caret line="377" column="17" selection-start-line="352" selection-start-column="12" selection-end-line="377" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/admin/js/func.bqn.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8673">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="8200" max-vertical-offset="8799">
+          <caret line="413" column="0" selection-start-line="413" selection-start-column="0" selection-end-line="413" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/header.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.02451" vertical-offset="1908" max-vertical-offset="3906">
-          <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5964052" vertical-offset="2050" max-vertical-offset="4158">
+          <caret line="115" column="16" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/includes/footer.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/xUser/UserEdit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="357">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.3321617" vertical-offset="1260" max-vertical-offset="2079">
+          <caret line="69" column="80" selection-start-line="69" selection-start-column="80" selection-end-line="69" selection-end-column="80" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/footer.css">
+    <entry file="file://$PROJECT_DIR$/resources/views/xUser/UserAdd.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1113" max-vertical-offset="5838">
-          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.6274165" vertical-offset="2268" max-vertical-offset="3024">
+          <caret line="125" column="99" selection-start-line="125" selection-start-column="89" selection-end-line="125" selection-end-column="99" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/statistics/user.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/xUser/password.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="609">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/AuthServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-49.766666" vertical-offset="250" max-vertical-offset="2205">
-          <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.0" vertical-offset="105" max-vertical-offset="2940">
-          <caret line="45" column="77" selection-start-line="45" selection-start-column="77" selection-end-line="45" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/includes/sidebar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5" vertical-offset="0" max-vertical-offset="903">
-          <caret line="5" column="88" selection-start-line="5" selection-start-column="88" selection-end-line="5" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/includes/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.9" vertical-offset="0" max-vertical-offset="1533">
-          <caret line="17" column="76" selection-start-line="17" selection-start-column="76" selection-end-line="17" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVedit2.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4" vertical-offset="0" max-vertical-offset="1743">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/xUser/UserIndex.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.9" vertical-offset="0" max-vertical-offset="336">
-          <caret line="100" column="10" selection-start-line="100" selection-start-column="10" selection-end-line="100" selection-end-column="10" />
-          <folding>
-            <element signature="e#139#973#0#HTML" expanded="false" />
-            <element signature="e#1023#5216#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/admin/js/1.15.0-jquery.validate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.95158595" vertical-offset="31581" max-vertical-offset="32277">
-          <caret line="1531" column="4" selection-start-line="1531" selection-start-column="4" selection-end-line="1531" selection-end-column="4" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/admin/js/1.11.4-jquery-ui.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42070118" vertical-offset="0" max-vertical-offset="599">
-          <caret line="12" column="12530" selection-start-line="12" selection-start-column="12530" selection-end-line="12" selection-end-column="12530" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/admin/js/jquery-1.12.2.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14023373" vertical-offset="0" max-vertical-offset="599">
-          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/admin/css/3.3.5-bootstrap.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14023373" vertical-offset="0" max-vertical-offset="599">
-          <caret line="4" column="122375" selection-start-line="4" selection-start-column="122375" selection-end-line="4" selection-end-column="122375" />
-          <folding />
+        <state vertical-scroll-proportion="0.29876977" vertical-offset="1027" max-vertical-offset="1848">
+          <caret line="57" column="80" selection-start-line="57" selection-start-column="80" selection-end-line="57" selection-end-column="80" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RecordController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.685567" vertical-offset="735" max-vertical-offset="1869">
-          <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-1.201031" vertical-offset="699" max-vertical-offset="1722">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/include.js">
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/ApplicantMiddleware.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6120" max-vertical-offset="14448">
-          <caret line="278" column="27" selection-start-line="278" selection-start-column="27" selection-end-line="278" selection-end-column="27" />
-          <folding>
-            <marker date="1470157811285" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.53092784" vertical-offset="48" max-vertical-offset="630">
+          <caret line="17" column="51" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/storage/framework/views/30722a5bad58e1c4ff43bfb69a70684c">
+    <entry file="file://$PROJECT_DIR$/resources/views/xCV/template.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2908" max-vertical-offset="3507">
-          <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="67" />
+        <state vertical-scroll-proportion="1.29174" vertical-offset="1050" max-vertical-offset="2394">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Positions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.2" vertical-offset="0" max-vertical-offset="1029">
+          <caret line="6" column="15" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVview.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Record.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.635739" vertical-offset="5368" max-vertical-offset="6447">
-          <caret line="44" column="76" selection-start-line="44" selection-start-column="76" selection-end-line="44" selection-end-column="76" />
+        <state vertical-scroll-proportion="0.072164945" vertical-offset="315" max-vertical-offset="1071">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/emails_tiniMCE.js">
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/CVRuleInfo.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.8119508" vertical-offset="1512" max-vertical-offset="2520">
+          <caret line="94" column="60" selection-start-line="94" selection-start-column="51" selection-end-line="94" selection-end-column="60" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28865978" vertical-offset="0" max-vertical-offset="5439">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/email_send.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13725491" vertical-offset="0" max-vertical-offset="777">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/CV_changeStatus.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1543" max-vertical-offset="2142">
+          <caret line="89" column="62" selection-start-line="89" selection-start-column="51" selection-end-line="89" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/emails_tagIt.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
-          <caret line="10" column="36" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="36" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2618629" vertical-offset="6907" max-vertical-offset="7980">
+          <caret line="359" column="55" selection-start-line="359" selection-start-column="50" selection-end-line="359" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8892794" vertical-offset="40" max-vertical-offset="1428">
+          <caret line="26" column="56" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1649485" vertical-offset="678" max-vertical-offset="1260">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.32474226" vertical-offset="189" max-vertical-offset="777">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/AuthServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.1370826" vertical-offset="2035" max-vertical-offset="2793">
+          <caret line="40" column="32" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.15463917" vertical-offset="426" max-vertical-offset="1008">
+          <caret line="20" column="58" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/RouteServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.1" vertical-offset="312" max-vertical-offset="987">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07692308" vertical-offset="803" max-vertical-offset="3906">
+          <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/dashboard.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BookmarkController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.3" vertical-offset="483" max-vertical-offset="1155">
-          <caret line="42" column="56" selection-start-line="42" selection-start-column="56" selection-end-line="42" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.6826923" vertical-offset="1769" max-vertical-offset="2604">
+          <caret line="98" column="9" selection-start-line="98" selection-start-column="9" selection-end-line="98" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Exceptions/Handler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6572934" vertical-offset="943" max-vertical-offset="1512">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Events/Event.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1071">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/sidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4059754" vertical-offset="252" max-vertical-offset="1638">
+          <caret line="23" column="100" selection-start-line="23" selection-start-column="85" selection-end-line="23" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVInfo.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18453427" vertical-offset="0" max-vertical-offset="1071">
+          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/CVActionMan.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17777778" vertical-offset="114" max-vertical-offset="882">
+          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/positions/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/xUser/UserIndex.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7" vertical-offset="0" max-vertical-offset="1071">
-          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/status/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="11.833333" vertical-offset="376" max-vertical-offset="945">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/CV_changeStatus.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="567" max-vertical-offset="2121">
-          <caret line="38" column="11" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.166667" vertical-offset="2917" max-vertical-offset="3486">
-          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="156" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/MyLibrary/Pagination_temp.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.741652" vertical-offset="4282" max-vertical-offset="4977">
-          <caret line="224" column="64" selection-start-line="224" selection-start-column="64" selection-end-line="224" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/email_send.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="14" />
-          <folding />
+        <state vertical-scroll-proportion="1.4" vertical-offset="945" max-vertical-offset="2289">
+          <caret line="43" column="21" selection-start-line="37" selection-start-column="15" selection-end-line="43" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/includes/table-result.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5666666" vertical-offset="922" max-vertical-offset="1491">
-          <caret line="49" column="52" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="52" />
+        <state vertical-scroll-proportion="-6.3" vertical-offset="420" max-vertical-offset="3024">
+          <caret line="29" column="67" selection-start-line="29" selection-start-column="67" selection-end-line="29" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/includes/_form_status.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVStep.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.4" vertical-offset="0" max-vertical-offset="1281">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.036906853" vertical-offset="0" max-vertical-offset="569">
+          <caret line="1" column="133" selection-start-line="1" selection-start-column="133" selection-end-line="1" selection-end-column="133" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/CvStepInfo.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5536028" vertical-offset="0" max-vertical-offset="945">
+          <caret line="15" column="132" selection-start-line="15" selection-start-column="132" selection-end-line="15" selection-end-column="132" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5412371" vertical-offset="0" max-vertical-offset="3339">
+          <caret line="15" column="67" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/CV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.516696" vertical-offset="2016" max-vertical-offset="3822">
+          <caret line="110" column="26" selection-start-line="110" selection-start-column="23" selection-end-line="110" selection-end-column="29" />
+          <folding>
+            <element signature="e#23#62#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVindex.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.5799649" vertical-offset="0" max-vertical-offset="3927">
+          <caret line="97" column="46" selection-start-line="97" selection-start-column="44" selection-end-line="97" selection-end-column="46" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVshow.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0508475" vertical-offset="6267" max-vertical-offset="7812">
+          <caret line="307" column="37" selection-start-line="307" selection-start-column="37" selection-end-line="307" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/CVUploadStep.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.9" vertical-offset="63" max-vertical-offset="714">
+          <caret line="10" column="148" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="148" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7896494" vertical-offset="18385" max-vertical-offset="19047">
+          <caret line="898" column="26" selection-start-line="898" selection-start-column="26" selection-end-line="898" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/xCV/CVShowUpload.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.036906853" vertical-offset="3066" max-vertical-offset="3843">
+          <caret line="162" column="141" selection-start-line="162" selection-start-column="141" selection-end-line="162" selection-end-column="141" />
+          <folding>
+            <element signature="e#111#133#0#HTML" expanded="true" />
+            <element signature="e#1158#1973#0#HTML" expanded="false" />
+            <element signature="e#4420#4451#0#HTML" expanded="true" />
+            <element signature="e#6034#6059#0#HTML" expanded="true" />
+            <element signature="e#6876#6901#0#HTML" expanded="true" />
+            <element signature="e#7713#7738#0#HTML" expanded="true" />
+            <element signature="e#7833#7864#0#HTML" expanded="true" />
+            <element signature="e#8481#8506#0#HTML" expanded="true" />
+            <element signature="e#8783#8808#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/include.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="13764" max-vertical-offset="16065">
+          <caret line="818" column="23" selection-start-line="818" selection-start-column="23" selection-end-line="818" selection-end-column="23" />
+          <folding>
+            <element signature="e#23339#23735#0" expanded="false" />
+            <element signature="e#23850#23898#0" expanded="false" />
+            <element signature="n#!!block;n#change_positions#0" expanded="false" />
+            <element signature="e#24504#24882#0" expanded="false" />
+            <element signature="e#24642#24678#0" expanded="false" />
+            <element signature="n#!!block;n#submitCVRule#0" expanded="false" />
+            <element signature="n#!!block;n#getDeleteCV#0" expanded="false" />
+            <element signature="n#!!block;n#upActNotee#0" expanded="false" />
+            <marker date="1470602382803" expanded="true" signature="7619:7630" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CVController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="12.0" vertical-offset="6135" max-vertical-offset="8610">
-          <caret line="275" column="68" selection-start-line="275" selection-start-column="68" selection-end-line="275" selection-end-column="68" />
+        <state vertical-scroll-proportion="0.48330405" vertical-offset="6004" max-vertical-offset="6762">
+          <caret line="650" column="32" selection-start-line="650" selection-start-column="28" selection-end-line="650" selection-end-column="32" />
           <folding>
             <element signature="e#40#49#0#PHP" expanded="true" />
+            <element signature="e#3232#4350#0#PHP" expanded="false" />
+            <element signature="e#5726#8631#0#PHP" expanded="false" />
+            <element signature="e#7964#8457#0#PHP" expanded="false" />
+            <element signature="e#8638#9226#0#PHP" expanded="false" />
+            <element signature="e#9232#9520#0#PHP" expanded="false" />
+            <element signature="e#9640#10198#0#PHP" expanded="false" />
+            <element signature="e#10620#12711#0#PHP" expanded="false" />
+            <element signature="e#12861#14480#0#PHP" expanded="false" />
+            <element signature="e#15411#19500#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/xCV/template.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.251497" vertical-offset="126" max-vertical-offset="2331">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

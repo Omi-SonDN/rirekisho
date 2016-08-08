@@ -67,7 +67,7 @@
     <!-- END Table Styles Title -->
    @stop
    @section('addtional-js')
-<!-- <script src="{{asset('public/js/bootstrap-datepicker.js')}}"></script> -->
+
 <script>
     $('#startdate').datepicker({autoclose: true, todayHighlight: true, format: "dd/mm/yyyy"});
     $('#enddate').datepicker({autoclose: true, todayHighlight: true, format: "dd/mm/yyyy"});

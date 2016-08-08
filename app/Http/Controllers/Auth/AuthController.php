@@ -49,7 +49,7 @@ class AuthController extends Controller
             if (Auth::attempt($userdata)) {
                 if (Auth::user()->getRole() == "Applicant" || Auth::user()->getRole() == "SuperAdmin"|| Auth::user()->getRole() == "Admin") {
                     if(is_null(Auth::user()->CV)) {
-                        DB::table('cvs')->insert(['user_id' => Auth::user()->id, 'First_name' => Auth::user()->name, 'Last_name' =>'null', 'email' => Auth::user()->email]);
+                        //DB::table('cvs')->insert(['user_id' => Auth::user()->id, 'email' => Auth::user()->email]);
                     }
                 }
                 return redirect('/');//->withInput($userdata);
@@ -74,7 +74,7 @@ class AuthController extends Controller
         $user->role = 0;
         $user->save();
 
-        $CV = DB::table('cvs')->insert(['user_id' => $user->id, 'First_name' => $request->get('name'), 'Last_name' =>'null', 'email' => Auth::user()->email]);
+        //$CV = DB::table('cvs')->insert(['user_id' => $user->id, 'email' => Auth::user()->email]);
         return redirect('auth/login')->withInput($request->except(['password']));
     }
 

@@ -84,7 +84,7 @@ i[class^='fa-'], i[class*=' fa-'] {
     height: 128px;
 }
 
-.my-forms input[type="text"], .my-forms input[type="password"], .my-forms input[type="email"], .my-forms input[type="search"], .my-forms input[type="url"], .my-forms textarea {
+.my-forms input[type="date"], .my-forms input[type="tel"], .my-forms input[type="text"], .my-forms input[type="password"], .my-forms input[type="email"], .my-forms input[type="search"], .my-forms input[type="url"], .my-forms textarea {
     background: #fff;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;

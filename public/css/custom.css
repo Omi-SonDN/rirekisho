@@ -627,10 +627,276 @@ div#adSearch {
     cursor: default;
 }
 
-/*
-custom button send email in page cv
-*/
+/* custom button send email in page cv */
 
 button.btn-send-email {
    margin-top: 6px;
+}
+
+/* ****     fix input type=file       *** */
+.my-forms .fix-file {
+    padding: 7px 0px;
+}
+
+/* ------------------- css create cv basic---------------------- */
+
+.box_white {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+}
+
+.mt_6 {
+    margin-top: 6px !important;
+}
+.text_red_box {
+    color: #ff0000;
+    font-size: 1.5em;
+}
+.fw-500 {
+    font-weight: 500;
+}
+.block-info {
+    padding: 15px 35px;
+    line-height: 30px;
+}
+
+.block_ntv_dangnhap {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 10px 15px 20px;
+    overflow: hidden;
+    line-height: 29px;
+    display: block;
+}
+.hr_box {
+    background: #eeeeee;
+}
+.fix-btn-ccv {
+    padding: 10px 20px;
+}
+.fix-btn-ccv span.fa.fa-paperclip {
+    font-size: 1.2em;
+    padding: 2px 8px 2px 0px;
+}
+
+.title_lange {
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    height: 62px;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    display: table;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+.text_title_white_lange {
+    vertical-align: middle;
+}
+
+.bg_blue {
+    background: #00999f !important;
+}
+.mt20 {
+    margin-top: 20px;
+}
+.mt8 {
+    margin-top: 8px;
+}
+.text_white {
+    color: white;
+}
+.font18 {
+    font-size: 18px !important;
+}
+.pt_18 {
+    padding-top: 18px !important;
+}
+
+.pl_4 {
+    padding-left: 4px !important;
+}
+.col-xs-6 {
+    width: 50%;
+}
+.text-tim-nhat {
+    color: #00999f;
+}
+.text-tim-nhat {
+    color: #3f51b5;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.block_ntv_dangnhap .pl_16 {
+    background: #CDDC39;
+    font-size: inherit;
+    color: white;
+    font-weight: 600;
+}
+.block_ntv_dangnhap a.btn {
+    background: lightgray;
+}
+.block_ntv_dangnhap .fix-lb {
+    background: beige;
+    width: 100%;
+    font-size: large;
+    font-weight: 500;
+    color: black;
+    cursor: pointer;
+}
+
+/*  -------------Custom by tooltip cv-------------*/
+.topx-bit {
+    box-shadow: aliceblue;
+    background: #ede1e2;
+}
+.forumhead .foruminfo .topx-tip-head {
+    color: rebeccapurple;
+    /* font-size: 5em; */
+    padding: 1px 20px;
+    /* line-height: 12px; */
+    font-weight: 400;
+}
+.forumhead h2 {
+    /* padding: 0; */
+    font-size: 20px;
+    color: red;
+    line-height: 12px;
+    font-weight: 500;
+}
+.topx-bit hr {
+    margin: 0;
+    padding: 0;
+}
+.forumrow.table.topx-tip-info {
+    padding: 5px 30px;
+}
+
+/*------- custom bqn submit and note cv -----------*/
+table.imagetable {
+    font-family: verdana,arial,sans-serif;
+    font-size:13px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+    width: 100%;
+}
+table.imagetable th {
+    background:#b5cfd2;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #999999;
+}
+
+table.imagetable tr {
+    border-bottom: 1pt solid #9f8b8b;
+    border-width: 1px;
+    border-color: grey;
+    padding: 2px;
+}
+table.imagetable td {
+     background:#dcddc0;
+     border-width: 1px;
+     padding: 8px;
+     border-style: solid;
+     border-color: #999999;
+ }
+/* ---------------On/Off FlipSwitch ------- */
+.onoffswitch {
+    position: relative; width: 49px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 8px;
+    margin: 0 auto;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 14px; padding: 0; line-height: 14px;
+    font-size: 12px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 5px;
+    background-color: #34A7C1;
+    color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 5px;
+    background-color: #EEEEEE;
+    color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block;
+    margin: 0px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0; bottom: 0;
+    right: 31px;
+    border: 2px solid #999999;
+    border-radius: 8px;
+    transition: all 0.3s ease-in 0s;
+    width: 17px;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+.btn-ac-note {
+    margin: 4px 5px;
+}
+.block_ntv_dangnhap .icheckbox_square-blue {
+    padding-left: 5px;
+}
+
+.block_ntv_dangnhap .font14 {
+    font-weight: 600;
+}
+
+input.fix-class-check {
+    opacity: 1;
+    position: relative;
+    display: block;
+    -ms-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+/*fix check box in CVAct*/
+.ckf {
+    top:9px
+}
+/*fix- width page show pdf CV*/
+#File-pdf .fix-file-view {
+    margin: 0 auto;
+    width: 100%;
 }

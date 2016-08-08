@@ -12,7 +12,10 @@ use Input;
 use Session;
 class StatusController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('SuperAdmin');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -6,16 +6,29 @@ Route::controllers([
     'auth' => '\App\Http\Controllers\Auth\AuthController',
     'password' => '\App\Http\Controllers\Auth\PasswordController',
 ]);
+
+Route::group(['middleware' => ['auth', 'App\Http\Middleware\ApplicantMiddleware']], function () {
+    Route::resource('CV', 'CVController', ['except' => ['index', 'show']]);
+
+    Route::get('CV/info', 'CVController@getInfo');
+    // show create cv no id, or show cv upload with id
+    Route::get('CV/create/upload/', 'CVController@getCreateUpload');
+    Route::get('CV/create/upload/{id}', 'CVController@getShowUpload');
+    Route::get('CV/create/upload/{id}/edit', 'CVController@getEditUpload');
+});
+
 // gioi han quyen voi aplication
 Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']], function () {
     //Route::get('CV/search', 'CVController@search');
     //Route::get('CV/search1', 'CVController@search1');
+
     Route::get('CV', 'CVController@index');
     Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
     Route::post('CV/adSearch', 'CVController@adSearch');
     Route::get('CV/resort','CVController@resort1');
     Route::post('CV/resort','CVController@resort');
 });
+
 Route::group(['middleware' => ['auth']], function () {
     Route::bind('User', function ($id) {
         if (count(Hashids::decode($id)) == 0) {
@@ -37,11 +50,17 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     //every one can see
-    Route::get('/', function () {
-        return view('about');
-    });
+//    Route::get('/', function () {
+//        return view('about');
+//    });
     Route::get('about', function () {
         return view('about');
+    });
+    Route::get('/', function () {
+        if (Auth::user()->getRole() === 'Applicant'){
+            return view('xCV.CVInfo');
+        }
+        return Redirect::action('CVController@index');
     });
 
     //every one see different page  
@@ -123,9 +142,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
-Route::group(['middleware' => ['auth', 'App\Http\Middleware\ApplicantMiddleware']], function () {
-    Route::resource('CV', 'CVController', ['except' => ['index', 'destroy', 'show']]);
-});
+
 
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

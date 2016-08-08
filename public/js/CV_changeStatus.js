@@ -36,7 +36,9 @@ $(document).ready(function () {
         [4],
     ];
 
-    $('form.status').change(function () {
+    $(document).on("change", 'form.status', function(){
+
+    //$('form.status').change(function () {
         var result = confirm("Want to change?");
         var stt = $(this).children('select.status').val();
         if (result) {
@@ -85,7 +87,6 @@ $(document).ready(function () {
                         btn_send_email += data.status + '">Send Email ';
                         btn_send_email += data.status + '</button>';
                     }
-
                     $('#btn_send_email' + data.id).replaceWith(btn_send_email);
                 }
             });

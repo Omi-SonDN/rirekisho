@@ -40,7 +40,7 @@
             <h2>{{ $e->getMessage() }}</h2>
         </span>
         <img src="{{asset('public/user/img/503.jpg')}}" width="600" height="449" />
-        <a href="#" title="Back to site" class="error-back">Trang chủ</a>
+        <a href="{{url('/')}}" title="Back to site" class="error-back">Trang chủ</a>
     </div>
 </div>
 @stop

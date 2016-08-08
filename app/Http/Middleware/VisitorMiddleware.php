@@ -17,7 +17,8 @@ class VisitorMiddleware
     {
 
         if ($request->user()->getRole() == "Applicant") {
-            return response('Access denied ', 404);
+            abort(403);
+//            return response('Access denied ', 404);
         }
         return $next($request);
     }

@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class StatisticsUserController extends Controller
 {
+    public function __construct()
+    {
+         $this->middleware('SuperAdmin');
+    }
     /**
      * Display a listing of the resource.
      *

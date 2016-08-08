@@ -13,27 +13,27 @@ class CV extends Model
 
     protected $table = 'cvs';
     protected $fillable = [
-        'Furigana_name',
-        'Last_name',
-        'First_name',
+        'user_id',
+        'name_cv',
+        'email',
         'Photo',
-        'Birth_date',
-        'Gender',
-        'Address',
-        'Contact_information',
-        'Phone',
-        'Self_intro',
-        'Marriage',
         'Request',
         'positions',
+        'Memo',
+        'Active',
+        'Status',
+        'version',
+        'apply_to',
         'notes',
+        'type_cv',
+        'live',
+        'attach',
         'github',
         'linkedin',
-        'Active',
-        'attach'
+        'active_by'
     ];
 
-    protected $appends = ['age'];
+    //protected $appends = ['age'];
 
     // public function getStatusnameAttribute(){
     //     switch ($this->Status) {
@@ -75,21 +75,55 @@ class CV extends Model
         return $query->where('active', 1);
     }
 
-    /************* scope *********************/
-
-    public function getNameAttribute()
+    /************* scopenoneactive array *********************/
+    public function scopeIsactive($query, $active)
     {
-        if ($this->First_name != "") {
-            return $this->Last_name . " " . $this->First_name;
-        } else return '---';
-    }
-
-    public function getJGenderAttribute()
-    {
-        if ($this->Gender == 0) {
-            return "Nữ";
+        if ($active) {
+            return $query->whereIn('cvs.active', $active);
         } else {
-            return "Nam";
+            return $query;
+        }
+    }
+    /************* scopelive array *********************/
+    public function scopeLive($query, $live)
+    {
+        return $query->whereIn('cvs.live', $live);
+    }
+    /************* scope check status cv *********************/
+    public function getCheckcvAttribute()
+    {
+        if ($this->Active == 0) {
+            return "Hồ sơ đang chờ duyệt";
+        } else {
+            return "Hồ sơ đã duyệt";
+        }
+    }
+    /************* scope check status cv *********************/
+    public function getLivecvAttribute()
+    {
+        if ($this->live == 0) {
+            return '<img style="-webkit-user-select: none" alt="Cv Offline" src="'. asset('/admin/img/users_offline.gif').'">';
+        } else {
+            return '<img style="-webkit-user-select: none" alt="Cv Online" src="'. asset('/admin/img/users_online.gif').'">';
+        }
+    }
+    /************* scope check type cv *********************/
+    public function getcvTypeAttribute()
+    {
+        if ($this->type_cv == 0) {
+            return 'Hồ sơ từng bước';
+        } else {
+            return 'Hồ sơ đính kèm file';
+        }
+    }
+    /************* scope check type cv *********************/
+    public function getActBycvAttribute()
+    {
+        $_us = \DB::table('users')->where('id',$this->active_by)->first();
+        if(count($_us) && $_us->First_name) {
+            return '<a href="#" title="Viet them trang thong tin tai khoan CV info">' . $_us->Last_name . " " . $_us->First_name .'</a>';
+        } else {
+            return '----';
         }
     }
 
@@ -97,40 +131,6 @@ class CV extends Model
     {
         $position = $this->positions;
         return $position;
-
-    }
-
-    public function getBDayAttribute()
-    {
-        $value = date_create($this->Birth_date);
-        return date_format($value, 'Y年m月d日');
-    }
-
-    public function getBirthdayAttribute()
-    {
-
-        $value = date_create($this->Birth_date);
-        return date_format($value, 'd-m-Y');
-    }
-
-    /**
-     * @param $value
-     * @return string
-     */
-    public function getAgeAttribute($value)
-    {
-        $value = date_create($this->Birth_date);
-        $today = date_create();
-        date_timestamp_set($today, time());
-        $tuoi = date_diff($value, $today);
-        return $tuoi->format("%y");
-    }
-
-    public function getJMarriageAttribute($value)
-    {
-        if ($this->Marriage == 0) {
-            return "Độc thân";
-        } else return "Đã kết hôn";
 
     }
 

@@ -162,7 +162,7 @@
                     <h1>{{$e->getStatusCode()}}</h1>
                     <h2>{{ $e->getMessage() }}</h2>
                 </hgroup>
-                <a href="#" title="Back to site" class="error-back">Trang chủ</a>
+                <a href="{{url('/')}}" title="Back to site" class="error-back">Trang chủ</a>
             </article>
         </div>
     </div>

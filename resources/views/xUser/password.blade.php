@@ -55,7 +55,7 @@
                         <input type="submit" form="profile-forms" name="submit1" value="Thay đổi"
                                class="b-purple">
                         <input type="button" form="profile-forms" name="" value="Cancel"
-                               class="b-purple" onclick="window.location='{{\URL::route('User.index')}}'">
+                               class="b-purple" onclick="window.location='{{\URL('/')}}'">
                     </li>
                     <li>
                         @if (count($errors) > 0)

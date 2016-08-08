@@ -8,6 +8,7 @@
     <!-- local css-->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/admin/css/3.3.5-bootstrap.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/datepicker3.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>
@@ -40,6 +41,7 @@
 <!---  jQuery-->
 <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
 <script type="text/javascript" src="{{ URL::asset('/admin/js/1.15.0-jquery.validate.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 <script src="{{ URL::asset('js/include.js')}}"></script>
 {{--thu vien bang bieu--}}
 <script type="text/javascript" src="{{ URL::asset('/admin/bower_components/statistics/js/raphael-min.js')}}"></script>

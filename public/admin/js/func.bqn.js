@@ -1,6 +1,5 @@
 $(document).ready(function ($) {
     $.tablesorter.customPagerControls({
-        size: 10,
         table: $('.tableuser'),                   // point at correct table (string or jQuery object)
         pager: $('.pager'),                   // pager wrapper (string or jQuery object)
         pageSize: '.left a',                // container for page sizes
@@ -242,8 +241,9 @@ $(document).ready(function ($) {
         })
         .tablesorterPager({
             container: $('.pager'),
-            output: 'showing: {startRow} to {endRow} of {totalRows} rows',
             size: 10,
+            output: 'showing: {startRow} to {endRow} of {totalRows} rows',
+
             //
             //    // if true, the table will remain the same height no matter how many
             //    // records are displayed. The space is made up by an empty
@@ -326,7 +326,7 @@ $(document).ready(function ($){
         loop =0;
     });
 
-    $('.checkAll').live( 'click', function() {
+    $('.checkAll').on( 'click', function() {
         loop = 0
         if($(this).is(':checked')){
             is_check =true;
@@ -350,7 +350,7 @@ $(document).ready(function ($){
         });
     });
 
-    $('.cb-element' ).live( 'click', function() {
+    $('.cb-element' ).on( 'click', function() {
         var total = 0;
         $('tbody tr input.cb-element').each( function () {
             if (($(this).closest('.data').css('display')) != 'none') {
@@ -405,4 +405,9 @@ function multi_del_use () {
             $('.wait-modal-load').removeClass("loading");
         }
     });
+}
+
+// goi tooltip
+function topxTip (content)	{
+    Tip(content, PADDING, 1 , BORDERWIDTH, 0, BGCOLOR, '', STICKY, 1, DURATION, 10000, CLICKCLOSE, true);
 }
