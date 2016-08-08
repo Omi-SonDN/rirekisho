@@ -11,6 +11,7 @@
                 <thead>
                 <th>STT</th>
                 <th>Trạng thái</th>
+                <th>Cho phép gửi mail</th>
                 <th>Hành động</th>
                 </thead>
                 @include('includes.flash-alert')
@@ -23,6 +24,9 @@
                         </td>
                         <td>
                             {{ $stt->status }}
+                        </td>
+                        <td>
+                            {!! $stt->allow_send !!}
                         </td>
                         <td>
                             <a style="font-weight: bold; color: white;" href="{{url('status',[$stt->id ,'edit'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>

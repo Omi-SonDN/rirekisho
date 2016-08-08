@@ -267,7 +267,7 @@
                         <table>
                             <tr>
                                 <th colspan="2"><h2 style="text-align: left;">Giới thiệu bản thân</h2></th>
-                                <tr><th></th><td>{{$CV->User->Self_intro}} </td></tr>
+                                <tr><td class="col-lg-12">{{$CV->User->Self_intro}} </td></tr>
                             </tr>
                         </table>
                     </li>
@@ -275,7 +275,7 @@
                         <table>
                             <tr>
                                 <th colspan="2"><h2 style="text-align: left;">Nguyện vọng</h2></th>
-                                <tr><th></th><td>{{$CV->Request}} </td></tr>
+                                <tr><td class="col-lg-12">{{$CV->Request}} </td></tr>
                             </tr>
 
                         </table>

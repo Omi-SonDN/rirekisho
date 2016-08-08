@@ -16,6 +16,7 @@
                     <option @if (Request::has('apply_to')) {{ (Request::input('apply_to') == $position->id) ? 'selected' : ''}} @endif value="{{$position->id}}">{{$position->name}}</option>
                 @endforeach
             </select>
+
             <select id = "statusSearch" name="Status" onchange="adSearchChange('', '', '', this)">
                 <option value="">-- Trạng thái --</option>
                 @can('Visitor')

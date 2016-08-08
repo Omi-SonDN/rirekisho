@@ -14,6 +14,7 @@
     {{--<link rel="stylesheet" type="text/css" href=" URL::asset('css/all.css') " />--}}
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/datepicker3.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/select2.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>
@@ -84,13 +85,14 @@
 <script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 <script type="text/javascript" src="{{asset('/admin/js/wz_tooltip.js')}}"></script>
 
+<script type="text/javascript" src="{{asset('/js/tinymce/tinymce.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/select2.full.min.js')}}"></script>
+
 <script src="{{ URL::asset('js/include.js')}}"></script>
 <script src="{{ asset('js/CV_changeStatus.js') }}"></script>
 <script src="{{ asset('js/email_send.js') }}"></script>
 
-
 <!-- DataTables JavaScript -->
-{{--<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>--}}
 {{--<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/js/jquery-latest.js')}}"></script>--}}
 <script type="text/javascript"
         src="{{asset('/admin/bower_components/datatables-sort/js/jquery.tablesorter.min.js')}}"></script>

@@ -39,16 +39,18 @@ class CVController extends Controller
             $s_name = '';
         }
 
-        if ($request->has('apply_to')) {
-            $apply_to = (int)$request->get('apply_to');
-        } else {
-            $apply_to = null;
+
+        if ($request->has('positions') ) {
+            $positions = (int)$request->get('positions');
+        }else {
+            $positions = null;
+
         }
 
         if ($request->has('status')) {
             $status = (int)$request->get('status');
-        } else {
-            $status = null;
+        }else {
+            $status = '';
         }
 
         if ($request->has('data-field')) {
@@ -76,7 +78,8 @@ class CVController extends Controller
             $_page = 1;
         }
 
-        list($CVs, $_Position, $get_paging) = $this->paginationCV($s_name, $apply_to, $status, $_field, $_sort, $_page, $_numpage);
+
+        list($CVs, $_Position, $get_paging)= $this->paginationCV($s_name, $positions, $status, $_field, $_sort, $_page, $_numpage);
         $count = count($CVs);
 
         return view('xCV.CVindex', compact('CVs', 'count', '_numpage', 'get_paging', '_Position'));
@@ -120,32 +123,6 @@ class CVController extends Controller
         return view('xCV.resort', compact('CVs'));
     }
 
-    public function resort()
-    {
-        if (Gate::denies('Visitor')) {
-            abort(403);
-        }
-        global $request;
-        if (!$request->startdate || !$request->enddate)
-            return view('xCV.resort');
-        $startdate = Carbon::createFromFormat('d/m/Y', trim($request->startdate));
-        $enddate = Carbon::createFromFormat('d/m/Y', trim($request->enddate));
-        $in = \App\CV::whereBetween('created_at', array($startdate->subDay(), $enddate))->get();
-        $out = \App\CV::whereBetween('created_at', array($startdate, $enddate))->get();
-        $out->each(function ($item, $key) use ($in) {
-            $in->add($item);
-        });
-
-        $result = $in->sortBy(function ($item, $key) {
-            return $item->created_at;
-        })->groupBy(function ($item, $key) {
-            return $item->created_at;
-        });
-        dd($result->groupBy(function ($item, $key) {
-            return $item->created_at;
-        }));
-        return view('xCV.resort', compact('CVs'), ['result' => $result, 'startdate' => trim($request->startdate), 'enddate' => trim($request->enddate)]);
-    }
 
     public function show($id)
     {
@@ -198,6 +175,7 @@ class CVController extends Controller
             $cv->save();
             exit();
         }
+
         if ($request->get('apply_to')) {
             $cv->apply_to = $request->get('apply_to');
             $cv->positions = \App\Positions::find($cv->apply_to)->name;
@@ -219,6 +197,7 @@ class CVController extends Controller
                 \File::exists($oldattach) && \File::delete($oldattach);
             }
             $file->move(public_path() . '/files/', $attach);
+
             $cv->attach = $attach;
             $cv->save();
 
@@ -455,14 +434,28 @@ class CVController extends Controller
         }
 
         $CV = CV::findorfail($id);
+
         if ($request->has('_potions')) {
             $CV->apply_to = $request->input('_potions');
             $CV->update();
             return 'true';
             //return \Response::json(array('url'=> \URL::previous()));
         }
-        $CV->status = $request->status;
+        $CV->Status = $request->status;
+
         $CV->update();
+        //get allow send mail info;
+        $status = \App\Status::find($request->status);
+        $CV->allow_sendmail = $status->allow_sendmail;
+        //Get next status
+        $next_status = array();
+        foreach(\App\Status::all() as $status ){
+            if( in_array($request->status,$status->previous_status) ){
+                $next_status[] = $status;
+            }
+        }
+        $CV->next_status = $next_status;
+        
 
         return \Illuminate\Support\Facades\Response::json($CV);
     }
@@ -522,6 +515,8 @@ class CVController extends Controller
         }
 
         $CV1 = CV::with('User')
+            ->with('positionCv')
+            ->with('status')
             ->join('users', 'users.id', '=', 'cvs.user_id')
             ->select(
                 'cvs.*',
@@ -578,6 +573,7 @@ class CVController extends Controller
         } else {
             $_Position = Positions::all();
         }
+
 
         $url_modify = Pagination_temp::cn_url_modify('search=' . $name, 'status=' . $Status, 'apply_to=' . $positions, 'data-field=' . $none_field, 'data-sort=' . $bc, 'per_page', 'page');
         list ($cvs, $get_paging) = Pagination_temp::cn_arr_pagina($CV1, $url_modify, $_page, $_numpage);

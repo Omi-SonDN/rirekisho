@@ -25,6 +25,7 @@
                     @endif
                 </div>
             </td>
+
             <td class="name">
                 @if ($CV->type_cv)
                     <a href="{{ \URL('CV/create/upload/'. $CV->hash) }}" title="Xem CV {{$CV->name_cv}}">{{ $CV->User->Name }} </a>
@@ -34,36 +35,27 @@
             </td>
             <td class="worth">{{$CV->User->JGender}}</td>
             <td data-field="age">{{$CV->User->Age}}</td>
-            @can('Visitor')
-            <td class="name" style="{{$CV->position}}">
-                <select class="form-control" name="_positions" onchange="change_positions(this, {{ $CV->id }})">
-                    @can('Admin')
-                    <option>-- Chọn vị trí --</option>
-                    @endcan
-                    @foreach ($_Position as $position)
-                        @if(Auth::user()->getRole() === 'Visitor')
-                            @if ($position->id === $CV->apply_to)
-                                <option selected value="{{$position->id}}">{{$position->name}}</option>
-                            @endif
-                        @else
-                            <option {{($position->id === $CV->apply_to) ? 'selected' : ''}} value="{{$position->id}}">{{$position->name}}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </td>
 
+            @can('Visitor')
+            <td class="name" style="">{{(!empty($CV->positionCv)) ? $CV->positionCv->name : '---'}}</td>
             <td style="">
                 <div class="status" id="status{{ $CV->id}}">
                     @include('includes._form_status',['CV' => $CV])
                     @can('Admin')
                         <input type="hidden" value="{{ $CV->id}}" id="id"/>
                         <input type="hidden" value="{{ ($CV->User->email)}}" id="email"/>
-                        <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary btn-send-email col-lg-12" value="{{ $CV->Status }}">Send Email {{ $CV->Status }}</button>
+
+                        @if(!empty($CV->status))
+                            <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary btn-send-email {{($CV->status->allow_sendmail) ? '' : 'disabled'}} col-lg-12" value="{{ $CV->Status }}">Send Email {{ $CV->Status }}</button>
+                        @else
+                            <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary disabled btn-send-email col-lg-12" value="">Send Email </button>
+                        @endif
                     @endcan
                 </div>
             </td>
             @endcan
             @can('Admin')
+
             <td style="text-align: center">
                 <table style="margin: 0 auto">
                     <tr>
@@ -102,6 +94,7 @@
                     </tr>
                 </table>
             </td>
+
             @endcan
 
         </tr>

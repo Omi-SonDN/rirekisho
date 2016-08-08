@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CheckFormEmailRequest;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,7 @@ use Session;
 use App\User;
 use App\Groups;
 use Carbon\Carbon;
+use App\Status;
 
 class EmailsController extends Controller
 {
@@ -162,8 +164,10 @@ class EmailsController extends Controller
 
         if ($request->type != null) {
             $email = $request->email;
+            $status = Status::find($request->type);
 
-            $data = array('email' => $email, 'id' => $request->id, 'type' => $request->type);
+            $data = array('email' => $email, 'id' => $request->id, 'type' => $request->type, 'status' =>
+            $status);
 
             return view('emails._form_email_1')->with($data);
         }
@@ -215,12 +219,16 @@ class EmailsController extends Controller
             return redirect()->back()->withErrors($errors)->withInput($request->all());
         }//end get email address
 
-        // $this->validate($request, [
-        //     'sender' => 'required',
-        //     'date' => 'required|after:now',
-        //     'time' => 'required',
-        //     'address' => 'required',
-        // ]);
+        $rules = array('sender'=>'required');
+        $status = Status::find($request->type);
+        if( in_array('Date',$status->info))
+            $rules['date'] = 'required|after:now';
+        if( in_array('Time',$status->info))
+            $rules['time'] = 'required';
+        if( in_array('Adddress',$status->info))
+            $rules['address'] = 'required';
+
+        $this->validate($request, $rules);
 
         $data = array(
             'date' => $request->date,
@@ -229,6 +237,18 @@ class EmailsController extends Controller
             'type' => $request->type,
             'cv' => \App\CV::find($request->id)
         );
+
+        $message = $data['cv']->status->email_template;
+
+        $message = str_replace('[First_name]', $data['cv']->User->First_name, $message);
+        $message = str_replace('[Positions]', ($data['cv']->position)?$data['cv']->position->name:'' , $message);
+        if( in_array('Time',$status->info))
+        $message = str_replace('[Time]', $request->time, $message);
+        if( in_array('Date',$status->info))
+        $message = str_replace('[Date]', \Carbon\Carbon::createFromFormat('Y-m-d',$request->date)->format('d/m/Y'), $message);
+        if( in_array('Adddress',$status->info))
+        $message = str_replace('[Address]', $request->address, $message);
+        $data['email_content'] = $message;
 
         if (isset($request->attach[0])) {
             //upload file to server
@@ -241,7 +261,7 @@ class EmailsController extends Controller
                 // $filename = $file->getFilename() . '.' . $extension;
                 $attachs[] = public_path('public/') . $filename;
             }
-
+            
             //send email
             Mail::send('emails._email_1', $data, function ($m) use ($request, $recipients, $attachs) {
                 $m->from(config('mail.username'), $request->sender)
@@ -255,13 +275,26 @@ class EmailsController extends Controller
                 //     $m->attach($attachs[$i]);
                 // }
             });
+            //  Mail::send('html' => 'view', [], function ($m) use ($request, $recipients, $attachs, $message) {
+            //     $m->from(config('mail.username'), $request->sender)
+            //         ->subject($request->subject)
+            //         ->to($recipients)
+            //         ->setBody($message);
+            //     foreach ($attachs as $file) {
+            //         $m->attach($file);
+            //     }
+            //     // for ($i = 0; $i < sizeOf($attachs); $i++) {
+            //     //     print_r($attachs[$i]);
+            //     //     $m->attach($attachs[$i]);
+            //     // }
+            // });
 
             //delete file
             foreach ($attachs as $file) {
                 unlink($file);
             }
 
-            Session::flash('flash_message', 'Email has been sent.');
+            //Session::flash('flash_message', 'Email has been sent.');
             $errors = false;
             if ($errors) {
                 return redirect()->back()->withErrors($errors);
@@ -270,7 +303,8 @@ class EmailsController extends Controller
             }
         }
         //if status in this list
-        if (in_array($request->type, [1, 2, 3, 9, 12, 26, 29]))
+        $status = \App\Status::find($request->type);
+        if ($status->allow_sendmail)
             Mail::send('emails._email_1', $data, function ($m) use ($request) {
                 $m->from(config('mail.username'), $request->sender);
                 $m->to($request->recipient)->subject($request->subject);

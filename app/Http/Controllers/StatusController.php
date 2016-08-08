@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Status;
+use DB;
 use Illuminate\Support\Facades\Response;
 use Gate;
 use Input;
@@ -46,6 +47,12 @@ class StatusController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
+
+        $is_ck = DB::table('status')->count();
+        if (empty($is_ck)){
+            DB::table('status')->insert(['id' => 1, 'status' => 'Chờ duyệt CV', 'allow_sendmail' => 0]);
+        }
+
         return view('status.add');
     }
 
@@ -54,9 +61,15 @@ class StatusController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
+
         global $request;
         $status = new Status();
         $status->status = $request->status;
+        $status->prev_status = implode(',', $request->prev_status);
+        if(count($request->infor))
+            $status->infor = implode(',', $request->infor);
+        $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
+        $status->email_template = $request->email_template;
 
         $status->save();
         return redirect()
@@ -86,7 +99,11 @@ class StatusController extends Controller
 
         $status = new Status();
         $status->status = $request->status;
-
+        $status->prev_status = implode(',', $request->prev_status);
+        if(count($request->infor))
+            $status->infor = implode(',', $request->infor);
+        $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
+        $status->email_template = $request->email_template;
         $status->save();
 
 //        Session::flash('flash_message', 'status has been saved.');
@@ -138,11 +155,19 @@ class StatusController extends Controller
             $this->validate($request, [
                 'status' => 'required|max:255|unique:status',
             ]);
-
-            $status->status = $request->status;
         }
+        
+        $status->status = $request->status;
+        $status->prev_status = implode(',', $request->prev_status);
+        if(count($request->infor))
+            $status->infor = implode(',', $request->infor);
+        else
+            $status->infor = null;
+        $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
+        $status->email_template = $request->email_template;
 
-        $status->update($request->all());
+        // $status->update($request->all());
+        $status->save();
         return redirect()
             ->route('status::list')
             ->with(
@@ -168,7 +193,12 @@ class StatusController extends Controller
         }
         //Status::destroy($id);
         $status = Status::findorfail($id);
-
+        foreach( \App\CV::all() as $cv){
+            if( $cv->Status==$id){
+                $cv->Status = 1;
+                $cv->save();
+            }
+        }
         $status->delete($id);
 
 //        Session::flash('flash_message', 'status has been deleted.');

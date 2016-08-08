@@ -11,8 +11,12 @@ class CreateStatusTable extends Migration
     public function up()
     {
         Schema::create('status', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->string('status');
+            $table->tinyInteger('allow_sendmail');
+            $table->text('prev_status');
+            $table->text('infor');
+            $table->text('email_template');
             $table->timestamps();
         });
     }

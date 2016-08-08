@@ -363,8 +363,10 @@
                     </div>
                     @endif
                     <div >
+
                         <div class="input fix-file">
                             <input id="{{$key}}" name="attach" type="file" accept=".pdf"/>
+
                             <div class="success-status float_left" id="s_attach_{{$key}}" style="display:none;">
                                 <i class="fa fa-pencil-square-o"></i>
                             </div>

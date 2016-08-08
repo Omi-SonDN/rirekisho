@@ -110,6 +110,13 @@ i[class^='fa-'], i[class*=' fa-'] {
     transition: all .4s;
 }
 
+.my-forms select.optioncv{
+    width: 90%;
+    height: 44px;
+    padding: 0 20px;
+    font-weight: 600;
+}
+
 .my-forms .input-left {
     padding-left: 58px;
 }

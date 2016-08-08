@@ -25,6 +25,13 @@
                         @endif
                         @can('Admin')
                             <li {!! (\Request::route()->getName() == 'User.index') ? 'class="active"' : '' !!}><a href="{{url('User')}}">User</a></li>
+
+                        {{--<li @if(URL::current() == url('CV')) class="active" @endif ><a href="{{url('CV')}}">Trang chủ</a></li>--}}
+                        {{--@can('Admin')--}}
+                            {{--<li @if(URL::current() == url('User')) class="active" @endif><a href="{{url('User')}}">User</a></li>--}}
+                            {{--<li @if(URL::current() == url('positions')) class="active" @endif><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>--}}
+                            {{--<li @if(URL::current() == url('status')) class="active" @endif><a href="{{url('status')}}">Quản lý trạng thái</a></li>--}}
+
                         @endcan
                         <li><a href="{{url('auth/logout')}}">Đăng xuất</a></li>
                         <li class="{{(\Request::path() == 'User/'.\Auth::user()->hash) ? 'active' : ''}}"><a href="{{url('User',[Auth::User()->hash])}}" style="border: 1px solid transparent;">Chào {{Auth::User()->name}}</a></li>
