@@ -10,6 +10,8 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" defer></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript"> (function () {
             var css = document.createElement('link');
             css.href = '//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
@@ -19,13 +21,14 @@
         })(); </script>
 
     <script src="{{ URL::asset('js/include.js')}}" defer></script>
-
+    <script src="{{ URL::asset('js/bootstrap-datepicker.js')}}" defer></script>
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- local css-->
 <!--link rel="stylesheet" type="text/css" href="{{ URL::asset('css/all.css') }}"/-->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/datepicker3.css') }}"/>
 
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>
@@ -50,6 +53,7 @@
           href="{{ asset('/admin/bower_components/datatables-sort/css/theme.grey.min.css') }}"/>
     <link rel="stylesheet" type="text/css"
           href="{{ asset('/admin/bower_components/datatables-sort/css/theme.jui.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/statistic.css') }}"/>
 
 </head>
 <body>

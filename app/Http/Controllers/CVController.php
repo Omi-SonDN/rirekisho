@@ -47,7 +47,7 @@ class CVController extends Controller
         if ($request->has('data-field') ) {
             $_field = $request->get('data-field');
         }else {
-            $_field = 'name';
+            $_field = 'id';
         }
 
         if ($request->has('data-sort') ) {
@@ -251,7 +251,7 @@ class CVController extends Controller
     /// $positions  tim theo vi tri tuyen dung
     /// $Status trang thai cua cv
     // Mac dinh sap xep theo ten tang dan voi 10 bang ghi tren mot trang
-    public function paginationCV ($name = '', $positions = null, $Status = null, $_field = 'name', $data_sort = 'asc', $_page = 1, $_numpage = 10)
+    public function paginationCV ($name = '', $positions = null, $Status = null, $_field = 'id', $data_sort = 'asc', $_page = 1, $_numpage = 10)
     {
         if($data_sort == "desc") {
             $bc = 'desc';
@@ -285,7 +285,7 @@ class CVController extends Controller
             }
         }else {
             $_field = 'Last_name';
-            $none_field = 'name';
+            $none_field = 'id';
         }
 
         $CV1 = CV::with('User')
@@ -311,16 +311,19 @@ class CVController extends Controller
                 $CV1 = $this->ASC($CV1);
             else $CV1 = $this->DESC($CV1);
         } else{
-            if($bc == 'desc')
-                $CV1 = $CV1->sortBy($none_field);
-            else $CV1 = $CV1->sortByDesc($none_field);
+            if($none_field == 'id')
+                $CV1 = $CV1->sortByDesc($none_field);
+            else{
+                if($bc == 'desc')
+                    $CV1 = $CV1->sortBy($none_field);
+                else $CV1 = $CV1->sortByDesc($none_field);
+            }
         }
 
         $url_modify = Pagination_temp::cn_url_modify('search='.$name, 'status='.$Status, 'apply_to='.$positions, 'data-field='.$none_field, 'data-sort='.$bc, 'per_page', 'page');
         list ($cvs, $get_paging) = Pagination_temp::cn_arr_pagina($CV1, $url_modify, $_page, $_numpage);
 
         return array($cvs, $get_paging);
-
     }
 
     public function DESC($CVs)
@@ -336,7 +339,7 @@ class CVController extends Controller
             $CVs[$i]->dem = $dem;
             $CVs[$i]->fullname = $CVs[$i]->ten.' '.$CVs[$i]->Last_name.' '.$CVs[$i]->dem;
         }
-        $CVs = $CVs->sortBy('fullname');
+        $CVs = $CVs->sortByDesc('fullname');
         return $CVs;
     }
 
@@ -354,7 +357,252 @@ class CVController extends Controller
             $CVs[$i]->fullname = $CVs[$i]->ten.' '.$CVs[$i]->Last_name.' '.$CVs[$i]->dem;
 
         }
-        $CVs = $CVs->sortByDesc('fullname');
+        $CVs = $CVs->sortBy('fullname');
         return $CVs;
+    }
+
+    public function statistic(Request $request){
+        list($cv_upload, $cv_pass, $ox, $text) = $this->statisticMonth();
+        return view('xCV.CVstatistic')->with('ox', $ox)->with('cv_upload', $cv_upload)
+            ->with('cv_pass', $cv_pass)->with('text', $text);
+    }
+
+    public function statisticYear(){
+        $cv3 = CV::select(DB::raw("count(id) as count, year(created_at) as year"))
+            ->orderBy('created_at')
+            ->groupBy(DB::raw('year(created_at)'))
+            ->get();
+        foreach ($cv3 as $cv) {
+            $year = $cv->year;
+            $datestart = $year.'-01-01 00:00:00';
+            $dateend = $year.'-12-31 00:00:00';
+            $cv1 = CV::select(DB::raw("count(id) as count"))
+                ->where('created_at', '>=', $datestart)
+                ->where('created_at', '<=', $dateend)
+                ->where('Status', '=', 14)
+                ->orderBy('created_at')
+                ->get();
+            if($cv1 != null)
+                $cv->count_pass = $cv1[0]->count;
+            else $cv->count_pass = 0;
+        }
+        $cv3 = $cv3->toArray();
+
+        $count_year = array_column($cv3, 'count');
+        $year = array_column($cv3,'year');
+        $cv_pass = array_column($cv3, 'count_pass');
+        
+        $cv_upload = json_encode($count_year,JSON_NUMERIC_CHECK);
+        $year = json_encode($year,JSON_NUMERIC_CHECK);
+        $cv_pass = json_encode($cv_pass,JSON_NUMERIC_CHECK);
+        $text = 'Thống kê CV theo năm';
+
+        return array($cv_upload, $cv_pass,$year, $text);
+    }
+
+    public function statisticQuarter(){
+        //now year
+        $day = date('Y-m-d H:i:s');
+        $year = getYear($day);
+        $datestart = $year.'-01-01 00:00:00';
+        $dateend = $year.'-12-31 00:00:00';
+
+        $cv = CV::select(DB::raw("count(created_at) as count, quarter(created_at) as quarter"))
+            ->where('created_at', '>=', $datestart)
+            ->where('created_at', '<=', $dateend)
+            ->orderBy('created_at')
+            ->groupBy(DB::raw('quarter(created_at)'))
+            ->get();
+        foreach ($cv as $cv1) {
+            $_quarter = $cv1->quarter;
+            $month = $_quarter*3 + 1;
+            $month1 = $month - 3;
+            $datestart = $year.'-'.$month1.'-01 00:00:00';
+            $dateend = $year.'-'.$month.'-01 00:00:00';
+            $cv2 = CV::select(DB::raw("count(id) as count"))
+            ->where('Status', '=', 14)
+            ->where('created_at', '>=', $datestart)
+            ->where('created_at', '<', $dateend)
+            ->orderBy('created_at')
+            ->get();
+
+            if($cv2 != null)
+                $cv1->count_pass = $cv2[0]->count;
+            else $cv1->count_pass = 0;
+            $cv1->month = 'Tháng '.$cv1->month;
+
+            $cv1->quarter = 'Quý '.$cv1->quarter;
+        }
+
+        $cv = $cv->toArray();        
+        $quarter = array_column($cv, 'quarter');
+        $count_quarter = array_column($cv, 'count');
+        $c_q_pass = array_column($cv, 'count_pass');
+
+        $quarter = json_encode($quarter,JSON_NUMERIC_CHECK);
+        $count_quarter = json_encode($count_quarter,JSON_NUMERIC_CHECK);
+        $c_q_pass = json_encode($c_q_pass,JSON_NUMERIC_CHECK);
+        $text = 'Thống kê CV theo quý';
+        return array($count_quarter, $c_q_pass,$quarter, $text);
+    }
+
+    public function statisticMonth()
+    {
+        //by month
+        $day = date('Y-m-d H:i:s');
+        $year = getYear($day);
+        $datestart = $year.'-01-01 00:00:00';
+        $dateend = $year.'-12-31 00:00:00';
+
+        $cv = CV::select(DB::raw("count(id) as count, month(created_at) as month"))
+            ->where('created_at', '>=', $datestart)
+            ->where('created_at', '<=', $dateend)
+            ->orderBy('created_at')
+            ->groupBy(DB::raw('month(created_at)'))
+            ->get();
+        foreach ($cv as $cv1) {
+            $datestart = $year.'-'.$cv1->month.'-01 00:00:00';
+            $month1 = $cv1->month + 1;
+            $dateend = $year.'-'.$month1.'-01 00:00:00';
+            $cv2 = CV::select(DB::raw("count(id) as count, month(created_at) as month"))
+            ->where('Status', '=', 14)
+            ->where('created_at', '>=', $datestart)
+            ->where('created_at', '<', $dateend)
+            ->orderBy('created_at')
+            ->get();
+            if($cv2 != null)
+                $cv1->count_pass = $cv2[0]->count;
+            else $cv1->count_pass = 0;
+            $cv1->month = 'Tháng '.$cv1->month;
+        }
+
+        $cv = $cv->toArray();
+
+        $cv_upload = array_column($cv, 'count');
+        $month = array_column($cv,'month');
+        $cv_pass = array_column($cv, 'count_pass');
+
+        $cv_upload = json_encode($cv_upload,JSON_NUMERIC_CHECK);
+        $cv_pass = json_encode($cv_pass,JSON_NUMERIC_CHECK);
+        $month = json_encode($month,JSON_NUMERIC_CHECK);
+        $text = 'Thống kê CV theo tháng';
+        return array($cv_upload, $cv_pass,$month, $text);
+    }
+
+    public function statisticPositions($datestart, $dateend,$key)
+    {
+        if($key == ''){
+            $cv = CV::select(DB::raw("count(id) as count, apply_to positions"))
+                ->where('created_at', '>=', $datestart)
+                ->where('created_at', '<=', $dateend)
+                ->groupBy(DB::raw('apply_to'))
+                ->get();
+
+            // $cv = DB::table('cvs')->join('positions', 'cvs.apply_to', '=', 'positions.id')
+            // ->select(DB::raw("count(cvs.id) as count, cvs.apply_to as po, positions.name as name"))
+            // ->where('cvs.created_at', '>=', $datestart)
+            // ->where('cvs.created_at', '<=', $dateend)
+            // ->groupBy(DB::raw('apply_to'))
+            // ->get();
+            // return $cv;
+            
+            foreach ($cv as $cv1) {
+                $cv2 = CV::select(DB::raw("count(id) as count"))
+                ->where('created_at', '>=', $datestart)
+                ->where('created_at', '<=', $dateend)
+                ->where('Status', '=', 14)
+                ->where('apply_to', '=', $cv1->positions)
+                ->get();
+                if($cv1 != null)
+                    $cv1->count_positions_pass = $cv2[0]->count;
+                else $cv1->count_positions_pass = 0;
+                if($cv1->positions != null){
+                    $name = DB::table('positions')
+                    ->where('id', '=', $cv1->positions)->get();
+                    $cv1->positions = $name[0]->name;
+                }
+            }
+        } else {
+            $cv = CV::select(DB::raw("count(id) as count, apply_to positions"))
+                ->where('created_at', '>=', $datestart)
+                ->where('created_at', '<=', $dateend)
+                ->where('apply_to', '=', $key)
+                ->get();
+    
+            foreach ($cv as $cv1) {
+                $cv2 = CV::select(DB::raw("count(id) as count"))
+                ->where('created_at', '>=', $datestart)
+                ->where('created_at', '<=', $dateend)
+                ->where('Status', '=', 14)
+                ->where('apply_to', '=', $key)
+                ->get();
+                if($cv1 != null)
+                    $cv1->count_positions_pass = $cv2[0]->count;
+                else $cv1->count_positions_pass = 0;
+                if($cv1->positions != null){
+                    $name = DB::table('positions')
+                    ->where('id', '=', $cv1->positions)->get();
+                    $cv1->positions = $name[0]->name;
+                }
+            }
+        }
+
+        $cv= $cv->toArray();
+
+        $positions = array_column($cv, 'positions');
+        $count_positions = array_column($cv, 'count');
+        $count_positions_pass = array_column($cv, 'count_positions_pass');
+
+        $positions = json_encode($positions,JSON_NUMERIC_CHECK);
+        $count_positions = json_encode($count_positions,JSON_NUMERIC_CHECK);
+        $count_positions_pass = json_encode($count_positions_pass,JSON_NUMERIC_CHECK);
+        $text = 'Thống kê CV theo vị trí apply to';
+
+        return array($count_positions, $count_positions_pass, $positions,$text);
+    }
+
+    public function statisticSearch(Request $request)
+    {
+        $datestart = $request->input('startDate');
+        $datestart = $datestart.' 00:00:00';
+
+        $dateend = $request->input('endDate');
+        $dateend = $dateend.' 00:00:00';
+        $key = $request->input('key_search');
+    
+        list($cv_upload, $cv_pass, $ox, $text) = $this->statisticPositions($datestart, $dateend,$key);
+
+        return View::make('includes.positions_chart')
+            ->with('ox', $ox)->with('cv_upload', $cv_upload)
+            ->with('cv_pass', $cv_pass)->with('text', $text);
+    }
+
+    public function statisticStatus(Request $request)
+    {
+        $ox = $request->input('ox');
+        switch ($ox) {
+            case 'month':
+                list($cv_upload, $cv_pass, $ox, $text) = $this->statisticMonth();
+                break;
+            case 'quarter':
+                list($cv_upload, $cv_pass, $ox, $text) = $this->statisticQuarter();
+                break;
+            case 'year':
+                list($cv_upload, $cv_pass, $ox, $text) = $this->statisticYear();
+                break;
+            case 'position':
+                $day = date('Y-m-d H:i:s');
+                $year = getYear($day);
+                $month = getMonth($day);
+                $month1 = $month +1;
+                $datestart = $year.'-'.$month.'-01 00:00:00';
+                $dateend = $year.'-'.$month1.'-01 00:00:00';
+                list($cv_upload, $cv_pass, $ox, $text) = $this->statisticPositions($datestart, $dateend,'');
+                break;
+        }
+
+        return View::make('includes.positions_chart')
+            ->with('ox', $ox)->with('cv_upload', $cv_upload)
+            ->with('cv_pass', $cv_pass)->with('text', $text);
     }
 }

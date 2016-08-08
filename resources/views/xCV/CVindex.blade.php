@@ -59,8 +59,8 @@
     <table id="example" class="dataTable" data-sort="" data-field="">
         <thead>
         <tr>
-            <th class="ab" style="width: 150px"></th>
             <th class="ab" style="width: 50px"></th>
+            <th class="ab" style="width: 150px"></th>
             <th @if (Request::has('data-field') && Request::has('data-sort'))
                     @if(Request::input('data-field') == 'name')
                         @if (Request::input('data-sort') == 'asc ')
@@ -72,7 +72,7 @@
                         class="sorting" data-sort="asc"
                     @endif
                 @else
-                    class="sorting_asc" data-sort="asc"
+                    class="sorting" data-sort="asc"
                 @endif
                 onclick="adSearchChange('', '', '', '', this)" data-field="name" style="width: 150px">Họ và tên</th>
             <th @if (Request::has('data-field') && Request::has('data-sort'))

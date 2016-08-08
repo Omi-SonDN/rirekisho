@@ -12,7 +12,10 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
     //Route::get('CV/search1', 'CVController@search1');
     Route::get('CV', 'CVController@index');
     Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
-    Route::post('CV/adSearch', 'CVController@adSearch');
+    Route::post('CV/adSearch', 'CVController@adSearch');    
+    Route::get('CV/statistic', 'CVController@statistic');
+    Route::post('CV/statisticSearch', 'CVController@statisticSearch');
+    Route::post('CV/statisticStatus', 'CVController@statisticStatus');
 });
 Route::group(['middleware' => ['auth']], function () {
     Route::bind('User', function ($id) {

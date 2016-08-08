@@ -8,10 +8,12 @@
     <?php //$CVx = $CVs->reject(function ($item) {
         //return $item->Name == null || $item->Age == "0000-00-00";
     //});
+        $i = 0;
     ?>
 
     @foreach($CVs as $key => $CV)
         <tr class="data{{$key}}">
+            <td class="rank" style="text-align: center">{{++$i }}</td>
             <td class="image">
                 <div style=" position: relative;height: 100px;width: 100px;">
                     <?php $image = $CV->User->image;?>
@@ -29,7 +31,6 @@
                     @endif
                 </div>
             </td>
-            <td class="rank">{{++$key}}</td>
             <td class="name"><a href="{{url('CV',$CV )}} ">{{ $CV->Name }} </a></td>
             <td class="worth">{{$CV->JGender or ''}}</td>
             <td data-field="age">{{$CV->Age or ''}}</td>
