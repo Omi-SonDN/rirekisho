@@ -183,43 +183,8 @@ class EmailsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        $recipients = explode(",", $request->recipient);
-        foreach ($recipients as $recipient) {
-            if (!filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
-                //is group's name?
-                $group = Groups::where('name', '=', $recipient)
-                    ->with('users')->first();
-                //yes
-                if ($group) {
-                    if ($group->users->count() == 0) {
-                        $errors[] = 'No one in ' . $group->name;
-                    } else {
-                        foreach ($group->users as $user) {
-                            //add email address
-                            $recipients[] = $user->email;
-                        }
-                    }
-                    //remove group's name
-                    $key = array_search($recipient, $recipients);
-                    unset($recipients[$key]);
-                } else { //NO!
-                    $errors[] = 'Recipitent must be an email address.';
-                    return redirect()->back()->withErrors($errors)->withInput($request->all());
-                }
-            }
-        }
 
-
-        //remove duplicate
-        $recipients = array_unique($recipients);
-
-        //check - is there any email address?
-        if (count($recipients) == 0) {
-            $errors[] = 'No recipient!';
-            return redirect()->back()->withErrors($errors)->withInput($request->all());
-        }//end get email address
-
-        $rules = array('recipient'=>'required', 'sender'=>'required', 'subject'=>'required');
+        $rules = array('recipient'=>'required|regex:/^[a-z][a-z0-9]*(_[a-z0-9]+)*(\.[a-z0-9]+)*@[a-z0-9]([a-z0-9-][a-z0-9+)*(\.[a-z]{2,4}){1,2}$/', 'sender'=>'required', 'subject'=>'required');
         $status = Status::find($request->type);
         if( in_array('Date',$status->info))
             $rules['date'] = 'required|after:now';
@@ -250,6 +215,7 @@ class EmailsController extends Controller
         $message = str_replace('[Address]', $request->address, $message);
         $data['email_content'] = $message;
 
+        $attachs = array();
         if (isset($request->attach[0])) {
             //upload file to server
             $files = $request->attach;
@@ -261,57 +227,32 @@ class EmailsController extends Controller
                 // $filename = $file->getFilename() . '.' . $extension;
                 $attachs[] = public_path('public/') . $filename;
             }
-            
-            //send email
-            Mail::send('emails._email_1', $data, function ($m) use ($request, $recipients, $attachs) {
-                $m->from(config('mail.username'), $request->sender)
-                    ->subject($request->subject)
-                    ->to($recipients);
-                foreach ($attachs as $file) {
-                    $m->attach($file);
-                }
-                // for ($i = 0; $i < sizeOf($attachs); $i++) {
-                //     print_r($attachs[$i]);
-                //     $m->attach($attachs[$i]);
-                // }
-            });
-            //  Mail::send('html' => 'view', [], function ($m) use ($request, $recipients, $attachs, $message) {
-            //     $m->from(config('mail.username'), $request->sender)
-            //         ->subject($request->subject)
-            //         ->to($recipients)
-            //         ->setBody($message);
-            //     foreach ($attachs as $file) {
-            //         $m->attach($file);
-            //     }
-            //     // for ($i = 0; $i < sizeOf($attachs); $i++) {
-            //     //     print_r($attachs[$i]);
-            //     //     $m->attach($attachs[$i]);
-            //     // }
-            // });
-
-            //delete file
-            foreach ($attachs as $file) {
-                unlink($file);
-            }
-
-            //Session::flash('flash_message', 'Email has been sent.');
-            $errors = false;
-            if ($errors) {
-                return redirect()->back()->withErrors($errors);
-            } else {
-                return redirect()->back();
-            }
         }
-        //if status in this list
-        $status = \App\Status::find($request->type);
-        if ($status->allow_sendmail)
-            Mail::send('emails._email_1', $data, function ($m) use ($request) {
-                $m->from(config('mail.username'), $request->sender);
-                $m->to($request->recipient)->subject($request->subject);
-            });
+            
+        //send email
+        Mail::send('emails._email_1', $data, function ($m) use ($request, $attachs) {
+            $m->from(config('mail.username'), $request->sender)
+                ->subject($request->subject)
+                ->to($request->recipient);
+            if(count($attachs))
+            foreach ($attachs as $file) {
+                $m->attach($file);
+            }
+        });
+        if(count($attachs))
+        foreach ($attachs as $file) {
+            unlink($file);
+        }
 
         //Session::flash('flash_message', 'Email has been sent.');
-        return redirect()->back();
+        $errors = false;
+        if ($errors) {
+            return redirect()->back()->withErrors($errors);
+        } else {
+            return redirect()->back();
+        }
+        
+         redirect()->back();
     }
 
     /**

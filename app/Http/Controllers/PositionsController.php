@@ -61,7 +61,15 @@ class PositionsController extends Controller
         $positions->active = $request->get('active') ? $request->get('active'):0;
         $positions->description = $request->description;
 
+        $this->validate($request, array(
+            'name'=> 'required|unique:positions,name',
+            'active' => 'required',
+            'description' => 'required'
+        ));
+
         $positions->save();
+
+        
         return redirect()
             ->route('position::list')
             ->with(
@@ -84,10 +92,6 @@ class PositionsController extends Controller
             abort(403);
         }
 
-        $this->validate($request, [
-            'name' => 'required|max:255|unique:positions,name',
-        ]);
-
         $position = new Positions();
         $position->name = $request->name;
         $position->description = $request->description;
@@ -97,7 +101,11 @@ class PositionsController extends Controller
         if ($request->active == "false") {
             $position->active = 0;
         }
-
+        $this->validate($request, array(
+            'name'=> 'required|unique:positions,name',
+            'active' => 'required',
+            'description' => 'required'
+        ));
         $position->save();
 
 //        Session::flash('flash_message', 'Position has been saved.');
@@ -150,10 +158,6 @@ class PositionsController extends Controller
         $position = Positions::findorfail($id);
 
         if ($position->name != $request->name) {
-            $this->validate($request, [
-                'name' => 'required|max:255|unique:positions,name',
-            ]);
-
             $position->name = $request->name;
         }
 
@@ -163,6 +167,12 @@ class PositionsController extends Controller
             $position->active = 0;
         }
         $position->description = $request->description;
+
+        $this->validate($request, array(
+            'name'=> 'required|unique:positions,name',
+            'active' => 'required',
+            'description' => 'required'
+        ));
 
         $position->update();
         return redirect()

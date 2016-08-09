@@ -64,12 +64,19 @@ class StatusController extends Controller
 
         global $request;
         $status = new Status();
+        if(count($request->status))
         $status->status = $request->status;
+        if(count($request->prev_status))
         $status->prev_status = implode(',', $request->prev_status);
         if(count($request->infor))
             $status->infor = implode(',', $request->infor);
         $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
         $status->email_template = $request->email_template;
+
+        $this->validate($request, array(
+            'status'=> 'required|unique:status,status',
+            'allow_sendmail' => 'required'
+        ));
 
         $status->save();
         return redirect()
@@ -93,13 +100,15 @@ class StatusController extends Controller
             abort(403);
         }
 
-        $this->validate($request, [
-            'status' => 'required|max:255|unique:Status,status',
-        ]);
-
+        $this->validate($request, array(
+            'status'=> 'required|unique:status,status',
+            'allow_sendmail' => 'required'
+        ));
         $status = new Status();
-        $status->status = $request->status;
-        $status->prev_status = implode(',', $request->prev_status);
+        if(count($request->status))
+            $status->status = $request->status;
+        if(count($request->prev_status))
+            $status->prev_status = implode(',', $request->prev_status);
         if(count($request->infor))
             $status->infor = implode(',', $request->infor);
         $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
@@ -151,14 +160,15 @@ class StatusController extends Controller
 
         $status = Status::findorfail($id);
 
-        if ($status->status != $request->status) {
-            $this->validate($request, [
-                'status' => 'required|max:255|unique:status',
-            ]);
-        }
-        
+        $this->validate($request, array(
+            'status'=> 'required|unique:status,status',
+            'allow_sendmail' => 'required'
+        ));
         $status->status = $request->status;
+        if(count($request->prev_status))  
         $status->prev_status = implode(',', $request->prev_status);
+        else
+            $status->prev_status = null;
         if(count($request->infor))
             $status->infor = implode(',', $request->infor);
         else

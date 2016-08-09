@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Vinkla\Hashids\Facades\Hashids;
 
-
 class CV extends Model
 {
     use SearchableTrait;

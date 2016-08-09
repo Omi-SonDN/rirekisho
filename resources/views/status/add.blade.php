@@ -1,7 +1,8 @@
 @extends('xCV.template')
-<title>Sửa trạng thái</title>
+<title>Thêm trạng thái</title>
 
 @section('content')
+    </ul>
     <form class="form-horizontal" action="{{route('status::postaddstatus')}}" method="post" class="my-forms" id="profile-forms"
           enctype="multipart/form-data">
         <fieldset id="field-box">
@@ -15,9 +16,15 @@
                         <div class="float_right " style="width: 100%;">
                             <label class="control-label col-xs-3"><strong>Tên trạng thái </strong><i style="color: red;">*</i></label>
                             <div class="input col-xs-9">
-                                <input required="required" type="text" placeholder="status" class="input-right"
+                                <input type="text" class="input-right form-data"
                                        name="status" value="{{old('status')}}">
+                                        @if ($errors->has('status'))
+                                            <span class="help-block">
+                                                {{ $errors->first('status') }}
+                                            </span>
+                                        @endif
                             </div>
+                            
                         </div>
                     </li>
                     <li>
@@ -32,12 +39,17 @@
                                     <input type="radio" class="" name="allow_sendmail" value="0">
                                     Không cho phép gửi mail
                                 </label>
+                                        @if ($errors->has('allow_sendmail'))
+                                            <span class="help-block">
+                                                {{ $errors->first('allow_sendmail') }}
+                                            </span>
+                                        @endif
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="float_right" style="width: 100%;">
-                            <label class="control-label col-xs-3"><strong>Những trạng thái trước</strong><i style="color: red;">*</i></label>
+                            <label class="control-label col-xs-3"><strong>Những trạng thái trước</strong></label>
                             <div class="input col-xs-9">
                                 <select name="prev_status[]" id="prev_status" multiple="multiple" style="width: 100%;">
                                     @foreach( \App\Status::all() as $stt )
@@ -49,7 +61,7 @@
                     </li>
                     <li>
                         <div class="float_right" style="width: 100%;">
-                            <label class="control-label col-xs-3"><strong>Thông tin cần hiển thị</strong><i style="color: red;">*</i></label>
+                            <label class="control-label col-xs-3"><strong>Thông tin cần hiển thị</strong></label>
                             <div class="input col-xs-9">
                                 <select name="infor[]" id="infor" multiple="multiple" style="width: 100%;">
                                     <option value="Date">Date</option>

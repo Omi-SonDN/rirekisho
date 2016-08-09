@@ -114,15 +114,7 @@ class CVController extends Controller
     }
 
     /************Search orderBy Name Positions Status Age*************/
-    public function resort1()
-    {
-        if (Gate::denies('Visitor')) {
-            abort(403);
-        }
-        return view('xCV.resort', compact('CVs'));
-    }
-
-
+    
     public function show($id)
     {
         //$id = $id - 14000;

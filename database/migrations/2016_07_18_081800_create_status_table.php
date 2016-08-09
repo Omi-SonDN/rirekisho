@@ -18,6 +18,7 @@ class CreateStatusTable extends Migration
             $table->text('infor');
             $table->text('email_template');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
     /**

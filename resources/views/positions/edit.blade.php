@@ -15,7 +15,7 @@
                         <div class="float_right " style="width: 100%;">
                             <label class="label" for="name">Vị trí tuyển dụng <i style="color: red;">*</i></label>
                             <div class="input">
-                                <input required="required" type="text" placeholder="Position" class="input-right" name="name" value="{{old('name')?old('name'):$Positions->name}}">
+                                <input  type="text"  class="input-right form-data" name="name" value="{{old('name')?old('name'):$Positions->name}}">
                                         @if ($errors->has('name'))
                                             <span class="help-block">
                                                 {{ $errors->first('name') }}
@@ -26,9 +26,14 @@
                     </li>
                     <li class="bottom_20px">
                         <div class="form-group">
-                            <label class="title">Trạng thái</label>
+                            <label class="title">Trạng thái <i style="color: red;">*</i></label>
                                 <input name="active" value="0" type="radio" <?php if ($Positions->active == 0) { echo 'checked';}?>>Không kích hoạt
                                 <input name="active" value="1" type="radio" <?php if ($Positions->active == 1) { echo 'checked';}?>>Kích hoạt
+                                        @if ($errors->has('active'))
+                                            <span class="help-block">
+                                                {{ $errors->first('active') }}
+                                            </span>
+                                        @endif
                         </div>
                     </li>
                     <li class="bottom_20px">

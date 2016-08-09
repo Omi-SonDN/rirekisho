@@ -18,6 +18,7 @@ class CreatePositionsTable extends Migration
             $table->string('description');
             $table->tinyInteger('active');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
