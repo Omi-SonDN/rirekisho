@@ -15,10 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['about', 'xCV.template'], function ($view) {
+        view()->composer(['about', 'xCV.CVInfo', 'dashboard', 'xCV.template'], function ($view) {
             if (Auth::check()) {
                 $user = Auth::user();
-//                dd($user->CV);
+                // lay toan bo cv cua user dang nhap 1U -> 2CV
                 $cv = $user->CV;
                 $list = CV::whereHas('User', function ($q) use ($user) {
                     $q->whereHas('User', function ($q) use ($user) {

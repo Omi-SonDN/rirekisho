@@ -219,7 +219,7 @@ class EmailsController extends Controller
             return redirect()->back()->withErrors($errors)->withInput($request->all());
         }//end get email address
 
-        $rules = array('sender'=>'required');
+        $rules = array('recipient'=>'required', 'sender'=>'required', 'subject'=>'required');
         $status = Status::find($request->type);
         if( in_array('Date',$status->info))
             $rules['date'] = 'required|after:now';
@@ -240,7 +240,7 @@ class EmailsController extends Controller
 
         $message = $data['cv']->status->email_template;
 
-        $message = str_replace('[First_name]', $data['cv']->First_name, $message);
+        $message = str_replace('[First_name]', $data['cv']->User->First_name, $message);
         $message = str_replace('[Positions]', ($data['cv']->position)?$data['cv']->position->name:'' , $message);
         if( in_array('Time',$status->info))
         $message = str_replace('[Time]', $request->time, $message);
@@ -249,6 +249,7 @@ class EmailsController extends Controller
         if( in_array('Address',$status->info))
         $message = str_replace('[Address]', $request->address, $message);
         $data['email_content'] = $message;
+
         if (isset($request->attach[0])) {
             //upload file to server
             $files = $request->attach;

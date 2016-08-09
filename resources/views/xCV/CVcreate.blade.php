@@ -76,7 +76,7 @@
                         <label class="label" for="name">Tên bằng kana </label>
                         <div class="input">
                             <label class="icon-left" for="text">
-                                <i>カナ </i>
+                                <i>Kana </i>
                             </label>
                             <!--change editable="Rirekisho" name=field_name  -->
                             <input id="{{$key}}" editable="Rirekisho" style="width: 60%;" name="Furigana_name"
@@ -355,12 +355,18 @@
             </label>
             <ul slide-toggle=true>
                 <li class="">
+                    @if ($CV->attach)
+                        Hiên tại bạn đã có CV trên hệ thống: {{$CV->attach}}.
+                    @else
                     <div class="float_left" >
                         <label for="name" class="label">File CV của bạn: </label>
                     </div>
+                    @endif
                     <div >
-                        <div class="input">
-                            <input id="{{$key}}" name="attach" type="file" accept=".pdf" />
+
+                        <div class="input fix-file">
+                            <input id="{{$key}}" name="attach" type="file" accept=".pdf"/>
+
                             <div class="success-status float_left" id="s_attach_{{$key}}" style="display:none;">
                                 <i class="fa fa-pencil-square-o"></i>
                             </div>

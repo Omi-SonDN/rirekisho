@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Xem </title>
+<title>Xem hồ sơ {{$CV->name_cv}}</title>
 @section('content')
 
     <!--div class="display-box" style=""-->
@@ -15,7 +15,7 @@
                              style="background-color:{{$CV->User->getThemeColor()}} ">
                             <span class="dropzone-text letter-avatar"
                                   style="color: {{$CV->User->getTextColor()}};font-size:120px;">
-                                {{substr(trim($CV->name), 0, 1)}}
+                                {{substr(trim($CV->User->Name), 0, 1)}}
                             </span>
                         </div>
                     @endif
@@ -25,8 +25,8 @@
 
                     <ul class="profile-nav skippable">
                         <li class="title">
-                            <h2> {{$CV->Last_name}} {{$CV->First_name}}</h2>
-                            <h3>{{$CV->Furigana_name}}
+                            <h2> {{$CV->User->Last_name}} {{$CV->User->First_name}}</h2>
+                            <h3>{{$CV->User->Furigana_name}}
                                 @can('Visitor')
                                     <a data-action="bookmark" data-bookmark-id="{{$CV->user->hash}}"
                                        style='color:#efa907;' title="Bookmark this user!">
@@ -90,6 +90,36 @@
                 <div class="profile-link">
                     <a href=""></a>
                 </div>
+                @can('Admin')
+                <div class="clear-fix"></div>
+                <table class="imagetable">
+                    <th><span>Duyệt CV - Ghi chú</span></th>
+                    <tr>
+                        <td>
+                            <div class="fix-info-cv pull-left">{{$CV->Checkcv}} &nbsp; &nbsp;</div>
+                            <div class="onoffswitch pull-right">
+                                <input type="checkbox" name="check_{{($CV->id)}}" onclick="isChanges(this.id, '{{$CV->Active}}')" class="onoffswitch-checkbox" id="myCheck_{{$CV->hash}}" {{($CV->Active == 1) ? 'checked' : ''}} />
+                                <label class="onoffswitch-label" for="myCheck_{{$CV->hash}}">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%; padding: 0">
+                            <textarea id="txt_{{$CV->hash}}" rows="8" name="txtNotes" style="resize: vertical; width: 100%" onchange="isChanges(this.id, '{{(isset($CV) ? $CV->notes : '')}}')"> {!! old('txtNotes', isset($CV) ? $CV->notes : '') !!}</textarea>
+                            <button type="button" onclick="upActNotee('{{$CV->hash }}', 'myCheck_{{$CV->hash}}', 'txt_{{$CV->hash}}')" class="btn btn-default btn-sm btn-ac-note btn-{{$CV->hash}}">submit</button>
+                            <button type="button" onclick="getDeleteCV('{{$CV->hash }}', {{$CV->type_cv}})" title="Xóa CV {{$CV->name_cv}}" class="btn btn-default btn-sm btn-ac-note btn-{{$CV->hash}}">Delete</button>
+                            <button type="button" title="Trang chủ" onclick="returnHome()" class="btn btn-default btn-sm btn-ac-note">Cancel</button>
+                            <div class="wait-modal-load"></div>
+                        </td>
+                    </tr>
+                </table>
+                @endcan
+                @if ((Auth::user()->getRole() == 'Visitor') || (Auth::user()->getRole() == 'Applicant'))
+                    <button type="button" title="Trang chủ" onclick="returnHome()" class="btn btn-default btn-sm btn-ac-note pull-right">Cancel</button>
+                @endcan
             </div>
 
         </div>
@@ -108,17 +138,17 @@
                             </tr>
                             <tr>
                                 <th><h4>Ngày sinh</h4></th>
-                                <td>{{$CV->Birthday}} （{{$CV->Age}} tuổi）</td>
+                                <td>{{$CV->User->Birthday}} （{{$CV->User->Age}} tuổi）</td>
 
                             </tr>
                             <tr>
                                 <th><h4>Giới tính</h4></th>
-                                <td> {{$CV->Jgender}} </td>
+                                <td> {{$CV->User->Jgender}} </td>
                             </tr>
 
                             <tr>
                                 <th><h4>Tình trạng hôn nhân</h4></th>
-                                <td>{{$CV->Jmarriage}} </td>
+                                <td>{{$CV->User->Jmarriage}} </td>
 
                             </tr>
                         </table>
@@ -130,17 +160,17 @@
                             </tr>
                             <tr>
                                 <th><h4>Điện thoại</h4></th>
-                                <td>{{$CV->Phone}}</td>
+                                <td>{{$CV->User->Phone}}</td>
 
                             </tr>
                             <tr>
                                 <th><h4>Địa chỉ hiện tại</h4></th>
-                                <td>{{$CV->Address}}</td>
+                                <td>{{$CV->User->Address}}</td>
 
                             </tr>
                             <tr>
                                 <th><h4>Địa chỉ liên hệ</h4></th>
-                                <td>{{$CV->Contact_information}}</td>
+                                <td>{{$CV->User->Contact_information}}</td>
 
                             </tr>
                         </table>
@@ -237,7 +267,7 @@
                         <table>
                             <tr>
                                 <th colspan="2"><h2 style="text-align: left;">Giới thiệu bản thân</h2></th>
-                                <tr><th></th><td>{{$CV->Self_intro}} </td></tr>
+                                <tr><td class="col-lg-12">{{$CV->User->Self_intro}} </td></tr>
                             </tr>
                         </table>
                     </li>
@@ -245,7 +275,7 @@
                         <table>
                             <tr>
                                 <th colspan="2"><h2 style="text-align: left;">Nguyện vọng</h2></th>
-                                <tr><th></th><td>{{$CV->Request}} </td></tr>
+                                <tr><td class="col-lg-12">{{$CV->Request}} </td></tr>
                             </tr>
 
                         </table>

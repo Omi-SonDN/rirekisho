@@ -84,7 +84,7 @@ i[class^='fa-'], i[class*=' fa-'] {
     height: 128px;
 }
 
-.my-forms input[type="text"], .my-forms input[type="password"], .my-forms input[type="email"], .my-forms input[type="search"], .my-forms input[type="url"], .my-forms textarea {
+.my-forms input[type="date"], .my-forms input[type="tel"], .my-forms input[type="text"], .my-forms input[type="password"], .my-forms input[type="email"], .my-forms input[type="search"], .my-forms input[type="url"], .my-forms textarea {
     background: #fff;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -108,6 +108,13 @@ i[class^='fa-'], i[class*=' fa-'] {
     -ms-transition: all .4s;
     -o-transition: all .4s;
     transition: all .4s;
+}
+
+.my-forms select.optioncv{
+    width: 90%;
+    height: 44px;
+    padding: 0 20px;
+    font-weight: 600;
 }
 
 .my-forms .input-left {

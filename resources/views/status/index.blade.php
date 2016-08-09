@@ -1,5 +1,5 @@
 @extends('xCV.template')
-
+<title>Quản lý trạng thái</title>
 @section('content')
     <div class="row">
         <button class="btn btn-primary open-modal" name="btn_pos_create" id="btn_pos_create"><a style="font-weight: bold; color: white;" href="{{route('status::getaddstatus')}}">Create</a></button>

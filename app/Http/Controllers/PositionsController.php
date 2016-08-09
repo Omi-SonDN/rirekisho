@@ -13,7 +13,10 @@ use Session;
 
 class PositionsController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('SuperAdmin');
+    }
     /**
      * Display a listing of the resource.
      *

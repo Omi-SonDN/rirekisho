@@ -94,6 +94,17 @@ class UsersController extends Controller
         if (Gate::denies('profile', $id)) {
             abort(403);
         }
+
+        if (Auth::user()->getRole() !== 'SuperAdmin' && ($user->getRole() === 'SuperAdmin' || Auth::user()->id !== $user->id && $user->getRole() === 'Admin')) {
+            return redirect()
+                ->route('User.index')
+                ->with(
+                    [
+                        'flash_level' => 'danger',
+                        'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
+                    ]
+                );
+        }
         return View::make('xUser.UserEdit')->with('user', $user);
     }
 
@@ -140,7 +151,7 @@ class UsersController extends Controller
         } else {
             return redirect()
                 ->back()
-                ->with(['message' => 'No change!']);
+                ->with(['flash_level' => 'warning', 'message' => 'No change!']);
         }
     }
 
@@ -154,6 +165,17 @@ class UsersController extends Controller
         $user = User::find($id);
         if (Gate::denies('profile', $id)) {
             abort(403);
+        }
+
+        if (Auth::user()->getRole() !== 'SuperAdmin' && ($user->getRole() === 'SuperAdmin' || Auth::user()->id !== $user->id && $user->getRole() === 'Admin')) {
+            return redirect()
+                ->route('User.index')
+                ->with(
+                    [
+                        'flash_level' => 'danger',
+                        'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
+                    ]
+                );
         }
         return View::make('xUser.password')->with('user', $user);
     }
@@ -317,7 +339,7 @@ class UsersController extends Controller
                     );
             }
 
-
+            // xoa anh avatar
             if ($user->image) {
                 $old_del = public_path('img/thumbnail/') . 'thumb_' . $user->image;
                 if (File::exists($old_del)) {
@@ -326,25 +348,37 @@ class UsersController extends Controller
             }
             // xoa cv lien ket
             if ($user->CV) {
-                foreach ($user->CV->Record as $key => $dt_record) {
-                    $dt_record->destroy($dt_record->id);
+                foreach($user->CV as $items) {
+                    foreach ($items->Record as $key => $dt_record) {
+                        $dt_record->destroy($dt_record->id);
+                    }
+                    foreach ($items->Skill as $key => $dt_skill) {
+                        $dt_skill->destroy($dt_skill->id);
+                    }
+                    // xoa anh file pdf + Anh chua viet
+                    if ($items->type_cv) {
+                        $oldattach = public_path('files/') . $items->attach;
+                        if (\File::exists($oldattach)) {
+                            \File::exists($oldattach) && \File::delete($oldattach);
+                        }
+                    }
+//                    if ($user->image) {
+//                        $old_del = public_path('img/thumbnail/') . 'thumb_' . $user->image;
+//                        if (File::exists($old_del)) {
+//                            File::exists($old_del) && File::delete($old_del);
+//                        }
+//                    }
                 }
-                foreach ($user->CV->Skill as $key => $dt_skill) {
-                    $dt_skill->destroy($dt_skill->id);
-                }
-
-                $user->CV->delete();
             }
             // xoa trong bookmark
             DB::table('bookmarks')
                 ->where('bookmark_user_id', $_id)
                 ->delete();
 
-
-            $user->delete();
-            //
+            //xoa CV + user
             // kiem tra xoa [xoa anh -> skill -> Record -> cv -> ->bookmard -> acc]
-            //
+            $user->delete();
+
         }
 
         if (!$is_check) {
@@ -359,24 +393,5 @@ class UsersController extends Controller
         } else {
             return route('User.index');
         }
-
-        $user = User::findOrFail($_id);
-        if ($user->image) {
-            $old_del = public_path('img/thumbnail/') . 'thumb_' . $user->image;
-            if (File::exists($old_del)) {
-                File::exists($old_del) && File::delete($old_del);
-            }
-        }
-        // delete user with $_id
-        $user->delete();
-        return redirect()
-            ->route('User.index')
-            ->with(
-                [
-                    'flash_level' => 'success',
-                    'message' => 'Đã xóa user thành công!'
-                ]
-            );
-
     }
 }

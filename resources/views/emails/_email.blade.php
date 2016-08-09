@@ -1,4 +1,4 @@
-Chào bạn {{$cv->First_name}}!<br/>
+Chào bạn {{$cv->User->First_name}}!<br/>
 <br/>
 Công ty cổ phần Ominext chúng tôi thông báo tới bạn nội dung như sau:<br/>
 <strong>{!!$content!!}</strong><br>

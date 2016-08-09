@@ -44,11 +44,28 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
 
+//    public function render($request, Exception $e)
+//    {
+//        //if (!$this->isHttpException($e)) $e = new \Symfony\Component\HttpKernel\Exception\HttpException(403);
+//
+//        return parent::render($request, $e);
+//    }
+
     public function render($request, Exception $e)
     {
-        //if (!$this->isHttpException($e)) $e = new \Symfony\Component\HttpKernel\Exception\HttpException(403);
-
-        return parent::render($request, $e);
+        if ($this->isHttpException($e)) {
+            return $this->renderHttpException($e);
+        } else {
+            return parent::render($request, $e);
+        }
     }
 
+    protected function renderHttpException (HttpException  $e)
+    {
+        if (view()->exists('errors.'.$e->getStatusCode())) {
+            return response()->view('errors.'.$e->getStatusCode(), compact('e'), $e->getStatusCode());
+        } else {
+            return (new SymfonyDisplayer(config('app.debug')))->createResponse($e);
+        }
+    }
 }

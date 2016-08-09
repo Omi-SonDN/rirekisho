@@ -48,6 +48,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'decode' => \App\Http\Middleware\HashidsDecode::class,
         'encode' => \App\Http\Middleware\HashidsEncode::class,
-
+        'SuperAdmin' => \App\Http\Middleware\SuperAdminMiddleware::class,
     ];
 }

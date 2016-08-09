@@ -6,13 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Status;
+use DB;
 use Illuminate\Support\Facades\Response;
 use Gate;
 use Input;
 use Session;
 class StatusController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('SuperAdmin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,6 +47,12 @@ class StatusController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
+
+        $is_ck = DB::table('status')->count();
+        if (empty($is_ck)){
+            DB::table('status')->insert(['id' => 1, 'status' => 'Chờ duyệt CV', 'allow_sendmail' => 0]);
+        }
+
         return view('status.add');
     }
 
@@ -51,6 +61,7 @@ class StatusController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
+
         global $request;
         $status = new Status();
         $status->status = $request->status;

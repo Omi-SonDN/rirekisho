@@ -15,7 +15,7 @@ class Positions extends Model
 
     public function CVs()
     {
-        return $this->hasMany('App\CV', 'apply_to');
+        return $this->hasMany('App\CV', 'apply_to', 'id');
     }
     public function getActPositionAttribute()
     {

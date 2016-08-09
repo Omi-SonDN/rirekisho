@@ -18,6 +18,7 @@ class Status extends Model
     {
         return $this->hasMany('App\CV', 'Status', 'id');
     }
+
     public function getAllowSendAttribute()
     {
         if ($this->allow_sendmail == 0) {

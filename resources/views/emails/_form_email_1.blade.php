@@ -10,18 +10,18 @@
                 <input type="hidden" name="id" value="{{$id}}"/>
                 <input type="hidden" name="type" value="{{$type}}"/>
                 <div class="form-group">
-                    <label for="recipient" class="label label-default">Recipient: </label>
+                    <label for="recipient" class="label label-default">Recipient: <i style="color:red">*</i> </label>
                     <input name="recipient" class="form-control " type="email"
-                           placeholder="Recipient's email address" value="{{ $email }}"/>
+                           placeholder="Recipient's email address" value="{{ $email }}" required />
                 </div>
 
                 <div class="form-group">
-                    <label for="sender" class="label label-default">Sender: </label>
+                    <label for="sender" class="label label-default">Sender: <i style="color:red">*</i></label>
                     <input name="sender" class="form-control" placeholder="Sender's name"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="subject" class="label label-default">Subject: </label>
+                    <label for="subject" class="label label-default">Subject: <i style="color:red">*</i> </label>
                     <input name="subject" class="form-control" placeholder="Subject"/>
                 </div>
                 @if(count($status->info))
@@ -30,20 +30,20 @@
                 @endif
                 @if(in_array('Date',$status->info))
                 <div class="form-group">
-                    <label for="date" class="label label-default">Ngay: </label>
+                    <label for="date" class="label label-default">Ngay: <i style="color:red">*</i> </label>
                     <input type="date" class="form-control" name="date" id="date"
                            data-date='{"startView": 2, "openOnMouseFocus": true}'/>
                 </div>
                 @endif
                 @if(in_array('Time',$status->info))
                 <div class="form-group">
-                    <label for="time" class="label label-default">Vao luc: </label>
+                    <label for="time" class="label label-default">Vao luc: <i style="color:red">*</i> </label>
                     <input type="time" class="form-control" name="time" id="time"/>
                 </div>
                 @endif
                 @if(in_array('Address',$status->info))
                 <div class="form-group">
-                    <label for="address" class="label label-default">Tai: </label>
+                    <label for="address" class="label label-default">Tai: <i style="color:red">*</i> </label>
                     <input class="form-control" name="address"
                            value="Tầng 8 tòa nhà CTM Số 139 Cầu giấy, phường Quan Hoa, quận Cầu Giấy, Hà Nội."/>
                 </div>

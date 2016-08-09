@@ -1,33 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Be right back.</title>
+@extends('xCV.template')
+<title>Bạn không có quyền truy cập trang</title>
+@section('content')
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
     <style>
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            color: #B0BEC5;
-            display: table;
-            font-weight: 200;
-            font-family: 'Lato';
-        }
-
-        .container {
+        .container-403 {
             text-align: center;
             display: table-cell;
             vertical-align: middle;
             bottom: 600px;
         }
 
-        .content {
+        .content-403 {
             text-align: center;
             display: inline-block;
         }
@@ -37,14 +22,10 @@
             margin-bottom: 40px;
         }
     </style>
-</head>
-<body>
-<div class="container">
-    <div class="content">
+<div class="container-403">
+    <div class="content-403">
         <div class="title">403. Forbidden!!</div>
         <div><h3>Access denied.!!</h3></div>
-        <div>Copyright 2016<a href="#"> Ominext JSC</a></div>
     </div>
 </div>
-</body>
-</html>
+@stop

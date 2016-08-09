@@ -5,12 +5,7 @@
     <div class="legal">
         <ul></ul>
         <p class="copyright">
-
-            Copyright 2016 <a href="#"> Ominext JSC</a>.
-		<span class="sponsor-line">
-		<a href="">Web hosting by Mkjbkh</a> | mklmlmlk
-		</span>
-
+            &copy; Copyright <?php echo date('Y'); ?> <a href="#"> Ominext JSC</a>.
         </p>
     </div>
 </div>

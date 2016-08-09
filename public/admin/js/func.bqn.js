@@ -1,7 +1,5 @@
-// tables user
 $(document).ready(function ($) {
     $.tablesorter.customPagerControls({
-        size: 10,
         table: $('.tableuser'),                   // point at correct table (string or jQuery object)
         pager: $('.pager'),                   // pager wrapper (string or jQuery object)
         pageSize: '.left a',                // container for page sizes
@@ -113,10 +111,10 @@ $(document).ready(function ($) {
             // input search ///
             // bootstrap default blue green jui dropbox grey dark
             theme: 'bootstrap',
-            widgets: ['zebra', 'filter', 'numbering'],
+            widgets: ['zebra', 'filter', 'numbering', 'resizable'],
             // *** Appearance ***
             // fix the column widths
-            widthFixed: true,
+            widthFixed: false,
             // include zebra and any other widgets, options:
             // 'uitheme', 'filter', 'stickyHeaders' & 'resizable'
             // the 'columns' widget will require custom css for the
@@ -221,7 +219,8 @@ $(document).ready(function ($) {
                 filter_reset: '.reset',
                 zebra: ["even", "odd"],
                 filter_startsWith: false,
-                filter_childRows: true
+                filter_childRows: true,
+                resizable_widths : ['8%', '15%', '20%', '20%', '20%', '12%']
             },
             // Add select box to 4th column (zero-based index)
             // each option has an associated function that returns a boolean
@@ -242,8 +241,9 @@ $(document).ready(function ($) {
         })
         .tablesorterPager({
             container: $('.pager'),
-            output: 'showing: {startRow} to {endRow} of {totalRows} rows',
             size: 10,
+            output: 'showing: {startRow} to {endRow} of {totalRows} rows',
+
             //
             //    // if true, the table will remain the same height no matter how many
             //    // records are displayed. The space is made up by an empty
@@ -406,3 +406,9 @@ function multi_del_use () {
         }
     });
 }
+
+// goi tooltip
+function topxTip (content)	{
+    Tip(content, PADDING, 1 , BORDERWIDTH, 0, BGCOLOR, '', STICKY, 1, DURATION, 10000, CLICKCLOSE, true);
+}
+

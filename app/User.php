@@ -18,7 +18,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use Authenticatable, CanResetPassword;
     use SearchableTrait;
     protected $fillable = [
-        'name', 'email', 'password', 'image',
+        'name',
+        'email',
+        'password',
+        'image',
+        'note',
+        'Furigana_name',
+        'Last_name',
+        'First_name',
+        'Photo',
+        'Birth_date',
+        'Gender',
+        'Address',
+        'Contact_information',
+        'Phone',
+        'Self_intro',
+        'Marriage',
     ];
     protected $hidden = [
         'password', 'remember_token', 'id'
@@ -26,7 +41,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function CV()
     {
-        return $this->hasOne('App\CV');
+        return $this->hasMany('App\CV');
     }
 
     public function Bookmark()
@@ -131,4 +146,42 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return Hashids::encode($this->getKey());
     }
 
+    public function getNameAttribute()
+    {
+        if ($this->First_name != "") {
+            return $this->Last_name . " " . $this->First_name;
+        } else return '---';
+    }
+
+    public function getJGenderAttribute()
+    {
+        if ($this->Gender == 0) {
+            return "Nữ";
+        } else {
+            return "Nam";
+        }
+    }
+    public function getBirthdayAttribute()
+    {
+
+        $value = date_create($this->Birth_date);
+        return date_format($value, 'd-m-Y');
+    }
+
+    public function getAgeAttribute($value)
+    {
+        $value = date_create($this->Birth_date);
+        $today = date_create();
+        date_timestamp_set($today, time());
+        $tuoi = date_diff($value, $today);
+        return $tuoi->format("%y");
+    }
+
+    public function getJMarriageAttribute($value)
+    {
+        if ($this->Marriage == 0) {
+            return "Độc thân";
+        } else return "Đã kết hôn";
+
+    }
 }

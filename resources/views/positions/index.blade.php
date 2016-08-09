@@ -1,5 +1,5 @@
 @extends('xCV.template')
-
+<title>Quản lý ví trí tuyển dụng</title>
 @section('content')
     <div class="row">
         <button class="btn btn-primary open-modal" name="btn_pos_create" id="btn_pos_create"><a style="font-weight: bold; color: white;"  href="{{route('position::getaddposition')}}">Create</a></button>

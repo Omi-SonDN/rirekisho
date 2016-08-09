@@ -82,27 +82,27 @@
             <tbody>
             <tr class="">
                 <td style="width:10%;"> Furigana</td>
-                <td>{{$CV->Furigana_name}} </td>
+                <td>{{$CV->User->Furigana_name}} </td>
 
             </tr>
             <tr class="">
                 <td style="width:10%;"> Tên</td>
-                <td>{{$CV->name}} </td>
+                <td>{{$CV->User->name}} </td>
 
             </tr>
             <tr class="">
                 <td style="width:10%;"></td>
-                <td>{{$CV->BDay}} （満 {{$CV->Age}}歳） {{$CV->JGender}}</td>
+                <td>{{$CV->User->Birthday}} （満 {{$CV->User->Age}}歳） {{$CV->User->JGender}}</td>
 
             </tr>
             <tr class="">
                 <td style="width:10%;"> Address</td>
-                <td>{{$CV->Address}} </td>
-                <td style="width:23%;">Phone: {{$CV->Phone}}</td>
+                <td>{{$CV->User->Address}} </td>
+                <td style="width:23%;">Phone: {{$CV->User->Phone}}</td>
             </tr>
             <tr class="">
                 <td style="width:10%;"></td>
-                <td>{{$CV->Contact_information}} </td>
+                <td>{{$CV->User->Contact_information}} </td>
                 <td style="width:23%;"></td>
             </tr>
             </tbody>
@@ -234,7 +234,7 @@
             <tbody>
             <tr class="">
                 <td style="width:10%;"> Self -intro</td>
-                <td>{{$CV->Self_intro}} 　{{$CV->Self_intro}}</td>
+                <td>{{$CV->User->Self_intro}} 　{{$CV->User->Self_intro}}</td>
             </tr>
             <tr class="">
                 <td style="width:10%;"> 希望</td>

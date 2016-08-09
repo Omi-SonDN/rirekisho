@@ -1,7 +1,10 @@
 $(document).ready(function () {
     var url = '';
 
+    //$(document).on("change", 'form.status', function(){
+
     $('body').on('change','form.status',function () {
+
         var result = confirm("Want to change?");
         var stt = $(this).children('select.status').val();
         if (result) {
@@ -50,7 +53,6 @@ $(document).ready(function () {
                         btn_send_email += data.Status + '">Send Email ';
                         btn_send_email += data.Status + '</button>';
                     }
-
                     $('#btn_send_email' + data.id).replaceWith(btn_send_email);
                 }
             });

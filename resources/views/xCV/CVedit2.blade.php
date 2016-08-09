@@ -45,12 +45,15 @@
             <!--change editable="Rirekisho" name=field_name  -->
             <div class="">
                 <?php $positions = \App\Positions::where('active',1)->get(); ?>
-                <select id="{{$key}}" class="float_left apply_to" editable="Rirekisho"  name="apply_to" value="" style="height: 25px">
+                <select id="{{$key}}" class="float_left apply_to optioncv" editable="Rirekisho"  name="apply_to" value="" style="">
                     <option>Vị trí tuyển dụng</option>
                     @foreach( $positions as $position )
                         <option value="{{$position->id}}" @if($position->id == $CV->apply_to) selected @endif>{{$position->name}}</option>
                     @endforeach
                 </select>
+                <div class="success-status float_left" id="s_apply_to_{{$key}}" style="display:none;">
+                    <i class="fa fa-pencil-square-o"></i>
+                </div>
             </div>
         </div>
     </div>

@@ -37,7 +37,7 @@
                 <tbody id="list-table-body" data-reload="true">
                 @if(!count($users))
                     <tr class="no-record">
-                        <td colspan="6">
+                        <td colspan="100%">
                             <div style="text-align: center;">There are no records to display</div>
                         </td>
                     </tr>
@@ -98,5 +98,6 @@
 
 
         </div>
+    </div>
 @stop
 

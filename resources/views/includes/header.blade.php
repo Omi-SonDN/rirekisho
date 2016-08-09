@@ -15,19 +15,26 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse">
                     <div class="navbar-header">
-                        <a class="navbar-brand toptext" href="#">Rirekisho</a>
+                        <a class="navbar-brand toptext" href="{{URL('/')}}">Ominext JSC</a>
                     </div>
-
                     <ul class="float_right nav navbar-nav">
-                        <li @if(URL::current() == url('CV')) class="active" @endif ><a href="{{url('CV')}}">Trang chủ</a></li>
+                        @if (Auth::user()->getRole() === 'Applicant')
+                            <li class="{{(Route::getCurrentRoute()->getPath() =='/') ? 'active' : ''}}"><a href="{{url('/')}}">Trang chủ</a></li>
+                        @else
+                            <li class="{{(Route::getCurrentRoute()->getPath() =='CV') ? 'active' : ''}}"><a href="{{url('CV')}}">Trang chủ</a></li>
+                        @endif
                         @can('Admin')
-                            <li @if(URL::current() == url('User')) class="active" @endif><a href="{{url('User')}}">User</a></li>
-                            <li @if(URL::current() == url('positions')) class="active" @endif><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
-                            <li @if(URL::current() == url('status')) class="active" @endif><a href="{{url('status')}}">Quản lý trạng thái</a></li>
-                        @endcan
+                            <li {!! (\Request::route()->getName() == 'User.index') ? 'class="active"' : '' !!}><a href="{{url('User')}}">User</a></li>
 
+                        {{--<li @if(URL::current() == url('CV')) class="active" @endif ><a href="{{url('CV')}}">Trang chủ</a></li>--}}
+                        {{--@can('Admin')--}}
+                            {{--<li @if(URL::current() == url('User')) class="active" @endif><a href="{{url('User')}}">User</a></li>--}}
+                            {{--<li @if(URL::current() == url('positions')) class="active" @endif><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>--}}
+                            {{--<li @if(URL::current() == url('status')) class="active" @endif><a href="{{url('status')}}">Quản lý trạng thái</a></li>--}}
+
+                        @endcan
                         <li><a href="{{url('auth/logout')}}">Đăng xuất</a></li>
-                        <li><a style="border: 1px solid transparent;"> {{Auth::User()->name}}</a></li>
+                        <li class="{{(\Request::path() == 'User/'.\Auth::user()->hash) ? 'active' : ''}}"><a href="{{url('User',[Auth::User()->hash])}}" style="border: 1px solid transparent;">Chào {{Auth::User()->name}}</a></li>
                     </ul>
 
                 </div><!-- /.navbar-collapse -->

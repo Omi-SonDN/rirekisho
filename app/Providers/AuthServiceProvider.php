@@ -73,9 +73,12 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('view-cv', function ($user, $cv) {
             if($user->getRole() === 'SuperAdmin')
                 return true;
-
             if ($user->getRole() == "Applicant") {
-                return $user->id == $cv->user_id;
+                if (count($cv)) {
+                    return $user->id == $cv->user_id;
+                } else {
+                     return false;
+                }
             } else
                 return true;
 
@@ -89,9 +92,34 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
 
             if ($user->getRole() == "Applicant" || $user->getRole() == "Admin") {
-                return $user->id == $cv->user_id;
+                if (count($cv)) {
+                    foreach ($cv as $_cv) {
+                        return $user->id == $_cv->user_id;
+                    }
+                } else {
+                    return true;
+                }
             } else if ($user->getRole() == "Visitor") {
                 return false;
+            }
+        });
+        /*
+        *   kiem tra xoa CV
+        *   Visitor ko dk xoa cv bat ky
+        *   Applicant chi duoc xoa CV ban than
+        */
+        $gate->define('del-cv', function ($user, $cv) {
+
+            if ($user->getRole() == "Applicant") {
+                if (count($cv)) {
+                    return $user->id == $cv->user_id;
+                } else {
+                    return false;
+                }
+            } else if ($user->getRole() == "Visitor") {
+                return false;
+            } else {
+                return true;
             }
         });
 

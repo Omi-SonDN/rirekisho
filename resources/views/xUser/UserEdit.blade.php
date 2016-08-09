@@ -8,21 +8,21 @@
         <fieldset id="field-box">
             <div class=" float_left" style="width: 30%;">
                 @include('xUser.profile')
-                @can('SuperAdmin')
+                @can('Admin')
                 @if (Auth::user()->id != $user->id)
                 <div class="clear-fix"></div> <hr>
                 <div class="form-group">
                     <label class="title">User Level</label>
-
+                    @can('SuperAdmin')
                     <label class="radio-inline">
                         <input name="rdoLevel" value="2" <?php if ($user->role == 2) echo 'checked="checked"'; else echo ''; ?> type="radio">Admin
                     </label>
-
+                    @endcan
                     <label class="radio-inline">
-                        <input name="rdoLevel" value="1" <?php if ($user->role == 1) echo 'checked="checked"'; else echo ''; ?> type="radio">Visitor
+                        <input name="rdoLevel" value="1" <?php if ($user->role == 1) echo 'checked="checked"'; else echo ''; ?> type="radio">Duyệt CV
                     </label>
                     <label class="radio-inline">
-                        <input name="rdoLevel" value="0" <?php if ($user->role == 0) echo 'checked="checked"'; else echo ''; ?> type="radio">Applicant
+                        <input name="rdoLevel" value="0" <?php if ($user->role == 0) echo 'checked="checked"'; else echo ''; ?> type="radio">Ứng viên
                     </label>
                 </div>
                 @endif
@@ -67,7 +67,7 @@
                         <input type="submit" form="profile-forms" name="submit1" value="Thay đổi"
                                class="b-purple">
                         <input type="button" form="profile-forms" name="" value="Cancel"
-                               class="b-purple" onclick="window.location='{{\URL::route('User.index')}}'">
+                               class="b-purple" onclick="window.location='{{\URL('/')}}'">
                     </li>
                     <li>
                         @if (count($errors) > 0)
