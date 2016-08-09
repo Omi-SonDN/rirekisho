@@ -758,29 +758,33 @@ button.btn-send-email {
 }
 
 /*  -------------Custom by tooltip cv-------------*/
-.topx-bit {
+#WzBoDy {
+    width: 900px;
+    background: beige;
+}
+#WzBoDy .topx-bit {
     box-shadow: aliceblue;
     background: #ede1e2;
 }
-.forumhead .foruminfo .topx-tip-head {
+#WzBoDy .forumhead .foruminfo .topx-tip-head {
     color: rebeccapurple;
-    /* font-size: 5em; */
+    / font-size: 5em; /
     padding: 1px 20px;
-    /* line-height: 12px; */
+    / line-height: 12px; /
     font-weight: 400;
 }
-.forumhead h2 {
-    /* padding: 0; */
+#WzBoDy .forumhead h2 {
+    / padding: 0; /
     font-size: 20px;
     color: red;
     line-height: 12px;
     font-weight: 500;
 }
-.topx-bit hr {
+#WzBoDy .topx-bit hr {
     margin: 0;
     padding: 0;
 }
-.forumrow.table.topx-tip-info {
+#WzBoDy .forumrow.table.topx-tip-info {
     padding: 5px 30px;
 }
 
@@ -815,7 +819,7 @@ table.imagetable td {
      border-style: solid;
      border-color: #999999;
  }
-/* ---------------On/Off FlipSwitch ------- */
+/ ---------------On/Off FlipSwitch ------- /
 .onoffswitch {
     position: relative; width: 49px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;

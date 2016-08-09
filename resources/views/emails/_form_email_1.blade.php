@@ -19,7 +19,6 @@
                                 </span>
                             @endif
                 </div>
-
                 <div class="form-group">
                     <label for="sender" class="label label-primary">Sender: <i style="color:red">*</i></label>
                     <input name="sender" class="form-control" placeholder="Sender's name"/>

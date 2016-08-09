@@ -205,8 +205,8 @@ class EmailsController extends Controller
 
         $message = $data['cv']->status->email_template;
 
-        $message = str_replace('[First_name]', $data['cv']->User->First_name, $message);
-        $message = str_replace('[Positions]', ($data['cv']->position)?$data['cv']->position->name:'' , $message);
+        $message = str_replace('[First_name]', ($data['cv']->User)?$data['cv']->User->First_name:'', $message);
+        $message = str_replace('[Positions]', ($data['cv']->positionCv)?$data['cv']->positionCv->name:'' , $message);
         if( in_array('Time',$status->info))
         $message = str_replace('[Time]', $request->time, $message);
         if( in_array('Date',$status->info))
@@ -252,7 +252,7 @@ class EmailsController extends Controller
             return redirect()->back();
         }
         
-         redirect()->back();
+        redirect()->back();
     }
 
     /**

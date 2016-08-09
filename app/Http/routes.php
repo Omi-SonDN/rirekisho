@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'PositionsController@edit']);
         Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'PositionsController@update']);
         Route::get('/{id}/delete',['as'=>'delete','uses'=>'PositionsController@delete']);
+        Route::get('/{id}/view',['as'=>'view','uses'=>'PositionsController@view']);
     });
     Route::resource('positions', 'PositionsController');
 
@@ -107,6 +108,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'StatusController@edit']);
         Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'StatusController@update']);
         Route::get('/{id}/delete',['as'=>'delete','uses'=>'StatusController@delete']);
+        Route::get('/{id}/view',['as'=>'view','uses'=>'StatusController@view']);
     });
 
     Route::resource('status', 'StatusController');

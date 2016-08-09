@@ -32,18 +32,6 @@ class CV extends Model
         'active_by'
     ];
 
-    //protected $appends = ['age'];
-
-    // public function getStatusnameAttribute(){
-    //     switch ($this->Status) {
-    //         case 0: return "Chờ duyệt"; break;
-
-    //         default:
-    //             # code...
-    //             break;
-    //     }
-    // }
-
     public function User()
     {
         return $this->belongsTo('App\User', 'user_id');

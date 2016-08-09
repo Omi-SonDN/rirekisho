@@ -214,4 +214,8 @@ class PositionsController extends Controller
 //        Session::flash('flash_message', 'Position has been deleted.');
         //return Response::json($position);
     }
+    public function view($id){
+        $position = Positions::findorfail($id);
+        return view('positions.view')->with('Positions', $position);
+    }
 }

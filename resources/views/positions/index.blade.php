@@ -32,6 +32,7 @@
                             {{$position->description}}
                         </td>
                         <td>
+                            <a style="font-weight: bold; color: white;" href="{{url('position',[$position ,'view'])}}" class="btn ink-reaction btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin vị trí tuyển dụng"><span class="glyphicon glyphicon-eye-open"></span></a>
                             <a style="font-weight: bold; color: white;" href="{{url('position',[$position ,'edit'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                             <a style="font-weight: bold; color: white;" href="{{url('position',[$position ,'delete'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-remove"></span></a>
                         </td>

@@ -20,7 +20,7 @@
         <tr class="data{{$key}}">
             <td class="rank" style="text-align: center">{{++$i }}</td>
             <td class="image">
-                <div style=" position: relative;height: 100px;width: 100px; cursor: progress" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
+                <div style=" position: relative;height: 100px;width: 100px; cursor: pointer;" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
                     <?php $image = $CV->User->image;?>
                     @if($image!="")
                         <img style="height: 100px; width: 100px;"
@@ -109,31 +109,21 @@
             @endcan
 
         </tr>
-        <!-- -------------------------BQN custom Tooltip CV chua chinh lai css custom.css---------------------------------------- -->
         <div class="topx-bit">
             <div class="floatcontainer" id="tip_{{$CV->hash}}" style="display:none;">
-                <div class="forumhead foruminfo topx-tip-head" style="margin-top:0px;">
-                    <h2><span class="forumtitle">Thông tin</span></h2>
-                </div>
-                <hr>
                 <div class="childforum forumbit_post">
                     <div class="forumrow table topx-tip-info">
-                        <div> • <strong>Tiêu đề:</strong> <a href="{{\URL('CV.show', [$CV->hash])}}" title="{{ucfirst($CV->name_cv)}}">{{ucfirst($CV->name_cv)}}</a></div>
-                        <div> • <strong>Vị trí tuyển dụng:</strong> <a href="">{{ucfirst('rtllk77777777llll')}}</a></div>
-                        <div> • <strong>Kết quả:</strong> <a href="">{{ucfirst('rtllkl7777777llll')}}</a></div>
-                        <div> • <strong>Nguyện vọng:</strong> {!! $CV->Self_intro !!}</div>
-                        <hr>
-                        <div class="col-lg-3"> • <strong>Thể loại:</strong> {{ucfirst($CV->cvType)}}</div>
-                        <div class="col-lg-3"> • <strong>Duyệt:</strong> {{$CV->Checkcv}}</div>
-                        <div class="col-lg-3"> • <strong>Duyệt bởi:</strong> {!! ucfirst($CV->ActBycv) !!}</div>
-                        @can('SuperAdmin')
-                        <div> • <strong>Trạng thái:</strong> {!! $CV->Livecv !!}</div>
-                        @endcan
-
-                        <div class="clearfix"></div>
-                        <div class="col-lg-4"><span class="fa fa-anchor"> </span> <strong>Tác giả:</strong> <a href="#" title="Viet them trang thong tin tai khoan">{{ucfirst($CV->User->Name)}}</a></div>
-                        <div class="col-lg-4"><span class="fa fa-tags"> </span> <strong>Ngày khởi tạo:</strong> {{date("d-m-Y H:m A", strtotime($CV->created_at))}}</div>
-                        <div class="col-lg-4"><span class="fa fa-tags"> </span> <strong>Last post time:</strong> {{date("d-m-Y H:m A", strtotime($CV->updated_at))}}</div>
+                        <ul style="line-height: 2;">
+                            <li>
+                                {{($CV->name_cv)}}
+                            </li>
+                            <li>
+                                {{($CV->positions)}}
+                            </li>
+                            <li>
+                                {!!($CV->Checkcv)!!}
+                            </li>   
+                        </ul>                        
                     </div>
                 </div>
             </div>

@@ -222,4 +222,8 @@ class StatusController extends Controller
                 ]
             );
     }
+    public function view($id){
+        $status = Status::findorfail($id);
+        return view('status.view')->with('Status', $status);
+    }
 }
