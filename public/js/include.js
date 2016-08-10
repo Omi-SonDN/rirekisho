@@ -758,6 +758,23 @@ function submitCVRule() {
     });
 }
 
+function lam_moi_ttv(id){
+
+    if (id) {
+        $.ajax({
+            type: 'PUT',
+            url: "/CV/" + id,
+            data: 'id=' + id,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                alert('Update dữ liệu thành công!')
+                //redirect(data['url']);
+            },
+        });
+    }
+}
+
 // Xoa  cv
 function getDeleteCV(id, type) {
     if (id) {

@@ -77,7 +77,6 @@ class CVController extends Controller
             $_page = 1;
         }
 
-
         list($CVs, $_Position, $_Status, $get_paging)= $this->paginationCV($s_name, $positions, $status, $_field, $_sort, $_page, $_numpage);
         $count = count($CVs);
 
@@ -142,7 +141,7 @@ class CVController extends Controller
 
     }
 
-    public function edit($id)//Get
+    public function edit($id)//Get 
     {
         //$id = $id - 14000;
         $uCV = User::find(Auth::user()->id);
@@ -235,6 +234,18 @@ class CVController extends Controller
             return $_SERVER['HTTP_REFERER'];
         }
 
+        if($request->has('id')){
+            $id = $request->input('id');
+            $id = Hashids::decode($id);
+            $updated_at = date('Y-m-d H:i:s');
+            $cv = CV::find($id[0]);
+            $cv->updated_at = $updated_at;
+            $cv->update();
+            return Response::json(array(
+                'success' => 'success',
+            ));
+        }
+
         $cv->update($request->all());
     }
 
@@ -283,6 +294,7 @@ class CVController extends Controller
             abort(403);
         }
 
+
         $uCV = DB::table('users')->find(Auth::user()->id);
         $CV = CV::with('User')
             ->where('user_id', Auth::user()->id)
@@ -293,6 +305,8 @@ class CVController extends Controller
             $Records = $CV->Record;
             $Records = $Records->sortBy("Date");
         }
+
+
 
         return view('xCV.CVStep', compact('uCV', 'CV', 'Records', 'skills'));
     }
@@ -592,7 +606,6 @@ class CVController extends Controller
 //                $CV1 = $CV1->sortBy('updated_at');
             }
         } else{
-
             if($none_field == 'updated_at')
                 $CV1 = $CV1->sortByDesc($none_field);
             else{
@@ -723,7 +736,7 @@ class CVController extends Controller
             $cv1 = CV::select(DB::raw("count(id) as count"))
                 ->where('created_at', '>=', $datestart)
                 ->where('created_at', '<=', $dateend)
-                ->where('Status', '=', 14)
+                ->where('Status', '=', 20)
                 ->orderBy('created_at')
                 ->get();
             if($cv1 != null)
@@ -768,7 +781,7 @@ class CVController extends Controller
             $datestart = $year.'-'.$month1.'-01 00:00:00';
             $dateend = $year.'-'.$month.'-01 00:00:00';
             $cv2 = CV::select(DB::raw("count(id) as count"))
-            ->where('Status', '=', 14)
+            ->where('Status', '=', 20)
             ->where('created_at', '>=', $datestart)
             ->where('created_at', '<', $dateend)
             ->orderBy('created_at')
@@ -817,7 +830,7 @@ class CVController extends Controller
             $month1 = $cv1->month + 1;
             $dateend = $year.'-'.$month1.'-01 00:00:00';
             $cv2 = CV::select(DB::raw("count(id) as count, month(created_at) as month"))
-            ->where('Status', '=', 14)
+            ->where('Status', '=', 20)
             ->where('created_at', '>=', $datestart)
             ->where('created_at', '<', $dateend)
             ->orderBy('created_at')
@@ -852,20 +865,12 @@ class CVController extends Controller
                 ->where('created_at', '<=', $dateend)
                 ->groupBy(DB::raw('apply_to'))
                 ->get();
-
-            // $cv = DB::table('cvs')->join('positions', 'cvs.apply_to', '=', 'positions.id')
-            // ->select(DB::raw("count(cvs.id) as count, cvs.apply_to as po, positions.name as name"))
-            // ->where('cvs.created_at', '>=', $datestart)
-            // ->where('cvs.created_at', '<=', $dateend)
-            // ->groupBy(DB::raw('apply_to'))
-            // ->get();
-            // return $cv;
             
             foreach ($cv as $cv1) {
                 $cv2 = CV::select(DB::raw("count(id) as count"))
                 ->where('created_at', '>=', $datestart)
                 ->where('created_at', '<=', $dateend)
-                ->where('Status', '=', 14)
+                ->where('Status', '=', 20)
                 ->where('apply_to', '=', $cv1->positions)
                 ->get();
                 if($cv1 != null)
@@ -888,7 +893,7 @@ class CVController extends Controller
                 $cv2 = CV::select(DB::raw("count(id) as count"))
                 ->where('created_at', '>=', $datestart)
                 ->where('created_at', '<=', $dateend)
-                ->where('Status', '=', 14)
+                ->where('Status', '=', 20)
                 ->where('apply_to', '=', $key)
                 ->get();
                 if($cv1 != null)

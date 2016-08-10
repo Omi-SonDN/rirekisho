@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="mt_16 pl_4">
-            <a href="javascript:void(0);" class="btn pl_16 floatLeft" title="Cập nhật thời gian" onclick="lam_moi_ttv(3262540);">
+            <a href="javascript:void(0);" class="btn pl_16 floatLeft" title="Cập nhật thời gian" onclick="lam_moi_ttv('{{$items->hash}}');">
                 <i class="fa fa-calendar icon_24 icon-24"></i> LÀM MỚI
             </a>
             @if ($items->type_cv)

@@ -50,11 +50,13 @@
             document.getElementsByTagName('head')[0].appendChild(css);
         })();
 
+
         var id_local = '<?php echo Auth::user()->hash; ?>';
 
     </script>
     <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
     {{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>--}}
+
 </head>
 <body>
     <header>
@@ -77,16 +79,12 @@
             @include('includes.footer')
         </div>
 
-        <div class="footer col-lg-12">
-            @include('includes.footer')
-        </div>
-
     </div>
 
 <!---  jQuery-->
 
 {{--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>--}}
-<script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
+
 <!---  bootstrap-->
 {{--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>--}}
 <script type="text/javascript" src="{{ URL::asset('/admin/js/3.3.5-bootstrap.min.js')}}"></script>
