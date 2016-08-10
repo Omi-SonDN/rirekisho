@@ -48,12 +48,15 @@
             css.rel = 'stylesheet';
             css.type = 'text/css';
             document.getElementsByTagName('head')[0].appendChild(css);
-        })(); </script>
+        })();
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        var id_local = '<?php echo Auth::user()->hash; ?>';
+
+    </script>
+    <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
+    {{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>--}}
 </head>
 <body>
-
     <header>
         @include('includes.header')
         @include('includes.sidebar')
@@ -112,6 +115,7 @@
 {{--<script type="text/javascript"> jQuery.noConflict(); </script>--}}
 
 <script type="text/javascript" src="{{ URL::asset('/admin/js/func.bqn.js')}}"></script>
+
 </body>
 
 </html>

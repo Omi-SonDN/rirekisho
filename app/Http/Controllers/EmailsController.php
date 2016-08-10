@@ -225,7 +225,7 @@ class EmailsController extends Controller
             $rules['date'] = 'required|after:now';
         if( in_array('Time',$status->info))
             $rules['time'] = 'required';
-        if( in_array('Adddress',$status->info))
+        if( in_array('Address',$status->info))
             $rules['address'] = 'required';
 
         $this->validate($request, $rules);
@@ -246,7 +246,7 @@ class EmailsController extends Controller
         $message = str_replace('[Time]', $request->time, $message);
         if( in_array('Date',$status->info))
         $message = str_replace('[Date]', \Carbon\Carbon::createFromFormat('Y-m-d',$request->date)->format('d/m/Y'), $message);
-        if( in_array('Adddress',$status->info))
+        if( in_array('Address',$status->info))
         $message = str_replace('[Address]', $request->address, $message);
         $data['email_content'] = $message;
 

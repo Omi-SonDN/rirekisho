@@ -5,7 +5,7 @@
             var cv_upload = <?php echo $cv_upload; ?>;
             var cv_pass = <?php echo $cv_pass; ?>;
 
-		    var chart2 = new Highcharts.Chart({ 
+		    var chart2 = new Highcharts.Chart({
 	            chart: { 
 	                renderTo: 'chart',
 	                type: 'column'

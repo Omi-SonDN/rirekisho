@@ -34,7 +34,7 @@ class CreateCvsTable extends Migration
             $table->string('positions');
             $table->text('Memo');
             $table->tinyInteger('Active');
-            $table->tinyInteger('Status');
+            $table->tinyInteger('Status')->default(1);
             $table->tinyInteger('version');
             $table->tinyInteger('apply_to');
             $table->text('notes');

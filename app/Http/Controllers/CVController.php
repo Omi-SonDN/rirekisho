@@ -55,7 +55,7 @@ class CVController extends Controller
         if ($request->has('data-field')) {
             $_field = $request->get('data-field');
         }else {
-            $_field = 'id';
+            $_field = 'updated_at';
         }
 
         if ($request->has('data-sort')) {
@@ -78,23 +78,30 @@ class CVController extends Controller
         }
 
 
-        list($CVs, $_Position, $get_paging)= $this->paginationCV($s_name, $positions, $status, $_field, $_sort, $_page, $_numpage);
+        list($CVs, $_Position, $_Status, $get_paging)= $this->paginationCV($s_name, $positions, $status, $_field, $_sort, $_page, $_numpage);
         $count = count($CVs);
 
-        return view('xCV.CVindex', compact('CVs', 'count', '_numpage', 'get_paging', '_Position'));
+        return view('xCV.CVindex', compact('CVs', 'count', '_numpage', 'get_paging', '_Position', '_Status'));
     }
 
     /*********Advance Search**************/
     public function adSearch(Request $request)
     {
-
         if (Gate::denies('Visitor')) {
             abort(403);
         }
+//        $positions = $request->input('positionsSearch');
+//        $name = $request->input('nameSearch');
+//        $Status = $request->input('statusSearch');
 
-        $positions = $request->input('positionsSearch');
-        $name = $request->input('nameSearch');
-        $Status = $request->input('statusSearch');
+        $positions = $request->input('positions');
+        $name = $request->input('name');
+        $Status = $request->input('Status');
+        $field = $request->input('field');
+        $sort = $request->input('sort');
+        $per_page = $request->input('show_entries');
+        $txtActive = $request->input('txtActive');
+        $txtLive = $request->input('txtLive');
 
         if ($request->has('page')) {
             $_page = (int)$request->get('page');
@@ -102,11 +109,11 @@ class CVController extends Controller
             $_page = 1;
         }
 
-        list($CVs, $_Position, $get_paging) = $this->paginationCV($name, $positions, $Status, $request->input('data-field'), $request->input('data-sort'), $_page, $request->input('entrie'));
+        list($CVs, $_Position, $_Status, $get_paging) = $this->paginationCV($name, $positions, $Status, $field, $sort, $_page, $per_page, $txtActive, $txtLive);
         $count = count($CVs);
 
         return Response::json(array(
-                'data' => view('includes.table-result', compact('CVs', 'count', '_numpage', '_Position'))->render(),
+                'data' => view('includes.table-result', compact('CVs', 'count', '_numpage', '_Position', '_Status'))->render(),
                 'pagination' => $get_paging,
                 'url' => \URL::action('CVController@index')
             )
@@ -465,7 +472,7 @@ class CVController extends Controller
     /// $Status trang thai cua cv
     // Mac dinh sap xep theo ten tang dan voi 10 bang ghi tren mot trang
 
-    public function paginationCV ($name = '', $positions = null, $Status = null, $_field = 'id', $data_sort = 'asc', $_page = 1, $_numpage = 10)
+    public function paginationCV ($name = '', $positions = null, $Status = '', $_field = 'updated_at', $data_sort = 'asc', $_page = 1, $_numpage = 10, $txtActive = null, $txtLive = null)
     {
         if ($data_sort == "desc") {
             $bc = 'desc';
@@ -475,27 +482,55 @@ class CVController extends Controller
 
         $is_live = $is_active = $str_po = $str_role = $str_or = $str_and = array();
 
-        // chi cho phep 1 cv truc tuyen
-        $is_live = [1];
         // cv kich hoat hoac chua kich hoat
-        $is_active = [0, 1];
+        if ($txtActive == 2) {
+            $is_active = [0, 1];
+        } elseif ($txtActive == 1){
+            $is_active = [1];
+        } elseif (isset($txtActive) && $txtActive == 0) {
+            $is_active = [0];
+        }else {
+            $is_active = [0, 1];
+        }
+
+        // chi cho phep 1 cv truc tuyen
+        if ($txtLive == 2) {
+            $is_live = [0, 1];
+        } elseif ($txtLive == 1) {
+            $is_live = [1];
+        }elseif (isset($txtLive) && $txtLive == 0){
+            $is_live = [0];
+        }else {
+            $is_live = [0, 1];
+        }
 
         // them trang thai cv chua duoc kich hoat doi voi tai khoan toi cao
-        if (Auth::user()->getrole() === 'SuperAdmin') {
-            $is_live[] = 0;
+        if (Auth::user()->getrole() !== 'SuperAdmin') {
+            unset($is_live[0]);
         }
+        // xoa bo cv khong kich hoat voi nguoi quan tri vien
         if (Auth::user()->getrole() === 'Visitor') {
-            // xoa bo cv khong kich hoat voi nguoi quan tri vien
             unset($is_active[0]);
         }
 
         if ($Status != '') {
             $str_and['cvs.status'] = $Status;
-        } else {
-            if (Auth::user()->getrole() === 'Visitor') {
-                $str_role = [1, 2];
-            }
         }
+
+        // liet ke cac trang thai .... voi role_VisitorStatus = 1
+        if (Auth::user()->getrole() === 'Visitor') {
+            $_Status = Status::where('role_VisitorStatus', 1)->get();
+
+            $list_id_visitor = $_Status->toArray();
+            if (count($list_id_visitor)) {
+                $str_role = array_column($list_id_visitor, 'id');
+            } else {
+                $str_role = [0];
+            }
+        } else {
+            $_Status = Status::all();
+        }
+
         if ($positions) {
             $str_po['cvs.apply_to'] = $positions;
         }
@@ -512,7 +547,7 @@ class CVController extends Controller
             }
         }else {
             $_field = 'Last_name';
-            $none_field = 'id';
+            $none_field = 'updated_at';
         }
 
         $CV1 = CV::with('User')
@@ -549,14 +584,21 @@ class CVController extends Controller
             })
             ->isactive($is_active)
             ->live($is_live)
+            ->orderBy('updated_at')
             ->get();
 
         if ($none_field == 'name') {
-            if ($bc == 'asc')
+            if ($bc == 'asc'){
                 $CV1 = $this->ASC($CV1);
-            else $CV1 = $this->DESC($CV1);
+//                $CV1 = $CV1->sortBy('updated_at');
+            }
+
+            else{
+                $CV1 = $this->DESC($CV1);
+//                $CV1 = $CV1->sortBy('updated_at');
+            }
         } else{
-            if($none_field == 'id')
+            if($none_field == 'updated_at')
                 $CV1 = $CV1->sortByDesc($none_field);
             else{
                 if($bc == 'desc')
@@ -564,6 +606,8 @@ class CVController extends Controller
                 else $CV1 = $CV1->sortByDesc($none_field);
             }
         }
+
+       // $CV1 = $CV1->sortBy('updated_at');
 
         // remove no name or age "0000-00-00";
         // remove record no get positions actives (1) with role Visitor
@@ -582,7 +626,7 @@ class CVController extends Controller
         $url_modify = Pagination_temp::cn_url_modify('search=' . $name, 'status=' . $Status, 'apply_to=' . $positions, 'data-field=' . $none_field, 'data-sort=' . $bc, 'per_page', 'page');
         list ($cvs, $get_paging) = Pagination_temp::cn_arr_pagina($CV1, $url_modify, $_page, $_numpage);
 
-        return array($cvs, $_Position, $get_paging);
+        return array($cvs, $_Position, $_Status, $get_paging);
 
     }
 

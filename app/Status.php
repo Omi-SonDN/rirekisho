@@ -33,4 +33,5 @@ class Status extends Model
     public function getInfoAttribute(){
         return $this->infor?explode(',',$this->infor):array();
     }
+
 }
