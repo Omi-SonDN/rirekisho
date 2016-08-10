@@ -19,6 +19,7 @@ class CreateStatusTable extends Migration
             $table->text('email_template');
             $table->tinyInteger('role_VisitorStatus')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
     /**

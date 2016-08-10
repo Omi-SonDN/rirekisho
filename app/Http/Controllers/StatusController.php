@@ -34,7 +34,7 @@ class StatusController extends Controller
             'Status' => $status,
         );
 
-        return view('status.index')->with($data);
+        return view('status.index',isset($data)?$data:NULL)->with($data);
     }
 
     /**
@@ -64,12 +64,20 @@ class StatusController extends Controller
 
         global $request;
         $status = new Status();
+        if(count($request->status))
         $status->status = $request->status;
+        if(count($request->prev_status))
         $status->prev_status = implode(',', $request->prev_status);
         if(count($request->infor))
             $status->infor = implode(',', $request->infor);
         $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
         $status->email_template = $request->email_template;
+        $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
+        $this->validate($request, array(
+            'status'=> 'required|unique:status,status',
+            'allow_sendmail' => 'required',
+            'role_VisitorStatus' => 'required'
+        ));
 
         $status->save();
         return redirect()
@@ -93,17 +101,21 @@ class StatusController extends Controller
             abort(403);
         }
 
-        $this->validate($request, [
-            'status' => 'required|max:255|unique:Status,status',
-        ]);
-
+        $this->validate($request, array(
+            'status'=> 'required|unique:status,status',
+            'allow_sendmail' => 'required',
+            'role_VisitorStatus' => 'required'
+        ));
         $status = new Status();
-        $status->status = $request->status;
-        $status->prev_status = implode(',', $request->prev_status);
+        if(count($request->status))
+            $status->status = $request->status;
+        if(count($request->prev_status))
+            $status->prev_status = implode(',', $request->prev_status);
         if(count($request->infor))
             $status->infor = implode(',', $request->infor);
         $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
         $status->email_template = $request->email_template;
+        $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
         $status->save();
 
 //        Session::flash('flash_message', 'status has been saved.');
@@ -151,20 +163,23 @@ class StatusController extends Controller
 
         $status = Status::findorfail($id);
 
-        if ($status->status != $request->status) {
-            $this->validate($request, [
-                'status' => 'required|max:255|unique:status',
-            ]);
-        }
-        
+        $this->validate($request, array(
+            'status'=> 'required|unique:status,status',
+            'allow_sendmail' => 'required',
+            'role_VisitorStatus' => 'required'
+        ));
         $status->status = $request->status;
+        if(count($request->prev_status))  
         $status->prev_status = implode(',', $request->prev_status);
+        else
+            $status->prev_status = null;
         if(count($request->infor))
             $status->infor = implode(',', $request->infor);
         else
             $status->infor = null;
         $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
         $status->email_template = $request->email_template;
+        $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
 
         // $status->update($request->all());
         $status->save();
@@ -211,5 +226,9 @@ class StatusController extends Controller
                     'message' => 'Đã xóa trạng thái thành công'
                 ]
             );
+    }
+    public function view($id){
+        $status = Status::findorfail($id);
+        return view('status.view')->with('Status', $status);
     }
 }

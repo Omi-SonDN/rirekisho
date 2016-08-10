@@ -15,7 +15,7 @@
                         <div class="float_right " style="width: 100%;">
                             <label class="label" for="name">Vị trí tuyển dụng <i style="color: red;">*</i></label>
                             <div class="input">
-                                <input required="required" type="text" placeholder="Position" class="input-right"
+                                <input type="text" class="input-right form-data"
                                        name="name" value="{!! old('name') !!}">
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -27,16 +27,21 @@
                     </li>
                     <li class="bottom_20px">
                         <div class="form-group">
-                            <label class="title">Trạng thái</label>
+                            <label class="title">Trạng thái<i style="color: red;">*</i></label>
                                 <input name="active" value="0" type="radio" >Không kích hoạt
                                 <input name="active" value="1" type="radio" >Kích hoạt
+                                @if ($errors->has('active'))
+                                    <span class="help-block">
+                                        {{ $errors->first('active') }}
+                                    </span>
+                                @endif
                         </div>
                     </li>
                     <li class="bottom_20px">
                         <div class="float_right " style="width: 100%;">
                             <label class="label">Mô tả <i style="color: red;">*</i></label>
                             <div class="input">
-                                <textarea aria-required="true" name="description" id="description" class="input-right" rows="3" >{{old('description')}}</textarea>
+                                <textarea aria-required="true" name="description" id="description" class="input-right form-data" rows="3" >{{old('description')}}</textarea>
                                 @if ($errors->has('description'))
                                     <span class="help-block">
                                         {{ $errors->first('description') }}

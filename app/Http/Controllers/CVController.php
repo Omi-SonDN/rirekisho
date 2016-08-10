@@ -90,9 +90,6 @@ class CVController extends Controller
         if (Gate::denies('Visitor')) {
             abort(403);
         }
-//        $positions = $request->input('positionsSearch');
-//        $name = $request->input('nameSearch');
-//        $Status = $request->input('statusSearch');
 
         $positions = $request->input('positions');
         $name = $request->input('name');
@@ -118,15 +115,6 @@ class CVController extends Controller
                 'url' => \URL::action('CVController@index')
             )
         );
-    }
-
-    /************Search orderBy Name Positions Status Age*************/
-    public function resort1()
-    {
-        if (Gate::denies('Visitor')) {
-            abort(403);
-        }
-        return view('xCV.resort', compact('CVs'));
     }
 
 
@@ -310,6 +298,7 @@ class CVController extends Controller
     }
 
     public function getCreateUpload()
+
     {
         if (Gate::denies('Applicant')) {
             abort(403);
@@ -440,6 +429,8 @@ class CVController extends Controller
         }
 
         $CV = CV::findorfail($id);
+
+        $CV->old_status = $CV->Status;
 
         if ($request->has('_potions')) {
             $CV->apply_to = $request->input('_potions');
@@ -598,6 +589,7 @@ class CVController extends Controller
 //                $CV1 = $CV1->sortBy('updated_at');
             }
         } else{
+
             if($none_field == 'updated_at')
                 $CV1 = $CV1->sortByDesc($none_field);
             else{
@@ -606,8 +598,6 @@ class CVController extends Controller
                 else $CV1 = $CV1->sortByDesc($none_field);
             }
         }
-
-       // $CV1 = $CV1->sortBy('updated_at');
 
         // remove no name or age "0000-00-00";
         // remove record no get positions actives (1) with role Visitor
@@ -627,7 +617,6 @@ class CVController extends Controller
         list ($cvs, $get_paging) = Pagination_temp::cn_arr_pagina($CV1, $url_modify, $_page, $_numpage);
 
         return array($cvs, $_Position, $_Status, $get_paging);
-
     }
 
     public function DESC($CVs)

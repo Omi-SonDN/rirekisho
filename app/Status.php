@@ -3,16 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Status extends Model
 {
+    use SoftDeletes; 
     protected $table = 'status';
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'status',
         'prev_status',
         'infor',
         'allow_sendmail',
-        'email_template'
+        'email_template',
+        'role_VisitorStatus'
     ];
     public function CVs()
     {
@@ -22,6 +26,12 @@ class Status extends Model
     public function getAllowSendAttribute()
     {
         if ($this->allow_sendmail == 0) {
+            return "<span class='label label-default'>Không cho phép</span>";
+        } else return "<span class='label label-success'>Cho phép</span>";
+    }
+    public function getrole_VisitorAttribute()
+    {
+        if ($this->role_VisitorStatus == 0) {
             return "<span class='label label-default'>Không cho phép</span>";
         } else return "<span class='label label-success'>Cho phép</span>";
     }

@@ -3,8 +3,15 @@ $(document).ready(function () {
 
     //$(document).on("change", 'form.status', function(){
 
-    $('body').on('change','form.status',function () {
+    //
+    var old_status_id = null;
+    $('body').on('focus','select.status',function () {
+        old_status_id = $(this).val();
+        console.log(old_status_id);
+    });
 
+    $('body').on('change','form.status',function () {
+        console.log(old_status_id);
         var result = confirm("Want to change?");
         var stt = $(this).children('select.status').val();
         if (result) {
@@ -28,19 +35,27 @@ $(document).ready(function () {
                     $('#CV_status' + data.id).val(data.Status);
                     //disable all option in select;
                     $('#status' + data.id + ' option').each(function (k, i) {
-                        if (data.Status == $(i).attr('value'))
+                        if(old_status_id == $(i).attr('value')){
                             $(i).removeClass('hidden');
-                        else
-                            $(i).addClass('hidden');
-                        //in list next_status on data
+                            console.log(i);
+                            return true;
+                        }
                         $(data.next_status).each(function(x,el){
                             if( el.id == $(i).attr('value') ){
                                 $(i).removeClass('hidden');
                                 return false;
-                            }
-                            else
+                            } else{
                                 $(i).addClass('hidden');
+                            }
                         });
+                        if (data.Status == $(i).attr('value')){
+                            $(i).removeClass('hidden');
+                            return true;
+                        }
+                        if (old_status_id == parseInt($(i).attr('value'))){
+                            $(i).removeClass('hidden');
+                            return true;
+                        }
                     });
                     var btn_send_email = '<button id="btn_send_email' + data.id;
 

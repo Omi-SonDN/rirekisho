@@ -768,6 +768,7 @@ button.btn-send-email {
 }
 #WzBoDy .forumhead .foruminfo .topx-tip-head {
     color: rebeccapurple;
+<<<<<<< HEAD
     /* font-size: 5em; */
     padding: 1px 20px;
     /* line-height: 12px; */
@@ -775,6 +776,15 @@ button.btn-send-email {
 }
 #WzBoDy .forumhead h2 {
     /* padding: 0; */
+=======
+    / font-size: 5em; /
+    padding: 1px 20px;
+    / line-height: 12px; /
+    font-weight: 400;
+}
+#WzBoDy .forumhead h2 {
+    / padding: 0; /
+>>>>>>> 9d0bc684de8be3958f5d3bc196d08adf5bc10b62
     font-size: 20px;
     color: red;
     line-height: 12px;
@@ -819,6 +829,7 @@ table.imagetable td {
      border-style: solid;
      border-color: #999999;
  }
+
 /* ---------------On/Off FlipSwitch ------- */
 .onoffswitch {
     position: relative; width: 49px;

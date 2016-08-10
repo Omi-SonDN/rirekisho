@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Vinkla\Hashids\Facades\Hashids;
 
-
 class CV extends Model
 {
     use SearchableTrait;
@@ -32,18 +31,6 @@ class CV extends Model
         'linkedin',
         'active_by'
     ];
-
-    //protected $appends = ['age'];
-
-    // public function getStatusnameAttribute(){
-    //     switch ($this->Status) {
-    //         case 0: return "Chờ duyệt"; break;
-
-    //         default:
-    //             # code...
-    //             break;
-    //     }
-    // }
 
     public function User()
     {
@@ -87,9 +74,11 @@ class CV extends Model
 
     /************* scopelive array *********************/
     public function scopeLive($query, $live)
+
     {
         return $query->whereIn('cvs.live', $live);
     }
+
     /************* scope check status cv *********************/
     public function getCheckcvAttribute()
     {

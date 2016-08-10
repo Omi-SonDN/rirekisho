@@ -161,7 +161,6 @@ $(document).ready(function () {
 
     });
 
-
     $('input[type=file]').change(function (e) {
         e.preventDefault();
         var self = $(this);
@@ -292,7 +291,6 @@ $(document).ready(function () {
          });*/
 
     }
-
 
     function check() {
         var w = document.getElementById("mySidenav").offsetWidth;
@@ -434,6 +432,7 @@ $(document).ready(function () {
             .bind("click", editCell);
     }
 
+
     resetTable();
     function editCell() {
         var ID = $(this).closest('tr').attr('id');//record/skill id
@@ -517,10 +516,10 @@ $(document).ready(function () {
                     resetTable();
                 });
 
+
             }
         });
     }
-
 
     /***************User profile**********************/
 
@@ -557,6 +556,7 @@ $(document).ready(function () {
                         $img = $('<img />').attr('src', data).fadeIn();
                     $('#dropzone').find('.fixed-img').html($img);
                 };
+
 
             } else {
                 var ext = file.name.split('.').pop();
@@ -653,14 +653,20 @@ function onclickSetData(ojbect, isNamefunc){
     }
     //alert(ojbect.baseURI);
 
+    for(var ik in cachedData){
+        console.log(ik +'---->'+ cachedData[ik]);
+    }
+
     var data_to_send = arrToStrdata(cachedData);
     if (isNamefunc) {
         if (cachedData[isNamefunc].length > 2){
+            alert(1111);
             advSearch(data_to_send);
         }
+    }else {
+        // gui du lieu vao ajax
+        advSearch(data_to_send);
     }
-    // gui du lieu vao ajax
-    advSearch(data_to_send);
 }
 // convert arrary to string send ajax adsearch
 function arrToStrdata(arr) {
@@ -678,8 +684,7 @@ function arrToStrdata(arr) {
 
 
 // function send data search CV
-function advSearch(dataString)
-{
+function advSearch(dataString) {
     $.ajax({
         type: "POST",
         url: "/CV/adSearch",
@@ -816,6 +821,7 @@ function returnHome() {
 
 // mang toan cuc
 var arr__ActNotes = [];
+
 // is changes
 function isChanges(key, val, calfunc) {
     arr__ActNotes[key] = val;
@@ -882,6 +888,7 @@ $('#searchStatistics').on('click', function(){
 
 $('#status_statistic li a').on('click', function(){
     var $ox = $(this).attr('status');
+
 
     $('#status_statistic li.active').removeClass();
     $(this).parent().addClass('active');

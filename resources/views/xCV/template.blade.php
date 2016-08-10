@@ -77,6 +77,10 @@
             @include('includes.footer')
         </div>
 
+        <div class="footer col-lg-12">
+            @include('includes.footer')
+        </div>
+
     </div>
 
 <!---  jQuery-->
