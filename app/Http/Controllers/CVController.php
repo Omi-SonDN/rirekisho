@@ -425,6 +425,7 @@ class CVController extends Controller
         }
 
         $CV = CV::findorfail($id);
+        $CV->old_status = $CV->Status;
 
         if ($request->has('_potions')) {
             $CV->apply_to = $request->input('_potions');

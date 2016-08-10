@@ -34,7 +34,7 @@ class StatusController extends Controller
             'Status' => $status,
         );
 
-        return view('status.index')->with($data);
+        return view('status.index',isset($data)?$data:NULL)->with($data);
     }
 
     /**
@@ -72,10 +72,11 @@ class StatusController extends Controller
             $status->infor = implode(',', $request->infor);
         $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
         $status->email_template = $request->email_template;
-
+        $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
         $this->validate($request, array(
             'status'=> 'required|unique:status,status',
-            'allow_sendmail' => 'required'
+            'allow_sendmail' => 'required',
+            'role_VisitorStatus' => 'required'
         ));
 
         $status->save();
@@ -102,7 +103,8 @@ class StatusController extends Controller
 
         $this->validate($request, array(
             'status'=> 'required|unique:status,status',
-            'allow_sendmail' => 'required'
+            'allow_sendmail' => 'required',
+            'role_VisitorStatus' => 'required'
         ));
         $status = new Status();
         if(count($request->status))
@@ -113,6 +115,7 @@ class StatusController extends Controller
             $status->infor = implode(',', $request->infor);
         $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
         $status->email_template = $request->email_template;
+        $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
         $status->save();
 
 //        Session::flash('flash_message', 'status has been saved.');
@@ -162,7 +165,8 @@ class StatusController extends Controller
 
         $this->validate($request, array(
             'status'=> 'required|unique:status,status',
-            'allow_sendmail' => 'required'
+            'allow_sendmail' => 'required',
+            'role_VisitorStatus' => 'required'
         ));
         $status->status = $request->status;
         if(count($request->prev_status))  
@@ -175,6 +179,7 @@ class StatusController extends Controller
             $status->infor = null;
         $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
         $status->email_template = $request->email_template;
+        $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
 
         // $status->update($request->all());
         $status->save();

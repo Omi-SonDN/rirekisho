@@ -76,10 +76,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/list/{id?}',['as' => 'list','uses' =>'PositionsController@index']);
         Route::get('/add', ['as' => 'getaddposition', 'uses' => 'PositionsController@add']);
         Route::post('/add', ['as' => 'postaddposition', 'uses' => 'PositionsController@create']);
-        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'PositionsController@edit']);
-        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'PositionsController@update']);
-        Route::get('/{id}/delete',['as'=>'delete','uses'=>'PositionsController@delete']);
-        Route::get('/{id}/view',['as'=>'view','uses'=>'PositionsController@view']);
+        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'PositionsController@edit'])->where(['id'=>'[0-9]+']);
+        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'PositionsController@update'])->where(['id'=>'[0-9]+']);
+        Route::get('/{id}/delete',['as'=>'delete','uses'=>'PositionsController@delete'])->where(['id'=>'[0-9]+']);
+        Route::get('/{id}/view',['as'=>'view','uses'=>'PositionsController@view'])->where(['id'=>'[0-9]+']);
     });
     Route::resource('positions', 'PositionsController');
 
@@ -105,10 +105,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/list/{id?}',['as' => 'list','uses' =>'StatusController@index']);
         Route::get('/add', ['as' => 'getaddstatus', 'uses' => 'StatusController@add']);
         Route::post('/add', ['as' => 'postaddstatus', 'uses' => 'StatusController@create']);
-        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'StatusController@edit']);
-        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'StatusController@update']);
-        Route::get('/{id}/delete',['as'=>'delete','uses'=>'StatusController@delete']);
-        Route::get('/{id}/view',['as'=>'view','uses'=>'StatusController@view']);
+        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'StatusController@edit'])->where(['id'=>'[0-9]+']);
+        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'StatusController@update'])->where(['id'=>'[0-9]+']);
+        Route::get('/{id}/delete',['as'=>'delete','uses'=>'StatusController@delete'])->where(['id'=>'[0-9]+']);
+        Route::get('/{id}/view',['as'=>'view','uses'=>'StatusController@view'])->where(['id'=>'[0-9]+']);
     });
 
     Route::resource('status', 'StatusController');

@@ -46,6 +46,26 @@
                         </div>
                     </li>
                     <li>
+                        <div class="float_right " style="width: 100%;">
+                            <label class="control-label col-xs-3"><strong>Visiter quản lý</strong><i style="color: red;">*</i></label>
+                            <div class="input col-xs-9">
+                                <label>
+                                    <input @if($Status->role_VisitorStatus==1) checked @endif type="radio" class="" name="role_VisitorStatus" value="1">
+                                    Cho phép 
+                                </label>
+                                <label>
+                                    <input @if($Status->role_VisitorStatus==0) checked @endif type="radio" class="" name="role_VisitorStatus" value="0">
+                                    Không cho phép
+                                </label>
+                                        @if ($errors->has('role_VisitorStatus'))
+                                            <span class="help-block">
+                                                {{ $errors->first('role_VisitorStatus') }}
+                                            </span>
+                                        @endif
+                            </div>
+                        </div>
+                    </li>
+                    <li>
                         <div class="float_right" style="width: 100%;">
                             <label class="control-label col-xs-3"><strong>Những trạng thái trước</strong></label>
                             <div class="input col-xs-9">

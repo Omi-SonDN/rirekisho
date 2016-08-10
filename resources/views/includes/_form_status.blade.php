@@ -3,6 +3,10 @@
     <input type="hidden" name="CV_status" id="CV_status{{ $CV->id }}" value="{{ $CV->Status }}"/>
     <select class="form-control status" name="status" id="status{{ $CV->id }}">
         @foreach( \App\Status::all() as $status )
+            @if($CV->old_status && $status->id === $CV->old_status && $CV->old_status!= $CV->Status)
+                <option value="{{$status->id}}" >{{$status->id}}: {{$status->status}}</option>
+                <?php continue; ?>
+            @endif
             @if($status->id === $CV->Status))
                 <option value="{{$status->id}}" selected="select" >{{$status->id}}: {{$status->status}}</option>
             @else

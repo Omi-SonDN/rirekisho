@@ -12,6 +12,7 @@
                 <th>STT</th>
                 <th>Trạng thái</th>
                 <th>Cho phép gửi mail</th>
+                <th>Visiter quản lý</th>
                 <th>Hành động</th>
                 </thead>
                 @include('includes.flash-alert')
@@ -27,6 +28,9 @@
                         </td>
                         <td>
                             {!! $stt->allow_send !!}
+                        </td>
+                        <td>
+                            {!! $stt->role_VisitorStatus !!}
                         </td>
                         <td>
                             <a style="font-weight: bold; color: white;" href="{{url('status',[$stt ,'view'])}}" class="btn ink-reaction btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin trạng thái CV"><span class="glyphicon glyphicon-eye-open"></span></a>
