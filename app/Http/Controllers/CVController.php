@@ -418,6 +418,9 @@ class CVController extends Controller
 
     public function changeStatus(Request $request)
     {
+        if (Gate::denies('Visitor')) {
+            abort(403);
+        }
         if ($request->isMethod('post')) {
             if ($request->has('id')) {
                 $id = $request->input('id');
@@ -677,9 +680,6 @@ class CVController extends Controller
 
     public function getShowUpload ($id)
     {
-        if (Gate::denies('Applicant')) {
-            abort(403);
-        }
         if (count(Hashids::decode($id))) {
             $newId = ['id' => Hashids::decode($id)[0]];
         } else {
@@ -708,6 +708,10 @@ class CVController extends Controller
     }
 
     public function statisticYear(){
+
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
         $cv3 = CV::select(DB::raw("count(id) as count, year(created_at) as year"))
             ->orderBy('created_at')
             ->groupBy(DB::raw('year(created_at)'))
@@ -741,6 +745,10 @@ class CVController extends Controller
     }
 
     public function statisticQuarter(){
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
+
         //now year
         $day = date('Y-m-d H:i:s');
         $year = getYear($day);
@@ -788,6 +796,10 @@ class CVController extends Controller
 
     public function statisticMonth()
     {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
+
         //by month
         $day = date('Y-m-d H:i:s');
         $year = getYear($day);
@@ -831,6 +843,9 @@ class CVController extends Controller
 
     public function statisticPositions($datestart, $dateend,$key)
     {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
         if($key == ''){
             $cv = CV::select(DB::raw("count(id) as count, apply_to positions"))
                 ->where('created_at', '>=', $datestart)
@@ -903,6 +918,9 @@ class CVController extends Controller
 
     public function statisticSearch(Request $request)
     {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
         $datestart = $request->input('startDate');
         $datestart = $datestart.' 00:00:00';
 
@@ -919,6 +937,9 @@ class CVController extends Controller
 
     public function statisticStatus(Request $request)
     {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
         $ox = $request->input('ox');
         switch ($ox) {
             case 'month':

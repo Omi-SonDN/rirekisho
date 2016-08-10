@@ -8,7 +8,7 @@
                     {{--<option value="{{$status->id}}" selected="select" >{{$status->id}}: {{$status->status}}</option>--}}
 {{--=======--}}
 
-        @foreach( \App\Status::all() as $status )
+        @foreach($_Status as $status )
             @if($CV->old_status && $status->id === $CV->old_status && $CV->old_status!= $CV->Status)
                 <option value="{{$status->id}}" >{{$status->id}}: {{$status->status}}</option>
                 <?php //continue; ?>

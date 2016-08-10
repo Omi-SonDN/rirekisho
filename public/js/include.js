@@ -653,10 +653,6 @@ function onclickSetData(ojbect, isNamefunc){
     }
     //alert(ojbect.baseURI);
 
-    for(var ik in cachedData){
-        console.log(ik +'---->'+ cachedData[ik]);
-    }
-
     var data_to_send = arrToStrdata(cachedData);
     if (isNamefunc) {
         if (cachedData[isNamefunc].length > 2){

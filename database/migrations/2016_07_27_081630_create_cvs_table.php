@@ -43,6 +43,7 @@ class CreateCvsTable extends Migration
             $table->string('attach');
             $table->string('github');
             $table->string('linkedin');
+            $table->tinyInteger('old_status');
             $table->integer('active_by')->unsigned();
             $table->timestamps();
         });

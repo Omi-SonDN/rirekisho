@@ -18,10 +18,11 @@
                         <a class="navbar-brand toptext" href="{{URL('/')}}">Ominext JSC</a>
                     </div>
                     <ul class="float_right nav navbar-nav">
+                        {{--{{ dd(Route::getCurrentRoute())}}--}}
                         @if (Auth::user()->getRole() === 'Applicant')
-                            <li class="{{(Route::getCurrentRoute()->getPath() =='/') ? 'active' : ''}}"><a href="{{url('/')}}">Trang chủ</a></li>
+                            <li class="{{(Route::getCurrentRoute() =='/') ? 'active' : ''}}"><a href="{{url('/')}}">Trang chủ</a></li>
                         @else
-                            <li class="{{(Route::getCurrentRoute()->getPath() =='CV') ? 'active' : ''}}"><a href="{{url('CV')}}">Trang chủ</a></li>
+                            <li class="{{(Route::getCurrentRoute() =='CV') ? 'active' : ''}}"><a href="{{url('CV')}}">Trang chủ</a></li>
                         @endif
                         @can('Admin')
                             <li {!! (\Request::route()->getName() == 'User.index') ? 'class="active"' : '' !!}><a href="{{url('User')}}">User</a></li>
