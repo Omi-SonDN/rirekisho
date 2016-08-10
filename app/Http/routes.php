@@ -68,7 +68,7 @@ Route::group(['middleware' => ['auth']], function () {
         return Redirect::action('CVController@index');
     });
 
-    //every one see different page  
+    //every one see different page 
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
     Route::post('CV/changeStatus', 'CVController@changeStatus');
     Route::get('Record/index/{type}', 'RecordController@index');

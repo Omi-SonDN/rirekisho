@@ -94,7 +94,7 @@
                             class="sorting" data-sort="asc"
                         @endif
                     @else
-                        class="sorting_asc" data-sort="asc"
+                        class="sorting" data-sort="asc"
                     @endif
                     onclick="adSearchChange('', '', '', '', this)" data-field="name" style="width: 150px">Họ và tên</th>
                 <th @if (Request::has('data-field') && Request::has('data-sort'))

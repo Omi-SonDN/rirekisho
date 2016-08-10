@@ -692,7 +692,7 @@ function adSearchChange(per_page, s_name, pos, status, thead) {
         });
         if (!dataSort || !dataField || (dataSort == 'undefined') || (dataField == 'undefined')) {
             dataSort = 'asc';
-            dataField = 'id';
+            dataField = 'updated_at';
 
             $('.dataTable th').each(function () {
                 if ($(this).attr('data-field') == 'name') {
@@ -797,6 +797,23 @@ function submitCVRule() {
             }
         }
     });
+}
+
+function lam_moi_ttv(id){
+
+    if (id) {
+        $.ajax({
+            type: 'PUT',
+            url: "/CV/" + id,
+            data: 'id=' + id,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                alert('Update dữ liệu thành công!')
+                //redirect(data['url']);
+            },
+        });
+    }
 }
 
 // Xoa  cv
