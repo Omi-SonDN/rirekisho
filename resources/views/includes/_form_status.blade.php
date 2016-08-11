@@ -4,7 +4,7 @@
     <select class="form-control status" name="status" id="status{{ $CV->id }}">
         @foreach( \App\Status::all() as $status )
             @if($CV->old_status && $status->id === $CV->old_status && $CV->old_status!= $CV->Status)
-                <option value="{{$status->id}}" >{{$status->id}}: {{$status->status}}</option>
+                <option value="{{$status->id}}" style="color:#a94442;">{{$status->id}}: {{$status->status}}</option>
                 <?php continue; ?>
             @endif
             @if($status->id === $CV->Status))

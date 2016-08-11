@@ -168,11 +168,15 @@ class PositionsController extends Controller
         }
         $position->description = $request->description;
 
-        $this->validate($request, array(
-            'name'=> 'required|unique:positions,name',
+        $rules = array(
             'active' => 'required',
             'description' => 'required'
-        ));
+        );
+
+        if( $position->name != $request->name){
+            $rules['name'] = 'required|unique:positions,name';
+        }
+        $this->validate($request, $rules);
 
         $position->update();
         return redirect()

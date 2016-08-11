@@ -163,11 +163,16 @@ class StatusController extends Controller
 
         $status = Status::findorfail($id);
 
-        $this->validate($request, array(
-            'status'=> 'required|unique:status,status',
+        $rules = array(
             'allow_sendmail' => 'required',
             'role_VisitorStatus' => 'required'
-        ));
+        );
+
+        if( $status->status != $request->status){
+            $rules['status'] = 'required|unique:status,status';
+        }
+
+        $this->validate($request, $rules);
         $status->status = $request->status;
         if(count($request->prev_status))  
         $status->prev_status = implode(',', $request->prev_status);
