@@ -10,7 +10,11 @@
                 <input type="hidden" name="id" value="{{$id}}"/>
                 <input type="hidden" name="type" value="{{$type}}"/>
                 <div class="form-group">
+<<<<<<< HEAD
+                    <label for="recipient" class="label label-default">Recipient: <i style="color:red">*</i> </label>
+=======
                     <label for="recipient" class="label label-primary">Recipient: <i style="color:red">*</i> </label>
+>>>>>>> 9d0bc684de8be3958f5d3bc196d08adf5bc10b62
                     <input name="recipient" class="form-control " type="email"
                            placeholder="Recipient's email address" value="{{ $email }}" />
                            @if ($errors->has('recipient'))
@@ -34,6 +38,7 @@
                 @endif
                 @if(in_array('Date',$status->info))
                 <div class="form-group">
+
                     <label for="date" class="label label-primary">Ngay: <i style="color:red">*</i> </label>
                     <input type="date" class="form-control" name="date" id="date"
                            data-date='{"startView": 2, "openOnMouseFocus": true}'/>

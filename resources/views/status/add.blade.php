@@ -49,7 +49,7 @@
                     </li>
                     <li>
                         <div class="float_right " style="width: 100%;">
-                            <label class="control-label col-xs-3"><strong>Visiter quản lý</strong><i style="color: red;">*</i></label>
+                            <label class="control-label col-xs-3"><strong>Visitor quản lý</strong><i style="color: red;">*</i></label>
                             <div class="input col-xs-9">
                                 <label>
                                     <input type="radio" class="" name="role_VisitorStatus" value="1">

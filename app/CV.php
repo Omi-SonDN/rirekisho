@@ -74,9 +74,11 @@ class CV extends Model
 
     /************* scopelive array *********************/
     public function scopeLive($query, $live)
+
     {
         return $query->whereIn('cvs.live', $live);
     }
+
     /************* scope check status cv *********************/
     public function getCheckcvAttribute()
     {

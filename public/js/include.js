@@ -161,7 +161,6 @@ $(document).ready(function () {
 
     });
 
-
     $('input[type=file]').change(function (e) {
         e.preventDefault();
         var self = $(this);
@@ -292,7 +291,6 @@ $(document).ready(function () {
          });*/
 
     }
-
 
     function check() {
         var w = document.getElementById("mySidenav").offsetWidth;
@@ -434,6 +432,7 @@ $(document).ready(function () {
             .bind("click", editCell);
     }
 
+
     resetTable();
     function editCell() {
         var ID = $(this).closest('tr').attr('id');//record/skill id
@@ -517,10 +516,10 @@ $(document).ready(function () {
                     resetTable();
                 });
 
+
             }
         });
     }
-
 
     /***************User profile**********************/
 
@@ -558,168 +557,127 @@ $(document).ready(function () {
                     $('#dropzone').find('.fixed-img').html($img);
                 };
 
+
             } else {
                 var ext = file.name.split('.').pop();
                 $('#dropzone').find('.fixed-img').html(ext);
             }
         });
-//});
-///****************** search name date age status*************************/
-//
-//    $(".dataTable th").on('click', function () {
-//
-//         var entries = $('#show_entries').val();
-//         var dataSort = $(this).attr("data-sort");
-//         var dataField = $(this).attr("data-field");
-//         var nameSearch = $('#nameSearch').val();
-//         var positionsSearch = $('#positionsSearch').val();
-//         var statusSearch = $('#statusSearch').val();
-//         var entrie = $('#show_entries').val();
-//
-//         var dataString = "data-sort=" + dataSort +
-//             "&data-field=" + dataField +
-//             "&nameSearch=" + nameSearch +
-//             "&positionsSearch=" + positionsSearch +
-//             "&statusSearch=" + statusSearch +
-//             "&entrie=" + entries;
-//
-//         $(".dataTable .sorting_asc").attr("class", "sorting");
-//         $(".dataTable .sorting_asc").attr("data-sort", "asc");
-//         $(".dataTable .sorting_desc").attr("class", "sorting");
-//         $(".dataTable .sorting_desc").attr("data-sort", "asc");
-//
-//         if (dataSort == "desc") {
-//             $(this).attr("data-sort", "asc");
-//             $(this).attr("class", "sorting_asc");
-//
-//         } else {
-//             $(this).attr("data-sort", "desc");
-//             $(this).attr("class", "sorting_desc");
-//         }
-//
-//         var dataSortAff = $(this).attr("data-sort");
-//
-//         $("#example").attr("data-field", dataField);
-//         $("#example").attr("data-sort", dataSortAff);
-//
-//         if (dataString) {
-//             advSearch(dataString)
-//         }
-//    });
+
+
+/****************** thay doi icon up down sort table *************************/
+    $(".dataTable th").on('click', function () {
+         var dataSort = $(this).attr("data-sort");
+         var dataField = $(this).attr("data-field");
+
+         $(".dataTable .sorting_asc, .sorting_desc").attr("class", "sorting");
+         $(".dataTable .sorting_asc").attr("data-sort", "asc");
+         $(".dataTable .sorting_desc").attr("data-sort", "desc");
+
+         if (dataSort == "desc") {
+             $(this).attr("data-sort", "asc");
+             $(this).attr("class", "sorting_asc");
+
+         } else {
+             $(this).attr("data-sort", "desc");
+             $(this).attr("class", "sorting_desc");
+         }
+    });
 
 // search with button submit
     $("#submitSearch").on('click', function () {
-        var dataSort = 'asc';
-        var dataField = 'name';
-        var nameSearch = $('#nameSearch').val();
-        var positionsSearch = $('#positionsSearch').val();
-        var statusSearch = $('#statusSearch').val();
-        var entries = $('#show_entries').val();
-
-        var dataString = "data-sort=" + dataSort +
-            "&data-field=" + dataField +
-            "&nameSearch=" + nameSearch +
-            "&positionsSearch=" + positionsSearch +
-            "&statusSearch=" + statusSearch +
-            "&entrie=" + entries;
-
-        if (dataString) {
-            advSearch(dataString)
+        var data_to_send = arrToStrdata(cachedData);
+        if (data_to_send) {
+            advSearch(data_to_send)
         }
     });
 });
-// search change cv
-function adSearchChange(per_page, s_name, pos, status, thead) {
 
-    if (per_page) {
-        var entries = per_page.value;
-    } else {
-        var entries = $('#show_entries').val();
+//var cachedData = Array();
+//var elements = $(".set_"+id_local);
+//elements.each(function(){
+//    if($(this).attr('type')== 'text'){
+//        cachedData[$(this).attr('name')] = $(this).val();
+//        //console.log('INPUT: '+$(this).val());
+//    }
+//    if($(this).attr('type')== 'radio'){
+//        if($(this).is(":checked")){
+//            cachedData[$(this).attr('name')] = $(this).val();
+//            //console.log('RADIO: '+$(this).val());
+//        }
+//    }
+//    if($(this).is('th')){
+//        cachedData[$(this).attr('data-field')] = $(this).attr('data-field');
+//        cachedData[$(this).attr('data-sort')] = $(this).attr('data-sort');
+//        console.log('TH: '+$(this).attr('data-field'));
+//    }
+//    if($(this).is('select')){
+//        cachedData[$(this).attr('name')] = $(this).find('option:selected').val();
+//        //console.log('SELECT: '+$(this).find('option:selected').val());
+//    }
+//});
+
+var cachedData = Array();
+var elements = document.getElementsByClassName("set_"+id_local);
+for(var i=0; i<elements.length; i++) {
+    if (elements[i].localName === 'select' || elements[i].localName === 'input') {
+        cachedData[elements[i].name] = elements[i].value;
     }
-
-    if (s_name) {
-        var nameSearch = s_name;
-    } else {
-        var nameSearch = $('#nameSearch').val();
-    }
-
-    if (pos) {
-        var positionsSearch = pos.value;
-    } else {
-        var positionsSearch = $('#positionsSearch').val();
-    }
-
-    if (status) {
-        var statusSearch = status.value;
-    } else {
-        var statusSearch = $('#statusSearch').val();
-    }
-    if (thead) {
-        var dataSort = $(thead).attr("data-sort");
-        var dataField = $(thead).attr("data-field");
-
-        if (dataSort == 'asc') {
-            dataSort = 'desc';
-        } else {
-            dataSort = 'asc';
-        }
-
-        $('.dataTable th').each(function () {
-            if ($(this).attr('data-field') == dataField) {
-                $(this).attr("data-sort", dataSort);
-                $(this).attr("class", 'sorting_' + dataSort);
-            } else {
-                // $(this).attr("data-sort",'asc');
-                // $(this).attr("class",'sorting');
-                if ($(this).attr('class') != 'ab') {
-                    $(this).attr("data-sort", 'asc');
-                    $(this).attr("class", 'sorting');
-                }
+    if (elements[i].localName === 'th') {
+        for (var key in (elements[i].dataset)) {
+            if (key in elements[i].dataset) {
+                //console.log(elements[i].dataset);
+                cachedData[key] = elements[i].dataset[key];
             }
-        });
-
-    } else {
-        var dataSort;
-        var dataField;
-        $('.dataTable th').each(function () {
-            if ($(this).hasClass('sorting_asc')) {
-                dataSort = $(this).attr("data-sort");
-                dataField = $(this).attr("data-field");
-            } else if ($(this).hasClass('sorting_desc')) {
-                dataSort = $(this).attr("data-sort");
-                dataField = $(this).attr("data-field");
-            }
-        });
-        if (!dataSort || !dataField || (dataSort == 'undefined') || (dataField == 'undefined')) {
-            dataSort = 'asc';
-            dataField = 'id';
-
-            $('.dataTable th').each(function () {
-                if ($(this).attr('data-field') == 'name') {
-                    $(this).attr("data-sort", 'asc');
-                    $(this).attr("class", 'sorting_asc');
-                } else {
-                    $(this).attr("data-sort", 'asc');
-                    $(this).attr("class", 'sorting');
-                }
-            });
         }
     }
-    var dataString = "data-sort=" + dataSort +
-        "&data-field=" + dataField +
-        "&nameSearch=" + nameSearch +
-        "&positionsSearch=" + positionsSearch +
-        "&statusSearch=" + statusSearch +
-        "&entrie=" + entries;
-
-    // search name 3 characters  Min lenght
-    if (nameSearch.length > 2 && s_name) {
-        advSearch(dataString)
-    } else {
-        advSearch(dataString)
-    }
-
 }
+// xoa bo id va value chua duoc khai bao cachedData
+for (var kills in cachedData) {
+    if (cachedData[kills] === undefined || cachedData[kills] === undefined) {
+        delete cachedData[kills];
+    }
+}
+
+// set data input + radio th select =>> goi den ham adsearch
+function onclickSetData(ojbect, isNamefunc){
+    if (ojbect.localName === 'select' || ojbect.localName === 'input') {
+        cachedData[ojbect.name] = ojbect.value;
+    }
+    if (ojbect.localName === 'th') {
+        for (var key in (ojbect.dataset)) {
+            if (key in cachedData) {
+                cachedData[key] = ojbect.dataset[key];
+            }
+        }
+    }
+    //alert(ojbect.baseURI);
+
+    var data_to_send = arrToStrdata(cachedData);
+    if (isNamefunc) {
+        if (cachedData[isNamefunc].length > 2){
+            alert(1111);
+            advSearch(data_to_send);
+        }
+    }else {
+        // gui du lieu vao ajax
+        advSearch(data_to_send);
+    }
+}
+// convert arrary to string send ajax adsearch
+function arrToStrdata(arr) {
+    var isloop = false;
+    for (var key in arr) {
+        if (!isloop) {
+            var str = '' + key + '=' + arr[key];
+            isloop = true;
+        } else {
+            str += '&' + key + '=' + arr[key];
+        }
+    }
+    return str;
+}
+
 
 // function send data search CV
 function advSearch(dataString) {
@@ -728,6 +686,7 @@ function advSearch(dataString) {
         url: "/CV/adSearch",
         data: dataString,
         cache: false,
+        dataType: "json",
         success: function (data) {
             //console.log(data);
             $("[data-reload=true]").html(data['data']);
@@ -799,6 +758,23 @@ function submitCVRule() {
     });
 }
 
+function lam_moi_ttv(id){
+
+    if (id) {
+        $.ajax({
+            type: 'PUT',
+            url: "/CV/" + id,
+            data: 'id=' + id,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                alert('Update dữ liệu thành công!')
+                //redirect(data['url']);
+            },
+        });
+    }
+}
+
 // Xoa  cv
 function getDeleteCV(id, type) {
     if (id) {
@@ -858,15 +834,7 @@ function returnHome() {
 
 // mang toan cuc
 var arr__ActNotes = [];
-    arr__ActNotes['entrie'] = 10;
-    arr__ActNotes['page'] = 1;
-    arr__ActNotes['nameSearch'] = '';
-    arr__ActNotes['positionsSearch'] = 1;
-    arr__ActNotes['statusSearch'] = 1;
-    arr__ActNotes['data-sort'] = 'ASC';
-    arr__ActNotes['data-field'] = 'name';
-    arr__ActNotes['isAct'] = 1;
-    arr__ActNotes['isLive'] = 1;
+
 // is changes
 function isChanges(key, val, calfunc) {
     arr__ActNotes[key] = val;
@@ -934,6 +902,7 @@ $('#searchStatistics').on('click', function(){
 $('#status_statistic li a').on('click', function(){
     var $ox = $(this).attr('status');
 
+
     $('#status_statistic li.active').removeClass();
     $(this).parent().addClass('active');
 
@@ -953,5 +922,3 @@ $('#status_statistic li a').on('click', function(){
         }
     });
 });
-
-

@@ -90,7 +90,8 @@ class CVTableSeeder extends Seeder
                 //'Address' => $faker->city,
                 'name_cv' => $faker->Name,
                 'user_id' => $v->id,
-                'created_at' => $faker->date($format = 'Y-m-d', $max = '1995-11-03'),
+                //'created_at' => $faker->date($format = 'Y-m-d', $max = '1995-11-03'),
+                'created_at' => $faker->dateTimeBetween('-3 years', 'now'),
                 'apply_to' => array_rand($key_positions),
                 'Status' => array_rand($key_status),
                 'Status' => 1,
@@ -108,7 +109,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->delete();
         $faker = Faker::create('vi_VN');
-        $counter = range(1, 15);
+        $counter = range(1, 30);
 
         DB::table('users')->insert([
             'name' => 'BuiNgoc[superadmin]',
@@ -204,6 +205,7 @@ class StatusTableSeeder extends Seeder
         DB::table('status')->delete();
         $is_check = DB::table('status')->get();
         $arr_status = array(
+
             1  => array('id' => 1, 'status'  => 'Chờ duyệt', 'allow_sendmail'                 => '', 'prev_status'  => '', 'email_template'                          => ' Ch&agrave;o bạn&nbsp;[First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i đ&atilde; nhận được hồ sơ của bạn. Hiện tại hồ sơ của bạn đang trong qu&aacute; tr&igrave;nh chờ duyệt. Ch&uacute;ng t&ocirc;i sẽ xem x&eacute;t v&agrave; phản hồi cho bạn sớm nhất. Cảm ơn bạn đ&atilde; quan t&acirc;m v&agrave; gửi hồ sơ đến cho ch&uacute;ng t&ocirc;i. Tr&acirc;n trọng! '),
             2  => array('id' => 2, 'status'  => 'Đồng ý phỏng vấn', 'allow_sendmail'          => '1', 'prev_status' => '1,6', 'email_template'                       => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i đ&atilde; nhận được hồ sơ của bạn, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến tham dự phỏng vấn tại c&ocirc;ng ty. Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời! '),
             3  => array('id' => 3, 'status'  => 'Đã đặt lịch phỏng vấn', 'allow_sendmail'     => '1', 'prev_status' => '2', 'email_template'                         => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i thực sự đ&aacute;nh gi&aacute; cao tr&igrave;nh độ cũng như sự hiểu biết của bạn đối với vị tr&iacute; c&ocirc;ng ty đang tuyển dụng, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến tham dự phỏng vấn tại c&ocirc;ng ty. - Thời gian: [Time] ph&uacute;t, Ng&agrave;y&nbsp;[Date] - Địa điểm: [Address] Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại <a href="tel:04.3795.5299">04.3795.5299</a> để th&ocirc;ng b&aacute;o. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời! '),

@@ -34,7 +34,7 @@ class CreateCvsTable extends Migration
             $table->string('positions');
             $table->text('Memo');
             $table->tinyInteger('Active');
-            $table->tinyInteger('Status');
+            $table->tinyInteger('Status')->default(1);
             $table->tinyInteger('old_status');
             $table->tinyInteger('version');
             $table->tinyInteger('apply_to');
@@ -44,6 +44,7 @@ class CreateCvsTable extends Migration
             $table->string('attach');
             $table->string('github');
             $table->string('linkedin');
+            $table->tinyInteger('old_status');
             $table->integer('active_by')->unsigned();
             $table->timestamps();
         });

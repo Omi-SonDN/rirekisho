@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Response;
 use Gate;
 use Input;
 use Session;
+use Validator;
 
 class PositionsController extends Controller
 {
@@ -56,19 +57,27 @@ class PositionsController extends Controller
             abort(403);
         }
         global $request;
-        $positions = new Positions();
-        $positions->name = $request->name;
-        $positions->active = $request->get('active') ? $request->get('active'):0;
-        $positions->description = $request->description;
-
-        $this->validate($request, array(
+        $rules = array(
             'name'=> 'required|unique:positions,name',
             'active' => 'required',
             'description' => 'required'
-        ));
-
-        $positions->save();
-
+        );
+        $messages = array(
+            'description.required' => 'Bạn phải nhập thông tin mô tả cho vị trí tuyển dụng!',
+            'active.required' => "Bạn phải chọn kích hoạt hoặc không kích hoạt vị trí tuyển dụng!",
+            'name.required' => 'Tên vị trí không được để trống!',
+            'name.unique' => 'Tên vị trí đã tồn tại, vui lòng nhập tên khác!',
+        );
+        $validator = Validator::make($request->all(),$rules,$messages);
+        if( $validator->fails() ){
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $positions = new Positions();
+            $positions->name = $request->name;
+            $positions->active = $request->get('active') ? $request->get('active'):0;
+            $positions->description = $request->description;
+            $positions->save();
+        }
         
         return redirect()
             ->route('position::list')
@@ -88,28 +97,7 @@ class PositionsController extends Controller
      */
     public function store(Request $request)
     {
-        if (Gate::denies('Admin')) {
-            abort(403);
-        }
-
-        $position = new Positions();
-        $position->name = $request->name;
-        $position->description = $request->description;
-        if ($request->active == "true") {
-            $position->active = 1;
-        }
-        if ($request->active == "false") {
-            $position->active = 0;
-        }
-        $this->validate($request, array(
-            'name'=> 'required|unique:positions,name',
-            'active' => 'required',
-            'description' => 'required'
-        ));
-        $position->save();
-
-//        Session::flash('flash_message', 'Position has been saved.');
-        return Response::json($position);
+        //
     }
 
     /**
@@ -153,30 +141,32 @@ class PositionsController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-
-        
         $position = Positions::findorfail($id);
-
-        if ($position->name != $request->name) {
-            $position->name = $request->name;
-        }
-
-        if ($request->active) {
-            $position->active = 1;
-        } else {
-            $position->active = 0;
-        }
-        $position->description = $request->description;
-
         $rules = array(
             'active' => 'required',
             'description' => 'required'
         );
-
+        $messages = array(
+            'description.required' => 'Bạn phải nhập thông tin mô tả cho vị trí tuyển dụng!',
+            'active.required' => "Bạn phải chọn kích hoạt hoặc không kích hoạt vị trí tuyển dụng!",
+            'name.required' => 'Tên vị trí không được để trống!',
+            'name.unique' => 'Tên vị trí đã tồn tại, vui lòng nhập tên khác!',
+        );
         if( $position->name != $request->name){
             $rules['name'] = 'required|unique:positions,name';
         }
-        $this->validate($request, $rules);
+        $validator = Validator::make($request->all(),$rules,$messages);
+        if( $validator->fails() ){
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else { 
+            $position->name = $request->name;
+            if ($request->active) {
+                $position->active = 1;
+            } else {
+                $position->active = 0;
+            }
+            $position->description = $request->description;
+        }
 
         $position->update();
         return redirect()

@@ -5,22 +5,11 @@
         </td>
     </tr>
 @else
-
-    {{--@foreach($CVs as $key => $CV)--}}
-        {{--<tr class="data{{++$key}}">--}}
-            {{--<td class="rank">{{$key}}</td>--}}
-
-    <?php //$CVx = $CVs->reject(function ($item) {
-        //return $item->Name == null || $item->Age == "0000-00-00";
-    //});
-        $i = 0;
-    ?>
-
     @foreach($CVs as $key => $CV)
-        <tr class="data{{$key}}">
-            <td class="rank" style="text-align: center">{{++$i }}</td>
+        <tr class="data{{++$key}}">
+            <td class="rank">{{$key}}</td>
             <td class="image">
-                <div style=" position: relative;height: 100px;width: 100px; cursor: pointer;" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
+                <div style=" position: relative;height: 100px;width: 100px; cursor: pointer" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
                     <?php $image = $CV->User->image;?>
                     @if($image!="")
                         <img style="height: 100px; width: 100px;"

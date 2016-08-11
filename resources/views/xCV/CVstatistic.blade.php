@@ -38,9 +38,8 @@
 
                 <!-- ================ ========================== -->
                     <div class="tab-content">
-                        <!--      Statistic        -.>
+                        <!--      Statistic        -->
                         
-                        <!--<div id="container" style="width:100%; height:400px;"y></div>-->
                         <?php
                             $id = DB::select('select * from positions');
                         ?>

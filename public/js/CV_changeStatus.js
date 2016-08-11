@@ -2,6 +2,7 @@ $(document).ready(function () {
     var url = '';
 
     //$(document).on("change", 'form.status', function(){
+
     //
     var old_status_id = null;
     $('body').on('click','select.status',function (e) {

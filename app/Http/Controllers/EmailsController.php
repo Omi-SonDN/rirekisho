@@ -205,6 +205,7 @@ class EmailsController extends Controller
 
         $message = $data['cv']->status->email_template;
 
+
         $message = str_replace('[First_name]', ($data['cv']->User)?$data['cv']->User->First_name:'', $message);
         $message = str_replace('[Positions]', ($data['cv']->positionCv)?$data['cv']->positionCv->name:'' , $message);
         if( in_array('Time',$status->info))
@@ -214,6 +215,7 @@ class EmailsController extends Controller
         if( in_array('Address',$status->info))
         $message = str_replace('[Address]', $request->address, $message);
         $data['email_content'] = $message;
+
 
         $attachs = array();
         if (isset($request->attach[0])) {

@@ -55,7 +55,7 @@ class CVController extends Controller
         if ($request->has('data-field')) {
             $_field = $request->get('data-field');
         }else {
-            $_field = 'id';
+            $_field = 'updated_at';
         }
 
         if ($request->has('data-sort')) {
@@ -77,24 +77,27 @@ class CVController extends Controller
             $_page = 1;
         }
 
-
-        list($CVs, $_Position, $get_paging)= $this->paginationCV($s_name, $positions, $status, $_field, $_sort, $_page, $_numpage);
+        list($CVs, $_Position, $_Status, $get_paging)= $this->paginationCV($s_name, $positions, $status, $_field, $_sort, $_page, $_numpage);
         $count = count($CVs);
 
-        return view('xCV.CVindex', compact('CVs', 'count', '_numpage', 'get_paging', '_Position'));
+        return view('xCV.CVindex', compact('CVs', 'count', '_numpage', 'get_paging', '_Position', '_Status'));
     }
 
     /*********Advance Search**************/
     public function adSearch(Request $request)
     {
-
         if (Gate::denies('Visitor')) {
             abort(403);
         }
 
-        $positions = $request->input('positionsSearch');
-        $name = $request->input('nameSearch');
-        $Status = $request->input('statusSearch');
+        $positions = $request->input('positions');
+        $name = $request->input('name');
+        $Status = $request->input('Status');
+        $field = $request->input('field');
+        $sort = $request->input('sort');
+        $per_page = $request->input('show_entries');
+        $txtActive = $request->input('txtActive');
+        $txtLive = $request->input('txtLive');
 
         if ($request->has('page')) {
             $_page = (int)$request->get('page');
@@ -102,19 +105,18 @@ class CVController extends Controller
             $_page = 1;
         }
 
-        list($CVs, $_Position, $get_paging) = $this->paginationCV($name, $positions, $Status, $request->input('data-field'), $request->input('data-sort'), $_page, $request->input('entrie'));
+        list($CVs, $_Position, $_Status, $get_paging) = $this->paginationCV($name, $positions, $Status, $field, $sort, $_page, $per_page, $txtActive, $txtLive);
         $count = count($CVs);
 
         return Response::json(array(
-                'data' => view('includes.table-result', compact('CVs', 'count', '_numpage', '_Position'))->render(),
+                'data' => view('includes.table-result', compact('CVs', 'count', '_numpage', '_Position', '_Status'))->render(),
                 'pagination' => $get_paging,
                 'url' => \URL::action('CVController@index')
             )
         );
     }
 
-    /************Search orderBy Name Positions Status Age*************/
-    
+
     public function show($id)
     {
         //$id = $id - 14000;
@@ -139,7 +141,7 @@ class CVController extends Controller
 
     }
 
-    public function edit($id)//Get
+    public function edit($id)//Get 
     {
         //$id = $id - 14000;
         $uCV = User::find(Auth::user()->id);
@@ -232,6 +234,18 @@ class CVController extends Controller
             return $_SERVER['HTTP_REFERER'];
         }
 
+        if($request->has('id')){
+            $id = $request->input('id');
+            $id = Hashids::decode($id);
+            $updated_at = date('Y-m-d H:i:s');
+            $cv = CV::find($id[0]);
+            $cv->updated_at = $updated_at;
+            $cv->update();
+            return Response::json(array(
+                'success' => 'success',
+            ));
+        }
+
         $cv->update($request->all());
     }
 
@@ -280,6 +294,7 @@ class CVController extends Controller
             abort(403);
         }
 
+
         $uCV = DB::table('users')->find(Auth::user()->id);
         $CV = CV::with('User')
             ->where('user_id', Auth::user()->id)
@@ -291,10 +306,13 @@ class CVController extends Controller
             $Records = $Records->sortBy("Date");
         }
 
+
+
         return view('xCV.CVStep', compact('uCV', 'CV', 'Records', 'skills'));
     }
 
     public function getCreateUpload()
+
     {
         if (Gate::denies('Applicant')) {
             abort(403);
@@ -414,6 +432,9 @@ class CVController extends Controller
 
     public function changeStatus(Request $request)
     {
+        if (Gate::denies('Visitor')) {
+            abort(403);
+        }
         if ($request->isMethod('post')) {
             if ($request->has('id')) {
                 $id = $request->input('id');
@@ -425,6 +446,7 @@ class CVController extends Controller
         }
 
         $CV = CV::findorfail($id);
+
         $CV->old_status = $CV->Status;
 
         if ($request->has('_potions')) {
@@ -458,7 +480,7 @@ class CVController extends Controller
     /// $Status trang thai cua cv
     // Mac dinh sap xep theo ten tang dan voi 10 bang ghi tren mot trang
 
-    public function paginationCV ($name = '', $positions = null, $Status = null, $_field = 'id', $data_sort = 'asc', $_page = 1, $_numpage = 10)
+    public function paginationCV ($name = '', $positions = null, $Status = '', $_field = 'updated_at', $data_sort = 'asc', $_page = 1, $_numpage = 10, $txtActive = null, $txtLive = null)
     {
         if ($data_sort == "desc") {
             $bc = 'desc';
@@ -468,27 +490,55 @@ class CVController extends Controller
 
         $is_live = $is_active = $str_po = $str_role = $str_or = $str_and = array();
 
-        // chi cho phep 1 cv truc tuyen
-        $is_live = [1];
         // cv kich hoat hoac chua kich hoat
-        $is_active = [0, 1];
+        if ($txtActive == 2) {
+            $is_active = [0, 1];
+        } elseif ($txtActive == 1){
+            $is_active = [1];
+        } elseif (isset($txtActive) && $txtActive == 0) {
+            $is_active = [0];
+        }else {
+            $is_active = [0, 1];
+        }
+
+        // chi cho phep 1 cv truc tuyen
+        if ($txtLive == 2) {
+            $is_live = [0, 1];
+        } elseif ($txtLive == 1) {
+            $is_live = [1];
+        }elseif (isset($txtLive) && $txtLive == 0){
+            $is_live = [0];
+        }else {
+            $is_live = [0, 1];
+        }
 
         // them trang thai cv chua duoc kich hoat doi voi tai khoan toi cao
-        if (Auth::user()->getrole() === 'SuperAdmin') {
-            $is_live[] = 0;
+        if (Auth::user()->getrole() !== 'SuperAdmin') {
+            unset($is_live[0]);
         }
+        // xoa bo cv khong kich hoat voi nguoi quan tri vien
         if (Auth::user()->getrole() === 'Visitor') {
-            // xoa bo cv khong kich hoat voi nguoi quan tri vien
             unset($is_active[0]);
         }
 
         if ($Status != '') {
             $str_and['cvs.status'] = $Status;
-        } else {
-            if (Auth::user()->getrole() === 'Visitor') {
-                $str_role = [1, 2];
-            }
         }
+
+        // liet ke cac trang thai .... voi role_VisitorStatus = 1
+        if (Auth::user()->getrole() === 'Visitor') {
+            $_Status = Status::where('role_VisitorStatus', 1)->get();
+
+            $list_id_visitor = $_Status->toArray();
+            if (count($list_id_visitor)) {
+                $str_role = array_column($list_id_visitor, 'id');
+            } else {
+                $str_role = [0];
+            }
+        } else {
+            $_Status = Status::all();
+        }
+
         if ($positions) {
             $str_po['cvs.apply_to'] = $positions;
         }
@@ -505,7 +555,7 @@ class CVController extends Controller
             }
         }else {
             $_field = 'Last_name';
-            $none_field = 'id';
+            $none_field = 'updated_at';
         }
 
         $CV1 = CV::with('User')
@@ -542,14 +592,21 @@ class CVController extends Controller
             })
             ->isactive($is_active)
             ->live($is_live)
+            ->orderBy('updated_at')
             ->get();
 
         if ($none_field == 'name') {
-            if ($bc == 'asc')
+            if ($bc == 'asc'){
                 $CV1 = $this->ASC($CV1);
-            else $CV1 = $this->DESC($CV1);
+//                $CV1 = $CV1->sortBy('updated_at');
+            }
+
+            else{
+                $CV1 = $this->DESC($CV1);
+//                $CV1 = $CV1->sortBy('updated_at');
+            }
         } else{
-            if($none_field == 'id')
+            if($none_field == 'updated_at')
                 $CV1 = $CV1->sortByDesc($none_field);
             else{
                 if($bc == 'desc')
@@ -575,8 +632,7 @@ class CVController extends Controller
         $url_modify = Pagination_temp::cn_url_modify('search=' . $name, 'status=' . $Status, 'apply_to=' . $positions, 'data-field=' . $none_field, 'data-sort=' . $bc, 'per_page', 'page');
         list ($cvs, $get_paging) = Pagination_temp::cn_arr_pagina($CV1, $url_modify, $_page, $_numpage);
 
-        return array($cvs, $_Position, $get_paging);
-
+        return array($cvs, $_Position, $_Status, $get_paging);
     }
 
     public function DESC($CVs)
@@ -637,9 +693,6 @@ class CVController extends Controller
 
     public function getShowUpload ($id)
     {
-        if (Gate::denies('Applicant')) {
-            abort(403);
-        }
         if (count(Hashids::decode($id))) {
             $newId = ['id' => Hashids::decode($id)[0]];
         } else {
@@ -668,6 +721,10 @@ class CVController extends Controller
     }
 
     public function statisticYear(){
+
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
         $cv3 = CV::select(DB::raw("count(id) as count, year(created_at) as year"))
             ->orderBy('created_at')
             ->groupBy(DB::raw('year(created_at)'))
@@ -679,7 +736,7 @@ class CVController extends Controller
             $cv1 = CV::select(DB::raw("count(id) as count"))
                 ->where('created_at', '>=', $datestart)
                 ->where('created_at', '<=', $dateend)
-                ->where('Status', '=', 14)
+                ->where('Status', '=', 20)
                 ->orderBy('created_at')
                 ->get();
             if($cv1 != null)
@@ -701,6 +758,10 @@ class CVController extends Controller
     }
 
     public function statisticQuarter(){
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
+
         //now year
         $day = date('Y-m-d H:i:s');
         $year = getYear($day);
@@ -720,7 +781,7 @@ class CVController extends Controller
             $datestart = $year.'-'.$month1.'-01 00:00:00';
             $dateend = $year.'-'.$month.'-01 00:00:00';
             $cv2 = CV::select(DB::raw("count(id) as count"))
-            ->where('Status', '=', 14)
+            ->where('Status', '=', 20)
             ->where('created_at', '>=', $datestart)
             ->where('created_at', '<', $dateend)
             ->orderBy('created_at')
@@ -748,6 +809,10 @@ class CVController extends Controller
 
     public function statisticMonth()
     {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
+
         //by month
         $day = date('Y-m-d H:i:s');
         $year = getYear($day);
@@ -765,7 +830,7 @@ class CVController extends Controller
             $month1 = $cv1->month + 1;
             $dateend = $year.'-'.$month1.'-01 00:00:00';
             $cv2 = CV::select(DB::raw("count(id) as count, month(created_at) as month"))
-            ->where('Status', '=', 14)
+            ->where('Status', '=', 20)
             ->where('created_at', '>=', $datestart)
             ->where('created_at', '<', $dateend)
             ->orderBy('created_at')
@@ -791,26 +856,21 @@ class CVController extends Controller
 
     public function statisticPositions($datestart, $dateend,$key)
     {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
         if($key == ''){
             $cv = CV::select(DB::raw("count(id) as count, apply_to positions"))
                 ->where('created_at', '>=', $datestart)
                 ->where('created_at', '<=', $dateend)
                 ->groupBy(DB::raw('apply_to'))
                 ->get();
-
-            // $cv = DB::table('cvs')->join('positions', 'cvs.apply_to', '=', 'positions.id')
-            // ->select(DB::raw("count(cvs.id) as count, cvs.apply_to as po, positions.name as name"))
-            // ->where('cvs.created_at', '>=', $datestart)
-            // ->where('cvs.created_at', '<=', $dateend)
-            // ->groupBy(DB::raw('apply_to'))
-            // ->get();
-            // return $cv;
             
             foreach ($cv as $cv1) {
                 $cv2 = CV::select(DB::raw("count(id) as count"))
                 ->where('created_at', '>=', $datestart)
                 ->where('created_at', '<=', $dateend)
-                ->where('Status', '=', 14)
+                ->where('Status', '=', 20)
                 ->where('apply_to', '=', $cv1->positions)
                 ->get();
                 if($cv1 != null)
@@ -833,7 +893,7 @@ class CVController extends Controller
                 $cv2 = CV::select(DB::raw("count(id) as count"))
                 ->where('created_at', '>=', $datestart)
                 ->where('created_at', '<=', $dateend)
-                ->where('Status', '=', 14)
+                ->where('Status', '=', 20)
                 ->where('apply_to', '=', $key)
                 ->get();
                 if($cv1 != null)
@@ -863,6 +923,9 @@ class CVController extends Controller
 
     public function statisticSearch(Request $request)
     {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
         $datestart = $request->input('startDate');
         $datestart = $datestart.' 00:00:00';
 
@@ -879,6 +942,9 @@ class CVController extends Controller
 
     public function statisticStatus(Request $request)
     {
+        if (Gate::denies('Admin')) {
+            abort(403);
+        }
         $ox = $request->input('ox');
         switch ($ox) {
             case 'month':

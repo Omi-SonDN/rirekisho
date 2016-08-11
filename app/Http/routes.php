@@ -13,7 +13,6 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\ApplicantMiddleware'
     Route::get('CV/info', 'CVController@getInfo');
     // show create cv no id, or show cv upload with id
     Route::get('CV/create/upload/', 'CVController@getCreateUpload');
-    Route::get('CV/create/upload/{id}', 'CVController@getShowUpload');
     Route::get('CV/create/upload/{id}/edit', 'CVController@getEditUpload');
 });
 
@@ -24,7 +23,7 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
 
     Route::get('CV', 'CVController@index');
     Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
-
+    Route::post('CV/changeStatus', 'CVController@changeStatus');
     Route::post('CV/adSearch', 'CVController@adSearch');
 
     Route::get('CV/statistic', 'CVController@statistic');
@@ -66,9 +65,9 @@ Route::group(['middleware' => ['auth']], function () {
         return Redirect::action('CVController@index');
     });
 
-    //every one see different page  
+    //every one see different page 
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
-    Route::post('CV/changeStatus', 'CVController@changeStatus');
+    Route::get('CV/create/upload/{id}', 'CVController@getShowUpload');
     Route::get('Record/index/{type}', 'RecordController@index');
     Route::get('User/{User}/changePass', 'UsersController@changePassword');
 
