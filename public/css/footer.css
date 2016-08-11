@@ -87,10 +87,10 @@
  }
 
 .legal .copyright {
-    margin: 10px 0 0 0;
+    margin: 10px 0 0 140px;
     float: left;
     width: 40%;
-    font-size: 20px;
+    font-size: 15px;
     line-height: 130%;
     color: #777;
 }

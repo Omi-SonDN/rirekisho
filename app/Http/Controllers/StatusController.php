@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Gate;
 use Input;
 use Session;
+use Validator;
 class StatusController extends Controller
 {
     public function __construct()
@@ -61,25 +62,36 @@ class StatusController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-
         global $request;
-        $status = new Status();
-        if(count($request->status))
-        $status->status = $request->status;
-        if(count($request->prev_status))
-        $status->prev_status = implode(',', $request->prev_status);
-        if(count($request->infor))
-            $status->infor = implode(',', $request->infor);
-        $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
-        $status->email_template = $request->email_template;
-        $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
-        $this->validate($request, array(
-            'status'=> 'required|unique:status,status',
+        $rules = array(
+            'status' => 'required|unique:status,status',
             'allow_sendmail' => 'required',
             'role_VisitorStatus' => 'required'
-        ));
+        );
+        $messages = array(
+            'allow_sendmail.required' => 'Bạn phải chọn cho phép hoặc không cho phép gửi mail!',
+            'role_VisitorStatus.required' => "Bạn phải chọn cho phép hoặc không cho phép Visistor quản lý",
+            'status.required' => 'Tên trạng thái không được để trống!',
+            'status.unique' => 'Tên trạng thái đã tồn tại, vui lòng nhập tên trạng thái khác!',
+        );
+        
+        $validator = Validator::make($request->all(),$rules,$messages);
+        if( $validator->fails() ){
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $status = new Status();
+            if(count($request->status))
+            $status->status = $request->status;
+            if(count($request->prev_status))
+            $status->prev_status = implode(',', $request->prev_status);
+            if(count($request->infor))
+                $status->infor = implode(',', $request->infor);
+            $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
+            $status->email_template = $request->email_template;
+            $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
+            $status->save();
+        }
 
-        $status->save();
         return redirect()
             ->route('status::getaddstatus')
             ->with(
@@ -97,29 +109,7 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        if (Gate::denies('Admin')) {
-            abort(403);
-        }
-
-        $this->validate($request, array(
-            'status'=> 'required|unique:status,status',
-            'allow_sendmail' => 'required',
-            'role_VisitorStatus' => 'required'
-        ));
-        $status = new Status();
-        if(count($request->status))
-            $status->status = $request->status;
-        if(count($request->prev_status))
-            $status->prev_status = implode(',', $request->prev_status);
-        if(count($request->infor))
-            $status->infor = implode(',', $request->infor);
-        $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
-        $status->email_template = $request->email_template;
-        $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
-        $status->save();
-
-//        Session::flash('flash_message', 'status has been saved.');
-        return Response::json($status);
+        //
     }
 
     /**
@@ -163,11 +153,23 @@ class StatusController extends Controller
 
         $status = Status::findorfail($id);
 
-        $this->validate($request, array(
-            'status'=> 'required|unique:status,status',
+        $rules = array(
             'allow_sendmail' => 'required',
             'role_VisitorStatus' => 'required'
-        ));
+        );
+        $messages = array(
+            'allow_sendmail.required' => 'Bạn phải chọn cho phép hoặc không cho phép gửi mail!',
+            'role_VisitorStatus.required' => "Bạn phải chọn cho phép hoặc không cho phép Visistor quản lý",
+            'status.required' => 'Tên trạng thái không được để trống!',
+            'status.unique' => 'Tên trạng thái đã tồn tại, vui lòng nhập tên trạng thái khác!',
+        );
+        if( $status->status != $request->status){
+            $rules['status'] = 'required|unique:status,status';
+        }
+        $validator = Validator::make($request->all(),$rules,$messages);
+        if( $validator->fails() ){
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
         $status->status = $request->status;
         if(count($request->prev_status))  
         $status->prev_status = implode(',', $request->prev_status);
@@ -180,7 +182,7 @@ class StatusController extends Controller
         $status->allow_sendmail = $request->get('allow_sendmail') ? $request->get('allow_sendmail'):0;
         $status->email_template = $request->email_template;
         $status->role_VisitorStatus = $request->get('role_VisitorStatus') ? $request->get('role_VisitorStatus'):0;
-
+        }
         // $status->update($request->all());
         $status->save();
         return redirect()

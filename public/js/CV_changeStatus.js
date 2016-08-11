@@ -5,13 +5,13 @@ $(document).ready(function () {
 
     //
     var old_status_id = null;
-    $('body').on('focus','select.status',function () {
-        old_status_id = $(this).val();
-        console.log(old_status_id);
+    $('body').on('click','select.status',function (e) {
+        if( e.clientX > 0 && e.clientY > 0){
+            old_status_id = $(this).val();
+        }
     });
 
-    $('body').on('change','form.status',function () {
-        console.log(old_status_id);
+    $('body').on('change','form.status',function (e) {
         var result = confirm("Want to change?");
         var stt = $(this).children('select.status').val();
         if (result) {
@@ -36,24 +36,23 @@ $(document).ready(function () {
                     //disable all option in select;
                     $('#status' + data.id + ' option').each(function (k, i) {
                         if(old_status_id == $(i).attr('value')){
-                            $(i).removeClass('hidden');
-                            console.log(i);
+                            $(i).removeClass('hidden').css('color','#a94442');
                             return true;
                         }
                         $(data.next_status).each(function(x,el){
                             if( el.id == $(i).attr('value') ){
-                                $(i).removeClass('hidden');
+                                $(i).removeClass('hidden').css('color','#000000');
                                 return false;
                             } else{
-                                $(i).addClass('hidden');
+                                $(i).addClass('hidden').css('color','#000000');
                             }
                         });
                         if (data.Status == $(i).attr('value')){
-                            $(i).removeClass('hidden');
+                            $(i).removeClass('hidden').css('color','#000000');
                             return true;
                         }
                         if (old_status_id == parseInt($(i).attr('value'))){
-                            $(i).removeClass('hidden');
+                            $(i).removeClass('hidden').css('color','#000000');
                             return true;
                         }
                     });
