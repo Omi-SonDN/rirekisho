@@ -17,7 +17,6 @@
                     <div class="navbar-header">
                         <a class="navbar-brand toptext" href="{{URL('/')}}">Ominext JSC</a>
                     </div>
-                    {{phpinfo()}}
                     <ul class="float_right nav navbar-nav">
                         @if (Auth::user()->getRole() === 'Applicant')
                             <li class="{{(URL::current() == url('/')) ? 'active' : ''}}"><a href="{{url('/')}}">Trang chủ</a></li>

@@ -656,7 +656,6 @@ function onclickSetData(ojbect, isNamefunc){
     var data_to_send = arrToStrdata(cachedData);
     if (isNamefunc) {
         if (cachedData[isNamefunc].length > 2){
-            alert(1111);
             advSearch(data_to_send);
         }
     }else {

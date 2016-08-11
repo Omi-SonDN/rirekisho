@@ -18,7 +18,7 @@
                 <a href="{{ \URL('CV/create/upload/'. $items->hash) }}" class="btn "><i class="fa fa-eye icon_24 icon-24"></i> XEM</a>
             @else
                 @if ((Route::current()->getName() !== 'CV.edit') && (Route::current()->getName() !== 'CV.create'))
-                    <a href="{{route('CV.create')}}" class="btn " title="Sửa CV {{$items->name_cv}}"><i class="fa fa-edit icon_24 icon-24"></i> CHỈNH SỬA</a>
+                    <a href="{{route('CV.edit', [$items->hash])}}" class="btn " title="Sửa CV {{$items->name_cv}}"><i class="fa fa-edit icon_24 icon-24"></i> CHỈNH SỬA</a>
                 @endif
                 <a href="{{url('CV',[$items->hash])}}" class="btn " title="Xem CV {{$items->name_cv}}"><i class="fa fa-eye icon_24 icon-24"></i> XEM</a>
             @endif

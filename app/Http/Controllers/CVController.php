@@ -294,7 +294,6 @@ class CVController extends Controller
             abort(403);
         }
 
-
         $uCV = DB::table('users')->find(Auth::user()->id);
         $CV = CV::with('User')
             ->where('user_id', Auth::user()->id)
@@ -305,10 +304,9 @@ class CVController extends Controller
             $Records = $CV->Record;
             $Records = $Records->sortBy("Date");
         }
+        $isCreate = 1;
 
-
-
-        return view('xCV.CVStep', compact('uCV', 'CV', 'Records', 'skills'));
+        return view('xCV.CVStep', compact('uCV', 'CV', 'Records', 'skills','isCreate'));
     }
 
     public function getCreateUpload()
@@ -324,8 +322,8 @@ class CVController extends Controller
             ->first();
 
         $uCV = DB::table('users')->find(Auth::user()->id);
-        $isUpload = 1;
-        return view('xCV.CVStep', compact('uCV', 'CV', 'isUpload'));
+        $isCreate = $isUpload = 1;
+        return view('xCV.CVStep', compact('uCV', 'CV', 'isUpload', 'isCreate'));
     }
 
     public function store(CVRuleInfoRequest $request)
