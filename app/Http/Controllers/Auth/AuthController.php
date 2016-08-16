@@ -29,7 +29,7 @@ class AuthController extends Controller
 
     protected function create(array $data)
     {
-        return User::create(['name' => $data ['name'], 'email' => $data ['email'],
+        return User::create(['userName' => $data ['userName'], 'email' => $data ['email'],
             'password' => bcrypt($data ['password']),]);
     }
 
@@ -55,7 +55,12 @@ class AuthController extends Controller
                 return redirect('/');//->withInput($userdata);
             }
 
-            return redirect('auth/login')->withInput($request->except(['password']));
+            return redirect('auth/login')
+                ->withInput($request->except(['password']))
+                ->with([
+                    'flash_level' => 'danger',
+                    'message' => 'Email hoặc mật khẩu không đúng'
+                ]);
         }
     }
 
@@ -66,7 +71,7 @@ class AuthController extends Controller
 
     public function postRegister(Request $request)
     {
-        $validator = Validator::make($request->all(), User::$rules);
+        $validator = Validator::make($request->all(), User::$rules, User::$messageRegister);
         if ($validator->fails()) {
             return redirect('auth/register')->withErrors($validator)->withInput($request->all());
         }
@@ -74,8 +79,12 @@ class AuthController extends Controller
         $user->role = 0;
         $user->save();
 
-        //$CV = DB::table('cvs')->insert(['user_id' => $user->id, 'email' => Auth::user()->email]);
-        return redirect('auth/login')->withInput($request->except(['password']));
+        return redirect('auth/login')
+            ->withInput($request->except(['password', 'password_confirmation']))
+            ->with([
+                'flash_level' => 'success',
+                'message' => 'Bạn đã đăng ký thành công'
+            ]);
     }
 
     public function myLogout()

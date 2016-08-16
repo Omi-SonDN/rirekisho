@@ -40,26 +40,6 @@
 </li>
 <li class="">
     <div class=" float_left" style="width: 100%;">
-        <label class="label" for="apply_to">Vị trí ứng tuyển</label>
-        <div class="input">
-            <!--change editable="Rirekisho" name=field_name  -->
-            <div class="">
-                <?php $positions = \App\Positions::where('active',1)->get(); ?>
-                <select id="{{$key}}" class="float_left apply_to optioncv" editable="Rirekisho"  name="apply_to" value="" style="">
-                    <option>Vị trí tuyển dụng</option>
-                    @foreach( $positions as $position )
-                        <option value="{{$position->id}}" @if($position->id == $CV->apply_to) selected @endif>{{$position->name}}</option>
-                    @endforeach
-                </select>
-                <div class="success-status float_left" id="s_apply_to_{{$key}}" style="display:none;">
-                    <i class="fa fa-pencil-square-o"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</li>
-<li class="">
-    <div class=" float_left" style="width: 100%;">
         <label class="label" for="Request">Lời nhắn đến nhà tuyển dụng</label>
         <div class="input">
             <label class="icon-left" for="Request">

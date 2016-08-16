@@ -72,34 +72,38 @@
                 <div class="profile-link">
                     <a href=""></a>
                 </div>
-                @can('Admin')
+                @can('Visitor')
                 <div class="clear-fix"></div>
                 <table class="imagetable">
-                    <th><span>Duyệt CV - Ghi chú</span></th>
+                    <th><span>@can('Admin')Duyệt CV -@endcan Ghi chú</span> <span class="fa fa-remove pull-right rm-text" onclick="clearContents('txt_{{$CV->hash}}')" title="Xóa hết ghi chú"></span></th>
                     <tr>
+                        @can('Admin')
                         <td>
                             <div class="fix-info-cv pull-left">{{$CV->Checkcv}} &nbsp; &nbsp;</div>
                             <div class="onoffswitch pull-right">
-                                <input type="checkbox" name="check_{{($CV->id)}}" onclick="isChanges(this.id, '{{$CV->Active}}')" class="onoffswitch-checkbox" id="myCheck_{{$CV->hash}}" {{($CV->Active == 1) ? 'checked' : ''}} />
+                                <input type="checkbox" name="check_{{($CV->id)}}" onclick="isChanges(this.id)" class="onoffswitch-checkbox" id="myCheck_{{$CV->hash}}" {{($CV->Active == 1) ? 'checked' : ''}} />
                                 <label class="onoffswitch-label" for="myCheck_{{$CV->hash}}">
                                     <span class="onoffswitch-inner"></span>
                                     <span class="onoffswitch-switch"></span>
                                 </label>
                             </div>
                         </td>
+                        @endcan
                     </tr>
                     <tr>
                         <td style="width: 100%; padding: 0">
-                            <textarea id="txt_{{$CV->hash}}" rows="8" name="txtNotes" style="resize: vertical; width: 100%" onchange="isChanges(this.id, '{{(isset($CV) ? $CV->notes : '')}}')"> {!! old('txtNotes', isset($CV) ? $CV->notes : '') !!}</textarea>
+                            <textarea id="txt_{{$CV->hash}}" rows="8" name="txtNotes" style="resize: vertical; width: 100%" onchange="isChanges(this.id)">{!! old('txtNotes', isset($CV) ? $CV->notes : '') !!}</textarea>
                             <button type="button" onclick="upActNotee('{{$CV->hash }}', 'myCheck_{{$CV->hash}}', 'txt_{{$CV->hash}}')" class="btn btn-default btn-sm btn-ac-note btn-{{$CV->hash}}">submit</button>
+                            @can('Admin')
                             <button type="button" onclick="getDeleteCV('{{$CV->hash }}', {{$CV->type_cv}})" title="Xóa CV {{$CV->name_cv}}" class="btn btn-default btn-sm btn-ac-note btn-{{$CV->hash}}">Delete</button>
+                            @endcan
                             <button type="button" title="Trang chủ" onclick="returnHome()" class="btn btn-default btn-sm btn-ac-note">Cancel</button>
                             <div class="wait-modal-load"></div>
                         </td>
                     </tr>
                 </table>
                 @endcan
-                @if ((Auth::user()->getRole() == 'Visitor') || (Auth::user()->getRole() == 'Applicant'))
+                @if (Auth::user()->getRole() == 'Applicant')
                     <button type="button" title="Trang chủ" onclick="returnHome()" class="btn btn-default btn-sm btn-ac-note pull-right">Cancel</button>
                     @endcan
             </div>
@@ -133,6 +137,7 @@
                             </tr>
                         </table>
                     </li>
+                    <hr/>
                     <li id="">
                         <table>
                             <th colspan="2"><h2 style="text-align: left;">Thông tin liên lạc</h2></th>
@@ -153,7 +158,7 @@
                             </tr>
                         </table>
                     </li>
-
+                    <hr/>
                     <li id="File-pdf">
                         <table>
                             <th colspan="100%"><h2 style="text-align: left;">File đính kèm </h2></th>
@@ -170,15 +175,39 @@
                     </li>
 
                     <li id="S-selfintro">
-                        <table>
-                            <th colspan="100%"><h2 style="text-align: left;">Giới thiệu bản thân</h2></th>
-                            <tr><td>{{$CV->User->Self_intro}} </td></tr>
+                        <table class="table table-sm table-hover table-show">
+                            <thead>
+                            <tr>
+                                <th colspan="100%"><h2 style="text-align: left;">Giới thiệu bản thân</h2></th>
+                            </tr>
+                            </thead>
+                            @if ($CV->User->Self_intro)
+                                <tr>
+                                    <td class="col-lg-12">{{$CV->User->Self_intro}} </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td class="col-lg-12">Chưa có thông tin mô tả nào</td>
+                                </tr>
+                            @endif
                         </table>
                     </li>
-                    <li id="">
-                        <table>
-                            <th colspan="100%"><h2 style="text-align: left;">Nguyện vọng</h2></th>
-                            <tr><td>{{$CV->Request}} </td></tr>
+                    <li>
+                        <table class="table table-sm table-hover table-show">
+                            <thead>
+                            <tr>
+                                <th colspan="100%"><h2 style="text-align: left;">Nguyện vọng</h2></th>
+                            </tr>
+                            </thead>
+                            @if ($CV->Request)
+                                <tr>
+                                    <td class="col-lg-12">{{$CV->Request}} </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td class="col-lg-12">Chưa có thông tin mô tả nào</td>
+                                </tr>
+                            @endif
                         </table>
                     </li>
                 </ul>

@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/custom.css') }}"/>
 
+
 </head>
 <body>
 <div class="background-image"></div>
@@ -30,5 +31,17 @@
 
     </div>
 </div>
+
+<script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
+<script style="text/javascript">
+    $("div.alert, span.help-block").delay(4000).slideUp();
+
+    function callHome(){
+        window.location.href = '/';
+    }
+    function callBack(){
+        window.location.href = '/auth/login';
+    }
+</script>
 </body>
 </html>

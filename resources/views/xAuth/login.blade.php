@@ -9,7 +9,7 @@
         <div class="h3-title">
             <h3 class="clao"><i class="fa fa-lock form-inline"></i> Đăng nhập</h3>
         </div>
-
+        @include('includes.flash-alert')
         <fieldset id="" class="fix">
             <ul class="">
                 <li>

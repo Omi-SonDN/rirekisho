@@ -12,7 +12,7 @@
                 <th>STT</th>
                 <th>Trạng thái</th>
                 <th>Cho phép gửi mail</th>
-                <th>Visiter quản lý</th>
+                <th>Visitor quản lý</th>
                 <th>Hành động</th>
                 </thead>
                 @include('includes.flash-alert')

@@ -1,11 +1,13 @@
 <div class="box_white mt20">
     <div class="block_ntv_dangnhap">
         <div class="demo-list mt_16 pl_4">
+            @if (Auth::user()->id == $items->user_id)
             <div class="icheckbox_square-blue">
                 <label class="checkbox-inline font14">
                     <input type="checkbox" name="txtLiveCv" id="live_{{$items->hash}}" onchange="getChangeLiveCv(this.id, '{{$items->hash}}')" {{($items->live == 1) ? 'checked' : ''}} class="fix-class-check ckf"> Cho phép nhà tuyển dụng tìm kiếm hồ sơ và liên hệ với bạn
                 </label>
             </div>
+            @endif
         </div>
         <div class="mt_16 pl_4">
             <a href="javascript:void(0);" class="btn pl_16 floatLeft" title="Cập nhật thời gian" onclick="lam_moi_ttv('{{$items->hash}}');">
@@ -13,9 +15,9 @@
             </a>
             @if ($items->type_cv)
                 @if ((Route::getCurrentRoute()->uri() !== 'CV/create/upload') && (Route::getCurrentRoute()->uri() !== 'CV/create/upload/{id}/edit'))
-                    <a href="{{\URL('CV/create/upload/'. $items->hash.'/edit')}}" class="btn "><i class="fa fa-edit icon_24 icon-24"></i> CHỈNH SỬA</a>
+                    <a href="{{\URL('CV/upload/'. $items->hash.'/edit')}}" class="btn "><i class="fa fa-edit icon_24 icon-24"></i> CHỈNH SỬA</a>
                 @endif
-                <a href="{{ \URL('CV/create/upload/'. $items->hash) }}" class="btn "><i class="fa fa-eye icon_24 icon-24"></i> XEM</a>
+                <a href="{{ \URL('CV/upload/'. $items->hash) }}" class="btn "><i class="fa fa-eye icon_24 icon-24"></i> XEM</a>
             @else
                 @if ((Route::current()->getName() !== 'CV.edit') && (Route::current()->getName() !== 'CV.create'))
                     <a href="{{route('CV.edit', [$items->hash])}}" class="btn " title="Sửa CV {{$items->name_cv}}"><i class="fa fa-edit icon_24 icon-24"></i> CHỈNH SỬA</a>

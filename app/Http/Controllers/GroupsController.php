@@ -164,9 +164,9 @@ class GroupsController extends Controller
 
         $key = $request->term;
 
-        $Usernames = User::select('name', 'email')
+        $Usernames = User::select('userName', 'email')
             ->where('email', 'like', '%' . $key . '%')
-            ->orWhere('name', 'like', '%' . $key . '%')
+            ->orWhere('userName', 'like', '%' . $key . '%')
             ->get();
 
         return Response::json($Usernames);
@@ -192,7 +192,7 @@ class GroupsController extends Controller
         $username = explode(',', $request->members);
 
         foreach ($username as $user) {
-            $user = User::where('name', '=', $user)->first();
+            $user = User::where('userName', '=', $user)->first();
             $group->users()->attach($user['id']);
         }
 

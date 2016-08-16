@@ -5,8 +5,11 @@
         <div class="table_action">
             <div class="top_action"></div>
             <div class="bottom_action">
-                <button class='btn btn-primary'><a href="{{route('getadduser')}}"><i class="fa fa-plus" style="margin: 0 auto;"></i> Thêm User</a></button>
+                <button class='btn btn-primary'>
+                    <a href="{{route('getadduser')}}"><i class="fa fa-user-plus" style="margin: 0 auto;">
+                        </i> Thêm User</a></button>
                 <span class="active-del"></span>
+
                 <div class="wait-modal-load"></div>
                 <div class="search">
                     <div class="search-forms">
@@ -23,16 +26,19 @@
         <div>
             <table id="datatables" class="tableuser tablesorter">
                 <thead>
-                    <tr>
-                        <th class="header-none-sort filter-false" filter-false>#</th>
-                        <th class="header-none-sort filter-false">Avatar</th>
-
-                        <th data-field="name" ><a>Name</a></th>
-                        <th data-field="email"><a>Email</a></th>
-                        <th class="first-name filter-select" data-placeholder="Select a type">Type</th>
-                        {{--<th class="header-none-sort"></th>--}}
-                        <th class="header-none-sort filter-false"><input class="fix-class-check checkAll" type="checkbox" /></th>
-                    </tr>
+                <tr>
+                    <th class="header-none-sort filter-false">Avatar</th>
+                    <th class="sort-tb" data-field="name"><a>Tên tài khoản</a></th>
+                    <th class="sort-tb" data-field="email"><a>Email</a></th>
+                    <th class="header-none-sort sort-tb filter-select" filter-false>G.Tính</th>
+                    <th class="header-none-sort sort-tb">Tuổi</th>
+                    <th class="header-none-sort sort-tb">Sinh nhật</th>
+                    <th class="header-none-sort sort-tb">S.Đ.Thoại</th>
+                    <th class="header-none-sort sort-tb filter-select">Số CV</th>
+                    <th class="first-name sort-tb filter-select" data-placeholder="Select a type">Type</th>
+                    <th class="header-none-sort filter-false"><input class="fix-class-check checkAll" type="checkbox"/>
+                    </th>
+                </tr>
                 </thead>
                 <tbody id="list-table-body" data-reload="true">
                 @if(!count($users))
@@ -44,12 +50,11 @@
                 @else
                     @foreach ($users as $key => $row)
                         <tr class="data">
-                            <td></td>
                             <td class="image">
                                 <div style=" position: relative;height: 100px;width: 100px;">
                                     @if($row->image!="")
                                         <img style="height: 100px; width: 100px;"
-                                             src=<?php echo "/img/thumbnail/thumb_" . $row->image;?> >
+                                             src=<?php echo "/img/thumbnail/thumb_" . $row->image;?>>
                                     @else
                                         <div class="dropzone-text-place"
                                              style="background-color:{{$row->getThemeColor()}} ">
@@ -61,12 +66,28 @@
                                     @endif
                                 </div>
                             </td>
-                            <td class="name"><i class="fa fa-pencil fa-fw"></i>&nbsp<a href="{{url('User',$row->hash)}}" title="Edit {{ $row->name }}">{{ $row->name }} </a></td>
+                            <td class="name"><i class="fa fa-pencil fa-fw"></i>&nbsp<a href="{{url('User',$row->hash)}}"
+                                                                                       title="Edit {{ $row->userName }}">{{ $row->userName }} </a>
+                            </td>
                             <td class="name">{{ $row->email }}  </td>
+                            <td>{{$row->JGender}}</td>
+                            <td>{{$row->Age}}</td>
+                            <td>{{$row->Birthday}}</td>
+                            <td>{{$row->Phone}}</td>
+                            <td>{{$row->CV->count()}}</td>
                             <td> {{ $row->getRole() }}</td>
                             <td>
-                                <input class="fix-class-check cb-element" type="checkbox" value="{{$row->hash}}" name="arrDel[]" style="opacity: 1">
-                                <a href="{{route('getdeluser', $row->hash)}}" onclick="return xacnhanxoa('Bạn có chắc là xóa không!')" title="Delete {{$row->name}}"><i class="fa fa-trash-o  fa-fw"></i>&nbsp Delete</a>
+                                <div class="col-lg-12">
+                                    <input class="fix-class-check cb-element" type="checkbox"
+                                           value="{{$row->hash}}"
+                                           name="arrDel[]">
+                                </div>
+                                <div class="col-lg-12 mt8">
+                                    <a href="{{route('getdeluser', $row->hash)}}"
+                                       onclick="return xacnhanxoa('Bạn có chắc là xóa không!')"
+                                       title="Delete {{$row->userName}}">
+                                        Delete</a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -79,11 +100,12 @@
             <div id="" class="pager pages-tablesorter">
                 <span class="left">
                     # per page:
-                    <a href="#" class="current">10</a> |
-                    <a href="#">20</a> |
-                    <a href="#">40</a> |
-                    <a href="#">75</a>
+                    @foreach(config('app.list_per_page') as $items)
+{{--                        <a href="#" class="{{$items == config('app.per_page') ? 'current' : ''}}">{{$items}}</a> |--}}
+                        <a href="#" class="">{{$items}}</a> |
+                    @endforeach
                 </span>
+                <span id="{{'show'. \Illuminate\Support\Facades\Auth::user()->hash}}"></span>
                 <span class="pagedisplay"></span>
                 <span class="right">
                     <span class="prev">

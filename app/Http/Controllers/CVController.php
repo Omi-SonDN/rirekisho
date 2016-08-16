@@ -98,6 +98,7 @@ class CVController extends Controller
         $per_page = $request->input('show_entries');
         $txtActive = $request->input('txtActive');
         $txtLive = $request->input('txtLive');
+        $txtType = $request->input('txtType');
 
         if ($request->has('page')) {
             $_page = (int)$request->get('page');
@@ -105,7 +106,7 @@ class CVController extends Controller
             $_page = 1;
         }
 
-        list($CVs, $_Position, $_Status, $get_paging) = $this->paginationCV($name, $positions, $Status, $field, $sort, $_page, $per_page, $txtActive, $txtLive);
+        list($CVs, $_Position, $_Status, $get_paging) = $this->paginationCV($name, $positions, $Status, $field, $sort, $_page, $per_page, $txtActive, $txtLive, $txtType);
         $count = count($CVs);
 
         return Response::json(array(
@@ -121,9 +122,12 @@ class CVController extends Controller
     {
         //$id = $id - 14000;
         $CV = CV::with('User')->find($id);
-        if (Gate::denies('view-cv', $CV)) {
+
+        // kiem tra CV tung buoc
+        if (Gate::denies('show-cv-step', $CV)) {
             abort(403);
         }
+
         if (empty($CV)) {
             abort(404, 'Lỗi, Không tìm thấy trang');
         }
@@ -134,6 +138,7 @@ class CVController extends Controller
         $bookmark = DB::table('bookmarks')
             ->whereUserId(Auth::User()->id)
             ->whereBookmarkUserId($CV->user_id)->first();
+
         if ($bookmark === null) $bookmark = 0;
         else $bookmark = $bookmark->id;
         return View::make('xCV.CVshow')
@@ -146,19 +151,30 @@ class CVController extends Controller
         //$id = $id - 14000;
         $uCV = User::find(Auth::user()->id);
         $cv = CV::findOrFail($id);
-        if (Gate::denies('update-cv', $cv->user_id)) {
+
+//        if (Gate::denies('update-cv', $cv->user_id)) {
+//            abort(403);
+//        }
+
+        // kiem tra EDIT CV TUNG BUOC
+        if (Gate::denies('edit-cv-step', $cv)) {
             abort(403);
         }
+        if (empty($cv)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
+
         $skills = $cv->Skill;
         $Records = $cv->Record;
         $Records = $Records->sortBy("Date");
         return View::make('xCV.CVStep')->with('CV', $cv)->with('uCV', $uCV)->with('Records', $Records)->with('skills', $skills);
-        //return View::make('xCV.CVcreate')->with('CV', $cv)->with('Records', $Records)->with('skills', $skills);
     }
 
     public function update($id, UpdateRequest $request)//PUT
     {
         $cv = CV::findOrFail($id);
+
+        // kiem tra UPDATE CV STEP + TUNG BUOC
         if (Gate::denies('update-cv', $cv->user_id)) {
             abort(403);
         }
@@ -179,7 +195,13 @@ class CVController extends Controller
         if ($request->hasFile('attach')) {
             $data['is_ck'] = 'false';
             $file = $request->file('attach');
+            $sizefile = $file->getSize();
             if ($file->getClientOriginalExtension() != 'pdf') {
+                $data['info'] = 'Cho phép upload file có đuôi .pdf';
+                return \Response::json($data);
+            }
+            if ($sizefile >= 1024*1024*config('app.max_UploadCV')) {
+                $data['info'] = 'Kích thước file vượt quá giới hạn cho phép ' . number_format(config('app.max_UploadCV'),0, ',', '.'). 'MB';
                 return \Response::json($data);
             }
 
@@ -200,15 +222,6 @@ class CVController extends Controller
             return \Response::json($data);
         }
 
-        // update active CV + notes + active by author for CV show
-        if ($request->has('txtAction') || $request->has('txtNotes')) {
-            $cv->Active = $request->input('txtAction');
-            $cv->notes = $request->input('txtNotes');
-            $cv->active_by = Auth::user()->id;
-            $cv->save();
-            return '';
-            //return \Response::json(array('url'=> \URL::previous()));
-        }
         // chi nguoi tạo CV moi co quyen cho CV dang truc tuyen
         if ($request->has('txtLiveCv')) {
             $ucvLive = DB::table('cvs')
@@ -310,7 +323,6 @@ class CVController extends Controller
     }
 
     public function getCreateUpload()
-
     {
         if (Gate::denies('Applicant')) {
             abort(403);
@@ -357,11 +369,22 @@ class CVController extends Controller
                     if (($request->Input('txtname') !== $is_namecv) && $request->Input('txtname')) {
                         $iscv = CV::where('user_id', Auth::user()->id)->where('type_cv', 0)->first();
                         $iscv->name_cv = $request->Input('txtname');
+                        $iscv->apply_to = $request->Input('txtApply_to');
+                        $iscv->Request = $request->Input('txtRequest');
                         $iscv->updated_at = Carbon::now()->format('Y-m-d H:i:s');
                         $iscv->save();
                     }
                 } else {
-                    DB::table('cvs')->insert(['user_id' => Auth::user()->id, 'name_cv' => $request->Input('txtname'), 'email' => Auth::user()->email, 'created_at' => Carbon::now()->format('Y-m-d H:i:s'), 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'), 'type_cv' => $request->get('txtTypeCv')]);
+                    DB::table('cvs')->insert([
+                        'user_id' => Auth::user()->id,
+                        'name_cv' => $request->Input('txtname'),
+                        'email' => Auth::user()->email,
+                        'apply_to' => $request->Input('txtApply_to'),
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                        'type_cv' => $request->get('txtTypeCv'),
+                        'Request' => $request->get('txtRequest')
+                    ]);
                 }
 
                 return Response::json(array(
@@ -478,7 +501,7 @@ class CVController extends Controller
     /// $Status trang thai cua cv
     // Mac dinh sap xep theo ten tang dan voi 10 bang ghi tren mot trang
 
-    public function paginationCV ($name = '', $positions = null, $Status = '', $_field = 'updated_at', $data_sort = 'asc', $_page = 1, $_numpage = 10, $txtActive = null, $txtLive = null)
+    public function paginationCV ($name = '', $positions = null, $Status = '', $_field = 'updated_at', $data_sort = 'asc', $_page = 1, $_numpage = 10, $txtActive = null, $txtLive = null, $txtType = null)
     {
         if ($data_sort == "desc") {
             $bc = 'desc';
@@ -486,8 +509,18 @@ class CVController extends Controller
             $bc = 'asc';
         }
 
-        $is_live = $is_active = $str_po = $str_role = $str_or = $str_and = array();
+        $is_type = $is_live = $is_active = $str_po = $str_role = $str_or = $str_and = array();
 
+        // Dang cv tung buoc hay dang dinh kem
+        if ($txtType == 2) {
+            $is_type = [0, 1];
+        } elseif ($txtType == 1){
+            $is_type = [1];
+        } elseif (isset($txtType) && $txtType == 0) {
+            $is_type = [0];
+        }else {
+            $is_type = [0, 1];
+        }
         // cv kich hoat hoac chua kich hoat
         if ($txtActive == 2) {
             $is_active = [0, 1];
@@ -589,7 +622,8 @@ class CVController extends Controller
                 }
             })
             ->isactive($is_active)
-            ->live($is_live)
+            ->islive($is_live)
+            ->istypecv($is_type)
             ->orderBy('updated_at')
             ->get();
 
@@ -684,6 +718,14 @@ class CVController extends Controller
             ->where('type_cv', 1)
             ->first();
 
+        // kiem tra EDIT UPLOAD FILE
+        if (Gate::denies('edit-cv-upload', $CV)) {
+            abort(403);
+        }
+        if (empty($CV)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
+
         $uCV = DB::table('users')->find($CV->user_id);
         $isUploadedit = 1;
         return view('xCV.CVStep', compact('uCV', 'CV', 'isUploadedit'));
@@ -701,7 +743,14 @@ class CVController extends Controller
             ->where('id', $newId)
             ->where('type_cv', 1)
             ->first();
+        // show cv - upload
+        if (Gate::denies('show-cv-upload', $CV)) {
+            abort(403);
+        }
 
+        if (empty($CV)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
         $uCV = DB::table('users')->find($CV->user_id);
 
         $bookmark = DB::table('bookmarks')
@@ -968,5 +1017,29 @@ class CVController extends Controller
         return View::make('includes.positions_chart')
             ->with('ox', $ox)->with('cv_upload', $cv_upload)
             ->with('cv_pass', $cv_pass)->with('text', $text);
+    }
+
+    public function postActNotes ($id, Request $request){
+        if (Gate::denies('Visitor')) {
+            return \Response::json(array('info'=> 'Lỗi, Không có quyền truy cập'));
+        }
+        if (count(Hashids::decode($id))) {
+            $newId = Hashids::decode($id)[0];
+        } else {
+            return \Response::json(array('info'=> 'Chúng tôi không thấy trang bạn truy cập'));
+        }
+
+        $cv = CV::findOrFail($newId);
+        // update active CV + notes + active by author for CV show
+        if ($request->has('txtAction') || $request->has('txtNotes')) {
+            $cv->notes = $request->input('txtNotes');
+            // tuong duong can
+            if (Gate::allows('Admin')) {
+                $cv->Active = $request->input('txtAction');
+                $cv->active_by = Auth::user()->id;
+            }
+            $cv->save();
+            return \Response::json(array('info'=> 'Đã cập nhập thành công!'));
+        }
     }
 }

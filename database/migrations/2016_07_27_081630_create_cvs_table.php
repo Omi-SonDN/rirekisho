@@ -29,7 +29,6 @@ class CreateCvsTable extends Migration
             //$table->char('Phone');
             //$table->text('Self_intro');
             //$table->tinyInteger('Marriage');
-            $table->tinyInteger('配偶者の扶養義務');
             $table->text('Request');
             $table->string('positions');
             $table->text('Memo');
@@ -44,7 +43,6 @@ class CreateCvsTable extends Migration
             $table->string('attach');
             $table->string('github');
             $table->string('linkedin');
-            $table->tinyInteger('old_status');
             $table->integer('active_by')->unsigned();
             $table->timestamps();
         });

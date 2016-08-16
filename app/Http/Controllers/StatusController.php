@@ -51,7 +51,7 @@ class StatusController extends Controller
 
         $is_ck = DB::table('status')->count();
         if (empty($is_ck)){
-            DB::table('status')->insert(['id' => 1, 'status' => 'Chờ duyệt CV', 'allow_sendmail' => 0]);
+            DB::table('status')->insert(['id' => 1, 'status' => 'Chờ duyệt CV', 'allow_sendmail' => 0, 'role_VisitorStatus'=>1]);
         }
 
         return view('status.add');

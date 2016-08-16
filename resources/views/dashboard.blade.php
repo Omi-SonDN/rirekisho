@@ -8,44 +8,36 @@
     <!-- local css-->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/admin/css/3.3.5-bootstrap.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/datepicker3.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/footer.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/custom.css') }}"/>
-
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/admin/bower_components/statistics/css/morris-0.4.3.min.css') }}"/>
-
+    <!---  jQuery-->
+    <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
 </head>
 <body>
 <header>
     @include('includes.header')
-    @include('includes.sidebar')
 </header>
-<div id="push">
-    <div id="hamburger" class="burger-place">
-        <a class="burger-effect burger-icon" href="#"><span></span></a>
-    </div>
+
     <div class="container">
         <div id="main" class="row">
             @yield('content')
-
         </div>
 
     </div>
     <div class="footer col-lg-12">
         @include('includes.footer')
     </div>
-</div>
-<!---  jQuery-->
+
+
 <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
 <script type="text/javascript" src="{{ URL::asset('/admin/js/1.15.0-jquery.validate.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
-<script src="{{ URL::asset('js/include.js')}}"></script>
 {{--thu vien bang bieu--}}
-<script type="text/javascript" src="{{ URL::asset('/admin/bower_components/statistics/js/raphael-min.js')}}"></script>
-<script type="text/javascript" src="{{ URL::asset('/admin/bower_components/statistics/js/morris-0.4.3.min.js')}}"></script>
+{{--<script type="text/javascript" src="{{ URL::asset('/admin/bower_components/statistics/js/raphael-min.js')}}"></script>--}}
+{{--<script type="text/javascript" src="{{ URL::asset('/admin/bower_components/statistics/js/morris-0.4.3.min.js')}}"></script>--}}
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
 
 </body>
 

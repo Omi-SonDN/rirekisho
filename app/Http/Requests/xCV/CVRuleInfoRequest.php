@@ -27,11 +27,12 @@ class CVRuleInfoRequest extends Request
             'LastName' => 'required',
             'Firstname' => 'required',
             'rdGender' => 'required',
-            'txtDate' => 'required',
-            'txtPhone' => 'required|min:10',
+            'txtDate' => 'required|after:-60 year|before:-13 year',
+            'txtPhone' => ['required' ,'regex:/^(?:0|\(\+84\))[1-9]{1}[0-9]{1,2}[- .]\d{3}[- .]\d{4}$/'],
             'txtAddress' => 'required',
             'txtContact' => 'required',
             'txtname' => 'required',
+            'txtApply_to' => 'required|not_in:0',
         ];
     }
 
@@ -40,11 +41,15 @@ class CVRuleInfoRequest extends Request
             'LastName.required' => 'Vui lòng nhập họ',
             'Firstname.required' => 'Vui lòng nhập tên',
             'txtDate.required' => 'Vui lòng nhập ngày tháng năm sinh',
+            'txtDate.after' => 'Bạn đã đến lúc nghỉ hưu theo chế độ',
+            'txtDate.before' => 'Bạn chưa đủ độ tuổi đi làm việc',
             'txtPhone.required' => 'Vui lòng nhập số điện thoại',
-            'txtPhone.min' => 'Số điện thoại tối thiểu 11 số',
+            'txtPhone.regex' => 'Vui nhập đúng định dạng số điện thoại',
             'txtAddress.required' => 'Vui lòng nhập địa chỉ liên hệ',
             'txtContact.required' => 'Vui lòng điền thông tin liên hệ',
             'txtname.required' => 'Vui lòng điền thông tin ví trí mong muốn',
+            'txtApply_to.required' => 'Vui lòng chọn ví trí ứng tuyển',
+            'txtApply_to.not_in' => 'Vui lòng chọn ví trí tuyển dụng'
         ];
     }
 }
