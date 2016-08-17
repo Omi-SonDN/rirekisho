@@ -1,13 +1,12 @@
 @if(!count($users))
     <tr class="no-record">
-        <td colspan="6">
+        <td colspan="100%">
             <div style="text-align: center;">There are no records to display</div>
         </td>
     </tr>
 @else
     @foreach ($users as $key => $row)
         <tr class="data">
-            <td></td>
             <td class="image">
                 <div style=" position: relative;height: 100px;width: 100px;">
                     @if($row->image!="")
@@ -24,19 +23,27 @@
                     @endif
                 </div>
             </td>
-            <td class="name"><i class="fa fa-pencil fa-fw"></i>&nbsp<a href="{{url('User',$row->hash)}}" title="Edit {{ $row->name }}">{{ $row->name }} </a></td>
+            <td class="name"><i class="fa fa-pencil fa-fw"></i>&nbsp<a href="{{url('User',$row->hash)}}" title="Edit {{ $row->userName }}">{{ $row->userName }} </a></td>
             <td class="name">{{ $row->email }}  </td>
+            <td>{{$row->JGender}}</td>
+            <td>{{$row->Age}}</td>
+            <td>{{$row->Birthday}}</td>
+            <td>{{$row->Phone}}</td>
+            <td>{{$row->CV->count()}}</td>
             <td> {{ $row->getRole() }}</td>
             <td>
-                <input class="fix-class-check cb-element" type="checkbox" value="{{$row->hash}}" name="arrDel[]" style="opacity: 1">
-                {{--</td>--}}
-                {{--<td>--}}
-                {{--<a href="url('User',[$row->hash ])">Sửa</a>--}}{{--{{route('destroyuser')}}--}}
-                <a href="{{route('getdeluser', $row->hash)}}" onclick="return xacnhanxoa('Bạn có chắc là xóa không!')" title="Delete {{$row->name}}"><i class="fa fa-trash-o  fa-fw"></i>&nbsp Delete</a>
+                <div class="col-lg-12">
+                    <input class="fix-class-check cb-element" type="checkbox"
+                           value="{{$row->hash}}"
+                           name="arrDel[]">
+                </div>
+                <div class="col-lg-12 mt8">
+                    <a href="{{route('getdeluser', $row->hash)}}"
+                       onclick="return xacnhanxoa('Bạn có chắc là xóa không!')"
+                       title="Delete {{$row->userName}}">
+                        Delete</a>
+                </div>
             </td>
         </tr>
     @endforeach
-    {{--<tr id="number-result" style="display: none;">--}}
-    {{--<td colspan="5">Có {{$count }} kết quả</td>--}}
-    {{--</tr>--}}
 @endif

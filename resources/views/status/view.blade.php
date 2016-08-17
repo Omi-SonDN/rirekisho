@@ -34,6 +34,16 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-3">
+                                <p class="control-label text-right"><strong>Visiter quản lý:</strong></p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="control-static">{!! $Status->role_Visitor !!}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
                                 <p class="control-label text-right"><strong>Những trạng thái trước:</strong></p>
                             </div>
                             <div class="col-md-9">

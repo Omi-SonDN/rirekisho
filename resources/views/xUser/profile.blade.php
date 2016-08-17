@@ -1,4 +1,4 @@
-<div class="dropzone-container" style="margin: 30px 0 0 30px;">
+<div class="dropzone-container">
     <div id="dropzone">
         <div class="fixed-img">
             @if($user->image!="")
@@ -9,8 +9,13 @@
                 </div>
             @endif
         </div>
-        <input id="fileInput" type="file" accept="image/png,image/jpeg" name="image"/>
+        <input id="fileInput" type="file" accept="image/png,image/jpeg" name="txtImage"/>
     </div>
     <i> Click to edit</i>
+    @if ($errors->has('txtImage'))
+        <span class="help-block">
+                            {{ $errors->first('txtImage') }}
+                        </span>
+    @endif
 </div>
 

@@ -8,7 +8,7 @@
     <div class="row">
         <div class='col-lg-12'>
             <table class="table table-hover table-responsive" id="pos-list">
-                <thead>
+                <thead class="bg-primary">
                 <th>STT</th>
                 <th>Vị trí</th>
                 <th>Kích hoạt</th>

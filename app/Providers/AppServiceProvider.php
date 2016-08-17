@@ -24,9 +24,33 @@ class AppServiceProvider extends ServiceProvider
                     $q->whereHas('User', function ($q) use ($user) {
                         $q->where('user_id', $user->id);
                     });
-                })->take(10)->get();
-                if (Gate::allows('get-cv', $cv)) {
+                })
+                    ->take(10)
+                    //->list()
+                    ->get();
 
+                // kiem tra bookmark
+                // Visitor: xoa bo nhung cv chua duoc kich hoat
+                // hoac cv cho phep chu nha tuyen dung tim kiem
+                if(Auth::user()->getRole() == 'Visitor') {
+                    foreach ($list as $kr => $its){
+                        if ($its->Active == 0 || $its->live == 0) {
+                            unset($list[$kr]);
+                        }
+                    }
+                }
+
+                // kiem tra bookmark
+                // Admin: xoa bo nhung cv chua cho phep tuyen dung tim kiem
+                if(Auth::user()->getRole() == 'Admin') {
+                    foreach ($list as $kr => $its) {
+                        if ($its->live == 0) {
+                            unset($list[$kr]);
+                        }
+                    }
+                }
+
+                if (Gate::allows('get-cv', $cv)) {
                     $view->with('CV', $cv)->with('list', $list);
                 } else {
                     $view->with('list', $list);

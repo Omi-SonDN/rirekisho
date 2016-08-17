@@ -135,6 +135,8 @@ return array(
     'Collective\\Html\\HtmlFacade' => $vendorDir . '/laravelcollective/html/src/HtmlFacade.php',
     'Collective\\Html\\HtmlServiceProvider' => $vendorDir . '/laravelcollective/html/src/HtmlServiceProvider.php',
     'CreateBookmarksTable' => $baseDir . '/database/migrations/2016_07_27_081836_create_bookmarks_table.php',
+    'CreateConfigCompany' => $baseDir . '/database/migrations/2016_08_15_055850_create_config_company.php',
+    'CreateConfigsTables' => $baseDir . '/database/migrations/2016_08_15_052738_create_configs_company_tables.php',
     'CreateCvsTable' => $baseDir . '/database/migrations/2016_07_27_081630_create_cvs_table.php',
     'CreateGroupsTable' => $baseDir . '/database/migrations/2016_07_27_081818_create_groups_table.php',
     'CreateItSkillTable' => $baseDir . '/database/migrations/2016_07_27_092211_create_it_skill_table.php',

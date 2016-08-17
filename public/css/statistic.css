@@ -2,7 +2,9 @@
     margin: 20px 0;
     position: relative;
 }
-/* statistic sidebar */
+.col-md-3{
+    width: 255px;
+}
 
 .statistic-sidebar {
     padding: 20px 0 10px 0;
@@ -229,10 +231,17 @@
     display: none;
 }
 
-#highcharts-2 svg text:nth-child(15){
+#highcharts-2 svg text:nth-child(15)
+
     display: none;
 }*/
 
 .highcharts-tooltip + text{
     display: none;
 }
+@media only screen and (max-width: 980px) {
+    .statisic-content {
+        background-color: red;
+    }
+}
+　　

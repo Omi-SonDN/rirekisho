@@ -42,6 +42,31 @@ return [
     'timezone' => 'UTC',
 
     /*
+     | So bang ghi tren mot trang
+     */
+    'per_page' => 10,
+
+    /*
+     | tao cac so bang ghi khac nhau bang cach
+     | lay liet ke cac so bang ghi tren mot trang
+     |
+     */
+    'list_per_page' => [10, 25, 50, 100, 150, 200],
+
+    /*
+     * Chi phep upload CV file toi da
+     * don vi MB
+     */
+    'max_UploadCV' => 5,
+    /*
+
+     *//*
+     * Chi phep upload Avatr file toi da
+     * don vi MB
+     */
+    'max_UploadAvatar' => 1,
+
+    /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------

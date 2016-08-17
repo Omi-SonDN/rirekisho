@@ -7,7 +7,6 @@
 @else
     @foreach($CVs as $key => $CV)
         <tr class="data{{++$key}}">
-            <td class="rank">{{$key}}</td>
             <td class="image">
                 <div style=" position: relative;height: 100px;width: 100px; cursor: pointer" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
                     <?php $image = $CV->User->image;?>
@@ -28,7 +27,7 @@
 
             <td class="name">
                 @if ($CV->type_cv)
-                    <a href="{{ \URL('CV/create/upload/'. $CV->hash) }}" title="Xem CV {{$CV->name_cv}}">{{ $CV->User->Name }} </a>
+                    <a href="{{ \URL('CV/upload/'. $CV->hash) }}" title="Xem CV {{$CV->name_cv}}">{{ $CV->User->Name }} </a>
                 @else
                     <a href="{{url('CV',$CV )}}" title="Xem CV {{$CV->name_cv}}">{{ $CV->User->Name }} </a>
                 @endif
@@ -63,14 +62,14 @@
                             @if ($CV->type_cv == 0)
                                 <a href="{{url('CV',[$CV ,'edit'])}}" title="Sửa CV tên: {{$CV->name_cv }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                             @else
-                                <a href="{{ \URL('CV/create/upload/'. $CV->hash .'/edit') }}" title="Sửa CV tên: {{$CV->name_cv }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                <a href="{{ \URL('CV/upload/'. $CV->hash .'/edit') }}" title="Sửa CV tên: {{$CV->name_cv }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                             @endif
                         </td>
                         <td>
                             @if ($CV->type_cv == 0)
                                 <a style="-webkit-user-select: none;{{ ($CV->Active == 0) ? 'color:red;' : 'color: #008000' }}" {!! ($CV->Active == 0) ? 'alt="Cv Offline" title="CV chưa được được duyệt"' : 'alt="Cv Online" title="CV đã được duyệt"' !!}  href="{{url('CV',$CV )}}" ><span class="fa fa-power-off"></span></a>
                             @else
-                                <a style="-webkit-user-select: none;{{ ($CV->Active == 0) ? 'color:red;' : 'color: #008000' }}" {!! ($CV->Active == 0) ? 'alt="Cv Offline" title="CV chưa được được duyệt"' : 'alt="Cv Online" title="CV đã được duyệt"' !!}  href="{{ \URL('CV/create/upload/'. $CV->hash) }}" ><span class="fa fa-power-off"></span></a>
+                                <a style="-webkit-user-select: none;{{ ($CV->Active == 0) ? 'color:red;' : 'color: #008000' }}" {!! ($CV->Active == 0) ? 'alt="Cv Offline" title="CV chưa được được duyệt"' : 'alt="Cv Online" title="CV đã được duyệt"' !!}  href="{{ \URL('CV/upload/'. $CV->hash) }}" ><span class="fa fa-power-off"></span></a>
                             @endif
                         </td>
                         <td>
@@ -107,7 +106,7 @@
                                 {{($CV->name_cv)}}
                             </li>
                             <li>
-                                {{($CV->positions)}}
+                                {{($CV->positionCV->name)}}
                             </li>
                             <li>
                                 {!!($CV->Checkcv)!!}

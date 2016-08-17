@@ -123,6 +123,114 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        /*
+         * Kiem show CV TUNG BUOC
+         * UngVien: chi co quyen xem tai khoan
+         * Visitor: chi xem cv truc tuyen va duoc kich hoat
+         * Admin:  xem cv full cua admin va truc tuyen
+         */
+        $gate->define('show-cv-step', function ($user, $cv) {
+            if ($user->getRole() == "Applicant") {
+                if (count($cv)) {
+                    return $user->id == $cv->user_id && $cv->type_cv == 0;
+                } else {
+                    return false;
+                }
+            } elseif ($user->getRole() == "Visitor") {
+                if (count($cv)) {
+                    return $cv->live == 1 && $cv->Active == 1 && $cv->type_cv == 0;
+                } else {
+                    return false;
+                }
+            } elseif ($user->getRole() === 'Admin') {
+                if (count($cv)) {
+                    return $user->id == $cv->user_id || ($cv->live == 1 && $cv->type_cv == 0);
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        });
+         /*
+         * Kiem show CV UPLOAD FILE
+         * UngVien: chi co quyen
+         * Visitor:
+         * Admin:
+         */
+        $gate->define('show-cv-upload', function ($user, $cv) {
+            if ($user->getRole() == "Applicant") {
+                if (count($cv)) {
+                    return $user->id == $cv->user_id && $cv->type_cv == 1;
+                } else {
+                    return false;
+                }
+            } elseif ($user->getRole() == "Visitor") {
+                if (count($cv)) {
+                    return $cv->live == 1 && $cv->Active == 1 && $cv->type_cv == 1;
+                } else {
+                    return false;
+                }
+            } elseif ($user->getRole() === 'Admin') {
+                if (count($cv)) {
+                    return $user->id == $cv->user_id || ($cv->live == 1 && $cv->type_cv == 1);
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        });
 
+        /*
+         * Kiem tra edit voi CV TUNG BUOC
+         * UngVien: chi sua vc ban than
+         * Visitor: khong duoc sua cv nao
+         * Admin:  true
+         */
+        $gate->define('edit-cv-step', function ($user, $cv) {
+            if ($user->getRole() == "Applicant") {
+                if (count($cv)) {
+                    return $user->id == $cv->user_id && $cv->type_cv == 0;
+                } else {
+                    return false;
+                }
+            } elseif ($user->getRole() == "Visitor") {
+                return false;
+            } elseif ($user->getRole() === 'Admin') {
+                if (count($cv)) {
+                    return $user->id == $cv->user_id || ($cv->live == 1 && $cv->type_cv == 0);
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        });
+            /*
+         * Kiem tra edit voi CV UPLOAD FILE
+         * UngVien: chi sua vc ban than
+         * Visitor: khong duoc sua cv nao
+         * Admin:  true
+         */
+        $gate->define('edit-cv-upload', function ($user, $cv) {
+            if ($user->getRole() == "Applicant") {
+                if (count($cv)) {
+                    return $user->id == $cv->user_id && $cv->type_cv == 1;
+                } else {
+                    return false;
+                }
+            } elseif ($user->getRole() == "Visitor") {
+                return false;
+            } elseif ($user->getRole() === 'Admin') {
+                if (count($cv)) {
+                    return $user->id == $cv->user_id || ($cv->live == 1 && $cv->type_cv == 1);
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        });
     }
 }

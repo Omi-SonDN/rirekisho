@@ -29,7 +29,7 @@ class Status extends Model
             return "<span class='label label-default'>Không cho phép</span>";
         } else return "<span class='label label-success'>Cho phép</span>";
     }
-    public function getrole_VisitorAttribute()
+    public function getroleVisitorAttribute()
     {
         if ($this->role_VisitorStatus == 0) {
             return "<span class='label label-default'>Không cho phép</span>";
