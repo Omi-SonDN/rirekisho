@@ -37,7 +37,7 @@ class ApplicationTester
     /**
      * Constructor.
      *
-     * @param Application $application An Application instance to test.
+     * @param Application $application An Application instance to test
      */
     public function __construct(Application $application)
     {
@@ -53,7 +53,7 @@ class ApplicationTester
      *  * decorated:   Sets the output decorated flag
      *  * verbosity:   Sets the output verbosity flag
      *
-     * @param array $input An array of arguments and options
+     * @param array $input   An array of arguments and options
      * @param array $options An array of options
      *
      * @return int The command exit code

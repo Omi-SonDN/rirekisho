@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\View;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class ViewParser
-{
+class ViewParser {
 
     /**
      * View file
@@ -60,7 +59,7 @@ class ViewParser
     /**
      * Load the HTML
      * @param  \Maatwebsite\Excel\Classes\LaravelExcelWorksheet $sheet
-     * @param  string $html
+     * @param  string                                           $html
      * @return \Maatwebsite\Excel\Classes\LaravelExcelWorksheet
      */
     protected function _loadHTML($sheet, $html)

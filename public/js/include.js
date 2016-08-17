@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+        $(".highcharts-button").css("display", "none");
         $('#startDate').datepicker();
         $('#endDate').datepicker();
         $("cv-forms").each(function () {
@@ -882,36 +882,48 @@ function getChangeLiveCv (element, id)
 }
 
 $('#searchStatistics').on('click', function(){
-    $key_search = $('#positionsSearch').val();    
-    $.ajax({
-        type: "POST",
-        url: "/CV/statisticSearch",
-        data : {
-            'startDate' : $('#startDate').val(),
-            'endDate' : $('#endDate').val(),
-            'key_search' : $key_search,
-        },
-        cache: false,
-        success: function (data) {
-            $('#container2').html(data);
-        }
-    });
+    $key_search = $('#positionsSearch').val();
+
+    var day = new Date().toJSON().slice(0,10);
+    var startDate = $('#startDate').val();
+    var endDate = $('#endDate').val();
+    if(startDate > endDate || endDate > day){
+        $('#error_date').show();
+        $('#error_date').text('Nhập sai ngày tháng!');
+    } else {
+        $('#error_date').hide();
+        $.ajax({
+            type: "POST",
+            url: "/CV/statisticSearch",
+            data : {
+                'startDate' : $('#startDate').val(),
+                'endDate' : $('#endDate').val(),
+                'key_search' : $key_search,
+            },
+            cache: false,
+            success: function (data) {
+                $('#container2').html(data);
+            }
+        });
+    }
     
 });
 
 $('#status_statistic li a').on('click', function(){
-    var $ox = $(this).attr('status');
-
+    var ox = $(this).attr('status');
+    $('#error_date').hide();
 
     $('#status_statistic li.active').removeClass();
     $(this).parent().addClass('active');
 
-    if($ox == 'position'){
+    if(ox == 'position'){
         $('.search_po_sa').show();
     } else {
         $('.search_po_sa').hide();
     }
-    var dataString = "ox=" + $ox;
+    var startDate = $('#startDate').val();
+    var endDate = $('#endDate').val();
+    var dataString = "ox=" + ox + '&startDate=' + startDate + '&endDate=' + endDate;
     $.ajax({
         type: "POST",
         url: "/CV/statisticStatus",
@@ -922,3 +934,60 @@ $('#status_statistic li a').on('click', function(){
         }
     });
 });
+
+$('.menu_download .list_do').on('click', downloadCV);
+//$('.reaction-box li').on('click', downloadCV);
+
+function downloadCV(){
+    var export_type = $(this).attr('export-type');
+    var status = $('#status_statistic li.active').attr('id');
+
+    var startDate = $('#startDate').val();
+    var endDate = $('#endDate').val();
+
+    if(status == 'position'){
+        var day = new Date().toJSON().slice(0,10);
+        if(startDate > endDate || endDate > day){
+            $('#error_date').show();
+            $('#error_date').text('Nhập sai ngày tháng!');
+        } else {
+            $('#error_date').hide();
+            $.ajax({
+                type: "GET",
+                url: "/CV/downloadCV/" + export_type,
+                data : {
+                    'status' : status,
+                    'startDate' : startDate,
+                    'endDate' : endDate,
+                    'key_search' : $('#positionsSearch').val(),
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data.path);
+                    var path = data.path;
+                    //download file
+                    location.href = path;
+                }
+            });
+        }
+    }else{
+        $('#error_date').hide();
+        $.ajax({
+        type: "GET",
+            url: "/CV/downloadCV/" + export_type,
+            data : {
+                'status' : status,
+                'startDate' : startDate,
+                'endDate' : endDate,
+                'key_search' : $('#positionsSearch').val(),
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data.path);
+                var path = data.path;
+                //download file
+                location.href = path;
+            }
+        });
+    }
+}

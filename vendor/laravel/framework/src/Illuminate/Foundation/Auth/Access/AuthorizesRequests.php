@@ -11,8 +11,8 @@ trait AuthorizesRequests
     /**
      * Authorize a given action against a set of arguments.
      *
-     * @param  mixed $ability
-     * @param  mixed|array $arguments
+     * @param  mixed  $ability
+     * @param  mixed|array  $arguments
      * @return \Illuminate\Auth\Access\Response
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
@@ -27,9 +27,9 @@ trait AuthorizesRequests
     /**
      * Authorize a given action for a user.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed $user
-     * @param  mixed $ability
-     * @param  mixed|array $arguments
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed  $user
+     * @param  mixed  $ability
+     * @param  mixed|array  $arguments
      * @return \Illuminate\Auth\Access\Response
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
@@ -46,9 +46,9 @@ trait AuthorizesRequests
     /**
      * Authorize the request at the given gate.
      *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate $gate
-     * @param  mixed $ability
-     * @param  mixed|array $arguments
+     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
+     * @param  mixed  $ability
+     * @param  mixed|array  $arguments
      * @return \Illuminate\Auth\Access\Response
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
@@ -67,8 +67,8 @@ trait AuthorizesRequests
     /**
      * Guesses the ability's name if it wasn't provided.
      *
-     * @param  mixed $ability
-     * @param  mixed|array $arguments
+     * @param  mixed  $ability
+     * @param  mixed|array  $arguments
      * @return array
      */
     protected function parseAbilityAndArguments($ability, $arguments)
@@ -83,10 +83,10 @@ trait AuthorizesRequests
     /**
      * Throw an unauthorized exception based on gate results.
      *
-     * @param  string $ability
-     * @param  mixed|array $arguments
-     * @param  string $message
-     * @param  \Exception $previousException
+     * @param  string  $ability
+     * @param  mixed|array  $arguments
+     * @param  string  $message
+     * @param  \Exception  $previousException
      * @return \Symfony\Component\HttpKernel\Exception\HttpException
      */
     protected function createGateUnauthorizedException($ability, $arguments, $message = 'This action is unauthorized.', $previousException = null)

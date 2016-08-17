@@ -31,9 +31,9 @@ class UnixPipes extends AbstractPipes
 
     public function __construct($ttyMode, $ptyMode, $input, $disableOutput)
     {
-        $this->ttyMode = (bool)$ttyMode;
-        $this->ptyMode = (bool)$ptyMode;
-        $this->disableOutput = (bool)$disableOutput;
+        $this->ttyMode = (bool) $ttyMode;
+        $this->ptyMode = (bool) $ptyMode;
+        $this->disableOutput = (bool) $disableOutput;
 
         parent::__construct($input);
     }
@@ -140,13 +140,13 @@ class UnixPipes extends AbstractPipes
      */
     public function areOpen()
     {
-        return (bool)$this->pipes;
+        return (bool) $this->pipes;
     }
 
     /**
      * Creates a new UnixPipes instance.
      *
-     * @param Process $process
+     * @param Process         $process
      * @param string|resource $input
      *
      * @return UnixPipes

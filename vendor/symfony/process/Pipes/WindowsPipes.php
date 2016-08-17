@@ -40,22 +40,42 @@ class WindowsPipes extends AbstractPipes
 
     public function __construct($disableOutput, $input)
     {
-        $this->disableOutput = (bool)$disableOutput;
+        $this->disableOutput = (bool) $disableOutput;
 
         if (!$this->disableOutput) {
             // Fix for PHP bug #51800: reading from STDOUT pipe hangs forever on Windows if the output is too big.
             // Workaround for this problem is to use temporary files instead of pipes on Windows platform.
             //
             // @see https://bugs.php.net/bug.php?id=51800
-            $this->files = array(
-                Process::STDOUT => tempnam(sys_get_temp_dir(), 'out_sf_proc'),
-                Process::STDERR => tempnam(sys_get_temp_dir(), 'err_sf_proc'),
+            $pipes = array(
+                Process::STDOUT => Process::OUT,
+                Process::STDERR => Process::ERR,
             );
-            foreach ($this->files as $offset => $file) {
-                if (false === $file || false === $this->fileHandles[$offset] = @fopen($file, 'rb')) {
-                    throw new RuntimeException('A temporary file could not be opened to write the process output to, verify that your TEMP environment variable is writable');
+            $tmpDir = sys_get_temp_dir();
+            $error = 'unknown reason';
+            set_error_handler(function ($type, $msg) use (&$error) { $error = $msg; });
+            for ($i = 0;; ++$i) {
+                foreach ($pipes as $pipe => $name) {
+                    $file = sprintf('%s\\sf_proc_%02X.%s', $tmpDir, $i, $name);
+                    if (file_exists($file) && !unlink($file)) {
+                        continue 2;
+                    }
+                    $h = fopen($file, 'xb');
+                    if (!$h && false === strpos($error, 'File exists')) {
+                        restore_error_handler();
+                        throw new RuntimeException(sprintf('A temporary file could not be opened to write the process output: %s', $error));
+                    }
+                    if (!$h || !$this->fileHandles[$pipe] = fopen($file, 'rb')) {
+                        continue 2;
+                    }
+                    if (isset($this->files[$pipe])) {
+                        unlink($this->files[$pipe]);
+                    }
+                    $this->files[$pipe] = $file;
                 }
+                break;
             }
+            restore_error_handler();
         }
 
         parent::__construct($input);

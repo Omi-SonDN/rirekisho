@@ -20,14 +20,12 @@ class CallableTypePresenterSpec extends ObjectBehavior
 
     function it_should_support_callable_values()
     {
-        $this->supports(function () {
-        })->shouldReturn(true);
+        $this->supports(function () {})->shouldReturn(true);
     }
 
     function it_should_present_a_closure()
     {
-        $this->present(function () {
-        })->shouldReturn('[closure]');
+        $this->present(function () {})->shouldReturn('[closure]');
     }
 
     function it_should_present_function_callable_as_string()
@@ -37,8 +35,7 @@ class CallableTypePresenterSpec extends ObjectBehavior
 
     function it_should_present_a_method_as_string(
         WithMethod $object, Presenter $presenter
-    )
-    {
+    ) {
         $className = get_class($object->getWrappedObject());
 
         $presenter->presentValue($object->getWrappedObject())->willReturn(sprintf('[obj:%s]', $className));
@@ -49,8 +46,7 @@ class CallableTypePresenterSpec extends ObjectBehavior
 
     function it_should_present_a_magic_method_as_string(
         WithMagicCall $object, Presenter $presenter
-    )
-    {
+    ) {
         $className = get_class($object->getWrappedObject());
 
         $presenter->presentValue($object->getWrappedObject())->willReturn(sprintf('[obj:%s]', $className));

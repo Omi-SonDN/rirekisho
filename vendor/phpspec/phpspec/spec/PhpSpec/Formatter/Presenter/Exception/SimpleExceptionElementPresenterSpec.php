@@ -21,8 +21,7 @@ class SimpleExceptionElementPresenterSpec extends ObjectBehavior
 
     function it_should_return_a_simple_exception_thrown_message(
         ExceptionTypePresenter $typePresenter, \Exception $exception
-    )
-    {
+    ) {
         $typePresenter->present($exception)->willReturn('exc');
         $this->presentExceptionThrownMessage($exception)->shouldReturn('Exception exc has been thrown.');
     }

@@ -1,4 +1,4 @@
-@php-version @php7
+@php:~7.0
 Feature: Developer generates a collaborator
   As a Developer
   I want to automate creating collaborators
@@ -35,7 +35,7 @@ Feature: Developer generates a collaborator
       }
 
       """
-    When I run phpspec and answer "n" when asked if I want to generate the code
+  When I run phpspec and answer "n" when asked if I want to generate the code
     Then I should be prompted with:
       """
       Would you like me to generate an interface

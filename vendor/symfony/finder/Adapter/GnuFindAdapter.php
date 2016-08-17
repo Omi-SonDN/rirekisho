@@ -60,10 +60,11 @@ class GnuFindAdapter extends AbstractFindAdapter
         $command
             ->get('find')
             ->add('-printf')
-            ->arg($format . ' %h/%f\\n')
+            ->arg($format.' %h/%f\\n')
             ->add('| sort | cut')
             ->arg('-d ')
-            ->arg('-f2-');
+            ->arg('-f2-')
+        ;
     }
 
     /**
@@ -96,7 +97,8 @@ class GnuFindAdapter extends AbstractFindAdapter
                 ->add($expr->isCaseSensitive() ? null : '-i')
                 ->add($not ? '-L' : '-l')
                 ->add('-Ee')->arg($expr->renderPattern())
-                ->add('{}');
+                ->add('{}')
+            ;
         }
     }
 }

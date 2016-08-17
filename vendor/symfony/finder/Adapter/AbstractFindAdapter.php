@@ -94,11 +94,8 @@ abstract class AbstractFindAdapter extends AbstractAdapter
         $command->setErrorHandler(
             $this->ignoreUnreadableDirs
                 // If directory is unreadable and finder is set to ignore it, `stderr` is ignored.
-                ? function ($stderr) {
-            }
-                : function ($stderr) {
-                throw new AccessDeniedException($stderr);
-            }
+                ? function ($stderr) { }
+                : function ($stderr) { throw new AccessDeniedException($stderr); }
         );
 
         $paths = $this->shell->testCommand('uniq') ? $command->add('| uniq')->execute() : array_unique($command->execute());
@@ -134,7 +131,7 @@ abstract class AbstractFindAdapter extends AbstractAdapter
 
     /**
      * @param Command $command
-     * @param string $dir
+     * @param string  $dir
      *
      * @return Command
      */
@@ -148,9 +145,9 @@ abstract class AbstractFindAdapter extends AbstractAdapter
     }
 
     /**
-     * @param Command $command
+     * @param Command  $command
      * @param string[] $names
-     * @param bool $not
+     * @param bool     $not
      */
     private function buildNamesFiltering(Command $command, array $names, $not = false)
     {
@@ -195,10 +192,10 @@ abstract class AbstractFindAdapter extends AbstractAdapter
     }
 
     /**
-     * @param Command $command
-     * @param string $dir
+     * @param Command  $command
+     * @param string   $dir
      * @param string[] $paths
-     * @param bool $not
+     * @param bool     $not
      */
     private function buildPathsFiltering(Command $command, $dir, array $paths, $not = false)
     {
@@ -219,7 +216,7 @@ abstract class AbstractFindAdapter extends AbstractAdapter
             // Fixes 'not search' regex problems.
             if ($expr->isRegex()) {
                 $regex = $expr->getRegex();
-                $regex->prepend($regex->hasStartFlag() ? preg_quote($dir) . DIRECTORY_SEPARATOR : '.*')->setEndJoker(!$regex->hasEndFlag());
+                $regex->prepend($regex->hasStartFlag() ? preg_quote($dir).DIRECTORY_SEPARATOR : '.*')->setEndJoker(!$regex->hasEndFlag());
             } else {
                 $expr->prepend('*')->append('*');
             }
@@ -237,7 +234,7 @@ abstract class AbstractFindAdapter extends AbstractAdapter
     }
 
     /**
-     * @param Command $command
+     * @param Command            $command
      * @param NumberComparator[] $sizes
      */
     private function buildSizesFiltering(Command $command, array $sizes)
@@ -247,27 +244,27 @@ abstract class AbstractFindAdapter extends AbstractAdapter
 
             switch ($size->getOperator()) {
                 case '<=':
-                    $command->add('-size -' . ($size->getTarget() + 1) . 'c');
+                    $command->add('-size -'.($size->getTarget() + 1).'c');
                     break;
                 case '>=':
-                    $command->add('-size +' . ($size->getTarget() - 1) . 'c');
+                    $command->add('-size +'.($size->getTarget() - 1).'c');
                     break;
                 case '>':
-                    $command->add('-size +' . $size->getTarget() . 'c');
+                    $command->add('-size +'.$size->getTarget().'c');
                     break;
                 case '!=':
-                    $command->add('-size -' . $size->getTarget() . 'c');
-                    $command->add('-size +' . $size->getTarget() . 'c');
+                    $command->add('-size -'.$size->getTarget().'c');
+                    $command->add('-size +'.$size->getTarget().'c');
                     break;
                 case '<':
                 default:
-                    $command->add('-size -' . $size->getTarget() . 'c');
+                    $command->add('-size -'.$size->getTarget().'c');
             }
         }
     }
 
     /**
-     * @param Command $command
+     * @param Command          $command
      * @param DateComparator[] $dates
      */
     private function buildDatesFiltering(Command $command, array $dates)
@@ -275,7 +272,7 @@ abstract class AbstractFindAdapter extends AbstractAdapter
         foreach ($dates as $i => $date) {
             $command->add($i > 0 ? '-and' : null);
 
-            $mins = (int)round((time() - $date->getTarget()) / 60);
+            $mins = (int) round((time() - $date->getTarget()) / 60);
 
             if (0 > $mins) {
                 // mtime is in the future
@@ -286,27 +283,27 @@ abstract class AbstractFindAdapter extends AbstractAdapter
 
             switch ($date->getOperator()) {
                 case '<=':
-                    $command->add('-mmin +' . ($mins - 1));
+                    $command->add('-mmin +'.($mins - 1));
                     break;
                 case '>=':
-                    $command->add('-mmin -' . ($mins + 1));
+                    $command->add('-mmin -'.($mins + 1));
                     break;
                 case '>':
-                    $command->add('-mmin -' . $mins);
+                    $command->add('-mmin -'.$mins);
                     break;
                 case '!=':
-                    $command->add('-mmin +' . $mins . ' -or -mmin -' . $mins);
+                    $command->add('-mmin +'.$mins.' -or -mmin -'.$mins);
                     break;
                 case '<':
                 default:
-                    $command->add('-mmin +' . $mins);
+                    $command->add('-mmin +'.$mins);
             }
         }
     }
 
     /**
      * @param Command $command
-     * @param string $sort
+     * @param string  $sort
      *
      * @throws \InvalidArgumentException
      */
@@ -317,14 +314,14 @@ abstract class AbstractFindAdapter extends AbstractAdapter
 
     /**
      * @param Command $command
-     * @param string $sort
+     * @param string  $sort
      */
     abstract protected function buildFormatSorting(Command $command, $sort);
 
     /**
      * @param Command $command
-     * @param array $contains
-     * @param bool $not
+     * @param array   $contains
+     * @param bool    $not
      */
     abstract protected function buildContentFiltering(Command $command, array $contains, $not = false);
 }

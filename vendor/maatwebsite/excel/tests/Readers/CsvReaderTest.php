@@ -7,8 +7,7 @@ use Mockery as m;
 use Maatwebsite\Excel\Readers\LaravelExcelReader;
 use Maatwebsite\Excel\Classes;
 
-class CsvReaderTest extends TestCase
-{
+class CsvReaderTest extends TestCase {
 
     /**
      * Import trait

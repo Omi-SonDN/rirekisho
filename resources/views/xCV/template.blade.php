@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="_token" content="{!! csrf_token() !!}" />
-
+   
     <!--Bootstrap CSS-->
     {{--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">--}}
     <link rel="stylesheet" href="{{ URL::asset('/admin/css/3.3.5-bootstrap.min.css') }}">
@@ -21,6 +21,8 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/footer.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/custom.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/font-awesome.min.css')}}"/>
+
     <!--CSS lib tablesorter -->
     <link rel="stylesheet" type="text/css"
           href="{{ asset('/admin/bower_components/datatables-sort/css/tablesorter.pager.css') }}"/>
@@ -56,6 +58,16 @@
     </script>
     <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
     {{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>--}}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{{asset('/hightchart//js/highcharts.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/hightchart/js/exporting.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('/hightchart/js/canvas-tools.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/hightchart/js/export-csv.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('/hightchart/js/jspdf.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/hightchart/js/highcharts-export-clientside.js')}}"></script>
+
 
 </head>
 <body>

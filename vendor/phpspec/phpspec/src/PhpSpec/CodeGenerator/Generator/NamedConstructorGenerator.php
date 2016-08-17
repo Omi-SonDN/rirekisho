@@ -50,16 +50,16 @@ class NamedConstructorGenerator implements GeneratorInterface
      */
     public function __construct(IO $io, TemplateRenderer $templates, Filesystem $filesystem = null, CodeWriter $codeWriter = null)
     {
-        $this->io = $io;
-        $this->templates = $templates;
+        $this->io         = $io;
+        $this->templates  = $templates;
         $this->filesystem = $filesystem ?: new Filesystem();
         $this->codeWriter = $codeWriter ?: new TokenizedCodeWriter();
     }
 
     /**
      * @param ResourceInterface $resource
-     * @param string $generation
-     * @param array $data
+     * @param string            $generation
+     * @param array             $data
      *
      * @return bool
      */
@@ -70,13 +70,13 @@ class NamedConstructorGenerator implements GeneratorInterface
 
     /**
      * @param ResourceInterface $resource
-     * @param array $data
+     * @param array             $data
      */
     public function generate(ResourceInterface $resource, array $data = array())
     {
-        $filepath = $resource->getSrcFilename();
+        $filepath   = $resource->getSrcFilename();
         $methodName = $data['name'];
-        $arguments = $data['arguments'];
+        $arguments  = $data['arguments'];
 
         $content = $this->getContent($resource, $methodName, $arguments);
 
@@ -104,8 +104,8 @@ class NamedConstructorGenerator implements GeneratorInterface
 
     /**
      * @param  ResourceInterface $resource
-     * @param  string $methodName
-     * @param  array $arguments
+     * @param  string            $methodName
+     * @param  array             $arguments
      * @return string
      */
     private function getContent(ResourceInterface $resource, $methodName, $arguments)

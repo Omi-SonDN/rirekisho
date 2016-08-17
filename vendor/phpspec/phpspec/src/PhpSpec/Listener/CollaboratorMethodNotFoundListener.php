@@ -70,8 +70,7 @@ class CollaboratorMethodNotFoundListener implements EventSubscriberInterface
         ResourceManagerInterface $resources,
         GeneratorManager $generator,
         NameCheckerInterface $nameChecker = null
-    )
-    {
+    ) {
         $this->io = $io;
         $this->resources = $resources;
         $this->generator = $generator;
@@ -117,7 +116,7 @@ class CollaboratorMethodNotFoundListener implements EventSubscriberInterface
      */
     private function getDoubledInterface($classname)
     {
-        if (class_parents($classname) !== array('stdClass' => 'stdClass')) {
+        if (class_parents($classname) !== array('stdClass'=>'stdClass')) {
             return;
         }
 
@@ -192,8 +191,7 @@ class CollaboratorMethodNotFoundListener implements EventSubscriberInterface
     {
         if ($this->io->isCodeGenerationEnabled()
             && ($exception = $event->getException())
-            && $exception instanceof MethodNotFoundException
-        ) {
+            && $exception instanceof MethodNotFoundException) {
             return $exception;
         }
     }

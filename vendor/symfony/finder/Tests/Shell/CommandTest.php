@@ -86,7 +86,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $cmd = Command::create()->add('--force');
 
         $cmd->arg('--run');
-        $this->assertSame('--force ' . escapeshellarg('--run'), $cmd->join());
+        $this->assertSame('--force '.escapeshellarg('--run'), $cmd->join());
     }
 
     public function testCmd()
@@ -133,9 +133,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     public function testErrorHandler()
     {
         $cmd = Command::create();
-        $handler = function () {
-            return 'error-handler';
-        };
+        $handler = function () { return 'error-handler'; };
         $cmd->setErrorHandler($handler);
 
         $this->assertSame($handler, $cmd->getErrorHandler());
@@ -150,7 +148,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('array', $result);
         $this->assertNotEmpty($result);
-        $this->assertRegexp('/PHP|HipHop/', $result[0]);
+        $this->assertRegExp('/PHP|HipHop/', $result[0]);
     }
 
     public function testCastToString()
@@ -159,6 +157,6 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $cmd->add('--force');
         $cmd->add('--run');
 
-        $this->assertSame('--force --run', (string)$cmd);
+        $this->assertSame('--force --run', (string) $cmd);
     }
 }

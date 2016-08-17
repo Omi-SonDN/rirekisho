@@ -56,7 +56,7 @@ class MethodAnalyser
         $reflectionMethod = new \ReflectionMethod($class, $method);
         $startLine = $reflectionMethod->getStartLine();
         $endLine = $reflectionMethod->getEndLine();
-        $reflectionClass = $this->getMethodOwner($reflectionMethod, $startLine, $endLine);
+        $reflectionClass  = $this->getMethodOwner($reflectionMethod, $startLine, $endLine);
 
         return $reflectionClass->getName();
     }
@@ -103,7 +103,7 @@ class MethodAnalyser
 
     /**
      * @param  \ReflectionClass[] $traits
-     * @param  string $file
+     * @param  string  $file
      * @param  int $start
      * @param  int $end
      *
@@ -115,7 +115,7 @@ class MethodAnalyser
             if ($trait->getFileName() == $file && $trait->getStartLine() <= $start && $trait->getEndLine() >= $end) {
                 return $trait;
             }
-            if (null !== ($trait = $this->getDeclaringTrait($trait->getTraits(), $file, $start, $end))) {
+            if (null !== ( $trait = $this->getDeclaringTrait($trait->getTraits(), $file, $start, $end) )) {
                 return $trait;
             }
         }
@@ -153,7 +153,7 @@ class MethodAnalyser
      */
     private function codeIsOnlyBlocksAndWhitespace($codeWithoutComments)
     {
-        return (bool)preg_match('/^[\s{}]*$/s', $codeWithoutComments);
+        return (bool) preg_match('/^[\s{}]*$/s', $codeWithoutComments);
     }
 
     /**

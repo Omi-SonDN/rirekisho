@@ -13,6 +13,7 @@ namespace Monolog\Handler;
 
 use Monolog\TestCase;
 use Monolog\Logger;
+use Monolog\Formatter\LineFormatter;
 
 /**
  * @author Greg Kedzierski <greg@gregkedzierski.com>
@@ -57,6 +58,23 @@ class SlackHandlerTest extends TestCase
         $this->assertRegexp('/token=myToken&channel=channel1&username=Monolog&text=&attachments=.*$/', $content);
     }
 
+    public function testWriteContentUsesFormatterIfProvided()
+    {
+        $this->createHandler('myToken', 'channel1', 'Monolog', false);
+        $this->handler->handle($this->getRecord(Logger::CRITICAL, 'test1'));
+        fseek($this->res, 0);
+        $content = fread($this->res, 1024);
+
+        $this->createHandler('myToken', 'channel1', 'Monolog', false);
+        $this->handler->setFormatter(new LineFormatter('foo--%message%'));
+        $this->handler->handle($this->getRecord(Logger::CRITICAL, 'test2'));
+        fseek($this->res, 0);
+        $content2 = fread($this->res, 1024);
+
+        $this->assertRegexp('/token=myToken&channel=channel1&username=Monolog&text=test1.*$/', $content);
+        $this->assertRegexp('/token=myToken&channel=channel1&username=Monolog&text=foo--test2.*$/', $content2);
+    }
+
     public function testWriteContentWithEmoji()
     {
         $this->createHandler('myToken', 'channel1', 'Monolog', true, 'alien');
@@ -77,7 +95,7 @@ class SlackHandlerTest extends TestCase
         fseek($this->res, 0);
         $content = fread($this->res, 1024);
 
-        $this->assertRegexp('/color%22%3A%22' . $expectedColor . '/', $content);
+        $this->assertRegexp('/color%22%3A%22'.$expectedColor.'/', $content);
     }
 
     public function testWriteContentWithPlainTextMessage()
@@ -93,14 +111,14 @@ class SlackHandlerTest extends TestCase
     public function provideLevelColors()
     {
         return array(
-            array(Logger::DEBUG, '%23e3e4e6'),   // escaped #e3e4e6
-            array(Logger::INFO, 'good'),
-            array(Logger::NOTICE, 'good'),
-            array(Logger::WARNING, 'warning'),
-            array(Logger::ERROR, 'danger'),
+            array(Logger::DEBUG,    '%23e3e4e6'),   // escaped #e3e4e6
+            array(Logger::INFO,     'good'),
+            array(Logger::NOTICE,   'good'),
+            array(Logger::WARNING,  'warning'),
+            array(Logger::ERROR,    'danger'),
             array(Logger::CRITICAL, 'danger'),
-            array(Logger::ALERT, 'danger'),
-            array(Logger::EMERGENCY, 'danger'),
+            array(Logger::ALERT,    'danger'),
+            array(Logger::EMERGENCY,'danger'),
         );
     }
 

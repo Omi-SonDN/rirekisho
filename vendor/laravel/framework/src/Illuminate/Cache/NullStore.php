@@ -16,7 +16,7 @@ class NullStore extends TaggableStore implements Store
     /**
      * Retrieve an item from the cache by key.
      *
-     * @param  string $key
+     * @param  string  $key
      * @return mixed
      */
     public function get($key)
@@ -27,9 +27,9 @@ class NullStore extends TaggableStore implements Store
     /**
      * Store an item in the cache for a given number of minutes.
      *
-     * @param  string $key
-     * @param  mixed $value
-     * @param  int $minutes
+     * @param  string  $key
+     * @param  mixed   $value
+     * @param  int     $minutes
      * @return void
      */
     public function put($key, $value, $minutes)
@@ -40,8 +40,8 @@ class NullStore extends TaggableStore implements Store
     /**
      * Increment the value of an item in the cache.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param  string  $key
+     * @param  mixed   $value
      * @return int
      */
     public function increment($key, $value = 1)
@@ -52,8 +52,8 @@ class NullStore extends TaggableStore implements Store
     /**
      * Increment the value of an item in the cache.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param  string  $key
+     * @param  mixed   $value
      * @return int
      */
     public function decrement($key, $value = 1)
@@ -64,8 +64,8 @@ class NullStore extends TaggableStore implements Store
     /**
      * Store an item in the cache indefinitely.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param  string  $key
+     * @param  mixed   $value
      * @return void
      */
     public function forever($key, $value)
@@ -76,7 +76,7 @@ class NullStore extends TaggableStore implements Store
     /**
      * Remove an item from the cache.
      *
-     * @param  string $key
+     * @param  string  $key
      * @return void
      */
     public function forget($key)

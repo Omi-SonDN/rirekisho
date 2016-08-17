@@ -28,17 +28,17 @@ abstract class PdoProfilerStorage implements ProfilerStorageInterface
     /**
      * Constructor.
      *
-     * @param string $dsn A data source name
+     * @param string $dsn      A data source name
      * @param string $username The username for the database
      * @param string $password The password for the database
-     * @param int $lifetime The lifetime to use for the purge
+     * @param int    $lifetime The lifetime to use for the purge
      */
     public function __construct($dsn, $username = '', $password = '', $lifetime = 86400)
     {
         $this->dsn = $dsn;
         $this->username = $username;
         $this->password = $password;
-        $this->lifetime = (int)$lifetime;
+        $this->lifetime = (int) $lifetime;
     }
 
     /**
@@ -56,10 +56,10 @@ abstract class PdoProfilerStorage implements ProfilerStorageInterface
 
         list($criteria, $args) = $this->buildCriteria($ip, $url, $start, $end, $limit, $method);
 
-        $criteria = $criteria ? 'WHERE ' . implode(' AND ', $criteria) : '';
+        $criteria = $criteria ? 'WHERE '.implode(' AND ', $criteria) : '';
 
         $db = $this->initDb();
-        $tokens = $this->fetch($db, 'SELECT token, ip, method, url, time, parent, status_code FROM sf_profiler_data ' . $criteria . ' ORDER BY time DESC LIMIT ' . ((int)$limit), $args);
+        $tokens = $this->fetch($db, 'SELECT token, ip, method, url, time, parent, status_code FROM sf_profiler_data '.$criteria.' ORDER BY time DESC LIMIT '.((int) $limit), $args);
         $this->close($db);
 
         return $tokens;
@@ -127,11 +127,11 @@ abstract class PdoProfilerStorage implements ProfilerStorageInterface
     /**
      * Build SQL criteria to fetch records by ip and url.
      *
-     * @param string $ip The IP
-     * @param string $url The URL
-     * @param string $start The start period to search from
-     * @param string $end The end period to search to
-     * @param string $limit The maximum number of tokens to return
+     * @param string $ip     The IP
+     * @param string $url    The URL
+     * @param string $start  The start period to search from
+     * @param string $end    The end period to search to
+     * @param string $limit  The maximum number of tokens to return
      * @param string $method The request method
      *
      * @return array An array with (criteria, args)
@@ -221,7 +221,7 @@ abstract class PdoProfilerStorage implements ProfilerStorageInterface
     /**
      * Reads the child profiles for the given token.
      *
-     * @param string $token The parent token
+     * @param string $token  The parent token
      * @param string $parent The parent instance
      *
      * @return Profile[] An array of Profile instance

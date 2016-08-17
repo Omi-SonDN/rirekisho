@@ -41,10 +41,10 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Create a new IronMQ queue instance.
      *
-     * @param  \IronMQ\IronMQ $iron
-     * @param  \Illuminate\Http\Request $request
-     * @param  string $default
-     * @param  bool $shouldEncrypt
+     * @param  \IronMQ\IronMQ  $iron
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $default
+     * @param  bool  $shouldEncrypt
      * @return void
      */
     public function __construct(IronMQ $iron, Request $request, $default, $shouldEncrypt = false)
@@ -58,9 +58,9 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Push a new job onto the queue.
      *
-     * @param  string $job
-     * @param  mixed $data
-     * @param  string $queue
+     * @param  string  $job
+     * @param  mixed   $data
+     * @param  string  $queue
      * @return mixed
      */
     public function push($job, $data = '', $queue = null)
@@ -71,9 +71,9 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Push a raw payload onto the queue.
      *
-     * @param  string $payload
-     * @param  string $queue
-     * @param  array $options
+     * @param  string  $payload
+     * @param  string  $queue
+     * @param  array   $options
      * @return mixed
      */
     public function pushRaw($payload, $queue = null, array $options = [])
@@ -88,9 +88,9 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Push a raw payload onto the queue after encrypting the payload.
      *
-     * @param  string $payload
-     * @param  string $queue
-     * @param  int $delay
+     * @param  string  $payload
+     * @param  string  $queue
+     * @param  int     $delay
      * @return mixed
      */
     public function recreate($payload, $queue, $delay)
@@ -103,10 +103,10 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Push a new job onto the queue after a delay.
      *
-     * @param  \DateTime|int $delay
-     * @param  string $job
-     * @param  mixed $data
-     * @param  string $queue
+     * @param  \DateTime|int  $delay
+     * @param  string  $job
+     * @param  mixed   $data
+     * @param  string  $queue
      * @return mixed
      */
     public function later($delay, $job, $data = '', $queue = null)
@@ -121,7 +121,7 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Pop the next job off of the queue.
      *
-     * @param  string $queue
+     * @param  string  $queue
      * @return \Illuminate\Contracts\Queue\Job|null
      */
     public function pop($queue = null)
@@ -133,7 +133,7 @@ class IronQueue extends Queue implements QueueContract
         // If we were able to pop a message off of the queue, we will need to decrypt
         // the message body, as all Iron.io messages are encrypted, since the push
         // queues will be a security hazard to unsuspecting developers using it.
-        if (!is_null($job)) {
+        if (! is_null($job)) {
             $job->body = $this->parseJobBody($job->body);
 
             return new IronJob($this->container, $this, $job);
@@ -143,8 +143,8 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Delete a message from the Iron queue.
      *
-     * @param  string $queue
-     * @param  string $id
+     * @param  string  $queue
+     * @param  string  $id
      * @return void
      */
     public function deleteMessage($queue, $id)
@@ -177,7 +177,7 @@ class IronQueue extends Queue implements QueueContract
 
         $body = $this->parseJobBody($r->getContent());
 
-        return (object)[
+        return (object) [
             'id' => $r->header('iron-message-id'), 'body' => $body, 'pushed' => true,
         ];
     }
@@ -185,7 +185,7 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Create a new IronJob for a pushed job.
      *
-     * @param  object $job
+     * @param  object  $job
      * @return \Illuminate\Queue\Jobs\IronJob
      */
     protected function createPushedIronJob($job)
@@ -196,9 +196,9 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Create a payload string from the given job and data.
      *
-     * @param  string $job
-     * @param  mixed $data
-     * @param  string $queue
+     * @param  string  $job
+     * @param  mixed   $data
+     * @param  string  $queue
      * @return string
      */
     protected function createPayload($job, $data = '', $queue = null)
@@ -211,7 +211,7 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Parse the job body for firing.
      *
-     * @param  string $body
+     * @param  string  $body
      * @return string
      */
     protected function parseJobBody($body)
@@ -222,7 +222,7 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Get the queue or return the default.
      *
-     * @param  string|null $queue
+     * @param  string|null  $queue
      * @return string
      */
     public function getQueue($queue)
@@ -253,7 +253,7 @@ class IronQueue extends Queue implements QueueContract
     /**
      * Set the request instance.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return void
      */
     public function setRequest(Request $request)

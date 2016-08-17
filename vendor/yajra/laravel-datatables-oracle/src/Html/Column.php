@@ -18,11 +18,11 @@ class Column extends Fluent
      */
     public function __construct($attributes = [])
     {
-        $attributes['orderable'] = isset($attributes['orderable']) ? $attributes['orderable'] : true;
+        $attributes['orderable']  = isset($attributes['orderable']) ? $attributes['orderable'] : true;
         $attributes['searchable'] = isset($attributes['searchable']) ? $attributes['searchable'] : true;
         $attributes['exportable'] = isset($attributes['exportable']) ? $attributes['exportable'] : true;
-        $attributes['printable'] = isset($attributes['printable']) ? $attributes['printable'] : true;
-        $attributes['footer'] = isset($attributes['footer']) ? $attributes['footer'] : '';
+        $attributes['printable']  = isset($attributes['printable']) ? $attributes['printable'] : true;
+        $attributes['footer']     = isset($attributes['footer']) ? $attributes['footer'] : '';
 
         // Allow methods override attribute value
         foreach ($attributes as $attribute => $value) {
@@ -44,12 +44,12 @@ class Column extends Fluent
     public function parseRender($value)
     {
         /** @var \Illuminate\Contracts\View\Factory $view */
-        $view = app('view');
+        $view       = app('view');
         $parameters = [];
 
         if (is_array($value)) {
             $parameters = array_except($value, 0);
-            $value = $value[0];
+            $value      = $value[0];
         }
 
         if (is_callable($value)) {

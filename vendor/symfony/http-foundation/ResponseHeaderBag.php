@@ -60,12 +60,12 @@ class ResponseHeaderBag extends HeaderBag
     {
         $cookies = '';
         foreach ($this->getCookies() as $cookie) {
-            $cookies .= 'Set-Cookie: ' . $cookie . "\r\n";
+            $cookies .= 'Set-Cookie: '.$cookie."\r\n";
         }
 
         ksort($this->headerNames);
 
-        return parent::__toString() . $cookies;
+        return parent::__toString().$cookies;
     }
 
     /**
@@ -213,8 +213,8 @@ class ResponseHeaderBag extends HeaderBag
      * @param string $name
      * @param string $path
      * @param string $domain
-     * @param bool $secure
-     * @param bool $httpOnly
+     * @param bool   $secure
+     * @param bool   $httpOnly
      */
     public function clearCookie($name, $path = '/', $domain = null, $secure = false, $httpOnly = true)
     {
@@ -224,13 +224,13 @@ class ResponseHeaderBag extends HeaderBag
     /**
      * Generates a HTTP Content-Disposition field-value.
      *
-     * @param string $disposition One of "inline" or "attachment"
-     * @param string $filename A unicode string
+     * @param string $disposition      One of "inline" or "attachment"
+     * @param string $filename         A unicode string
      * @param string $filenameFallback A string containing only ASCII characters that
      *                                 is semantically equivalent to $filename. If the filename is already ASCII,
      *                                 it can be omitted, or just copied from $filename
      *
-     * @return string A string suitable for use as a Content-Disposition field-value.
+     * @return string A string suitable for use as a Content-Disposition field-value
      *
      * @throws \InvalidArgumentException
      *
@@ -296,7 +296,7 @@ class ResponseHeaderBag extends HeaderBag
 
         // public if s-maxage is defined, private otherwise
         if (!isset($this->cacheControl['s-maxage'])) {
-            return $header . ', private';
+            return $header.', private';
         }
 
         return $header;

@@ -78,13 +78,13 @@ class ClassLoader
     /**
      * Registers a set of classes.
      *
-     * @param string $prefix The classes prefix
-     * @param array|string $paths The location(s) of the classes
+     * @param string       $prefix The classes prefix
+     * @param array|string $paths  The location(s) of the classes
      */
     public function addPrefix($prefix, $paths)
     {
         if (!$prefix) {
-            foreach ((array)$paths as $path) {
+            foreach ((array) $paths as $path) {
                 $this->fallbackDirs[] = $path;
             }
 
@@ -100,7 +100,7 @@ class ClassLoader
                 $this->prefixes[$prefix][] = $paths;
             }
         } else {
-            $this->prefixes[$prefix] = array_unique((array)$paths);
+            $this->prefixes[$prefix] = array_unique((array) $paths);
         }
     }
 
@@ -111,7 +111,7 @@ class ClassLoader
      */
     public function setUseIncludePath($useIncludePath)
     {
-        $this->useIncludePath = (bool)$useIncludePath;
+        $this->useIncludePath = (bool) $useIncludePath;
     }
 
     /**
@@ -170,7 +170,7 @@ class ClassLoader
     {
         if (false !== $pos = strrpos($class, '\\')) {
             // namespaced class name
-            $classPath = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, 0, $pos)) . DIRECTORY_SEPARATOR;
+            $classPath = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, 0, $pos)).DIRECTORY_SEPARATOR;
             $className = substr($class, $pos + 1);
         } else {
             // PEAR-like class name
@@ -178,21 +178,21 @@ class ClassLoader
             $className = $class;
         }
 
-        $classPath .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+        $classPath .= str_replace('_', DIRECTORY_SEPARATOR, $className).'.php';
 
         foreach ($this->prefixes as $prefix => $dirs) {
             if ($class === strstr($class, $prefix)) {
                 foreach ($dirs as $dir) {
-                    if (file_exists($dir . DIRECTORY_SEPARATOR . $classPath)) {
-                        return $dir . DIRECTORY_SEPARATOR . $classPath;
+                    if (file_exists($dir.DIRECTORY_SEPARATOR.$classPath)) {
+                        return $dir.DIRECTORY_SEPARATOR.$classPath;
                     }
                 }
             }
         }
 
         foreach ($this->fallbackDirs as $dir) {
-            if (file_exists($dir . DIRECTORY_SEPARATOR . $classPath)) {
-                return $dir . DIRECTORY_SEPARATOR . $classPath;
+            if (file_exists($dir.DIRECTORY_SEPARATOR.$classPath)) {
+                return $dir.DIRECTORY_SEPARATOR.$classPath;
             }
         }
 

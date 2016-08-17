@@ -43,20 +43,20 @@ class RetryCommand extends Command
     /**
      * Retry the queue job with the given ID.
      *
-     * @param  string $id
+     * @param  string  $id
      * @return void
      */
     protected function retryJob($id)
     {
         $failed = $this->laravel['queue.failer']->find($id);
 
-        if (!is_null($failed)) {
-            $failed = (object)$failed;
+        if (! is_null($failed)) {
+            $failed = (object) $failed;
 
             $failed->payload = $this->resetAttempts($failed->payload);
 
             $this->laravel['queue']->connection($failed->connection)
-                ->pushRaw($failed->payload, $failed->queue);
+                                ->pushRaw($failed->payload, $failed->queue);
 
             $this->laravel['queue.failer']->forget($failed->id);
 
@@ -69,7 +69,7 @@ class RetryCommand extends Command
     /**
      * Reset the payload attempts.
      *
-     * @param  string $payload
+     * @param  string  $payload
      * @return string
      */
     protected function resetAttempts($payload)

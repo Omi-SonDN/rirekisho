@@ -25,7 +25,7 @@ trait ResetsPasswords
     /**
      * Send a reset link to the given user.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function postEmail(Request $request)
@@ -57,7 +57,7 @@ trait ResetsPasswords
     /**
      * Display the password reset view for the given token.
      *
-     * @param  string $token
+     * @param  string  $token
      * @return \Illuminate\Http\Response
      */
     public function getReset($token = null)
@@ -72,7 +72,7 @@ trait ResetsPasswords
     /**
      * Reset the given user's password.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function postReset(Request $request)
@@ -96,16 +96,16 @@ trait ResetsPasswords
                 return redirect($this->redirectPath())->with('status', trans($response));
             default:
                 return redirect()->back()
-                    ->withInput($request->only('email'))
-                    ->withErrors(['email' => trans($response)]);
+                            ->withInput($request->only('email'))
+                            ->withErrors(['email' => trans($response)]);
         }
     }
 
     /**
      * Reset the given user's password.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword $user
-     * @param  string $password
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  string  $password
      * @return void
      */
     protected function resetPassword($user, $password)

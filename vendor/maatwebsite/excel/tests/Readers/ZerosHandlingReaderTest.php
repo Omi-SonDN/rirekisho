@@ -5,8 +5,7 @@ require_once('traits/SingleImportTestingTrait.php');
 
 use Mockery as m;
 
-class ZerosHandlingReaderTest extends TestCase
-{
+class ZerosHandlingReaderTest extends TestCase {
 
     /**
      * Traits
@@ -54,7 +53,7 @@ class ZerosHandlingReaderTest extends TestCase
     {
         $got = $this->loadedFile->toArray();
 
-        $this->assertContains((double)0, $got[1]);
+        $this->assertContains((double) 0, $got[1]);
     }
 
 
@@ -70,6 +69,6 @@ class ZerosHandlingReaderTest extends TestCase
     {
         $got = $this->loadedFile->toArray();
 
-        $this->assertContains((double)0, $got[5]);
+        $this->assertContains((double) 0, $got[5]);
     }
 }

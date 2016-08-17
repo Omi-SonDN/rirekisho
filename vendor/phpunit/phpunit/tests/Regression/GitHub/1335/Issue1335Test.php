@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @runTestsInSeparateProcesses
  * @preserveGlobalState enabled
@@ -53,16 +52,16 @@ class Issue1335Test extends PHPUnit_Framework_TestCase
 
     public function testGlobalObject()
     {
-        $this->assertEquals((object)array('foo' => 'bar'), $GLOBALS['globalObject']);
+        $this->assertEquals((object) array('foo'=> 'bar'), $GLOBALS['globalObject']);
     }
 
     public function testGlobalObjectWithBackSlashString()
     {
-        $this->assertEquals((object)array('foo' => 'back\\slash'), $GLOBALS['globalObjectWithBackSlashString']);
+        $this->assertEquals((object) array('foo'=> 'back\\slash'), $GLOBALS['globalObjectWithBackSlashString']);
     }
 
     public function testGlobalObjectWithDoubleBackSlashString()
     {
-        $this->assertEquals((object)array('foo' => 'back\\\\slash'), $GLOBALS['globalObjectWithDoubleBackSlashString']);
+        $this->assertEquals((object) array('foo'=> 'back\\\\slash'), $GLOBALS['globalObjectWithDoubleBackSlashString']);
     }
 }

@@ -2,8 +2,7 @@
 
 use Maatwebsite\Excel\Collections\CellCollection;
 
-class CellCollectionTest extends TestCase
-{
+class CellCollectionTest extends TestCase {
 
 
     public function __construct()

@@ -30,7 +30,7 @@ class LoggingTranslator implements TranslatorInterface, TranslatorBagInterface
 
     /**
      * @param TranslatorInterface $translator The translator must implement TranslatorBagInterface
-     * @param LoggerInterface $logger
+     * @param LoggerInterface     $logger
      */
     public function __construct(TranslatorInterface $translator, LoggerInterface $logger)
     {
@@ -99,7 +99,7 @@ class LoggingTranslator implements TranslatorInterface, TranslatorBagInterface
     /**
      * Logs for missing translations.
      *
-     * @param string $id
+     * @param string      $id
      * @param string|null $domain
      * @param string|null $locale
      */
@@ -109,7 +109,7 @@ class LoggingTranslator implements TranslatorInterface, TranslatorBagInterface
             $domain = 'messages';
         }
 
-        $id = (string)$id;
+        $id = (string) $id;
         $catalogue = $this->translator->getCatalogue($locale);
         if ($catalogue->defines($id, $domain)) {
             return;

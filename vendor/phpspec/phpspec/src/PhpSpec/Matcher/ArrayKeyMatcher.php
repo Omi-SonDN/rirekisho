@@ -34,16 +34,17 @@ class ArrayKeyMatcher extends BasicMatcher
 
     /**
      * @param string $name
-     * @param mixed $subject
-     * @param array $arguments
+     * @param mixed  $subject
+     * @param array  $arguments
      *
      * @return bool
      */
     public function supports($name, $subject, array $arguments)
     {
         return 'haveKey' === $name
-        && 1 == count($arguments)
-        && (is_array($subject) || $subject instanceof ArrayAccess);
+            && 1 == count($arguments)
+            && (is_array($subject) || $subject instanceof ArrayAccess)
+        ;
     }
 
     /**
@@ -65,8 +66,8 @@ class ArrayKeyMatcher extends BasicMatcher
 
     /**
      * @param string $name
-     * @param mixed $subject
-     * @param array $arguments
+     * @param mixed  $subject
+     * @param array  $arguments
      *
      * @return FailureException
      */
@@ -81,8 +82,8 @@ class ArrayKeyMatcher extends BasicMatcher
 
     /**
      * @param string $name
-     * @param mixed $subject
-     * @param array $arguments
+     * @param mixed  $subject
+     * @param array  $arguments
      *
      * @return FailureException
      */

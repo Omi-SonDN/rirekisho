@@ -18,8 +18,8 @@ class Schedule
     /**
      * Add a new callback event to the schedule.
      *
-     * @param  string $callback
-     * @param  array $parameters
+     * @param  string  $callback
+     * @param  array   $parameters
      * @return \Illuminate\Console\Scheduling\Event
      */
     public function call($callback, array $parameters = [])
@@ -32,8 +32,8 @@ class Schedule
     /**
      * Add a new Artisan command event to the schedule.
      *
-     * @param  string $command
-     * @param  array $parameters
+     * @param  string  $command
+     * @param  array  $parameters
      * @return \Illuminate\Console\Scheduling\Event
      */
     public function command($command, array $parameters = [])
@@ -56,14 +56,14 @@ class Schedule
     /**
      * Add a new command event to the schedule.
      *
-     * @param  string $command
-     * @param  array $parameters
+     * @param  string  $command
+     * @param  array  $parameters
      * @return \Illuminate\Console\Scheduling\Event
      */
     public function exec($command, array $parameters = [])
     {
         if (count($parameters)) {
-            $command .= ' ' . $this->compileParameters($parameters);
+            $command .= ' '.$this->compileParameters($parameters);
         }
 
         $this->events[] = $event = new Event($command);
@@ -74,13 +74,13 @@ class Schedule
     /**
      * Compile parameters for a command.
      *
-     * @param  array $parameters
+     * @param  array  $parameters
      * @return string
      */
     protected function compileParameters(array $parameters)
     {
         return collect($parameters)->map(function ($value, $key) {
-            return is_numeric($key) ? $value : $key . '=' . (is_numeric($value) ? $value : ProcessUtils::escapeArgument($value));
+            return is_numeric($key) ? $value : $key.'='.(is_numeric($value) ? $value : ProcessUtils::escapeArgument($value));
         })->implode(' ');
     }
 
@@ -97,7 +97,7 @@ class Schedule
     /**
      * Get all of the events on the schedule that are due.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
      * @return array
      */
     public function dueEvents(Application $app)

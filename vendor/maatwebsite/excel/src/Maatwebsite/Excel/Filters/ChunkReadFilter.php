@@ -25,14 +25,14 @@ class ChunkReadFilter implements PHPExcel_Reader_IReadFilter
     public function setRows($startRow, $chunkSize)
     {
         $this->_startRow = $startRow;
-        $this->_endRow = $startRow + $chunkSize;
+        $this->_endRow   = $startRow + $chunkSize;
     }
 
     /**
      * Read the cell
-     * @param  string $column
-     * @param  integer $row
-     * @param  string $worksheetName
+     * @param  string   $column
+     * @param  integer  $row
+     * @param  string   $worksheetName
      * @return booleaan
      */
     public function readCell($column, $row, $worksheetName = '')

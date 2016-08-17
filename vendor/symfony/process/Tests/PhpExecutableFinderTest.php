@@ -37,7 +37,7 @@ class PhpExecutableFinderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($f->find(false), '::find() returns false for not executable PHP');
 
         //executable PHP_PATH
-        putenv('PHP_PATH=' . $current);
+        putenv('PHP_PATH='.$current);
         $this->assertEquals($f->find(), $current, '::find() returns the executable PHP');
         $this->assertEquals($f->find(false), $current, '::find() returns the executable PHP');
     }
@@ -55,7 +55,7 @@ class PhpExecutableFinderTest extends \PHPUnit_Framework_TestCase
 
         $current = getenv('PHP_BINARY') ?: PHP_BINARY;
 
-        $this->assertEquals($current . ' --php', $f->find(), '::find() returns the executable PHP');
+        $this->assertEquals($current.' --php', $f->find(), '::find() returns the executable PHP');
         $this->assertEquals($current, $f->find(false), '::find() returns the executable PHP');
     }
 
@@ -93,7 +93,7 @@ class PhpExecutableFinderTest extends \PHPUnit_Framework_TestCase
         //TODO maybe php executable is custom or even Windows
         if ('\\' === DIRECTORY_SEPARATOR) {
             $this->assertTrue(is_executable($current));
-            $this->assertTrue((bool)preg_match('/' . addslashes(DIRECTORY_SEPARATOR) . 'php\.(exe|bat|cmd|com)$/i', $current), '::find() returns the executable PHP with suffixes');
+            $this->assertTrue((bool) preg_match('/'.addslashes(DIRECTORY_SEPARATOR).'php\.(exe|bat|cmd|com)$/i', $current), '::find() returns the executable PHP with suffixes');
         }
     }
 }

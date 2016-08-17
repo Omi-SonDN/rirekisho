@@ -60,7 +60,7 @@ class Util
         $result = [];
 
         foreach ($map as $from => $to) {
-            if (!isset($object[$from])) {
+            if ( ! isset($object[$from])) {
                 continue;
             }
 
@@ -156,7 +156,7 @@ class Util
     {
         $mimeType = MimeType::detectByContent($content);
 
-        if (!(empty($mimeType) || in_array($mimeType, ['application/x-empty', 'text/plain', 'text/x-asm']))) {
+        if ( ! (empty($mimeType) || in_array($mimeType, ['application/x-empty', 'text/plain', 'text/x-asm']))) {
             return $mimeType;
         }
 
@@ -272,7 +272,7 @@ class Util
 
         $parent = $object['dirname'];
 
-        while (!empty($parent) && !in_array($parent, $directories)) {
+        while ( ! empty($parent) && ! in_array($parent, $directories)) {
             $directories[] = $parent;
             $parent = static::dirname($parent);
         }

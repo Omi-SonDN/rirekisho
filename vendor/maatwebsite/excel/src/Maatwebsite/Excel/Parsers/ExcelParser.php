@@ -23,8 +23,7 @@ use Maatwebsite\Excel\Exceptions\LaravelExcelException;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class ExcelParser
-{
+class ExcelParser {
 
     /**
      * If file is parsed
@@ -91,7 +90,7 @@ class ExcelParser
      * @param LaravelExcelReader $reader
      * @return \Maatwebsite\Excel\Parsers\ExcelParser
      */
-    public function __construct($reader)
+    public function  __construct($reader)
     {
         $this->reader = $reader;
         $this->excel = $reader->excel;
@@ -116,7 +115,8 @@ class ExcelParser
         $this->setSelectedColumns($columns);
 
         // If not parsed yet
-        if (!$this->isParsed) {
+        if ( !$this->isParsed )
+        {
             // Set worksheet count
             $this->w = 0;
 
@@ -124,18 +124,23 @@ class ExcelParser
             $iterator = $this->excel->getWorksheetIterator();
 
             // Loop through the worksheets
-            foreach ($iterator as $this->worksheet) {
+            foreach ($iterator as $this->worksheet)
+            {
                 // Check if the sheet might have been selected by it's index
-                if ($this->reader->isSelectedByIndex($iterator->key())) {
+                if ( $this->reader->isSelectedByIndex($iterator->key()) )
+                {
                     // Parse the worksheet
                     $worksheet = $this->parseWorksheet();
 
                     // If multiple sheets
-                    if ($this->parseAsMultiple()) {
+                    if ( $this->parseAsMultiple() )
+                    {
                         // Push every sheet
                         $workbook->push($worksheet);
                         $workbook->setTitle($this->excel->getProperties()->getTitle());
-                    } else {
+                    }
+                    else
+                    {
                         // Ignore the sheet collection
                         $workbook = $worksheet;
                         break;
@@ -191,7 +196,8 @@ class ExcelParser
         $this->indices = array();
 
         // Loop through the cells
-        foreach ($this->row->getCellIterator() as $this->cell) {
+        foreach ($this->row->getCellIterator() as $this->cell)
+        {
             $this->indices[] = $this->getIndex($this->cell);
         }
 
@@ -213,13 +219,14 @@ class ExcelParser
         // Get value
         $value = $this->getOriginalIndex($cell);
 
-        switch ($config) {
+        switch ($config)
+        {
             case 'slugged':
                 return $this->getSluggedIndex($value, Config::get('excel.import.to_ascii', true));
                 break;
             case 'slugged_with_count':
                 $index = $this->getSluggedIndex($value, Config::get('excel.import.to_ascii', true));
-                if (in_array($index, $this->indices)) {
+                if(in_array($index,$this->indices)){
                     $index = $this->appendOrIncreaseStringCount($index);
                 }
                 return $index;
@@ -251,17 +258,20 @@ class ExcelParser
     protected function appendOrIncreaseStringCount($index)
     {
         do {
-            if (preg_match("/(\d+)$/", $index, $matches) === 1) {
+            if (preg_match("/(\d+)$/",$index,$matches) === 1)
+            {
                 // increase +1
-                $index = preg_replace_callback("/(\d+)$/",
+                $index = preg_replace_callback( "/(\d+)$/",
                     function ($matches) {
                         return ++$matches[1];
                     }, $index);
-            } else {
+            }
+            else
+            {
                 $index .= '_1';
             }
 
-        } while (in_array($index, $this->indices));
+        } while(in_array($index,$this->indices));
 
         return $index;
     }
@@ -269,7 +279,7 @@ class ExcelParser
     /**
      * Get slugged index
      * @param  string $value
-     * @param bool $ascii
+     * @param bool    $ascii
      * @return string
      */
     protected function getSluggedIndex($value, $ascii = false)
@@ -278,7 +288,7 @@ class ExcelParser
         $separator = $this->reader->getSeparator();
 
         // Convert to ascii when needed
-        if ($ascii)
+        if ( $ascii )
             $value = $this->getAsciiIndex($value);
 
         // Convert all dashes/underscores into separator
@@ -351,14 +361,15 @@ class ExcelParser
 
         try {
             $rows = $this->worksheet->getRowIterator($startRow);
-        } catch (PHPExcel_Exception $e) {
+        } catch(PHPExcel_Exception $e) {
             $rows = [];
         }
 
         // Loop through the rows inside the worksheet
-        foreach ($rows as $this->row) {
+        foreach ($rows as $this->row)
+        {
             // Limit the results when needed
-            if ($this->hasReachedLimit())
+            if ( $this->hasReachedLimit() )
                 break;
 
             // Push the parsed cells inside the parsed rows
@@ -382,14 +393,14 @@ class ExcelParser
         $startRow = $this->defaultStartRow;
 
         // If the reader has a heading, skip the first row
-        if ($this->reader->hasHeading())
+        if ( $this->reader->hasHeading() )
             $startRow++;
 
         // Get the amount of rows to skip
         $skip = $this->reader->getSkip();
 
         // If we want to skip rows, add the amount of rows
-        if ($skip > 0)
+        if ( $skip > 0 )
             $startRow = $startRow + $skip;
 
         // Return the startrow
@@ -426,12 +437,14 @@ class ExcelParser
             $cellIterator->setIterateOnlyExistingCells($this->reader->needsIgnoreEmpty());
 
             // Foreach cells
-            foreach ($cellIterator as $this->cell) {
+            foreach ($cellIterator as $this->cell)
+            {
                 // Check how we need to save the parsed array
                 $index = ($this->reader->hasHeading() && isset($this->indices[$i])) ? $this->indices[$i] : $this->getIndexFromColumn();
 
                 // Check if we want to select this column
-                if ($this->cellNeedsParsing($index)) {
+                if ( $this->cellNeedsParsing($index) )
+                {
                     // Set the value
                     $parsedCells[$index] = $this->parseCell($index);
                 }
@@ -460,14 +473,20 @@ class ExcelParser
     protected function parseCell($index)
     {
         // If the cell is a date time
-        if ($this->cellIsDate($index)) {
+        if ( $this->cellIsDate($index) )
+        {
             // Parse the date
             return $this->parseDate();
-        } // Check if we want calculated values or not
-        elseif ($this->reader->needsCalculation()) {
+        }
+
+        // Check if we want calculated values or not
+        elseif ( $this->reader->needsCalculation() )
+        {
             // Get calculated value
             return $this->getCalculatedValue();
-        } else {
+        }
+        else
+        {
             // Get real value
             return $this->getCellValue();
         }
@@ -506,7 +525,7 @@ class ExcelParser
         list($input, $output) = array_values(Config::get('excel.import.encoding', array('UTF-8', 'UTF-8')));
 
         // If they are the same, return the value
-        if ($input == $output)
+        if ( $input == $output )
             return $value;
 
         // Encode
@@ -520,10 +539,13 @@ class ExcelParser
     protected function parseDate()
     {
         // If the date needs formatting
-        if ($this->reader->needsDateFormatting()) {
+        if ( $this->reader->needsDateFormatting() )
+        {
             // Parse the date with carbon
             return $this->parseDateAsCarbon();
-        } else {
+        }
+        else
+        {
             // Parse the date as a normal string
             return $this->parseDateAsString();
         }
@@ -536,7 +558,8 @@ class ExcelParser
     protected function parseDateAsCarbon()
     {
         // If has a date
-        if ($cellContent = $this->cell->getCalculatedValue()) {
+        if ( $cellContent = $this->cell->getCalculatedValue() )
+        {
             // Convert excel time to php date object
             $date = PHPExcel_Shared_Date::ExcelToPHPObject($this->cell->getCalculatedValue())->format('Y-m-d H:i:s');
 
@@ -557,12 +580,12 @@ class ExcelParser
     protected function parseDateAsString()
     {
         //Format the date to a formatted string
-        return (string)PHPExcel_Style_NumberFormat::toFormattedString(
+        return (string) PHPExcel_Style_NumberFormat::toFormattedString(
             $this->cell->getCalculatedValue(),
             $this->cell->getWorksheet()->getParent()
-                ->getCellXfByIndex($this->cell->getXfIndex())
-                ->getNumberFormat()
-                ->getFormatCode()
+                       ->getCellXfByIndex($this->cell->getXfIndex())
+                       ->getNumberFormat()
+                       ->getFormatCode()
         );
     }
 
@@ -574,9 +597,12 @@ class ExcelParser
     protected function cellIsDate($index)
     {
         // if is a date or if is a date column
-        if ($this->reader->getDateColumns()) {
+        if ( $this->reader->getDateColumns() )
+        {
             return in_array($index, $this->reader->getDateColumns());
-        } else {
+        }
+        else
+        {
             return PHPExcel_Shared_Date::isDateTime($this->cell);
         }
     }

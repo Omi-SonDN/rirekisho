@@ -6,8 +6,7 @@ use Mockery as m;
 use Maatwebsite\Excel\Readers\LaravelExcelReader;
 use Maatwebsite\Excel\Classes;
 
-class MultipleSheetsXlsReaderTest extends TestCase
-{
+class MultipleSheetsXlsReaderTest extends TestCase {
 
     /**
      * Import trait
@@ -93,7 +92,7 @@ class MultipleSheetsXlsReaderTest extends TestCase
 
     public function testSelectMultipleSheetsByIndex()
     {
-        $this->reader->setSelectedSheetIndices(array(0, 1));
+        $this->reader->setSelectedSheetIndices(array(0,1));
         $this->reload();
 
         $got = $this->loadedFile->get();

@@ -22,8 +22,7 @@ class CollaboratorMethodNotFoundListenerSpec extends ObjectBehavior
         IO $io, ResourceManagerInterface $resources, ExampleEvent $event,
         MethodNotFoundException $exception, ResourceInterface $resource, GeneratorManager $generator,
         NameCheckerInterface $nameChecker
-    )
-    {
+    ) {
         $this->beConstructedWith($io, $resources, $generator, $nameChecker);
         $event->getException()->willReturn($exception);
 
@@ -161,8 +160,7 @@ class CollaboratorMethodNotFoundListenerSpec extends ObjectBehavior
         SuiteEvent $suiteEvent,
         IO $io,
         NameCheckerInterface $nameChecker
-    )
-    {
+    ) {
         $exception = new MethodNotFoundException('Error', new DoubleOfInterface(), 'throw');
 
         $event->getException()->willReturn($exception);
@@ -180,8 +178,7 @@ class CollaboratorMethodNotFoundListenerSpec extends ObjectBehavior
         SuiteEvent $suiteEvent,
         IO $io,
         NameCheckerInterface $nameChecker
-    )
-    {
+    ) {
         $this->callAfterExample($event, $nameChecker, 'throw', false);
         $this->callAfterExample($event, $nameChecker, 'foo');
 
@@ -202,14 +199,8 @@ class CollaboratorMethodNotFoundListenerSpec extends ObjectBehavior
     }
 }
 
-interface ExampleInterface
-{
-}
+interface ExampleInterface {}
 
-class DoubleOfInterface extends \stdClass implements ExampleInterface, DoubleInterface
-{
-}
+class DoubleOfInterface extends \stdClass implements ExampleInterface, DoubleInterface {}
 
-class DoubleOfStdClass extends \stdClass implements DoubleInterface
-{
-}
+class DoubleOfStdClass extends \stdClass implements DoubleInterface {}

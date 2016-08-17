@@ -14,8 +14,7 @@ class SimpleExceptionPresenterSpec extends ObjectBehavior
     function let(
         Differ $differ, ExceptionElementPresenter $exceptionElementPresenter,
         CallArgumentsPresenter $callArgumentsPresenter, PhpSpecExceptionPresenter $phpspecExceptionPresenter
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $differ,
             $exceptionElementPresenter,

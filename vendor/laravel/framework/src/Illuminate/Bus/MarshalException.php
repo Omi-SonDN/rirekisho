@@ -10,8 +10,8 @@ class MarshalException extends RuntimeException
     /**
      * Throw a new exception.
      *
-     * @param  string $command
-     * @param  \ReflectionParameter $parameter
+     * @param  string  $command
+     * @param  \ReflectionParameter  $parameter
      * @return void
      *
      * @throws static

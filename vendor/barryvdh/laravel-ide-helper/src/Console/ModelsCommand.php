@@ -113,7 +113,7 @@ class ModelsCommand extends Command
     protected function getArguments()
     {
         return array(
-            array('model', InputArgument::OPTIONAL | InputArgument::IS_ARRAY, 'Which models to include', array()),
+          array('model', InputArgument::OPTIONAL | InputArgument::IS_ARRAY, 'Which models to include', array()),
         );
     }
 
@@ -125,12 +125,12 @@ class ModelsCommand extends Command
     protected function getOptions()
     {
         return array(
-            array('filename', 'F', InputOption::VALUE_OPTIONAL, 'The path to the helper file', $this->filename),
-            array('dir', 'D', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'The model dir', array()),
-            array('write', 'W', InputOption::VALUE_NONE, 'Write to Model file'),
-            array('nowrite', 'N', InputOption::VALUE_NONE, 'Don\'t write to Model file'),
-            array('reset', 'R', InputOption::VALUE_NONE, 'Remove the original phpdocs instead of appending'),
-            array('ignore', 'I', InputOption::VALUE_OPTIONAL, 'Which models to ignore', ''),
+          array('filename', 'F', InputOption::VALUE_OPTIONAL, 'The path to the helper file', $this->filename),
+          array('dir', 'D', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'The model dir', array()),
+          array('write', 'W', InputOption::VALUE_NONE, 'Write to Model file'),
+          array('nowrite', 'N', InputOption::VALUE_NONE, 'Don\'t write to Model file'),
+          array('reset', 'R', InputOption::VALUE_NONE, 'Remove the original phpdocs instead of appending'),
+          array('ignore', 'I', InputOption::VALUE_OPTIONAL, 'Which models to ignore', ''),
         );
     }
 
@@ -140,7 +140,7 @@ class ModelsCommand extends Command
 
         $output = "<?php
 /**
- * An helper file for your Eloquent Models
+ * A helper file for your Eloquent Models
  * Copy the phpDocs from this file to the correct Model,
  * And remove them from this file, to prevent double declarations.
  *
@@ -205,7 +205,7 @@ class ModelsCommand extends Command
 
         if (!$hasDoctrine) {
             $this->error(
-                'Warning: `"doctrine/dbal": "~2.3"` is required to load database information. ' .
+                'Warning: `"doctrine/dbal": "~2.3"` is required to load database information. '.
                 'Please require that in your composer.json and run `composer update`.'
             );
         }
@@ -309,9 +309,9 @@ class ModelsCommand extends Command
         if ($methods) {
             foreach ($methods as $method) {
                 if (Str::startsWith($method, 'get') && Str::endsWith(
-                        $method,
-                        'Attribute'
-                    ) && $method !== 'getAttribute'
+                    $method,
+                    'Attribute'
+                ) && $method !== 'getAttribute'
                 ) {
                     //Magic get<name>Attribute
                     $name = Str::snake(substr($method, 3, -9));
@@ -319,9 +319,9 @@ class ModelsCommand extends Command
                         $this->setProperty($name, null, true, null);
                     }
                 } elseif (Str::startsWith($method, 'set') && Str::endsWith(
-                        $method,
-                        'Attribute'
-                    ) && $method !== 'setAttribute'
+                    $method,
+                    'Attribute'
+                ) && $method !== 'setAttribute'
                 ) {
                     //Magic set<name>Attribute
                     $name = Str::snake(substr($method, 3, -9));
@@ -357,15 +357,15 @@ class ModelsCommand extends Command
                     $code = substr($code, $begin, strrpos($code, '}') - $begin + 1);
 
                     foreach (array(
-                                 'hasMany',
-                                 'hasManyThrough',
-                                 'belongsToMany',
-                                 'hasOne',
-                                 'belongsTo',
-                                 'morphOne',
-                                 'morphTo',
-                                 'morphMany',
-                                 'morphToMany'
+                               'hasMany',
+                               'hasManyThrough',
+                               'belongsToMany',
+                               'hasOne',
+                               'belongsTo',
+                               'morphOne',
+                               'morphTo',
+                               'morphMany',
+                               'morphToMany'
                              ) as $relation) {
                         $search = '$this->' . $relation . '(';
                         if ($pos = stripos($code, $search)) {
@@ -418,7 +418,7 @@ class ModelsCommand extends Command
             $this->properties[$name]['type'] = 'mixed';
             $this->properties[$name]['read'] = false;
             $this->properties[$name]['write'] = false;
-            $this->properties[$name]['comment'] = (string)$comment;
+            $this->properties[$name]['comment'] = (string) $comment;
         }
         if ($type !== null) {
             $this->properties[$name]['type'] = $type;
@@ -487,6 +487,11 @@ class ModelsCommand extends Command
             } else {
                 $attr = 'property-read';
             }
+
+            if ($this->hasCamelCaseModelProperties()) {
+                $name = Str::camel($name);
+            }
+
             $tagLine = trim("@{$attr} {$property['type']} {$name} {$property['comment']}");
             $tag = Tag::createInstance($tagLine, $phpdoc);
             $phpdoc->appendTag($tag);
@@ -501,7 +506,7 @@ class ModelsCommand extends Command
             $phpdoc->appendTag($tag);
         }
 
-        if ($this->write && !$phpdoc->getTagsByName('mixin')) {
+        if ($this->write && ! $phpdoc->getTagsByName('mixin')) {
             $phpdoc->appendTag(Tag::createInstance("@mixin \\Eloquent", $phpdoc));
         }
 
@@ -585,5 +590,13 @@ class ModelsCommand extends Command
         /** @var \Illuminate\Database\Eloquent\Model $model */
         $model = new $className;
         return '\\' . get_class($model->newCollection());
+    }
+
+    /**
+     * @return bool
+     */
+    protected function hasCamelCaseModelProperties()
+    {
+        return $this->laravel['config']->get('ide-helper.model_camel_case_properties', false);
     }
 }

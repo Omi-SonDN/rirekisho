@@ -87,7 +87,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator $validator
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @return mixed
      */
     protected function failedValidation(Validator $validator)
@@ -124,7 +124,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Get the proper failed validation response for the request.
      *
-     * @param  array $errors
+     * @param  array  $errors
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function response(array $errors)
@@ -134,8 +134,8 @@ class FormRequest extends Request implements ValidatesWhenResolved
         }
 
         return $this->redirector->to($this->getRedirectUrl())
-            ->withInput($this->except($this->dontFlash))
-            ->withErrors($errors, $this->errorBag);
+                                        ->withInput($this->except($this->dontFlash))
+                                        ->withErrors($errors, $this->errorBag);
     }
 
     /**
@@ -151,7 +151,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Format the errors from the given Validator instance.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator $validator
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @return array
      */
     protected function formatErrors(Validator $validator)
@@ -182,7 +182,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Set the Redirector instance.
      *
-     * @param  \Illuminate\Routing\Redirector $redirector
+     * @param  \Illuminate\Routing\Redirector  $redirector
      * @return \Illuminate\Foundation\Http\FormRequest
      */
     public function setRedirector(Redirector $redirector)
@@ -195,7 +195,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Set the container implementation.
      *
-     * @param  \Illuminate\Container\Container $container
+     * @param  \Illuminate\Container\Container  $container
      * @return $this
      */
     public function setContainer(Container $container)

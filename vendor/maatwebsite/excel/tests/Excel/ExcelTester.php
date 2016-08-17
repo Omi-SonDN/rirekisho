@@ -2,8 +2,7 @@
 
 use Mockery as m;
 
-class ExcelTester extends ExcelTestCase
-{
+class ExcelTester extends ExcelTestCase {
 
     /**
      * Test select sheets

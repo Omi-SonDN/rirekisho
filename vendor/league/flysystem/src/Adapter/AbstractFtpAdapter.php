@@ -105,7 +105,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
     public function setConfig(array $config)
     {
         foreach ($this->configurable as $setting) {
-            if (!isset($config[$setting])) {
+            if ( ! isset($config[$setting])) {
                 continue;
             }
 
@@ -200,7 +200,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
      */
     public function setPort($port)
     {
-        $this->port = (int)$port;
+        $this->port = (int) $port;
 
         return $this;
     }
@@ -286,7 +286,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
      */
     public function setTimeout($timeout)
     {
-        $this->timeout = (int)$timeout;
+        $this->timeout = (int) $timeout;
 
         return $this;
     }
@@ -328,7 +328,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
     /**
      * Normalize a directory listing.
      *
-     * @param array $listing
+     * @param array  $listing
      * @param string $prefix
      *
      * @return array directory listing
@@ -418,7 +418,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
 
         $permissions = $this->normalizePermissions($permissions);
         $visibility = $permissions & 0044 ? AdapterInterface::VISIBILITY_PUBLIC : AdapterInterface::VISIBILITY_PRIVATE;
-        $size = (int)$size;
+        $size = (int) $size;
 
         return compact('type', 'path', 'visibility', 'size');
     }
@@ -444,7 +444,8 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
 
         // Check for the correct date/time format
         $format = strlen($date) === 8 ? 'm-d-yH:iA' : 'Y-m-dH:i';
-        $timestamp = DateTime::createFromFormat($format, $date . $time)->getTimestamp();
+        $dt = DateTime::createFromFormat($format, $date . $time);
+        $timestamp = $dt ? $dt->getTimestamp() : (int) strtotime("$date $time");
 
         if ($size === '<DIR>') {
             $type = 'dir';
@@ -454,7 +455,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
 
         $type = 'file';
         $visibility = AdapterInterface::VISIBILITY_PUBLIC;
-        $size = (int)$size;
+        $size = (int) $size;
 
         return compact('type', 'path', 'visibility', 'size', 'timestamp');
     }
@@ -468,11 +469,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
      */
     protected function detectSystemType($item)
     {
-        if (preg_match('/^[0-9]{2,4}-[0-9]{2}-[0-9]{2}/', $item)) {
-            return $this->systemType = 'windows';
-        }
-
-        return $this->systemType = 'unix';
+        return preg_match('/^[0-9]{2,4}-[0-9]{2}-[0-9]{2}/', $item) ? 'windows' : 'unix';
     }
 
     /**
@@ -525,7 +522,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
     public function removeDotDirectories(array $list)
     {
         $filter = function ($line) {
-            if (!empty($line) && !preg_match('#.* \.(\.)?$|^total#', $line)) {
+            if ( ! empty($line) && ! preg_match('#.* \.(\.)?$|^total#', $line)) {
                 return true;
             }
 
@@ -566,7 +563,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
      */
     public function ensureDirectory($dirname)
     {
-        if (!empty($dirname) && !$this->has($dirname)) {
+        if ( ! empty($dirname) && ! $this->has($dirname)) {
             $this->createDir($dirname, new Config());
         }
     }
@@ -576,7 +573,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
      */
     public function getConnection()
     {
-        if (!$this->isConnected()) {
+        if ( ! $this->isConnected()) {
             $this->disconnect();
             $this->connect();
         }

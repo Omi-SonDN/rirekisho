@@ -78,7 +78,8 @@ class Finder implements \IteratorAggregate, \Countable
             ->addAdapter(new GnuFindAdapter())
             ->addAdapter(new BsdFindAdapter())
             ->addAdapter(new PhpAdapter(), -50)
-            ->setAdapter('php');
+            ->setAdapter('php')
+        ;
     }
 
     /**
@@ -94,8 +95,8 @@ class Finder implements \IteratorAggregate, \Countable
     /**
      * Registers a finder engine implementation.
      *
-     * @param AdapterInterface $adapter An adapter instance
-     * @param int $priority Highest is selected first
+     * @param AdapterInterface $adapter  An adapter instance
+     * @param int              $priority Highest is selected first
      *
      * @return Finder The current Finder instance
      */
@@ -396,7 +397,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function exclude($dirs)
     {
-        $this->exclude = array_merge($this->exclude, (array)$dirs);
+        $this->exclude = array_merge($this->exclude, (array) $dirs);
 
         return $this;
     }
@@ -450,7 +451,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public static function addVCSPattern($pattern)
     {
-        foreach ((array)$pattern as $p) {
+        foreach ((array) $pattern as $p) {
             self::$vcsPatterns[] = $p;
         }
 
@@ -607,7 +608,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function ignoreUnreadableDirs($ignore = true)
     {
-        $this->ignoreUnreadableDirs = (bool)$ignore;
+        $this->ignoreUnreadableDirs = (bool) $ignore;
 
         return $this;
     }
@@ -625,7 +626,7 @@ class Finder implements \IteratorAggregate, \Countable
     {
         $resolvedDirs = array();
 
-        foreach ((array)$dirs as $dir) {
+        foreach ((array) $dirs as $dir) {
             if (is_dir($dir)) {
                 $resolvedDirs[] = $dir;
             } elseif ($glob = glob($dir, (defined('GLOB_BRACE') ? GLOB_BRACE : 0) | GLOB_ONLYDIR)) {
@@ -645,7 +646,7 @@ class Finder implements \IteratorAggregate, \Countable
      *
      * This method implements the IteratorAggregate interface.
      *
-     * @return \Iterator An iterator
+     * @return \Iterator|SplFileInfo[] An iterator
      *
      * @throws \LogicException if the in() method has not been called
      */

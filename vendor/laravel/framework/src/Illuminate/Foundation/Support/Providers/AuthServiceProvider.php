@@ -17,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register the application's policies.
      *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate $gate
+     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      * @return void
      */
     public function registerPolicies(GateContract $gate)

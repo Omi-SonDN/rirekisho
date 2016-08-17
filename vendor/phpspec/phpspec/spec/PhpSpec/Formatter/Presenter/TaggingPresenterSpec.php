@@ -31,8 +31,7 @@ class TaggingPresenterSpec extends ObjectBehavior
 
     function it_should_return_presented_exceptions_from_the_decorated_presenter_unchanged(
         Presenter $presenter, \Exception $exception
-    )
-    {
+    ) {
         $presenter->presentException($exception, true)->willReturn('exc');
         $this->presentException($exception, true)->shouldReturn('exc');
     }

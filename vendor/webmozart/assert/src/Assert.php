@@ -26,6 +26,7 @@ use Traversable;
  * @method static void nullOrNumeric($value, $message = '')
  * @method static void nullOrBoolean($value, $message = '')
  * @method static void nullOrScalar($value, $message = '')
+ * @method static void nullOrObject($value, $message = '')
  * @method static void nullOrResource($value, $type = null, $message = '')
  * @method static void nullOrIsCallable($value, $message = '')
  * @method static void nullOrIsArray($value, $message = '')
@@ -37,7 +38,7 @@ use Traversable;
  * @method static void nullOrTrue($value, $message = '')
  * @method static void nullOrFalse($value, $message = '')
  * @method static void nullOrEq($value, $value2, $message = '')
- * @method static void nullOrNotEq($value, $value2, $message = '')
+ * @method static void nullOrNotEq($value,$value2,  $message = '')
  * @method static void nullOrSame($value, $value2, $message = '')
  * @method static void nullOrNotSame($value, $value2, $message = '')
  * @method static void nullOrGreaterThan($value, $value2, $message = '')
@@ -68,6 +69,13 @@ use Traversable;
  * @method static void nullOrClassExists($value, $message = '')
  * @method static void nullOrSubclassOf($value, $class, $message = '')
  * @method static void nullOrImplementsInterface($value, $interface, $message = '')
+ * @method static void nullOrPropertyExists($value, $property, $message = '')
+ * @method static void nullOrPropertyNotExists($value, $property, $message = '')
+ * @method static void nullOrMethodExists($value, $method, $message = '')
+ * @method static void nullOrMethodNotExists($value, $method, $message = '')
+ * @method static void nullOrKeyExists($value, $key, $message = '')
+ * @method static void nullOrKeyNotExists($value, $key, $message = '')
+ * @method static void nullOrUuid($values, $message = '')
  * @method static void allString($values, $message = '')
  * @method static void allStringNotEmpty($values, $message = '')
  * @method static void allInteger($values, $message = '')
@@ -76,6 +84,7 @@ use Traversable;
  * @method static void allNumeric($values, $message = '')
  * @method static void allBoolean($values, $message = '')
  * @method static void allScalar($values, $message = '')
+ * @method static void allObject($values, $message = '')
  * @method static void allResource($values, $type = null, $message = '')
  * @method static void allIsCallable($values, $message = '')
  * @method static void allIsArray($values, $message = '')
@@ -89,7 +98,7 @@ use Traversable;
  * @method static void allTrue($values, $message = '')
  * @method static void allFalse($values, $message = '')
  * @method static void allEq($values, $value2, $message = '')
- * @method static void allNotEq($values, $value2, $message = '')
+ * @method static void allNotEq($values,$value2,  $message = '')
  * @method static void allSame($values, $value2, $message = '')
  * @method static void allNotSame($values, $value2, $message = '')
  * @method static void allGreaterThan($values, $value2, $message = '')
@@ -120,6 +129,13 @@ use Traversable;
  * @method static void allClassExists($values, $message = '')
  * @method static void allSubclassOf($values, $class, $message = '')
  * @method static void allImplementsInterface($values, $interface, $message = '')
+ * @method static void allPropertyExists($values, $property, $message = '')
+ * @method static void allPropertyNotExists($values, $property, $message = '')
+ * @method static void allMethodExists($values, $method, $message = '')
+ * @method static void allMethodNotExists($values, $method, $message = '')
+ * @method static void allKeyExists($values, $key, $message = '')
+ * @method static void allKeyNotExists($values, $key, $message = '')
+ * @method static void allUuid($values, $message = '')
  *
  * @since  1.0
  *
@@ -155,7 +171,7 @@ class Assert
 
     public static function integerish($value, $message = '')
     {
-        if (!is_numeric($value) || $value != (int)$value) {
+        if (!is_numeric($value) || $value != (int) $value) {
             throw new InvalidArgumentException(sprintf(
                 $message ?: 'Expected an integerish value. Got: %s',
                 self::typeToString($value)
@@ -198,6 +214,16 @@ class Assert
         if (!is_scalar($value)) {
             throw new InvalidArgumentException(sprintf(
                 $message ?: 'Expected a scalar. Got: %s',
+                self::typeToString($value)
+            ));
+        }
+    }
+
+    public static function object($value, $message = '')
+    {
+        if (!is_object($value)) {
+            throw new InvalidArgumentException(sprintf(
+                $message ?: 'Expected an object. Got: %s',
                 self::typeToString($value)
             ));
         }
@@ -713,6 +739,46 @@ class Assert
         }
     }
 
+    public static function propertyExists($classOrObject, $property, $message = '')
+    {
+        if (!property_exists($classOrObject, $property)) {
+            throw new InvalidArgumentException(sprintf(
+                $message ?: 'Expected the property %s to exist.',
+                self::valueToString($property)
+            ));
+        }
+    }
+
+    public static function propertyNotExists($classOrObject, $property, $message = '')
+    {
+        if (property_exists($classOrObject, $property)) {
+            throw new InvalidArgumentException(sprintf(
+                $message ?: 'Expected the property %s to not exist.',
+                self::valueToString($property)
+            ));
+        }
+    }
+
+    public static function methodExists($classOrObject, $method, $message = '')
+    {
+        if (!method_exists($classOrObject, $method)) {
+            throw new InvalidArgumentException(sprintf(
+                $message ?: 'Expected the method %s to exist.',
+                self::valueToString($method)
+            ));
+        }
+    }
+
+    public static function methodNotExists($classOrObject, $method, $message = '')
+    {
+        if (method_exists($classOrObject, $method)) {
+            throw new InvalidArgumentException(sprintf(
+                $message ?: 'Expected the method %s to not exist.',
+                self::valueToString($method)
+            ));
+        }
+    }
+
     public static function keyExists($array, $key, $message = '')
     {
         if (!array_key_exists($key, $array)) {
@@ -729,6 +795,24 @@ class Assert
             throw new InvalidArgumentException(sprintf(
                 $message ?: 'Expected the key %s to not exist.',
                 self::valueToString($key)
+            ));
+        }
+    }
+
+    public static function uuid($value, $message = '')
+    {
+        $value = str_replace(array('urn:', 'uuid:', '{', '}'), '', $value);
+
+        // The nil UUID is special form of UUID that is specified to have all
+        // 128 bits set to zero.
+        if ('00000000-0000-0000-0000-000000000000' === $value) {
+            return;
+        }
+
+        if (!preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/', $value)) {
+            throw new InvalidArgumentException(sprintf(
+                $message ?: 'Value "%s" is not a valid UUID.',
+                self::valueToString($value)
             ));
         }
     }
@@ -759,7 +843,7 @@ class Assert
             return;
         }
 
-        throw new BadMethodCallException('No such method: ' . $name);
+        throw new BadMethodCallException('No such method: '.$name);
     }
 
     protected static function valueToString($value)
@@ -789,10 +873,10 @@ class Assert
         }
 
         if (is_string($value)) {
-            return '"' . $value . '"';
+            return '"'.$value.'"';
         }
 
-        return (string)$value;
+        return (string) $value;
     }
 
     protected static function typeToString($value)

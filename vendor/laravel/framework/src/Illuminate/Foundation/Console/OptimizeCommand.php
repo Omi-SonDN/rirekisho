@@ -42,7 +42,7 @@ class OptimizeCommand extends Command
     /**
      * Create a new optimize command instance.
      *
-     * @param  \Illuminate\Foundation\Composer $composer
+     * @param  \Illuminate\Foundation\Composer  $composer
      * @return void
      */
     public function __construct(Composer $composer)
@@ -67,7 +67,7 @@ class OptimizeCommand extends Command
             $this->composer->dumpOptimized();
         }
 
-        if ($this->option('force') || !$this->laravel['config']['app.debug']) {
+        if ($this->option('force') || ! $this->laravel['config']['app.debug']) {
             $this->info('Compiling common classes');
             $this->compileClasses();
         } else {
@@ -88,7 +88,7 @@ class OptimizeCommand extends Command
 
         foreach ($this->getClassFiles() as $file) {
             try {
-                fwrite($handle, $preloader->getCode($file, false) . "\n");
+                fwrite($handle, $preloader->getCode($file, false)."\n");
             } catch (SkipFileException $ex) {
                 // Class Preloader 2.x
             } catch (VisitorExceptionInterface $e) {
@@ -142,7 +142,7 @@ class OptimizeCommand extends Command
     {
         $app = $this->laravel;
 
-        $core = require __DIR__ . '/Optimize/config.php';
+        $core = require __DIR__.'/Optimize/config.php';
 
         $files = array_merge($core, $app['config']->get('compile.files', []));
 
