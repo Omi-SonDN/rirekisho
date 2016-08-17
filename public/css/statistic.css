@@ -225,6 +225,14 @@
     display: none;
 }
 
-/*#highcharts-0 svg text{
+/*#highcharts-0 svg text:nth-child(14){
+    display: none;
+}
+
+#highcharts-2 svg text:nth-child(15){
     display: none;
 }*/
+
+.highcharts-tooltip + text{
+    display: none;
+}

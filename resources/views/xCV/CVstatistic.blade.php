@@ -1,14 +1,5 @@
 @extends('xCV.template')
 <title>Statistic CV</title>
-
-<!-- <script src="//a----.github.io/highcharts-export-clientside/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="//a----.github.io/highcharts-export-clientside/bower_components/highcharts/highcharts.js"></script>
-<!-- <script src="//a----.github.io/highcharts-export-clientside/bower_components/highcharts/modules/exporting.js"></script> -->
-<!-- <script src="//a----.github.io/highcharts-export-clientside/bower_components/highcharts/modules/canvas-tools.js"></script> -->
-<!-- <script src="//a----.github.io/highcharts-export-clientside/bower_components/export-csv/export-csv.js"></script> -->
-<!-- <script type="application/javascript" src="//a----.github.io/highcharts-export-clientside/bower_components/jspdf/dist/jspdf.min.js"></script> -->
-<!-- <script src="//a----.github.io/highcharts-export-clientside/bower_components/highcharts-export-clientside/highcharts-export-clientside.js"></script> -->
-
 @section('content')
 
     <div class="row statisic" style="position: relative">
@@ -39,22 +30,7 @@
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <div id="">
-                        <!-- <form method="get" action="{{ url('CV/downloadCV/pdf') }}">    -->  
-                            <ul class="menu_download" >
-                                <li class="list_do" export-type='pdf'>  
-                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                                    DownLoad PDF
-                                </li>
-                                <li class="list_do" export-type='xlsx'>
-                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i> 
-                                    Download Excel
-                                </li>
-                            </ul>
-                       <!--  </form> -->
-                    </div>
-                </div>
+            
                 <!-- END MENU -->
             </div>
         </div>

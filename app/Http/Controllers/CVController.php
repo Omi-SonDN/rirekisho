@@ -736,6 +736,7 @@ class CVController extends Controller
         return $apply;
     }
 
+    /* STATISTIC CV VIEW */
     public function statistic(Request $request)
     {
         list($cv, $text) = $this->sta_month_applyTo();
@@ -746,6 +747,7 @@ class CVController extends Controller
             ->with('cv_pass', $cv_pass)->with('text', $text)->with('apply', $apply);
     }
 
+    // return số lượng cv_pass, cv_upload trong năm hiện tại
     public function statisticYear()
     {
 
@@ -773,10 +775,11 @@ class CVController extends Controller
             else $cv->count_pass = 0;
         }
 
-        $text = 'Năm';
+        $text = 'năm';
         return array($cv3,$text);
     }
 
+    // return số lượng cv_pass, cv_upload trong năm hiện tại theo quy
     public function statisticQuarter()
     {
         if (Gate::denies('Admin')) {
@@ -813,10 +816,11 @@ class CVController extends Controller
             $cv1->ox = 'Quý '.$cv1->ox;
         }
 
-        $text = 'Quý';
+        $text = 'quý trong năm '.$year;
         return array($cv,$text);
     }
 
+    // return số lượng cv_pass, cv_upload trong năm hiện tại theo tháng
     public function statisticMonth()
     {
         if (Gate::denies('Admin')) {
@@ -850,10 +854,11 @@ class CVController extends Controller
             $cv1->ox = 'Tháng '.$cv1->ox;
         }
 
-        $text = 'Tháng';
+        $text = 'tháng trong năm '.$year;
         return array($cv,$text);
     }
 
+    // return số lượng cv_pass, cv_upload trong tháng hiện tại theo vị trí apply
     public function statisticPositions($datestart, $dateend,$key)
     {
         if (Gate::denies('Admin')) {
@@ -911,6 +916,7 @@ class CVController extends Controller
         return array($cv,$text);
     }
 
+
     public function toArrayCV($cv)
     {
         $cv = $cv->toArray();
@@ -925,6 +931,7 @@ class CVController extends Controller
         return array($cv_upload, $cv_pass,$ox);
     }
 
+    //thống kê cv theo thời gian và theo vị trí apply
     public function statisticSearch(Request $request)
     {
         if (Gate::denies('Admin')) {
@@ -946,6 +953,7 @@ class CVController extends Controller
             ->with('cv_pass', $cv_pass)->with('text', $text)->with('apply', $apply);
     }
 
+    //view satistic theo month quarter month apply
     public function statisticStatus(Request $request)
     {
         if (Gate::denies('Admin')) {
@@ -954,17 +962,14 @@ class CVController extends Controller
         $ox1 = $request->input('ox');
         switch ($ox1) {
             case 'month':
-                //list($cv,$text) = $this->statisticMonth();
                 list($cv, $text) = $this->sta_month_applyTo();
                 $apply = $this->_statistic($cv);
                 break;
             case 'quarter':
-                //list($cv,$text) = $this->statisticQuarter();
                 list($cv, $text) = $this->sta_quarter_applyTo();
                 $apply = $this->_statistic($cv);
                 break;
             case 'year':
-                //list($cv,$text) = $this->statisticYear();
                 list($cv, $text) = $this->sta_year_applyTo();
                 $apply = $this->_statistic($cv);
                 break;
@@ -979,79 +984,12 @@ class CVController extends Controller
                 break;
         }
         list($cv_upload, $cv_pass, $ox) = $this->toArrayCV($cv);
-        // if( $ox1 == 'position')
-        //     return View::make('includes.positions_chart')
-        //         ->with('ox', $ox)->with('cv_upload', $cv_upload)
-        //         ->with('cv_pass', $cv_pass)->with('text', $text);
         return View::make('includes.positions_chart')
-                ->with('ox', $ox)->with('cv_upload', $cv_upload)
-                ->with('cv_pass', $cv_pass)->with('text', $text)->with('apply', $apply);
+            ->with('ox', $ox)->with('cv_upload', $cv_upload)
+            ->with('cv_pass', $cv_pass)->with('text', $text)->with('apply', $apply);
     }
 
-    public function downloadCV(Request $request, $type)
-    {
-        if (Gate::denies('Admin')) {
-            abort(403);
-        }
-        $ox = $request->input('status');
-        switch ($ox) {
-            case 'month':
-                //list($cv,$text) = $this->statisticMonth();
-                list($cv1,$text) = $this->sta_month_applyTo();
-                break;
-            case 'quarter':
-                list($cv1,$text) = $this->sta_quarter_applyTo();
-                break;
-            case 'year':
-                list($cv1,$text) = $this->sta_year_applyTo();
-                break;
-            case 'position':
-                
-                $datestart = $request->input('startDate');
-                $key = $request->input('key_search');
-                $datestart = $datestart.' 00:00:00';
-
-                $dateend = $request->input('endDate');
-                $dateend = $dateend.' 23:59:59';
-                
-                list($cv1,$text) = $this->statisticPositions($datestart, $dateend,$key);
-                break;
-        }
-
-        Excel::create('StatisticCV', function($excel) use ($cv1,$text,$ox) {
-            $excel->sheet('mySheet', function($sheet) use ($cv1,$text){
-                $sheet->setAllBorders('thin');
-                $sheet->loadView('invoice.export')
-                  ->with('data', $cv1)->with('text', $text);
-            });
-            if($ox != 'position'){
-                $excel->sheet('mySheet1', function($sheet) use ($cv1,$text){
-                    // $sheet->fromArray($data, null, 'A1', false, false);
-                    // $sheet->setStyle(array(
-                    //     'font' => array(
-                    //        // 'family'     => 'Calibri',
-                    //         'size'      =>  12,
-                    //     ),
-                    // ));
-                    $sheet->setAllBorders('thin');
-                    $sheet->loadView('invoice.export1')
-                      ->with('data', $cv1)->with('text', $text);
-                });
-            }
-        })->store($type, 'CV/downloadCV');
-
-        //CV/downloadCV => url đến file
-        //nameFile download : StatisticCV
-        //Request::server('HTTP_HOST') ==  $_SERVER['HTTP_HOST'];
-
-        $serve = $_SERVER['HTTP_HOST'];
-        
-        return Response::json(array(
-            'success' => true,
-            'path' => 'http://'.$serve.'/CV/downloadCV/StatisticCV.'.$type,
-        ));
-    }
-
+    //thống kê CV oderby year and oderby apply
     public function sta_year_applyTo()
     {
         list($cv,$text) = $this->statisticYear();
@@ -1078,6 +1016,7 @@ class CVController extends Controller
         return array($cv, $text);
     }
 
+     //thống kê CV oderby month and oderby apply
     public function sta_month_applyTo()
     {
         list($cv,$text) = $this->statisticMonth();
@@ -1110,6 +1049,7 @@ class CVController extends Controller
         return array($cv,$text);
     }
 
+     //thống kê CV oderby quarter and oderby apply
     public function sta_quarter_applyTo()
     {
         list($cv,$text) = $this->statisticQuarter();
