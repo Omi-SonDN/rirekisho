@@ -62,13 +62,7 @@ class PositionsController extends Controller
             'active' => 'required',
             'description' => 'required'
         );
-        $messages = array(
-            'description.required' => 'Bạn phải nhập thông tin mô tả cho vị trí tuyển dụng!',
-            'active.required' => "Bạn phải chọn kích hoạt hoặc không kích hoạt vị trí tuyển dụng!",
-            'name.required' => 'Tên vị trí không được để trống!',
-            'name.unique' => 'Tên vị trí đã tồn tại, vui lòng nhập tên khác!',
-        );
-        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator = Validator::make($request->all(),$rules);
         if( $validator->fails() ){
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
@@ -146,16 +140,10 @@ class PositionsController extends Controller
             'active' => 'required',
             'description' => 'required'
         );
-        $messages = array(
-            'description.required' => 'Bạn phải nhập thông tin mô tả cho vị trí tuyển dụng!',
-            'active.required' => "Bạn phải chọn kích hoạt hoặc không kích hoạt vị trí tuyển dụng!",
-            'name.required' => 'Tên vị trí không được để trống!',
-            'name.unique' => 'Tên vị trí đã tồn tại, vui lòng nhập tên khác!',
-        );
         if( $position->name != $request->name){
             $rules['name'] = 'required|unique:positions,name';
         }
-        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator = Validator::make($request->all(),$rules);
         if( $validator->fails() ){
             return redirect()->back()->withErrors($validator)->withInput();
         } else { 

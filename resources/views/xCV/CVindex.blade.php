@@ -32,7 +32,7 @@
             <div style="float: left; width: 50px">Show</div>
             <div style="float: left; width: 70px">
                 <select class="set_{{\Auth::user()->hash}}" id = "show_entries" name="show_entries" style="height: 25px; width : 50px; float: left" onchange="onclickSetData(this);">
-                    <option @if (Request::has('per_page')) {{ (Request::input('per_page') == 10) ? 'selected' : ''}} @endif value="10">10</option>
+                    <option @if (Request::has('per_page')) {{ (Request::input('per_page') == 10) ? 'selected' : ''}} @endif value="10">2</option>
                     <option @if (Request::has('per_page')) {{ (Request::input('per_page') == 15) ? 'selected' : ''}} @endif value="15">15</option>
                     <option @if (Request::has('per_page')) {{ (Request::input('per_page') == 25) ? 'selected' : ''}} @endif value="25">25</option>
                     <option @if (Request::has('per_page')) {{ (Request::input('per_page') == 50) ? 'selected' : ''}} @endif value="50">50</option>
@@ -66,6 +66,11 @@
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" id="modal-content"></div>
+            </div>
+        </div>
+        <div class="modal fade" id="emailPreview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id="preview-content"></div>
             </div>
         </div>
 

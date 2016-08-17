@@ -303,7 +303,7 @@ $(document).ready(function ($) {
 });
 
 /* thông báo 3s*/
-$("div.alert, span.help-block").delay(3000).slideUp();
+//$("div.alert, span.help-block").delay(3000).slideUp();
 
 // xac nhan co xoa
 function xacnhanxoa(msg) {

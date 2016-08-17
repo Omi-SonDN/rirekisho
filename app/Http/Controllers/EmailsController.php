@@ -227,34 +227,27 @@ class EmailsController extends Controller
                 $file->move('public/', $filename);
                 // Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
                 // $filename = $file->getFilename() . '.' . $extension;
-                $attachs[] = public_path('public/') . $filename;
+                $attachs[] = public_path('public') .'\\'. $filename;
             }
         }
-            
-        //send email
-        Mail::send('emails._email_1', $data, function ($m) use ($request, $attachs) {
-            $m->from(config('mail.username'), $request->sender)
-                ->subject($request->subject)
-                ->to($request->recipient);
+        if(isset($_POST['_action']) && $_POST['_action'] == 'preview'):
+            return view('emails._email_preview')->with(['message'=> $message,'attachs'=>$attachs]);
+        else:
+            //send email
+            Mail::send('emails._email_1', $data, function ($m) use ($request, $attachs) {
+                $m->from(config('mail.username'), $request->sender)
+                    ->subject($request->subject)
+                    ->to($request->recipient);
+                if(count($attachs))
+                foreach ($attachs as $file) {
+                    $m->attach($file);
+                }
+            });
             if(count($attachs))
-            foreach ($attachs as $file) {
-                $m->attach($file);
-            }
-        });
-        if(count($attachs))
-        foreach ($attachs as $file) {
-            unlink($file);
-        }
-
-        //Session::flash('flash_message', 'Email has been sent.');
-        $errors = false;
-        if ($errors) {
-            return redirect()->back()->withErrors($errors);
-        } else {
-            return redirect()->back();
-        }
-        
-        redirect()->back();
+                foreach ($attachs as $file) {
+                    unlink($file);
+                }
+        endif;
     }
 
     /**

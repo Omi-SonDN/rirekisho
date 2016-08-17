@@ -10,11 +10,7 @@
                 <input type="hidden" name="id" value="{{$id}}"/>
                 <input type="hidden" name="type" value="{{$type}}"/>
                 <div class="form-group">
-<<<<<<< HEAD
-                    <label for="recipient" class="label label-default">Recipient: <i style="color:red">*</i> </label>
-=======
                     <label for="recipient" class="label label-primary">Recipient: <i style="color:red">*</i> </label>
->>>>>>> 9d0bc684de8be3958f5d3bc196d08adf5bc10b62
                     <input name="recipient" class="form-control " type="email"
                            placeholder="Recipient's email address" value="{{ $email }}" />
                            @if ($errors->has('recipient'))
@@ -25,12 +21,12 @@
                 </div>
                 <div class="form-group">
                     <label for="sender" class="label label-primary">Sender: <i style="color:red">*</i></label>
-                    <input name="sender" class="form-control" placeholder="Sender's name"/>
+                    <input name="sender" class="form-control" placeholder="Sender's name" value="{{Auth::user()->name}}"/>
                 </div>
 
                 <div class="form-group">
                     <label for="subject" class="label label-primary">Subject: <i style="color:red">*</i> </label>
-                    <input name="subject" class="form-control" placeholder="Subject"/>
+                    <input name="subject" class="form-control" placeholder="Subject" value="[Thông báo] {{$status->status}}"/>
                 </div>
                 @if(count($status->info))
                 <hr>
@@ -64,7 +60,8 @@
                 </div>
                 @endif
             </div>
-            <button class="btn btn-primary col-lg-12" name="sendMail">Send mail</button>
+            <button class="btn btn-primary col-lg-5" name="preview">Xem trước</button>
+            <button class="btn btn-primary col-lg-5 col-lg-push-2" name="sendMail">Send mail</button>
         </form>
     </div>
 </div>
