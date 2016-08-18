@@ -78,7 +78,7 @@ jQuery(function($){
 	/*  5. WOW SMOOTH ANIMATIN
 	/* ----------------------------------------------------------- */
 
-	wow = new WOW(
+    wow = new WOW(
       {
         animateClass: 'animated',
         offset:       100

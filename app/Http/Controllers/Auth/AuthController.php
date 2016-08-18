@@ -40,7 +40,7 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
-        $validator = Validator::make($request->all(), User::$login_rules);
+        $validator = Validator::make($request->all(), User::$login_rules, User::$messageRegister);
 
         if ($validator->fails()) {
             return redirect('auth/login')->withErrors($validator)->withInput($request->except(['password']));
