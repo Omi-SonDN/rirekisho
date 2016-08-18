@@ -2,22 +2,19 @@
 
 namespace app\Http\Controllers;
 
+use App\User;
 use Auth;
 use Carbon\Carbon;
-use File;
-use Validator;
-use Illuminate\Http\Request;
-use App\User;
 use DB;
+use File;
 use Gate;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
-use Nicolaslopezj\Searchable\SearchableTrait;
-use Intervention\Image\Facades\Image;
-use Vinkla\Hashids\Facades\Hashids;
 use Hash;
-use App\Http\Requests\xUser\addUserRequest;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\View;
+use Intervention\Image\Facades\Image;
+use Validator;
+use Vinkla\Hashids\Facades\Hashids;
 
 class UsersController extends Controller
 {
@@ -38,11 +35,12 @@ class UsersController extends Controller
         if (Auth::user()->role === 3) {
             $arr_is = [3];
         } elseif (Auth::user()->getRole() == 'Admin') {
-            $arr_is = [2,3];
+            $arr_is = [2, 3];
         } else {
             $arr_is = null;
         }
         $users = User::whereNotIn('role', $arr_is)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         // neu dung tablesort thi tat phan trang
@@ -60,17 +58,20 @@ class UsersController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        //use SearchableTrait
-        if ($request->has("data-sort")) { //sort
-            $user = User::search($request->input('keyword'))
-                ->orderBy($request->input('data-field'), $request->input('data-sort'))
+        $valsearch = '';
+        if ($request->has("keyword")) {
+            $valsearch = $request->input('keyword');
+            $valsearch = str_replace('\'', '', $valsearch);
+        }
+        if ($valsearch) {
+            $user = User::where('userName', 'LIKE', '%' . $valsearch . '%')
+                ->orderBy('created_at', 'desc')
                 ->get();
         } else {
-            $user = User::search($request->input('keyword'))
-                ->orderBy('id', 'asc')
-                //->take(10)
+            $user = User::orderBy('created_at', 'desc')
                 ->get();
         }
+
         //remove admin info
         $user = $user->reject(function ($item) {
             if (Auth::user()->getRole() == 'Admin') {
@@ -94,7 +95,9 @@ class UsersController extends Controller
         if (Gate::denies('profile', $id)) {
             abort(403);
         }
-
+        if (empty($user)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
         if (Auth::user()->getRole() !== 'SuperAdmin' && ($user->getRole() === 'SuperAdmin' || Auth::user()->id !== $user->id && $user->getRole() === 'Admin')) {
             return redirect()
                 ->route('User.index')
@@ -108,52 +111,6 @@ class UsersController extends Controller
         return View::make('xUser.UserEdit')->with('user', $user);
     }
 
-    public function changePassword($id, Request $request)
-    {
-        $user = User::findOrFail($id);
-        if (Auth::user()->getRole() == 'Admin') {
-            if ($user->getRole() == "SuperAdmin") {
-                return redirect()
-                    ->route('User.index')
-                    ->with(
-                        [
-                            'flash_level' => 'danger',
-                            'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
-                        ]
-                    );
-            }
-        }
-        if (Gate::denies('profile', $id)) {
-            abort(403);
-        }
-        if ($request->has('password')) {
-            $userdata = array(
-                'email' => $user->email,
-                'password' => $request->input('old_password'));
-            $rules = [
-                'email' => 'email|max:255',
-                'password' => 'confirmed|min:4',
-                'old_password' => 'min:4',
-            ];
-            $validator = Validator::make($request->all(), $rules);
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput($request->except(['old_password']));
-            } else {
-                if (Auth::attempt($userdata)) {
-                    $user->password = bcrypt($request->input('password'));
-                    $user->save();
-                    return redirect()->back()->with('message', 'Success!!');
-                }
-                return redirect()
-                    ->back()
-                    ->withErrors(['error' => 'Wrong Password!! Please try again.']);
-            }
-        } else {
-            return redirect()
-                ->back()
-                ->with(['flash_level' => 'warning', 'message' => 'No change!']);
-        }
-    }
 
     /**
      * @param $id
@@ -162,22 +119,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        if (Gate::denies('profile', $id)) {
-            abort(403);
-        }
 
-        if (Auth::user()->getRole() !== 'SuperAdmin' && ($user->getRole() === 'SuperAdmin' || Auth::user()->id !== $user->id && $user->getRole() === 'Admin')) {
-            return redirect()
-                ->route('User.index')
-                ->with(
-                    [
-                        'flash_level' => 'danger',
-                        'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
-                    ]
-                );
-        }
-        return View::make('xUser.password')->with('user', $user);
     }
 
     /**
@@ -202,58 +144,108 @@ class UsersController extends Controller
 
     }
 
+//    public function update(editUserRequest $request, $id)
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        if (Auth::user()->getRole() == 'Admin') {
-            if ($user->getRole() == "SuperAdmin") {
+        if ($this->validateAddEdit($request->all(), $id)) {
+            $user = User::findOrFail($id);
+            if (Auth::user()->getRole() == 'Admin') {
+                if ($user->getRole() == "SuperAdmin") {
+                    return redirect()
+                        ->route('User.index')
+                        ->with([
+                                'flash_level' => 'danger',
+                                'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
+                            ]);
+                }
+            }
+            if (Gate::denies('profile', $id)) {
+                abort(403);
+            }
+
+            $is_changePass = false;
+            //check old password
+            // have column old true: check before update
+            // if false break
+            if ($request->has('oldPass')){
+                // Super co quyen thay doi bat ky mat khau nao
+                if (Auth::user()->getRole() == 'SuperAdmin') {
+                    $is_changePass = true;
+                    $user->password = bcrypt($request->input('txtNewPass'));
+                } else {
+                    if (Hash::check($request->input('oldPass'), $user->password)) {
+                        $is_changePass = true;
+                        $user->password = bcrypt($request->input('txtNewPass'));
+                    } else {
+                        return redirect()
+                            ->back()
+                            ->with([
+                                'flash_level' => 'danger',
+                                'message' => 'Lỗi, Vui lòng kiểm tra lại mật khẩu cũ'
+                            ]);
+                    }
+                }
+            }
+
+            if ($request->hasFile('txtImage')) {
+
+                $file = $request->file('txtImage');
+                $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+                $name = $timestamp . '-' . $file->getClientOriginalName();
+                $oldthumb = public_path('img/thumbnail/') . 'thumb_' . $user->image;
+                if (File::exists($oldthumb)) {
+                    File::exists($oldthumb) && File::delete($oldthumb);
+                    //File::delete($oldfile);
+                }
+                /*resize*/
+                $resizedImage = $this->resize($file, '200', $name);
+                if (!$resizedImage) {
+                    return redirect()->back()
+                        ->withError('Could not resize Image');
+                }
+                $user->image = $name;
+            }
+            if ($request->has('rdoLevel')) {
+                $user->role = $request->input('rdoLevel');
+            }
+
+            $user->userName = $request->input('txtName');
+            $user->email = $request->input('txtEmail');
+            $user->Last_name = $request->input('txtHo');
+            $user->First_name = $request->input('txtTen');
+            $user->Furigana_name = $request->input('txtbDanh');
+            $user->Birth_date = $request->input('txtNsinh');
+            $user->Phone = $request->input('txtSdt');
+            $user->Marriage = $request->input('txtMarriage');
+            $user->Gender = $request->input('rdGender');
+            $user->Address = $request->input('txtAddres');
+            $user->Self_intro = $request->input('txtInfo');
+
+            $user->update();
+
+            if (Auth::user()->id === $id && $is_changePass){
                 return redirect()
-                    ->route('User.index')
-                    ->with(
-                        [
-                            'flash_level' => 'danger',
-                            'message' => 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!'
-                        ]
-                    );
+                    ->back()
+                    ->with([
+                        'flash_level' => 'success',
+                        'message' => 'Bạn đã cập nhập thành công',
+                        'javascript' => view('xUser.onFfoUser')->render(),
+                    ]);
             }
-        }
-        if (Gate::denies('profile', $id)) {
-            abort(403);
-        }
-        $rules = [
-            'email' => 'email|max:255|unique:users',
-            'name' => 'max:255|min:4'
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails() && $user->email != $request->input('email')) {
-            return redirect()->back()->withErrors($validator)->withInput($request->all());
-        }
-        if ($request->hasFile('image')) {
 
-            $file = $request->file('image');
-            $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
-            $name = $timestamp . '-' . $file->getClientOriginalName();
-            //$oldfile = public_path('img') . $user->image;
-            $oldthumb = public_path('img/thumbnail/') . 'thumb_' . $user->image;
-            if (File::exists($oldthumb)) {
-                File::exists($oldthumb) && File::delete($oldthumb);
-                //File::delete($oldfile);
-            }
-            /*resize*/
-            $resizedImage = $this->resize($file, '200', $name);
-            if (!$resizedImage) {
-                return redirect()->back()
-                    ->withError('Could not resize Image');
-            }
-            $user->image = $name;
-            //$file->move(public_path() . '/img/', $name);
-        }
-        if ($request->has('rdoLevel')) {
-            $user->role = $request->input('rdoLevel');
-        }
+            return redirect()
+                ->back()
+                ->with([
+                    'flash_level' => 'success',
+                    'message' => 'Bạn đã cập nhập thành công'
+                ])
+                ->withInput($request->all());
 
-        $user->update($request->except('image'));
-        return redirect()->back()->withInput($request->all());
+        } else {
+            return \Redirect::back()
+                ->withErrors($this->errorsAddEdit)
+                ->withInput(\Request::except('oldPass', 'txtNewPass'));
+        }
     }
 
     public function store(Request $request)
@@ -282,43 +274,58 @@ class UsersController extends Controller
         return View('xUser.UserAdd');
     }
 
-    public function postAddUser(addUserRequest $request)
+//    public function postAddUser(addUserRequest $request)
+    public function postAddUser(Request $request)
     {
-        if (Gate::denies('Admin')) {
-            abort(403);
-        }
-        if ($request->hasFile('txtImage')) {
-            $extension = $request->file('txtImage')->getClientOriginalExtension();
-            $file_name = substr(md5(rand()), 0, 7) . "." . $extension;
-            $request->file('txtImage')->move('img/thumbnail', 'thumb_' . $file_name);
-        } else {
-            $file_name = '';
-        }
-        $_user = new User();
-        $_user->name = $request->txtName;
-        $_user->email = $request->txtEmail;
-        $_user->role = $request->rdoLevel;
-        $_user->active = 1;
-        $_user->password = Hash::make($request->txtPass);
-        $_user->image = $file_name;
-        $_user->note = '';
+        if ($this->validateAddEdit($request->all())) {
+            if (Gate::denies('Admin')) {
+                abort(403);
+            }
+            if ($request->hasFile('txtImage')) {
+                $extension = $request->file('txtImage')->getClientOriginalExtension();
+                $file_name = substr(md5(rand()), 0, 7) . "." . $extension;
+                $request->file('txtImage')->move('img/thumbnail', 'thumb_' . $file_name);
+            } else {
+                $file_name = '';
+            }
+            $_user = new User();
+            $_user->userName = $request->txtName;
+            $_user->email = $request->txtEmail;
+            $_user->role = $request->rdLevel;
+            $_user->active = 1;
+            $_user->password = Hash::make($request->txtPass);
+            $_user->image = $file_name;
+            $_user->note = '';
+            $_user->Last_name = $request->txtHo;
+            $_user->First_name = $request->txtTen;
+            $_user->Birth_date = $request->txtNsinh;
+            $_user->Phone = $request->txtSdt;
+            $_user->Gender = $request->rdGender;
+            $_user->Address = $request->txtAddres;
+            $_user->Self_intro = $request->txtInfo;
+            $_user->Furigana_name = $request->txtbDanh;
+            $_user->Marriage = $request->txtMarriage;
 
-        $_user->save();
-        return redirect()
-            ->route('getadduser')
-            ->with(
-                [
-                    'flash_level' => 'success',
-                    'message' => 'Đã thêm user thành công'
-                ]
-            );
+            $_user->save();
+            return redirect()
+                ->route('getadduser')
+                ->with(
+                    [
+                        'flash_level' => 'success',
+                        'message' => 'Đã thêm user thành công'
+                    ]
+                );
+        } else {
+            return \Redirect::back()->withErrors($this->errorsAddEdit);
+        }
     }
+
     public function getDel($listid)
     {
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        if(strpos($listid, ',')) {
+        if (strpos($listid, ',')) {
             $is_check = true;
         } else {
             $is_check = false;
@@ -348,7 +355,7 @@ class UsersController extends Controller
             }
             // xoa cv lien ket
             if ($user->CV) {
-                foreach($user->CV as $items) {
+                foreach ($user->CV as $items) {
                     foreach ($items->Record as $key => $dt_record) {
                         $dt_record->destroy($dt_record->id);
                     }
@@ -384,14 +391,119 @@ class UsersController extends Controller
         if (!$is_check) {
             return redirect()
                 ->route('User.index')
-                ->with(
-                    [
+                ->with([
                         'flash_level' => 'success',
                         'message' => 'Đã xóa user thành công!'
-                    ]
-                );
+                    ]);
         } else {
             return route('User.index');
         }
+    }
+
+    /* custom validate Add + Edit by bqn
+     *  list rules $rulesAddEdit + function update
+     *  chu y khi them cac truong bat buoc phai nhap REQUIRED
+     *  NHO KIEM TRA VOI METHORD TUONG UNG KHI THEM COT CO REQUIRED
+     *
+     *  VD: FORM [A] KO CO NAME='ABC' TRONG KHI $rulesAddEdit CO
+     *      TON TAI 'ABC' => 'REQUIRED' -> XUNG DOT
+     *  KQ: VALIDATE => FALSE
+     *      ERROR => [ABC] => 'phai ......'
+     *
+     *  custom message $messagesAddEdit + function update
+     *  value error + function error
+     *  output: ValidateAddEdit (with data + id or null) return True or False
+     *  output: get message error width func setErrorsAddEdit()
+    */
+    protected $rulesAddEdit = array(
+        'txtName' => 'required|min:4|regex:/^[a-z0-9]*$/|unique:users,userName',
+        'txtEmail' => 'required|regex:/^[a-z][a-z0-9]*(_[a-z0-9]+)*(\.[a-z0-9]+)*@[a-z0-9]([a-z0-9-][a-z0-9+)*(\.[a-z]{2,4}){1,2}$/|unique:users,email',
+        'txtPass' => 'min:6',
+        'txtRePass' => 'same:txtPass',
+        'txtImage' => 'mimes:jpg,jpeg,bmp,png',
+        'txtHo' => 'required',
+        'txtTen' => 'required',
+        'txtNsinh' => 'required|before:-13 years|after:-60 years',
+        'txtSdt' => ['required' ,'regex:/^(?:0|\(\+84\))[1-9]{1}[0-9]{1,2}[- .]\d{3}[- .]\d{4}$/'],
+        'txtAddres' => 'required',
+        'oldPass'   =>  'min:6',
+        'txtNewPass' => 'min:6'
+    );
+
+    protected $messagesAddEdit = array(
+        'txtName.required' => 'Vui lòng nhập tên.',
+        'txtName.min' => 'Tài khoàn tối thiểu 4 kí tự',
+        'txtName.unique' => 'Tài khoàn đã tồn tại',
+        'txtName.regex' => 'Tài khoản chỉ được dùng chữ thường và số',
+        'txtEmail.unique' => 'Email đã tồn tại.',
+        'txtEmail.required' => 'Vui lòng nhập email',
+        'txtEmail.regex' => 'Địa chỉ email không hợp lệ.',
+        'txtPass.min' => 'Pass tối thiểu 6 kí tự.',
+        'txtRePass.required' => 'Vui lòng nhập lại mật khẩu',
+        'txtRePass.same' => 'Hai mật khẩu không trùng nhau',
+        'txtRePass.required' => 'Vui lòng nhập email',
+        'txtImage.mimes' => 'Đây không phải hình ảnh',
+        'txtImage.max' => 'Kích thước vượt quá giới hạn cho phép',
+        'txtHo.required' => 'Vùi lòng nhập họ của bạn',
+        'txtHo.required' => 'Vùi lòng nhập họ của bạn',
+        'txtTen.required' => 'Vùi lòng nhập tên của bạn',
+        'txtNsinh.required' => 'Vùi lòng nhập ngày thành năm sinh',
+        'txtNsinh.before' => 'Bạn chưa đủ độ tuổi đi làm việc',
+        'txtNsinh.after' => 'Bạn đã đến lúc nghỉ hưu theo chế độ',
+        'txtNsinh.required' => 'Vui nhập số điện thoại',
+        'txtSdt.regex' => 'Vui nhập đúng định dạng số điện thoại',
+        'txtAddres.required' => 'Vui nhập thông tin liên hệ',
+        'oldPass.min' => 'Password tối thiểu 6 kí tự',
+        'txtNewPass.min' => 'Password tối thiểu 6 kí tự',
+    );
+
+    protected $errorsAddEdit;
+
+    // update rules user
+    public function updateRules($id = null)
+    {
+        $rules = $this->rulesAddEdit;
+        if (\Request::isMethod('PUT')) {
+            $rules['txtName'] = $rules['txtName'].','. $id .',id';
+            $rules['txtEmail'] = $rules['txtEmail'].','. $id .',id';
+        }
+        if (\Request::isMethod('POST')) {
+            $rules['txtPass'] = $rules['txtPass'].'|required';
+            $rules['txtRePass'] = $rules['txtRePass'].'|required';
+        }
+        $rules['txtImage'] = $rules['txtImage'].'|max:'. 1024*config('app.max_UploadAvatar');
+
+        return $rules;
+    }
+    // update message
+    public function updateMessage()
+    {
+        $msg = $this->messagesAddEdit;
+        $msg['txtImage.max'] = $msg['txtImage.max'].' '. config('app.max_UploadAvatar') .'MB';
+
+        return $msg;
+    }
+
+    // validate add + Edit User
+    public function validateAddEdit($data, $id = null)
+    {
+        $v = Validator::make($data, $this->updateRules($id), $this->updateMessage());
+        if ($v->fails())
+        {
+            $this->errorsAddEdit = $v->messages();
+            return false;
+        }
+
+        return true;
+    }
+
+    public function setErrorsAddEdit()
+    {
+        return $this->errorsAddEdit;
+    }
+
+    public function getUserLogout(){
+        Auth::logout();
+        return '';
     }
 }

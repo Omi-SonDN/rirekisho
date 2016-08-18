@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
-        $('#startDate').datepicker();
-        $('#endDate').datepicker();
-        $("cv-forms").each(function () {
-            $(this).data("validator").settings.success = false;
-        });
-        /*************************fix navbar*************************************/
+    $('#startDate').datepicker();
+    $('#endDate').datepicker();
+    $("cv-forms").each(function () {
+        $(this).data("validator").settings.success = false;
+    });
+    /*************************fix navbar*************************************/
 
     tinymce.init({
         selector: '.tinymce-textarea',
@@ -80,7 +80,7 @@ $(document).ready(function () {
     slideHeader.first().next().show();
     slideHeader.click(function () {
         var content = $(this).next();
-        if (!(content.is(":visible"))) {   //no - its hidden - slide all the other open tabs to hide 
+        if (!(content.is(":visible"))) {  //no - its hidden - slide all the other open tabs to hide 
             $('[slide-toggle=true]').hide();
             // open up the content needed 
             content.slideToggle(800);
@@ -161,7 +161,7 @@ $(document).ready(function () {
 
     });
 
-    $('input[type=file]').change(function (e) {
+    $('input[name="attach"]').change(function (e) {
         e.preventDefault();
         var self = $(this);
         var data = new FormData();
@@ -180,12 +180,12 @@ $(document).ready(function () {
                 success: function (data, html) {
                     if (data['is_ck'] != 'false') {
                         $('.hasfile').html('<span class="abc">Hiên tại bạn đã có CV trên hệ thống <a href="/" target="_blank" title="Ominext JSC">Ominext JSC: ' +
-                        ' <a target="_blank" href="'+ data['url'] +'" download="'+ data['namefile'] +'" title="File CV: '+ data['namefile'] +'">'+ data['namefile'] +'</a> ' +
-                        ' <iframe src="'+ data['url'] +'" class="col-lg-12 mt8" style="margin-bottom: 30px; height:500px;" frameborder="0"></iframe>');
+                        ' <a target="_blank" href="' + data['url'] + '" download="' + data['namefile'] + '" title="File CV: ' + data['namefile'] + '">' + data['namefile'] + '</a> ' +
+                        ' <iframe src="' + data['url'] + '" class="col-lg-12 mt8" style="margin-bottom: 30px; height:500px;" frameborder="0"></iframe>');
 
-                        $('a.appendflie').replaceWith('<a target="_blank" href="'+ data['url'] +'" class="btn appendflie"><i class="fa fa-cloud-download icon_24 icon-24"></i> TẢI VỀ</a>');
+                        $('a.appendflie').replaceWith('<a target="_blank" href="' + data['url'] + '" class="btn appendflie"><i class="fa fa-cloud-download icon_24 icon-24"></i> TẢI VỀ</a>');
                     } else {
-                        alert("File must be pdf type!");
+                        alert(data['info']);
                     }
                 }
             });
@@ -355,7 +355,7 @@ $(document).ready(function () {
                 },
                 linkedin: {
                     url: true
-                },
+                }
             },
             messages: {
                 Year: {
@@ -565,25 +565,6 @@ $(document).ready(function () {
         });
 
 
-/****************** thay doi icon up down sort table *************************/
-    $(".dataTable th").on('click', function () {
-         var dataSort = $(this).attr("data-sort");
-         var dataField = $(this).attr("data-field");
-
-         $(".dataTable .sorting_asc, .sorting_desc").attr("class", "sorting");
-         $(".dataTable .sorting_asc").attr("data-sort", "asc");
-         $(".dataTable .sorting_desc").attr("data-sort", "desc");
-
-         if (dataSort == "desc") {
-             $(this).attr("data-sort", "asc");
-             $(this).attr("class", "sorting_asc");
-
-         } else {
-             $(this).attr("data-sort", "desc");
-             $(this).attr("class", "sorting_desc");
-         }
-    });
-
 // search with button submit
     $("#submitSearch").on('click', function () {
         var data_to_send = arrToStrdata(cachedData);
@@ -591,6 +572,7 @@ $(document).ready(function () {
             advSearch(data_to_send)
         }
     });
+
 });
 
 //var cachedData = Array();
@@ -618,8 +600,8 @@ $(document).ready(function () {
 //});
 
 var cachedData = Array();
-var elements = document.getElementsByClassName("set_"+id_local);
-for(var i=0; i<elements.length; i++) {
+var elements = document.getElementsByClassName("set_" + id_local);
+for (var i = 0; i < elements.length; i++) {
     if (elements[i].localName === 'select' || elements[i].localName === 'input') {
         cachedData[elements[i].name] = elements[i].value;
     }
@@ -640,7 +622,7 @@ for (var kills in cachedData) {
 }
 
 // set data input + radio th select =>> goi den ham adsearch
-function onclickSetData(ojbect, isNamefunc){
+function onclickSetData(ojbect, isNamefunc) {
     if (ojbect.localName === 'select' || ojbect.localName === 'input') {
         cachedData[ojbect.name] = ojbect.value;
     }
@@ -650,16 +632,24 @@ function onclickSetData(ojbect, isNamefunc){
                 cachedData[key] = ojbect.dataset[key];
             }
         }
+        // change icon sort asc + desc
+        $(".dataTable .sorting_asc, .sorting_desc").attr("class", "sorting");
+        //$(".dataTable th").attr("class", "sorting");
+        if(dataSort = ojbect.dataset.sort == 'asc'){
+            $(ojbect).attr("data-sort", "desc");
+            $(ojbect).attr("class", "sorting_desc");
+        } else {
+            $(ojbect).attr("data-sort", "asc");
+            $(ojbect).attr("class", "sorting_asc");
+        }
     }
     //alert(ojbect.baseURI);
-
     var data_to_send = arrToStrdata(cachedData);
     if (isNamefunc) {
-        if (cachedData[isNamefunc].length > 2){
-            alert(1111);
+        if (cachedData[isNamefunc].length > 2) {
             advSearch(data_to_send);
         }
-    }else {
+    } else {
         // gui du lieu vao ajax
         advSearch(data_to_send);
     }
@@ -748,17 +738,17 @@ function submitCVRule() {
             redirect(data['url']);
         },
         error: function (xhr, status, errorThrown) {
-            if (xhr.status === 422) {
+            //if (xhr.status === 422) {
                 $.each(xhr.responseJSON, function (key, value) {
-                    errorsHtml = '<div class="col-lg-8 alert-danger">' + value[0] + '</div>';
-                    $('.' + key).show().html(errorsHtml);
+                    errorsHtml = '<div class="col-lg-12 alert-danger">' + value[0] + '</div>';
+                    $('.' + key).show().html(errorsHtml).delay(3000).fadeOut(300);
                 });
-            }
+            //}
         }
     });
 }
 
-function lam_moi_ttv(id){
+function lam_moi_ttv(id) {
 
     if (id) {
         $.ajax({
@@ -770,7 +760,7 @@ function lam_moi_ttv(id){
             success: function (data) {
                 alert('Update dữ liệu thành công!')
                 //redirect(data['url']);
-            },
+            }
         });
     }
 }
@@ -796,28 +786,26 @@ function getDeleteCV(id, type) {
 
 // cap nhap lai active + notes cv
 function upActNotee(is, act, note) {
-    var is_check = document.getElementById("myCheck_" + is).checked;
+    var is_check = document.getElementById("myCheck_" + is);
     var _notes = document.getElementById("txt_" + is).value;
-    if (is_check) {
-        var _check = 1;
-    } else {
+    if (is_check == undefined || !is_check.checked) {
         var _check = 0;
+    } else {
+        var _check = 1;
     }
 
     if (getChanges(act) || getChanges(note)) {
         $.ajax({
-            type: "PUT",
-            url: "/CV/" + is,
+            type: "POST",
+            url: "/cv/actnotes/" + is,
             data: 'txtAction=' + _check + "&txtNotes=" + _notes,
             cache: false,
             beforeSend: function () {
                 $('.wait-modal-load').addClass("loading");
             },
-            success: function (html) {
-                alert('Đã cập nhập thành công');
+            success: function (data) {
+                alert(data['info']);
                 removeKey([act, note]);
-                //var btn_ = '<button type="button" onclick="upActNotee(\'' + is + '\',' + _check + ')" class="btn btn-default btn-sm btn-ac-note">submit</button>';
-                //$('.btn-' + is).replaceWith(btn_);
             },
             ajaxStop: function () {
                 $('.wait-modal-load').removeClass("loading");
@@ -836,9 +824,8 @@ function returnHome() {
 var arr__ActNotes = [];
 
 // is changes
-function isChanges(key, val, calfunc) {
-    arr__ActNotes[key] = val;
-
+function isChanges(key, calfunc) {
+    arr__ActNotes[key] = document.getElementById(key).value;
     if (calfunc) {
         returnHome();
     }
@@ -846,7 +833,7 @@ function isChanges(key, val, calfunc) {
 
 function getChanges(getkey) {
     if (arr__ActNotes[getkey]) {
-        return arr__ActNotes[getkey]
+        return true;
     } else {
         return false;
     }
@@ -860,10 +847,17 @@ function removeKey(rmarray) {
     }
 }
 
+// xoa notes cv
+function clearContents(id) {
+    if (document.getElementById(id).value.length >= 1) {
+        document.getElementById(id).value = "";
+        arr__ActNotes[id] = true;
+    }
+}
+
 // chi chu tai khoan moi co quyen
 // thay doi CV truc tuyen hay khong
-function getChangeLiveCv (element, id)
-{
+function getChangeLiveCv(element, id) {
     var liveCv = (document.getElementById(element).checked) ? 1 : 0;
     $.ajax({
         type: "PUT",
@@ -873,40 +867,35 @@ function getChangeLiveCv (element, id)
         success: function (data) {
             //alert('Đã cập nhập thành công');
             redirect(data);
-
-    //dua mod ra....
-            //var btn_ = '<button type="button" onclick="upActNotee(\'' + is + '\',' + _check + ')" class="btn btn-default btn-sm btn-ac-note">submit</button>';
-            //$('.btn-' + is).replaceWith(btn_);
         }
     });
 }
 
-$('#searchStatistics').on('click', function(){
-    $key_search = $('#positionsSearch').val();    
+$('#searchStatistics').on('click', function () {
+    $key_search = $('#positionsSearch').val();
     $.ajax({
         type: "POST",
         url: "/CV/statisticSearch",
-        data : {
-            'startDate' : $('#startDate').val(),
-            'endDate' : $('#endDate').val(),
-            'key_search' : $key_search,
+        data: {
+            'startDate': $('#startDate').val(),
+            'endDate': $('#endDate').val(),
+            'key_search': $key_search
         },
         cache: false,
         success: function (data) {
             $('#container2').html(data);
         }
     });
-    
+
 });
 
-$('#status_statistic li a').on('click', function(){
+$('#status_statistic li a').on('click', function () {
     var $ox = $(this).attr('status');
-
 
     $('#status_statistic li.active').removeClass();
     $(this).parent().addClass('active');
 
-    if($ox == 'position'){
+    if ($ox == 'position') {
         $('.search_po_sa').show();
     } else {
         $('.search_po_sa').hide();
@@ -915,10 +904,37 @@ $('#status_statistic li a').on('click', function(){
     $.ajax({
         type: "POST",
         url: "/CV/statisticStatus",
-        data : dataString,
+        data: dataString,
         cache: false,
         success: function (data) {
             $('#container2').html(data);
         }
     });
 });
+
+function phonenumber(obj) {
+    var phoneno = /^(?:0|\(\+84\))[1-9]{1}[0-9]{1,2}[- .]\d{3}[- .]\d{4}$/;
+    //var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+    if (obj.value.match(phoneno)) {
+        obj.style.border = '1px solid green';
+
+        return true;
+    }
+    else {
+        obj.style.border = '2px solid red';
+        return false;
+    }
+}
+
+// return url with url
+function redirect(_url) {
+    window.location = _url;
+}
+
+// call function login
+
+function callLogin(){
+    var newURL = window.location.protocol + "//" + window.location.host + "/auth/login";
+    window.location = newURL;
+}

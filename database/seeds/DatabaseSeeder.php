@@ -79,8 +79,13 @@ class CVTableSeeder extends Seeder
         $users = DB::table('users')->where('role', 0)->get();
         $abc1 = DB::table('positions')->get();
         $abc2 = DB::table('status')->get();
-        $key_positions = array_keys($abc1);
-        $key_status = array_keys($abc2);
+        $key_status = $key_positions = array();
+        foreach ($abc1 as $item){
+            $key_positions[$item->id] = $item->id;
+        }
+        foreach ($abc2 as $item){
+            $key_status[$item->id] = $item->id;
+        }
 
         foreach ($users as $v) {
             DB::table('cvs')->insert([
@@ -88,7 +93,7 @@ class CVTableSeeder extends Seeder
                 //'Last_name' => $faker->lastName,
                 //'Gender' => 1,
                 //'Address' => $faker->city,
-                'name_cv' => $faker->Name,
+                'name_cv' => $faker->text,
                 'user_id' => $v->id,
                 //'created_at' => $faker->date($format = 'Y-m-d', $max = '1995-11-03'),
                 'created_at' => $faker->dateTimeBetween('-3 years', 'now'),
@@ -109,10 +114,10 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->delete();
         $faker = Faker::create('vi_VN');
-        $counter = range(1, 30);
+        $counter = range(1, 50);
 
         DB::table('users')->insert([
-            'name' => 'BuiNgoc[superadmin]',
+            'userName' => 'BuiNgoc[superadmin]',
             'email' => 'superadmin@123.com',
             'password' => bcrypt('secret'),
             'role' => 3,
@@ -126,7 +131,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'LinhDang[admin]',
+            'userName' => 'LinhDang[admin]',
             'email' => 'admin@123.com',
             'password' => bcrypt('secret'),
             'role' => 2,
@@ -139,7 +144,7 @@ class UsersTableSeeder extends Seeder
             'Self_intro' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         ]);
         DB::table('users')->insert([
-            'name' => 'Linh Dan[applicant]',
+            'userName' => 'Linh Dan[applicant]',
             'email' => 'applicant@123.com',
             'password' => bcrypt('secret'),
             'role' => 0,
@@ -152,7 +157,7 @@ class UsersTableSeeder extends Seeder
             'Self_intro' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         ]);
         DB::table('users')->insert([
-            'name' => 'Linh Dang[visitor]',
+            'userName' => 'Linh Dang[visitor]',
             'email' => 'visitor@123.com',
             'password' => bcrypt('secret'),
             'role' => 1,
@@ -167,7 +172,7 @@ class UsersTableSeeder extends Seeder
 
         foreach ($counter as $v) {
             DB::table('users')->insert([
-                'name' => $faker->name,
+                'userName' => $faker->name,
                 'email' => $faker->safeEmail,
                 'password' => bcrypt('secret'),
                 'role' => 0,
@@ -183,7 +188,7 @@ class UsersTableSeeder extends Seeder
 
         for ($i = 1; $i < 7; $i++) {
             DB::table('users')->insert([
-                'name' => $faker->name,
+                'userName' => $faker->name,
                 'email' => $faker->safeEmail,
                 'password' => bcrypt('secret'),
                 'role' => 1,
@@ -206,36 +211,36 @@ class StatusTableSeeder extends Seeder
         $is_check = DB::table('status')->get();
         $arr_status = array(
 
-            1  => array('id' => 1, 'status'  => 'Chờ duyệt', 'allow_sendmail'                 => '', 'prev_status'  => '', 'email_template'                          => ' Ch&agrave;o bạn&nbsp;[First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i đ&atilde; nhận được hồ sơ của bạn. Hiện tại hồ sơ của bạn đang trong qu&aacute; tr&igrave;nh chờ duyệt. Ch&uacute;ng t&ocirc;i sẽ xem x&eacute;t v&agrave; phản hồi cho bạn sớm nhất. Cảm ơn bạn đ&atilde; quan t&acirc;m v&agrave; gửi hồ sơ đến cho ch&uacute;ng t&ocirc;i. Tr&acirc;n trọng! '),
-            2  => array('id' => 2, 'status'  => 'Đồng ý phỏng vấn', 'allow_sendmail'          => '1', 'prev_status' => '1,6', 'email_template'                       => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i đ&atilde; nhận được hồ sơ của bạn, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến tham dự phỏng vấn tại c&ocirc;ng ty. Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời! '),
-            3  => array('id' => 3, 'status'  => 'Đã đặt lịch phỏng vấn', 'allow_sendmail'     => '1', 'prev_status' => '2', 'email_template'                         => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i thực sự đ&aacute;nh gi&aacute; cao tr&igrave;nh độ cũng như sự hiểu biết của bạn đối với vị tr&iacute; c&ocirc;ng ty đang tuyển dụng, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến tham dự phỏng vấn tại c&ocirc;ng ty. - Thời gian: [Time] ph&uacute;t, Ng&agrave;y&nbsp;[Date] - Địa điểm: [Address] Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại <a href="tel:04.3795.5299">04.3795.5299</a> để th&ocirc;ng b&aacute;o. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời! '),
-            4  => array('id' => 4, 'status'  => 'Loại', 'allow_sendmail'                      => '0', 'prev_status' => '8,12,17,21,24,25,28,30,31', 'email_template' => ''),
-            5  => array('id' => 5, 'status'  => 'Testing', 'allow_sendmail'                   => '0', 'prev_status' => '11', 'email_template'                        => ''),
-            6  => array('id' => 6, 'status'  => 'Đã qua test', 'allow_sendmail'               => '1', 'prev_status' => '5,10', 'email_template'                      => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i thực sự đ&aacute;nh gi&aacute; cao tr&igrave;nh độ cũng như sự hiểu biết của bạn đối với vị tr&iacute; c&ocirc;ng ty đang tuyển dụng, c&ocirc;ng ty ch&uacute;ng t&ocirc;i th&ocirc;ng b&aacute;o rằng bạn đ&atilde; vượt qua b&agrave;i test của ch&uacute;ng t&ocirc;i! Ch&uacute;ng t&ocirc;i muốn mời bạn tới c&ocirc;ng ty tham gia buổi phỏng vấn. <strong>- Thời gian: [Time] ph&uacute;t Ng&agrave;y [Date]</strong> <strong>- Địa điểm: [Address]</strong> Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại <a href="tel:04.3795.5299">04.3795.5299</a> để th&ocirc;ng b&aacute;o. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng! '),
-            7  => array('id' => 7, 'status'  => 'Không qua test', 'allow_sendmail'            => '1', 'prev_status' => '5,10', 'email_template'                      => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i th&ocirc;ng b&aacute;o rằng bạn chưa vượt qua b&agrave;i test của ch&uacute;ng t&ocirc;i! Cảm ơn bạn đ&atilde; quan t&acirc;m đến th&ocirc;ng tin tuyển dụng của ch&uacute;ng t&ocirc;i! Tr&acirc;n trọng! '),
-            8  => array('id' => 8, 'status'  => 'Đã phỏng vấn', 'allow_sendmail'              => '0', 'prev_status' => '3', 'email_template'                         => ''),
-            9  => array('id' => 9, 'status'  => 'Đã đồng ý làm bài test', 'allow_sendmail'    => '0', 'prev_status' => '2,23', 'email_template'                      => ' &nbsp; &nbsp; '),
-            10 => array('id' => 10,  'status' => 'Đã làm bài Test', 'allow_sendmail'           => '0', 'prev_status' => '13', 'email_template'                        => ''),
-            11 => array('id' => 11,  'status' => 'Đã gửi bài test', 'allow_sendmail'           => '0', 'prev_status' => '22', 'email_template'                        => ''),
-            12 => array('id' => 12,  'status' => 'Từ chối làm bài Test', 'allow_sendmail'      => '1', 'prev_status' => '2,23', 'email_template'                      => ''),
-            13 => array('id' => 13,  'status' => 'Đã nhận bài Test gửi về', 'allow_sendmail'   => '0', 'prev_status' => '1', 'email_template'                         => ''),
-            14 => array('id' => 14,  'status' => 'Nhận', 'allow_sendmail'                      => '1', 'prev_status' => '8,30', 'email_template'                      => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i thực sự đ&aacute;nh gi&aacute; cao tr&igrave;nh độ cũng như sự hiểu biết của bạn đối với vị tr&iacute; c&ocirc;ng ty đang tuyển dụng, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến l&agrave;m việc&nbsp;tại c&ocirc;ng ty với vị tr&iacute; <strong>[Positions]</strong>. <strong>- Thời gian bắt đầu: [Time] ph&uacute;t Ng&agrave;y [Date]</strong> <strong>- Địa điểm: [Address]</strong> Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại <a href="tel:04.3795.5299">04.3795.5299</a> để th&ocirc;ng b&aacute;o. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời! '),
-            15 => array('id' => 15,  'status' => 'Đã gửi mail offer', 'allow_sendmail'         => '0', 'prev_status' => '14', 'email_template'                        => ''),
-            16 => array('id' => 16,  'status' => 'Đã checkin', 'allow_sendmail'                => '0', 'prev_status' => '19', 'email_template'                        => ''),
-            17 => array('id' => 17,  'status' => 'Đã checkout', 'allow_sendmail'               => '0', 'prev_status' => '18,26', 'email_template'                     => ''),
-            18 => array('id' => 18,  'status' => 'Đã từ chối offer', 'allow_sendmail'          => '0', 'prev_status' => '15', 'email_template'                        => ''),
-            19 => array('id' => 19,  'status' => 'Đã xác nhận offer', 'allow_sendmail'         => '0', 'prev_status' => '15', 'email_template'                        => ''),
-            20 => array('id' => 20,  'status' => 'Lưu Hồ Sơ', 'allow_sendmail'                 => '0', 'prev_status' => '16', 'email_template'                        => ''),
-            21 => array('id' => 21,  'status' => 'Từ chối phỏng vấn', 'allow_sendmail'         => '0', 'prev_status' => '6', 'email_template'                         => ''),
-            22 => array('id' => 22,  'status' => 'Đã đặt lịch làm Test', 'allow_sendmail'      => '0', 'prev_status' => '9', 'email_template'                         => ''),
-            23 => array('id' => 23,  'status' => 'Đã gửi mail từ chối', 'allow_sendmail'       => '0', 'prev_status' => '7,1', 'email_template'                      => ''),
-            24 => array('id' => 24,  'status' => 'Không tới phỏng vấn', 'allow_sendmail'       => '0', 'prev_status' => '3', 'email_template'                         => ''),
-            25 => array('id' => 25,  'status' => 'Không check in', 'allow_sendmail'            => '1', 'prev_status' => '19', 'email_template'                        => ''),
-            26 => array('id' => 26,  'status' => 'Đã đặt lịch PV lại lần 2', 'allow_sendmail'  => '0', 'prev_status' => '29', 'email_template'                        => ''),
-            27 => array('id' => 27,  'status' => 'Từ chối pv lần 2', 'allow_sendmail'          => '0', 'prev_status' => '27', 'email_template'                        => ''),
-            28 => array('id' => 28,  'status' => 'Phỏng vấn lại', 'allow_sendmail'             => '1', 'prev_status' => '3', 'email_template'                         => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i mời bạn đến tham dự <strong>phỏng vấn lần 2</strong> tại c&ocirc;ng ty. - Thời gian: [Time] ph&uacute;t, Ng&agrave;y&nbsp;[Date] - Địa điểm: [Address] Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại&nbsp;<a href="tel:04.3795.5299">04.3795.5299</a>&nbsp;để th&ocirc;ng b&aacute;o. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời! '),
-            29 => array('id' => 39,  'status' => 'Đã phỏng vấn lần 2', 'allow_sendmail'        => '0', 'prev_status' => '27', 'email_template'                        => ''),
-            30 => array('id' => 30,  'status' => 'Không tới phỏng vấn lần 2', 'allow_sendmail' => '0', 'prev_status' => '27', 'email_template'                        => ''),
+            1  => array('id' => 1, 'status'  => 'Chờ duyệt', 'allow_sendmail'                 => '', 'prev_status'  => '', 'email_template'                          => ' Ch&agrave;o bạn&nbsp;[First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i đ&atilde; nhận được hồ sơ của bạn. Hiện tại hồ sơ của bạn đang trong qu&aacute; tr&igrave;nh chờ duyệt. Ch&uacute;ng t&ocirc;i sẽ xem x&eacute;t v&agrave; phản hồi cho bạn sớm nhất. Cảm ơn bạn đ&atilde; quan t&acirc;m v&agrave; gửi hồ sơ đến cho ch&uacute;ng t&ocirc;i. Tr&acirc;n trọng!', 'role_VisitorStatus'=>1),
+            2  => array('id' => 2, 'status'  => 'Đồng ý phỏng vấn', 'allow_sendmail'          => '1', 'prev_status' => '1,6', 'email_template'                       => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i đ&atilde; nhận được hồ sơ của bạn, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến tham dự phỏng vấn tại c&ocirc;ng ty. Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời!', 'role_VisitorStatus'=>1),
+            3  => array('id' => 3, 'status'  => 'Đã đặt lịch phỏng vấn', 'allow_sendmail'     => '1', 'prev_status' => '2', 'email_template'                         => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i thực sự đ&aacute;nh gi&aacute; cao tr&igrave;nh độ cũng như sự hiểu biết của bạn đối với vị tr&iacute; c&ocirc;ng ty đang tuyển dụng, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến tham dự phỏng vấn tại c&ocirc;ng ty. - Thời gian: [Time] ph&uacute;t, Ng&agrave;y&nbsp;[Date] - Địa điểm: [Address] Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại <a href="tel:04.3795.5299">04.3795.5299</a> để th&ocirc;ng b&aacute;o. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời!', 'role_VisitorStatus'=>0),
+            4  => array('id' => 4, 'status'  => 'Loại', 'allow_sendmail'                      => '0', 'prev_status' => '8,12,17,21,24,25,28,30,31', 'email_template' => '', 'role_VisitorStatus'=>0),
+            5  => array('id' => 5, 'status'  => 'Testing', 'allow_sendmail'                   => '0', 'prev_status' => '11', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            6  => array('id' => 6, 'status'  => 'Đã qua test', 'allow_sendmail'               => '1', 'prev_status' => '5,10', 'email_template'                      => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i thực sự đ&aacute;nh gi&aacute; cao tr&igrave;nh độ cũng như sự hiểu biết của bạn đối với vị tr&iacute; c&ocirc;ng ty đang tuyển dụng, c&ocirc;ng ty ch&uacute;ng t&ocirc;i th&ocirc;ng b&aacute;o rằng bạn đ&atilde; vượt qua b&agrave;i test của ch&uacute;ng t&ocirc;i! Ch&uacute;ng t&ocirc;i muốn mời bạn tới c&ocirc;ng ty tham gia buổi phỏng vấn. <strong>- Thời gian: [Time] ph&uacute;t Ng&agrave;y [Date]</strong> <strong>- Địa điểm: [Address]</strong> Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại <a href="tel:04.3795.5299">04.3795.5299</a> để th&ocirc;ng b&aacute;o. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng!', 'role_VisitorStatus'=>0),
+            7  => array('id' => 7, 'status'  => 'Không qua test', 'allow_sendmail'            => '1', 'prev_status' => '5,10', 'email_template'                      => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i th&ocirc;ng b&aacute;o rằng bạn chưa vượt qua b&agrave;i test của ch&uacute;ng t&ocirc;i! Cảm ơn bạn đ&atilde; quan t&acirc;m đến th&ocirc;ng tin tuyển dụng của ch&uacute;ng t&ocirc;i! Tr&acirc;n trọng! ', 'role_VisitorStatus'=>0),
+            8  => array('id' => 8, 'status'  => 'Đã phỏng vấn', 'allow_sendmail'              => '0', 'prev_status' => '3', 'email_template'                         => '', 'role_VisitorStatus'=>0),
+            9  => array('id' => 9, 'status'  => 'Đã đồng ý làm bài test', 'allow_sendmail'    => '0', 'prev_status' => '2,23', 'email_template'                      => ' &nbsp; &nbsp; ','role_VisitorStatus'=>0),
+            10 => array('id' => 10,  'status' => 'Đã làm bài Test', 'allow_sendmail'           => '0', 'prev_status' => '13', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            11 => array('id' => 11,  'status' => 'Đã gửi bài test', 'allow_sendmail'           => '0', 'prev_status' => '22', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            12 => array('id' => 12,  'status' => 'Từ chối làm bài Test', 'allow_sendmail'      => '1', 'prev_status' => '2,23', 'email_template'                      => '', 'role_VisitorStatus'=>0),
+            13 => array('id' => 13,  'status' => 'Đã nhận bài Test gửi về', 'allow_sendmail'   => '0', 'prev_status' => '1', 'email_template'                         => '', 'role_VisitorStatus'=>0),
+            14 => array('id' => 14,  'status' => 'Nhận', 'allow_sendmail'                      => '1', 'prev_status' => '8,30', 'email_template'                      => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i thực sự đ&aacute;nh gi&aacute; cao tr&igrave;nh độ cũng như sự hiểu biết của bạn đối với vị tr&iacute; c&ocirc;ng ty đang tuyển dụng, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến l&agrave;m việc&nbsp;tại c&ocirc;ng ty với vị tr&iacute; <strong>[Positions]</strong>. <strong>- Thời gian bắt đầu: [Time] ph&uacute;t Ng&agrave;y [Date]</strong> <strong>- Địa điểm: [Address]</strong> Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại <a href="tel:04.3795.5299">04.3795.5299</a> để th&ocirc;ng b&aacute;o. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời!', 'role_VisitorStatus'=>0),
+            15 => array('id' => 15,  'status' => 'Đã gửi mail offer', 'allow_sendmail'         => '0', 'prev_status' => '14', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            16 => array('id' => 16,  'status' => 'Đã checkin', 'allow_sendmail'                => '0', 'prev_status' => '19', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            17 => array('id' => 17,  'status' => 'Đã checkout', 'allow_sendmail'               => '0', 'prev_status' => '18,26', 'email_template'                     => '', 'role_VisitorStatus'=>0),
+            18 => array('id' => 18,  'status' => 'Đã từ chối offer', 'allow_sendmail'          => '0', 'prev_status' => '15', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            19 => array('id' => 19,  'status' => 'Đã xác nhận offer', 'allow_sendmail'         => '0', 'prev_status' => '15', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            20 => array('id' => 20,  'status' => 'Lưu Hồ Sơ', 'allow_sendmail'                 => '0', 'prev_status' => '16', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            21 => array('id' => 21,  'status' => 'Từ chối phỏng vấn', 'allow_sendmail'         => '0', 'prev_status' => '6', 'email_template'                         => '', 'role_VisitorStatus'=>0),
+            22 => array('id' => 22,  'status' => 'Đã đặt lịch làm Test', 'allow_sendmail'      => '0', 'prev_status' => '9', 'email_template'                         => '', 'role_VisitorStatus'=>0),
+            23 => array('id' => 23,  'status' => 'Đã gửi mail từ chối', 'allow_sendmail'       => '0', 'prev_status' => '7,1', 'email_template'                      => '', 'role_VisitorStatus'=>0),
+            24 => array('id' => 24,  'status' => 'Không tới phỏng vấn', 'allow_sendmail'       => '0', 'prev_status' => '3', 'email_template'                         => '', 'role_VisitorStatus'=>0),
+            25 => array('id' => 25,  'status' => 'Không check in', 'allow_sendmail'            => '1', 'prev_status' => '19', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            26 => array('id' => 26,  'status' => 'Đã đặt lịch PV lại lần 2', 'allow_sendmail'  => '0', 'prev_status' => '29', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            27 => array('id' => 27,  'status' => 'Từ chối pv lần 2', 'allow_sendmail'          => '0', 'prev_status' => '27', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            28 => array('id' => 28,  'status' => 'Phỏng vấn lại', 'allow_sendmail'             => '1', 'prev_status' => '3', 'email_template'                         => ' Ch&agrave;o bạn [First_name]! C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i mời bạn đến tham dự <strong>phỏng vấn lần 2</strong> tại c&ocirc;ng ty. - Thời gian: [Time] ph&uacute;t, Ng&agrave;y&nbsp;[Date] - Địa điểm: [Address] Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn. Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại&nbsp;<a href="tel:04.3795.5299">04.3795.5299</a>&nbsp;để th&ocirc;ng b&aacute;o. Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn. Tr&acirc;n trọng, k&iacute;nh mời! ','role_VisitorStatus'=>0),
+            29 => array('id' => 39,  'status' => 'Đã phỏng vấn lần 2', 'allow_sendmail'        => '0', 'prev_status' => '27', 'email_template'                        => '', 'role_VisitorStatus'=>0),
+            30 => array('id' => 30,  'status' => 'Không tới phỏng vấn lần 2', 'allow_sendmail' => '0', 'prev_status' => '27', 'email_template'                        => '', 'role_VisitorStatus'=>0),
         );
         if (count($is_check) == 0) {
             DB::table('status')->insert($arr_status);

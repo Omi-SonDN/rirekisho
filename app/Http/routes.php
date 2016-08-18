@@ -13,7 +13,7 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\ApplicantMiddleware'
     Route::get('CV/info', 'CVController@getInfo');
     // show create cv no id, or show cv upload with id
     Route::get('CV/create/upload/', 'CVController@getCreateUpload');
-    Route::get('CV/create/upload/{id}/edit', 'CVController@getEditUpload');
+    Route::get('CV/upload/{id}/edit', 'CVController@getEditUpload');
 });
 
 // gioi han quyen voi aplication
@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
     Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
     Route::post('CV/changeStatus', 'CVController@changeStatus');
     Route::post('CV/adSearch', 'CVController@adSearch');
+    Route::post('cv/actnotes/{id}', ['as'=>'cv.active.notes', 'uses' => 'CVController@postActNotes']);
 
     Route::get('CV/statistic', 'CVController@statistic');
     Route::post('CV/statisticSearch', 'CVController@statisticSearch');
@@ -67,9 +68,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     //every one see different page 
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
-    Route::get('CV/create/upload/{id}', 'CVController@getShowUpload');
+    Route::get('CV/upload/{id}', 'CVController@getShowUpload');
     Route::get('Record/index/{type}', 'RecordController@index');
-    Route::get('User/{User}/changePass', 'UsersController@changePassword');
+    Route::get('User/logout', 'UsersController@getUserLogout');
 
     Route::group(['prefix' => 'position','as'=>'position::'], function () {
         Route::get('/list/{id?}',['as' => 'list','uses' =>'PositionsController@index']);
@@ -152,3 +153,5 @@ Route::get('auth/logout', 'Auth\AuthController@myLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
+//FrontEnd
+route::get('/', 'FrontEnd\WellController@index');

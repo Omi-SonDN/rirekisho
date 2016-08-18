@@ -56,11 +56,11 @@ class CV extends Model
         return $this->belongsTo('App\Status', 'Status', 'id');
     }
 
-    /************* scope *********************/
-    public function scopeActive($query)
-    {
-        return $query->where('active', 1);
-    }
+//    /************* scope *********************/
+//    public function scopeActive($query)
+//    {
+//        return $query->where('active', 1);
+//    }
 
     /************* scopenoneactive array *********************/
     public function scopeIsactive($query, $active)
@@ -72,11 +72,17 @@ class CV extends Model
         }
     }
 
-    /************* scopelive array *********************/
-    public function scopeLive($query, $live)
+    /************* scopeislive array *********************/
+    public function scopeIslive($query, $live)
 
     {
         return $query->whereIn('cvs.live', $live);
+    }
+    /************* scopeisType CV array *********************/
+    public function scopeIsTypecv($query, $typecv)
+
+    {
+        return $query->whereIn('cvs.type_cv', $typecv);
     }
 
     /************* scope check status cv *********************/

@@ -238,7 +238,7 @@
             </tr>
             <tr class="">
                 <td style="width:10%;"> 希望</td>
-                <td>Et omnis ea illum illo id　{{$CV->Request}}  </td>
+                <td>Etomnis eaillum illid　{{$CV->Request}}  </td>
             </tr>
 
             </tbody>

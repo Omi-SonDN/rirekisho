@@ -250,8 +250,8 @@ div.content:hover, div.content:active, div.content:focus {
 
 .basic-info .bd ul li:not(:last-child) {
     margin-bottom: 2em;
-    padding-bottom: 2em;
-    border-bottom: 1px solid #ccc;
+    /*padding-bottom: 2em;*/
+    /*border-bottom: 1px solid #ccc;*/
     min-height: 150px;
 }
 
@@ -468,12 +468,15 @@ input[type="checkbox"].purple.ios-switch:checked + div > div {
     margin: 25px 5px;
 }
 
-#login .clr {
+#login .clr, #register .clr {
     clear: both;
     background: #424242;
     padding: 20px;
 }
-
+#register .title {
+    text-align: left;
+    line-height: 32px;
+}
 #login .clr .checkbox {
     color: #ffffff;
 }
@@ -707,6 +710,9 @@ button.btn-send-email {
 .mt20 {
     margin-top: 20px;
 }
+.mt32 {
+    margin-top: 32px;
+}
 .mt8 {
     margin-top: 8px;
 }
@@ -718,6 +724,45 @@ button.btn-send-email {
 }
 .pt_18 {
     padding-top: 18px !important;
+}
+.mr_15 {
+    margin-right: 15px;
+}
+.ml_15 {
+    margin-left: 15px;
+}
+.m-top-15 {
+    margin-top: -15px;
+}
+.m-top-20 {
+    margin-top: -20px;
+}
+.m-top-25 {
+    margin-top: -25px;
+}
+.m-top-40 {
+    margin-top: -40px;
+}
+.m-top-50 {
+    margin-top: -50px;
+}
+.m-left-15 {
+    margin-left: -15px;
+}
+.m-left-20 {
+    margin-left: -20px;
+}
+.m-left-25 {
+    margin-left: -25px;
+}
+.m-left-40 {
+    margin-left: -40px;
+}
+.m-left-50 {
+    margin-left: -50px;
+}
+.ml_15 {
+    margin-left: 15px;
 }
 
 .pl_4 {
@@ -767,24 +812,14 @@ button.btn-send-email {
     background: #ede1e2;
 }
 #WzBoDy .forumhead .foruminfo .topx-tip-head {
-    color: rebeccapurple;
-<<<<<<< HEAD
-    /* font-size: 5em; */
+    color: snow;
+    font-size: 5em;
     padding: 1px 20px;
-    /* line-height: 12px; */
+    line-height: 12px;
     font-weight: 400;
 }
 #WzBoDy .forumhead h2 {
-    /* padding: 0; */
-=======
-    / font-size: 5em; /
-    padding: 1px 20px;
-    / line-height: 12px; /
-    font-weight: 400;
-}
-#WzBoDy .forumhead h2 {
-    / padding: 0; /
->>>>>>> 9d0bc684de8be3958f5d3bc196d08adf5bc10b62
+     padding: 0;
     font-size: 20px;
     color: red;
     line-height: 12px;
@@ -914,4 +949,55 @@ input.fix-class-check {
 #File-pdf .fix-file-view {
     margin: 0 auto;
     width: 100%;
+}
+
+.rm-text {
+    padding: 2px 5px;
+    color: #ec0505;
+    cursor: pointer;
+    background: #f5f5f5;
+}
+
+.role-control {
+
+}
+label.title {
+    font-weight: 600;
+}
+.role-control label{
+    padding-top: 4px;
+    display: inline;
+}
+.fix-with4 {
+    float: left ;
+}
+
+.role-control label.radio.col-lg-2 {
+    padding: 4px 0 0px 15px;
+}
+
+/* ------------ css table show cv -------------- */
+.bd table.table-show td{
+    width: 0;
+}
+.table-show {
+    margin: 10px auto;
+}
+.table-show td {
+    width: 0;
+}
+.table-show thead tr.tr-show h2 {
+    text-align: left;
+}
+.table-show tr.tr-show{
+    width: 0;
+}
+.table-show tr.tr-show td.title {
+    font-weight: 500;
+    color: #7b90b5;
+    margin: 0 auto;
+    padding: 4px;
+}
+.table-show tr td.show-dt {
+    text-align: center;
 }

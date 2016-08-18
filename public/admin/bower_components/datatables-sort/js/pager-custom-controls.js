@@ -29,12 +29,15 @@ $.tablesorter.customPagerControls = function(settings) {
             currentClass: 'current',                // current page class name
             adjacentSpacer: ' | ',                    // spacer for page numbers next to each other
             distanceSpacer: ' &#133; ',               // spacer for page numbers away from each other (ellipsis)
-            addKeyboard: true                      // add left/right keyboard arrows to change current page
+            addKeyboard: true,                      // add left/right keyboard arrows to change current page
+            idTotalRecord: 'idTotalRecord',                      // them so bang ghi vao class idTotalRecord hien thuc dang goi
+            myHtmlSize: '<span>{mysise}</span>',     // them html voi tong so bang ghi hien thi
+            myPageCount: '.pagecount'                      // them vao pagination vao class myPageCount
         },
         options = $.extend({}, defaults, settings),
         $table = $(options.table),
-        $pager = $(options.pager);
-
+        $pager = $(options.pager),
+        $myPagination = $(options.myPageCount);
 
     $table
         .on('pagerInitialized pagerComplete', function (e, c) {
@@ -46,11 +49,25 @@ $.tablesorter.customPagerControls = function(settings) {
                 start = cur > 1 ? (p.filteredPages - cur < options.aroundCurrent ? -(options.aroundCurrent + 1) + (p.filteredPages - cur) : -options.aroundCurrent) : 0,
                 end = cur < options.aroundCurrent + 1 ? options.aroundCurrent + 3 - cur : options.aroundCurrent + 1;
 
+            // add class to pageSize
+            $pager.find(options.pageSize).each(function () {
+                var tempt = parseInt($(this).text());
+                if (tempt == p.size) {
+                    $(this).addClass(options.currentClass);
+                    return false;
+                }
+                $(this).removeClass(options.currentClass);
+            });
+
+            // show so bang ghi dang hien tren trang
+            $pager.find('#'+ options.idTotalRecord).replaceWith($(options.myHtmlSize.replace(/\{mysise\}/g, p.size)).attr('id' ,options.idTotalRecord).hide());
+
             for (indx = start; indx < end; indx++) {
                 if (cur + indx >= 1 && cur + indx < p.filteredPages) {
                     pageArray.push(cur + indx);
                 }
             }
+
             if (pageArray.length) {
                 // include first and last pages (ends) in the pagination
                 for (indx = 0; indx < options.ends; indx++) {
@@ -73,7 +90,7 @@ $.tablesorter.customPagerControls = function(settings) {
                             ( indx >= pageArray.length - 1 ? '' : options.adjacentSpacer )) + '</span>');
                 });
             }
-            $pager.find('.pagecount').html(pages.html());
+            $pager.find($myPagination).html(pages.html());
         });
 
     // set up pager controls

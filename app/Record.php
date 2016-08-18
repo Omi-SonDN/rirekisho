@@ -20,10 +20,10 @@ class Record extends Model
     }
 
     //ở dưới là accessor
-    public function getJDateAttribute($value)
+    public function getVNDateAttribute($value)
     {
         $value = date_create($this->Date);
-        return date_format($value, 'Y年m月');;
+        return date_format($value, 'd-m-Y');;
     }
 
     //function

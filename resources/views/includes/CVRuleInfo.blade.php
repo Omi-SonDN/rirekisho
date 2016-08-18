@@ -10,7 +10,7 @@
                         <div class="float_left" style="width: 45%;">
                             <label class="label" for="name">Họ <i style="color:red">*</i></label>
                             <div class="input">
-                                <label class="icon-left" for="text"><i class="fa fa-edit"></i></label>
+                                <label class="icon-left" for="text"><i class="fa fa-user"></i></label>
                                 <input style="width: 60%;" required name="LastName" type="text" class="input-left float_left" value="{!! old('LastName', isset($uCV) ? $uCV->Last_name : '') !!}" placeholder="Ví dụ: Nguyễn">
                                 <div class="LastName"></div>
                             </div>
@@ -19,7 +19,7 @@
                         <div class=" float_left" style="width: 50%;">
                             <label class="label" for="name">Tên <i style="color:red">*</i></label>
                             <div class="input">
-                                <label class="icon-left" for="text"><i class="fa fa-edit"></i></label>
+                                <label class="icon-left" for="text"><i class="fa fa-user"></i></label>
                                 <input style="width: 60%;" required name="Firstname" type="text" class="input-left float_left" value="{!! old('Firstname', isset($uCV) ? $uCV->First_name : '') !!}" placeholder="Ví dụ: Văn A">
                                 <div class="Firstname"></div>
                             </div>
@@ -27,9 +27,9 @@
                     </li>
                     <li class="">
                         <div class="float_left" style="width: 45%;">
-                            <label class="label" for="name">Tên bằng kana </label>
+                            <label class="label" for="name">Bí danh </label>
                             <div class="input">
-                                <label class="icon-left" for="text"><i>Kana </i></label>
+                                <label class="icon-left" for="text"><i class="fa fa-info"></i></label>
                                 <input style="width: 60%;" name="txtFuriganaName" type="text" class="input-left float_left" placeholder="some text" value="{!! old('txtFuriganaName', isset($uCV) ? $uCV->Furigana_name : '') !!}">
                                 <div class="txtFuriganaName"></div>
                             </div>
@@ -53,10 +53,10 @@
                             </div>
                         </div>
                         <div class=" float_left" style="width: 50%;">
-                            <label class="label" for="name">Điện thoại <i style="color:red">*</i></label>
+                            <label class="label" for="name">Điện thoại <small><i>0*|(+84)*-xxx-xxxx</i></small> <i style="color:red">*</i></label>
                             <div class="input">
                                 <label class="icon-left" for="text"><i class="fa fa-phone"></i></label>
-                                <input style="width: 60%;" required name="txtPhone" type="tel" class="input-left float_left" maxlength="15" placeholder="some text" value="{!! old('txtPhone', isset($uCV) ? $uCV->Phone : '') !!}">
+                                <input onkeyup="phonenumber(this)" style="width: 60%;" required name="txtPhone" type="tel" class="input-left float_left" placeholder="some text" value="{!! old('txtPhone', isset($uCV) ? $uCV->Phone : '') !!}">
                                 <div class="txtPhone"></div>
                             </div>
                         </div>
@@ -95,11 +95,37 @@
                     <li><input type="hidden" name="txtTypeCv" value="{{ isset($isUpload) ? '1' : '0' }}" /></li>
                     <li>
                         <div class=" float_left" style="width: 100%;">
-                            <label class="label" for="name">Vị trí mong muốn <i style="color:red">*</i></label>
+                            <label class="label" for="name">Tên CV <i style="color:red">*</i></label>
                             <div class="input">
                                 <label class="icon-left" for="text"><i class="fa fa-edit"></i></label>
                                 <input style="width: 90%;" required name="txtname" type="text" class="input-left float_left" placeholder="some text" value="{!! old('txtname', isset($CV) ? $CV->name_cv : '') !!}">
                                 <div class="txtname"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="float_left" style="width: 100%;">
+                            <label class="label" for="apply_to">Vị trí ứng tuyển <i style="color:red">*</i></label>
+                            <div class="input">
+                                <div class="">
+                                    <?php $positions = \App\Positions::where('active',1)->get(); ?>
+                                    <select class="float_left optioncv" name="txtApply_to">
+                                        <option value="0">Vị trí ứng tuyển</option>
+                                        @foreach($positions as $position )
+                                            <option value="{{$position->id}}" {{ old('txtApply_to', (isset($CV->id) == $position->id) ? 'selected' : '') }}>{{$position->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="txtApply_to"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class=" float_left" style="width: 100%;">
+                            <label class="label" for="">Nguyện vọng</label>
+                            <div class="input">
+                                <label class="icon-left" for=""><i class="fa fa-edit"></i></label>
+                                <textarea style="width: 90%;" name="txtRequest" type="text" class="input-left float_left">{!! old('txtRequest', isset($CV) ? $CV->Request : '') !!}</textarea>
                             </div>
                         </div>
                     </li>

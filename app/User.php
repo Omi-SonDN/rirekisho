@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use Authenticatable, CanResetPassword;
     use SearchableTrait;
     protected $fillable = [
-        'name',
+        'userName',
         'email',
         'password',
         'image',
@@ -86,13 +86,29 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     /*******rules ********/
     public static $rules = array(
-        //Auth Controller
-        'name' => 'required|max:255',
+        'userName' => 'required|max:255|regex:/^[a-z0-9]*$/|unique:users,userName',
         'email' => 'required|email|max:255|unique:users',
-        'password' => 'required|confirmed|min:4',
+        'password' => 'required|min:4',
+        'password_confirmation' => 'same:password',
     );
+    /*******rules ********/
+    public static $messageRegister = array(
+        'userName.required' => 'Vùi lòng nhập tên tài khoản',
+        'userName.max' => 'Độ dài tên đăng nhập tối đa 255 kí tự',
+        'userName.min' => 'Tên tài khoản tối thiểu 4 kí tự',
+        'userName.unique' => 'Tên tài khoản đã tồn tại',
+        'userName.regex' => 'Tên tài khoản chỉ cho phép chữ thường và số',
+        'email.required' => 'Vui lòng nhập email',
+        'email.unique' => 'Email đã tồn tại',
+        'email.email' => 'Vui lòng nhập đúng định dạng Email',
+        'email.max' => 'Độ dài Email tối đa 255 kí tự',
+        'password.required' => 'Vui lòng nhập mật khẩu',
+        'password_confirmation.same' => 'Hai mật khẩu không trùng nhau',
+    );
+
     public static $login_rules = array(
         //Auth Controller
+//        'userName' => 'required|unique:users',
         'email' => 'required|email|max:255',
         'password' => 'required|min:4',
     );
@@ -100,15 +116,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $searchable = [
         'columns' => [
             'users.id' => 5,
-            'users.name' => 10,
+            'users.userName' => 10,
             'users.email' => 10,
         ],
 
     ];
 
+
     public function getThemeColor()
     {
-
         if($this->getRole()== "Visitor") return "#f9f9f9";//gray
         if($this->getRole()== "Admin") return "#333333";
         if($this->getRole()== "SuperAdmin") return "#FF7F50";
@@ -150,7 +166,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         if ($this->First_name != "") {
             return $this->Last_name . " " . $this->First_name;
-        } else return '---';
+        } else
+            return '---';
     }
 
     public function getJGenderAttribute()
@@ -163,7 +180,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
     public function getBirthdayAttribute()
     {
-
         $value = date_create($this->Birth_date);
         return date_format($value, 'd-m-Y');
     }
@@ -184,4 +200,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         } else return "Đã kết hôn";
 
     }
+
 }
