@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
     //every one can see
 //    Route::get('/', function () {
 //        return view('about');
-//    });
+//    }); 
     Route::get('about', function () {
         return view('about');
     });
