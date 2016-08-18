@@ -15,6 +15,7 @@
                     <!-- LOGO -->
                     <!-- TEXT BASED LOGO -->
                     <a class="navbar-brand" href="/"><span>Ominext JSC</span></a>
+
                     <!-- IMG BASED LOGO  -->
                     {{--<a class="navbar-brand" href="/"><img src="img/logo.png" alt="logo"></a>--}}
 

@@ -56,6 +56,7 @@ $(document).ready(function () {
                             return true;
                         }
                     });
+
                     var btn_send_email = '<button id="btn_send_email' + data.id;
 
                     if( data.allow_sendmail == 1){
@@ -67,10 +68,12 @@ $(document).ready(function () {
                         // btn_send_email += '" class="btn btn-primary btn-send-email disabled col-lg-12" value="';
                         // btn_send_email += data.Status + '">Send Email ';
                         // btn_send_email += data.Status + '</button>';
-                        btn_send_email = '';
+                        btn_send_email += '></button>';
                     }
-                    $('#btn_send_email' + data.id).remove();
-                    $('.status#status' + data.id).append(btn_send_email);
+                    //console.log (data.id);
+                    //$('#btn_send_email' + data.id).remove();
+                    // $('.status#status' + data.id).append(btn_send_email);
+                    $('#btn_send_email' + data.id).replaceWith(btn_send_email);
                 }
             });
         } else {

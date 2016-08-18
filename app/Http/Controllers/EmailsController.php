@@ -263,9 +263,9 @@ class EmailsController extends Controller
 
         $key = $request->term;
 
-        $emails = User::select('name', 'email')
+        $emails = User::select('userName', 'email')
             ->where('email', 'like', '%' . $key . '%')
-            ->orWhere('name', 'like', '%' . $key . '%')
+            ->orWhere('userName', 'like', '%' . $key . '%')
             ->get();
 
         $groups = Groups::select('name')

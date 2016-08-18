@@ -10,23 +10,26 @@ $(document).ready(function ($) {
         currentClass: 'current',                // current page class name
         adjacentSpacer: ' | ',                    // spacer for page numbers next to each other
         distanceSpacer: ' \u2026 ',               // spacer for page numbers away from each other (ellipsis &amp;hellip;)
-        addKeyboard: true                      // add left/right keyboard arrows to change current page
+        addKeyboard: true,                      // add left/right keyboard arrows to change current page
+        idTotalRecord: 'show' + id_local,                      // them so bang ghi vao Id idTotalRecord hien thuc dang goi
+        myHtmlSize: '<span>{mysise}</span>',     // them html voi tong so bang ghi hien thi
+        myPageCount: '.pagecount'                      // them vao pagination vao class myPageCount
     });
 
-    $.tablesorter.addWidget({
-        id: "numbering",
-        format: function(table) {
-            var c = table.config;
-            $("tr:visible", table.tBodies[0]).each(function(i) {
-                $(this).find('td').eq(0).text(i + 1);
-            });
-        }
-    });
+    //$.tablesorter.addWidget({
+    //    id: "numbering",
+    //    format: function(table) {
+    //        var c = table.config;
+    //        $("tr:visible", table.tBodies[0]).each(function(i) {
+    //            $(this).find('td').eq(0).text(i + 1);
+    //        });
+    //    }
+    //});
 
-/*
-/ loi
-/
-*/
+    /*
+     / loi
+     /
+     */
     // add parser through the tablesorter addParser method
     $.tablesorter.addParser({
         id: 'checkbox',
@@ -134,11 +137,17 @@ $(document).ready(function ($) {
                     filter: false,
                     sorter: false
                 },
-                1: {sorter: false},
+                1: {sorter: "text"},
                 2: {sorter: "text"},
                 3: {sorter: "email"},
                 4: {sorter: "text"},
                 5: {
+                    sorter: "shortDate"
+                },
+                6: {},
+                7: {},
+                8: {},
+                9: {
                     sorter: false,
                     filter: false
                 }
@@ -157,7 +166,7 @@ $(document).ready(function ($) {
             sortForce: null,
             // initial sort order of the columns
             // [[columnIndex, sortDirection], ... ]
-            sortList: [[4, 1]],
+            sortList: [[8, 1]],
             // default sort that is added to the end of the users sort
             // selection.
             sortAppend: null,
@@ -220,7 +229,7 @@ $(document).ready(function ($) {
                 zebra: ["even", "odd"],
                 filter_startsWith: false,
                 filter_childRows: true,
-                resizable_widths : ['8%', '15%', '20%', '20%', '20%', '12%']
+                resizable_widths: ['5%', '15%', '12%', '5%', '5%', '13%', '12%', '5%', '12%', '10%']
             },
             // Add select box to 4th column (zero-based index)
             // each option has an associated function that returns a boolean
@@ -234,6 +243,15 @@ $(document).ready(function ($) {
                 //5: function (){
                 //    return "null";
                 //}
+                //5 : function($cell, indx){
+                //    return $.tablesorter.filterFormatter.uiDateCompare( $cell, indx, {
+                //        // defaultDate : '1/1/2014', // default date
+                //        cellText : 'dates >= ', // text added before the input
+                //        changeMonth : true,
+                //        changeYear : true,
+                //        compare : '>='
+                //    });
+                //}
             },
 
             // *** send messages to console ***
@@ -241,7 +259,7 @@ $(document).ready(function ($) {
         })
         .tablesorterPager({
             container: $('.pager'),
-            size: 10,
+            size: per_page_local,
             output: 'showing: {startRow} to {endRow} of {totalRows} rows',
 
             //
@@ -278,7 +296,11 @@ $(document).ready(function ($) {
 
     $('[data-table=table-user] input#table-search').bind("change blur", Search1);
     function Search1() {
-        //$('input#table-search').bind("blur", Search);
+        arr_key['loop'] = 0;
+        rmListElement();
+        rmBtDel();
+        $('.checkAll')[0].checked = false;
+
         var value = $(this).val();
         var dataString = 'keyword=' + value;
         $('input#table-search').off();
@@ -300,10 +322,97 @@ $(document).ready(function ($) {
             });
         }
     }
-});
 
-/* thông báo 3s*/
-//$("div.alert, span.help-block").delay(3000).slideUp();
+
+    });
+    /*
+     * set select all false + value default
+     * arr_key['loop] cac chi muc ve mac dinh 0
+     * remove items is checked in arr_key['list']
+     * remove button del multi
+     *  set is false checkAll
+     */
+
+    /* thông báo 3s*/
+    $("div.alert, span.help-block").delay(7000).slideUp();
+
+    $('body').on('click', '.checkAll', function () {
+        var indx = 0;
+        if ($(this).is(':checked')) {
+            is_check = true;
+        } else {
+            is_check = false;
+        }
+        $('tbody tr input.cb-element').each(function () {
+            if (($(this).closest('.data').css('display')) != 'none') {
+                var val = $(this).val();
+                if (is_check) {
+                    arr_key['list'][indx] = val;
+                    arr_key['loop'] = ++indx;
+                    $(this)[0].checked = true;
+                } else {
+                    $(this)[0].checked = false;
+                    arr_key['list'] = [];
+                }
+            }
+        });
+
+        if (is_check) {
+            if (arr_key['loop'] > 1) {
+                addBtDel();
+            }
+        } else {
+            rmBtDel();
+            arr_key['loop'] = 0;
+            arr_key['list'] = [];
+        }
+    });
+
+    $('body').on('click', '.cb-element', function () {
+        var val = $(this).val();
+        var totalRecord = $('#show' + id_local).text();
+
+        if ($(this)[0].checked) {
+            arr_key['list'][arr_key['loop']] = val;
+            ++arr_key['loop'];
+        } else {
+            var idx = arr_key['list'].indexOf(val);
+            delete arr_key['list'][idx];
+            --arr_key['loop'];
+        }
+
+        if (arr_key['loop'] > 1) {
+            addBtDel();
+        } else {
+            rmBtDel();
+        }
+
+        if (arr_key['loop'] == totalRecord) {
+            $('.checkAll')[0].checked = true;
+        } else {
+            $('.checkAll')[0].checked = false;
+        }
+    });
+
+    $(".tableuser thead tr td").on('change', function () {
+        rmBtDel();
+        $('.checkAll')[0].checked = false;
+        arr_key['loop'] = 0;
+        rmListElement();
+    });
+
+
+
+    $('.pager span a,.right, span.right .prev, span.right .next').on('click', function () {
+        $('.checkAll')[0].checked = false;
+        arr_key['loop'] = 0;
+        rmListElement();
+        rmBtDel();
+    });
+var arr_key = [];
+arr_key['loop'] = 0;
+arr_key['list'] = [];
+
 
 // xac nhan co xoa
 function xacnhanxoa(msg) {
@@ -312,103 +421,56 @@ function xacnhanxoa(msg) {
     }
     return false;
 }
+
 //reload page parameter _url
 function redirect(_url) {
     window.location = _url;
 }
 
-$(document).ready(function ($){
-    var loop = 0;
-    var is_check;
-
-    $('span.right, span.right .prev, span.right .next').click(function (){
-        $('.checkAll')[0].checked =false;
-        loop =0;
-    });
-
-    $('.checkAll').on( 'click', function() {
-        loop = 0
-        if($(this).is(':checked')){
-            is_check =true;
-        } else {
-            is_check =false;
-        }
-        $('tbody tr input.cb-element').each( function (){
-            if(($(this).closest('.data').css('display')) != 'none') {
-                if(is_check) {
-                    ++loop;
-                    $(this)[0].checked = true;
-                    $('.active-del').html('<button class="btn btn-primary" onclick="multi_del_use()"><i class="fa  fa-trash-o" style="margin: 0 auto;"></i> Delete selected</button>');
-                } else {
-                    $(this)[0].checked = false;
-                    $(".table_action span.active-del button").remove();
-                    //$(this).attr('checked', false);
-                }
-            } else {
-                $(this)[0].checked = false;
-            }
-        });
-    });
-
-    $('.cb-element' ).on( 'click', function() {
-        var total = 0;
-        $('tbody tr input.cb-element').each( function () {
-            if (($(this).closest('.data').css('display')) != 'none') {
-                ++total;
-            } else {
-                $(this)[0].checked = false;
-            }
-        });
-        if ($(this)[0].checked){
-            ++loop;
-            if (loop > 1) {
-                $('.active-del').html('<button class="btn btn-primary" onclick="multi_del_use()"><i class="fa  fa-trash-o" style="margin: 0 auto;"></i> Delete selected</button>');
-            }
-        } else {
-            --loop;
-            if (loop < 2) {
-                $(".table_action span.active-del button").remove();
-            }
-        }
-        if (loop === total) {
-            $('.checkAll')[0].checked=true;
-        } else {
-            $('.checkAll')[0].checked =false;
-        }
-
-    });
-
-});
-
-function multi_del_use () {
-    //var check_del_user = $("input[name='arrDel[]']:checked")
-    //  .map(fuar _valuesnction(){return $(this).val();}).get();
-
-    var check_del_user = $('input:checkbox:checked.cb-element').map(function () {
-        return this.value;
-    }).get();
-    check_del_user = String(check_del_user);
-    $.ajax({
-        type: "GET",
-        url: "/user/" + check_del_user + "/del",
-        data: "",
-        cache: false,
-        beforeSend: function() {
-            $('.wait-modal-load').addClass("loading");
-        },
-        success: function (data) {
-            redirect(data);
-            //alert('Bạn đã xóa thành công!');
-            //console.log(data);
-        },
-        ajaxStop: function() {
-            $('.wait-modal-load').removeClass("loading");
-        }
-    });
-}
-
 // goi tooltip
-function topxTip (content)	{
-    Tip(content, PADDING, 1 , BORDERWIDTH, 0, BGCOLOR, '', STICKY, 1, DURATION, 10000, CLICKCLOSE, true);
+function topxTip(content) {
+    Tip(content, PADDING, 1, BORDERWIDTH, 0, BGCOLOR, '', STICKY, 1, DURATION, 10000, CLICKCLOSE, true);
+}
+function rmListElement() {
+    for (var key in arr_key['list']) {
+        $('.cb-element').attr("checked", false);
+    }
+    arr_key['list'] = []
 }
 
+function addBtDel() {
+    return $('.active-del').html('<button class="btn btn-primary" onclick="multi_del_use()"><i class="fa  fa-trash-o" style="margin: 0 auto;"></i> Delete selected</button>');
+}
+
+function rmBtDel() {
+    return $(".table_action span.active-del button").remove();
+}
+
+// del multi record user
+function multi_del_use() {
+    var result = confirm("Có chắc xóa nhiều bảng ghi không?");
+    if (result) {
+        var check_del_user = $('input:checkbox:checked.cb-element').map(function () {
+            return this.value;
+        }).get();
+
+        check_del_user = String(check_del_user);
+        $.ajax({
+            type: "GET",
+            url: "/user/" + check_del_user + "/del",
+            data: "",
+            cache: false,
+            beforeSend: function () {
+                $('.wait-modal-load').addClass("loading");
+            },
+            success: function (data) {
+                redirect(data);
+                //alert('Bạn đã xóa thành công!');
+                //console.log(data);
+            },
+            ajaxStop: function () {
+                $('.wait-modal-load').removeClass("loading");
+            }
+        });
+    }
+}
