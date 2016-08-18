@@ -7,7 +7,7 @@
 @else
     @foreach($CVs as $key => $CV)
         <tr class="data{{++$key}}">
-            <td class="image">
+            <td class="image" style="width: 90px">
                 <div style=" position: relative;height: 100px;width: 100px; cursor: pointer" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
                     <?php $image = $CV->User->image;?>
                     @if($image!="")

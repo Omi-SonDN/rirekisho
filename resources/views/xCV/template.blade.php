@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/footer.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/custom.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/font-awesome.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/alert.css') }}"/>
 
     <!--CSS lib tablesorter -->
     <link rel="stylesheet" type="text/css"

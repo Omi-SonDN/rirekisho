@@ -33,7 +33,7 @@
                 <!--</form>-->
             </div>
             <!--advance search-->
-
+        <div class="box_search">
             <div style="float: left; width: 200px">
                 <div style="float: left; width: 50px">Show</div>
                 <div style="float: left; width: 70px">
@@ -48,7 +48,7 @@
                 <div style="float: left; width: 70px">entries</div>
             </div>
             <div class="clearfix"></div>
-            <div class="box_white block_ntv_dangnhap">
+            <div class="box_white block_ntv_dangnhap" style="background-image: linear-gradient(to bottom, #fff 0px, #e0e0e0 100%); background-repeat: repeat-x; ">
                 <div class="col-lg-6">
                     <label>Thể loại CV</label>&nbsp;
                     <label class="radio-inline"><input type="radio" class="set_{{\Auth::user()->hash}}"
@@ -84,6 +84,7 @@
                 </div>
                 @endcan
             </div>
+        </div>
             <div class="clearfix"></div>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
@@ -95,7 +96,7 @@
             <table id="example" class="dataTable" data-sort="" data-field="">
                 <thead>
                 <tr>
-                    <th class="ab sorting set_{{\Auth::user()->hash}}" data-sort="" data-field="" style="width: 150px">Ảnh</th>
+                    <th class="ab set_{{\Auth::user()->hash}}" data-sort="" data-field="" style="width: 90px">Ảnh</th>
                     <th @if (Request::has('data-field') && Request::has('data-sort'))
                         @if(Request::input('data-field') == 'name')
                             @if (Request::input('data-sort') == 'asc ')
