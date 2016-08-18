@@ -2,11 +2,10 @@
 
 use Maatwebsite\Excel\Files\ExcelFile;
 
-class TestImport extends ExcelFile
-{
+class TestImport extends ExcelFile {
 
-    protected $delimiter = ',';
-    protected $enclosure = '"';
+    protected $delimiter  = ',';
+    protected $enclosure  = '"';
     protected $lineEnding = '\r\n';
 
     /**

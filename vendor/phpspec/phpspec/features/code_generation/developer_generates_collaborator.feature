@@ -34,7 +34,7 @@ Feature: Developer generates a collaborator
       }
 
       """
-    When I run phpspec and answer "n" when asked if I want to generate the code
+  When I run phpspec and answer "n" when asked if I want to generate the code
     Then I should be prompted with:
       """
       Would you like me to generate an interface

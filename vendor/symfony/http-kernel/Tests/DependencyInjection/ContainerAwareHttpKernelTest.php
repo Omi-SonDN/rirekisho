@@ -39,7 +39,8 @@ class ContainerAwareHttpKernelTest extends \PHPUnit_Framework_TestCase
             ->expectsEnterScopeOnce($container)
             ->expectsLeaveScopeOnce($container)
             ->expectsSetRequestWithAt($container, $request, 3)
-            ->expectsSetRequestWithAt($container, null, 4);
+            ->expectsSetRequestWithAt($container, null, 4)
+        ;
 
         $dispatcher = new EventDispatcher();
         $resolver = $this->getResolverMockFor($controller, $request);
@@ -90,7 +91,8 @@ class ContainerAwareHttpKernelTest extends \PHPUnit_Framework_TestCase
             ->expectsEnterScopeOnce($container)
             ->expectsLeaveScopeOnce($container)
             ->expectsSetRequestWithAt($container, $request, 3)
-            ->expectsSetRequestWithAt($container, null, 4);
+            ->expectsSetRequestWithAt($container, null, 4)
+        ;
 
         $dispatcher = new EventDispatcher();
         $resolver = $this->getMock('Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface');
@@ -136,7 +138,8 @@ class ContainerAwareHttpKernelTest extends \PHPUnit_Framework_TestCase
         $container
             ->expects($this->at($at))
             ->method('set')
-            ->with($this->equalTo('request'), $this->equalTo($with), $this->equalTo('request'));
+            ->with($this->equalTo('request'), $this->equalTo($with), $this->equalTo('request'))
+        ;
 
         return $this;
     }
@@ -146,7 +149,8 @@ class ContainerAwareHttpKernelTest extends \PHPUnit_Framework_TestCase
         $container
             ->expects($this->once())
             ->method('enterScope')
-            ->with($this->equalTo('request'));
+            ->with($this->equalTo('request'))
+        ;
 
         return $this;
     }
@@ -156,7 +160,8 @@ class ContainerAwareHttpKernelTest extends \PHPUnit_Framework_TestCase
         $container
             ->expects($this->once())
             ->method('leaveScope')
-            ->with($this->equalTo('request'));
+            ->with($this->equalTo('request'))
+        ;
 
         return $this;
     }

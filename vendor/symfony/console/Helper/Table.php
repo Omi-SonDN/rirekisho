@@ -76,7 +76,7 @@ class Table
     /**
      * Sets a style definition.
      *
-     * @param string $name The style name
+     * @param string     $name  The style name
      * @param TableStyle $style A TableStyle instance
      */
     public static function setStyleDefinition($name, TableStyle $style)
@@ -101,11 +101,11 @@ class Table
             self::$styles = self::initStyles();
         }
 
-        if (!self::$styles[$name]) {
-            throw new \InvalidArgumentException(sprintf('Style "%s" is not defined.', $name));
+        if (isset(self::$styles[$name])) {
+            return self::$styles[$name];
         }
 
-        return self::$styles[$name];
+        throw new \InvalidArgumentException(sprintf('Style "%s" is not defined.', $name));
     }
 
     /**
@@ -117,13 +117,7 @@ class Table
      */
     public function setStyle($name)
     {
-        if ($name instanceof TableStyle) {
-            $this->style = $name;
-        } elseif (isset(self::$styles[$name])) {
-            $this->style = self::$styles[$name];
-        } else {
-            throw new \InvalidArgumentException(sprintf('Style "%s" is not defined.', $name));
-        }
+        $this->style = $this->resolveStyle($name);
 
         return $this;
     }
@@ -246,7 +240,7 @@ class Table
 
         $markup = $this->style->getCrossingChar();
         for ($column = 0; $column < $count; ++$column) {
-            $markup .= str_repeat($this->style->getHorizontalBorderChar(), $this->getColumnWidth($column)) . $this->style->getCrossingChar();
+            $markup .= str_repeat($this->style->getHorizontalBorderChar(), $this->getColumnWidth($column)).$this->style->getCrossingChar();
         }
 
         $this->output->writeln(sprintf($this->style->getBorderFormat(), $markup));
@@ -265,7 +259,7 @@ class Table
      *
      * Example: | 9971-5-0210-0 | A Tale of Two Cities  | Charles Dickens  |
      *
-     * @param array $row
+     * @param array  $row
      * @param string $cellFormat
      */
     private function renderRow(array $row, $cellFormat)
@@ -285,8 +279,8 @@ class Table
     /**
      * Renders table cell with padding.
      *
-     * @param array $row
-     * @param int $column
+     * @param array  $row
+     * @param int    $column
      * @param string $cellFormat
      */
     private function renderCell(array $row, $column, $cellFormat)
@@ -376,7 +370,7 @@ class Table
      * fill rows that contains rowspan > 1.
      *
      * @param array $rows
-     * @param int $line
+     * @param int   $line
      *
      * @return array
      */
@@ -396,7 +390,7 @@ class Table
                 }
 
                 // create a two dimensional array (rowspan x colspan)
-                $unmergedRows = array_replace_recursive(array_fill($line + 1, $nbLines, ''), $unmergedRows);
+                $unmergedRows = array_replace_recursive(array_fill($line + 1, $nbLines, array()), $unmergedRows);
                 foreach ($unmergedRows as $unmergedRowKey => $unmergedRow) {
                     $value = isset($lines[$unmergedRowKey - $line]) ? $lines[$unmergedRowKey - $line] : '';
                     $unmergedRows[$unmergedRowKey][$column] = new TableCell($value, array('colspan' => $cell->getColspan()));
@@ -450,7 +444,7 @@ class Table
 
     /**
      * @param array $rows
-     * @param int $line
+     * @param int   $line
      *
      * @return array
      */
@@ -554,7 +548,7 @@ class Table
      * Gets cell width.
      *
      * @param array $row
-     * @param int $column
+     * @param int   $column
      *
      * @return int
      */
@@ -585,21 +579,24 @@ class Table
         $borderless
             ->setHorizontalBorderChar('=')
             ->setVerticalBorderChar(' ')
-            ->setCrossingChar(' ');
+            ->setCrossingChar(' ')
+        ;
 
         $compact = new TableStyle();
         $compact
             ->setHorizontalBorderChar('')
             ->setVerticalBorderChar(' ')
             ->setCrossingChar('')
-            ->setCellRowContentFormat('%s');
+            ->setCellRowContentFormat('%s')
+        ;
 
         $styleGuide = new TableStyle();
         $styleGuide
             ->setHorizontalBorderChar('-')
             ->setVerticalBorderChar(' ')
             ->setCrossingChar(' ')
-            ->setCellHeaderFormat('%s');
+            ->setCellHeaderFormat('%s')
+        ;
 
         return array(
             'default' => new TableStyle(),
@@ -607,5 +604,18 @@ class Table
             'compact' => $compact,
             'symfony-style-guide' => $styleGuide,
         );
+    }
+
+    private function resolveStyle($name)
+    {
+        if ($name instanceof TableStyle) {
+            return $name;
+        }
+
+        if (isset(self::$styles[$name])) {
+            return self::$styles[$name];
+        }
+
+        throw new \InvalidArgumentException(sprintf('Style "%s" is not defined.', $name));
     }
 }

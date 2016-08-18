@@ -30,6 +30,33 @@ $(document).ready(function ($) {
         });
     });
     $('#myModal').on('show.bs.modal',function(e){
+        $('#myModal').on('click','button[name=preview]',function(e){
+            e.preventDefault();
+            var form = new FormData($('#myModal form')[0]);
+            form.append('_action','preview');
+            var sent = $.ajax({
+                type: 'POST',
+                url: $('#myModal form')[0].action,
+                data: form,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    $('#preview-content').html(response);
+                    $('#emailPreview').modal('show');
+                },
+                error: function( jqXHR, textStatus, errorThrown ){
+                    if(jqXHR.status == 422 ){
+                        $('#myModal div.danger').html('');
+                        var text = '<ul class="alert alert-danger">';
+                        $.each(jqXHR.responseJSON, function (key, value) {
+                            text += '<li>'+value+'</li>';
+                        });
+                        text += '</ul>';
+                        $('#myModal div.danger').append(text);
+                    }
+                }
+            });
+        });
         $('#myModal form').submit(function(e){
             var form = new FormData($('#myModal form')[0]);
             var sent = $.ajax({

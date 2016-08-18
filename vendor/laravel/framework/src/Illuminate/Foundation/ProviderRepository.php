@@ -31,9 +31,9 @@ class ProviderRepository
     /**
      * Create a new service repository instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  string $manifestPath
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param  string  $manifestPath
      * @return void
      */
     public function __construct(ApplicationContract $app, Filesystem $files, $manifestPath)
@@ -46,7 +46,7 @@ class ProviderRepository
     /**
      * Register the application service providers.
      *
-     * @param  array $providers
+     * @param  array  $providers
      * @return void
      */
     public function load(array $providers)
@@ -80,8 +80,8 @@ class ProviderRepository
     /**
      * Register the load events for the given provider.
      *
-     * @param  string $provider
-     * @param  array $events
+     * @param  string  $provider
+     * @param  array  $events
      * @return void
      */
     protected function registerLoadEvents($provider, array $events)
@@ -100,7 +100,7 @@ class ProviderRepository
     /**
      * Compile the application manifest file.
      *
-     * @param  array $providers
+     * @param  array  $providers
      * @return array
      */
     protected function compileManifest($providers)
@@ -138,7 +138,7 @@ class ProviderRepository
     /**
      * Create a new provider instance.
      *
-     * @param  string $provider
+     * @param  string  $provider
      * @return \Illuminate\Support\ServiceProvider
      */
     public function createProvider($provider)
@@ -149,8 +149,8 @@ class ProviderRepository
     /**
      * Determine if the manifest should be compiled.
      *
-     * @param  array $manifest
-     * @param  array $providers
+     * @param  array  $manifest
+     * @param  array  $providers
      * @return bool
      */
     public function shouldRecompile($manifest, $providers)
@@ -180,7 +180,7 @@ class ProviderRepository
     /**
      * Write the service manifest file to disk.
      *
-     * @param  array $manifest
+     * @param  array  $manifest
      * @return array
      */
     public function writeManifest($manifest)
@@ -195,7 +195,7 @@ class ProviderRepository
     /**
      * Create a fresh service manifest data structure.
      *
-     * @param  array $providers
+     * @param  array  $providers
      * @return array
      */
     protected function freshManifest(array $providers)

@@ -27,8 +27,8 @@ class ArrayInput extends Input
     /**
      * Constructor.
      *
-     * @param array $parameters An array of parameters
-     * @param InputDefinition $definition A InputDefinition instance
+     * @param array                $parameters An array of parameters
+     * @param InputDefinition|null $definition A InputDefinition instance
      */
     public function __construct(array $parameters, InputDefinition $definition = null)
     {
@@ -38,9 +38,7 @@ class ArrayInput extends Input
     }
 
     /**
-     * Returns the first argument from the raw parameters (not parsed).
-     *
-     * @return string The value of the first argument or null otherwise
+     * {@inheritdoc}
      */
     public function getFirstArgument()
     {
@@ -54,18 +52,11 @@ class ArrayInput extends Input
     }
 
     /**
-     * Returns true if the raw parameters (not parsed) contain a value.
-     *
-     * This method is to be used to introspect the input parameters
-     * before they have been validated. It must be used carefully.
-     *
-     * @param string|array $values The values to look for in the raw parameters (can be an array)
-     *
-     * @return bool true if the value is contained in the raw parameters
+     * {@inheritdoc}
      */
     public function hasParameterOption($values)
     {
-        $values = (array)$values;
+        $values = (array) $values;
 
         foreach ($this->parameters as $k => $v) {
             if (!is_int($k)) {
@@ -81,19 +72,11 @@ class ArrayInput extends Input
     }
 
     /**
-     * Returns the value of a raw option (not parsed).
-     *
-     * This method is to be used to introspect the input parameters
-     * before they have been validated. It must be used carefully.
-     *
-     * @param string|array $values The value(s) to look for in the raw parameters (can be an array)
-     * @param mixed $default The default value to return if no result is found
-     *
-     * @return mixed The option value
+     * {@inheritdoc}
      */
     public function getParameterOption($values, $default = false)
     {
-        $values = (array)$values;
+        $values = (array) $values;
 
         foreach ($this->parameters as $k => $v) {
             if (is_int($k)) {
@@ -118,7 +101,7 @@ class ArrayInput extends Input
         $params = array();
         foreach ($this->parameters as $param => $val) {
             if ($param && '-' === $param[0]) {
-                $params[] = $param . ('' != $val ? '=' . $this->escapeToken($val) : '');
+                $params[] = $param.('' != $val ? '='.$this->escapeToken($val) : '');
             } else {
                 $params[] = $this->escapeToken($val);
             }
@@ -128,7 +111,7 @@ class ArrayInput extends Input
     }
 
     /**
-     * Processes command line arguments.
+     * {@inheritdoc}
      */
     protected function parse()
     {
@@ -147,7 +130,7 @@ class ArrayInput extends Input
      * Adds a short option value.
      *
      * @param string $shortcut The short option key
-     * @param mixed $value The value for the option
+     * @param mixed  $value    The value for the option
      *
      * @throws \InvalidArgumentException When option given doesn't exist
      */
@@ -163,8 +146,8 @@ class ArrayInput extends Input
     /**
      * Adds a long option value.
      *
-     * @param string $name The long option key
-     * @param mixed $value The value for the option
+     * @param string $name  The long option key
+     * @param mixed  $value The value for the option
      *
      * @throws \InvalidArgumentException When option given doesn't exist
      * @throws \InvalidArgumentException When a required value is missing
@@ -191,8 +174,8 @@ class ArrayInput extends Input
     /**
      * Adds an argument value.
      *
-     * @param string $name The argument name
-     * @param mixed $value The value for the argument
+     * @param string $name  The argument name
+     * @param mixed  $value The value for the argument
      *
      * @throws \InvalidArgumentException When argument given doesn't exist
      */

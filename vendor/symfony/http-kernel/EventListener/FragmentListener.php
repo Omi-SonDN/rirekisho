@@ -37,8 +37,8 @@ class FragmentListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param UriSigner $signer A UriSigner instance
-     * @param string $fragmentPath The path that triggers this listener
+     * @param UriSigner $signer       A UriSigner instance
+     * @param string    $fragmentPath The path that triggers this listener
      */
     public function __construct(UriSigner $signer, $fragmentPath = '/_fragment')
     {
@@ -87,7 +87,7 @@ class FragmentListener implements EventSubscriberInterface
 
         // is the Request signed?
         // we cannot use $request->getUri() here as we want to work with the original URI (no query string reordering)
-        if ($this->signer->check($request->getSchemeAndHttpHost() . $request->getBaseUrl() . $request->getPathInfo() . (null !== ($qs = $request->server->get('QUERY_STRING')) ? '?' . $qs : ''))) {
+        if ($this->signer->check($request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getPathInfo().(null !== ($qs = $request->server->get('QUERY_STRING')) ? '?'.$qs : ''))) {
             return;
         }
 
@@ -101,7 +101,7 @@ class FragmentListener implements EventSubscriberInterface
      */
     protected function getLocalIpAddresses()
     {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.3.19 and will be removed in 3.0.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.3.19 and will be removed in 3.0.', E_USER_DEPRECATED);
 
         return array('127.0.0.1', 'fe80::1', '::1');
     }

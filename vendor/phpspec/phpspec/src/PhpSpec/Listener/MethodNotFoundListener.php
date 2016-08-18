@@ -46,9 +46,8 @@ class MethodNotFoundListener implements EventSubscriberInterface
         ResourceManagerInterface $resources,
         GeneratorManager $generator,
         NameCheckerInterface $nameChecker = null
-    )
-    {
-        $this->io = $io;
+    ) {
+        $this->io        = $io;
         $this->resources = $resources;
         $this->generator = $generator;
         $this->nameChecker = $nameChecker ?: new ReservedWordsMethodNameChecker();
@@ -58,7 +57,7 @@ class MethodNotFoundListener implements EventSubscriberInterface
     {
         return array(
             'afterExample' => array('afterExample', 10),
-            'afterSuite' => array('afterSuite', -10),
+            'afterSuite'   => array('afterSuite', -10),
         );
     }
 
@@ -74,7 +73,7 @@ class MethodNotFoundListener implements EventSubscriberInterface
 
         $classname = get_class($exception->getSubject());
         $methodName = $exception->getMethodName();
-        $this->methods[$classname . '::' . $methodName] = $exception->getArguments();
+        $this->methods[$classname .'::'.$methodName] = $exception->getArguments();
         $this->checkIfMethodNameAllowed($methodName);
     }
 
@@ -101,7 +100,7 @@ class MethodNotFoundListener implements EventSubscriberInterface
 
             if ($this->io->askConfirmation($message)) {
                 $this->generator->generate($resource, 'method', array(
-                    'name' => $method,
+                    'name'      => $method,
                     'arguments' => $arguments
                 ));
                 $event->markAsWorthRerunning();

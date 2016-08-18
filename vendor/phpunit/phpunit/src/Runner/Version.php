@@ -30,7 +30,7 @@ class PHPUnit_Runner_Version
         }
 
         if (self::$version === null) {
-            $version = new SebastianBergmann\Version('4.8.26', dirname(dirname(__DIR__)));
+            $version       = new SebastianBergmann\Version('4.8.27', dirname(dirname(__DIR__)));
             self::$version = $version->getVersion();
         }
 
@@ -45,7 +45,7 @@ class PHPUnit_Runner_Version
     public static function series()
     {
         if (strpos(self::id(), '-')) {
-            $tmp = explode('-', self::id());
+            $tmp     = explode('-', self::id());
             $version = $tmp[0];
         } else {
             $version = self::id();

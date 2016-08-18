@@ -229,7 +229,7 @@ class ContainerAssembler
         });
 
         $container->set('code_generator.generators.specification', function (ServiceContainer $c) {
-            $specificationGenerator = new CodeGenerator\Generator\SpecificationGenerator(
+            $specificationGenerator =  new CodeGenerator\Generator\SpecificationGenerator(
                 $c->get('console.io'),
                 $c->get('code_generator.templates')
             );
@@ -306,14 +306,14 @@ class ContainerAssembler
         });
 
         if (!empty($_SERVER['HOMEDRIVE']) && !empty($_SERVER['HOMEPATH'])) {
-            $home = $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'];
+            $home = $_SERVER['HOMEDRIVE'].$_SERVER['HOMEPATH'];
         } else {
             $home = getenv('HOME');
         }
 
         $container->setParam('code_generator.templates.paths', array(
-            rtrim(getcwd(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . '.phpspec',
-            rtrim($home, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . '.phpspec',
+            rtrim(getcwd(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'.phpspec',
+            rtrim($home, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'.phpspec',
         ));
     }
 
@@ -346,13 +346,13 @@ class ContainerAssembler
             $suites = $c->getParam('suites', array('main' => ''));
 
             foreach ($suites as $name => $suite) {
-                $suite = is_array($suite) ? $suite : array('namespace' => $suite);
+                $suite      = is_array($suite) ? $suite : array('namespace' => $suite);
                 $defaults = array(
-                    'namespace' => '',
-                    'spec_prefix' => 'spec',
-                    'src_path' => 'src',
-                    'spec_path' => '.',
-                    'psr4_prefix' => null
+                    'namespace'     => '',
+                    'spec_prefix'   => 'spec',
+                    'src_path'      => 'src',
+                    'spec_path'     => '.',
+                    'psr4_prefix'   => null
                 );
 
                 $config = array_merge($defaults, $suite);
@@ -394,16 +394,16 @@ class ContainerAssembler
                 return new Loader\Transformer\TypeHintRewriter($c->get('analysis.typehintrewriter'));
             });
         }
-        $container->setShared('analysis.typehintrewriter', function ($c) {
+        $container->setShared('analysis.typehintrewriter', function($c) {
             return new TokenizedTypeHintRewriter(
                 $c->get('loader.transformer.typehintindex'),
                 $c->get('analysis.namespaceresolver')
             );
         });
-        $container->setShared('loader.transformer.typehintindex', function () {
+        $container->setShared('loader.transformer.typehintindex', function() {
             return new Loader\Transformer\InMemoryTypeHintIndex();
         });
-        $container->setShared('analysis.namespaceresolver.tokenized', function () {
+        $container->setShared('analysis.namespaceresolver.tokenized', function() {
             return new TokenizedNamespaceResolver();
         });
         $container->setShared('analysis.namespaceresolver', function ($c) {
@@ -502,7 +502,7 @@ class ContainerAssembler
             ));
 
             try {
-                $formatter = $c->get('formatter.formatters.' . $formatterName);
+                $formatter = $c->get('formatter.formatters.'.$formatterName);
             } catch (\InvalidArgumentException $e) {
                 throw new \RuntimeException(sprintf('Formatter not recognised: "%s"', $formatterName));
             }
@@ -579,15 +579,15 @@ class ContainerAssembler
             return new Wrapper\Unwrapper();
         });
 
-        $container->setShared('access_inspector', function ($c) {
+        $container->setShared('access_inspector', function($c) {
             return $c->get('access_inspector.magic');
         });
 
-        $container->setShared('access_inspector.magic', function ($c) {
+        $container->setShared('access_inspector.magic', function($c) {
             return new MagicAwareAccessInspector($c->get('access_inspector.visibility'));
         });
 
-        $container->setShared('access_inspector.visibility', function () {
+        $container->setShared('access_inspector.visibility', function() {
             return new VisibilityAccessInspector();
         });
     }
@@ -669,7 +669,7 @@ class ContainerAssembler
             );
         });
         $container->setShared('process.rerunner.platformspecific.passthru', function (ServiceContainer $c) {
-            return ReRunner\PassthruReRunner::withExecutionContext(
+            return ReRunner\ProcOpenReRunner::withExecutionContext(
                 $c->get('process.phpexecutablefinder'),
                 $c->get('process.executioncontext')
             );
@@ -708,12 +708,12 @@ class ContainerAssembler
         });
     }
 
-    /**
-     * @param ServiceContainer $container
-     */
+  /**
+   * @param ServiceContainer $container
+   */
     private function setupShutdown(ServiceContainer $container)
     {
-        $container->setShared('process.shutdown', function () {
+        $container->setShared('process.shutdown', function() {
             return new Shutdown();
         });
     }

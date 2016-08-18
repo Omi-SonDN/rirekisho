@@ -12,6 +12,7 @@
 namespace Symfony\Component\HttpKernel;
 
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -21,6 +22,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
+use Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,9 +42,9 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
     /**
      * Constructor.
      *
-     * @param EventDispatcherInterface $dispatcher An EventDispatcherInterface instance
-     * @param ControllerResolverInterface $resolver A ControllerResolverInterface instance
-     * @param RequestStack $requestStack A stack for master/sub requests
+     * @param EventDispatcherInterface    $dispatcher   An EventDispatcherInterface instance
+     * @param ControllerResolverInterface $resolver     A ControllerResolverInterface instance
+     * @param RequestStack                $requestStack A stack for master/sub requests
      */
     public function __construct(EventDispatcherInterface $dispatcher, ControllerResolverInterface $resolver, RequestStack $requestStack = null)
     {
@@ -61,6 +63,9 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
         try {
             return $this->handleRaw($request, $type);
         } catch (\Exception $e) {
+            if ($e instanceof ConflictingHeadersException) {
+                $e = new BadRequestHttpException('The request headers contain conflicting information regarding the origin of this request.', $e);
+            }
             if (false === $catch) {
                 $this->finishRequest($request, $type);
 
@@ -104,7 +109,7 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
      * Exceptions are not caught.
      *
      * @param Request $request A Request instance
-     * @param int $type The type of the request (one of HttpKernelInterface::MASTER_REQUEST or HttpKernelInterface::SUB_REQUEST)
+     * @param int     $type    The type of the request (one of HttpKernelInterface::MASTER_REQUEST or HttpKernelInterface::SUB_REQUEST)
      *
      * @return Response A Response instance
      *
@@ -165,8 +170,8 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
      * Filters a response object.
      *
      * @param Response $response A Response instance
-     * @param Request $request An error message in case the response is not a Response object
-     * @param int $type The type of the request (one of HttpKernelInterface::MASTER_REQUEST or HttpKernelInterface::SUB_REQUEST)
+     * @param Request  $request  An error message in case the response is not a Response object
+     * @param int      $type     The type of the request (one of HttpKernelInterface::MASTER_REQUEST or HttpKernelInterface::SUB_REQUEST)
      *
      * @return Response The filtered Response instance
      *
@@ -191,7 +196,7 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
      * weird results.
      *
      * @param Request $request
-     * @param int $type
+     * @param int     $type
      */
     private function finishRequest(Request $request, $type)
     {
@@ -202,9 +207,9 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
     /**
      * Handles an exception by trying to convert it to a Response.
      *
-     * @param \Exception $e An \Exception instance
-     * @param Request $request A Request instance
-     * @param int $type The type of the request
+     * @param \Exception $e       An \Exception instance
+     * @param Request    $request A Request instance
+     * @param int        $type    The type of the request
      *
      * @return Response A Response instance
      *
@@ -280,6 +285,6 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
             return 'true';
         }
 
-        return (string)$var;
+        return (string) $var;
     }
 }

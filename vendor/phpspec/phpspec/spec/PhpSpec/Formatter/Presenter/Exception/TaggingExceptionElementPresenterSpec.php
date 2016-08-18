@@ -23,8 +23,7 @@ class TaggingExceptionElementPresenterSpec extends ObjectBehavior
     function it_should_tag_an_exception_thrown_message(
         ExceptionTypePresenter $exceptionTypePresenter,
         \Exception $exception
-    )
-    {
+    ) {
         $exceptionTypePresenter->present($exception)->willReturn('exc');
         $this->presentExceptionThrownMessage($exception)->shouldReturn('Exception <label>exc</label> has been thrown.');
     }
@@ -49,7 +48,7 @@ class TaggingExceptionElementPresenterSpec extends ObjectBehavior
         $valuePresenter->presentValue('a')->willReturn('zaz');
         $valuePresenter->presentValue('b')->willReturn('zbz');
 
-        $result = '   <trace><trace-class>class</trace-class><trace-type>type</trace-type>' .
+        $result = '   <trace><trace-class>class</trace-class><trace-type>type</trace-type>'.
             '<trace-func>method</trace-func>(<trace-args><value>zaz</value>, <value>zbz</value></trace-args>)</trace>';
 
         $this->presentExceptionTraceMethod('class', 'type', 'method', array('a', 'b'))->shouldReturn($result);
@@ -60,7 +59,7 @@ class TaggingExceptionElementPresenterSpec extends ObjectBehavior
         $valuePresenter->presentValue('a')->willReturn('zaz');
         $valuePresenter->presentValue('b')->willReturn('zbz');
 
-        $result = '   <trace><trace-func>function</trace-func>' .
+        $result = '   <trace><trace-func>function</trace-func>'.
             '(<trace-args><value>zaz</value>, <value>zbz</value></trace-args>)</trace>';
 
         $this->presentExceptionTraceFunction('function', array('a', 'b'))->shouldReturn($result);

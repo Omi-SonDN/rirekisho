@@ -17,7 +17,6 @@ use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\SymfonyQuestionHelper;
 use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -41,7 +40,7 @@ class SymfonyStyle extends OutputStyle
     private $bufferedOutput;
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     public function __construct(InputInterface $input, OutputInterface $output)
@@ -49,7 +48,7 @@ class SymfonyStyle extends OutputStyle
         $this->input = $input;
         $this->bufferedOutput = new BufferedOutput($output->getVerbosity(), false, clone $output->getFormatter());
         // Windows cmd wraps lines as soon as the terminal width is reached, whether there are following chars or not.
-        $this->lineLength = min($this->getTerminalWidth() - (int)(DIRECTORY_SEPARATOR === '\\'), self::MAX_LINE_LENGTH);
+        $this->lineLength = min($this->getTerminalWidth() - (int) (DIRECTORY_SEPARATOR === '\\'), self::MAX_LINE_LENGTH);
 
         parent::__construct($output);
     }
@@ -58,10 +57,10 @@ class SymfonyStyle extends OutputStyle
      * Formats a message as a block of text.
      *
      * @param string|array $messages The message to write in the block
-     * @param string|null $type The block type (added in [] on first line)
-     * @param string|null $style The style to apply to the whole block
-     * @param string $prefix The prefix for the block
-     * @param bool $padding Whether to add vertical padding
+     * @param string|null  $type     The block type (added in [] on first line)
+     * @param string|null  $style    The style to apply to the whole block
+     * @param string       $prefix   The prefix for the block
+     * @param bool         $padding  Whether to add vertical padding
      */
     public function block($messages, $type = null, $style = null, $prefix = ' ', $padding = false)
     {
@@ -84,7 +83,7 @@ class SymfonyStyle extends OutputStyle
             // prefix each line with a number of spaces equivalent to the type length
             if (null !== $type) {
                 foreach ($lines as &$line) {
-                    $line = $lineIndentation === substr($line, 0, $indentLength) ? $line : $lineIndentation . $line;
+                    $line = $lineIndentation === substr($line, 0, $indentLength) ? $line : $lineIndentation.$line;
                 }
             }
 
@@ -218,21 +217,13 @@ class SymfonyStyle extends OutputStyle
      */
     public function table(array $headers, array $rows)
     {
-        array_walk_recursive($headers, function (&$value) {
-            if ($value instanceof TableCell) {
-                $value = new TableCell(sprintf('<info>%s</>', $value), array(
-                    'colspan' => $value->getColspan(),
-                    'rowspan' => $value->getRowspan(),
-                ));
-            } else {
-                $value = sprintf('<info>%s</>', $value);
-            }
-        });
+        $style = clone Table::getStyleDefinition('symfony-style-guide');
+        $style->setCellHeaderFormat('<info>%s</info>');
 
         $table = new Table($this);
         $table->setHeaders($headers);
         $table->setRows($rows);
-        $table->setStyle('symfony-style-guide');
+        $table->setStyle($style);
 
         $table->render();
         $this->newLine();
@@ -424,6 +415,6 @@ class SymfonyStyle extends OutputStyle
         // Preserve the last 4 chars inserted (PHP_EOL on windows is two chars) in the history buffer
         return array_map(function ($value) {
             return substr($value, -4);
-        }, array_merge(array($this->bufferedOutput->fetch()), (array)$messages));
+        }, array_merge(array($this->bufferedOutput->fetch()), (array) $messages));
     }
 }

@@ -52,7 +52,7 @@ class MultipartStreamTest extends \PHPUnit_Framework_TestCase
     {
         $b = new MultipartStream([
             [
-                'name' => 'foo',
+                'name'     => 'foo',
                 'contents' => 'bar'
             ],
             [
@@ -63,27 +63,27 @@ class MultipartStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             "--boundary\r\nContent-Disposition: form-data; name=\"foo\"\r\nContent-Length: 3\r\n\r\n"
             . "bar\r\n--boundary\r\nContent-Disposition: form-data; name=\"baz\"\r\nContent-Length: 3"
-            . "\r\n\r\nbam\r\n--boundary--\r\n", (string)$b);
+            . "\r\n\r\nbam\r\n--boundary--\r\n", (string) $b);
     }
 
     public function testSerializesNonStringFields()
     {
         $b = new MultipartStream([
             [
-                'name' => 'int',
-                'contents' => (int)1
+                'name'     => 'int',
+                'contents' => (int) 1
             ],
             [
                 'name' => 'bool',
-                'contents' => (boolean)false
+                'contents' => (boolean) false
             ],
             [
                 'name' => 'bool2',
-                'contents' => (boolean)true
+                'contents' => (boolean) true
             ],
             [
                 'name' => 'float',
-                'contents' => (float)1.1
+                'contents' => (float) 1.1
             ]
         ], 'boundary');
         $this->assertEquals(
@@ -91,7 +91,7 @@ class MultipartStreamTest extends \PHPUnit_Framework_TestCase
             . "1\r\n--boundary\r\nContent-Disposition: form-data; name=\"bool\"\r\n\r\n\r\n--boundary"
             . "\r\nContent-Disposition: form-data; name=\"bool2\"\r\nContent-Length: 1\r\n\r\n"
             . "1\r\n--boundary\r\nContent-Disposition: form-data; name=\"float\"\r\nContent-Length: 3"
-            . "\r\n\r\n1.1\r\n--boundary--\r\n", (string)$b);
+            . "\r\n\r\n1.1\r\n--boundary--\r\n", (string) $b);
     }
 
     public function testSerializesFiles()
@@ -116,7 +116,7 @@ class MultipartStreamTest extends \PHPUnit_Framework_TestCase
 
         $b = new MultipartStream([
             [
-                'name' => 'foo',
+                'name'     => 'foo',
                 'contents' => $f1
             ],
             [
@@ -124,7 +124,7 @@ class MultipartStreamTest extends \PHPUnit_Framework_TestCase
                 'contents' => $f2
             ],
             [
-                'name' => 'qux',
+                'name'     => 'qux',
                 'contents' => $f3
             ],
         ], 'boundary');
@@ -167,7 +167,7 @@ EOT;
             [
                 'name' => 'foo',
                 'contents' => $f1,
-                'headers' => [
+                'headers'  => [
                     'x-foo' => 'bar',
                     'content-disposition' => 'custom'
                 ]
@@ -205,17 +205,17 @@ EOT;
 
         $b = new MultipartStream([
             [
-                'name' => 'foo',
+                'name'     => 'foo',
                 'contents' => $f1,
-                'headers' => [
+                'headers'  => [
                     'x-foo' => 'bar',
                     'content-disposition' => 'custom'
                 ]
             ],
             [
-                'name' => 'foo',
+                'name'     => 'foo',
                 'contents' => $f2,
-                'headers' => ['cOntenT-Type' => 'custom'],
+                'headers'  => ['cOntenT-Type' => 'custom'],
             ]
         ], 'boundary');
 

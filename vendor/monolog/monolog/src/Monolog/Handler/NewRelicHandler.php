@@ -49,7 +49,7 @@ class NewRelicHandler extends AbstractProcessingHandler
      * {@inheritDoc}
      *
      * @param string $appName
-     * @param bool $explodeArrays
+     * @param bool   $explodeArrays
      * @param string $transactionName
      */
     public function __construct(
@@ -58,11 +58,10 @@ class NewRelicHandler extends AbstractProcessingHandler
         $appName = null,
         $explodeArrays = false,
         $transactionName = null
-    )
-    {
+    ) {
         parent::__construct($level, $bubble);
 
-        $this->appName = $appName;
+        $this->appName       = $appName;
         $this->explodeArrays = $explodeArrays;
         $this->transactionName = $transactionName;
     }
@@ -92,23 +91,27 @@ class NewRelicHandler extends AbstractProcessingHandler
             newrelic_notice_error($record['message']);
         }
 
-        foreach ($record['formatted']['context'] as $key => $parameter) {
-            if (is_array($parameter) && $this->explodeArrays) {
-                foreach ($parameter as $paramKey => $paramValue) {
-                    $this->setNewRelicParameter('context_' . $key . '_' . $paramKey, $paramValue);
+        if (isset($record['formatted']['context']) && is_array($record['formatted']['context'])) {
+            foreach ($record['formatted']['context'] as $key => $parameter) {
+                if (is_array($parameter) && $this->explodeArrays) {
+                    foreach ($parameter as $paramKey => $paramValue) {
+                        $this->setNewRelicParameter('context_' . $key . '_' . $paramKey, $paramValue);
+                    }
+                } else {
+                    $this->setNewRelicParameter('context_' . $key, $parameter);
                 }
-            } else {
-                $this->setNewRelicParameter('context_' . $key, $parameter);
             }
         }
 
-        foreach ($record['formatted']['extra'] as $key => $parameter) {
-            if (is_array($parameter) && $this->explodeArrays) {
-                foreach ($parameter as $paramKey => $paramValue) {
-                    $this->setNewRelicParameter('extra_' . $key . '_' . $paramKey, $paramValue);
+        if (isset($record['formatted']['extra']) && is_array($record['formatted']['extra'])) {
+            foreach ($record['formatted']['extra'] as $key => $parameter) {
+                if (is_array($parameter) && $this->explodeArrays) {
+                    foreach ($parameter as $paramKey => $paramValue) {
+                        $this->setNewRelicParameter('extra_' . $key . '_' . $paramKey, $paramValue);
+                    }
+                } else {
+                    $this->setNewRelicParameter('extra_' . $key, $parameter);
                 }
-            } else {
-                $this->setNewRelicParameter('extra_' . $key, $parameter);
             }
         }
     }
@@ -127,7 +130,7 @@ class NewRelicHandler extends AbstractProcessingHandler
      * Returns the appname where this log should be sent. Each log can override the default appname, set in this
      * handler's constructor, by providing the appname in it's context.
      *
-     * @param  array $context
+     * @param  array       $context
      * @return null|string
      */
     protected function getAppName(array $context)
@@ -178,7 +181,7 @@ class NewRelicHandler extends AbstractProcessingHandler
 
     /**
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      */
     protected function setNewRelicParameter($key, $value)
     {

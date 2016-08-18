@@ -403,7 +403,7 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('POST', $server->getMethod());
         $this->assertEquals(['Host' => ['www.blakesimpson.co.uk']], $server->getHeaders());
-        $this->assertEquals('', (string)$server->getBody());
+        $this->assertEquals('', (string) $server->getBody());
         $this->assertEquals('1.0', $server->getProtocolVersion());
         $this->assertEquals($_COOKIE, $server->getCookieParams());
         $this->assertEquals($_POST, $server->getParsedBody());
@@ -515,5 +515,18 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['name' => 'value'], $request2->getAttributes());
         $this->assertEquals(['name' => 'value', 'other' => 'otherValue'], $request3->getAttributes());
         $this->assertEquals(['name' => 'value'], $request4->getAttributes());
+    }
+
+    public function testNullAttribute()
+    {
+        $request = (new ServerRequest('GET', '/'))->withAttribute('name', null);
+
+        $this->assertSame(['name' => null], $request->getAttributes());
+        $this->assertNull($request->getAttribute('name', 'different-default'));
+
+        $requestWithoutAttribute = $request->withoutAttribute('name');
+
+        $this->assertSame([], $requestWithoutAttribute->getAttributes());
+        $this->assertSame('different-default', $requestWithoutAttribute->getAttribute('name', 'different-default'));
     }
 }

@@ -13,8 +13,7 @@ use Illuminate\Support\Collection;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class ExcelCollection extends Collection
-{
+class ExcelCollection extends Collection {
 
     /**
      * Sheet title

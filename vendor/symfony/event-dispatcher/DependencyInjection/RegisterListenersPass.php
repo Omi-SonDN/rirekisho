@@ -38,8 +38,8 @@ class RegisterListenersPass implements CompilerPassInterface
      * Constructor.
      *
      * @param string $dispatcherService Service name of the event dispatcher in processed container
-     * @param string $listenerTag Tag name used for listener
-     * @param string $subscriberTag Tag name used for subscribers
+     * @param string $listenerTag       Tag name used for listener
+     * @param string $subscriberTag     Tag name used for subscribers
      */
     public function __construct($dispatcherService = 'event_dispatcher', $listenerTag = 'kernel.event_listener', $subscriberTag = 'kernel.event_subscriber')
     {
@@ -74,12 +74,10 @@ class RegisterListenersPass implements CompilerPassInterface
                 }
 
                 if (!isset($event['method'])) {
-                    $event['method'] = 'on' . preg_replace_callback(array(
-                            '/(?<=\b)[a-z]/i',
-                            '/[^a-z0-9]/i',
-                        ), function ($matches) {
-                            return strtoupper($matches[0]);
-                        }, $event['event']);
+                    $event['method'] = 'on'.preg_replace_callback(array(
+                        '/(?<=\b)[a-z]/i',
+                        '/[^a-z0-9]/i',
+                    ), function ($matches) { return strtoupper($matches[0]); }, $event['event']);
                     $event['method'] = preg_replace('/[^a-z0-9]/i', '', $event['method']);
                 }
 
@@ -99,9 +97,13 @@ class RegisterListenersPass implements CompilerPassInterface
 
             // We must assume that the class value has been correctly filled, even if the service is created by a factory
             $class = $container->getParameterBag()->resolveValue($def->getClass());
-
             $interface = 'Symfony\Component\EventDispatcher\EventSubscriberInterface';
+
             if (!is_subclass_of($class, $interface)) {
+                if (!class_exists($class, false)) {
+                    throw new \InvalidArgumentException(sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                }
+
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, $interface));
             }
 

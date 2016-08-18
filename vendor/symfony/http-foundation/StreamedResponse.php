@@ -33,8 +33,8 @@ class StreamedResponse extends Response
      * Constructor.
      *
      * @param callable|null $callback A valid PHP callback or null to set it later
-     * @param int $status The response status code
-     * @param array $headers An array of response headers
+     * @param int           $status   The response status code
+     * @param array         $headers  An array of response headers
      */
     public function __construct($callback = null, $status = 200, $headers = array())
     {
@@ -50,8 +50,8 @@ class StreamedResponse extends Response
      * Factory method for chainability.
      *
      * @param callable|null $callback A valid PHP callback or null to set it later
-     * @param int $status The response status code
-     * @param array $headers An array of response headers
+     * @param int           $status   The response status code
+     * @param array         $headers  An array of response headers
      *
      * @return StreamedResponse
      */

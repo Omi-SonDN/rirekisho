@@ -1,7 +1,6 @@
 <?php
 
-trait SingleImportTestingTrait
-{
+trait SingleImportTestingTrait {
 
 
     public function testGet()
@@ -54,7 +53,7 @@ trait SingleImportTestingTrait
     {
         $me = $this;
 
-        $this->loadedFile->each(function ($cells) use ($me) {
+        $this->loadedFile->each(function($cells) use($me) {
 
             $me->assertInstanceOf('Maatwebsite\Excel\Collections\CellCollection', $cells);
 
@@ -68,29 +67,29 @@ trait SingleImportTestingTrait
         $this->assertEquals(array(
 
             array(
-                'heading_one' => 'test',
-                'heading_two' => 'test',
-                'heading_three' => 'test',
+                'heading_one'  => 'test',
+                'heading_two'  => 'test',
+                'heading_three'  => 'test',
             ),
             array(
-                'heading_one' => 'test',
-                'heading_two' => 'test',
-                'heading_three' => 'test',
+                'heading_one'  => 'test',
+                'heading_two'  => 'test',
+                'heading_three'  => 'test',
             ),
             array(
-                'heading_one' => 'test',
-                'heading_two' => 'test',
-                'heading_three' => 'test',
+                'heading_one'  => 'test',
+                'heading_two'  => 'test',
+                'heading_three'  => 'test',
             ),
             array(
-                'heading_one' => 'test',
-                'heading_two' => 'test',
-                'heading_three' => 'test',
+                'heading_one'  => 'test',
+                'heading_two'  => 'test',
+                'heading_three'  => 'test',
             ),
             array(
-                'heading_one' => 'test',
-                'heading_two' => 'test',
-                'heading_three' => 'test',
+                'heading_one'  => 'test',
+                'heading_two'  => 'test',
+                'heading_three'  => 'test',
             )
 
         ), $array);
@@ -100,7 +99,7 @@ trait SingleImportTestingTrait
     public function testImportedHeadingsSlugged()
     {
         $first = $this->loadedFile->first()->toArray();
-        $keys = array_keys($first);
+        $keys  = array_keys($first);
 
         $this->assertEquals(array(
             'heading_one',
@@ -117,7 +116,7 @@ trait SingleImportTestingTrait
         $loaded = $this->reload();
 
         $first = $loaded->first()->toArray();
-        $keys = array_keys($first);
+        $keys  = array_keys($first);
 
         $this->assertEquals(array(
             md5('heading one'),
@@ -134,7 +133,7 @@ trait SingleImportTestingTrait
         $loaded = $this->reload();
 
         $first = $loaded->first()->toArray();
-        $keys = array_keys($first);
+        $keys  = array_keys($first);
 
         $this->assertEquals(array(
             0,
@@ -151,7 +150,7 @@ trait SingleImportTestingTrait
         $loaded = $this->reload();
 
         $first = $loaded->first()->toArray();
-        $keys = array_keys($first);
+        $keys  = array_keys($first);
 
         $this->assertEquals(array(
             'heading one',
@@ -182,7 +181,8 @@ trait SingleImportTestingTrait
     {
         $me = $this;
 
-        $config = $this->loadedFile->byConfig('excel.import.sheets', function ($config) use ($me) {
+        $config = $this->loadedFile->byConfig('excel.import.sheets', function($config) use($me)
+        {
             $me->assertInstanceOf('Maatwebsite\Excel\Readers\ConfigReader', $config);
         });
 

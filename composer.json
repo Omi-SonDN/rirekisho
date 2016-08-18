@@ -20,7 +20,10 @@
     "intervention/image": "^2.3",
     "hashids/hashids": "^1.0",
     "barryvdh/laravel-dompdf": "^0.6.1",
-    "vinkla/hashids": "^2.3"
+    "vinkla/hashids": "^2.3",
+    "maatwebsite/excel": "~2.1.0",
+    "dompdf/dompdf": "~0.6.1",
+    "mpdf/mpdf": "~5.7.3"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

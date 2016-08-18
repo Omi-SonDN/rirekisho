@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
     Route::get('CV/statistic', 'CVController@statistic');
     Route::post('CV/statisticSearch', 'CVController@statisticSearch');
     Route::post('CV/statisticStatus', 'CVController@statisticStatus');
+    Route::get('CV/downloadCV/{type}', 'CVController@downloadCV');
 });
 
 Route::group(['middleware' => ['auth']], function () {

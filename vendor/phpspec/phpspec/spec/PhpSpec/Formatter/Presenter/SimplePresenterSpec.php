@@ -38,8 +38,7 @@ class SimplePresenterSpec extends ObjectBehavior
 
     function it_should_be_a_proxy_for_an_exception_presenter(
         ExceptionPresenter $exceptionPresenter, \Exception $exception
-    )
-    {
+    ) {
         $result = 'this is the result';
         $exceptionPresenter->presentException($exception, true)->willReturn($result);
         $this->presentException($exception, true)->shouldReturn($result);
@@ -47,8 +46,7 @@ class SimplePresenterSpec extends ObjectBehavior
 
     function it_should_be_a_proxy_for_a_value_presenter(
         ValuePresenter $valuePresenter
-    )
-    {
+    ) {
         $valuePresenter->presentValue('foo')->willReturn('zfooz');
         $this->presentValue('foo')->shouldReturn('zfooz');
     }

@@ -29,8 +29,8 @@ class ConsoleFormatter extends BasicFormatter implements FatalPresenter
     private $io;
 
     /**
-     * @param PresenterInterface $presenter
-     * @param IO $io
+     * @param PresenterInterface  $presenter
+     * @param IO                  $io
      * @param StatisticsCollector $stats
      */
     public function __construct(PresenterInterface $presenter, IO $io, StatisticsCollector $stats)

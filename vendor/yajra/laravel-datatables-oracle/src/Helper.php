@@ -19,8 +19,8 @@ class Helper
     /**
      * Places item of extra columns into results by care of their order.
      *
-     * @param  $item
-     * @param  $array
+     * @param array $item
+     * @param array $array
      * @return array
      */
     public static function includeInArray($item, $array)
@@ -29,7 +29,7 @@ class Helper
             return array_merge($array, [$item['name'] => $item['content']]);
         } else {
             $count = 0;
-            $last = $array;
+            $last  = $array;
             $first = [];
             foreach ($array as $key => $value) {
                 if ($count == $item['order']) {
@@ -90,8 +90,8 @@ class Helper
         }
 
         $empty_filesystem_instance = new Filesystem();
-        $blade = new BladeCompiler($empty_filesystem_instance, 'datatables');
-        $parsed_string = $blade->compileString($str);
+        $blade                     = new BladeCompiler($empty_filesystem_instance, 'datatables');
+        $parsed_string             = $blade->compileString($str);
 
         ob_start() && extract($data, EXTR_SKIP);
 
@@ -109,6 +109,8 @@ class Helper
     }
 
     /**
+     * Get a mixed value of custom data and the parameters.
+     *
      * @param  array $data
      * @param  mixed $param
      * @return array
@@ -127,15 +129,21 @@ class Helper
     }
 
     /**
-     * @param $param
+     * Cast the parameter into an array.
+     *
+     * @param mixed $param
      * @return array
      */
     public static function castToArray($param)
     {
         if ($param instanceof \stdClass) {
-            $param = (array)$param;
+            $param = (array) $param;
 
             return $param;
+        }
+
+        if ($param instanceof Arrayable) {
+            return $param->toArray();
         }
 
         return $param;
@@ -149,7 +157,7 @@ class Helper
      */
     public static function getOrMethod($method)
     {
-        if (!Str::contains(Str::lower($method), 'or')) {
+        if (! Str::contains(Str::lower($method), 'or')) {
             return 'or' . ucfirst($method);
         }
 
@@ -165,7 +173,7 @@ class Helper
      */
     public static function wrapDatabaseValue($database, $value)
     {
-        $parts = explode('.', $value);
+        $parts  = explode('.', $value);
         $column = '';
         foreach ($parts as $key) {
             $column = static::wrapDatabaseColumn($database, $key, $column);
@@ -175,7 +183,7 @@ class Helper
     }
 
     /**
-     * Database column wrapper
+     * Database column wrapper.
      *
      * @param string $database
      * @param string $key
@@ -213,7 +221,7 @@ class Helper
      */
     public static function convertToArray($row)
     {
-        $data = $row instanceof Arrayable ? $row->toArray() : (array)$row;
+        $data = $row instanceof Arrayable ? $row->toArray() : (array) $row;
         foreach (array_keys($data) as $key) {
             if (is_object($data[$key]) || is_array($data[$key])) {
                 $data[$key] = self::convertToArray($data[$key]);
@@ -235,8 +243,10 @@ class Helper
     }
 
     /**
-     * @param $row
-     * @return mixed
+     * Transform row data into an array.
+     *
+     * @param mixed $row
+     * @return array
      */
     protected static function transformRow($row)
     {
@@ -245,7 +255,7 @@ class Helper
                 $row[$key] = $value->format('Y-m-d H:i:s');
             } else {
                 if (is_object($value)) {
-                    $row[$key] = (string)$value;
+                    $row[$key] = (string) $value;
                 } else {
                     $row[$key] = $value;
                 }

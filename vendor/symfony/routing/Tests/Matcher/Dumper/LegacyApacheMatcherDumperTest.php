@@ -24,14 +24,14 @@ class LegacyApacheMatcherDumperTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        self::$fixturesPath = realpath(__DIR__ . '/../../Fixtures/');
+        self::$fixturesPath = realpath(__DIR__.'/../../Fixtures/');
     }
 
     public function testDump()
     {
         $dumper = new ApacheMatcherDumper($this->getRouteCollection());
 
-        $this->assertStringEqualsFile(self::$fixturesPath . '/dumper/url_matcher1.apache', $dumper->dump(), '->dump() dumps basic routes to the correct apache format.');
+        $this->assertStringEqualsFile(self::$fixturesPath.'/dumper/url_matcher1.apache', $dumper->dump(), '->dump() dumps basic routes to the correct apache format.');
     }
 
     /**
@@ -60,7 +60,7 @@ class LegacyApacheMatcherDumperTest extends \PHPUnit_Framework_TestCase
         $collection = new RouteCollection();
         $collection->add('foo', new Route('/foo'));
         $dumper = new ApacheMatcherDumper($collection);
-        $this->assertStringEqualsFile(self::$fixturesPath . '/dumper/url_matcher2.apache', $dumper->dump(array('script_name' => 'ap p_d\ ev.php')));
+        $this->assertStringEqualsFile(self::$fixturesPath.'/dumper/url_matcher2.apache', $dumper->dump(array('script_name' => 'ap p_d\ ev.php')));
     }
 
     private function getRouteCollection()

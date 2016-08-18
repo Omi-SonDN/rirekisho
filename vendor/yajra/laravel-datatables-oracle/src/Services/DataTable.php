@@ -3,6 +3,7 @@
 namespace Yajra\Datatables\Services;
 
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Config;
 use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use Maatwebsite\Excel\Writers\LaravelExcelWriter;
 use Yajra\Datatables\Contracts\DataTableButtonsContract;
@@ -72,7 +73,7 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
      */
     public function __construct(Datatables $datatables, Factory $viewFactory)
     {
-        $this->datatables = $datatables;
+        $this->datatables  = $datatables;
         $this->viewFactory = $viewFactory;
     }
 
@@ -203,7 +204,7 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
         $this->datatables->getRequest()->merge(['length' => -1]);
 
         $response = $this->ajax();
-        $data = $response->getData(true);
+        $data     = $response->getData(true);
 
         return $data['data'];
     }
@@ -303,11 +304,36 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
     /**
      * Export results to PDF file.
      *
-     * @return void
+     * @return mixed
      */
     public function pdf()
     {
-        $this->buildExcelFile()->download('pdf');
+        if ('snappy' == Config::get('datatables.pdf_generator', 'excel')) {
+            return $this->snappyPdf();
+        } else {
+            $this->buildExcelFile()->download('pdf');
+        }
+    }
+
+    /**
+     * PDF version of the table using print preview blade template.
+     *
+     * @return mixed
+     */
+    public function snappyPdf()
+    {
+        $data   = $this->getDataForPrint();
+        $snappy = app('snappy.pdf.wrapper');
+        $snappy->setOptions([
+            'no-outline'    => true,
+            'margin-left'   => '0',
+            'margin-right'  => '0',
+            'margin-top'    => '10mm',
+            'margin-bottom' => '10mm',
+        ])->setOrientation('landscape');
+
+        return $snappy->loadView($this->printPreview, compact('data'))
+                      ->download($this->getFilename() . ".pdf");
     }
 
     /**
@@ -346,7 +372,7 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
     protected function getBuilderParameters()
     {
         return [
-            'order' => [[0, 'desc']],
+            'order'   => [[0, 'desc']],
             'buttons' => [
                 'create',
                 'export',

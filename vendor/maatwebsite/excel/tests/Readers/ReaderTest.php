@@ -4,8 +4,7 @@ use Mockery as m;
 use Maatwebsite\Excel\Readers\LaravelExcelReader;
 use Maatwebsite\Excel\Classes;
 
-class ReaderTest extends TestCase
-{
+class ReaderTest extends TestCase {
 
     /**
      * Setup
@@ -15,10 +14,10 @@ class ReaderTest extends TestCase
         parent::setUp();
 
         // Set excel class
-        $this->excel = App::make('phpexcel');
+        $this->excel    = App::make('phpexcel');
 
         // Set writer class
-        $this->reader = App::make('excel.reader');
+        $this->reader   = App::make('excel.reader');
         $this->reader->injectExcel($this->excel);
     }
 

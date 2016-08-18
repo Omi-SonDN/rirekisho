@@ -15,8 +15,7 @@ use Maatwebsite\Excel\Exceptions\LaravelExcelException;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class Batch
-{
+class Batch {
 
     /**
      * Excel object
@@ -42,8 +41,8 @@ class Batch
 
     /**
      * Start the Batach
-     * @param  Excel $excel
-     * @param  array $files
+     * @param  Excel   $excel
+     * @param  array   $files
      * @param  Closure $callback
      * @return Excel
      */
@@ -56,8 +55,10 @@ class Batch
         $this->_setFiles($files);
 
         // Do the callback
-        if ($callback instanceof Closure) {
-            foreach ($this->getFiles() as $file) {
+        if ($callback instanceof Closure)
+        {
+            foreach ($this->getFiles() as $file)
+            {
                 // Load the file
                 $excel = $this->excel->load($file);
 
@@ -88,10 +89,14 @@ class Batch
     protected function _setFiles($files)
     {
         // If the param is an array, these will be the files for the batch import
-        if (is_array($files)) {
+        if (is_array($files))
+        {
             $this->files = $this->_getFilesByArray($files);
-        } // Get all the files inside a folder
-        elseif (is_string($files)) {
+        }
+
+        // Get all the files inside a folder
+        elseif (is_string($files))
+        {
             $this->files = $this->_getFilesByFolder($files);
         }
 
@@ -109,7 +114,8 @@ class Batch
     {
         $files = array();
         // Make sure we have real paths
-        foreach ($array as $i => $file) {
+        foreach ($array as $i => $file)
+        {
             $files[$i] = realpath($file) ? $file : base_path($file);
         }
 
@@ -134,7 +140,8 @@ class Batch
         if ($glob === false) return array();
 
         // Return files
-        return array_filter($glob, function ($file) {
+        return array_filter($glob, function ($file)
+        {
             return filetype($file) == 'file';
         });
     }

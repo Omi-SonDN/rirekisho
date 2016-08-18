@@ -20,8 +20,7 @@ class ComposedValuePresenterSpec extends ObjectBehavior
 
     function it_should_call_supports_on_value_presenters_until_one_returns_true(
         TypePresenter $presenter1, TypePresenter $presenter2, TypePresenter $presenter3
-    )
-    {
+    ) {
         $value = 'blah';
 
         $presenter1->getPriority()->willReturn(3);
@@ -42,8 +41,7 @@ class ComposedValuePresenterSpec extends ObjectBehavior
 
     function it_should_order_presenters_by_their_priority_in_descending_order(
         TypePresenter $presenter1, TypePresenter $presenter2
-    )
-    {
+    ) {
         $value = 'foo';
 
         $presenter1->getPriority()->willReturn(10);
@@ -73,7 +71,7 @@ class ComposedValuePresenterSpec extends ObjectBehavior
     function it_should_return_the_type_presenter_presented_value(TypePresenter $typePresenter)
     {
         $value = 'blah';
-        $presented = $value . 'presented';
+        $presented = $value.'presented';
 
         $typePresenter->supports($value)->willReturn(true);
         $typePresenter->present($value)->willReturn($presented);

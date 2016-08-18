@@ -18,7 +18,7 @@ abstract class AbstractProfilerStorageTest extends \PHPUnit_Framework_TestCase
     public function testStore()
     {
         for ($i = 0; $i < 10; ++$i) {
-            $profile = new Profile('token_' . $i);
+            $profile = new Profile('token_'.$i);
             $profile->setIp('127.0.0.1');
             $profile->setUrl('http://foo.bar');
             $profile->setMethod('GET');
@@ -161,7 +161,7 @@ abstract class AbstractProfilerStorageTest extends \PHPUnit_Framework_TestCase
 
         for ($i = 0; $i < 3; ++$i) {
             $dt->modify('+1 minute');
-            $profile = new Profile('time_' . $i);
+            $profile = new Profile('time_'.$i);
             $profile->setIp('127.0.0.1');
             $profile->setUrl('http://foo.bar');
             $profile->setTime($dt->getTimestamp());
@@ -182,7 +182,7 @@ abstract class AbstractProfilerStorageTest extends \PHPUnit_Framework_TestCase
     public function testRetrieveByEmptyUrlAndIp()
     {
         for ($i = 0; $i < 5; ++$i) {
-            $profile = new Profile('token_' . $i);
+            $profile = new Profile('token_'.$i);
             $profile->setMethod('GET');
             $this->getStorage()->write($profile);
         }
@@ -194,7 +194,7 @@ abstract class AbstractProfilerStorageTest extends \PHPUnit_Framework_TestCase
     {
         foreach (array('POST', 'GET') as $method) {
             for ($i = 0; $i < 5; ++$i) {
-                $profile = new Profile('token_' . $i . $method);
+                $profile = new Profile('token_'.$i.$method);
                 $profile->setMethod($method);
                 $this->getStorage()->write($profile);
             }
@@ -234,7 +234,7 @@ abstract class AbstractProfilerStorageTest extends \PHPUnit_Framework_TestCase
     public function testDuplicates()
     {
         for ($i = 1; $i <= 5; ++$i) {
-            $profile = new Profile('foo' . $i);
+            $profile = new Profile('foo'.$i);
             $profile->setIp('127.0.0.1');
             $profile->setUrl('http://example.net/');
             $profile->setMethod('GET');

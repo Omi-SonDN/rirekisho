@@ -100,7 +100,8 @@ cho
     margin-bottom: 1px;
 }
 .nav li a:hover, .nav li.active a{
-    background-color: #6a5b91;
+    background-color: #c2c2ef;
+    /*#6a5b91;*/
     color: white;
 }
 
@@ -115,7 +116,8 @@ cho
 }
 
 .nav li.active a{
-    background-color: #6a5b91;
+    /*background-color: #6a5b91;*/
+    background-color:  #8585e0;
     color: white;
 }
 

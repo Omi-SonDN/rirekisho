@@ -37,7 +37,7 @@ class Esi implements SurrogateInterface
     /**
      * Constructor.
      *
-     * @param array $contentTypes An array of content-type that should be parsed for ESI information.
+     * @param array $contentTypes An array of content-type that should be parsed for ESI information
      *                            (default: text/html, text/xml, application/xhtml+xml, and application/xml)
      */
     public function __construct(array $contentTypes = array('text/html', 'text/xml', 'application/xhtml+xml', 'application/xml'))
@@ -87,7 +87,7 @@ class Esi implements SurrogateInterface
      */
     public function hasSurrogateEsiCapability(Request $request)
     {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.6 and will be removed in 3.0. Use the hasSurrogateCapability() method instead.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.6 and will be removed in 3.0. Use the hasSurrogateCapability() method instead.', E_USER_DEPRECATED);
 
         return $this->hasSurrogateCapability($request);
     }
@@ -102,7 +102,7 @@ class Esi implements SurrogateInterface
         $current = $request->headers->get('Surrogate-Capability');
         $new = 'symfony2="ESI/1.0"';
 
-        $request->headers->set('Surrogate-Capability', $current ? $current . ', ' . $new : $new);
+        $request->headers->set('Surrogate-Capability', $current ? $current.', '.$new : $new);
     }
 
     /**
@@ -114,7 +114,7 @@ class Esi implements SurrogateInterface
      */
     public function addSurrogateEsiCapability(Request $request)
     {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.6 and will be removed in 3.0. Use the addSurrogateCapability() method instead.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.6 and will be removed in 3.0. Use the addSurrogateCapability() method instead.', E_USER_DEPRECATED);
 
         $this->addSurrogateCapability($request);
     }
@@ -146,7 +146,7 @@ class Esi implements SurrogateInterface
             return false;
         }
 
-        return (bool)preg_match('#content="[^"]*ESI/1.0[^"]*"#', $control);
+        return (bool) preg_match('#content="[^"]*ESI/1.0[^"]*"#', $control);
     }
 
     /**
@@ -160,7 +160,7 @@ class Esi implements SurrogateInterface
      */
     public function needsEsiParsing(Response $response)
     {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.6 and will be removed in 3.0. Use the needsParsing() method instead.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.6 and will be removed in 3.0. Use the needsParsing() method instead.', E_USER_DEPRECATED);
 
         return $this->needsParsing($response);
     }
@@ -168,10 +168,10 @@ class Esi implements SurrogateInterface
     /**
      * Renders an ESI tag.
      *
-     * @param string $uri A URI
-     * @param string $alt An alternate URI
-     * @param bool $ignoreErrors Whether to ignore errors or not
-     * @param string $comment A comment to add as an esi:include tag
+     * @param string $uri          A URI
+     * @param string $alt          An alternate URI
+     * @param bool   $ignoreErrors Whether to ignore errors or not
+     * @param string $comment      A comment to add as an esi:include tag
      *
      * @return string
      */
@@ -193,7 +193,7 @@ class Esi implements SurrogateInterface
     /**
      * Replaces a Response ESI tags with the included resource content.
      *
-     * @param Request $request A Request instance
+     * @param Request  $request  A Request instance
      * @param Response $response A Response instance
      *
      * @return Response
@@ -230,7 +230,7 @@ class Esi implements SurrogateInterface
                 throw new \RuntimeException('Unable to process an ESI tag without a "src" attribute.');
             }
 
-            $chunks[$i] = sprintf('<?php echo $this->surrogate->handle($this, %s, %s, %s) ?>' . "\n",
+            $chunks[$i] = sprintf('<?php echo $this->surrogate->handle($this, %s, %s, %s) ?>'."\n",
                 var_export($options['src'], true),
                 var_export(isset($options['alt']) ? $options['alt'] : '', true),
                 isset($options['onerror']) && 'continue' === $options['onerror'] ? 'true' : 'false'
@@ -260,10 +260,10 @@ class Esi implements SurrogateInterface
     /**
      * Handles an ESI from the cache.
      *
-     * @param HttpCache $cache An HttpCache instance
-     * @param string $uri The main URI
-     * @param string $alt An alternative URI
-     * @param bool $ignoreErrors Whether to ignore errors or not
+     * @param HttpCache $cache        An HttpCache instance
+     * @param string    $uri          The main URI
+     * @param string    $alt          An alternative URI
+     * @param bool      $ignoreErrors Whether to ignore errors or not
      *
      * @return string
      *

@@ -12,7 +12,7 @@ $(document).ready(function () {
     });
 
     $('body').on('change','form.status',function (e) {
-        var result = confirm("Want to change?");
+        var result = confirm("Bạn có muốn thay đổi trạng thái?");
         var stt = $(this).children('select.status').val();
         if (result) {
             $.ajaxSetup({
@@ -62,12 +62,15 @@ $(document).ready(function () {
                         btn_send_email += '" class="btn btn-primary btn-send-email col-lg-12" value="';
                         btn_send_email += data.Status + '">Send Email ';
                         btn_send_email += data.Status + '</button>';
+                        console.log(btn_send_email);
                     }else {
-                        btn_send_email += '" class="btn btn-primary btn-send-email disabled col-lg-12" value="';
-                        btn_send_email += data.Status + '">Send Email ';
-                        btn_send_email += data.Status + '</button>';
+                        // btn_send_email += '" class="btn btn-primary btn-send-email disabled col-lg-12" value="';
+                        // btn_send_email += data.Status + '">Send Email ';
+                        // btn_send_email += data.Status + '</button>';
+                        btn_send_email = '';
                     }
-                    $('#btn_send_email' + data.id).replaceWith(btn_send_email);
+                    $('#btn_send_email' + data.id).remove();
+                    $('.status#status' + data.id).append(btn_send_email);
                 }
             });
         } else {

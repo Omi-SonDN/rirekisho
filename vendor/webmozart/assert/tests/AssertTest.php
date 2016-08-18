@@ -14,6 +14,7 @@ namespace Webmozart\Assert\Tests;
 use ArrayIterator;
 use Exception;
 use PHPUnit_Framework_TestCase;
+use RuntimeException;
 use stdClass;
 use Webmozart\Assert\Assert;
 
@@ -78,14 +79,19 @@ class AssertTest extends PHPUnit_Framework_TestCase
             array('scalar', array(null), false),
             array('scalar', array(array()), false),
             array('scalar', array(new stdClass()), false),
+            array('object', array(new stdClass()), true),
+            array('object', array(new RuntimeException()), true),
+            array('object', array(null), false),
+            array('object', array(true), false),
+            array('object', array(1), false),
+            array('object', array(array()), false),
             array('resource', array($resource), true),
             array('resource', array($resource, 'stream'), true),
             array('resource', array($resource, 'other'), false),
             array('resource', array(1), false),
             array('isCallable', array('strlen'), true),
             array('isCallable', array(array($this, 'getTests')), true),
-            array('isCallable', array(function () {
-            }), true),
+            array('isCallable', array(function () {}), true),
             array('isCallable', array(1234), false),
             array('isCallable', array('foobar'), false),
             array('isArray', array(array()), true),
@@ -229,26 +235,59 @@ class AssertTest extends PHPUnit_Framework_TestCase
             array('lengthBetween', array('äbcdef', 3, 5), false, true),
             array('fileExists', array(__FILE__), true),
             array('fileExists', array(__DIR__), true),
-            array('fileExists', array(__DIR__ . '/foobar'), false),
+            array('fileExists', array(__DIR__.'/foobar'), false),
             array('file', array(__FILE__), true),
             array('file', array(__DIR__), false),
-            array('file', array(__DIR__ . '/foobar'), false),
+            array('file', array(__DIR__.'/foobar'), false),
             array('directory', array(__DIR__), true),
             array('directory', array(__FILE__), false),
-            array('directory', array(__DIR__ . '/foobar'), false),
+            array('directory', array(__DIR__.'/foobar'), false),
             // no tests for readable()/writable() for now
             array('classExists', array(__CLASS__), true),
-            array('classExists', array(__NAMESPACE__ . '\Foobar'), false),
+            array('classExists', array(__NAMESPACE__.'\Foobar'), false),
             array('subclassOf', array(__CLASS__, 'PHPUnit_Framework_TestCase'), true),
             array('subclassOf', array(__CLASS__, 'stdClass'), false),
             array('implementsInterface', array('ArrayIterator', 'Traversable'), true),
             array('implementsInterface', array(__CLASS__, 'Traversable'), false),
+            array('propertyExists', array((object) array('property' => 0), 'property'), true),
+            array('propertyExists', array((object) array('property' => null), 'property'), true),
+            array('propertyExists', array((object) array('property' => null), 'foo'), false),
+            array('propertyNotExists', array((object) array('property' => 0), 'property'), false),
+            array('propertyNotExists', array((object) array('property' => null), 'property'), false),
+            array('propertyNotExists', array((object) array('property' => null), 'foo'), true),
+            array('methodExists', array('RuntimeException', 'getMessage'), true),
+            array('methodExists', array(new RuntimeException(), 'getMessage'), true),
+            array('methodExists', array('stdClass', 'getMessage'), false),
+            array('methodExists', array(new stdClass(), 'getMessage'), false),
+            array('methodExists', array(null, 'getMessage'), false),
+            array('methodExists', array(true, 'getMessage'), false),
+            array('methodExists', array(1, 'getMessage'), false),
+            array('methodNotExists', array('RuntimeException', 'getMessage'), false),
+            array('methodNotExists', array(new RuntimeException(), 'getMessage'), false),
+            array('methodNotExists', array('stdClass', 'getMessage'), true),
+            array('methodNotExists', array(new stdClass(), 'getMessage'), true),
+            array('methodNotExists', array(null, 'getMessage'), true),
+            array('methodNotExists', array(true, 'getMessage'), true),
+            array('methodNotExists', array(1, 'getMessage'), true),
             array('keyExists', array(array('key' => 0), 'key'), true),
             array('keyExists', array(array('key' => null), 'key'), true),
             array('keyExists', array(array('key' => null), 'foo'), false),
             array('keyNotExists', array(array('key' => 0), 'key'), false),
             array('keyNotExists', array(array('key' => null), 'key'), false),
             array('keyNotExists', array(array('key' => null), 'foo'), true),
+            array('uuid', array('00000000-0000-0000-0000-000000000000'), true),
+            array('uuid', array('ff6f8cb0-c57d-21e1-9b21-0800200c9a66'), true),
+            array('uuid', array('ff6f8cb0-c57d-11e1-9b21-0800200c9a66'), true),
+            array('uuid', array('ff6f8cb0-c57d-31e1-9b21-0800200c9a66'), true),
+            array('uuid', array('ff6f8cb0-c57d-41e1-9b21-0800200c9a66'), true),
+            array('uuid', array('ff6f8cb0-c57d-51e1-9b21-0800200c9a66'), true),
+            array('uuid', array('FF6F8CB0-C57D-11E1-9B21-0800200C9A66'), true),
+            array('uuid', array('zf6f8cb0-c57d-11e1-9b21-0800200c9a66'), false),
+            array('uuid', array('af6f8cb0c57d11e19b210800200c9a66'), false),
+            array('uuid', array('ff6f8cb0-c57da-51e1-9b21-0800200c9a66'), false),
+            array('uuid', array('af6f8cb-c57d-11e1-9b21-0800200c9a66'), false),
+            array('uuid', array('3f6f8cb0-c57d-11e1-9b21-0800200c9a6'), false),
+
         );
     }
 
@@ -296,7 +335,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
             $this->setExpectedException('\InvalidArgumentException');
         }
 
-        call_user_func_array(array('Webmozart\Assert\Assert', 'nullOr' . ucfirst($method)), $args);
+        call_user_func_array(array('Webmozart\Assert\Assert', 'nullOr'.ucfirst($method)), $args);
     }
 
     /**
@@ -304,7 +343,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
      */
     public function testNullOrAcceptsNull($method)
     {
-        call_user_func(array('Webmozart\Assert\Assert', 'nullOr' . ucfirst($method)), null);
+        call_user_func(array('Webmozart\Assert\Assert', 'nullOr'.ucfirst($method)), null);
     }
 
     /**
@@ -325,7 +364,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
         $arg = array_shift($args);
         array_unshift($args, array($arg));
 
-        call_user_func_array(array('Webmozart\Assert\Assert', 'all' . ucfirst($method)), $args);
+        call_user_func_array(array('Webmozart\Assert\Assert', 'all'.ucfirst($method)), $args);
     }
 
     /**
@@ -346,7 +385,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
         $arg = array_shift($args);
         array_unshift($args, new ArrayIterator(array($arg)));
 
-        call_user_func_array(array('Webmozart\Assert\Assert', 'all' . ucfirst($method)), $args);
+        call_user_func_array(array('Webmozart\Assert\Assert', 'all'.ucfirst($method)), $args);
     }
 
     public function getStringConversions()

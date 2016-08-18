@@ -32,7 +32,7 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
     /**
      * Constructor.
      *
-     * @param HttpKernelInterface $kernel A HttpKernelInterface instance
+     * @param HttpKernelInterface      $kernel     A HttpKernelInterface instance
      * @param EventDispatcherInterface $dispatcher A EventDispatcherInterface instance
      */
     public function __construct(HttpKernelInterface $kernel, EventDispatcherInterface $dispatcher = null)
@@ -122,13 +122,15 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
             if ($trustedHeaderName = Request::getTrustedHeaderName(Request::HEADER_CLIENT_IP)) {
                 $currentXForwardedFor = $request->headers->get($trustedHeaderName, '');
 
-                $server['HTTP_' . $trustedHeaderName] = ($currentXForwardedFor ? $currentXForwardedFor . ', ' : '') . $request->getClientIp();
+                $server['HTTP_'.$trustedHeaderName] = ($currentXForwardedFor ? $currentXForwardedFor.', ' : '').$request->getClientIp();
             }
         } catch (\InvalidArgumentException $e) {
             // Do nothing
         }
 
         $server['REMOTE_ADDR'] = '127.0.0.1';
+        unset($server['HTTP_IF_MODIFIED_SINCE']);
+        unset($server['HTTP_IF_NONE_MATCH']);
 
         $subRequest = Request::create($uri, 'get', array(), $cookies, array(), $server);
         if ($request->headers->has('Surrogate-Capability')) {

@@ -24,7 +24,7 @@ interface SessionStorageInterface
     /**
      * Starts the session.
      *
-     * @return bool True if started.
+     * @return bool True if started
      *
      * @throws \RuntimeException If something goes wrong starting the session.
      */
@@ -33,14 +33,14 @@ interface SessionStorageInterface
     /**
      * Checks if the session is started.
      *
-     * @return bool True if started, false otherwise.
+     * @return bool True if started, false otherwise
      */
     public function isStarted();
 
     /**
      * Returns the session ID.
      *
-     * @return string The session ID or empty.
+     * @return string The session ID or empty
      */
     public function getId();
 
@@ -54,7 +54,7 @@ interface SessionStorageInterface
     /**
      * Returns the session name.
      *
-     * @return mixed The session name.
+     * @return mixed The session name
      */
     public function getName();
 
@@ -84,8 +84,8 @@ interface SessionStorageInterface
      * Otherwise session data could get lost again for concurrent requests with the
      * new ID. One result could be that you get logged out after just logging in.
      *
-     * @param bool $destroy Destroy session when regenerating?
-     * @param int $lifetime Sets the cookie lifetime for the session cookie. A null value
+     * @param bool $destroy  Destroy session when regenerating?
+     * @param int  $lifetime Sets the cookie lifetime for the session cookie. A null value
      *                       will leave the system settings unchanged, 0 sets the cookie
      *                       to expire with browser session. Time is in seconds, and is
      *                       not a Unix timestamp.

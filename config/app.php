@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'vn',
 
     /*
     |--------------------------------------------------------------------------
@@ -176,6 +176,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        //Collective\Bus\BusServiceProvider::class,
         /*
         *
         */
@@ -234,8 +236,8 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Hashids' => Vinkla\Hashids\Facades\Hashids::class
-
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

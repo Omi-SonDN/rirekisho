@@ -58,8 +58,7 @@ class PHPUnit_Util_Printer
                     $this->out = fsockopen($out[0], $out[1]);
                 } else {
                     if (strpos($out, 'php://') === false &&
-                        !is_dir(dirname($out))
-                    ) {
+                        !is_dir(dirname($out))) {
                         mkdir(dirname($out), 0777, true);
                     }
 
@@ -86,8 +85,7 @@ class PHPUnit_Util_Printer
             $this->outTarget !== null &&
             strpos($this->outTarget, 'php://') !== 0 &&
             strpos($this->outTarget, 'socket://') !== 0 &&
-            extension_loaded('tidy')
-        ) {
+            extension_loaded('tidy')) {
             file_put_contents(
                 $this->outTarget,
                 tidy_repair_file(

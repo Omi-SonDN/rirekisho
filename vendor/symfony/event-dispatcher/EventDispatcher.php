@@ -80,8 +80,8 @@ class EventDispatcher implements EventDispatcherInterface
      *
      * Returns null if the event or the listener does not exist.
      *
-     * @param string $eventName The name of the event
-     * @param callable $listener The listener
+     * @param string   $eventName The name of the event
+     * @param callable $listener  The listener
      *
      * @return int|null The event listener priority
      */
@@ -103,7 +103,7 @@ class EventDispatcher implements EventDispatcherInterface
      */
     public function hasListeners($eventName = null)
     {
-        return (bool)count($this->getListeners($eventName));
+        return (bool) count($this->getListeners($eventName));
     }
 
     /**
@@ -171,9 +171,9 @@ class EventDispatcher implements EventDispatcherInterface
      * This method can be overridden to add functionality that is executed
      * for each listener.
      *
-     * @param callable[] $listeners The event listeners.
-     * @param string $eventName The name of the event to dispatch.
-     * @param Event $event The event object to pass to the event handlers/listeners.
+     * @param callable[] $listeners The event listeners
+     * @param string     $eventName The name of the event to dispatch
+     * @param Event      $event     The event object to pass to the event handlers/listeners
      */
     protected function doDispatch($listeners, $eventName, Event $event)
     {
@@ -188,7 +188,7 @@ class EventDispatcher implements EventDispatcherInterface
     /**
      * Sorts the internal list of listeners for the given event by priority.
      *
-     * @param string $eventName The name of the event.
+     * @param string $eventName The name of the event
      */
     private function sortListeners($eventName)
     {

@@ -162,7 +162,7 @@ abstract class Bundle extends ContainerAware implements BundleInterface
      */
     public function registerCommands(Application $application)
     {
-        if (!is_dir($dir = $this->getPath() . '/Command')) {
+        if (!is_dir($dir = $this->getPath().'/Command')) {
             return;
         }
 
@@ -173,15 +173,15 @@ abstract class Bundle extends ContainerAware implements BundleInterface
         $finder = new Finder();
         $finder->files()->name('*Command.php')->in($dir);
 
-        $prefix = $this->getNamespace() . '\\Command';
+        $prefix = $this->getNamespace().'\\Command';
         foreach ($finder as $file) {
             $ns = $prefix;
             if ($relativePath = $file->getRelativePath()) {
-                $ns .= '\\' . str_replace('/', '\\', $relativePath);
+                $ns .= '\\'.str_replace('/', '\\', $relativePath);
             }
-            $class = $ns . '\\' . $file->getBasename('.php');
+            $class = $ns.'\\'.$file->getBasename('.php');
             if ($this->container) {
-                $alias = 'console.command.' . strtolower(str_replace('\\', '_', $class));
+                $alias = 'console.command.'.strtolower(str_replace('\\', '_', $class));
                 if ($this->container->has($alias)) {
                     continue;
                 }
@@ -202,6 +202,6 @@ abstract class Bundle extends ContainerAware implements BundleInterface
     {
         $basename = preg_replace('/Bundle$/', '', $this->getName());
 
-        return $this->getNamespace() . '\\DependencyInjection\\' . $basename . 'Extension';
+        return $this->getNamespace().'\\DependencyInjection\\'.$basename.'Extension';
     }
 }

@@ -67,7 +67,7 @@ class BsdFindAdapter extends AbstractFindAdapter
 
         $command
             ->add('-print0 | xargs -0 stat -f')
-            ->arg($format . '%t%N')
+            ->arg($format.'%t%N')
             ->add('| sort | cut -f 2');
     }
 
@@ -96,7 +96,8 @@ class BsdFindAdapter extends AbstractFindAdapter
                 ->add($expr->isCaseSensitive() ? null : '-i')
                 ->add($not ? '-L' : '-l')
                 ->add('-Ee')->arg($expr->renderPattern())
-                ->add('{}');
+                ->add('{}')
+            ;
         }
     }
 }

@@ -62,15 +62,16 @@ class DotFormatter extends ConsoleFormatter
         }
 
         $remainder = $eventsCount % 50;
+        $endOfRow = 0 === $remainder;
         $lastRow = $eventsCount === $this->examplesCount;
 
-        if ($remainder === 0 || $lastRow) {
-            $length = strlen((string)$this->examplesCount);
-            $format = sprintf(' %%%dd / %%%dd', $length, $length);
+        if ($lastRow && !$endOfRow) {
+            $io->write(str_repeat(' ', 50 - $remainder));
+        }
 
-            if ($lastRow) {
-                $io->write(str_repeat(' ', 50 - $remainder));
-            }
+        if ($lastRow || $endOfRow) {
+            $length = strlen((string) $this->examplesCount);
+            $format = sprintf(' %%%dd / %%%dd', $length, $length);
 
             $io->write(sprintf($format, $eventsCount, $this->examplesCount));
 
