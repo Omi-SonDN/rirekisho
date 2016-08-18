@@ -482,4 +482,3 @@ function multi_del_use() {
         });
     }
 }
-

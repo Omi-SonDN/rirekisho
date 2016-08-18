@@ -68,14 +68,8 @@ class StatusController extends Controller
             'allow_sendmail' => 'required',
             'role_VisitorStatus' => 'required'
         );
-        $messages = array(
-            'allow_sendmail.required' => 'Bạn phải chọn cho phép hoặc không cho phép gửi mail!',
-            'role_VisitorStatus.required' => "Bạn phải chọn cho phép hoặc không cho phép Visistor quản lý",
-            'status.required' => 'Tên trạng thái không được để trống!',
-            'status.unique' => 'Tên trạng thái đã tồn tại, vui lòng nhập tên trạng thái khác!',
-        );
         
-        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator = Validator::make($request->all(),$rules);
         if( $validator->fails() ){
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
@@ -157,16 +151,10 @@ class StatusController extends Controller
             'allow_sendmail' => 'required',
             'role_VisitorStatus' => 'required'
         );
-        $messages = array(
-            'allow_sendmail.required' => 'Bạn phải chọn cho phép hoặc không cho phép gửi mail!',
-            'role_VisitorStatus.required' => "Bạn phải chọn cho phép hoặc không cho phép Visistor quản lý",
-            'status.required' => 'Tên trạng thái không được để trống!',
-            'status.unique' => 'Tên trạng thái đã tồn tại, vui lòng nhập tên trạng thái khác!',
-        );
         if( $status->status != $request->status){
             $rules['status'] = 'required|unique:status,status';
         }
-        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator = Validator::make($request->all(),$rules);
         if( $validator->fails() ){
             return redirect()->back()->withErrors($validator)->withInput();
         } else {

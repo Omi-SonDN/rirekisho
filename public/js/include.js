@@ -765,7 +765,7 @@ function lam_moi_ttv(id) {
     }
 }
 
-var ALERT_TITLE = "Oops!";
+var ALERT_TITLE = "";
 var ALERT_BUTTON_TEXT = "Ok";
 
 function createCustomAlert(txt) {

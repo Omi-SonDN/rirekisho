@@ -58,7 +58,7 @@
                         ?>
 
                             <div class="search_po_sa" style="display: none">
-                                    <label>Date: </label>
+                                    <label>From: </label>
                                     <input id="startDate" data-date-format="yyyy-mm-dd" name="startDate" value="{{$dateStart}}">
                                     <label>To: </label>
                                     <input id="endDate"  data-date-format="yyyy-mm-dd" name="endDate" value="{{$day}}">

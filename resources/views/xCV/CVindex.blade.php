@@ -4,34 +4,29 @@
 
     <div id="list_table" data-table="table-resume">
 
-        <div class="controlle-search col-md-12 box_white block_ntv_dangnhap">
-            {{--<p id="advancedSearch" style="float: right">Advanced search</p>--}}
-            <!--advance search-->
-            <div id="adSearch">
-                <!--<form id="search" method="POST" action="{{-- url('CV/adSearch') --}}">-->
-                <input id="nameSearch" class="set_{{\Auth::user()->hash}}" type="text" placeholder="Name" name="name"
-                       value="{{ (Request::has('search')) ? Request::input('search') : ''}}"
-                       onkeyup="onclickSetData(this, this.name)">
-                <select id="positionsSearch" class="set_{{\Auth::user()->hash}}" name="positions"
-                        onchange="onclickSetData(this);">
-                    <option value="">--Vị trí tuyển dụng--</option>
-                    @foreach ($_Position as $position)
-                        <option @if (Request::has('apply_to')) {{ (Request::input('apply_to') == $position->id) ? 'selected' : ''}}
-                                @endif value="{{$position->id}}">{{$position->name}}</option>
-                    @endforeach
-                </select>
+    <div class="controlle-search col-md-12 box_white block_ntv_dangnhap">
+        {{--<p id="advancedSearch" style="float: right">Advanced search</p>--}}
+        <!--advance search-->
+        <div id="adSearch">
+        <!--<form id="search" method="POST" action="{{-- url('CV/adSearch') --}}">-->
+            <input id = "nameSearch" class="set_{{\Auth::user()->hash}}" type="text" placeholder="Name" name="name" value="{{ (Request::has('search')) ? Request::input('search') : ''}}" onkeyup="onclickSetData(this, this.name)">
+            <select id = "positionsSearch" class="set_{{\Auth::user()->hash}}" name="positions" onchange="onclickSetData(this);">
+                <option value="">--Vị trí tuyển dụng--</option>
+                @foreach ($_Position as $position)
+                    <option @if (Request::has('apply_to')) {{ (Request::input('apply_to') == $position->id) ? 'selected' : ''}} @endif value="{{$position->id}}">{{$position->name}}</option>
+                @endforeach
+            </select>
 
-                <select id="statusSearch" class="set_{{\Auth::user()->hash}}" name="Status"
-                        onchange="onclickSetData(this);">
-                    <option value="">-- Trạng thái --</option>
-                    @foreach ($_Status as $sta)
-                        <option @if (Request::has('status')) {{ (Request::input('status') == $sta->id) ? 'selected' : ''}}
-                                @endif value="{{$sta->id}}">{{$sta->status}}</option>
-                    @endforeach
-                </select>
-                <input id="submitSearch" type="submit" name="submit" value="Search">
-                <!--</form>-->
-            </div>
+            <select id = "statusSearch" class="set_{{\Auth::user()->hash}}" name="Status" onchange="onclickSetData(this);">
+                <option value="">-- Trạng thái --</option>
+                @foreach ($_Status as $sta)
+                    <option @if (Request::has('status')) {{ (Request::input('status') == $sta->id) ? 'selected' : ''}} @endif value="{{$sta->id}}">{{$sta->status}}</option>
+                @endforeach
+            </select>
+            <input id="submitSearch" type="submit" name="submit" value="Search">
+        <!--</form>-->
+        </div>
+        <!--advance search-->
             <!--advance search-->
         <div class="box_search">
             <div style="float: left; width: 200px">
@@ -85,6 +80,7 @@
                 @endcan
             </div>
         </div>
+
             <div class="clearfix"></div>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
@@ -92,7 +88,7 @@
                     <div class="modal-content" id="modal-content"></div>
                 </div>
             </div>
-
+    
             <table id="example" class="dataTable" data-sort="" data-field="">
                 <thead>
                 <tr>

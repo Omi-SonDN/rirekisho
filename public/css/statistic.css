@@ -239,3 +239,12 @@
 .highcharts-tooltip + text{
     display: none;
 }
+
+#error_{
+    height: 300px;
+    text-align: center;
+    display: none;
+    color: #336699;;
+    font-size: 15pt;
+    font-weight: 700px;
+}

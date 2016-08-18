@@ -2,13 +2,13 @@
 <title>Quản lý ví trí tuyển dụng</title>
 @section('content')
     <div class="row">
-        <button class="btn btn-primary open-modal" name="btn_pos_create" id="btn_pos_create"><a style="font-weight: bold; color: white;"  href="{{route('position::getaddposition')}}">Create</a></button>
+        <a class="btn btn-primary open-modal" style="font-weight: bold; color: white;"  href="{{route('position::getaddposition')}}">Create</a>
         <hr>
     </div>
     <div class="row">
         <div class='col-lg-12'>
             <table class="table table-hover table-responsive" id="pos-list">
-                <thead class="bg-primary">
+                <thead>s
                 <th>STT</th>
                 <th>Vị trí</th>
                 <th>Kích hoạt</th>

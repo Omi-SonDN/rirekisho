@@ -38,7 +38,7 @@
 			            },
 			            yAxis: {
 			                title: {
-			                    text: 'Số CV'
+			                    text: 'Số lượng cv'
 			                }
 			            },
 			            series:[
@@ -72,7 +72,7 @@
 		            },
 		            yAxis: {
 		                title: {
-		                    text: 'Số CV'
+		                    text: 'Số lượng cv'
 		                }
 		            },
 		            series: [{
@@ -101,7 +101,7 @@
 	    });
 	});
 </script>
-<div id="error_" style="height: 300px;text-align: center; display: none;"></div>
+<div id="error_" style=""></div>
 <div class="button_print" style="width: 25px; height: 25px; float: right">
     <div class="printCV">
         

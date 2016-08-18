@@ -45,9 +45,11 @@
                         <input type="hidden" value="{{ ($CV->User->email)}}" id="email"/>
 
                         @if(!empty($CV->status))
-                            <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary btn-send-email {{($CV->status->allow_sendmail) ? '' : 'disabled'}} col-lg-12" value="{{ $CV->Status }}">Send Email {{ $CV->Status }}</button>
+                            @if($CV->status->allow_sendmail)
+                                <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary btn-send-email col-lg-12" value="{{ $CV->Status }}">Send Email {{ $CV->Status }}</button>
+                            @endif
                         @else
-                            <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary disabled btn-send-email col-lg-12" value="">Send Email </button>
+                            <!-- <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary disabled btn-send-email col-lg-12" value="">Send Email </button> -->
                         @endif
                     @endcan
                 </div>
@@ -84,11 +86,6 @@
                                 <span class="fa fa-trash-o" aria-hidden="true"></span>
                                 {{--<input type="checkbox" name="checkDelCV" />--}}
                             </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="100%" style="text-align: center">
-                        {!! $CV->Livecv !!}
                         </td>
                     </tr>
                 </table>
