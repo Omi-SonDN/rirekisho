@@ -9,7 +9,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Compnaies;
 use App\User;
+use App\Slide;
+use App\Positions;
 use App\CV;
+use App\Fgeneral;
 
 class WellController extends Controller
 {
@@ -23,6 +26,9 @@ class WellController extends Controller
      */
     public function index()
     {
+        $settings = Fgeneral::all()->keyBy('key');
+        $slides = Slide::orderBy('order')->get();
+        $positions = Positions::take(6)->get();
         $configcp = Compnaies::first();
         $pCV = array();
         if (\Auth::check()) {
@@ -31,7 +37,7 @@ class WellController extends Controller
                 ->get();
         }
         $isslider = 1;
-       return view('FrontEnd.pages.home', compact('configcp', 'isslider', 'pCV'));
+       return view('FrontEnd.pages.home', compact('configcp', 'isslider', 'pCV','slides','positions','settings'));
     }
 
     /**

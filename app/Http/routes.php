@@ -81,8 +81,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{id}/delete',['as'=>'delete','uses'=>'PositionsController@delete'])->where(['id'=>'[0-9]+']);
         Route::get('/{id}/view',['as'=>'view','uses'=>'PositionsController@view'])->where(['id'=>'[0-9]+']);
     });
-    Route::resource('positions', 'PositionsController');
-
+    Route::resource('positions', 'PositionsCoslidentroller');
+    Route::group(['prefix' => 'slide','as'=>'slide::'], function () {
+        Route::get('/list', ['as' => 'list', 'uses' => 'FrontEnd\SlideController@index']);
+        Route::get('/add', ['as' => 'addSlide', 'uses' => 'FrontEnd\SlideController@add']);
+        Route::post('/add', ['as' => 'postSlide', 'uses' => 'FrontEnd\SlideController@create']);
+        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'FrontEnd\SlideController@edit']);
+        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'FrontEnd\SlideController@update']);
+    });
+    Route::group(['prefix' => 'fgeneral','as'=>'fgeneral::'], function () {
+        Route::get('/', ['as' => 'list', 'uses' => 'FrontEnd\FGeneralController@index']);
+        Route::post('/', ['as' => 'update', 'uses' => 'FrontEnd\FGeneralController@update']);
+    });
     Route::resource('groups', 'GroupsController');
     Route::post('/groups/getUsername', [
         'as' => 'groups.getUsername',

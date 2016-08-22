@@ -1,11 +1,11 @@
 @extends('xCV.template')
-<title>Thêm thông tin vị trí tuyển dụng</title>
+<title>Sửa Slide</title>
 
 @section('content')
-    <form action="{{route('position::postaddposition')}}" method="post" class="my-forms" id="profile-forms"
+    <form action="{{route('slide::update',['id'=>$slide->id])}}" method="post" class="my-forms" id="profile-forms"
           enctype="multipart/form-data">
         <fieldset id="field-box">
-            <label slide-header="true"><h3>Thông tin vị trí tuyển dụng </h3></label>
+            <label slide-header="true"><h3>Sửa slide</h3></label>
             @include('includes.flash-alert')
             <hr>
             <div class="float_left" style="width: 100%;">
@@ -13,10 +13,10 @@
                 <ul slide-toggle=true>
                     <li class="bottom_20px">
                         <div class="float_right " style="width: 100%;">
-                            <label class="label" for="name">Vị trí tuyển dụng <i style="color: red;">*</i></label>
+                            <label class="label" for="name">Tên slide <i style="color: red;">*</i></label>
                             <div class="input">
                                 <input type="text" class="input-right form-data"
-                                       name="name" value="{!! old('name') !!}">
+                                       name="name" value="{!! old('name')?old('name'):$slide->name !!}">
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         {{ $errors->first('name') }}
@@ -27,25 +27,26 @@
                     </li>
                     <li class="bottom_20px">
                         <div class="form-group">
-                            <label>Trạng thái<i style="color: red;">*</i></label>
-                                <input name="active" value="0" type="radio" >Không kích hoạt
-                                <input name="active" value="1" type="radio" >Kích hoạt
-                                @if ($errors->has('active'))
+                            <div class="preview">
+                                <img src="{{asset($slide->image)}}" style="width:100%"/>
+                            </div>
+                            <label class="title">Ảnh<i style="color: red;">*</i></label>
+                                <input type="file" name='image'/>
+                                @if ($errors->has('image'))
                                     <span class="help-block">
-                                        {{ $errors->first('active') }}
+                                        {{ $errors->first('image') }}
                                     </span>
                                 @endif
                         </div>
                     </li>
                     <li class="bottom_20px">
-                        <div class="form-group ">
-                            <label>Icon <i style="color: red;">*</i></label>
+                        <div class="float_right " style="width: 100%;">
+                            <label class="label">Text <i style="color: red;">*</i></label>
                             <div class="input">
-                                <input type="text" id="faicon" class="input-right form-data form-control"
-                                       name="icon" value="{!! old('icon') !!}">
-                                @if ($errors->has('icon'))
+                                <textarea aria-required="true" name="text" id="description" class="input-right form-data" rows="3" >{{old('text')?old('text'):$slide->text}}</textarea>
+                                @if ($errors->has('text'))
                                     <span class="help-block">
-                                        {{ $errors->first('icon') }}
+                                        {{ $errors->first('text') }}
                                     </span>
                                 @endif
                             </div>
@@ -53,12 +54,12 @@
                     </li>
                     <li class="bottom_20px">
                         <div class="float_right " style="width: 100%;">
-                            <label class="label">Mô tả <i style="color: red;">*</i></label>
+                            <label class="label">Sắp xếp <i style="color: red;">*</i></label>
                             <div class="input">
-                                <textarea aria-required="true" name="description" id="description" class="input-right form-data" rows="3" >{{old('description')}}</textarea>
-                                @if ($errors->has('description'))
+                                <input type="number" name="order" value="{{old('order')?old('name'):$slide->order}}"></textarea>
+                                @if ($errors->has('order'))
                                     <span class="help-block">
-                                        {{ $errors->first('description') }}
+                                        {{ $errors->first('order') }}
                                     </span>
                                 @endif
                             </div>
@@ -67,7 +68,7 @@
                 </ul>
                 <ul>
                     <li class="cancel">
-                        <input type="submit" form="profile-forms" name="submit1" value="Add Position"
+                        <input type="submit" form="profile-forms" name="submit1" value="Cập nhật"
                                class="b-purple">
                     </li>
                 </ul>

@@ -8,10 +8,11 @@
     <div class="row">
         <div class='col-lg-12'>
             <table class="table table-hover table-responsive" id="pos-list">
-                <thead>s
+                <thead>
                 <th>STT</th>
                 <th>Vị trí</th>
                 <th>Kích hoạt</th>
+                <th>Icon</th>
                 <th>Mô tả</th>
                 <th>Hành động</th>
                 </thead>
@@ -27,6 +28,9 @@
                         </td>
                         <td>
                             {!! $position->ActPosition !!}
+                        </td>
+                        <td>
+                            <i class="fa {{$position->icon}}"></i>
                         </td>
                         <td>
                             {{$position->description}}
