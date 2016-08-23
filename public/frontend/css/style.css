@@ -485,3 +485,7 @@ section .introduce .right-content h2{
   margin-top: -20px;
   margin-bottom: 20px;
 }
+.footer_top .footer_widget_nav a{
+  font-weight: 300;
+  color: #fff;
+}

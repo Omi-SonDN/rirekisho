@@ -47,7 +47,7 @@
 
                         @if(!empty($CV->status))
                             @if($CV->status->allow_sendmail)
-                                <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary btn-send-email col-lg-12" value="{{ $CV->Status }}">Send Email {{ $CV->Status }}</button>
+                                <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary btn-send-email col-lg-12" value="{{ $CV->Status }}">Send Email</button>
                             @else
                             <button id="btn_send_email{{ $CV->id}}"></button>
                             @endif
