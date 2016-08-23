@@ -70,6 +70,7 @@ class PositionsController extends Controller
             $positions->name = $request->name;
             $positions->active = $request->get('active') ? $request->get('active'):0;
             $positions->description = $request->description;
+            $positions->icon = $request->icon;
             $positions->save();
         }
         
@@ -154,6 +155,7 @@ class PositionsController extends Controller
                 $position->active = 0;
             }
             $position->description = $request->description;
+            $position->icon = $request->icon;
         }
 
         $position->update();

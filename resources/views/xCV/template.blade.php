@@ -13,6 +13,7 @@
     <!-- local css-->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/content.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/datepicker3.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/fontawesome-iconpicker.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/select2.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
 
@@ -102,16 +103,13 @@
     <script type="text/javascript" src="{{ URL::asset('/admin/js/1.15.0-jquery.validate.js')}}"></script>
     <script type="text/javascript" src="{{ URL::asset('/admin/js/1.11.4-jquery-ui.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/fontawesome-iconpicker.min.js')}}" async></script>
     <script type="text/javascript" src="{{asset('/admin/js/wz_tooltip.js')}}"></script>
 
 
 
     <script type="text/javascript" src="{{asset('/js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/js/select2.full.min.js')}}"></script>
-
-    <script src="{{ URL::asset('js/include.js')}}"></script>
-    <script src="{{ asset('js/CV_changeStatus.js') }}"></script>
-    <script src="{{ asset('js/email_send.js') }}"></script>
 
     <!-- DataTables JavaScript -->
     {{--<script type="text/javascript" src="{{asset('/admin/bower_components/datatables-sort/js/jquery-latest.js')}}"></script>--}}
@@ -125,6 +123,10 @@
             src="{{asset('/admin/bower_components/datatables-sort/js/pager-custom-controls.js')}}"></script>
     <!-- Giet xung dot :))  [$ Jquery]-->
     {{--<script type="text/javascript"> jQuery.noConflict(); </script>--}}
+
+    <script src="{{ URL::asset('js/include.js')}}" defer></script>
+    <script src="{{ asset('js/CV_changeStatus.js') }}"></script>
+    <script src="{{ asset('js/email_send.js') }}"></script>
 
     <script type="text/javascript" src="{{ URL::asset('/admin/js/func.bqn.js')}}"></script>
 

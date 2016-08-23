@@ -27,7 +27,7 @@
                     </li>
                     <li class="bottom_20px">
                         <div class="form-group">
-                            <label class="title">Trạng thái<i style="color: red;">*</i></label>
+                            <label>Trạng thái<i style="color: red;">*</i></label>
                                 <input name="active" value="0" type="radio" >Không kích hoạt
                                 <input name="active" value="1" type="radio" >Kích hoạt
                                 @if ($errors->has('active'))
@@ -35,6 +35,20 @@
                                         {{ $errors->first('active') }}
                                     </span>
                                 @endif
+                        </div>
+                    </li>
+                    <li class="bottom_20px">
+                        <div class="form-group ">
+                            <label>Icon <i style="color: red;">*</i></label>
+                            <div class="input">
+                                <input type="text" id="faicon" class="input-right form-data form-control"
+                                       name="icon" value="{!! old('icon') !!}">
+                                @if ($errors->has('icon'))
+                                    <span class="help-block">
+                                        {{ $errors->first('icon') }}
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                     </li>
                     <li class="bottom_20px">
@@ -55,8 +69,6 @@
                     <li class="cancel">
                         <input type="submit" form="profile-forms" name="submit1" value="Add Position"
                                class="b-purple">
-                        <input type="button" form="profile-forms" name="" value="Cancel"
-                               class="b-purple" onclick="window.location='{{URL::route('positions.index')}}'">
                     </li>
                 </ul>
             </div>

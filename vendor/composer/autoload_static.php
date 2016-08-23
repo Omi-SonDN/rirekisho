@@ -511,6 +511,7 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Cellmap' => __DIR__ . '/..' . '/dompdf/dompdf/include/cellmap.cls.php',
+
         'ClassPreloader\\ClassList' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassList.php',
         'ClassPreloader\\ClassLoader' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassLoader.php',
         'ClassPreloader\\ClassNode' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassNode.php',
@@ -531,9 +532,11 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'Collective\\Html\\HtmlBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlBuilder.php',
         'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
         'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
+
+        'Companies' => __DIR__ . '/../..' . '/database/migrations/2016_08_18_084241_companies.php',
+        
         'CreateBookmarksTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_081836_create_bookmarks_table.php',
         'CreateConfigCompany' => __DIR__ . '/../..' . '/database/migrations/2016_08_15_055850_create_config_company.php',
-        'CreateConfigsTables' => __DIR__ . '/../..' . '/database/migrations/2016_08_15_052738_create_configs_company_tables.php',
         'CreateCvsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_081630_create_cvs_table.php',
         'CreateGroupsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_081818_create_groups_table.php',
         'CreateItSkillTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_092211_create_it_skill_table.php',

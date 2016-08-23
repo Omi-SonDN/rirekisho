@@ -70,6 +70,14 @@
         <li class="nav-link"><a href="#" data-toggle="collapse" data-target="#submenu-sa">Cài đặt <i
                         class="fa fa-angle-down"></i></a>
             <ul class="nav collapse" id="submenu-sa">
+                <li>
+                    <a data-toggle="collapse" data-target="#submenu-fr">Frontend <i
+                        class="fa fa-angle-down"></i></a>
+                    <ul class="nav collapse" id="submenu-fr">
+                        <li><a href="{{url('fgeneral')}}">Thông tin chung</a></li>
+                        <li><a href="{{url('slide/list')}}">Slider</a></li>
+                    </ul>
+                </li>
                 <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                 <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>
                 <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>

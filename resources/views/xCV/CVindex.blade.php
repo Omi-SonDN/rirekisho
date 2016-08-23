@@ -17,16 +17,19 @@
                 @endforeach
             </select>
 
-            <select id = "statusSearch" class="set_{{\Auth::user()->hash}}" name="Status" onchange="onclickSetData(this);">
-                <option value="">-- Trạng thái --</option>
-                @foreach ($_Status as $sta)
-                    <option @if (Request::has('status')) {{ (Request::input('status') == $sta->id) ? 'selected' : ''}} @endif value="{{$sta->id}}">{{$sta->status}}</option>
-                @endforeach
-            </select>
-            <input id="submitSearch" type="submit" name="submit" value="Search">
-        <!--</form>-->
-        </div>
-        <!--advance search-->
+                <select id="statusSearch" class="set_{{\Auth::user()->hash}}" name="Status"
+                        onchange="onclickSetData(this);">
+                    <option value="">-- Trạng thái --</option>
+                    @foreach ($_Status as $sta)
+                        <option @if (Request::has('status')) {{ (Request::input('status') == $sta->id) ? 'selected' : ''}}
+                                @endif value="{{$sta->id}}">{{$sta->status}}</option>
+                    @endforeach
+
+                </select>
+                <input id="submitSearch" type="submit" name="submit" value="Search">
+                <!--</form>-->
+            </div>
+            
             <!--advance search-->
         <div class="box_search">
             <div style="float: left; width: 200px">
@@ -88,7 +91,14 @@
                     <div class="modal-content" id="modal-content"></div>
                 </div>
             </div>
-    
+
+        </div>
+        <div class="modal fade" id="emailPreview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id="preview-content"></div>
+            </div>
+        </div>
+
             <table id="example" class="dataTable" data-sort="" data-field="">
                 <thead>
                 <tr>
