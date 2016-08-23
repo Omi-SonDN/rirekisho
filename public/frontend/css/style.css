@@ -222,7 +222,7 @@ ul{
   color: #fff;
 }
 .footer_widget_nav li a {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
   margin-bottom: 3px;
   display: block;
@@ -260,6 +260,7 @@ ul{
 .test-monial-time-line{
     position:relative;
     margin: 2em 0;
+    width: 100%;
 }
 .test-monial-time-line-left-text p{
     color: #8E999C;
@@ -454,13 +455,14 @@ color: #f36f21;}
     color: #f36f21;
     font-size: 50px;
     line-height: 60px;
+    text-transform: uppercase;
 }
 .navbar-default .navbar-nav > li.fixavatar > a{
     padding-top: 15px;
     padding-bottom: 0px;
 }
 .position{
-  padding: 70px 0px;
+  padding: 70px 0px 30px;
 }
 .position .title{
     font-size: 24px;
@@ -473,3 +475,13 @@ color: #f36f21;}
 .content .icon{ font-size: 70px; }
 .content .name{ font-size: 15px; font-weight:bold;text-transform:uppercase;}
 .content .col-md-4{ margin-bottom: 40px}  
+.single_footer_widget h3{
+  font-size:16px;
+}
+section .introduce .right-content h2{
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}

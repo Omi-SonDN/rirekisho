@@ -27,9 +27,9 @@
                     </li>
                     <li class="bottom_20px">
                         <div class="float_right " style="width: 100%;">
-                            <label class="label">Ominext <i style="color: red;">*</i></label>
+                            <label class="label">Giới thiệu <i style="color: red;">*</i></label>
                             <div class="input">
-                                <textarea aria-required="true" name="ominext" id="description" class="input-right form-data" rows="3" >{{old('ominext')?old('ominext'):$setting->get('ominext')->value}}</textarea>
+                                <textarea aria-required="true" name="ominext" id="description" class=" tinymce-textarea input-right form-data" rows="3" >{{old('ominext')?old('ominext'):$setting->get('ominext')->value}}</textarea>
                                 @if ($errors->has('ominext'))
                                     <span class="help-block">
                                         {{ $errors->first('ominext') }}

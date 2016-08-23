@@ -5,31 +5,31 @@
             <div class="row">
                 <div class="col-ld-3  col-md-3 col-sm-3">
                     <div class="single_footer_widget">
-                        <h3>About Us</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <h3>CÔNG TY CỔ PHẦN OMINEXT</h3>
+                        <p>Tầng 8, CTM Building 139 Cầu Giấy, Cầu Giấy, Hà Nội, Việt Nam<br /> Email: info@ominext.com<br /> Phone: +84 43 795 5299</p>
                     </div>
                 </div>
                 <div class="col-ld-3  col-md-3 col-sm-3">
                     <div class="single_footer_widget">
-                        <h3>Community</h3>
-                        <ul class="footer_widget_nav">
-                            <li><a href="#">Our Tutors</a></li>
-                            <li><a href="#">Our Students</a></li>
-                            <li><a href="#">Our Team</a></li>
-                            <li><a href="#">Forum</a></li>
-                            <li><a href="#">News &amp; Media</a></li>
+                        <h3>Thông tin công ty</h3>
+                        <ul  class="footer_widget_nav">
+                            <li><a href="#">LỊCH SỬ</a></li>
+                            <li><a href="#">VÌ SAO CHỌN CHÚNG TÔI</a></li>
+                            <li><a href="#">SỨ MẠNG</a></li>
+                            <li><a href="#">LÃNH ĐẠO</a></li>
+                            <li><a href="#">THƯ VIỆN ẢNH</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-ld-3  col-md-3 col-sm-3">
                     <div class="single_footer_widget">
-                        <h3>Others</h3>
+                        <h3>DỊCH VỤ CỦA CHÚNG TÔI</h3>
                         <ul class="footer_widget_nav">
-                            <li><a href="#">Link 1</a></li>
-                            <li><a href="#">Link 2</a></li>
-                            <li><a href="#">Link 3</a></li>
-                            <li><a href="#">Link 4</a></li>
-                            <li><a href="#">Link 5</a></li>
+                            <li><a href="#">PHÁT TRIỂN ỨNG DỤNG WEB</a></li>
+                            <li><a href="#">PHÁT TRIỂN ỨNG DỤNG DI ĐỘNG</a></li>
+                            <li><a href="#">OUTSOURCE PHÁT TRIỂN GAME</a></li>
+                            <li><a href="#">ĐỘI NGŨ RIÊNG</a></li>
+                            <li><a href="#">BẢO TRÌ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -54,14 +54,9 @@
     <div class="footer_bottom">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="footer_bootomLeft">
-                        <p> Copyright &copy; All Rights Reserved</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="footer_bootomRight">
-                        <p>Designed by <a href="http://wpfreeware.com/" rel="nofollow">Wpfreeware.com</a></p>
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <p>Copyright &copy; 2016 Ominext Company. All rights reserved.</p>
                     </div>
                 </div>
             </div>

@@ -139,15 +139,16 @@ class SlideController extends Controller
             $slide->name = $request->name;
             $slide->order = $request->get('order') ? $request->get('order'):0;
             $slide->text = $request->text;
-
-            if ($request->file('image')->isValid()) {
-                $arr['image'] = $_FILES['image']['name'];
-                $url = 'public/upload/img/'.$_FILES['image']['name'];
-                $request->file('image')->move('public/upload/img/', $_FILES['image']['name']);
-                $slide->image = $url;
-                //DB::table('f_slide')->insert(['image'=>$url]);
-            } else{
-                Session::flash('error','Anh khong dungd dinh dang');
+            if ($request->has('image')){
+                if ($request->file('image')->isValid()) {
+                    $arr['image'] = $_FILES['image']['name'];
+                    $url = 'public/upload/img/'.$_FILES['image']['name'];
+                    $request->file('image')->move('public/upload/img/', $_FILES['image']['name']);
+                    $slide->image = $url;
+                    //DB::table('f_slide')->insert(['image'=>$url]);
+                } else{
+                    Session::flash('error','Ảnh không đúng định dạng!');
+                }
             }
             $slide->save();
         }

@@ -105,5 +105,26 @@ class WellController extends Controller
     {
         //
     }
+
+    public function sendMailContact(Request $request){
+        $email = $request->email;
+        $name = $request->name;
+        $message = $request->message;
+        $settings = Fgeneral::all()->keyBy('key');
+        $to = $settings->get('email')->value;
+
+        \Mail::send('emails.contact', ['mymessage' => $message], function ($m) use ($request, $email, $name, $message, $to) {
+            $m->from($email,$name);
+            $m->to($to)->subject('[Contact] Contact me now!');
+        });
+        return redirect()
+            ->back()
+            ->with(
+                [
+                    'flash_level' => 'success',
+                    'message' => 'Đã gửi thành công'
+                ]
+            );
+    }
 }
 

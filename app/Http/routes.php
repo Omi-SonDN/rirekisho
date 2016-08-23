@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{id}/delete',['as'=>'delete','uses'=>'PositionsController@delete'])->where(['id'=>'[0-9]+']);
         Route::get('/{id}/view',['as'=>'view','uses'=>'PositionsController@view'])->where(['id'=>'[0-9]+']);
     });
-    Route::resource('positions', 'PositionsCoslidentroller');
+    Route::resource('positions', 'PositionsController');
     Route::group(['prefix' => 'slide','as'=>'slide::'], function () {
         Route::get('/list', ['as' => 'list', 'uses' => 'FrontEnd\SlideController@index']);
         Route::get('/add', ['as' => 'addSlide', 'uses' => 'FrontEnd\SlideController@add']);
@@ -165,3 +165,4 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //FrontEnd
 route::get('/', 'FrontEnd\WellController@index');
+route::post('/contact','FrontEnd\WellController@sendMailContact');

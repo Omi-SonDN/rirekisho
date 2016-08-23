@@ -24,11 +24,11 @@
     </div>
     <div class="clearfix"> </div>
     <section style="background-color:#efefef; padding: 70px 0px;">
-        <div class="container">
+        <div class="container introduce">
             <div class="col-md-6">
                 <img src="{{asset('frontend/img/Home-map.png')}}" alt="" style="width:100%;"/>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 right-content">
                 {!!  $settings->get("ominext")->value !!}
             </div>
         </div>  
