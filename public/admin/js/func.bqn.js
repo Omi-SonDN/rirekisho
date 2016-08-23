@@ -414,6 +414,9 @@ $(document).ready(function ($) {
         rmListElement();
         rmBtDel();
     });
+
+});
+
 var arr_key = [];
 arr_key['loop'] = 0;
 arr_key['list'] = [];

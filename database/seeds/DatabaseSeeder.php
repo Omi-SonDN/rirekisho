@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RecordTableSeeder::class);
         $this->call(SkillSeeder::class);
         $this->call(companies::class);
+        $this->call(f_general::class);
+        $this->call(f_slide::class);
         Model::reguard();
     }
 }
@@ -252,14 +254,42 @@ class PositionsTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('positions')->delete();
-        for ($i = 1; $i < 6; $i++) {
-            DB::table('positions')->insert([
-                'name' => 'Vị trí ' . $i,
-                'active' => rand(0,1),
-                'description' => 'Vị trí ' . $i,
-            ]);
-        }
+        DB::table('positions')->insert([
+            'name' => 'GAME DEVELOPMENT',
+            'icon' => 'fa-gamepad',
+            'active' => 1,
+            'description' => 'GAME DEVELOPMENT',
+        ]);
+        DB::table('positions')->insert([
+            'name' => 'SMARTPHONE APPLICATIONS',
+            'icon' => 'fa-mobile-phone',
+            'active' => 1,
+            'description' => 'SMARTPHONE APPLICATIONS',
+        ]);
+        DB::table('positions')->insert([
+            'name' => 'WEB APPLICATIONS',
+            'icon' => 'fa-cogs',
+            'active' => 1,
+            'description' => 'WEB APPLICATIONS',
+        ]);
+        DB::table('positions')->insert([
+            'name' => 'MAINTENANCE',
+            'icon' => 'fa-cog',
+            'active' => 1,
+            'description' => 'MAINTENANCE',
+        ]);
+        DB::table('positions')->insert([
+            'name' => 'DEDICATED TEAM',
+            'icon' => 'fa-user',
+            'active' => 1,
+            'description' => 'DEDICATED TEAM',
+        ]);
+        DB::table('positions')->insert([
+            'name' => 'PORTFOLIO',
+            'icon' => 'fa-trophy',
+            'active' => 1,
+            'description' => 'PORTFOLIO',
+        ]);
     }
 }
 class companies extends Seeder
@@ -275,11 +305,67 @@ class companies extends Seeder
         DB::table('companies')->insert([
             'nameCompany'=>'Ominext Jsc',
             'map'=>'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.019121431853!2d105.79697321450045!3d21.031920893047246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab46d1dce439%3A0xd2d8d609d84ffde!2sCTM+Complex!5e0!3m2!1svi!2s!4v1471244909747" width="700" height="390" frameborder="0" style="border:0" allowfullscreen></iframe>',
-            'phones'=>'098.039.xxxx,098.434.xxxx',
+            'phones'=>'+84 43 795 5299',
             'about'=>'1234567',
             'link'=>'Ominext Jsc',
-            'subdomain'=>'www.company.com',
-            'address'=>'Ominext Jsc',
+            'subdomain'=>'http://www.ominext.com/',
+            'address'=>'Tầng 8, CTM Building 139 Cầu Giấy, Cầu Giấy, Hà Nội, Việt Nam',
+            ]);
+    }
+}
+class f_general extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+        DB::table('f_general')->insert([
+            'key'=>'ominext',
+            'value'=>'<h2>Giới thiệu về c&ocirc;ng ty</h2>
+                        <h4>Đi đầu trong lĩnh vực sản xuất v&agrave; gia c&ocirc;ng phần mềm</h4>
+                        <p>Ominext l&agrave; một c&ocirc;ng ty c&ocirc;ng nghệ th&ocirc;ng tin hoạt động trong lĩnh vực sản xuất v&agrave; gia c&ocirc;ng phần mềm cho thị trường Nhật Bản. Với mong muốn vươn l&ecirc;n trở th&agrave;nh một đối t&aacute;c tin cậy với c&aacute;c c&ocirc;ng ty Nhật Bản v&agrave; l&agrave; đơn vị đi đầu trong việc sản xuất c&aacute;c sản phẩm c&ocirc;ng nghệ, đem sự s&aacute;ng tạo của tuối trẻ Việt Nam giới thiệu đến với kh&aacute;ch h&agrave;ng Nhật Bản, Ominext đang từng bước ho&agrave;n thiện 3 mũi nhọn: tổ chức quản l&yacute; trong c&ocirc;ng ty - Operation (O), am hiểu nắm bắt thị trường - Market (M) v&agrave; thực h&agrave;nh s&aacute;ng tạo - Innovation (I), để tạo ra những gi&aacute; trị mới trong c&aacute;c sản phẩm c&ocirc;ng nghệ theo đ&uacute;ng ti&ecirc;u ch&iacute; m&agrave; c&aacute;i t&ecirc;n Ominext được tạo ra.&nbsp;Ch&uacute;ng t&ocirc;i x&acirc;y dựng c&ocirc;ng ty dựa tr&ecirc;n những gi&aacute; trị l&otilde;i sau:</p>
+                        <p>- Customer First (Kh&aacute;ch h&agrave;ng l&agrave; ưu ti&ecirc;n số 1)</p>
+                        <p>- Responsibility (Tinh thần tr&aacute;ch nhiệm của từng th&agrave;nh vi&ecirc;n)</p>
+                        <p>- Trust (Niềm tin cậy lẫn nhau trong c&ocirc;ng ty)</p>
+                        <p>- Open Communication (Giao tiếp mở)</p>
+                        <p>- Result Driven (Phong c&aacute;ch l&agrave;m việc hướng kết quả)</p>
+                        <p>To&agrave;n bộ c&aacute;n bộ nh&acirc;n vi&ecirc;n ch&uacute;ng t&ocirc;i mong muốn Ominext sẽ:</p>
+                        <p>- Trở th&agrave;nh c&ocirc;ng ty gia c&ocirc;ng phần mềm h&agrave;ng đầu tại Việt Nam</p>
+                        <p>- Trở th&agrave;nh đơn vị h&agrave;ng đầu trong việc sản xuất c&aacute;c phần mềm, giải ph&aacute;p CNTT v&agrave; cung cấp nội dung số cho thị trường Nhật Bản v&agrave; quốc tế</p>
+                        <p>Mission của tất cả ch&uacute;ng t&ocirc;i l&agrave;: "Make Ominext become a great place to work, the most reliable destination for customer to choose and the source of Innovation"</p>
+                        <p>H&atilde;y đến với ch&uacute;ng t&ocirc;i để c&ugrave;ng nhau x&acirc;y dựng một tập thể đo&agrave;n kết, chuy&ecirc;n nghiệp, biết chinh phục thử th&aacute;ch v&agrave; thắng lợi.</p>',
+            ]);
+            DB::table('f_general')->insert([
+            'key'=>'email',
+            'value'=>'phamthituoi1112@gmail.com',
+            ]);
+    }
+}
+class f_slide extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+        DB::table('f_slide')->insert([
+            'name'=>'Slider 1',
+            'image'=>'public/upload/img/home-slider-1.jpg',
+            'text'=>'we create the next values',
+            'order'=>'1',
+            ]);
+        DB::table('f_slide')->insert([
+            'name'=>'Slider 2',
+            'image'=>'public/upload/img/slide2.jpg',
+            'text'=>'we create the next values',
+            'order'=>'2',
             ]);
     }
 }

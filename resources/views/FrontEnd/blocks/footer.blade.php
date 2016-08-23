@@ -6,30 +6,30 @@
                 <div class="col-ld-3  col-md-3 col-sm-3">
                     <div class="single_footer_widget">
                         <h3>CÔNG TY CỔ PHẦN OMINEXT</h3>
-                        <p>Tầng 8, CTM Building 139 Cầu Giấy, Cầu Giấy, Hà Nội, Việt Nam<br /> Email: info@ominext.com<br /> Phone: +84 43 795 5299</p>
+                        <p>@if($dtCp){!!$dtCp->address !!}@endif<br /> Website: @if($dtCp){!!$dtCp->subdomain !!}@endif<br /> Phone: @if($dtCp){!!$dtCp->phones !!}@endif</p>
                     </div>
                 </div>
                 <div class="col-ld-3  col-md-3 col-sm-3">
                     <div class="single_footer_widget">
                         <h3>Thông tin công ty</h3>
                         <ul  class="footer_widget_nav">
-                            <li><a href="#">LỊCH SỬ</a></li>
-                            <li><a href="#">VÌ SAO CHỌN CHÚNG TÔI</a></li>
-                            <li><a href="#">SỨ MẠNG</a></li>
-                            <li><a href="#">LÃNH ĐẠO</a></li>
-                            <li><a href="#">THƯ VIỆN ẢNH</a></li>
+                            <li><a href="#">Lịch sử</a></li>
+                            <li><a href="#">Vì sao chọn chúng tôi?</a></li>
+                            <li><a href="#">Sứ mạng</a></li>
+                            <li><a href="#">Lãnh đạo</a></li>
+                            <li><a href="#">Thư viện ảnh</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-ld-3  col-md-3 col-sm-3">
                     <div class="single_footer_widget">
-                        <h3>DỊCH VỤ CỦA CHÚNG TÔI</h3>
+                        <h3>Dịch vụ của chúng tôi</h3>
                         <ul class="footer_widget_nav">
-                            <li><a href="#">PHÁT TRIỂN ỨNG DỤNG WEB</a></li>
-                            <li><a href="#">PHÁT TRIỂN ỨNG DỤNG DI ĐỘNG</a></li>
-                            <li><a href="#">OUTSOURCE PHÁT TRIỂN GAME</a></li>
-                            <li><a href="#">ĐỘI NGŨ RIÊNG</a></li>
-                            <li><a href="#">BẢO TRÌ</a></li>
+                            <li><a href="#">Phát triển ứng dụng web</a></li>
+                            <li><a href="#">Phát triển ứng dụng di động</a></li>
+                            <li><a href="#">Outsource phát triển game</a></li>
+                            <li><a href="#">Đội ngũ riêng</a></li>
+                            <li><a href="#">Bảo trì</a></li>
                         </ul>
                     </div>
                 </div>

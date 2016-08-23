@@ -621,6 +621,7 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'Doctrine\\Instantiator\\InstantiatorInterface' => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator/InstantiatorInterface.php',
         'Dotenv' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Dotenv.php',
         'Encoding_Map' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Encoding_Map.php',
+
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Luhn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
         'Faker\\DefaultGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/DefaultGenerator.php',
@@ -1013,6 +1014,10 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'Faker\\Provider\\zh_TW\\Text' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/zh_TW/Text.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/ValidGenerator.php',
+
+        'FGeneral' => __DIR__ . '/../..' . '/database/migrations/2016_08_23_064029_f_general.php',
+        'FSlide' => __DIR__ . '/../..' . '/database/migrations/2016_08_23_064830_f_slide.php',
+
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
@@ -3948,6 +3953,7 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'Yajra\\Datatables\\Services\\DataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Services/DataTable.php',
         'Yajra\\Datatables\\Transformers\\DataTransformer' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Transformers/DataTransformer.php',
         'app\\MyLibrary\\Pagination_temp' => __DIR__ . '/../..' . '/app/MyLibrary/Pagination_temp.php',
+
         'bmp' => __DIR__ . '/..' . '/mpdf/mpdf/classes/bmp.php',
         'cssmgr' => __DIR__ . '/..' . '/mpdf/mpdf/classes/cssmgr.php',
         'directw' => __DIR__ . '/..' . '/mpdf/mpdf/classes/directw.php',
@@ -4040,6 +4046,10 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'phpDocumentor\\Reflection\\Types\\Void_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Void_.php',
         'tocontents' => __DIR__ . '/..' . '/mpdf/mpdf/classes/tocontents.php',
         'wmf' => __DIR__ . '/..' . '/mpdf/mpdf/classes/wmf.php',
+
+        'companies' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
+        'f_general' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
+
     );
 
     public static function getInitializer(ClassLoader $loader)

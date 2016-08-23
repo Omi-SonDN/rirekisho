@@ -54,7 +54,7 @@
                                         title="{{Auth::user()->userName}}" width="44" height="44" border="0"><span
                                             class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="about">Cài đặt tài khoản</a></li>
+                                    <li><a href="profile">Cài đặt tài khoản</a></li>
                                     @can('SuperAdmin')
                                     <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                                     <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>

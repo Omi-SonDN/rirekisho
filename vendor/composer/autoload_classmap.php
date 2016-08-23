@@ -224,6 +224,7 @@ return array(
     'Doctrine\\Instantiator\\InstantiatorInterface' => $vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator/InstantiatorInterface.php',
     'Dotenv' => $vendorDir . '/vlucas/phpdotenv/src/Dotenv.php',
     'Encoding_Map' => $vendorDir . '/phenx/php-font-lib/classes/Encoding_Map.php',
+
     'Faker\\Calculator\\Iban' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
     'Faker\\Calculator\\Luhn' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
     'Faker\\DefaultGenerator' => $vendorDir . '/fzaninotto/faker/src/Faker/DefaultGenerator.php',
@@ -616,6 +617,9 @@ return array(
     'Faker\\Provider\\zh_TW\\Text' => $vendorDir . '/fzaninotto/faker/src/Faker/Provider/zh_TW/Text.php',
     'Faker\\UniqueGenerator' => $vendorDir . '/fzaninotto/faker/src/Faker/UniqueGenerator.php',
     'Faker\\ValidGenerator' => $vendorDir . '/fzaninotto/faker/src/Faker/ValidGenerator.php',
+
+    'FGeneral' => $baseDir . '/database/migrations/2016_08_23_064029_f_general.php',
+    'FSlide' => $baseDir . '/database/migrations/2016_08_23_064830_f_slide.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
@@ -3551,6 +3555,7 @@ return array(
     'Yajra\\Datatables\\Services\\DataTable' => $vendorDir . '/yajra/laravel-datatables-oracle/src/Services/DataTable.php',
     'Yajra\\Datatables\\Transformers\\DataTransformer' => $vendorDir . '/yajra/laravel-datatables-oracle/src/Transformers/DataTransformer.php',
     'app\\MyLibrary\\Pagination_temp' => $baseDir . '/app/MyLibrary/Pagination_temp.php',
+
     'bmp' => $vendorDir . '/mpdf/mpdf/classes/bmp.php',
     'cssmgr' => $vendorDir . '/mpdf/mpdf/classes/cssmgr.php',
     'directw' => $vendorDir . '/mpdf/mpdf/classes/directw.php',
@@ -3643,4 +3648,7 @@ return array(
     'phpDocumentor\\Reflection\\Types\\Void_' => $vendorDir . '/phpdocumentor/type-resolver/src/Types/Void_.php',
     'tocontents' => $vendorDir . '/mpdf/mpdf/classes/tocontents.php',
     'wmf' => $vendorDir . '/mpdf/mpdf/classes/wmf.php',
+
+    'companies' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'f_general' => $baseDir . '/database/seeds/DatabaseSeeder.php',
 );

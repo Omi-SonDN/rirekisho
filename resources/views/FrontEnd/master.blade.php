@@ -47,7 +47,7 @@
 {{----}}
     {{--</div>--}}
 <!--=========== BEGIN FOOTER SECTION ================-->
-    @include('FrontEnd.blocks.footer')
+    @include('FrontEnd.blocks.footer',['dtCp'=> $configcp])
         <!--=========== END FOOTER SECTION ================-->
 
         <!-- SCROLL TOP BUTTON -->
