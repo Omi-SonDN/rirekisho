@@ -21,7 +21,6 @@ return array(
     'Canvas' => $vendorDir . '/dompdf/dompdf/include/canvas.cls.php',
     'Canvas_Factory' => $vendorDir . '/dompdf/dompdf/include/canvas_factory.cls.php',
     'Cellmap' => $vendorDir . '/dompdf/dompdf/include/cellmap.cls.php',
-    'Companies' => $baseDir . '/database/migrations/2016_08_18_084241_companies.php',
     'CreateBookmarksTable' => $baseDir . '/database/migrations/2016_07_27_081836_create_bookmarks_table.php',
     'CreateConfigCompany' => $baseDir . '/database/migrations/2016_08_15_055850_create_config_company.php',
     'CreateCvsTable' => $baseDir . '/database/migrations/2016_07_27_081630_create_cvs_table.php',
@@ -38,6 +37,8 @@ return array(
     'DOMPDF_Image_Exception' => $vendorDir . '/dompdf/dompdf/include/dompdf_image_exception.cls.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'Encoding_Map' => $vendorDir . '/phenx/php-font-lib/classes/Encoding_Map.php',
+    'FGeneral' => $baseDir . '/database/migrations/2016_08_23_064029_f_general.php',
+    'FSlide' => $baseDir . '/database/migrations/2016_08_23_064830_f_slide.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
@@ -665,4 +666,6 @@ return array(
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'app\\MyLibrary\\Pagination_temp' => $baseDir . '/app/MyLibrary/Pagination_temp.php',
+    'companies' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'f_general' => $baseDir . '/database/seeds/DatabaseSeeder.php',
 );

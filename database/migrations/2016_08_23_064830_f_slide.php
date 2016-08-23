@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePositionsTable extends Migration
+class FSlide extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreatePositionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('positions', function (Blueprint $table) {
+        Schema::create('f_slide', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('icon');
-            $table->string('description');
-            $table->tinyInteger('active');
+            $table->text('image');
+            $table->string('text');
+            $table->tinyInteger('order');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +30,6 @@ class CreatePositionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('positions');
+        Schema::drop('f_slide');
     }
 }

@@ -418,7 +418,6 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'Canvas' => __DIR__ . '/..' . '/dompdf/dompdf/include/canvas.cls.php',
         'Canvas_Factory' => __DIR__ . '/..' . '/dompdf/dompdf/include/canvas_factory.cls.php',
         'Cellmap' => __DIR__ . '/..' . '/dompdf/dompdf/include/cellmap.cls.php',
-        'Companies' => __DIR__ . '/../..' . '/database/migrations/2016_08_18_084241_companies.php',
         'CreateBookmarksTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_081836_create_bookmarks_table.php',
         'CreateConfigCompany' => __DIR__ . '/../..' . '/database/migrations/2016_08_15_055850_create_config_company.php',
         'CreateCvsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_081630_create_cvs_table.php',
@@ -435,6 +434,8 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'DOMPDF_Image_Exception' => __DIR__ . '/..' . '/dompdf/dompdf/include/dompdf_image_exception.cls.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'Encoding_Map' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Encoding_Map.php',
+        'FGeneral' => __DIR__ . '/../..' . '/database/migrations/2016_08_23_064029_f_general.php',
+        'FSlide' => __DIR__ . '/../..' . '/database/migrations/2016_08_23_064830_f_slide.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
@@ -1062,6 +1063,8 @@ class ComposerStaticInit6bf3617d13955ce58040dbf0ebec5e84
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'app\\MyLibrary\\Pagination_temp' => __DIR__ . '/../..' . '/app/MyLibrary/Pagination_temp.php',
+        'companies' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
+        'f_general' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
