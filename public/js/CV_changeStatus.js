@@ -57,12 +57,12 @@ $(document).ready(function () {
                         }
                     });
 
-                    var btn_send_email = '<button id="btn_send_email' + data.id;
+                    var btn_send_email = '<button id="btn_send_email';
 
                     if( data.allow_sendmail == 1){
                         btn_send_email += '" class="btn btn-primary btn-send-email col-lg-12" value="';
                         btn_send_email += data.Status + '">Send Email ';
-                        btn_send_email += data.Status + '</button>';
+                        btn_send_email += '</button>';
                         console.log(btn_send_email);
                     }else {
                         // btn_send_email += '" class="btn btn-primary btn-send-email disabled col-lg-12" value="';
