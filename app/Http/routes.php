@@ -52,14 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
         }
         return Hashids::decode($id)[0];
     });
-
-    //every one can see
-//    Route::get('/', function () {
-//        return view('about');
-//    }); 
-    Route::get('about', function () {
-        return view('about');
-    });
+    Route::get('profile', 'UsersController@profile');
     Route::get('/', function () {
         if (Auth::user()->getRole() === 'Applicant'){
             return view('xCV.CVInfo');
@@ -69,6 +62,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //every one see different page 
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
+    Route::get('CV/show/{id}', 'CVController@show1');
     Route::get('CV/upload/{id}', 'CVController@getShowUpload');
     Route::get('Record/index/{type}', 'RecordController@index');
     Route::get('User/logout', 'UsersController@getUserLogout');

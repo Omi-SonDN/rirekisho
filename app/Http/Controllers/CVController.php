@@ -30,7 +30,6 @@ use App\Http\Requests\xCV\CVRuleInfoRequest;
 
 class CVController extends Controller
 {
-
     public function index(Request $request)
     {
         if ($request->has('search')) {
@@ -762,6 +761,35 @@ class CVController extends Controller
         return view('xCV.CVShowUpload', compact('uCV', 'CV', 'bookmark'));
     }
 
+     public function show1($id)
+    {
+        //$id = $id - 14000;
+        $id = Hashids::decode($id);
+        $CV = CV::with('User')->find($id[0]);
+
+        // kiem tra CV tung buoc
+        if (Gate::denies('show-cv-step', $CV)) {
+            abort(403);
+        }
+
+        if (empty($CV)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
+        $skills = $CV->Skill;
+        $Records = $CV->Record;
+        $Records = $Records->sortBy("Date");
+        $image = $CV->User->image;
+        $bookmark = DB::table('bookmarks')
+            ->whereUserId(Auth::User()->id)
+            ->whereBookmarkUserId($CV->user_id)->first();
+
+        if ($bookmark === null) $bookmark = 0;
+        else $bookmark = $bookmark->id;
+        return View::make('xCV.CVshow')
+            ->with(compact('CV', 'Records', 'skills', 'image', 'bookmark'));
+
+    }
+
     public function _statistic($cv){
         $apply = DB::table('positions')
             ->select('id', 'name')->get();
@@ -776,6 +804,7 @@ class CVController extends Controller
                         $vt .= ','.$apply_to[$i]->count.']';
                     else $vt .= ','.$apply_to[$i]->count;
                 }
+                if(count($cv) == 1) $vt.=']';
             }
             $apply[$i]->apply_to = $vt;   
         }

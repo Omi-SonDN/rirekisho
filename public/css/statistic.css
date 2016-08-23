@@ -248,3 +248,22 @@
     font-size: 15pt;
     font-weight: 700px;
 }
+
+#box_tb{
+    color: #666699;
+    transform: translate(0,10px);
+}
+
+.number_tb{
+    height: 20px;
+    background-color: red;
+    transform: translate(80px, -30px);
+    width: 18px;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.dropdown-menu li{
+    border-bottom: 1px solid #ccc;
+}

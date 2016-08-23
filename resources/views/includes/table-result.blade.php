@@ -5,6 +5,7 @@
         </td>
     </tr>
 @else
+
     @foreach($CVs as $key => $CV)
         <tr class="data{{++$key}}">
             <td class="image" style="width: 90px">

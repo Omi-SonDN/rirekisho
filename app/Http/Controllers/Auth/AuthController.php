@@ -4,7 +4,7 @@ namespace app\Http\Controllers\Auth;
 
 use Auth;
 use DB;
-use CV;
+use App\CV;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
+use Session;
 
 class AuthController extends Controller
 {
@@ -40,7 +41,7 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
-        $validator = Validator::make($request->all(), User::$login_rules);
+        $validator = Validator::make($request->all(), User::$login_rules, User::$messageRegister);
 
         if ($validator->fails()) {
             return redirect('auth/login')->withErrors($validator)->withInput($request->except(['password']));
@@ -51,6 +52,14 @@ class AuthController extends Controller
                     if(is_null(Auth::user()->CV)) {
                         //DB::table('cvs')->insert(['user_id' => Auth::user()->id, 'email' => Auth::user()->email]);
                     }
+                    // $cv_active = CV::with('User')
+                    //     ->with('positionCv')
+                    //     ->with('status')
+                    //     ->join('users', 'users.id', '=', 'cvs.user_id')
+                    //     ->where('cvs.Active', '=', 0)
+                    //     ->get();
+                    // Session::put('CVTB',$cv_active);
+
                 }
                 return redirect('/');//->withInput($userdata);
             }

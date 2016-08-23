@@ -176,7 +176,7 @@ div.content:hover, div.content:active, div.content:focus {
     position: relative;
     border-radius: 3px;
     border: 1px solid #ddd;
-    z-index: 10;
+    /*z-index: 10;*/
     line-height: 1.7;
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 

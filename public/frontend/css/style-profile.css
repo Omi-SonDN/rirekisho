@@ -1273,3 +1273,31 @@ dl.tabslight {
     width: 100%;
     /* width: auto; */
 }
+
+.box_user_pro{
+    padding-left: 20px;
+    width: 700px;
+}
+.title_pro{
+    font-size: 15pt;
+    font-weight: 700;
+    height: 40px;
+    border-bottom: 3px solid #7192a8;
+    color: #2d5986;
+}
+.userProfile{
+    height: 200px;
+}
+
+.user_pro_{
+    width: 500px;
+    margin: 0 auto;
+    height: 30px;
+    font-size: 12pt;
+}
+.user_pro_ dt{
+    float: left;
+}
+.user_pro_ dd{
+    float: left;
+}

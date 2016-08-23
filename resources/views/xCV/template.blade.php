@@ -16,12 +16,11 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/select2.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
 
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/datepicker3.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/footer.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/custom.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/font-awesome.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/font-awesome.min.css')}}"/> 
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/alert.css') }}"/>
 
     <!--CSS lib tablesorter -->
@@ -63,15 +62,12 @@
 
     </script>
     <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script type="text/javascript" src="{{asset('/hightchart//js/highcharts.js')}}"></script>
-    
+    <!-- thong ke -->
+    <script type="text/javascript" src="{{asset('/hightchart/js/highcharts.js')}}"></script>
     <script type="text/javascript" src="{{asset('/hightchart/js/exporting.js')}}"></script>
-
     <script type="text/javascript" src="{{asset('/hightchart/js/canvas-tools.js')}}"></script>
     <script type="text/javascript" src="{{asset('/hightchart/js/export-csv.js')}}"></script>
-
-    <script type="text/javascript" src="{{asset('/hightchart/js/jspdf.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/hightchart/js/jspdf.js')}}"></script>
     <script type="text/javascript" src="{{asset('/hightchart/js/highcharts-export-clientside.js')}}"></script>
 
 </head>
@@ -99,14 +95,16 @@
     </div>
 
     <!---  jQuery-->
-    {{--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>--}}
+
     <!---  bootstrap-->
     <script type="text/javascript" src="{{ URL::asset('/admin/js/3.3.5-bootstrap.min.js')}}"></script>
+    <!-- validate -->
     <script type="text/javascript" src="{{ URL::asset('/admin/js/1.15.0-jquery.validate.js')}}"></script>
     <script type="text/javascript" src="{{ URL::asset('/admin/js/1.11.4-jquery-ui.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
     <script type="text/javascript" src="{{asset('/admin/js/wz_tooltip.js')}}"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+
 
     <script type="text/javascript" src="{{asset('/js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/js/select2.full.min.js')}}"></script>

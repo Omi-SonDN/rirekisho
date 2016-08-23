@@ -167,11 +167,27 @@ class UsersController extends Controller
             //check old password
             // have column old true: check before update
             // if false break
-            if ($request->has('oldPass')){
+            if ($request->has('oldPass')) {
                 // Super co quyen thay doi bat ky mat khau nao
+                //// tai khoan khac ngoai superadmin co quyen thay doi
+                // co tai khoan thay doi la super phai kiem tra truoc khi thay doi
                 if (Auth::user()->getRole() == 'SuperAdmin') {
-                    $is_changePass = true;
-                    $user->password = bcrypt($request->input('txtNewPass'));
+                    if ($user->getRole() == 'SuperAdmin') {
+                        if (Hash::check($request->input('oldPass'), $user->password)) {
+                            $is_changePass = true;
+                            $user->password = bcrypt($request->input('txtNewPass'));
+                        } else {
+                            return redirect()
+                                ->back()
+                                ->with([
+                                    'flash_level' => 'danger',
+                                    'message' => 'Lỗi, Vui lòng kiểm tra lại mật khẩu cũ'
+                                ]);
+                        }
+                    } else {
+                        $is_changePass = true;
+                        $user->password = bcrypt($request->input('txtNewPass'));
+                    }
                 } else {
                     if (Hash::check($request->input('oldPass'), $user->password)) {
                         $is_changePass = true;
@@ -505,5 +521,10 @@ class UsersController extends Controller
     public function getUserLogout(){
         Auth::logout();
         return '';
+    }
+
+    public function profile()
+    {
+        return view('about');
     }
 }
