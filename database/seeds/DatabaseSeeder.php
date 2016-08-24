@@ -255,37 +255,37 @@ class PositionsTableSeeder extends Seeder
     public function run()
     {
         DB::table('positions')->insert([
-            'name' => 'GAME DEVELOPMENT',
+            'name' => 'game development',
             'icon' => 'fa-gamepad',
             'active' => 1,
             'description' => 'GAME DEVELOPMENT',
         ]);
         DB::table('positions')->insert([
-            'name' => 'SMARTPHONE APPLICATIONS',
+            'name' => 'smartphone applications',
             'icon' => 'fa-mobile-phone',
             'active' => 1,
             'description' => 'SMARTPHONE APPLICATIONS',
         ]);
         DB::table('positions')->insert([
-            'name' => 'WEB APPLICATIONS',
+            'name' => 'web applications',
             'icon' => 'fa-cogs',
             'active' => 1,
             'description' => 'WEB APPLICATIONS',
         ]);
         DB::table('positions')->insert([
-            'name' => 'MAINTENANCE',
+            'name' => 'maintenance',
             'icon' => 'fa-cog',
             'active' => 1,
             'description' => 'MAINTENANCE',
         ]);
         DB::table('positions')->insert([
-            'name' => 'DEDICATED TEAM',
+            'name' => 'dedicated team',
             'icon' => 'fa-user',
             'active' => 1,
             'description' => 'DEDICATED TEAM',
         ]);
         DB::table('positions')->insert([
-            'name' => 'PORTFOLIO',
+            'name' => 'portfolio',
             'icon' => 'fa-trophy',
             'active' => 1,
             'description' => 'PORTFOLIO',

@@ -255,7 +255,8 @@ table.dataTable #list-table-body tr td {
     padding: 10px 10px 5px 0;
     border-bottom: solid 1px #e1e1e1;
     vertical-align: middle;
-    font: normal 16px Georgia, 'Times New Roman', serif
+    font: normal 16px Georgia, 'Times New Roman', serif;
+    text-transform: capitalize;
 }
 table.dataTable #list-table-body tr:hover{
     border-bottom: solid 1px #6a5b91;
