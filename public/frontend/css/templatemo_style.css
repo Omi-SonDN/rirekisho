@@ -90,37 +90,13 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
     font-size: 16px;
 }
 
-@media (min-width: 768px) {
-    #templatemo-carousel .carousel-caption p {
-        margin-bottom: 20px;
-        line-height: 1.4;
-        font-size: 21px;
-    }
-
-    #templatemo-carousel .carousel-caption {
-        padding-bottom: 140px;
-        right: 20%;
-        left: 20%;
-    }
-}
-
-@media (max-width: 768px) {
-    #templatemo-carousel .carousel-caption {
-        padding-bottom: 120px;
-    }
-}
-
-@media (max-width: 1024px) {
-    #templatemo-carousel {
-        background: url('../images/templatemo_carousel_bg_s.jpg') no-repeat center center;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        overflow-x: hidden;
-        margin-bottom:0;
-        height: 500px;
-    }
+#templatemo-carousel .carousel-caption {
+    bottom: 50%;
+    transform: translateY(50%);
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* ------ End of Carousel ----- */
@@ -599,6 +575,36 @@ ul.templatemo-project-gallery  li  a img:hover {
 
 .blog_box {
     margin-left: -12px;
+}
+
+@media (max-width: 1024px) {
+    #templatemo-carousel {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        overflow-x: hidden;
+        margin-bottom:0;
+        max-height: 500px;
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    #templatemo-carousel .carousel-caption h1 {
+        font-size: 40px;
+    }
+
+    #header img{
+        width: auto !important;
+        height: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    #templatemo-carousel .carousel-caption {
+        padding-bottom: 120px;
+    }
 }
 
 @media (min-width:991px) and (max-width:1200px) {
