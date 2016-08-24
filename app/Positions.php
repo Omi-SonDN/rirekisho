@@ -45,4 +45,9 @@ class Positions extends Model
         return $query->where('active', 1);
     }
 
+    public function getNamePositionAttribute()
+    {
+        return strtolower($this->name);
+    }
+
 }

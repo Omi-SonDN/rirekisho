@@ -37,7 +37,7 @@
             <td data-field="age">{{$CV->User->Age}}</td>
 
             @can('Visitor')
-            <td class="name" style="">{{(!empty($CV->positionCv)) ? $CV->positionCv->name : '---'}}</td>
+            <td class="name" style="">{{(!empty($CV->positionCv)) ? $CV->positionCv->NamePosition : '---'}}</td> 
             <td style="">
                 <div class="status" id="status{{ $CV->id}}">
                     @include('includes._form_status',['CV' => $CV])
