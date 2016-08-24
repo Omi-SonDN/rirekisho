@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/footer.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/admin/bower_components/statistics/css/morris-0.4.3.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/statistic.css') }}"/>
     <!---  jQuery-->
     <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
 </head>

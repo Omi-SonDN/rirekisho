@@ -577,29 +577,7 @@ ul.templatemo-project-gallery  li  a img:hover {
     margin-left: -12px;
 }
 
-@media (max-width: 1024px) {
-    #templatemo-carousel {
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        overflow-x: hidden;
-        margin-bottom:0;
-        max-height: 500px;
-        width: 100%;
-    }
-}
 
-@media (min-width: 768px) {
-    #templatemo-carousel .carousel-caption h1 {
-        font-size: 40px;
-    }
-
-    #header img{
-        width: auto !important;
-        height: 100%;
-    }
-}
 
 @media (max-width: 768px) {
     #templatemo-carousel .carousel-caption {
@@ -738,12 +716,4 @@ ul.templatemo-project-gallery  li  a img:hover {
     .team_hr {
         width: 11%;
     }
-}
-
-/*#navbar .top_header_{
-    transform: translate(0,50px);
-}*/
-.fix-hedar-logo {
-    margin: 0 auto;
-    width: 0;
 }

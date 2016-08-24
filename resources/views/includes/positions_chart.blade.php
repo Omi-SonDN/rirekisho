@@ -24,9 +24,10 @@
             	$('.button_print').show();
             	if(status != 'position'){
             		$('#hightchart_1').show();
-            		var chart2 = new Highcharts.Chart({ 
+            		// var chart2 = new Highcharts.Chart({ 
+            		 $('#chart').highcharts({ 
 			            chart: { 
-			                renderTo: 'chart',
+			                // renderTo: 'chart',
 			                type: 'column',
 			                style: {
 					            fontFamily: 'verdana, DejaVu Sans, sans-serif'
