@@ -217,7 +217,7 @@ class StatusTableSeeder extends Seeder
             1  => array('id' => 1, 'status'  => 'Chờ duyệt', 'allow_sendmail'                 => '', 'prev_status'  => '', 'infor'=>'', 'email_template'                          => ' <p>Ch&agrave;o bạn&nbsp;[First_name]!</p> <p>C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i đ&atilde; nhận được hồ sơ của bạn. Hiện tại hồ sơ của bạn đang trong qu&aacute; tr&igrave;nh chờ duyệt.</p> <p>Ch&uacute;ng t&ocirc;i sẽ xem x&eacute;t v&agrave; phản hồi cho bạn sớm nhất. Cảm ơn bạn đ&atilde; quan t&acirc;m v&agrave; gửi hồ sơ đến cho ch&uacute;ng t&ocirc;i.</p> <p>Tr&acirc;n trọng!</p>', 'role_VisitorStatus'=>1),
             2  => array('id' => 2, 'status'  => 'Đồng ý phỏng vấn', 'allow_sendmail'          => '1', 'prev_status' => '1,6', 'infor'=>'', 'email_template'                       => ' <p>Ch&agrave;o bạn [First_name]!</p> <p>C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i đ&atilde; nhận được hồ sơ của bạn, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến tham dự phỏng vấn tại c&ocirc;ng ty.</p> <p>Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn.</p> <p>Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn.</p> <p>Tr&acirc;n trọng, k&iacute;nh mời!</p>', 'role_VisitorStatus'=>1),
             3  => array('id' => 3, 'status'  => 'Đã đặt lịch phỏng vấn', 'allow_sendmail'     => '1', 'prev_status' => '2', 'infor'=>'Date,Time,Address,Attach', 'email_template'                         => ' <p>Ch&agrave;o bạn [First_name]!</p> <p>C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i thực sự đ&aacute;nh gi&aacute; cao tr&igrave;nh độ cũng như sự hiểu biết của bạn đối với vị tr&iacute; c&ocirc;ng ty đang tuyển dụng, c&ocirc;ng ty ch&uacute;ng t&ocirc;i muốn mời bạn đến tham dự phỏng vấn tại c&ocirc;ng ty.</p> <p>- Thời gian: [Time] ph&uacute;t, Ng&agrave;y&nbsp;[Date]</p> <p>- Địa điểm: [Address]</p> <p>Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn.</p> <p>Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại <a href="tel:04.3795.5299">04.3795.5299</a> để th&ocirc;ng b&aacute;o.</p> <p>Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn.</p> <p>Tr&acirc;n trọng, k&iacute;nh mời!</p>', 'role_VisitorStatus'=>0),
-            4  => array('id' => 4, 'status'  => 'Loại', 'allow_sendmail'                      => '0', 'prev_status' => '1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30', 'infor'=>'', 'email_template' => '', 'role_VisitorStatus'=>0),
+            4  => array('id' => 4, 'status'  => 'Loại', 'allow_sendmail'                      => '0', 'prev_status' => '1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30', 'infor'=>'', 'email_template' => '', 'role_VisitorStatus'=>1),
             5  => array('id' => 5, 'status'  => 'Testing', 'allow_sendmail'                   => '0', 'prev_status' => '11', 'infor'=>'', 'email_template'                        => '', 'role_VisitorStatus'=>0),
             6  => array('id' => 6, 'status'  => 'Đã qua test', 'allow_sendmail'               => '1', 'prev_status' => '5,10', 'infor'=>'Date,Time,Address,Attach', 'email_template'                      => ' <p>Ch&agrave;o bạn [First_name]!</p> <p>C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i thực sự đ&aacute;nh gi&aacute; cao tr&igrave;nh độ cũng như sự hiểu biết của bạn đối với vị tr&iacute; c&ocirc;ng ty đang tuyển dụng, c&ocirc;ng ty ch&uacute;ng t&ocirc;i th&ocirc;ng b&aacute;o rằng bạn đ&atilde; vượt qua b&agrave;i test của ch&uacute;ng t&ocirc;i! Ch&uacute;ng t&ocirc;i muốn mời bạn tới c&ocirc;ng ty tham gia buổi phỏng vấn.</p> <p><strong>- Thời gian: [Time] ph&uacute;t Ng&agrave;y [Date]</strong></p> <p><strong>- Địa điểm: [Address]</strong></p> <p>Bạn vui l&ograve;ng phản hồi lại email n&agrave;y để x&aacute;c nhận tham gia buổi phỏng vấn.</p> <p>Trong trường hợp bạn kh&ocirc;ng thể thu xếp được thời gian, xin vui l&ograve;ng li&ecirc;n hệ lại theo địa chỉ email n&agrave;y hoặc số điện thoại <a href="tel:04.3795.5299">04.3795.5299</a> để th&ocirc;ng b&aacute;o.</p> <p>Rất mong bạn c&oacute; thể thu xếp thời gian tham gia phỏng vấn.</p> <p>Tr&acirc;n trọng!</p>', 'role_VisitorStatus'=>0),
             7  => array('id' => 7, 'status'  => 'Không qua test', 'allow_sendmail'            => '1', 'prev_status' => '5,10', 'infor'=>'', 'email_template'                      => ' <p>Ch&agrave;o bạn [First_name]!</p> <p>C&ocirc;ng ty cổ phần Ominext ch&uacute;ng t&ocirc;i th&ocirc;ng b&aacute;o rằng bạn chưa vượt qua b&agrave;i test của ch&uacute;ng t&ocirc;i! Cảm ơn bạn đ&atilde; quan t&acirc;m đến th&ocirc;ng tin tuyển dụng của ch&uacute;ng t&ocirc;i!</p> <p>Tr&acirc;n trọng!</p> ', 'role_VisitorStatus'=>0),
@@ -255,37 +255,37 @@ class PositionsTableSeeder extends Seeder
     public function run()
     {
         DB::table('positions')->insert([
-            'name' => 'GAME DEVELOPMENT',
+            'name' => 'game development',
             'icon' => 'fa-gamepad',
             'active' => 1,
             'description' => 'GAME DEVELOPMENT',
         ]);
         DB::table('positions')->insert([
-            'name' => 'SMARTPHONE APPLICATIONS',
+            'name' => 'smartphone applications',
             'icon' => 'fa-mobile-phone',
             'active' => 1,
             'description' => 'SMARTPHONE APPLICATIONS',
         ]);
         DB::table('positions')->insert([
-            'name' => 'WEB APPLICATIONS',
+            'name' => 'web applications',
             'icon' => 'fa-cogs',
             'active' => 1,
             'description' => 'WEB APPLICATIONS',
         ]);
         DB::table('positions')->insert([
-            'name' => 'MAINTENANCE',
+            'name' => 'maintenance',
             'icon' => 'fa-cog',
             'active' => 1,
             'description' => 'MAINTENANCE',
         ]);
         DB::table('positions')->insert([
-            'name' => 'DEDICATED TEAM',
+            'name' => 'dedicated team',
             'icon' => 'fa-user',
             'active' => 1,
             'description' => 'DEDICATED TEAM',
         ]);
         DB::table('positions')->insert([
-            'name' => 'PORTFOLIO',
+            'name' => 'portfolio',
             'icon' => 'fa-trophy',
             'active' => 1,
             'description' => 'PORTFOLIO',

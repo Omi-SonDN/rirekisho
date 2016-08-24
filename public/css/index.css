@@ -269,6 +269,7 @@ table.dataTable #list-table-body tr td {
     border: solid 1px #e1e1e1;
     vertical-align: middle;
     font: normal 16px Georgia, 'Times New Roman', serif;
+    text-transform: capitalize;
 }
 table.dataTable #list-table-body tr:hover td{
     /*border-bottom: solid 1px #6a5b91;*/

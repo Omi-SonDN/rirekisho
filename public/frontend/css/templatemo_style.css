@@ -739,3 +739,11 @@ ul.templatemo-project-gallery  li  a img:hover {
         width: 11%;
     }
 }
+
+/*#navbar .top_header_{
+    transform: translate(0,50px);
+}*/
+.fix-hedar-logo {
+    margin: 0 auto;
+    width: 0;
+}
