@@ -1,7 +1,6 @@
 <?php
 
-class CustomValuBinderTest extends TestCase
-{
+class CustomValuBinderTest extends TestCase {
 
     /**
      * Setup
@@ -11,10 +10,10 @@ class CustomValuBinderTest extends TestCase
         parent::setUp();
 
         // Set excel class
-        $this->excel = App::make('phpexcel');
+        $this->excel    = App::make('phpexcel');
 
         // Set writer class
-        $this->reader = App::make('excel.reader');
+        $this->reader   = App::make('excel.reader');
         $this->reader->injectExcel($this->excel);
         $this->reader->noHeading(true);
 

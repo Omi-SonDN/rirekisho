@@ -48,7 +48,7 @@ class ArrayKeyMatcherSpec extends ObjectBehavior
 
     function it_does_not_match_array_without_specified_key()
     {
-        $this->shouldThrow()->duringPositiveMatch('haveKey', array(1, 2, 3), array('abc'));
+        $this->shouldThrow()->duringPositiveMatch('haveKey', array(1,2,3), array('abc'));
     }
 
     function it_does_not_match_ArrayObject_without_provided_offset(ArrayObject $array)
@@ -60,7 +60,7 @@ class ArrayKeyMatcherSpec extends ObjectBehavior
 
     function it_matches_array_without_specified_key()
     {
-        $this->shouldNotThrow()->duringNegativeMatch('haveKey', array(1, 2, 3), array('abc'));
+        $this->shouldNotThrow()->duringNegativeMatch('haveKey', array(1,2,3), array('abc'));
     }
 
     function it_matches_ArrayObject_without_specified_offset(ArrayObject $array)

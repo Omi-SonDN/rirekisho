@@ -43,8 +43,8 @@ class SubjectMaintainer implements MaintainerInterface
     private $accessInspector;
 
     /**
-     * @param PresenterInterface $presenter
-     * @param Unwrapper $unwrapper
+     * @param PresenterInterface       $presenter
+     * @param Unwrapper                $unwrapper
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
@@ -52,8 +52,7 @@ class SubjectMaintainer implements MaintainerInterface
         Unwrapper $unwrapper,
         EventDispatcherInterface $dispatcher,
         AccessInspectorInterface $accessInspector
-    )
-    {
+    ) {
         $this->presenter = $presenter;
         $this->unwrapper = $unwrapper;
         $this->dispatcher = $dispatcher;
@@ -73,18 +72,17 @@ class SubjectMaintainer implements MaintainerInterface
     }
 
     /**
-     * @param ExampleNode $example
+     * @param ExampleNode            $example
      * @param SpecificationInterface $context
-     * @param MatcherManager $matchers
-     * @param CollaboratorManager $collaborators
+     * @param MatcherManager         $matchers
+     * @param CollaboratorManager    $collaborators
      */
     public function prepare(
         ExampleNode $example,
         SpecificationInterface $context,
         MatcherManager $matchers,
         CollaboratorManager $collaborators
-    )
-    {
+    ) {
         $subjectFactory = new Wrapper($matchers, $this->presenter, $this->dispatcher, $example, $this->accessInspector);
         $subject = $subjectFactory->wrap(null);
         $subject->beAnInstanceOf(
@@ -95,18 +93,17 @@ class SubjectMaintainer implements MaintainerInterface
     }
 
     /**
-     * @param ExampleNode $example
+     * @param ExampleNode            $example
      * @param SpecificationInterface $context
-     * @param MatcherManager $matchers
-     * @param CollaboratorManager $collaborators
+     * @param MatcherManager         $matchers
+     * @param CollaboratorManager    $collaborators
      */
     public function teardown(
         ExampleNode $example,
         SpecificationInterface $context,
         MatcherManager $matchers,
         CollaboratorManager $collaborators
-    )
-    {
+    ) {
     }
 
     /**

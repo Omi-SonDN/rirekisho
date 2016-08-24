@@ -4,8 +4,7 @@ use Mockery as m;
 use Maatwebsite\Excel\Readers\LaravelExcelReader;
 use Maatwebsite\Excel\Classes;
 
-class ChineseXlsReaderTest extends TestCase
-{
+class ChineseXlsReaderTest extends TestCase {
 
     /**
      * Test csv file
@@ -30,10 +29,10 @@ class ChineseXlsReaderTest extends TestCase
         Config::set('excel.import.to_ascii', false);
 
         // Set excel class
-        $this->excel = App::make('phpexcel');
+        $this->excel    = App::make('phpexcel');
 
         // Set writer class
-        $this->reader = App::make('excel.reader');
+        $this->reader   = App::make('excel.reader');
         $this->reader->injectExcel($this->excel);
 
         // Load csv file
@@ -72,14 +71,14 @@ class ChineseXlsReaderTest extends TestCase
         $this->assertEquals(array(
 
             array(
-                '商品編號' => 'L01A01SY047',
-                '商品名稱' => 'LED T8燈管',
-                '實際數量' => 1,
+                '商品編號'  => 'L01A01SY047',
+                '商品名稱'  => 'LED T8燈管',
+                '實際數量'  => 1,
             ),
             array(
-                '商品編號' => 'L01A01SY046',
-                '商品名稱' => 'LED T8燈管',
-                '實際數量' => 1,
+                '商品編號'  => 'L01A01SY046',
+                '商品名稱'  => 'LED T8燈管',
+                '實際數量'  => 1,
             )
 
         ), $array);

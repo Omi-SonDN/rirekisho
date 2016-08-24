@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\Yaml\Tests;
 
+use Symfony\Bridge\PhpUnit\ErrorAssert;
 use Symfony\Component\Yaml\Inline;
 use Symfony\Component\Yaml\Yaml;
 
@@ -65,7 +66,7 @@ class InlineTest extends \PHPUnit_Framework_TestCase
         try {
             $requiredLocales = array('fr_FR.UTF-8', 'fr_FR.UTF8', 'fr_FR.utf-8', 'fr_FR.utf8', 'French_France.1252');
             if (false === setlocale(LC_NUMERIC, $requiredLocales)) {
-                $this->markTestSkipped('Could not set any of required locales: ' . implode(', ', $requiredLocales));
+                $this->markTestSkipped('Could not set any of required locales: '.implode(', ', $requiredLocales));
             }
 
             $this->assertEquals('1.2', Inline::dump(1.2));
@@ -254,27 +255,14 @@ class InlineTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group legacy
+     * @requires function Symfony\Bridge\PhpUnit\ErrorAssert::assertDeprecationsAreTriggered
      * throws \Symfony\Component\Yaml\Exception\ParseException in 4.0
      */
     public function testParseUnquotedScalarStartingWithPercentCharacter()
     {
-        $deprecations = array();
-        set_error_handler(function ($type, $msg) use (&$deprecations) {
-            if (E_USER_DEPRECATED !== $type) {
-                restore_error_handler();
-
-                return call_user_func_array('PHPUnit_Util_ErrorHandler::handleError', func_get_args());
-            }
-
-            $deprecations[] = $msg;
+        ErrorAssert::assertDeprecationsAreTriggered('Not quoting a scalar starting with the "%" indicator character is deprecated since Symfony 3.1 and will throw a ParseException in 4.0.', function () {
+            Inline::parse('{ foo: %foo }');
         });
-
-        Inline::parse('{ foo: %foo }');
-
-        restore_error_handler();
-
-        $this->assertCount(1, $deprecations);
-        $this->assertContains('Not quoting a scalar starting with the "%" indicator character is deprecated since Symfony 3.1 and will throw a ParseException in 4.0.', $deprecations[0]);
     }
 
     /**
@@ -411,41 +399,41 @@ class InlineTest extends \PHPUnit_Framework_TestCase
             array('[\'foo,bar\', \'foo bar\']', array('foo,bar', 'foo bar')),
 
             // mappings
-            array('{foo:bar,bar:foo,false:false,null:null,integer:12}', (object)array('foo' => 'bar', 'bar' => 'foo', 'false' => false, 'null' => null, 'integer' => 12)),
-            array('{ foo  : bar, bar : foo,  false  :   false,  null  :   null,  integer :  12  }', (object)array('foo' => 'bar', 'bar' => 'foo', 'false' => false, 'null' => null, 'integer' => 12)),
-            array('{foo: \'bar\', bar: \'foo: bar\'}', (object)array('foo' => 'bar', 'bar' => 'foo: bar')),
-            array('{\'foo\': \'bar\', "bar": \'foo: bar\'}', (object)array('foo' => 'bar', 'bar' => 'foo: bar')),
-            array('{\'foo\'\'\': \'bar\', "bar\"": \'foo: bar\'}', (object)array('foo\'' => 'bar', 'bar"' => 'foo: bar')),
-            array('{\'foo: \': \'bar\', "bar: ": \'foo: bar\'}', (object)array('foo: ' => 'bar', 'bar: ' => 'foo: bar')),
+            array('{foo:bar,bar:foo,false:false,null:null,integer:12}', (object) array('foo' => 'bar', 'bar' => 'foo', 'false' => false, 'null' => null, 'integer' => 12)),
+            array('{ foo  : bar, bar : foo,  false  :   false,  null  :   null,  integer :  12  }', (object) array('foo' => 'bar', 'bar' => 'foo', 'false' => false, 'null' => null, 'integer' => 12)),
+            array('{foo: \'bar\', bar: \'foo: bar\'}', (object) array('foo' => 'bar', 'bar' => 'foo: bar')),
+            array('{\'foo\': \'bar\', "bar": \'foo: bar\'}', (object) array('foo' => 'bar', 'bar' => 'foo: bar')),
+            array('{\'foo\'\'\': \'bar\', "bar\"": \'foo: bar\'}', (object) array('foo\'' => 'bar', 'bar"' => 'foo: bar')),
+            array('{\'foo: \': \'bar\', "bar: ": \'foo: bar\'}', (object) array('foo: ' => 'bar', 'bar: ' => 'foo: bar')),
 
             // nested sequences and mappings
             array('[foo, [bar, foo]]', array('foo', array('bar', 'foo'))),
-            array('[foo, {bar: foo}]', array('foo', (object)array('bar' => 'foo'))),
-            array('{ foo: {bar: foo} }', (object)array('foo' => (object)array('bar' => 'foo'))),
-            array('{ foo: [bar, foo] }', (object)array('foo' => array('bar', 'foo'))),
+            array('[foo, {bar: foo}]', array('foo', (object) array('bar' => 'foo'))),
+            array('{ foo: {bar: foo} }', (object) array('foo' => (object) array('bar' => 'foo'))),
+            array('{ foo: [bar, foo] }', (object) array('foo' => array('bar', 'foo'))),
 
             array('[  foo, [  bar, foo  ]  ]', array('foo', array('bar', 'foo'))),
 
-            array('[{ foo: {bar: foo} }]', array((object)array('foo' => (object)array('bar' => 'foo')))),
+            array('[{ foo: {bar: foo} }]', array((object) array('foo' => (object) array('bar' => 'foo')))),
 
             array('[foo, [bar, [foo, [bar, foo]], foo]]', array('foo', array('bar', array('foo', array('bar', 'foo')), 'foo'))),
 
-            array('[foo, {bar: foo, foo: [foo, {bar: foo}]}, [foo, {bar: foo}]]', array('foo', (object)array('bar' => 'foo', 'foo' => array('foo', (object)array('bar' => 'foo'))), array('foo', (object)array('bar' => 'foo')))),
+            array('[foo, {bar: foo, foo: [foo, {bar: foo}]}, [foo, {bar: foo}]]', array('foo', (object) array('bar' => 'foo', 'foo' => array('foo', (object) array('bar' => 'foo'))), array('foo', (object) array('bar' => 'foo')))),
 
-            array('[foo, bar: { foo: bar }]', array('foo', '1' => (object)array('bar' => (object)array('foo' => 'bar')))),
-            array('[foo, \'@foo.baz\', { \'%foo%\': \'foo is %foo%\', bar: \'%foo%\' }, true, \'@service_container\']', array('foo', '@foo.baz', (object)array('%foo%' => 'foo is %foo%', 'bar' => '%foo%'), true, '@service_container')),
+            array('[foo, bar: { foo: bar }]', array('foo', '1' => (object) array('bar' => (object) array('foo' => 'bar')))),
+            array('[foo, \'@foo.baz\', { \'%foo%\': \'foo is %foo%\', bar: \'%foo%\' }, true, \'@service_container\']', array('foo', '@foo.baz', (object) array('%foo%' => 'foo is %foo%', 'bar' => '%foo%'), true, '@service_container')),
 
             array('{}', new \stdClass()),
-            array('{ foo  : bar, bar : {}  }', (object)array('foo' => 'bar', 'bar' => new \stdClass())),
-            array('{ foo  : [], bar : {}  }', (object)array('foo' => array(), 'bar' => new \stdClass())),
-            array('{foo: \'bar\', bar: {} }', (object)array('foo' => 'bar', 'bar' => new \stdClass())),
-            array('{\'foo\': \'bar\', "bar": {}}', (object)array('foo' => 'bar', 'bar' => new \stdClass())),
-            array('{\'foo\': \'bar\', "bar": \'{}\'}', (object)array('foo' => 'bar', 'bar' => '{}')),
+            array('{ foo  : bar, bar : {}  }', (object) array('foo' => 'bar', 'bar' => new \stdClass())),
+            array('{ foo  : [], bar : {}  }', (object) array('foo' => array(), 'bar' => new \stdClass())),
+            array('{foo: \'bar\', bar: {} }', (object) array('foo' => 'bar', 'bar' => new \stdClass())),
+            array('{\'foo\': \'bar\', "bar": {}}', (object) array('foo' => 'bar', 'bar' => new \stdClass())),
+            array('{\'foo\': \'bar\', "bar": \'{}\'}', (object) array('foo' => 'bar', 'bar' => '{}')),
 
             array('[foo, [{}, {}]]', array('foo', array(new \stdClass(), new \stdClass()))),
             array('[foo, [[], {}]]', array('foo', array(array(), new \stdClass()))),
             array('[foo, [[{}, {}], {}]]', array('foo', array(array(new \stdClass(), new \stdClass()), new \stdClass()))),
-            array('[foo, {bar: {}}]', array('foo', '1' => (object)array('bar' => new \stdClass()))),
+            array('[foo, {bar: {}}]', array('foo', '1' => (object) array('bar' => new \stdClass()))),
         );
     }
 
@@ -535,6 +523,22 @@ class InlineTest extends \PHPUnit_Framework_TestCase
             'spaced' => array('2001-12-15 21:59:43.10 -5', 2001, 12, 16, 2, 59, 43),
             'date' => array('2001-12-15', 2001, 12, 15, 0, 0, 0),
         );
+    }
+
+    /**
+     * @dataProvider getTimestampTests
+     */
+    public function testParseNestedTimestampListAsDateTimeObject($yaml, $year, $month, $day, $hour, $minute, $second)
+    {
+        $expected = new \DateTime($yaml);
+        $expected->setTimeZone(new \DateTimeZone('UTC'));
+        $expected->setDate($year, $month, $day);
+        $expected->setTime($hour, $minute, $second);
+
+        $expectedNested = array('nested' => array($expected));
+        $yamlNested = "{nested: [$yaml]}";
+
+        $this->assertEquals($expectedNested, Inline::parse($yamlNested, Yaml::PARSE_DATETIME));
     }
 
     /**

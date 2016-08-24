@@ -5,6 +5,7 @@ namespace app;
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Vinkla\Hashids\Facades\Hashids;
+use DB;
 
 class CV extends Model
 {
@@ -121,6 +122,13 @@ class CV extends Model
         } else {
             return '----';
         }
+    }
+
+    public function getStatusCVAttribute()
+    {
+        $status = $this->Status;
+        $status = DB::table('status')->where('id', '=', $status)->get();
+        return $status[0]->status;
     }
 
     public function getPositionAttribute()

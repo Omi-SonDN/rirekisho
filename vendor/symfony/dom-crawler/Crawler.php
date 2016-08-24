@@ -43,9 +43,9 @@ class Crawler extends \SplObjectStorage
     /**
      * Constructor.
      *
-     * @param mixed $node A Node to use as the base for the crawling
+     * @param mixed  $node       A Node to use as the base for the crawling
      * @param string $currentUri The current URI
-     * @param string $baseHref The base href value
+     * @param string $baseHref   The base href value
      */
     public function __construct($node = null, $currentUri = null, $baseHref = null)
     {
@@ -95,8 +95,8 @@ class Crawler extends \SplObjectStorage
      * to be ISO-8859-1, which is the default charset defined by the
      * HTTP 1.1 specification.
      *
-     * @param string $content A string to parse as HTML/XML
-     * @param null|string $type The content type of the string
+     * @param string      $content A string to parse as HTML/XML
+     * @param null|string $type    The content type of the string
      */
     public function addContent($content, $type = null)
     {
@@ -120,8 +120,7 @@ class Crawler extends \SplObjectStorage
         // http://www.w3.org/TR/encoding/#encodings
         // http://www.w3.org/TR/REC-xml/#NT-EncName
         if (null === $charset &&
-            preg_match('/\<meta[^\>]+charset *= *["\']?([a-zA-Z\-0-9_:.]+)/i', $content, $matches)
-        ) {
+            preg_match('/\<meta[^\>]+charset *= *["\']?([a-zA-Z\-0-9_:.]+)/i', $content, $matches)) {
             $charset = $matches[1];
         }
 
@@ -157,9 +156,7 @@ class Crawler extends \SplObjectStorage
         $dom = new \DOMDocument('1.0', $charset);
         $dom->validateOnParse = true;
 
-        set_error_handler(function () {
-            throw new \Exception();
-        });
+        set_error_handler(function () {throw new \Exception();});
 
         try {
             // Convert charset to HTML-entities to work around bugs in DOMDocument::loadHTML()
@@ -178,12 +175,12 @@ class Crawler extends \SplObjectStorage
                             if (0xF0 <= $m[$i]) {
                                 $c = (($m[$i++] - 0xF0) << 18) + (($m[$i++] - 0x80) << 12) + (($m[$i++] - 0x80) << 6) + $m[$i++] - 0x80;
                             } elseif (0xE0 <= $m[$i]) {
-                                $c = (($m[$i++] - 0xE0) << 12) + (($m[$i++] - 0x80) << 6) + $m[$i++] - 0x80;
+                                $c = (($m[$i++] - 0xE0) << 12) + (($m[$i++] - 0x80) << 6) + $m[$i++]  - 0x80;
                             } else {
                                 $c = (($m[$i++] - 0xC0) << 6) + $m[$i++] - 0x80;
                             }
 
-                            $entities .= '&#' . $c . ';';
+                            $entities .= '&#'.$c.';';
                         }
 
                         return $entities;
@@ -232,7 +229,7 @@ class Crawler extends \SplObjectStorage
      *
      * @param string $content The XML content
      * @param string $charset The charset
-     * @param int $options Bitwise OR of the libxml option constants
+     * @param int    $options Bitwise OR of the libxml option constants
      *                        LIBXML_PARSEHUGE is dangerous, see
      *                        http://symfony.com/blog/security-release-symfony-2-0-17-released
      */
@@ -327,7 +324,7 @@ class Crawler extends \SplObjectStorage
      *
      * @param int $position The position
      *
-     * @return Crawler A new instance of the Crawler with the selected node, or an empty Crawler if it does not exist.
+     * @return Crawler A new instance of the Crawler with the selected node, or an empty Crawler if it does not exist
      */
     public function eq($position)
     {
@@ -386,7 +383,7 @@ class Crawler extends \SplObjectStorage
      *
      * @param \Closure $closure An anonymous function
      *
-     * @return Crawler A Crawler instance with the selected nodes.
+     * @return Crawler A Crawler instance with the selected nodes
      */
     public function reduce(\Closure $closure)
     {
@@ -599,7 +596,7 @@ class Crawler extends \SplObjectStorage
      */
     public function extract($attributes)
     {
-        $attributes = (array)$attributes;
+        $attributes = (array) $attributes;
         $count = count($attributes);
 
         $data = array();
@@ -673,8 +670,8 @@ class Crawler extends \SplObjectStorage
      */
     public function selectLink($value)
     {
-        $xpath = sprintf('descendant-or-self::a[contains(concat(\' \', normalize-space(string(.)), \' \'), %s) ', static::xpathLiteral(' ' . $value . ' ')) .
-            sprintf('or ./img[contains(concat(\' \', normalize-space(string(@alt)), \' \'), %s)]]', static::xpathLiteral(' ' . $value . ' '));
+        $xpath = sprintf('descendant-or-self::a[contains(concat(\' \', normalize-space(string(.)), \' \'), %s) ', static::xpathLiteral(' '.$value.' ')).
+                            sprintf('or ./img[contains(concat(\' \', normalize-space(string(@alt)), \' \'), %s)]]', static::xpathLiteral(' '.$value.' '));
 
         return $this->filterRelativeXPath($xpath);
     }
@@ -689,9 +686,9 @@ class Crawler extends \SplObjectStorage
     public function selectButton($value)
     {
         $translate = 'translate(@type, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz")';
-        $xpath = sprintf('descendant-or-self::input[((contains(%s, "submit") or contains(%s, "button")) and contains(concat(\' \', normalize-space(string(@value)), \' \'), %s)) ', $translate, $translate, static::xpathLiteral(' ' . $value . ' ')) .
-            sprintf('or (contains(%s, "image") and contains(concat(\' \', normalize-space(string(@alt)), \' \'), %s)) or @id=%s or @name=%s] ', $translate, static::xpathLiteral(' ' . $value . ' '), static::xpathLiteral($value), static::xpathLiteral($value)) .
-            sprintf('| descendant-or-self::button[contains(concat(\' \', normalize-space(string(.)), \' \'), %s) or @id=%s or @name=%s]', static::xpathLiteral(' ' . $value . ' '), static::xpathLiteral($value), static::xpathLiteral($value));
+        $xpath = sprintf('descendant-or-self::input[((contains(%s, "submit") or contains(%s, "button")) and contains(concat(\' \', normalize-space(string(@value)), \' \'), %s)) ', $translate, $translate, static::xpathLiteral(' '.$value.' ')).
+                         sprintf('or (contains(%s, "image") and contains(concat(\' \', normalize-space(string(@alt)), \' \'), %s)) or @id=%s or @name=%s] ', $translate, static::xpathLiteral(' '.$value.' '), static::xpathLiteral($value), static::xpathLiteral($value)).
+                         sprintf('| descendant-or-self::button[contains(concat(\' \', normalize-space(string(.)), \' \'), %s) or @id=%s or @name=%s]', static::xpathLiteral(' '.$value.' '), static::xpathLiteral($value), static::xpathLiteral($value));
 
         return $this->filterRelativeXPath($xpath);
     }
@@ -734,7 +731,7 @@ class Crawler extends \SplObjectStorage
     /**
      * Returns a Form object for the first node in the list.
      *
-     * @param array $values An array of values for the form fields
+     * @param array  $values An array of values for the form fields
      * @param string $method The method for the form
      *
      * @return Form A Form instance
@@ -878,22 +875,22 @@ class Crawler extends \SplObjectStorage
 
             // BC for Symfony 2.4 and lower were elements were adding in a fake _root parent
             if (0 === strpos($expression, '/_root/')) {
-                $expression = './' . substr($expression, 7);
+                $expression = './'.substr($expression, 7);
             } elseif (0 === strpos($expression, 'self::*/')) {
-                $expression = './' . substr($expression, 8);
+                $expression = './'.substr($expression, 8);
             }
 
             // add prefix before absolute element selector
             if (empty($expression)) {
                 $expression = $nonMatchingExpression;
             } elseif (0 === strpos($expression, '//')) {
-                $expression = 'descendant-or-self::' . substr($expression, 2);
+                $expression = 'descendant-or-self::'.substr($expression, 2);
             } elseif (0 === strpos($expression, './/')) {
-                $expression = 'descendant-or-self::' . substr($expression, 3);
+                $expression = 'descendant-or-self::'.substr($expression, 3);
             } elseif (0 === strpos($expression, './')) {
-                $expression = 'self::' . substr($expression, 2);
+                $expression = 'self::'.substr($expression, 2);
             } elseif (0 === strpos($expression, 'child::')) {
-                $expression = 'self::' . substr($expression, 7);
+                $expression = 'self::'.substr($expression, 7);
             } elseif ('/' === $expression[0] || 0 === strpos($expression, 'self::')) {
                 // the only direct child in Symfony 2.4 and lower is _root, which is already handled previously
                 // so let's drop the expression entirely
@@ -902,14 +899,14 @@ class Crawler extends \SplObjectStorage
                 // '.' is the fake root element in Symfony 2.4 and lower, which is excluded from results
                 $expression = $nonMatchingExpression;
             } elseif (0 === strpos($expression, 'descendant::')) {
-                $expression = 'descendant-or-self::' . substr($expression, strlen('descendant::'));
+                $expression = 'descendant-or-self::'.substr($expression, strlen('descendant::'));
             } elseif (preg_match('/^(ancestor|ancestor-or-self|attribute|following|following-sibling|namespace|parent|preceding|preceding-sibling)::/', $expression)) {
                 // the fake root has no parent, preceding or following nodes and also no attributes (even no namespace attributes)
                 $expression = $nonMatchingExpression;
             } elseif (0 !== strpos($expression, 'descendant-or-self::')) {
-                $expression = 'self::' . $expression;
+                $expression = 'self::'.$expression;
             }
-            $expressions[] = $parenthesis . $expression;
+            $expressions[] = $parenthesis.$expression;
         }
 
         return implode(' | ', $expressions);
@@ -931,7 +928,7 @@ class Crawler extends \SplObjectStorage
 
     /**
      * @param \DOMElement $node
-     * @param string $siblingDir
+     * @param string      $siblingDir
      *
      * @return array
      */
@@ -950,7 +947,7 @@ class Crawler extends \SplObjectStorage
 
     /**
      * @param \DOMDocument $document
-     * @param array $prefixes
+     * @param array        $prefixes
      *
      * @return \DOMXPath
      *
@@ -972,7 +969,7 @@ class Crawler extends \SplObjectStorage
 
     /**
      * @param \DOMXPath $domxpath
-     * @param string $prefix
+     * @param string    $prefix
      *
      * @return string
      *

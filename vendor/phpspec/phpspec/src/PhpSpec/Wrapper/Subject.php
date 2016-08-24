@@ -48,12 +48,12 @@ class Subject implements ArrayAccess, WrapperInterface
     private $expectationFactory;
 
     /**
-     * @param mixed $subject
-     * @param Wrapper $wrapper
-     * @param WrappedObject $wrappedObject
-     * @param Caller $caller
+     * @param mixed                  $subject
+     * @param Wrapper                $wrapper
+     * @param WrappedObject          $wrappedObject
+     * @param Caller                 $caller
      * @param SubjectWithArrayAccess $arrayAccess
-     * @param ExpectationFactory $expectationFactory
+     * @param ExpectationFactory     $expectationFactory
      */
     public function __construct(
         $subject,
@@ -62,19 +62,18 @@ class Subject implements ArrayAccess, WrapperInterface
         Caller $caller,
         SubjectWithArrayAccess $arrayAccess,
         ExpectationFactory $expectationFactory
-    )
-    {
-        $this->subject = $subject;
-        $this->wrapper = $wrapper;
-        $this->wrappedObject = $wrappedObject;
-        $this->caller = $caller;
-        $this->arrayAccess = $arrayAccess;
+    ) {
+        $this->subject            = $subject;
+        $this->wrapper            = $wrapper;
+        $this->wrappedObject      = $wrappedObject;
+        $this->caller             = $caller;
+        $this->arrayAccess        = $arrayAccess;
         $this->expectationFactory = $expectationFactory;
     }
 
     /**
      * @param string $className
-     * @param array $arguments
+     * @param array  $arguments
      */
     public function beAnInstanceOf($className, array $arguments = array())
     {
@@ -91,7 +90,7 @@ class Subject implements ArrayAccess, WrapperInterface
 
     /**
      * @param array|string $factoryMethod
-     * @param array $arguments
+     * @param array        $arguments
      */
     public function beConstructedThrough($factoryMethod, array $arguments = array())
     {
@@ -112,7 +111,7 @@ class Subject implements ArrayAccess, WrapperInterface
 
     /**
      * @param string $method
-     * @param array $arguments
+     * @param array  $arguments
      *
      * @return Subject
      */
@@ -123,7 +122,7 @@ class Subject implements ArrayAccess, WrapperInterface
 
     /**
      * @param string $property
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return mixed
      */
@@ -164,7 +163,7 @@ class Subject implements ArrayAccess, WrapperInterface
 
     /**
      * @param string|integer $key
-     * @param mixed $value
+     * @param mixed          $value
      */
     public function offsetSet($key, $value)
     {
@@ -181,7 +180,7 @@ class Subject implements ArrayAccess, WrapperInterface
 
     /**
      * @param string $method
-     * @param array $arguments
+     * @param array  $arguments
      *
      * @return mixed|Subject
      */
@@ -212,7 +211,7 @@ class Subject implements ArrayAccess, WrapperInterface
 
     /**
      * @param string $property
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return mixed
      */
@@ -243,7 +242,7 @@ class Subject implements ArrayAccess, WrapperInterface
 
     /**
      * @param string $method
-     * @param array $arguments
+     * @param array  $arguments
      *
      * @return mixed
      */

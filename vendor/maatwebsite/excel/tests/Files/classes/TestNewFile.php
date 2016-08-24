@@ -2,8 +2,7 @@
 
 use Maatwebsite\Excel\Files\NewExcelFile;
 
-class TestNewFile extends NewExcelFile
-{
+class TestNewFile extends NewExcelFile {
 
     /**
      * Get file to import

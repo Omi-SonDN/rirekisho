@@ -57,7 +57,8 @@ class InlineFragmentRendererTest extends \PHPUnit_Framework_TestCase
             ->method('getController')
             ->will($this->returnValue(function (\stdClass $object, Bar $object1) {
                 return new Response($object1->getBar());
-            }));
+            }))
+        ;
 
         $kernel = new HttpKernel(new EventDispatcher(), $resolver);
         $renderer = new InlineFragmentRenderer($kernel);
@@ -117,7 +118,8 @@ class InlineFragmentRendererTest extends \PHPUnit_Framework_TestCase
         $kernel
             ->expects($this->any())
             ->method('handle')
-            ->will($returnValue);
+            ->will($returnValue)
+        ;
 
         return $kernel;
     }
@@ -132,7 +134,8 @@ class InlineFragmentRendererTest extends \PHPUnit_Framework_TestCase
         $kernel
             ->expects($this->any())
             ->method('handle')
-            ->with($this->equalTo($request, 1));
+            ->with($this->equalTo($request, 1))
+        ;
 
         return $kernel;
     }
@@ -147,11 +150,13 @@ class InlineFragmentRendererTest extends \PHPUnit_Framework_TestCase
                 ob_start();
                 echo 'bar';
                 throw new \RuntimeException();
-            }));
+            }))
+        ;
         $resolver
             ->expects($this->once())
             ->method('getArguments')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue(array()))
+        ;
 
         $kernel = new HttpKernel(new EventDispatcher(), $resolver);
         $renderer = new InlineFragmentRenderer($kernel);
@@ -191,6 +196,19 @@ class InlineFragmentRendererTest extends \PHPUnit_Framework_TestCase
         $this->testESIHeaderIsKeptInSubrequest();
 
         Request::setTrustedHeaderName(Request::HEADER_CLIENT_IP, $trustedHeaderName);
+    }
+
+    public function testHeadersPossiblyResultingIn304AreNotAssignedToSubrequest()
+    {
+        $expectedSubRequest = Request::create('/');
+        if (Request::getTrustedHeaderName(Request::HEADER_CLIENT_IP)) {
+            $expectedSubRequest->headers->set('x-forwarded-for', array('127.0.0.1'));
+            $expectedSubRequest->server->set('HTTP_X_FORWARDED_FOR', '127.0.0.1');
+        }
+
+        $strategy = new InlineFragmentRenderer($this->getKernelExpectingRequest($expectedSubRequest));
+        $request = Request::create('/', 'GET', array(), array(), array(), array('HTTP_IF_MODIFIED_SINCE' => 'Fri, 01 Jan 2016 00:00:00 GMT', 'HTTP_IF_NONE_MATCH' => '*'));
+        $strategy->render('/', $request);
     }
 }
 

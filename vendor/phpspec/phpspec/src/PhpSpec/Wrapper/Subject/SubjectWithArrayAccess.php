@@ -35,18 +35,17 @@ class SubjectWithArrayAccess
     private $dispatcher;
 
     /**
-     * @param Caller $caller
-     * @param PresenterInterface $presenter
+     * @param Caller                   $caller
+     * @param PresenterInterface       $presenter
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
         Caller $caller,
         PresenterInterface $presenter,
         EventDispatcherInterface $dispatcher
-    )
-    {
-        $this->caller = $caller;
-        $this->presenter = $presenter;
+    ) {
+        $this->caller     = $caller;
+        $this->presenter  = $presenter;
         $this->dispatcher = $dispatcher;
     }
 
@@ -59,7 +58,7 @@ class SubjectWithArrayAccess
     {
         $unwrapper = new Unwrapper();
         $subject = $this->caller->getWrappedObject();
-        $key = $unwrapper->unwrapOne($key);
+        $key     = $unwrapper->unwrapOne($key);
 
         $this->checkIfSubjectImplementsArrayAccess($subject);
 
@@ -75,7 +74,7 @@ class SubjectWithArrayAccess
     {
         $unwrapper = new Unwrapper();
         $subject = $this->caller->getWrappedObject();
-        $key = $unwrapper->unwrapOne($key);
+        $key     = $unwrapper->unwrapOne($key);
 
         $this->checkIfSubjectImplementsArrayAccess($subject);
 
@@ -84,14 +83,14 @@ class SubjectWithArrayAccess
 
     /**
      * @param string|integer $key
-     * @param mixed $value
+     * @param mixed          $value
      */
     public function offsetSet($key, $value)
     {
         $unwrapper = new Unwrapper();
         $subject = $this->caller->getWrappedObject();
-        $key = $unwrapper->unwrapOne($key);
-        $value = $unwrapper->unwrapOne($value);
+        $key     = $unwrapper->unwrapOne($key);
+        $value   = $unwrapper->unwrapOne($value);
 
         $this->checkIfSubjectImplementsArrayAccess($subject);
 
@@ -105,7 +104,7 @@ class SubjectWithArrayAccess
     {
         $unwrapper = new Unwrapper();
         $subject = $this->caller->getWrappedObject();
-        $key = $unwrapper->unwrapOne($key);
+        $key     = $unwrapper->unwrapOne($key);
 
         $this->checkIfSubjectImplementsArrayAccess($subject);
 

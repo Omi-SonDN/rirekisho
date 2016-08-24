@@ -7,7 +7,7 @@ interface Gate
     /**
      * Determine if a given ability has been defined.
      *
-     * @param  string $ability
+     * @param  string  $ability
      * @return bool
      */
     public function has($ability);
@@ -15,8 +15,8 @@ interface Gate
     /**
      * Define a new ability.
      *
-     * @param  string $ability
-     * @param  callable|string $callback
+     * @param  string  $ability
+     * @param  callable|string  $callback
      * @return $this
      */
     public function define($ability, $callback);
@@ -24,8 +24,8 @@ interface Gate
     /**
      * Define a policy class for a given class type.
      *
-     * @param  string $class
-     * @param  string $policy
+     * @param  string  $class
+     * @param  string  $policy
      * @return $this
      */
     public function policy($class, $policy);
@@ -33,8 +33,8 @@ interface Gate
     /**
      * Determine if the given ability should be granted.
      *
-     * @param  string $ability
-     * @param  array|mixed $arguments
+     * @param  string  $ability
+     * @param  array|mixed  $arguments
      * @return bool
      */
     public function check($ability, $arguments = []);

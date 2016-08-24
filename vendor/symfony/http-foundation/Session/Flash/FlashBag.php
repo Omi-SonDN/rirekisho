@@ -39,7 +39,7 @@ class FlashBag implements FlashBagInterface, \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param string $storageKey The key used to store flashes in the session.
+     * @param string $storageKey The key used to store flashes in the session
      */
     public function __construct($storageKey = '_sf2_flashes')
     {
@@ -123,7 +123,7 @@ class FlashBag implements FlashBagInterface, \IteratorAggregate
      */
     public function set($type, $messages)
     {
-        $this->flashes[$type] = (array)$messages;
+        $this->flashes[$type] = (array) $messages;
     }
 
     /**
@@ -175,7 +175,7 @@ class FlashBag implements FlashBagInterface, \IteratorAggregate
      */
     public function getIterator()
     {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.4 and will be removed in 3.0.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.4 and will be removed in 3.0.', E_USER_DEPRECATED);
 
         return new \ArrayIterator($this->all());
     }

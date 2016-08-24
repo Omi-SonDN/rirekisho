@@ -333,7 +333,7 @@ Feature: Developer specifies object construction
     When I run phpspec
     Then the suite should pass
 
-  Scenario: Developer cannot redefine constructor parameters if object is already instantiated
+    Scenario: Developer cannot redefine constructor parameters if object is already instantiated
     Given the spec file "spec/Runner/ConstructorExample9/ClassConstructorSpec.php" contains:
     """
     <?php

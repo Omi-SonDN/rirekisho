@@ -39,9 +39,9 @@ class DatabaseSessionHandler implements SessionHandlerInterface, ExistenceAwareI
     /**
      * Create a new database session handler instance.
      *
-     * @param  \Illuminate\Database\ConnectionInterface $connection
-     * @param  string $table
-     * @param  int $minutes
+     * @param  \Illuminate\Database\ConnectionInterface  $connection
+     * @param  string  $table
+     * @param  int  $minutes
      * @return void
      */
     public function __construct(ConnectionInterface $connection, $table, $minutes)
@@ -72,7 +72,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface, ExistenceAwareI
      */
     public function read($sessionId)
     {
-        $session = (object)$this->getQuery()->find($sessionId);
+        $session = (object) $this->getQuery()->find($sessionId);
 
         if (isset($session->last_activity)) {
             if ($session->last_activity < Carbon::now()->subMinutes($this->minutes)->getTimestamp()) {
@@ -136,7 +136,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface, ExistenceAwareI
     /**
      * Set the existence state for the session.
      *
-     * @param  bool $value
+     * @param  bool  $value
      * @return $this
      */
     public function setExists($value)

@@ -24,7 +24,7 @@ class HtmlPresenter extends StringPresenter
 {
     /**
      * @param Exception $exception
-     * @param bool $verbose
+     * @param bool      $verbose
      *
      * @return string
      */
@@ -38,7 +38,7 @@ class HtmlPresenter extends StringPresenter
     }
 
     /**
-     * @param string $file
+     * @param string  $file
      * @param integer $lineno
      * @param integer $context
      *
@@ -46,9 +46,9 @@ class HtmlPresenter extends StringPresenter
      */
     protected function presentFileCode($file, $lineno, $context = 6)
     {
-        $lines = explode("\n", file_get_contents($file));
+        $lines  = explode("\n", file_get_contents($file));
         $offset = max(0, $lineno - ceil($context / 2));
-        $lines = array_slice($lines, $offset, $context);
+        $lines  = array_slice($lines, $offset, $context);
 
         $text = "\n";
         foreach ($lines as $line) {
@@ -59,8 +59,8 @@ class HtmlPresenter extends StringPresenter
             } else {
                 $cssClass = "normal";
             }
-            $text .= '<span class="linenum">' . $offset . '</span><span class="' .
-                $cssClass . '">' . $line . '</span>';
+            $text .= '<span class="linenum">'.$offset.'</span><span class="'.
+                     $cssClass.'">'.$line.'</span>';
 
             $text .= "\n";
         }

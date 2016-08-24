@@ -18,8 +18,7 @@ use Maatwebsite\Excel\Exceptions\LaravelExcelException;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class ConfigReader
-{
+class ConfigReader {
 
     /**
      * Excel object
@@ -48,7 +47,7 @@ class ConfigReader
     /**
      * Constructor
      * @param PHPExcel $excel
-     * @param string $config
+     * @param string   $config
      * @param callback $callback
      */
     public function __construct(PHPExcel $excel, $config = 'excel.import', $callback = null)
@@ -75,9 +74,11 @@ class ConfigReader
         $this->sheetCollection = new SheetCollection();
 
         // Get the sheet names
-        if ($sheets = $this->excel->getSheetNames()) {
+        if ($sheets = $this->excel->getSheetNames())
+        {
             // Loop through the sheets
-            foreach ($sheets as $index => $name) {
+            foreach ($sheets as $index => $name)
+            {
                 // Set sheet name
                 $this->sheetName = $name;
 
@@ -85,10 +86,13 @@ class ConfigReader
                 $this->sheet = $this->excel->setActiveSheetIndex($index);
 
                 // Do the callback
-                if ($callback instanceof Closure) {
+                if ($callback instanceof Closure)
+                {
                     call_user_func($callback, $this);
-                } // If no callback, put it inside the sheet collection
-                else {
+                }
+                // If no callback, put it inside the sheet collection
+                else
+                {
                     $this->sheetCollection->push(clone $this);
                 }
             }
@@ -115,7 +119,8 @@ class ConfigReader
         $field = snake_case($field);
 
         // Get coordinate
-        if ($coordinate = $this->getCoordinateByKey($field)) {
+        if ($coordinate = $this->getCoordinateByKey($field))
+        {
             // return cell value by coordinate
             return $this->getCellValueByCoordinate($coordinate);
         }
@@ -130,13 +135,17 @@ class ConfigReader
      */
     protected function getCellValueByCoordinate($coordinate)
     {
-        if ($this->sheet) {
-            if (str_contains($coordinate, ':')) {
+        if ($this->sheet)
+        {
+            if (str_contains($coordinate, ':'))
+            {
                 // We want to get a range of cells
                 $values = $this->sheet->rangeToArray($coordinate);
 
                 return $values;
-            } else {
+            }
+            else
+            {
                 // We want 1 specific cell
                 return $this->sheet->getCell($coordinate)->getValue();
             }

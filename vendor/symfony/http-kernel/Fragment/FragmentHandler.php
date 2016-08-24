@@ -44,9 +44,9 @@ class FragmentHandler
      *
      * RequestStack will become required in 3.0.
      *
-     * @param FragmentRendererInterface[] $renderers An array of FragmentRendererInterface instances
-     * @param bool $debug Whether the debug mode is enabled or not
-     * @param RequestStack|null $requestStack The Request stack that controls the lifecycle of requests
+     * @param FragmentRendererInterface[] $renderers    An array of FragmentRendererInterface instances
+     * @param bool                        $debug        Whether the debug mode is enabled or not
+     * @param RequestStack|null           $requestStack The Request stack that controls the lifecycle of requests
      */
     public function __construct(array $renderers = array(), $debug = false, RequestStack $requestStack = null)
     {
@@ -80,7 +80,7 @@ class FragmentHandler
      */
     public function setRequest(Request $request = null)
     {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.4 and will be removed in 3.0.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.4 and will be removed in 3.0.', E_USER_DEPRECATED);
 
         $this->request = $request;
     }
@@ -92,9 +92,9 @@ class FragmentHandler
      *
      *  * ignore_errors: true to return an empty string in case of an error
      *
-     * @param string|ControllerReference $uri A URI as a string or a ControllerReference instance
-     * @param string $renderer The renderer name
-     * @param array $options An array of options
+     * @param string|ControllerReference $uri      A URI as a string or a ControllerReference instance
+     * @param string                     $renderer The renderer name
+     * @param array                      $options  An array of options
      *
      * @return string|null The Response content or null when the Response is streamed
      *

@@ -97,6 +97,6 @@ class FilterControllerEvent extends KernelEvent
             return 'true';
         }
 
-        return (string)$var;
+        return (string) $var;
     }
 }

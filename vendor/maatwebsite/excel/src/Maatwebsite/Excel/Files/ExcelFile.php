@@ -4,8 +4,7 @@ use Illuminate\Foundation\Application;
 use Maatwebsite\Excel\Excel;
 use Maatwebsite\Excel\Exceptions\LaravelExcelException;
 
-abstract class ExcelFile extends File
-{
+abstract class ExcelFile extends File {
 
     /**
      * @var bool|string
@@ -24,7 +23,7 @@ abstract class ExcelFile extends File
 
     /**
      * @param Application $app
-     * @param Excel $excel
+     * @param Excel       $excel
      */
     public function __construct(Application $app, Excel $excel)
     {
@@ -109,7 +108,8 @@ abstract class ExcelFile extends File
         );
 
         // Loop through the filters
-        foreach ($this->getFilters() as $filter) {
+        foreach($this->getFilters() as $filter)
+        {
             // Enable the filter
             $this->excel->filter($filter);
         }
@@ -132,21 +132,21 @@ abstract class ExcelFile extends File
         $delimiter = $this->getDelimiter();
 
         // Set it when given
-        if ($delimiter)
+        if($delimiter)
             $this->excel->setDelimiter($delimiter);
 
         // Get user provided enclosure
         $enclosure = $this->getEnclosure();
 
         // Set it when given
-        if ($enclosure)
+        if($enclosure)
             $this->excel->setEnclosure($enclosure);
     }
 
     /**
      * Dynamically call methods
      * @param  string $method
-     * @param  array $params
+     * @param  array  $params
      * @return mixed
      */
     public function __call($method, $params)

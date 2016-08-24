@@ -141,7 +141,7 @@ class ChoiceFormField extends FormField
             }
 
             if ($this->multiple) {
-                $value = (array)$value;
+                $value = (array) $value;
             }
 
             if (is_array($value)) {
@@ -275,7 +275,7 @@ class ChoiceFormField extends FormField
      * Checks whether given value is in the existing options.
      *
      * @param string $optionValue
-     * @param array $options
+     * @param array  $options
      *
      * @return bool
      */

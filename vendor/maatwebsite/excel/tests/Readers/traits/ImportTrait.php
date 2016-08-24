@@ -1,7 +1,6 @@
 <?php
 
-trait ImportTrait
-{
+trait ImportTrait {
 
     /**
      * Test csv file
@@ -26,14 +25,14 @@ trait ImportTrait
         Config::set('excel.import.heading', 'slugged');
 
         // Set excel class
-        $this->excel = App::make('phpexcel');
+        $this->excel    = App::make('phpexcel');
 
         // Set writer class
-        $this->reader = App::make('excel.reader');
+        $this->reader   = App::make('excel.reader');
         $this->reader->injectExcel($this->excel);
 
         // Disable heading usage
-        if (isset($this->noHeadings) && $this->noHeadings)
+        if(isset($this->noHeadings) && $this->noHeadings)
             $this->reader->noHeading(true);
 
         // Load csv file

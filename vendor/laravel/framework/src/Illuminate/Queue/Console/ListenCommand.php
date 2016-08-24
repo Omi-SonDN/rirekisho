@@ -33,7 +33,7 @@ class ListenCommand extends Command
     /**
      * Create a new queue listen command.
      *
-     * @param  \Illuminate\Queue\Listener $listener
+     * @param  \Illuminate\Queue\Listener  $listener
      * @return void
      */
     public function __construct(Listener $listener)
@@ -76,7 +76,7 @@ class ListenCommand extends Command
     /**
      * Get the name of the queue connection to listen on.
      *
-     * @param  string $connection
+     * @param  string  $connection
      * @return string
      */
     protected function getQueue($connection)

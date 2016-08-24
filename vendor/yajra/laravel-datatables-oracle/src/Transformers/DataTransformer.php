@@ -43,9 +43,9 @@ class DataTransformer
         foreach ($columns->all() as $column) {
             if ($column[$type]) {
                 $title = $column['title'];
-                $data = array_get($row, $column['data']);
+                $data  = array_get($row, $column['data']);
                 if ($type == 'exportable') {
-                    $data = $this->decodeContent($data);
+                    $data  = $this->decodeContent($data);
                     $title = $this->decodeContent($title);
                 }
 
@@ -64,8 +64,12 @@ class DataTransformer
      */
     protected function decodeContent($data)
     {
-        $decoded = html_entity_decode(strip_tags($data), ENT_QUOTES, 'UTF-8');
+        try {
+            $decoded = html_entity_decode(strip_tags($data), ENT_QUOTES, 'UTF-8');
 
-        return str_replace("\xc2\xa0", ' ', $decoded);
+            return str_replace("\xc2\xa0", ' ', $decoded);
+        } catch (\Exception $e) {
+            return $data;
+        }
     }
 }

@@ -12,7 +12,7 @@ $(document).ready(function () {
     });
 
     $('body').on('change','form.status',function (e) {
-        var result = confirm("Want to change?");
+        var result = confirm("Bạn có muốn thay đổi trạng thái?");
         var stt = $(this).children('select.status').val();
         if (result) {
             $.ajaxSetup({

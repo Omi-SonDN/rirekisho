@@ -22,8 +22,7 @@ class InvalidCollaboratorTypeExceptionSpec extends ObjectBehavior
         \ReflectionParameter $parameter,
         \ReflectionMethod $function,
         \ReflectionClass $class
-    )
-    {
+    ) {
         $parameter->getPosition()->willReturn(2);
         $function->getDeclaringClass()->willReturn($class);
         $class->getName()->willReturn('Acme\Foo');

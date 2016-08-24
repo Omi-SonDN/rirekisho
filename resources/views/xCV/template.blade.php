@@ -5,7 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="_token" content="{!! csrf_token() !!}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+   
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="{{ URL::asset('/admin/css/3.3.5-bootstrap.min.css') }}">
     <!-- local css-->
@@ -14,10 +16,14 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/fontawesome-iconpicker.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/select2.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/index.css') }}"/>
+
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/my-forms.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/header.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/footer.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/custom.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/font-awesome.min.css')}}"/> 
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/alert.css') }}"/>
+
     <!--CSS lib tablesorter -->
     <link rel="stylesheet" type="text/css"
           href="{{ asset('/admin/bower_components/datatables-sort/css/tablesorter.pager.css') }}"/>
@@ -57,6 +63,13 @@
 
     </script>
     <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
+    <!-- thong ke -->
+    <script type="text/javascript" src="{{asset('/hightchart/js/highcharts.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/hightchart/js/exporting.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/hightchart/js/canvas-tools.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/hightchart/js/export-csv.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/hightchart/js/jspdf.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/hightchart/js/highcharts-export-clientside.js')}}"></script>
 
 </head>
 <body>
@@ -83,15 +96,17 @@
     </div>
 
     <!---  jQuery-->
-    {{--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>--}}
+
     <!---  bootstrap-->
     <script type="text/javascript" src="{{ URL::asset('/admin/js/3.3.5-bootstrap.min.js')}}"></script>
+    <!-- validate -->
     <script type="text/javascript" src="{{ URL::asset('/admin/js/1.15.0-jquery.validate.js')}}"></script>
     <script type="text/javascript" src="{{ URL::asset('/admin/js/1.11.4-jquery-ui.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/fontawesome-iconpicker.min.js')}}" async></script>
     <script type="text/javascript" src="{{asset('/admin/js/wz_tooltip.js')}}"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+
 
     <script type="text/javascript" src="{{asset('/js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/js/select2.full.min.js')}}"></script>

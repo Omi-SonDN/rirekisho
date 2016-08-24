@@ -33,7 +33,8 @@ final class JsonExecutionContext implements ExecutionContextInterface
         if (array_key_exists(self::ENV_NAME, $env)) {
             $serialized = json_decode($env[self::ENV_NAME], true);
             $executionContext->generatedTypes = $serialized['generated-types'];
-        } else {
+        }
+        else {
             $executionContext->generatedTypes = array();
         }
 

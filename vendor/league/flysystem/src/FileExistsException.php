@@ -14,8 +14,8 @@ class FileExistsException extends Exception
     /**
      * Constructor.
      *
-     * @param string $path
-     * @param int $code
+     * @param string        $path
+     * @param int           $code
      * @param BaseException $previous
      */
     public function __construct($path, $code = 0, BaseException $previous = null)
@@ -26,7 +26,7 @@ class FileExistsException extends Exception
     }
 
     /**
-     * Get the path which was not found.
+     * Get the path which was found.
      *
      * @return string
      */

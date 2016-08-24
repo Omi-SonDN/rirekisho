@@ -2,16 +2,17 @@
 <title>Statistic CV</title>
 @section('content')
 
-    <div class="row statisic">
+    <div class="row statisic" style="position: relative">
         <div class="col-md-3" style="border: 1px solid #ddd;
             box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);">
             <div class="statisic-sidebar" style=" margin-bottom: 20px">
                 <!-- SIDEBAR BUTTONS -->
                 <div class="search-title">
+
                     Thống kê
                 </div>
                 <!-- END SIDEBAR BUTTONS --> 
-                 
+                  
                 <!-- SIDEBAR MENU -->
                 <div class="statisic-menu">
                     <ul class="nav" id="status_statistic">
@@ -24,11 +25,12 @@
                         <li id="year">
                             <a id="year_statistic" status="year">Thống kê theo năm </a>
                         </li>
-                        <li id="positions">
-                            <a id="positions_statistic" status="position">thống kê theo Positions </a>
+                        <li id="position">
+                            <a id="positions_statistic" status="position">Thống kê theo vị trí apply</a>
                         </li>
                     </ul>
                 </div>
+            
                 <!-- END MENU -->
             </div>
         </div>
@@ -44,13 +46,22 @@
                             $id = DB::select('select * from positions');
                         ?>
 
+                        <div id="error_date"></div>
+
                         <div class="container" id="sta4" style="padding-top: 30px;">
+                        <?php
+                            $day = date('Y-m-d');
+                            $year = getYear($day);
+                            $month = getMonth($day);
+                            $dateStart = $year.'-'.$month.'-01'; 
+
+                        ?>
 
                             <div class="search_po_sa" style="display: none">
-                                    <label>Date: </label>
-                                    <input id="startDate" data-date-format="yyyy-mm-dd" name="startDate">
+                                    <label>From: </label>
+                                    <input id="startDate" data-date-format="yyyy-mm-dd" name="startDate" value="{{$dateStart}}">
                                     <label>To: </label>
-                                    <input id="endDate"  data-date-format="yyyy-mm-dd" name="endDate">
+                                    <input id="endDate"  data-date-format="yyyy-mm-dd" name="endDate" value="{{$day}}">
                                     <select id = "positionsSearch" name="position">
                                         <option value="">Vị trí tuyển dụng</option>
                                         @foreach ($id as $position)
@@ -59,8 +70,9 @@
 
                                     </select>
                                     <input type="submit" name="Search" id="searchStatistics" value="Search">
-                            </div>
 
+                            </div>
+                
                             <div class="row">
                                 <div class="col-md-10 col-md-offset-1">
                                     <div class="panel panel-default">
@@ -74,6 +86,7 @@
                                 </div>
                             </div>
                         </div>
+
                     <!--      Statistic        -->
                     </div>
                  <!-- ================ ========================== -->

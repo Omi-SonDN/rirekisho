@@ -34,8 +34,8 @@ class JsonResponse extends Response
     /**
      * Constructor.
      *
-     * @param mixed $data The response data
-     * @param int $status The response status code
+     * @param mixed $data    The response data
+     * @param int   $status  The response status code
      * @param array $headers An array of response headers
      */
     public function __construct($data = null, $status = 200, $headers = array())
@@ -106,9 +106,7 @@ class JsonResponse extends Response
                     // PHP 5.3 triggers annoying warnings for some
                     // types that can't be serialized as JSON (INF, resources, etc.)
                     // but doesn't provide the JsonSerializable interface.
-                    set_error_handler(function () {
-                        return false;
-                    });
+                    set_error_handler(function () { return false; });
                     $data = @json_encode($data, $this->encodingOptions);
                 } else {
                     // PHP 5.4 and up wrap exceptions thrown by JsonSerializable
@@ -171,7 +169,7 @@ class JsonResponse extends Response
      */
     public function setEncodingOptions($encodingOptions)
     {
-        $this->encodingOptions = (int)$encodingOptions;
+        $this->encodingOptions = (int) $encodingOptions;
 
         return $this->setData(json_decode($this->data));
     }

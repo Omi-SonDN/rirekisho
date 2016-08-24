@@ -84,7 +84,8 @@ final class TokenizedTypeHintRewriter implements TypeHintRewriter
         foreach ($tokens as $index => $token) {
             if ($this->isToken($token, '{')) {
                 $this->currentBodyLevel++;
-            } elseif ($this->isToken($token, '}')) {
+            }
+            elseif ($this->isToken($token, '}')) {
                 $this->currentBodyLevel--;
             }
 
@@ -92,14 +93,16 @@ final class TokenizedTypeHintRewriter implements TypeHintRewriter
                 case self::STATE_READING_ARGUMENTS:
                     if (')' == $token) {
                         $this->state = self::STATE_READING_CLASS;
-                    } elseif ($this->tokenHasType($token, T_VARIABLE)) {
+                    }
+                    elseif ($this->tokenHasType($token, T_VARIABLE)) {
                         $this->extractTypehints($tokens, $index, $token);
                     }
                     break;
                 case self::STATE_READING_FUNCTION:
                     if ('(' == $token) {
                         $this->state = self::STATE_READING_ARGUMENTS;
-                    } elseif ($this->tokenHasType($token, T_STRING) && !$this->currentFunction) {
+                    }
+                    elseif ($this->tokenHasType($token, T_STRING) && !$this->currentFunction) {
                         $this->currentFunction = $token[1];
                     }
                     break;
@@ -107,12 +110,15 @@ final class TokenizedTypeHintRewriter implements TypeHintRewriter
                     if ('{' == $token && $this->currentFunction) {
                         $this->state = self::STATE_READING_FUNCTION_BODY;
                         $this->currentBodyLevel = 1;
-                    } elseif ('}' == $token && $this->currentClass) {
+                    }
+                    elseif ('}' == $token && $this->currentClass) {
                         $this->state = self::STATE_DEFAULT;
                         $this->currentClass = null;
-                    } elseif ($this->tokenHasType($token, T_STRING) && !$this->currentClass && $this->shouldExtractTokensOfClass($token[1])) {
+                    }
+                    elseif ($this->tokenHasType($token, T_STRING) && !$this->currentClass && $this->shouldExtractTokensOfClass($token[1])) {
                         $this->currentClass = $token[1];
-                    } elseif ($this->tokenHasType($token, T_FUNCTION) && $this->currentClass) {
+                    }
+                    elseif ($this->tokenHasType($token, T_FUNCTION) && $this->currentClass) {
                         $this->state = self::STATE_READING_FUNCTION;
                     }
                     break;

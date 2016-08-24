@@ -36,7 +36,7 @@ class CollaboratorNotFoundListenerSpec extends ObjectBehavior
     {
         $this->getSubscribedEvents()->shouldReturn(array(
             'afterExample' => array('afterExample', 10),
-            'afterSuite' => array('afterSuite', -10)
+            'afterSuite'   => array('afterSuite', -10)
         ));
     }
 

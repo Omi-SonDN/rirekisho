@@ -19,7 +19,7 @@ class Parameters extends Fluent
     protected $attributes = [
         'serverSide' => true,
         'processing' => true,
-        'ajax' => '',
-        'columns' => []
+        'ajax'       => '',
+        'columns'    => []
     ];
 }

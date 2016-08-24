@@ -39,7 +39,7 @@ class CommandMakeCommand extends GeneratorCommand
 
         if ($this->option('handler')) {
             $this->call('handler:command', [
-                'name' => $this->argument('name') . 'Handler',
+                'name' => $this->argument('name').'Handler',
                 '--command' => $this->parseName($this->argument('name')),
             ]);
         }
@@ -53,25 +53,25 @@ class CommandMakeCommand extends GeneratorCommand
     protected function getStub()
     {
         if ($this->option('queued') && $this->option('handler')) {
-            return __DIR__ . '/stubs/command-queued-with-handler.stub';
+            return __DIR__.'/stubs/command-queued-with-handler.stub';
         } elseif ($this->option('queued')) {
-            return __DIR__ . '/stubs/command-queued.stub';
+            return __DIR__.'/stubs/command-queued.stub';
         } elseif ($this->option('handler')) {
-            return __DIR__ . '/stubs/command-with-handler.stub';
+            return __DIR__.'/stubs/command-with-handler.stub';
         } else {
-            return __DIR__ . '/stubs/command.stub';
+            return __DIR__.'/stubs/command.stub';
         }
     }
 
     /**
      * Get the default namespace for the class.
      *
-     * @param  string $rootNamespace
+     * @param  string  $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Commands';
+        return $rootNamespace.'\Commands';
     }
 
     /**

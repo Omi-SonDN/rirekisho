@@ -48,12 +48,12 @@ class ChunkedReadJob implements SelfHandling, ShouldQueue
      * ChunkedReadJob constructor.
      *
      * @param          $file
-     * @param null $sheets
-     * @param int $startRow
+     * @param null     $sheets
+     * @param int      $startRow
      * @param          $startIndex
      * @param          $chunkSize
      * @param callable $callback
-     * @param bool $shouldQueue
+     * @param bool     $shouldQueue
      */
     public function __construct(
         $file,
@@ -63,15 +63,14 @@ class ChunkedReadJob implements SelfHandling, ShouldQueue
         $chunkSize,
         callable $callback,
         $shouldQueue = true
-    )
-    {
-        $this->startRow = $startRow;
-        $this->chunkSize = $chunkSize;
+    ) {
+        $this->startRow   = $startRow;
+        $this->chunkSize  = $chunkSize;
         $this->startIndex = $startIndex;
-        $this->file = $file;
+        $this->file       = $file;
 
-        $this->callback = $shouldQueue ? (new Serializer)->serialize($callback) : $callback;
-        $this->sheets = $sheets;
+        $this->callback    = $shouldQueue ? (new Serializer)->serialize($callback) : $callback;
+        $this->sheets      = $sheets;
         $this->shouldQueue = $shouldQueue;
     }
 

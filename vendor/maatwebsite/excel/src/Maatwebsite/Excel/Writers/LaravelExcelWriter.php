@@ -22,8 +22,7 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
  * @author     Maatwebsite <info@maatwebsite.nl>
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class LaravelExcelWriter
-{
+class LaravelExcelWriter {
 
     /**
      * Spreadsheet filename
@@ -93,8 +92,8 @@ class LaravelExcelWriter
 
     /**
      * Construct writer
-     * @param Response $response
-     * @param FileSystem $filesystem
+     * @param Response         $response
+     * @param FileSystem       $filesystem
      * @param FormatIdentifier $identifier
      */
     public function __construct(Response $response, FileSystem $filesystem, FormatIdentifier $identifier)
@@ -107,7 +106,7 @@ class LaravelExcelWriter
     /**
      * Inject the excel object
      * @param  PHPExcel $excel
-     * @param bool $reset
+     * @param bool      $reset
      * @return void
      */
     public function injectExcel($excel, $reset = true)
@@ -164,8 +163,8 @@ class LaravelExcelWriter
     /**
      * Share view with all sheets
      * @param  string $view
-     * @param  array $data
-     * @param  array $mergeData
+     * @param  array  $data
+     * @param  array  $mergeData
      * @return  LaravelExcelWriter
      */
     public function shareView($view, $data = array(), $mergeData = array())
@@ -201,7 +200,7 @@ class LaravelExcelWriter
 
     /**
      * Create a new sheet
-     * @param  string $title
+     * @param  string        $title
      * @param  callback|null $callback
      * @return  LaravelExcelWriter
      */
@@ -250,13 +249,24 @@ class LaravelExcelWriter
     /**
      * Export the spreadsheet
      * @param string $ext
-     * @param array $headers
+     * @param array  $headers
      * @throws LaravelExcelException
      */
     public function export($ext = 'xls', Array $headers = array())
     {
         // Set the extension
         $this->ext = $ext;
+
+        //Fix borders for merged cells
+        foreach($this->getAllSheets() as $sheet){
+
+            foreach($sheet->getMergeCells() as $cells){
+
+                $style = $sheet->getStyle(explode(':', $cells)[0]);
+
+                $sheet->duplicateStyle($style, $cells);
+            }
+        }
 
         // Render the file
         $this->_render();
@@ -278,7 +288,7 @@ class LaravelExcelWriter
     /**
      * Export and download the spreadsheet
      * @param  string $ext
-     * @param array $headers
+     * @param array   $headers
      */
     public function download($ext = 'xls', Array $headers = array())
     {
@@ -322,12 +332,12 @@ class LaravelExcelWriter
         $this->_setHeaders(
             $headers,
             array(
-                'Content-Type' => $this->contentType,
+                'Content-Type'        => $this->contentType,
                 'Content-Disposition' => 'attachment; filename="' . $this->filename . '.' . $this->ext . '"',
-                'Expires' => 'Mon, 26 Jul 1997 05:00:00 GMT', // Date in the past
-                'Last-Modified' => Carbon::now()->format('D, d M Y H:i:s'),
-                'Cache-Control' => 'cache, must-revalidate',
-                'Pragma' => 'public'
+                'Expires'             => 'Mon, 26 Jul 1997 05:00:00 GMT', // Date in the past
+                'Last-Modified'       => Carbon::now()->format('D, d M Y H:i:s'),
+                'Cache-Control'       => 'cache, must-revalidate',
+                'Pragma'              => 'public'
             )
         );
 
@@ -345,7 +355,7 @@ class LaravelExcelWriter
 
     /**
      * Store the excel file to the server
-     * @param  string $ext
+     * @param  string  $ext
      * @param  boolean $path
      * @param  boolean $returnInfo
      * @return LaravelExcelWriter
@@ -368,14 +378,15 @@ class LaravelExcelWriter
         $this->writer->save($toStore);
 
         // Return file info
-        if ($this->returnInfo($returnInfo)) {
+        if ($this->returnInfo($returnInfo))
+        {
             // Send back information about the stored file
             return array(
-                'full' => $toStore,
-                'path' => $this->storagePath,
-                'file' => $this->filename . '.' . $this->ext,
+                'full'  => $toStore,
+                'path'  => $this->storagePath,
+                'file'  => $this->filename . '.' . $this->ext,
                 'title' => $this->filename,
-                'ext' => $this->ext
+                'ext'   => $this->ext
             );
         }
 
@@ -395,9 +406,9 @@ class LaravelExcelWriter
 
     /**
      *  Store the excel file to the server
-     * @param str|string $ext The file extension
-     * @param bool|str $path The save path
-     * @param bool $returnInfo
+     * @param str|string $ext  The file extension
+     * @param bool|str   $path The save path
+     * @param bool       $returnInfo
      * @return LaravelExcelWriter
      */
     public function save($ext = 'xls', $path = false, $returnInfo = false)
@@ -460,7 +471,7 @@ class LaravelExcelWriter
     /**
      * Set attributes
      * @param string $setter
-     * @param array $params
+     * @param array  $params
      */
     protected function _setAttribute($setter, $params)
     {
@@ -468,7 +479,8 @@ class LaravelExcelWriter
         $key = lcfirst(str_replace('set', '', $setter));
 
         // If is an allowed property
-        if ($this->excel->isChangeableProperty($setter)) {
+        if ($this->excel->isChangeableProperty($setter))
+        {
             // Set the properties
             call_user_func_array(array($this->excel->getProperties(), $setter), $params);
         }
@@ -497,7 +509,8 @@ class LaravelExcelWriter
     protected function _setWriter()
     {
         // Set pdf renderer
-        if ($this->format == 'PDF') {
+        if ($this->format == 'PDF')
+        {
             $this->setPdfRenderer();
         }
 
@@ -505,14 +518,17 @@ class LaravelExcelWriter
         $this->writer = PHPExcel_IOFactory::createWriter($this->excel, $this->format);
 
         // Set CSV delimiter
-        if ($this->format == 'CSV') {
+        if ($this->format == 'CSV')
+        {
             $this->writer->setDelimiter(Config::get('excel.csv.delimiter', ','));
             $this->writer->setEnclosure(Config::get('excel.csv.enclosure', '"'));
             $this->writer->setLineEnding(Config::get('excel::csv.line_ending', "\r\n"));
+            $this->writer->setUseBOM(Config::get('excel.csv.use_bom', false));
         }
 
         // Set CSV delimiter
-        if ($this->format == 'PDF') {
+        if ($this->format == 'PDF')
+        {
             $this->writer->writeAllSheets();
         }
 
@@ -536,7 +552,7 @@ class LaravelExcelWriter
         $path = Config::get('excel.export.pdf.drivers.' . $driver . '.path');
 
         // Disable autoloading for dompdf
-        if (!defined("DOMPDF_ENABLE_AUTOLOAD")) {
+        if(! defined("DOMPDF_ENABLE_AUTOLOAD")){
             define("DOMPDF_ENABLE_AUTOLOAD", false);
         }
 
@@ -557,7 +573,8 @@ class LaravelExcelWriter
         // Merge the default headers with the overruled headers
         $headers = array_merge($default, $headers);
 
-        foreach ($headers as $header => $value) {
+        foreach ($headers as $header => $value)
+        {
             header($header . ': ' . $value);
         }
     }
@@ -597,19 +614,23 @@ class LaravelExcelWriter
     /**
      * Dynamically call methods
      * @param  string $method
-     * @param  array $params
+     * @param  array  $params
      * @throws LaravelExcelException
      * @return LaravelExcelWriter
      */
     public function __call($method, $params)
     {
         // If the dynamic call starts with "set"
-        if (starts_with($method, 'set') && $this->excel->isChangeableProperty($method)) {
+        if (starts_with($method, 'set') && $this->excel->isChangeableProperty($method))
+        {
             $this->_setAttribute($method, $params);
 
             return $this;
-        } // Call a php excel method
-        elseif (method_exists($this->excel, $method)) {
+        }
+
+        // Call a php excel method
+        elseif (method_exists($this->excel, $method))
+        {
             // Call the method from the excel object with the given params
             $return = call_user_func_array(array($this->excel, $method), $params);
 

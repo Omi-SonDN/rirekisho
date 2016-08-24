@@ -24,7 +24,7 @@ class Psr4ClassLoaderTest extends \PHPUnit_Framework_TestCase
         $loader = new Psr4ClassLoader();
         $loader->addPrefix(
             'Acme\\DemoLib',
-            __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'psr-4'
+            __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.'psr-4'
         );
         $loader->loadClass($className);
         $this->assertTrue(class_exists($className), sprintf('loadClass() should load %s', $className));
@@ -52,7 +52,7 @@ class Psr4ClassLoaderTest extends \PHPUnit_Framework_TestCase
         $loader = new Psr4ClassLoader();
         $loader->addPrefix(
             'Acme\\DemoLib',
-            __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'psr-4'
+            __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.'psr-4'
         );
         $loader->loadClass($className);
         $this->assertFalse(class_exists($className), sprintf('loadClass() should not load %s', $className));

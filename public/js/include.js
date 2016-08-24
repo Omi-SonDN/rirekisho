@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     $('#startDate').datepicker();
     $('#endDate').datepicker();
     $("cv-forms").each(function () {
@@ -759,11 +758,52 @@ function lam_moi_ttv(id) {
             dataType: 'json',
             cache: false,
             success: function (data) {
-                alert('Update dữ liệu thành công!')
+                //alert('Update dữ liệu thành công!')
                 //redirect(data['url']);
+                createCustomAlert('Update dữ liệu thành công!');
             }
         });
     }
+}
+
+var ALERT_TITLE = "";
+var ALERT_BUTTON_TEXT = "Ok";
+
+function createCustomAlert(txt) {
+    d = document;
+
+    if(d.getElementById("modalContainer")) return;
+
+    mObj = d.getElementsByTagName("body")[0].appendChild(d.createElement("div"));
+    mObj.id = "modalContainer";
+    mObj.style.height = d.documentElement.scrollHeight + "px";
+
+    alertObj = mObj.appendChild(d.createElement("div"));
+    alertObj.id = "alertBox";
+    if(d.all && !window.opera) alertObj.style.top = document.documentElement.scrollTop + "px";
+    alertObj.style.left = (d.documentElement.scrollWidth - alertObj.offsetWidth)/2 + "px";
+    alertObj.style.visiblity="visible";
+
+    h1 = alertObj.appendChild(d.createElement("h1"));
+    h1.appendChild(d.createTextNode(ALERT_TITLE));
+
+    msg = alertObj.appendChild(d.createElement("p"));
+    //msg.appendChild(d.createTextNode(txt));
+    msg.innerHTML = txt;
+
+    btn = alertObj.appendChild(d.createElement("a"));
+    btn.id = "closeBtn";
+    btn.appendChild(d.createTextNode(ALERT_BUTTON_TEXT));
+    btn.href = "#";
+    btn.focus();
+    btn.onclick = function() { removeCustomAlert();return false; }
+
+    alertObj.style.display = "block";
+
+}
+
+function removeCustomAlert() {
+    document.getElementsByTagName("body")[0].removeChild(document.getElementById("modalContainer"));
 }
 
 // Xoa  cv
@@ -872,36 +912,49 @@ function getChangeLiveCv(element, id) {
     });
 }
 
-$('#searchStatistics').on('click', function () {
+$('#searchStatistics').on('click', function(){
     $key_search = $('#positionsSearch').val();
-    $.ajax({
-        type: "POST",
-        url: "/CV/statisticSearch",
-        data: {
-            'startDate': $('#startDate').val(),
-            'endDate': $('#endDate').val(),
-            'key_search': $key_search
-        },
-        cache: false,
-        success: function (data) {
-            $('#container2').html(data);
-        }
-    });
 
+    var day = new Date().toJSON().slice(0,10);
+    var startDate = $('#startDate').val();
+    var endDate = $('#endDate').val();
+    if(startDate > endDate || endDate > day){
+        $('#error_date').show();
+        $('#error_date').text('Nhập sai ngày tháng!');
+    } else {
+        $('#error_date').hide();
+        $.ajax({
+            type: "POST",
+            url: "/CV/statisticSearch",
+            data : {
+                'startDate' : $('#startDate').val(),
+                'endDate' : $('#endDate').val(),
+                'key_search' : $key_search,
+            },
+            cache: false,
+            success: function (data) {
+                $('#container2').html(data);
+            }
+        });
+    }
+    
 });
 
-$('#status_statistic li a').on('click', function () {
-    var $ox = $(this).attr('status');
+$('#status_statistic li a').on('click', function(){
+    var ox = $(this).attr('status');
+    $('#error_date').hide();
 
     $('#status_statistic li.active').removeClass();
     $(this).parent().addClass('active');
 
-    if ($ox == 'position') {
+    if(ox == 'position'){
         $('.search_po_sa').show();
     } else {
         $('.search_po_sa').hide();
     }
-    var dataString = "ox=" + $ox;
+    var startDate = $('#startDate').val();
+    var endDate = $('#endDate').val();
+    var dataString = "ox=" + ox + '&startDate=' + startDate + '&endDate=' + endDate;
     $.ajax({
         type: "POST",
         url: "/CV/statisticStatus",

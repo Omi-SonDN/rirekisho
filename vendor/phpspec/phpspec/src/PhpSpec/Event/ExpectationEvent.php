@@ -25,17 +25,17 @@ class ExpectationEvent extends Event implements EventInterface
     /**
      * Expectation passed
      */
-    const PASSED = 0;
+    const PASSED  = 0;
 
     /**
      * Expectation failed
      */
-    const FAILED = 1;
+    const FAILED  = 1;
 
     /**
      * Expectation broken
      */
-    const BROKEN = 2;
+    const BROKEN  = 2;
 
     /**
      * @var ExampleNode
@@ -73,13 +73,13 @@ class ExpectationEvent extends Event implements EventInterface
     private $exception;
 
     /**
-     * @param ExampleNode $example
+     * @param ExampleNode      $example
      * @param MatcherInterface $matcher
-     * @param mixed $subject
-     * @param string $method
-     * @param array $arguments
-     * @param integer $result
-     * @param \Exception $exception
+     * @param mixed            $subject
+     * @param string           $method
+     * @param array            $arguments
+     * @param integer          $result
+     * @param \Exception       $exception
      */
     public function __construct(
         ExampleNode $example,
@@ -89,8 +89,7 @@ class ExpectationEvent extends Event implements EventInterface
         $arguments,
         $result = null,
         $exception = null
-    )
-    {
+    ) {
         $this->example = $example;
         $this->matcher = $matcher;
         $this->subject = $subject;

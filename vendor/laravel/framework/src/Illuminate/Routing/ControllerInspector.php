@@ -21,8 +21,8 @@ class ControllerInspector
     /**
      * Get the routable methods for a controller.
      *
-     * @param  string $controller
-     * @param  string $prefix
+     * @param  string  $controller
+     * @param  string  $prefix
      * @return array
      */
     public function getRoutable($controller, $prefix)
@@ -45,7 +45,7 @@ class ControllerInspector
                 // If the routable method is an index method, we will create a special index
                 // route which is simply the prefix and the verb and does not contain any
                 // the wildcard place-holders that each "typical" routes would contain.
-                if ($data['plain'] == $prefix . '/index') {
+                if ($data['plain'] == $prefix.'/index') {
                     $routable[$method->name][] = $this->getIndexData($data, $prefix);
                 }
             }
@@ -57,7 +57,7 @@ class ControllerInspector
     /**
      * Determine if the given controller method is routable.
      *
-     * @param  \ReflectionMethod $method
+     * @param  \ReflectionMethod  $method
      * @return bool
      */
     public function isRoutable(ReflectionMethod $method)
@@ -72,8 +72,8 @@ class ControllerInspector
     /**
      * Get the method data for a given method.
      *
-     * @param  \ReflectionMethod $method
-     * @param  string $prefix
+     * @param  \ReflectionMethod  $method
+     * @param  string  $prefix
      * @return array
      */
     public function getMethodData(ReflectionMethod $method, $prefix)
@@ -88,8 +88,8 @@ class ControllerInspector
     /**
      * Get the routable data for an index method.
      *
-     * @param  array $data
-     * @param  string $prefix
+     * @param  array   $data
+     * @param  string  $prefix
      * @return array
      */
     protected function getIndexData($data, $prefix)
@@ -100,7 +100,7 @@ class ControllerInspector
     /**
      * Extract the verb from a controller action.
      *
-     * @param  string $name
+     * @param  string  $name
      * @return string
      */
     public function getVerb($name)
@@ -111,23 +111,23 @@ class ControllerInspector
     /**
      * Determine the URI from the given method name.
      *
-     * @param  string $name
-     * @param  string $prefix
+     * @param  string  $name
+     * @param  string  $prefix
      * @return string
      */
     public function getPlainUri($name, $prefix)
     {
-        return $prefix . '/' . implode('-', array_slice(explode('_', Str::snake($name)), 1));
+        return $prefix.'/'.implode('-', array_slice(explode('_', Str::snake($name)), 1));
     }
 
     /**
      * Add wildcards to the given URI.
      *
-     * @param  string $uri
+     * @param  string  $uri
      * @return string
      */
     public function addUriWildcards($uri)
     {
-        return $uri . '/{one?}/{two?}/{three?}/{four?}/{five?}';
+        return $uri.'/{one?}/{two?}/{three?}/{four?}/{five?}';
     }
 }

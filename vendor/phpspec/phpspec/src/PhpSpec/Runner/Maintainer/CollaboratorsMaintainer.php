@@ -70,18 +70,17 @@ class CollaboratorsMaintainer implements MaintainerInterface
     }
 
     /**
-     * @param ExampleNode $example
+     * @param ExampleNode            $example
      * @param SpecificationInterface $context
-     * @param MatcherManager $matchers
-     * @param CollaboratorManager $collaborators
+     * @param MatcherManager         $matchers
+     * @param CollaboratorManager    $collaborators
      */
     public function prepare(
         ExampleNode $example,
         SpecificationInterface $context,
         MatcherManager $matchers,
         CollaboratorManager $collaborators
-    )
-    {
+    ) {
         $this->prophet = new Prophet(null, $this->unwrapper, null);
 
         $classRefl = $example->getSpecification()->getClassReflection();
@@ -94,18 +93,17 @@ class CollaboratorsMaintainer implements MaintainerInterface
     }
 
     /**
-     * @param ExampleNode $example
+     * @param ExampleNode            $example
      * @param SpecificationInterface $context
-     * @param MatcherManager $matchers
-     * @param CollaboratorManager $collaborators
+     * @param MatcherManager         $matchers
+     * @param CollaboratorManager    $collaborators
      */
     public function teardown(
         ExampleNode $example,
         SpecificationInterface $context,
         MatcherManager $matchers,
         CollaboratorManager $collaborators
-    )
-    {
+    ) {
         $this->prophet->checkPredictions();
     }
 
@@ -118,9 +116,9 @@ class CollaboratorsMaintainer implements MaintainerInterface
     }
 
     /**
-     * @param CollaboratorManager $collaborators
+     * @param CollaboratorManager         $collaborators
      * @param \ReflectionFunctionAbstract $function
-     * @param \ReflectionClass $classRefl
+     * @param \ReflectionClass            $classRefl
      */
     private function generateCollaborators(CollaboratorManager $collaborators, \ReflectionFunctionAbstract $function, \ReflectionClass $classRefl)
     {
@@ -142,13 +140,14 @@ class CollaboratorsMaintainer implements MaintainerInterface
                     throw new InvalidCollaboratorTypeException($parameter, $function);
                 }
                 if (($indexedClass = $this->getParameterTypeFromIndex($classRefl, $parameter))
-                    || ($indexedClass = $this->getParameterTypeFromReflection($parameter))
-                ) {
+                    || ($indexedClass = $this->getParameterTypeFromReflection($parameter))) {
                     $collaborator->beADoubleOf($indexedClass);
                 }
-            } catch (ClassNotFoundException $e) {
+            }
+            catch (ClassNotFoundException $e) {
                 $this->throwCollaboratorNotFound($e, null, $e->getClassname());
-            } catch (DisallowedScalarTypehintException $e) {
+            }
+            catch (DisallowedScalarTypehintException $e) {
                 throw new InvalidCollaboratorTypeException($parameter, $function);
             }
         }
@@ -161,7 +160,7 @@ class CollaboratorsMaintainer implements MaintainerInterface
 
     /**
      * @param CollaboratorManager $collaborators
-     * @param string $name
+     * @param string              $name
      *
      * @return Collaborator
      */
@@ -219,7 +218,8 @@ class CollaboratorsMaintainer implements MaintainerInterface
             }
 
             return $class->getName();
-        } catch (ReflectionException $e) {
+        }
+        catch (ReflectionException $e) {
             $this->throwCollaboratorNotFound($e, $parameter);
         }
     }

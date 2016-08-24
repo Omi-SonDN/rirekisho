@@ -47,7 +47,7 @@ class MockArraySessionStorageTest extends \PHPUnit_Framework_TestCase
         $this->data = array(
             $this->attributes->getStorageKey() => array('foo' => 'bar'),
             $this->flashes->getStorageKey() => array('notice' => 'hello'),
-        );
+            );
 
         $this->storage = new MockArraySessionStorage();
         $this->storage->registerBag($this->flashes);

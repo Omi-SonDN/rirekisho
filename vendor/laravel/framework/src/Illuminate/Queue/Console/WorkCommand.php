@@ -34,7 +34,7 @@ class WorkCommand extends Command
     /**
      * Create a new queue listen command.
      *
-     * @param  \Illuminate\Queue\Worker $worker
+     * @param  \Illuminate\Queue\Worker  $worker
      * @return void
      */
     public function __construct(Worker $worker)
@@ -51,7 +51,7 @@ class WorkCommand extends Command
      */
     public function fire()
     {
-        if ($this->downForMaintenance() && !$this->option('daemon')) {
+        if ($this->downForMaintenance() && ! $this->option('daemon')) {
             return $this->worker->sleep($this->option('sleep'));
         }
 
@@ -73,7 +73,7 @@ class WorkCommand extends Command
         // If a job was fired by the worker, we'll write the output out to the console
         // so that the developer can watch live while the queue runs in the console
         // window, which will also of get logged if stdout is logged out to disk.
-        if (!is_null($response['job'])) {
+        if (! is_null($response['job'])) {
             $this->writeOutput($response['job'], $response['failed']);
         }
     }
@@ -81,11 +81,11 @@ class WorkCommand extends Command
     /**
      * Run the worker instance.
      *
-     * @param  string $connection
-     * @param  string $queue
-     * @param  int $delay
-     * @param  int $memory
-     * @param  bool $daemon
+     * @param  string  $connection
+     * @param  string  $queue
+     * @param  int  $delay
+     * @param  int  $memory
+     * @param  bool  $daemon
      * @return array
      */
     protected function runWorker($connection, $queue, $delay, $memory, $daemon = false)
@@ -112,16 +112,16 @@ class WorkCommand extends Command
     /**
      * Write the status output for the queue worker.
      *
-     * @param  \Illuminate\Contracts\Queue\Job $job
-     * @param  bool $failed
+     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param  bool  $failed
      * @return void
      */
     protected function writeOutput(Job $job, $failed)
     {
         if ($failed) {
-            $this->output->writeln('<error>Failed:</error> ' . $job->getName());
+            $this->output->writeln('<error>Failed:</error> '.$job->getName());
         } else {
-            $this->output->writeln('<info>Processed:</info> ' . $job->getName());
+            $this->output->writeln('<info>Processed:</info> '.$job->getName());
         }
     }
 

@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\HttpKernel\Profiler;
 
+use Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
@@ -48,7 +49,7 @@ class Profiler
      * Constructor.
      *
      * @param ProfilerStorageInterface $storage A ProfilerStorageInterface instance
-     * @param LoggerInterface $logger A LoggerInterface instance
+     * @param LoggerInterface          $logger  A LoggerInterface instance
      */
     public function __construct(ProfilerStorageInterface $storage, LoggerInterface $logger = null)
     {
@@ -166,12 +167,12 @@ class Profiler
     /**
      * Finds profiler tokens for the given criteria.
      *
-     * @param string $ip The IP
-     * @param string $url The URL
-     * @param string $limit The maximum number of tokens to return
+     * @param string $ip     The IP
+     * @param string $url    The URL
+     * @param string $limit  The maximum number of tokens to return
      * @param string $method The request method
-     * @param string $start The start date to search from
-     * @param string $end The end date to search to
+     * @param string $start  The start date to search from
+     * @param string $end    The end date to search to
      *
      * @return array An array of tokens
      *
@@ -185,8 +186,8 @@ class Profiler
     /**
      * Collects data for the given Response.
      *
-     * @param Request $request A Request instance
-     * @param Response $response A Response instance
+     * @param Request    $request   A Request instance
+     * @param Response   $response  A Response instance
      * @param \Exception $exception An exception instance if the request threw one
      *
      * @return Profile|null A Profile instance or null if the profiler is disabled
@@ -200,9 +201,13 @@ class Profiler
         $profile = new Profile(substr(hash('sha256', uniqid(mt_rand(), true)), 0, 6));
         $profile->setTime(time());
         $profile->setUrl($request->getUri());
-        $profile->setIp($request->getClientIp());
         $profile->setMethod($request->getMethod());
         $profile->setStatusCode($response->getStatusCode());
+        try {
+            $profile->setIp($request->getClientIp());
+        } catch (ConflictingHeadersException $e) {
+            $profile->setIp('Unknown');
+        }
 
         $response->headers->set('X-Debug-Token', $profile->getToken());
 
@@ -286,7 +291,7 @@ class Profiler
         }
 
         try {
-            $value = new \DateTime(is_numeric($value) ? '@' . $value : $value);
+            $value = new \DateTime(is_numeric($value) ? '@'.$value : $value);
         } catch (\Exception $e) {
             return;
         }

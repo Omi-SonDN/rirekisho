@@ -46,6 +46,6 @@ final class Shutdown
     {
         $error = error_get_last();
 
-        return (null !== $error) && (bool)(E_ERROR & $error['type']) ? $error : null;
+        return (null !== $error) && (bool) (E_ERROR & $error['type']) ? $error : null;
     }
 }

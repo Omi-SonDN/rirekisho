@@ -176,7 +176,7 @@ div.content:hover, div.content:active, div.content:focus {
     position: relative;
     border-radius: 3px;
     border: 1px solid #ddd;
-    z-index: 10;
+    /*z-index: 10;*/
     line-height: 1.7;
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 
@@ -652,7 +652,10 @@ button.btn-send-email {
     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.25);
     box-shadow: 0 1px 4px rgba(0,0,0,.25);
 }
-
+.radio-inline{
+    margin-bottom: 6px;
+    position: relative;
+}
 .mt_6 {
     margin-top: 6px !important;
 }
@@ -669,6 +672,7 @@ button.btn-send-email {
 }
 
 .block_ntv_dangnhap {
+    margin-top: 20px;
     border-bottom: 1px solid #e0e0e0;
     padding: 15px 10px 15px 20px;
     overflow: hidden;

@@ -42,7 +42,7 @@ class DebugClassLoader
         $this->wasFinder = is_object($classLoader) && method_exists($classLoader, 'findFile');
 
         if ($this->wasFinder) {
-            @trigger_error('The ' . __METHOD__ . ' method will no longer support receiving an object into its $classLoader argument in 3.0.', E_USER_DEPRECATED);
+            @trigger_error('The '.__METHOD__.' method will no longer support receiving an object into its $classLoader argument in 3.0.', E_USER_DEPRECATED);
             $this->classLoader = array($classLoader, 'loadClass');
             $this->isFinder = true;
         } else {
@@ -56,7 +56,7 @@ class DebugClassLoader
             $dir = substr($file, 0, 1 + $i);
             $file = substr($file, 1 + $i);
             $test = strtoupper($file) === $file ? strtolower($file) : strtoupper($file);
-            $test = realpath($dir . $test);
+            $test = realpath($dir.$test);
 
             if (false === $test || false === $i) {
                 // filesystem is case sensitive
@@ -143,7 +143,7 @@ class DebugClassLoader
      */
     public function findFile($class)
     {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.5 and will be removed in 3.0.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.5 and will be removed in 3.0.', E_USER_DEPRECATED);
 
         if ($this->wasFinder) {
             return $this->classLoader[0]->findFile($class);
@@ -241,7 +241,7 @@ class DebugClassLoader
                 throw new \RuntimeException(sprintf('The autoloader expected class "%s" to be defined in file "%s". The file was found but the class was not in it, the class name or namespace probably has a typo.', $class, $file));
             }
             if (self::$caseCheck) {
-                $real = explode('\\', $class . strrchr($file, '.'));
+                $real = explode('\\', $class.strrchr($file, '.'));
                 $tail = explode(DIRECTORY_SEPARATOR, str_replace('/', DIRECTORY_SEPARATOR, $file));
 
                 $i = count($tail) - 1;
@@ -255,7 +255,7 @@ class DebugClassLoader
                 array_splice($tail, 0, $i + 1);
             }
             if (self::$caseCheck && $tail) {
-                $tail = DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $tail);
+                $tail = DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $tail);
                 $tailLen = strlen($tail);
                 $real = $refl->getFileName();
 
@@ -276,7 +276,7 @@ class DebugClassLoader
                         } else {
                             $dir = getcwd();
                             chdir($real);
-                            $real = getcwd() . '/';
+                            $real = getcwd().'/';
                             chdir($dir);
 
                             $dir = $real;
@@ -320,7 +320,7 @@ class DebugClassLoader
                 }
 
                 if (0 === substr_compare($real, $tail, -$tailLen, $tailLen, true)
-                    && 0 !== substr_compare($real, $tail, -$tailLen, $tailLen, false)
+                  && 0 !== substr_compare($real, $tail, -$tailLen, $tailLen, false)
                 ) {
                     throw new \RuntimeException(sprintf('Case mismatch between class and real file names: %s vs %s in %s', substr($tail, -$tailLen + 1), substr($real, -$tailLen + 1), substr($real, 0, -$tailLen + 1)));
                 }

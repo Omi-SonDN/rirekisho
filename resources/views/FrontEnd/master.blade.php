@@ -57,7 +57,7 @@
 <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
 <script type="text/javascript" src="{{ URL::asset('/admin/js/1.15.0-jquery.validate.js')}}"></script>
 <!-- Preloader js file -->
-<script src="{{ URL::asset('/frontend/js/queryloader2.min.js')}}" type="text/javascript"></script>
+{{--<script src="{{ URL::asset('/frontend/js/queryloader2.min.js')}}" type="text/javascript"></script>--}}
 <!-- For smooth animatin  -->
 <script src="{{ URL::asset('/frontend/js/wow.min.js')}}"></script>
 <!-- Bootstrap js -->

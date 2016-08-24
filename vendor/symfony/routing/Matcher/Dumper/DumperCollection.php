@@ -26,7 +26,7 @@ class DumperCollection implements \IteratorAggregate
     private $parent;
 
     /**
-     * @var (DumperCollection|DumperRoute)[]
+     * @var DumperCollection[]|DumperRoute[]
      */
     private $children = array();
 
@@ -38,7 +38,7 @@ class DumperCollection implements \IteratorAggregate
     /**
      * Returns the children routes and collections.
      *
-     * @return (DumperCollection|DumperRoute)[] Array of DumperCollection|DumperRoute
+     * @return DumperCollection[]|DumperRoute[] Array of DumperCollection|DumperRoute
      */
     public function all()
     {
@@ -76,7 +76,7 @@ class DumperCollection implements \IteratorAggregate
     /**
      * Returns an iterator over the children.
      *
-     * @return \Iterator The iterator
+     * @return \Iterator|DumperCollection[]|DumperRoute[] The iterator
      */
     public function getIterator()
     {
@@ -128,8 +128,8 @@ class DumperCollection implements \IteratorAggregate
     /**
      * Returns an attribute by name.
      *
-     * @param string $name The attribute name
-     * @param mixed $default Default value is the attribute doesn't exist
+     * @param string $name    The attribute name
+     * @param mixed  $default Default value is the attribute doesn't exist
      *
      * @return mixed The attribute value
      */
@@ -141,8 +141,8 @@ class DumperCollection implements \IteratorAggregate
     /**
      * Sets an attribute by name.
      *
-     * @param string $name The attribute name
-     * @param mixed $value The attribute value
+     * @param string $name  The attribute name
+     * @param mixed  $value The attribute value
      */
     public function setAttribute($name, $value)
     {

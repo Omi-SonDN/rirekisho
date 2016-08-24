@@ -39,10 +39,10 @@ class CollectionEngine extends BaseEngine
      */
     public function __construct(Collection $collection, Request $request)
     {
-        $this->request = $request;
-        $this->collection = $collection;
+        $this->request             = $request;
+        $this->collection          = $collection;
         $this->original_collection = $collection;
-        $this->columns = array_keys($this->serialize($collection->first()));
+        $this->columns             = array_keys($this->serialize($collection->first()));
     }
 
     /**
@@ -53,7 +53,7 @@ class CollectionEngine extends BaseEngine
      */
     protected function serialize($collection)
     {
-        return $collection instanceof Arrayable ? $collection->toArray() : (array)$collection;
+        return $collection instanceof Arrayable ? $collection->toArray() : (array) $collection;
     }
 
     /**
@@ -61,11 +61,12 @@ class CollectionEngine extends BaseEngine
      * Overrides global search.
      *
      * @param \Closure $callback
+     * @param bool $globalSearch
      * @return $this
      */
-    public function filter(Closure $callback)
+    public function filter(Closure $callback, $globalSearch = false)
     {
-        $this->overrideGlobalSearch($callback, $this);
+        $this->overrideGlobalSearch($callback, $this, $globalSearch);
 
         return $this;
     }
@@ -117,7 +118,7 @@ class CollectionEngine extends BaseEngine
         }
 
         foreach ($this->request->orderableColumns() as $orderable) {
-            $column = $this->getColumnName($orderable['column']);
+            $column           = $this->getColumnName($orderable['column']);
             $this->collection = $this->collection->sortBy(
                 function ($row) use ($column) {
                     $data = $this->serialize($row);
@@ -139,17 +140,17 @@ class CollectionEngine extends BaseEngine
      */
     public function filtering()
     {
-        $columns = $this->request['columns'];
+        $columns          = $this->request['columns'];
         $this->collection = $this->collection->filter(
             function ($row) use ($columns) {
-                $data = $this->serialize($row);
+                $data                  = $this->serialize($row);
                 $this->isFilterApplied = true;
-                $found = [];
+                $found                 = [];
 
                 $keyword = $this->request->keyword();
                 foreach ($this->request->searchableColumnIndex() as $index) {
                     $column = $this->getColumnName($index);
-                    if (!$value = Arr::get($data, $column)) {
+                    if (! $value = Arr::get($data, $column)) {
                         continue;
                     }
 
@@ -177,7 +178,7 @@ class CollectionEngine extends BaseEngine
             if ($this->request->isColumnSearchable($i)) {
                 $this->isFilterApplied = true;
 
-                $column = $this->getColumnName($i);
+                $column  = $this->getColumnName($i);
                 $keyword = $this->request->columnKeyword($i);
 
                 $this->collection = $this->collection->filter(
@@ -206,7 +207,7 @@ class CollectionEngine extends BaseEngine
     {
         $this->collection = $this->collection->slice(
             $this->request['start'],
-            (int)$this->request['length'] > 0 ? $this->request['length'] : 10
+            (int) $this->request['length'] > 0 ? $this->request['length'] : 10
         );
     }
 

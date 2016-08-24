@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 return array(
 
@@ -11,8 +11,8 @@ return array(
     |
     */
 
-    'filename' => '_ide_helper',
-    'format' => 'php',
+    'filename'  => '_ide_helper',
+    'format'    => 'php',
 
     /*
     |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ return array(
     'include_helpers' => false,
 
     'helper_files' => array(
-        base_path() . '/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
+        base_path().'/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
     ),
 
     /*
@@ -61,17 +61,17 @@ return array(
 
     'magic' => array(
         'Log' => array(
-            'debug' => 'Monolog\Logger::addDebug',
-            'info' => 'Monolog\Logger::addInfo',
-            'notice' => 'Monolog\Logger::addNotice',
-            'warning' => 'Monolog\Logger::addWarning',
-            'error' => 'Monolog\Logger::addError',
-            'critical' => 'Monolog\Logger::addCritical',
-            'alert' => 'Monolog\Logger::addAlert',
+            'debug'     => 'Monolog\Logger::addDebug',
+            'info'      => 'Monolog\Logger::addInfo',
+            'notice'    => 'Monolog\Logger::addNotice',
+            'warning'   => 'Monolog\Logger::addWarning',
+            'error'     => 'Monolog\Logger::addError',
+            'critical'  => 'Monolog\Logger::addCritical',
+            'alert'     => 'Monolog\Logger::addAlert',
             'emergency' => 'Monolog\Logger::addEmergency',
         )
     ),
-
+    
     /*
     |--------------------------------------------------------------------------
     | Interface implementations
@@ -81,8 +81,10 @@ return array(
     | are detected by the helpers, others can be listed below.
     |
     */
+    
+    'interfaces' => array(
 
-    'interfaces' => array(),
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -110,6 +112,34 @@ return array(
     |  ),
     |
     */
-    'custom_db_types' => array(),
+    'custom_db_types' => array(
+
+    ),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Support for camel cased models
+     |--------------------------------------------------------------------------
+     |
+     | There are some Laravel packages (such as Eloquence) that allow for accessing
+     | Eloquent model properties via camel case, instead of snake case.
+     |
+     | Enabling this option will support these packages by saving all model
+     | properties as camel case, instead of snake case.
+     |
+     | For example, normally you would see this:
+     |
+     |  * @property \Carbon\Carbon $created_at
+     |  * @property \Carbon\Carbon $updated_at
+     |
+     | With this enabled, the properties will be this:
+     |
+     |  * @property \Carbon\Carbon $createdAt
+     |  * @property \Carbon\Carbon $updatedAt
+     |
+     | Note, it is currently an all-or-nothing option.
+     |
+     */
+    'model_camel_case_properties' => false,
 
 );

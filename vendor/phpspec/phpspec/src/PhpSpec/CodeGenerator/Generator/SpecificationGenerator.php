@@ -23,8 +23,8 @@ class SpecificationGenerator extends PromptingGenerator
 {
     /**
      * @param ResourceInterface $resource
-     * @param string $generation
-     * @param array $data
+     * @param string            $generation
+     * @param array             $data
      *
      * @return bool
      */
@@ -43,17 +43,17 @@ class SpecificationGenerator extends PromptingGenerator
 
     /**
      * @param ResourceInterface $resource
-     * @param string $filepath
+     * @param string            $filepath
      *
      * @return string
      */
     protected function renderTemplate(ResourceInterface $resource, $filepath)
     {
         $values = array(
-            '%filepath%' => $filepath,
-            '%name%' => $resource->getSpecName(),
-            '%namespace%' => $resource->getSpecNamespace(),
-            '%subject%' => $resource->getSrcClassname(),
+            '%filepath%'      => $filepath,
+            '%name%'          => $resource->getSpecName(),
+            '%namespace%'     => $resource->getSpecNamespace(),
+            '%subject%'       => $resource->getSrcClassname(),
             '%subject_class%' => $resource->getName()
         );
 
@@ -69,7 +69,7 @@ class SpecificationGenerator extends PromptingGenerator
      */
     protected function getTemplate()
     {
-        return file_get_contents(__DIR__ . '/templates/specification.template');
+        return file_get_contents(__DIR__.'/templates/specification.template');
     }
 
     /**
@@ -83,7 +83,7 @@ class SpecificationGenerator extends PromptingGenerator
 
     /**
      * @param ResourceInterface $resource
-     * @param string $filepath
+     * @param string            $filepath
      *
      * @return string
      */

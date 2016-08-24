@@ -22,8 +22,8 @@ class StringEngine implements EngineInterface
 
     public function compare($expected, $actual)
     {
-        $expected = explode("\n", (string)$expected);
-        $actual = explode("\n", (string)$actual);
+        $expected = explode("\n", (string) $expected);
+        $actual   = explode("\n", (string) $actual);
 
         $diff = new \Diff($expected, $actual, array());
 

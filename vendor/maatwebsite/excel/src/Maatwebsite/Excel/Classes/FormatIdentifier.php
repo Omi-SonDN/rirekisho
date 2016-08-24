@@ -4,8 +4,7 @@ use PHPExcel_IOFactory;
 use Illuminate\Filesystem\Filesystem;
 use Maatwebsite\Excel\Exceptions\LaravelExcelException;
 
-class FormatIdentifier
-{
+class FormatIdentifier {
 
     /**
      * Available formats
@@ -63,7 +62,8 @@ class FormatIdentifier
      */
     public function getFormatByExtension($ext)
     {
-        switch ($ext) {
+        switch ($ext)
+        {
 
             /*
             |--------------------------------------------------------------------------
@@ -149,9 +149,9 @@ class FormatIdentifier
             | PDF
             |--------------------------------------------------------------------------
             */
-            case 'pdf':
-                return 'PDF';
-                break;
+             case 'pdf':
+                 return 'PDF';
+                 break;
         }
     }
 
@@ -162,7 +162,8 @@ class FormatIdentifier
      */
     public function getContentTypeByFormat($format)
     {
-        switch ($format) {
+        switch ($format)
+        {
 
             /*
             |--------------------------------------------------------------------------
@@ -205,16 +206,16 @@ class FormatIdentifier
             | PDF
             |--------------------------------------------------------------------------
             */
-            case 'PDF':
-                return 'application/pdf; charset=UTF-8';
-                break;
+             case 'PDF':
+                 return'application/pdf; charset=UTF-8';
+                 break;
         }
     }
 
     /**
      * Try every reader we have
      * @param        $file
-     * @param bool $wrongFormat
+     * @param bool   $wrongFormat
      * @param string $ext
      * @throws LaravelExcelException
      * @return string $format
@@ -222,7 +223,8 @@ class FormatIdentifier
     protected function lastResort($file, $wrongFormat = false, $ext = 'xls')
     {
         // Loop through all available formats
-        foreach ($this->formats as $format) {
+        foreach ($this->formats as $format)
+        {
             // Check if the file could be read
             if ($wrongFormat != $format && $this->canRead($format, $file))
                 return $format;
@@ -240,7 +242,8 @@ class FormatIdentifier
      */
     protected function canRead($format, $file)
     {
-        if ($format) {
+        if ($format)
+        {
             $reader = $this->initReader($format);
 
             return $reader && $reader->canRead($file);

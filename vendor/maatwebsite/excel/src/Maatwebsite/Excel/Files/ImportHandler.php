@@ -1,7 +1,6 @@
 <?php namespace Maatwebsite\Excel\Files;
 
-interface ImportHandler
-{
+interface ImportHandler {
 
     /**
      * Handle the import

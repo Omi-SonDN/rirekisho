@@ -323,7 +323,12 @@ $(document).ready(function ($) {
         }
     }
 
-
+    // reset event click table sort
+    $('.tableuser thead tr th.sort-tb').on('click', function () {
+        rmBtDel();
+        $('.checkAll')[0].checked = false;
+        arr_key['loop'] = 0;
+        rmListElement();
     });
     /*
      * set select all false + value default
@@ -409,6 +414,9 @@ $(document).ready(function ($) {
         rmListElement();
         rmBtDel();
     });
+
+});
+
 var arr_key = [];
 arr_key['loop'] = 0;
 arr_key['list'] = [];

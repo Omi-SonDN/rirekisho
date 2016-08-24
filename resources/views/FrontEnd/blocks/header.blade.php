@@ -3,7 +3,7 @@
     <div class="menu_area">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
-                <div class="navbar-header">
+                <div class="navbar-header fix-hedar-logo">
                     <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                             aria-expanded="false" aria-controls="navbar">
@@ -21,7 +21,7 @@
 
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
+                    <ul id="top-menu" class="nav navbar-nav navbar-right main-nav top_header_">
                         <li class="{{(URL::current() == url('/')) ? 'active' : ''}}"><a href="{{url('/')}}">Trang
                                 chủ</a></li>
                         @if (Auth::check())
@@ -54,7 +54,7 @@
                                         title="{{Auth::user()->userName}}" width="44" height="44" border="0"><span
                                             class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="about">Cài đặt tài khoản</a></li>
+                                    <li><a href="profile">Cài đặt tài khoản</a></li>
                                     @can('SuperAdmin')
                                     <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                                     <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>

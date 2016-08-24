@@ -22,7 +22,7 @@
                                 <span class="text_red_box">{{$items->Checkcv}}</span>
                             </p>
                             <p class="line-icon mb_4 ml-6">
-                                <span class="bold">Lượt xem:</span> <span class="job_value">196</span>
+                                <span class="bold">Trạng thái:</span> <span class="job_value">{{$items->StatusCV}}</span>
                             </p>
                         </div>
                         <div class="clearfix"></div>

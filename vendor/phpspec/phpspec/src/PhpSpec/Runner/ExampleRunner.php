@@ -41,12 +41,12 @@ class ExampleRunner
 
     /**
      * @param EventDispatcherInterface $dispatcher
-     * @param PresenterInterface $presenter
+     * @param PresenterInterface       $presenter
      */
     public function __construct(EventDispatcherInterface $dispatcher, PresenterInterface $presenter)
     {
         $this->dispatcher = $dispatcher;
-        $this->presenter = $presenter;
+        $this->presenter  = $presenter;
     }
 
     /**
@@ -80,22 +80,22 @@ class ExampleRunner
                 $example
             );
 
-            $status = ExampleEvent::PASSED;
+            $status    = ExampleEvent::PASSED;
             $exception = null;
         } catch (ExampleException\PendingException $e) {
-            $status = ExampleEvent::PENDING;
+            $status    = ExampleEvent::PENDING;
             $exception = $e;
         } catch (ExampleException\SkippingException $e) {
-            $status = ExampleEvent::SKIPPED;
+            $status    = ExampleEvent::SKIPPED;
             $exception = $e;
         } catch (ProphecyException\Prediction\PredictionException $e) {
-            $status = ExampleEvent::FAILED;
+            $status    = ExampleEvent::FAILED;
             $exception = $e;
         } catch (ExampleException\FailureException $e) {
-            $status = ExampleEvent::FAILED;
+            $status    = ExampleEvent::FAILED;
             $exception = $e;
         } catch (Exception $e) {
-            $status = ExampleEvent::BROKEN;
+            $status    = ExampleEvent::BROKEN;
             $exception = $e;
         }
 
@@ -114,7 +114,7 @@ class ExampleRunner
 
     /**
      * @param SpecificationInterface $context
-     * @param ExampleNode $example
+     * @param ExampleNode            $example
      *
      * @throws \PhpSpec\Exception\Example\PendingException
      * @throws \Exception
@@ -125,9 +125,9 @@ class ExampleRunner
             throw new ExampleException\PendingException();
         }
 
-        $matchers = new MatcherManager($this->presenter);
+        $matchers      = new MatcherManager($this->presenter);
         $collaborators = new CollaboratorManager($this->presenter);
-        $maintainers = array_filter($this->maintainers, function ($maintainer) use ($example) {
+        $maintainers   = array_filter($this->maintainers, function ($maintainer) use ($example) {
             return $maintainer->supports($example);
         });
 
@@ -157,10 +157,10 @@ class ExampleRunner
 
     /**
      * @param Maintainer\MaintainerInterface[] $maintainers
-     * @param ExampleNode $example
-     * @param SpecificationInterface $context
-     * @param MatcherManager $matchers
-     * @param CollaboratorManager $collaborators
+     * @param ExampleNode                      $example
+     * @param SpecificationInterface           $context
+     * @param MatcherManager                   $matchers
+     * @param CollaboratorManager              $collaborators
      */
     private function runMaintainersTeardown(
         array $maintainers,
@@ -168,8 +168,7 @@ class ExampleRunner
         SpecificationInterface $context,
         MatcherManager $matchers,
         CollaboratorManager $collaborators
-    )
-    {
+    ) {
         foreach (array_reverse($maintainers) as $maintainer) {
             $maintainer->teardown($example, $context, $matchers, $collaborators);
         }

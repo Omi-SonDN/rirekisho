@@ -34,8 +34,8 @@ class ArrayKeyValueMatcher extends BasicMatcher
 
     /**
      * @param string $name
-     * @param mixed $subject
-     * @param array $arguments
+     * @param mixed  $subject
+     * @param array  $arguments
      *
      * @return bool
      */
@@ -44,7 +44,8 @@ class ArrayKeyValueMatcher extends BasicMatcher
         return
             (is_array($subject) || $subject instanceof \ArrayAccess) &&
             'haveKeyWithValue' === $name &&
-            2 == count($arguments);
+            2 == count($arguments)
+        ;
     }
 
     /**
@@ -56,7 +57,7 @@ class ArrayKeyValueMatcher extends BasicMatcher
     protected function matches($subject, array $arguments)
     {
         $key = $arguments[0];
-        $value = $arguments[1];
+        $value  = $arguments[1];
 
         if ($subject instanceof ArrayAccess) {
             return $subject->offsetExists($key) && $subject->offsetGet($key) === $value;
@@ -67,8 +68,8 @@ class ArrayKeyValueMatcher extends BasicMatcher
 
     /**
      * @param string $name
-     * @param mixed $subject
-     * @param array $arguments
+     * @param mixed  $subject
+     * @param array  $arguments
      *
      * @return FailureException
      */
@@ -94,8 +95,8 @@ class ArrayKeyValueMatcher extends BasicMatcher
 
     /**
      * @param string $name
-     * @param mixed $subject
-     * @param array $arguments
+     * @param mixed  $subject
+     * @param array  $arguments
      *
      * @return FailureException
      */

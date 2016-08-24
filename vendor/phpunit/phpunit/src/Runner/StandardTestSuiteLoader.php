@@ -49,8 +49,7 @@ class PHPUnit_Runner_StandardTestSuiteLoader implements PHPUnit_Runner_TestSuite
             foreach ($loadedClasses as $loadedClass) {
                 $class = new ReflectionClass($loadedClass);
                 if (substr($loadedClass, $offset) === $suiteClassName &&
-                    $class->getFileName() == $filename
-                ) {
+                    $class->getFileName() == $filename) {
                     $suiteClassName = $loadedClass;
                     break;
                 }
@@ -61,14 +60,13 @@ class PHPUnit_Runner_StandardTestSuiteLoader implements PHPUnit_Runner_TestSuite
             $testCaseClass = 'PHPUnit_Framework_TestCase';
 
             foreach ($loadedClasses as $loadedClass) {
-                $class = new ReflectionClass($loadedClass);
+                $class     = new ReflectionClass($loadedClass);
                 $classFile = $class->getFileName();
 
                 if ($class->isSubclassOf($testCaseClass) &&
-                    !$class->isAbstract()
-                ) {
+                    !$class->isAbstract()) {
                     $suiteClassName = $loadedClass;
-                    $testCaseClass = $loadedClass;
+                    $testCaseClass  = $loadedClass;
 
                     if ($classFile == realpath($suiteClassFile)) {
                         break;
@@ -80,8 +78,7 @@ class PHPUnit_Runner_StandardTestSuiteLoader implements PHPUnit_Runner_TestSuite
 
                     if (!$method->isAbstract() &&
                         $method->isPublic() &&
-                        $method->isStatic()
-                    ) {
+                        $method->isStatic()) {
                         $suiteClassName = $loadedClass;
 
                         if ($classFile == realpath($suiteClassFile)) {
