@@ -440,8 +440,8 @@ ul{
 .contact-right{
     position:relative;
 }
-#header .menu_area .navbar.navbar-default{ background-color: #f3f3f3; }
-#header .navbar-brand{ margin-top: 2px; display: inline-block; }
+#header .menu_area .navbar.navbar-default{ background-color: #f3f3f3; height: 80px; }
+#header .navbar-brand{ margin-top: 2px; display: inline-block; height: 100%; }
 #header img{ width:180px; }
 #header .fixavatar img{ width:50px; }
 .navbar-default .navbar-nav > li > a {
@@ -488,4 +488,40 @@ section .introduce .right-content h2{
 .footer_top .footer_widget_nav a{
   font-weight: 300;
   color: #fff;
+}
+
+@media (max-width: 1024px) {
+    #templatemo-carousel {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        overflow-x: hidden;
+        margin-bottom:0;
+        max-height: 500px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    #templatemo-carousel .carousel-caption h1 {
+        font-size: 40px;
+    }
+
+    #header img{
+        width: auto !important;
+        height: 100%;
+    }
+}
+
+@media (max-width: 425px){
+  #templatemo-carousel .carousel-caption h1 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 375px){
+  #templatemo-carousel .carousel-caption h1 {
+        font-size: 20px;
+    }
 }
