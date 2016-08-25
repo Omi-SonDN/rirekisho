@@ -32,8 +32,8 @@
                     <p><img src="{{ URL::asset('/frontend/img/globe.png') }}" alt="icon 3"/><a class="link_orange"
                                                                                                href="#"><span
                                     class="txt_orange">@if($dtCp){!! $dtCp->nameCompany !!}@endif</span></a></p>
-
-                    <form class="form-horizontal" action="{{url('contact')}}" method="post">
+                                    @include('includes.flash-alert')
+                    <form class="form-horizontal" action="{{url('contact').'#templatemo-contact'}}" method="post" >
                         <div class="form-group">
                             <input type="text" class="form-control" name="name" placeholder="Your Name..." maxlength="40" value="{!! old('name') !!}" />
                             @if ($errors->has('name'))
@@ -61,7 +61,6 @@
                         </div>
                         <button type="submit" class="btn btn-orange pull-right">SEND</button>
                     </form>
-
                 </div>
             </div>
             <!-- /.row -->

@@ -509,6 +509,9 @@ section .introduce .right-content h2{
   font-weight: 300;
   color: #fff;
 }
+.contact_right h3{
+  margin-top:0px;
+}
 
 @media (max-width: 1024px) {
     #templatemo-carousel {

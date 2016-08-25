@@ -4,7 +4,7 @@ $(document).ready(function () {
     $("cv-forms").each(function () {
         $(this).data("validator").settings.success = false;
     });
-    $('#faicon').iconpicker();
+    //$('#faicon').iconpicker();
     /*************************fix navbar*************************************/
 
     tinymce.init({

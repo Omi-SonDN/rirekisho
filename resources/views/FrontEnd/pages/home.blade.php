@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="clearfix"> </div>
-    <section style="background-color:#efefef; padding: 70px 0px;">
+    <section style="background-color:#efefef; padding: 70px 0px;" id="introduction">
         <div class="container introduce">
             <div class="col-md-6">
                 <img src="{{asset('frontend/img/Home-map.png')}}" alt="" style="width:100%;"/>

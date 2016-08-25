@@ -4,6 +4,8 @@ namespace app\Http\Controllers\FrontEnd;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -123,11 +125,10 @@ class WellController extends Controller
             $settings = Fgeneral::all()->keyBy('key');
             $to = $settings->get('email')->value;
 
-            \Mail::send('emails.contact', ['mymessage' => $message], function ($m) use ($request, $email, $name, $message, $to) {
+            \Mail::send('emails.contact', ['mymessage' => $message,'email'=>$email,'name'=>$name], function ($m) use ($request, $email, $name, $message, $to) {
                 $m->from($email,$name);
                 $m->to($to)->subject('[Contact] Contact me now!');
             });
-        }
             return redirect()
                 ->back()
                 ->with(
@@ -137,5 +138,7 @@ class WellController extends Controller
                     ]
                 );
             }
+        }
+            
 }
 

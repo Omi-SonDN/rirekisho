@@ -98,13 +98,14 @@ class AuthController extends Controller
 
     public function myLogout()
     {
+        dd($_SESSION);
         //$this->auth->logout();
-        if (Auth::check()) {
-            Session::flush();
-            Auth::logout();
+    //     if (Auth::check()) {
+    //         Session::flush();
+    //         Auth::logout();
 
-            return redirect()->action('Auth\AuthController@getLogin');
-        } else
-            return redirect()->action('Auth\AuthController@getLogin');
+    //         return redirect()->action('Auth\AuthController@getLogin');
+    //     } else
+    //         return redirect()->action('Auth\AuthController@getLogin');
     }
 }
