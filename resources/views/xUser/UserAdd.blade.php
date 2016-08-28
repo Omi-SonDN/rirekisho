@@ -5,7 +5,7 @@
     <form action="{{action('UsersController@postAddUser')}}" method="POST" class="my-forms" id="profile-forms"
           enctype="multipart/form-data">
         <fieldset id="field-box">
-            <label slide-header="true"><h3>Add About </h3></label>
+            <label slide-header="true"><h3>Thêm tài khoản </h3></label>
             @include('includes.flash-alert')
             <hr>
             <div class="float_left col-lg-3">
@@ -39,7 +39,7 @@
                                     <label class="icon-right" for="txtName">
                                         <i class="fa fa-user"></i>
                                     </label>
-                                    <input required="required" type="text" placeholder="Username" class="input-right"
+                                    <input required="required" type="text" placeholder="Username" class="input-right" maxlength="15"
                                            name="txtName" value="{!! old('txtName') !!}">
                                     @if ($errors->has('txtName'))
                                         <span class="help-block">
@@ -185,11 +185,11 @@
                 </div>
             </div>
             <div class="col-lg-4 mt20">
-                <label class="title" for="txtSdt">Số điện thoại di động <small><i>0*|(+84)*-xxx-xxxx</i></small><i style="color: red;">*</i></label>
+                <label class="title" for="txtSdt">Số điện thoại di động <small><i>(+84)xx-xxx-xxxx</i></small><i style="color: red;">*</i></label>
 
                 <div class="input">
                     <label class="icon-right" for="txtSdt"><i class="fa fa-phone"></i></label>
-                    <input required="required" type="text" placeholder="(+84)98-123-1234" class="input-right"
+                    <input required="required" id="phone-number" type="text" placeholder="(+84)98-123-1234" class="input-right"
                            name="txtSdt" value="{!! old('txtSdt') !!}">
                     @if ($errors->has('txtSdt'))
                         <span class="help-block">

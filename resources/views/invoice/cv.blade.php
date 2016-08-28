@@ -81,27 +81,28 @@
             </thead>
             <tbody>
             <tr class="">
-                <td style="width:10%;"> Furigana</td>
-                <td>{{$CV->User->Furigana_name}} </td>
-
-            </tr>
-            <tr class="">
-                <td style="width:10%;"> Tên</td>
+                <td style="width:10%;"> Tên đầy đủ</td>
                 <td>{{$CV->User->name}} </td>
 
             </tr>
             <tr class="">
-                <td style="width:10%;"></td>
-                <td>{{$CV->User->Birthday}} （満 {{$CV->User->Age}}歳） {{$CV->User->JGender}}</td>
+                <td style="width:10%;"> Tên thường gọi</td>
+                <td>{{$CV->User->Furigana_name}} </td>
+
+            </tr>
+
+            <tr class="">
+                <td style="width:10%;">Ngày sinh</td>
+                <td>{{$CV->User->Birthday}} {{$CV->User->Age}} {{$CV->User->JGender}}</td>
 
             </tr>
             <tr class="">
-                <td style="width:10%;"> Address</td>
+                <td style="width:10%;"> Địa chỉ</td>
                 <td>{{$CV->User->Address}} </td>
                 <td style="width:23%;">Phone: {{$CV->User->Phone}}</td>
             </tr>
             <tr class="">
-                <td style="width:10%;"></td>
+                <td style="width:10%;">Giới thiệu bản thân</td>
                 <td>{{$CV->User->Contact_information}} </td>
                 <td style="width:23%;"></td>
             </tr>
@@ -190,7 +191,7 @@
             @if(!$Work->count())
                 <tr>
                     <td colspan="5">
-                        <center>There are no records to display</center>
+                        <center>Chưa có thông tin mô tả nào</center>
                     </td>
                 </tr>
             @else

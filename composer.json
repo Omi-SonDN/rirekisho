@@ -41,7 +41,8 @@
     },
     "files": [
       "app/Http/helpers.php",
-      "app/MyLibrary/Pagination_temp.php"
+      "app/MyLibrary/Pagination_temp.php",
+      "app/MyLibrary/myFunction.php"
     ]
   },
   "autoload-dev": {

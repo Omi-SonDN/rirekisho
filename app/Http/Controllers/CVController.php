@@ -117,10 +117,9 @@ class CVController extends Controller
         );
     }
 
-
+    // Hien thi CV tung buoc
     public function show($id)
     {
-        //$id = $id - 14000;
         $CV = CV::with('User')->find($id);
 
         // kiem tra CV tung buoc
@@ -139,22 +138,21 @@ class CVController extends Controller
             ->whereUserId(Auth::User()->id)
             ->whereBookmarkUserId($CV->user_id)->first();
 
+        // lay thong tin nguoi gioi thieu
+        $data_UserCeo = json_decode($this->getUserCeo($CV));
+
         if ($bookmark === null) $bookmark = 0;
         else $bookmark = $bookmark->id;
         return View::make('xCV.CVshow')
-            ->with(compact('CV', 'Records', 'skills', 'image', 'bookmark'));
+            ->with(compact('CV', 'Records', 'skills', 'image', 'bookmark', 'data_UserCeo'));
 
     }
 
-    public function edit($id)//Get 
+    // Method Get
+    public function edit($id)
     {
-        //$id = $id - 14000;
         $uCV = User::find(Auth::user()->id);
         $cv = CV::findOrFail($id);
-
-//        if (Gate::denies('update-cv', $cv->user_id)) {
-//            abort(403);
-//        }
 
         // kiem tra EDIT CV TUNG BUOC
         if (Gate::denies('edit-cv-step', $cv)) {
@@ -170,7 +168,8 @@ class CVController extends Controller
         return View::make('xCV.CVStep')->with('CV', $cv)->with('uCV', $uCV)->with('Records', $Records)->with('skills', $skills);
     }
 
-    public function update($id, UpdateRequest $request)//PUT
+    //PUT
+    public function update($id, UpdateRequest $request)
     {
         $cv = CV::findOrFail($id);
 
@@ -243,7 +242,7 @@ class CVController extends Controller
                     }
                 }
             }
-            http://localhost:8000/CV/info
+            //http://localhost:8000/CV/info
             return $_SERVER['HTTP_REFERER'];
         }
 
@@ -387,10 +386,34 @@ class CVController extends Controller
                     ]);
                 }
 
-                return Response::json(array(
-                        'url' => $_SERVER['HTTP_REFERER']
-                    )
-                );
+                if ($request->Input('checkcrete')) {
+                    return Response::json(array(
+                        'notes' => 'Bạn đã cập nhật thành công'
+                        )
+                    );
+                } else {
+                    $CV = CV::with('User')
+                        ->where('user_id', Auth::user()->id)
+                        ->where('type_cv', $request->get('txtTypeCv'))
+                        ->first();
+
+                    $uCV = DB::table('users')->find(Auth::user()->id);
+                    $urlCurent = '';
+                    if ($request->get('txtTypeCv')) {
+                        //$urlCurent = url('CV/upload/'. $CV->hash .'/edit');
+                        $modal = 1;
+                        return view('includes.CVUploadStep', compact('uCV', 'CV', 'modal', 'urlCurent'))->render();
+                    } else {
+                        if (count($CV)) {
+                            $skills = $CV->Skill;
+                            $Records = $CV->Record;
+                            $Records = $Records->sortBy("Date");
+                        }
+                        $modal = 1;
+                        //$urlCurent = route('CV.edit', $CV->hash);
+                        return view('includes.CVFormStep', compact('uCV', 'CV', 'Records', 'skills', 'modal', 'urlCurent'))->render();
+                    }
+                }
             }
         }
     }
@@ -412,7 +435,7 @@ class CVController extends Controller
             $cv = CV::where('id', '=', $id)
                 ->where('type_cv', '=', $request->get('type_cv'))
                 ->first();
-
+            $getuser_id = $cv->user_id ;
             $note_ = '';
             if (count($cv)) {
                 if (Gate::allows('del-cv', $cv)) {
@@ -443,9 +466,15 @@ class CVController extends Controller
                 $note_ = 'Lỗi, Bạn không có quyền hãy liên hệ với Admin!';
             }
 
+            if (Auth::user()->id == $getuser_id && Auth::user()->getRole() == 'Applicant'){
+                $url = route('cv.info');
+            } else {
+                $url = action('CVController@index');
+            }
+
             return Response::json(array(
                     'notes' => $note_,
-                    'url' => \URL('/')
+                    'url' => $url
                 )
             );
         }
@@ -752,42 +781,18 @@ class CVController extends Controller
             abort(404, 'Lỗi, Không tìm thấy trang');
         }
         $uCV = DB::table('users')->find($CV->user_id);
-
-        $bookmark = DB::table('bookmarks')
-            ->whereUserId(Auth::User()->id)
-            ->whereBookmarkUserId($CV->user_id)->first();
-        if ($bookmark === null) $bookmark = 0;
-        else $bookmark = $bookmark->id;
-        return view('xCV.CVShowUpload', compact('uCV', 'CV', 'bookmark'));
-    }
-
-     public function show1($id)
-    {
-        //$id = $id - 14000;
-        $id = Hashids::decode($id);
-        $CV = CV::with('User')->find($id[0]);
-
-        // kiem tra CV tung buoc
-        if (Gate::denies('show-cv-step', $CV)) {
-            abort(403);
-        }
-
-        if (empty($CV)) {
-            abort(404, 'Lỗi, Không tìm thấy trang');
-        }
-        $skills = $CV->Skill;
-        $Records = $CV->Record;
-        $Records = $Records->sortBy("Date");
-        $image = $CV->User->image;
+        $image = $uCV->image;
         $bookmark = DB::table('bookmarks')
             ->whereUserId(Auth::User()->id)
             ->whereBookmarkUserId($CV->user_id)->first();
 
         if ($bookmark === null) $bookmark = 0;
         else $bookmark = $bookmark->id;
-        return View::make('xCV.CVshow')
-            ->with(compact('CV', 'Records', 'skills', 'image', 'bookmark'));
 
+        // lay thong tin nguoi gioi thieu
+        $data_UserCeo = json_decode($this->getUserCeo($CV));
+
+        return view('xCV.CVShowUpload', compact('uCV', 'CV', 'bookmark', 'image', 'data_UserCeo'));
     }
 
     public function _statistic($cv){
@@ -1158,6 +1163,7 @@ class CVController extends Controller
         return array($cv,$text);
     }
 
+    // xu ly kich hoat CV - Ghi chu - Them nguoi gioi thieu
     public function postActNotes ($id, Request $request){
         if (Gate::denies('Visitor')) {
             return \Response::json(array('info'=> 'Lỗi, Không có quyền truy cập'));
@@ -1170,8 +1176,9 @@ class CVController extends Controller
 
         $cv = CV::findOrFail($newId);
         // update active CV + notes + active by author for CV show
-        if ($request->has('txtAction') || $request->has('txtNotes')) {
+        if ($request->has('txtAction') || $request->has('txtNotes')|| $request->has('txtCeo')) {
             $cv->notes = $request->input('txtNotes');
+            $cv->user_gioi_thieu = $request->input('txtCeo');
             // tuong duong can
             if (Gate::allows('Admin')) {
                 $cv->Active = $request->input('txtAction');
@@ -1180,5 +1187,39 @@ class CVController extends Controller
             $cv->save();
             return \Response::json(array('info'=> 'Đã cập nhập thành công!'));
         }
+    }
+
+    // lay thong tin nguoi gioi thieu
+    function getUserCeo($CV) {
+        if (empty ($CV)) {
+           return $data_UserCeo = [];
+        }
+
+        if ($CV->user_gioi_thieu) {
+            $idUser_Ceo = $CV->user_gioi_thieu;
+        } else {
+            $idUser_Ceo = null;
+        }
+
+        $dt_UserCeo = User::select(
+                'users.id as id',
+                'users.userName as userName',
+                'users.image as image'
+            )
+            ->UserCeo($idUser_Ceo)
+            ->first();
+
+        if ($dt_UserCeo['image']) {
+            $img = 'thumb_' . $dt_UserCeo['image'];
+        } else {
+            $img = 'no-avatar.jpg';
+        }
+
+        $data_UserCeo = [
+            'userName' => $dt_UserCeo['userName'],
+            'image' => asset('img/thumbnail').'/'. $img,
+        ];
+
+        return json_encode($data_UserCeo);
     }
 }

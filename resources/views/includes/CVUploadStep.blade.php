@@ -1,4 +1,13 @@
-<label slide-header=true class="slide-header">
+@if( isset($modal))
+    <div class="col-md-12 header-createcv">
+        <blockquote>
+        <p>Bạn đã tạo thành công CV đính kèm file. </p>
+        <p>Bạn có muốn gây ấn tượng tốt với nhà tuyển dụng, vui lòng điền thông tin bên dưới đây.</p>
+        </blockquote>
+    </div>
+@endif
+<fieldset id="field-box">
+<label slide-header=true class="fix-lb slide-header box_white block_ntv_dangnhap">
     I. File CV
 </label>
 <ul slide-toggle=true>
@@ -27,3 +36,10 @@
         </div>
     </li>
 </ul>
+</fieldset>
+
+@if( isset($modal))
+    <div class="box_white block_ntv_dangnhap">
+        @include('includes.CVActionSort', ['items'=>$CV])
+    </div>
+@endif

@@ -32,7 +32,7 @@
                     <a class="appendflie"></a>
                 @endif
             @endif
-            <a href="/" class="btn btn-grey ml_8" title="Trang chủ"><i class="fa fa-undo icon_24 icon-24"></i> Cancel</a>
+            <a href="/CV/info" class="btn btn-grey ml_8" title="Trang chủ"><i class="fa fa-undo icon_24 icon-24"></i> Cancel</a>
         </div>
         <div class="clearfix"></div>
     </div>

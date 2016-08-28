@@ -12,21 +12,21 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
-use Session;
+use Session, Cache;
 
 class AuthController extends Controller
 {
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-    protected $redirectTo = 'auth/login';
-    protected $user;
-    protected $auth;
-
     public function __construct(Guard $auth, User $user)
     {
         $this->user = $user;
         $this->auth = $auth;
-        $this->middleware('guest', ['except' => ['getLogout', 'myLogout', 'logout']]);
+        $this->middleware('guest', ['except' => [ 'getLogout', 'myLogout', 'logout']]);
     }
+
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    protected $redirectTo = 'auth/login';
+    protected $user;
+    protected $auth;
 
     protected function create(array $data)
     {
@@ -96,15 +96,30 @@ class AuthController extends Controller
             ]);
     }
 
+    public function getLogout()
+    {
+        if (Auth::check()) {
+            Session::flush();
+            Cache::flush();
+            Auth::logout();
+
+            return redirect()->action('FrontEnd\WellController@index');
+        } else
+            return redirect()->action('FrontEnd\WellController@index');
+//            return redirect()->action('Auth\AuthController@getLogin');
+    }
+
     public function myLogout()
     {
         //$this->auth->logout();
         if (Auth::check()) {
             Session::flush();
+            Cache::flush();
             Auth::logout();
 
-            return redirect()->action('Auth\AuthController@getLogin');
+            return redirect()->action('FrontEnd\WellController@index');
         } else
-            return redirect()->action('Auth\AuthController@getLogin');
+            return redirect()->action('FrontEnd\WellController@index');
+//            return redirect()->action('Auth\AuthController@getLogin');
     }
 }

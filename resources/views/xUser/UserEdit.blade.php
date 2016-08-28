@@ -6,7 +6,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="PUT">
         <fieldset id="field-box">
-            <label slide-header="true"><h3>Edit About </h3></label>
+            <label slide-header="true"><h3>Sửa thông tin tài khoản</h3></label>
             @include('includes.flash-alert')
             <hr>
 
@@ -23,7 +23,7 @@
                                 <label class="icon-right" for="txtName">
                                     <i class="fa fa-user"></i>
                                 </label>
-                                <input type="text" class="input-right" name="txtName"
+                                <input type="text" class="input-right" name="txtName" maxlength="15"
                                        value="{{old('txtName', isset($user->userName) ? $user->userName : '')}}">
                                 @if ($errors->has('txtName'))
                                     <span class="help-block">
@@ -183,12 +183,12 @@
             </div>
             <div class="col-lg-4 mt20">
                 <label class="title" for="txtSdt">Số điện thoại di động
-                    <small><i>0*|(+84)*-xxx-xxxx</i></small>
+                    <small><i>(+84)xx-xxx-xxxx</i></small>
                     <i style="color: red;">*</i></label>
 
                 <div class="input">
                     <label class="icon-right" for="txtSdt"><i class="fa fa-phone"></i></label>
-                    <input required="required" type="text" placeholder="(+84)98-123-1234" class="input-right"
+                    <input id="phone-number" required="required" type="text" placeholder="(+84)98-123-1234" class="input-right"
                            name="txtSdt" value="{!! old('txtSdt', isset($user->Phone) ? $user->Phone : '') !!}">
                     @if ($errors->has('txtSdt'))
                         <span class="help-block">

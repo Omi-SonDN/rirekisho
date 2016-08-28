@@ -204,6 +204,17 @@
     border-bottom: 1px solid #F5F5F5;
     /*border-bottom: 1px solid #6a5595;*/
 }
+.sidenav ul li.nav-link i.add-submenu{
+    top: -36px;
+    position: relative;
+    font-size: 30px;
+    margin: 0;
+    padding-right: 30px;
+    float: left;
+    cursor: pointer;
+    padding: 0;
+}
+
 
 .sidenav li.nav-link a {
     text-decoration: none;
@@ -255,7 +266,9 @@
 .sidenav ul li.track-list a:visited, a:link {
 
 }
-
+.sidenav ul li.nav-link ul li a{
+    font-size: 14px;
+}
 
 
 

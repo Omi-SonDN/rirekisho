@@ -29,6 +29,7 @@ $(document).ready(function ($) {
             }
         });
     });
+
     $('#myModal').on('show.bs.modal',function(e){
         $('#myModal').on('click','button[name=preview]',function(e){
             e.preventDefault();

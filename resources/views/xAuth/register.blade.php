@@ -18,7 +18,7 @@
                             <label class="icon-right" for="userName">
                                 <i class="fa fa-user"></i>
                             </label>
-                            <input type="text" class="input-right" placeholder="Tên " name="userName"
+                            <input type="text" class="input-right" placeholder="Tên " name="userName" maxlength="15"
                                    value="{{ old('userName') }}">
                             @if ($errors->has('userName'))
                                 <span class="help-block">

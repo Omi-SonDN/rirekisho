@@ -71,6 +71,7 @@
     <script type="text/javascript" src="{{asset('/hightchart/js/jspdf.js')}}"></script>
     <script type="text/javascript" src="{{asset('/hightchart/js/highcharts-export-clientside.js')}}"></script>
 
+
 </head>
 <body>
     <header>
@@ -95,8 +96,6 @@
 
     </div>
 
-    <!---  jQuery-->
-
     <!---  bootstrap-->
     <script type="text/javascript" src="{{ URL::asset('/admin/js/3.3.5-bootstrap.min.js')}}"></script>
     <!-- validate -->
@@ -106,7 +105,7 @@
     <script type="text/javascript" src="{{asset('js/fontawesome-iconpicker.min.js')}}" async></script>
     <script type="text/javascript" src="{{asset('/admin/js/wz_tooltip.js')}}"></script>
 
-
+    <script type="text/javascript" src="{{asset('/js/jquery.mask.js')}}"></script>
 
     <script type="text/javascript" src="{{asset('/js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/js/select2.full.min.js')}}"></script>

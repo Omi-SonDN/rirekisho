@@ -27,21 +27,16 @@
                         @if (Auth::check())
                             @can('Admin')
                             <li class="{{(URL::current() == url('User')) ? 'active' : ''}}"><a
-                                        href="{{url('User')}}">User</a></li>
+                                        href="{{url('User')}}">Quản lý tài khoản</a></li>
+                            <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
                             @endcan
                             @can('Visitor')
                             <li class="{{(URL::current() == url('CV')) ? 'active' : ''}}"><a href="{{url('CV')}}">Quản
                                     lý CV</a></li>
                             @endcan
                             @can('Applicant')
-                            <li class="{{(URL::current() == url('CV/info')) ? 'active' : ''}}"><a href="CV/info">Danh
-                                    sách CV</a></li>
+                            <li class="{{(URL::current() == url('CV/info')) ? 'active' : ''}}"><a href="CV/info">CV của tôi</a></li>
                             @endcan
-
-                            {{--<li><a href="#">Events</a></li>--}}
-                            {{--<li><a href="#">Gallery</a></li>--}}
-                            {{--<li><a href="#">Blog</a></li>--}}
-                            {{--<li><a href="about">Contact</a></li>--}}
                             <li class="dropdown fixavatar">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">
@@ -54,11 +49,10 @@
                                         title="{{Auth::user()->userName}}" width="44" height="44" border="0"><span
                                             class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="profile">Cài đặt tài khoản</a></li>
+                                    <li><a href="profile">Thông tin tài khoản</a></li>
                                     @can('SuperAdmin')
                                     <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                                     <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>
-                                    <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
                                     @endcan
                                     @can('Applicant')
 
