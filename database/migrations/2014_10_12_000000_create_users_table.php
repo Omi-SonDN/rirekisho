@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->char('Phone');
             $table->text('Self_intro');
             $table->tinyInteger('Marriage');
+            $table->integer('group')->nullable();
             $table->timestamps();
         });
     }

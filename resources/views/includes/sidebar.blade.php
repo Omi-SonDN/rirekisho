@@ -73,6 +73,7 @@
                 
                 <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                 <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>
+                <li><a href="{{url('group')}}">Quản lý nhóm</a></li>
                 <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
             </ul>
         </li>

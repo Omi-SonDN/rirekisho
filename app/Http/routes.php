@@ -117,6 +117,18 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::resource('status', 'StatusController');
+
+    Route::group(['prefix' => 'group','as'=>'group::'], function () {
+    //     Route::get('/list/{id?}',['as' => 'list','uses' =>'GroupController@index']);
+    //     Route::get('/add', ['as' => 'create', 'uses' => 'GroupController@add']);
+    //     Route::post('/add', ['as' => 'store', 'uses' => 'GroupController@create']);
+    //     Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'GroupController@edit'])->where(['id'=>'[0-9]+']);
+    //     Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'GroupController@update'])->where(['id'=>'[0-9]+']);
+    Route::get('/{id}/delete',['as'=>'delete','uses'=>'GroupController@delete'])->where(['id'=>'[0-9]+']);
+    //     Route::get('/{id}/view',['as'=>'view','uses'=>'GroupController@view'])->where(['id'=>'[0-9]+']);
+    });
+
+    Route::resource('group', 'GroupController');
     // thong ke user
     Route::resource('statistics/user', 'StatisticsUserController');
 

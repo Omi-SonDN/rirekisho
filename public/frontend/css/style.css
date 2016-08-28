@@ -91,7 +91,17 @@ ul{
   right: 25px;
   top: -15px;
   width: 0;
-
+  z-index: 2;
+}
+.navbar-nav > li > .dropdown-menu:after{
+  content:"";
+  width: 100%;
+  height: 15px;
+  position: absolute;
+  top:-15px;
+  right: 0;
+  background: transparent;
+  z-index: 1;
 }
 .navbar-nav > li > .dropdown-menu li a {
   border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
