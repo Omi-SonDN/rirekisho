@@ -79,7 +79,7 @@
                 @if(in_array('Attach',$status->info))
                 <div class="form-group">
                     <label for="attach" class="label label-primary">Attach: </label>
-                    <input name="attach[]" class="form-control" type="file" multiple=""/>
+                    <input name="attach[]" class="form-control" type="file" multiple="" accept=".pdf"/>
                 </div>
                 @endif
             </div>

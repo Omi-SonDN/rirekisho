@@ -112,6 +112,9 @@
                     <div class="forumrow table topx-tip-info">
                         <ul style="line-height: 2;">
                             <li>
+                                {!!($CV->User->userName)!!}
+                            </li>   
+                            <li>
                                 {{($CV->name_cv)}}
                             </li>
                             <li>
