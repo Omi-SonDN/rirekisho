@@ -466,14 +466,18 @@ $(document).ready(function () {
 });
 
 // dang ky cv cac truong thong tin bat buoc
-function submitCVRule(ischeck = null) {
-    $.ajax({
+function submitCVRule(ischeck) {
+    if (ischeck)
+		var isck = true;
+	else
+		var isck = false;
+	$.ajax({
         type: 'POST',
         url: $('#cv-rule').attr('action'),
         data: $('#cv-rule').serialize() + '&checkcrete=' + ischeck,
         cache: false,
         success: function (html) {
-            if (ischeck) {
+            if (isck) {
                 alert(html['notes']);
             } else {
                 //$("#idEditCv").html('<button  data-toggle="modal" data-target="#modalCvCreate" type="button" class="btn btn-primary">CHỈNH SỬA</button>');
@@ -861,11 +865,15 @@ function clearBoxUserCeo(idBoxSearch, idUserCeo){
  * input: String
  * output: String compare first
  */
-function myCompare(str1, str2, s = ' '){
+function myCompare(str1, str2, s){
     var result = '';
+	var split_str = ' ';
+	if (s) {
+		split_str = s;
+	}
     if (str1 && str2) {
-        var tmpStr1 = str1.split(s);
-        var tmpStr2 = str2.split(s);
+        var tmpStr1 = str1.split(split_str);
+        var tmpStr2 = str2.split(split_str);
 
         for (var key1 in tmpStr1) {
             var _temp = tmpStr1[key1];

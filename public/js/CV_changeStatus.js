@@ -1,10 +1,7 @@
 $(document).ready(function () {
     var url = '';
-
-    //$(document).on("change", 'form.status', function(){
-
-    //
     var old_status_id = null;
+
     $('body').on('click','select.status',function (e) {
         if( e.clientX > 0 && e.clientY > 0){
             old_status_id = $(this).val();
