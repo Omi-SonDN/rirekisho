@@ -131,11 +131,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('status', 'StatusController');
 
-    Route::group(['prefix' => 'group','as'=>'group::'], function () {
-    Route::get('/{id}/delete',['as'=>'delete','uses'=>'GroupController@delete'])->where(['id'=>'[0-9]+']);
+    Route::group(['prefix' => 'group_user','as'=>'group_user::'], function () {
+    Route::get('/{id}/delete',['as'=>'delete','uses'=>'Group_userController@delete'])->where(['id'=>'[0-9]+']);
     });
 
-    Route::resource('group', 'GroupController');
+    Route::resource('group_user', 'Group_userController');
     // thong ke user
     Route::resource('statistics/user', 'StatisticsUserController');
 
