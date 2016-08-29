@@ -89,6 +89,20 @@
                                     <input type="submit" name="Search" id="searchStatistics" value="Search">
 
                             </div>
+                            <?php
+                                $status = DB::select('select * from status');
+                            ?>
+                            <div class="search_po_sa" style="">
+                                    <select id = "statusSearch_" name="status" multiple>
+                                        <option value="">Trạng thái</option>
+                                        @foreach ($status as $sta_)
+                                            <option value="{{$sta_->id}}">{{$sta_->status}}</option>
+                                        @endforeach
+
+                                    </select>
+                                    <input type="submit" name="Search" id="search_Sta" value="Search">
+
+                            </div>
                 
                             <div class="row">
                                 <div class="col-md-10 col-md-offset-1">

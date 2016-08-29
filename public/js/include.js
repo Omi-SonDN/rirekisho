@@ -940,6 +940,24 @@ $('#searchStatistics').on('click', function(){
     
 });
 
+$('#search_Sta').on('click', function(){
+    $key_search = $('#statusSearch_').val();
+    $status = $('#status_statistic li.active').attr('status');
+    $.ajax({
+        type: "POST",
+        url: "/CV/statisticSearch",
+        data : {
+            'key_search' : $key_search,
+            'status': $status,
+        },
+        cache: false,
+        success: function (data) {
+            // $('#container2').html(data);
+            console(data.data);
+        }
+    });
+});
+
 $('#status_statistic li a').on('click', function(){
     var ox = $(this).attr('status');
     $('#error_date').hide();
@@ -994,7 +1012,7 @@ function callLogin(){
 }
 
 $('.menu_download .list_do').on('click', downloadCV);
-//$('.reaction-box li').on('click', downloadCV);
+// $('.reaction-box1 li').on('click', downloadCV{
 
 function downloadCV(){
     var export_type = $(this).attr('export-type');
@@ -1002,7 +1020,6 @@ function downloadCV(){
 
     var startDate = $('#startDate').val();
     var endDate = $('#endDate').val();
-
     if(status == 'position'){
         var day = new Date().toJSON().slice(0,10);
         if(startDate > endDate || endDate > day){
@@ -1049,3 +1066,4 @@ function downloadCV(){
         });
     }
 }
+

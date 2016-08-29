@@ -1021,7 +1021,7 @@ class CVController extends Controller
         return array($cv_upload, $cv_pass,$ox);
     }
 
-    //thống kê cv theo thời gian và theo vị trí apply
+    // thống kê cv theo thời gian và theo vị trí apply
     public function statisticSearch(Request $request)
     {
         if (Gate::denies('Admin')) {
@@ -1042,6 +1042,33 @@ class CVController extends Controller
             ->with('ox', $ox)->with('cv_upload', $cv_upload)
             ->with('cv_pass', $cv_pass)->with('text', $text)->with('apply', $apply);
     }
+    // public function statisticSearch(Request $request)
+    // {
+    //     if (Gate::denies('Admin')) {
+    //         abort(403);
+    //     }
+    //     $status = $request->input('status');
+    //     $key = $request->input('key_search');
+    //     return $status;
+    //     if($status == 'position'){
+    //         $datestart = $request->input('startDate');
+    //         $datestart = $datestart.' 00:00:00';
+
+    //         $dateend = $request->input('endDate');
+    //         $dateend = $dateend.' 23:59:59';
+    //         list($cv,$text) = $this->statisticPositions($datestart, $dateend,$key);
+    //         $apply = '';
+    //         list($cv_upload, $cv_pass, $ox) = $this->toArrayCV($cv);   
+    //     } else {
+    //         list($cv, $text) = $this->sta_month_applyTo($key);
+    //         $listPo = $this->_statistic($cv);
+            
+    //     }
+    //     return View::make('includes.positions_chart')
+    //         ->with('ox', $ox)->with('cv_upload', $cv_upload)
+    //         ->with('cv_pass', $cv_pass)->with('text', $text)->with('apply', $apply)->with('key', $key);
+    // }
+
 
     //view satistic theo month quarter month apply
     public function statisticStatus(Request $request)
@@ -1159,6 +1186,28 @@ class CVController extends Controller
             $cv1->apply_to = $apply_to;
             return $cv1;
     }
+
+    // public function sta_listPo($cv1, $listPo, $datestart, $dateend)
+    // {
+    //     for($i =0; $i < count($listPo); $i++) {
+    //         $cv2 = CV::select(DB::raw("count(id) as count"))
+    //             ->where('created_at', '>=', $datestart)
+    //             ->where('created_at', '<', $dateend)
+    //             ->where('apply_to', '=', $listPo[$i]->id)
+    //             ->get();
+    //         if($cv2 != null)
+    //             $listPo[$i]->count = $cv2[0]->count;
+    //         else $listPo[$i]->count = 0;
+
+    //         $cv2 = CV::where('created_at', '>=', $datestart)
+    //             ->where('created_at', '<', $dateend)
+    //             ->where('apply_to', '=', $listPo[$i]->id)
+    //             ->get();
+    //         $listPo[$i]->listCV = $cv2;
+    //     }
+    //     $cv1->listPo = $listPo;
+    //     return $cv1;
+    // }
 
     public function postActNotes ($id, Request $request)
     {
