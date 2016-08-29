@@ -466,11 +466,14 @@ $(document).ready(function () {
 });
 
 // dang ky cv cac truong thong tin bat buoc
-function submitCVRule(ischeck) {
-    if (ischeck)
+function submitCVRule (ischeck) {
+    if (ischeck){
 		var isck = true;
-	else
+    }
+	else{
 		var isck = false;
+    }
+
 	$.ajax({
         type: 'POST',
         url: $('#cv-rule').attr('action'),
