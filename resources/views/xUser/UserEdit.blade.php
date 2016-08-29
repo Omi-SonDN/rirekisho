@@ -6,7 +6,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="PUT">
         <fieldset id="field-box">
-            <label slide-header="true"><h3>Edit About </h3></label>
+            <label slide-header="true"><h3>Chỉnh sửa thông tin</h3></label>
             @include('includes.flash-alert')
             <hr>
 
@@ -54,14 +54,14 @@
                     <div class="col-lg-6">
                         <li class="bottom_20px">
                             <div class="float_right ">
-                                <label class="title">Old Password</label>
+                                <label class="title"> Mật khẩu cũ </label>
 
                                 <div class="input">
                                     <label class="icon-right" for="oldPass">
                                         <i class="fa fa-key"></i>
                                     </label>
                                     <input type="password" class="input-right" name="oldPass"
-                                           placeholder="Old Password"
+                                           placeholder="Mật khẩu cũ"
                                            value="">
                                     @if ($errors->has('oldPass'))
                                         <span class="help-block">
@@ -73,14 +73,14 @@
                         </li>
                         <li class="bottom_20px">
                             <div class="float_right">
-                                <label class="title"> New Password </label>
+                                <label class="title"> Mật khẩu mới </label>
 
                                 <div class="input">
                                     <label class="icon-right" for="txtNewPass">
                                         <i class="fa fa-key"></i>
                                     </label>
                                     <input type="password" class="input-right" name="txtNewPass"
-                                           placeholder="New Password"
+                                           placeholder="Mật khẩu mới"
                                            value="">
                                     @if ($errors->has('txtNewPass'))
                                         <span class="help-block">

@@ -5,9 +5,8 @@
         <div class="table_action">
             <div class="top_action"></div>
             <div class="bottom_action">
-                <button class='btn btn-primary'>
-                    <a href="{{route('getadduser')}}"><i class="fa fa-user-plus" style="margin: 0 auto;">
-                        </i> Thêm User</a></button>
+                <a class="btn btn-primary" style="color:white;" href="{{route('getadduser')}}"><i class="fa fa-user-plus" style="margin: 0 auto;">
+                </i> Thêm User</a>
                 <span class="active-del"></span>
 
                 <div class="wait-modal-load"></div>

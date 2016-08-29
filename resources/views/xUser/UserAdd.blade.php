@@ -5,7 +5,7 @@
     <form action="{{action('UsersController@postAddUser')}}" method="POST" class="my-forms" id="profile-forms"
           enctype="multipart/form-data">
         <fieldset id="field-box">
-            <label slide-header="true"><h3>Add About </h3></label>
+            <label slide-header="true"><h3>Thêm User</h3></label>
             @include('includes.flash-alert')
             <hr>
             <div class="float_left col-lg-3">
@@ -13,13 +13,13 @@
                     <div id="dropzone">
                         <div class="fixed-img">
                             <div class="dropzone-text-place">
-                                <span class="dropzone-text">Upload photos</span>
+                                <span class="dropzone-text">Tải hình ảnh</span>
                             </div>
                         </div>
                         <input id="fileInput" type="file" accept="image/png,image/jpg,image/bmp,image/jpeg"
                                name="txtImage"/>
                     </div>
-                    <i> Click to edit</i>
+                    <i> Click để tải hình ảnh</i>
                     @if ($errors->has('txtImage'))
                         <span class="help-block">
                             {{ $errors->first('txtImage') }}

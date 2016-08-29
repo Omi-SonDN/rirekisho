@@ -218,7 +218,7 @@
                                     </thead>
                             @if(!$School->count())
                                         <tr>
-                                            <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                            <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                         </tr>
                             @else
                                         <tr class="tr-show">
@@ -251,7 +251,7 @@
                                 </thead>
                             @if(!$Cert ->count())
                                     <tr>
-                                        <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                        <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                     </tr>
                             @else
                                     <tr class="tr-show">
@@ -285,7 +285,7 @@
                             </thead>
                             @if(!$Work ->count())
                                 <tr>
-                                    <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                    <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                 </tr>
                             @else
                                 <tr class="tr-show">
@@ -315,12 +315,12 @@
                             <table class="table table-hover table-show">
                                 <thead>
                                 <tr class="tr-show">
-                                    <th colspan="100%"><h2>Language</h2></th>
+                                    <th colspan="100%"><h2>Ngoại ngữ</h2></th>
                                 </tr>
                                 </thead>
                                 @if(!$Skill ->count())
                                 <tr>
-                                    <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                    <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                 </tr>
                             @else
                                     <tr class="tr-show">
@@ -342,7 +342,7 @@
                         <table class="table table-hover table-show">
                             <thead>
                             <tr class="tr-show">
-                                <th colspan="100%"><h2>Programing language</h2></th>
+                                <th colspan="100%"><h2>Ngôn ngữ</h2></th>
                             </tr>
                             </thead>
                             <?php
@@ -352,7 +352,7 @@
                             ?>
                             @if(!$Skill->count())
                                 <tr>
-                                    <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                    <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                 </tr>
                             @else
                                 <tr class="tr-show">
@@ -383,7 +383,7 @@
 
                                 @if(!$Skill ->count())
                                 <tr>
-                                    <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                    <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                 </tr>
                             @else
                                     <tr class="tr-show">
@@ -411,6 +411,24 @@
                             @if ($CV->User->Self_intro)
                                 <tr>
                                     <td class="col-lg-12">{{$CV->User->Self_intro}} </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td class="col-lg-12">Chưa có thông tin mô tả nào</td>
+                                </tr>
+                            @endif
+                        </table>
+                    </li>
+                    <li>
+                        <table class="table table-sm table-hover table-show">
+                            <thead>
+                            <tr>
+                                <th colspan="100%"><h2 style="text-align: left;">Vị trí ứng tuyển</h2></th>
+                            </tr>
+                            </thead>
+                            @if ($CV->positionCv->NamePosition)
+                                <tr>
+                                    <td class="col-lg-12">{{$CV->positionCv->NamePosition}} </td>
                                 </tr>
                             @else
                                 <tr>

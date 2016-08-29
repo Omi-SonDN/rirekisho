@@ -18,6 +18,7 @@
                         <li class="{{(URL::current() == url('User')) ? 'active' : ''}}"><a
                                     href="{{url('User')}}">User</a></li>
                         @endcan
+                        @can('Admin')
                         <li>
                             <div class="btn dropdown-toggle" data-toggle="dropdown" id="box_tb">
                             Thông báo<span class="caret"></span>
@@ -49,6 +50,7 @@
                                     </ul>
                                 @endif
                         </li>
+                        @endcan
                         <!-- <li><a href="{{url('auth/logout')}}">Đăng xuất</a></li>
                         <li class="{{(\Request::path() == 'User/'.\Auth::user()->hash) ? 'active' : ''}}"><a
                                     href="{{url('User',[Auth::User()->hash])}}" style="border: 1px solid transparent;" >Chào {{Auth::User()->userName}}</a>
@@ -61,9 +63,9 @@
                                 <ul class="dropdown-menu" style="transform: translate(0,20px)">
                                     <li><a href="{{url('auth/logout')}}">Đăng xuất</a></li>
                                     <li class="{{(\Request::path() == 'User/'.\Auth::user()->hash) ? 'active' : ''}}"><a
-                                    href="{{url('User',[Auth::User()->hash])}}" style="border: 1px solid transparent;" >Edit Profile</a>
+                                    href="{{url('User',[Auth::User()->hash])}}" style="border: 1px solid transparent;" >Chỉnh sửa thông tin</a>
                                     </li>
-                                    <li><a href="{{url('profile')}}">Profile</a></li>
+                                    <li><a href="{{url('profile')}}">Thông tin cá nhân</a></li>
                                 </ul>
                         </li>
                         
