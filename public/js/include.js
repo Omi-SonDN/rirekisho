@@ -799,6 +799,7 @@ function txtBoxAddUser(obj, idBoxSearch, idBtnAddCeo, idField, idCeo_CV, idsearc
 // add user user vao cv
 function addUserCeo(idBoxSearch, idCeo_CV, idBtnAddCeo, idField, idsearchclear) {
     var $idBoxSearch = $('#'+idBoxSearch);
+    var is_idCV = myCompare(idBoxSearch, idField, '_');
     var valUserCeo = $idBoxSearch.attr('valid');
     var url_img = '';
     var showhtml = '<div class="textarea" contenteditable="false"';
@@ -821,6 +822,10 @@ function addUserCeo(idBoxSearch, idCeo_CV, idBtnAddCeo, idField, idsearchclear) 
     // tra ve mac dinh <=> chi cho phep 1 nguoi gioi thieu
     clearBoxSearch(idsearchclear, idBoxSearch, idField, idBtnAddCeo);
     $('#' + idBoxSearch).attr('disabled', true);
+
+    if(is_idCV) {
+        $('.btn-submit-' + is_idCV).attr('disabled', false);
+    }
 }
 
 // xoa gia tri trong the input tim kiem nguoi gioi thieu

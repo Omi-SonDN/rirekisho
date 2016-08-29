@@ -245,8 +245,17 @@
                     <li class="cancel">
                         <input type="submit" value="Thay đổi"
                                class="b-purple">
-                        <input type="button" value="Cancel"
-                               class="b-purple" onclick="window.location='{{\URL('/')}}'">
+                        <input type="button"
+                               @if(Auth::user()->getRole() == 'Applicant' || Auth::user()->getRole() == 'Visitor')
+                                    onclick="window.location='{{\URL('/profile')}}'"
+                               @else
+                                   @if(Auth::user()->id == $user->id)
+                                        onclick="window.location='{{\URL('/profile')}}'"
+                                    @else
+                                        onclick="window.location='{{\URL::route('User.index')}}'"
+                                    @endif
+                               @endif
+                               value="Cancel" class="b-purple">
                     </li>
 
             </ul>
