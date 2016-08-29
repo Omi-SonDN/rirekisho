@@ -1,5 +1,6 @@
 @extends('xCV.template')
-@section('title')Quản lý nhóm @endsection
+@section('title')Quản lý nhóm người dùng @endsection
+
 @section('content')
     <div class="row">
         <a class="btn btn-primary open-modal" style="font-weight: bold; color: white;" href="{{route('group.create')}}">Create</a>
@@ -28,7 +29,7 @@
                             {{ ($stt->parent)?($stt->theParent()->name):'' }}
                         </td>
                         <td>
-                            <a style="font-weight: bold; color: white;" href="{{route('group.show',[$stt])}}" class="btn ink-reaction btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin trạng thái CV"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a style="font-weight: bold; color: white;" href="{{route('group.show',[$stt])}}" class="btn ink-reaction btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin nhóm người dùng"><span class="glyphicon glyphicon-eye-open"></span></a>
                             <a style="font-weight: bold; color: white;" href="{{url('group',[$stt->id ,'edit'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                             <a style="font-weight: bold; color: white;" href="{{url('group',[$stt->id ,'delete'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-remove"></span></a>
                         </td>

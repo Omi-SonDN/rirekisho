@@ -72,7 +72,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     //every one see different page 
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
-    //Route::get('CV/show/{id}', 'CVController@show');
     Route::get('CV/upload/{id}', 'CVController@getShowUpload');
     Route::get('Record/index/{type}', 'RecordController@index');
     Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
@@ -93,10 +92,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/list', ['as' => 'list', 'uses' => 'FrontEnd\SlideController@index']);
         Route::get('/add', ['as' => 'addSlide', 'uses' => 'FrontEnd\SlideController@add']);
         Route::post('/add', ['as' => 'postSlide', 'uses' => 'FrontEnd\SlideController@create']);
-        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'FrontEnd\SlideController@edit']);
-        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'FrontEnd\SlideController@update']);
+        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'FrontEnd\SlideController@edit'])->where(['id'=>'[0-9]+']);
+        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'FrontEnd\SlideController@update'])->where(['id'=>'[0-9]+']);
+        Route::get('/{id}/view',['as'=>'view','uses'=>'FrontEnd\SlideController@view'])->where(['id'=>'[0-9]+']);
     });
     Route::group(['prefix' => 'fgeneral','as'=>'fgeneral::'], function () {
+        Route::get('/', ['as' => 'list', 'uses' => 'FrontEnd\FGeneralController@index']);
         Route::get('/list', ['as' => 'list', 'uses' => 'FrontEnd\FGeneralController@index']);
         Route::post('/update', ['as' => 'update', 'uses' => 'FrontEnd\FGeneralController@update']);
     });
@@ -130,13 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('status', 'StatusController');
 
     Route::group(['prefix' => 'group','as'=>'group::'], function () {
-    //     Route::get('/list/{id?}',['as' => 'list','uses' =>'GroupController@index']);
-    //     Route::get('/add', ['as' => 'create', 'uses' => 'GroupController@add']);
-    //     Route::post('/add', ['as' => 'store', 'uses' => 'GroupController@create']);
-    //     Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'GroupController@edit'])->where(['id'=>'[0-9]+']);
-    //     Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'GroupController@update'])->where(['id'=>'[0-9]+']);
     Route::get('/{id}/delete',['as'=>'delete','uses'=>'GroupController@delete'])->where(['id'=>'[0-9]+']);
-    //     Route::get('/{id}/view',['as'=>'view','uses'=>'GroupController@view'])->where(['id'=>'[0-9]+']);
     });
 
     Route::resource('group', 'GroupController');
@@ -170,7 +165,6 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'emails.sendEmail1',
         'uses' => 'EmailsController@sendEmail1',
     ]);
-
 });
 
 //FrontEnd

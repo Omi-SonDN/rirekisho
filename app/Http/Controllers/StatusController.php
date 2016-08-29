@@ -87,7 +87,7 @@ class StatusController extends Controller
         }
 
         return redirect()
-            ->route('status::getaddstatus')
+            ->route('status::list')
             ->with(
                 [
                     'flash_level' => 'success',
@@ -146,7 +146,9 @@ class StatusController extends Controller
         }
 
         $status = Status::findorfail($id);
-
+        if (empty($status)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
         $rules = array(
             'allow_sendmail' => 'required',
             'role_VisitorStatus' => 'required'

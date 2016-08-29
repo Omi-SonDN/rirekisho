@@ -191,7 +191,12 @@ class EmailsController extends Controller
             $rules['time'] = 'required';
         if( in_array('Address',$status->info))
             $rules['address'] = 'required';
-
+        if (isset($request->attach[0])) {
+            $files = $request->attach;
+            foreach ($files as $i => $file) {
+                $rules['attach.'.$i] = 'mimes:pdf';
+            }
+        }
         $this->validate($request, $rules);
 
         $data = array(
@@ -214,7 +219,6 @@ class EmailsController extends Controller
         if( in_array('Address',$status->info))
         $message = str_replace('[Address]', $request->address, $message);
         $data['email_content'] = $message;
-
 
         $attachs = array();
         if (isset($request->attach[0])) {

@@ -1,12 +1,12 @@
 @extends('xCV.template')
-@section('title')Thêm nhóm @endsection
+@section('title')Thêm nhóm người dùng @endsection
 
 @section('content')
     </ul>
     <form class="form-horizontal" action="{{route('group.store')}}" method="post" class="my-forms" id="profile-forms"
           enctype="multipart/form-data">
         <fieldset id="field-box">
-            <label slide-header="true"><h3>Thêm nhóm </h3></label>
+            <label slide-header="true"><h3>Thêm nhóm người dùng</h3></label>
             @include('includes.flash-alert')
             <hr>
             <div class="float_left" style="width: 100%;  ">

@@ -77,7 +77,7 @@ class GroupController extends Controller
         ->with(
             [
                 'flash_level' => 'success',
-                'message' => 'Đã thêm trạng thái thành công!'
+                'message' => 'Đã thêm nhóm người dùng thành công!'
             ]
         );
     }
@@ -141,7 +141,7 @@ class GroupController extends Controller
         ->with(
             [
                 'flash_level' => 'success',
-                'message' => 'Đã sửa nhóm thành công'
+                'message' => 'Đã sửa nhóm người dùng thành công'
             ]
         );
     }
@@ -171,7 +171,7 @@ class GroupController extends Controller
         ->with(
             [
                 'flash_level' => 'success',
-                'message' => 'Đã xóa nhóm thành công'
+                'message' => 'Đã xóa nhóm người dùng hành công'
             ]
         );
     }
