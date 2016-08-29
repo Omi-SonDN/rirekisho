@@ -8,7 +8,7 @@
 
     @foreach($CVs as $key => $CV)
         <tr class="data{{++$key}}">
-            <td class="image" style="width: 90px">
+            <td class="image" style="width: 90px;">
                 <div style=" position: relative;height: 100px;width: 100px; cursor: pointer" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
                     <?php $image = $CV->User->image;?>
                     @if($image!="")
@@ -44,16 +44,13 @@
                     @can('Admin')
                         <input type="hidden" value="{{ $CV->id}}" id="id"/>
                         <input type="hidden" value="{{ ($CV->User->email)}}" id="email"/>
-
+                        <div class="btn_send_mail">
                         @if(!empty($CV->status))
-                            @if($CV->status->allow_sendmail)
+                            @if($CV->status->allow_sendmail == 1)
                                 <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary btn-send-email col-lg-12" value="{{ $CV->Status }}">Send Email</button>
-                            @else
-                            <button id="btn_send_email{{ $CV->id}}"></button>
                             @endif
-                        @else
-                            <!-- <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary disabled btn-send-email col-lg-12" value="">Send Email </button> -->
                         @endif
+                        </div>
                     @endcan
                 </div>
             </td>

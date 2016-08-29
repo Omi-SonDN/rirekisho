@@ -1,3 +1,16 @@
+<?php
+    function options_list($group,$groups){
+        $all = App\Group::where('parent',$group->id)->get();
+        foreach ($all as $item ){
+            if(in_array($item,$groups)) continue;
+            else{
+                echo "<option name='{$item->name}'>{$item->name}</option>";
+                array_push($groups, $item);
+                options_list($item,$groups);
+            }
+        }
+    }
+?>
 <div class="danger"></div>
 <div class="panel">
     <div class="panel panel-heading">
@@ -21,7 +34,17 @@
                 </div>
                 <div class="form-group">
                     <label for="sender" class="label label-primary">Sender: <i style="color:red">*</i></label>
-                    <input name="sender" class="form-control" placeholder="Sender's name" value="{{Auth::user()->name}}"/>
+                    <select name="sender" class="form-control">
+                        <option value="{{Auth::user()->name}}">{{Auth::user()->name}}</option>
+                        <?php $groups = array(); ?>
+                        <?php $group = Auth::user()->group;?>
+                        @if($group)
+                            <?php $group = App\Group::find($group); ?>
+                            <option value="{{$group->name}}">{{$group->name}}</option>
+                            <?php array_push($groups, $group); ?>
+                            {!! options_list($group,$groups) !!}
+                        @endif
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -36,14 +59,14 @@
                 <div class="form-group">
 
                     <label for="date" class="label label-primary">Ngay: <i style="color:red">*</i> </label>
-                    <input type="date" class="form-control" name="date" id="date"
-                           data-date='{"startView": 2, "openOnMouseFocus": true}'/>
+                    <input type="text" class="form-control" name="date" id="date"
+                           data-date='{"startView": 2, "openOnMouseFocus": true}' placeholder="yyyy/mm/dd" />
                 </div>
                 @endif
                 @if(in_array('Time',$status->info))
                 <div class="form-group">
                     <label for="time" class="label label-primary">Vao luc: <i style="color:red">*</i> </label>
-                    <input type="time" class="form-control" name="time" id="time"/>
+                    <input type="text" class="form-control" name="time" id="time"/>
                 </div>
                 @endif
                 @if(in_array('Address',$status->info))

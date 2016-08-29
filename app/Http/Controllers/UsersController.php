@@ -236,6 +236,7 @@ class UsersController extends Controller
             $user->Gender = $request->input('rdGender');
             $user->Address = $request->input('txtAddres');
             $user->Self_intro = $request->input('txtInfo');
+            $user->group = $request->input('group');
 
             $user->update();
 

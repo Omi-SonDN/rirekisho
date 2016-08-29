@@ -21,8 +21,8 @@ class Groups extends Model
     {
         parent::boot();
 
-        static::deleted(function ($group) {
-            $group->users()->detach();
+        static::deleted(function ($groups) {
+            $groups->users()->detach();
         });
     }
 }

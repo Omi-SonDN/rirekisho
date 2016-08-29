@@ -120,6 +120,5 @@ class AuthController extends Controller
             return redirect()->action('FrontEnd\WellController@index');
         } else
             return redirect()->action('FrontEnd\WellController@index');
-//            return redirect()->action('Auth\AuthController@getLogin');
     }
 }

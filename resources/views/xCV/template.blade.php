@@ -47,6 +47,7 @@
 
     <!-- Css preson profile -->
     <link href="{{ URL::asset('/frontend/css/style-profile.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/wickedpicker.min.css') }}" rel="stylesheet">
 {{--    <link href="{{ URL::asset('/frontend/css/abc.css') }}" rel="stylesheet">--}}
 
     <script type="text/javascript"> (function () {
@@ -63,6 +64,8 @@
 
     </script>
     <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
+
+    <script src="{{ asset('js/wickedpicker.min.js') }}" type="text/javascript"></script>
     <!-- thong ke -->
     <script type="text/javascript" src="{{asset('/hightchart/js/highcharts.js')}}"></script>
     <script type="text/javascript" src="{{asset('/hightchart/js/exporting.js')}}"></script>

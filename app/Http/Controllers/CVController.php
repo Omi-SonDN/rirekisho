@@ -495,8 +495,15 @@ class CVController extends Controller
         }
 
         $CV = CV::findorfail($id);
-
-        $CV->old_status = $CV->Status;
+        if( ! $CV->old_status )
+            $CV->old_status = $CV->Status;
+        else{
+            $arrs = explode(',', $CV->old_status);
+            if( !in_array($CV->Status,$arrs) ){
+                array_push($arrs, $CV->Status);
+            }
+            $CV->old_status = implode(',', $arrs);
+        }
 
         if ($request->has('_potions')) {
             $CV->apply_to = $request->input('_potions');
@@ -514,10 +521,11 @@ class CVController extends Controller
         $next_status = array();
         foreach(\App\Status::all() as $status ){
             if( in_array($request->status,$status->previous_status) ){
-                $next_status[] = $status;
+                $next_status[] = $status->id;
             }
         }
         $CV->next_status = $next_status;
+        $CV->old_status  = array_map('intval', explode(',', $CV->old_status));
         
 
         return \Illuminate\Support\Facades\Response::json($CV);

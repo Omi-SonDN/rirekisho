@@ -2,7 +2,8 @@ $(document).ready(function () {
     $('#startDate').datepicker();
     $('#endDate').datepicker();
 
-    //$('#faicon').iconpicker();
+    if($('#faicon').length>0)
+        $('#faicon').iconpicker();
     /*************************fix navbar*************************************/
 
     tinymce.init({

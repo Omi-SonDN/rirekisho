@@ -266,7 +266,7 @@ table.dataTable #list-table-body tr{
 }
 
 table.dataTable #list-table-body tr td {
-    padding: 10px 10px 0px 0;
+    padding: 10px;
     border-bottom: solid 1px #e1e1e1;
     border: solid 1px #e1e1e1;
     vertical-align: middle;
