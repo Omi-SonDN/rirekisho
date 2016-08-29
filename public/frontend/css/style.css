@@ -79,7 +79,7 @@ ul{
 }
 .navbar-nav > li > .dropdown-menu {
   background-color: #48575a;
-  margin-top: 18px;
+  /*margin-top: 18px;*/
 }
 .navbar-nav > li > .dropdown-menu:before {
   border-bottom: 15px solid #48575a;
@@ -464,6 +464,7 @@ color: #f36f21;}
   position: relative;
   display: block;
   width: 100px;
+  height: 80px;
 }
 .navbar-default .navbar-nav > li.fixavatar > a{
   height: 44px;
@@ -479,6 +480,9 @@ color: #f36f21;}
 .navbar-default .navbar-nav > li.fixavatar > a span.caret{
   float: left;
   margin-top: 22px
+}
+.navbar-default .navbar-nav > li.fixavatar> a:hover ul.dropdown-menu{
+  transition-delay: 1s;
 }
 
 .position{

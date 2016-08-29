@@ -753,6 +753,7 @@ function callLogin(){
     window.location = newURL;
 }
 
+
 // mask  phone-number vn (+84) xx-xxx-xxxx OR (+84) xxx-xxx-xxxx
 var options;
 options = {
@@ -877,3 +878,61 @@ function myCompare(str1, str2, s = ' '){
     }
     return result;
 }
+
+$('.menu_download .list_do').on('click', downloadCV);
+//$('.reaction-box li').on('click', downloadCV);
+
+function downloadCV(){
+    var export_type = $(this).attr('export-type');
+    var status = $('#status_statistic li.active').attr('id');
+
+    var startDate = $('#startDate').val();
+    var endDate = $('#endDate').val();
+
+    if(status == 'position'){
+        var day = new Date().toJSON().slice(0,10);
+        if(startDate > endDate || endDate > day){
+            $('#error_date').show();
+            $('#error_date').text('Nhập sai ngày tháng!');
+        } else {
+            $('#error_date').hide();
+            $.ajax({
+                type: "GET",
+                url: "/downloadCV/" + export_type,
+                data : {
+                    'status' : status,
+                    'startDate' : startDate,
+                    'endDate' : endDate,
+                    'key_search' : $('#positionsSearch').val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data.path);
+                    var path = data.path;
+                    //download file
+                    location.href = path;
+                }
+            });
+        }
+    }else{
+        $('#error_date').hide();
+        $.ajax({
+        type: "GET",
+            url: "/downloadCV/" + export_type,
+            data : {
+                'status' : status,
+                'startDate' : startDate,
+                'endDate' : endDate,
+                'key_search' : $('#positionsSearch').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data.path);
+                var path = data.path;
+                //download file
+                location.href = path;
+            }
+        });
+    }
+}
+

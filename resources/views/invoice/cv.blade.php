@@ -64,46 +64,58 @@
 </head>
 <body>
 <?php $key = $CV;?>
-<h1 style="">
-    Resume
+<h1 style="text-align: center">
+    SƠ YẾU LÝ LICH
 </h1>
 
 <ul class="list">
     <li>
         <table class="table-bordered table table-striped" style="width: 100%;">
             <thead>
-            <tr class="">
-                <th colspan="2" style="text-align: right;">{{$CV->updated_at}}</th>
-                <th rowspan="4"></th>
-            </tr>
-
 
             </thead>
             <tbody>
+            
             <tr class="">
-                <td style="width:10%;"> Tên đầy đủ</td>
+                <td style="width:15%; font-weight: 700;">Họ và Tên</td>
                 <td>{{$CV->User->name}} </td>
+                <td rowspan="3" style="" >
+                    <?php $image = $CV->User->image;?>
+                    @if(isset($image)&&($image!=""))
+                            <img style="height: 100px; width: 100px; padding-left: 15px;"
+                                 src=<?php echo "/img/thumbnail/thumb_" . $image;?>>
+                    @else
+                        <div class=""
+                             style="background-color:{{$CV->User->getThemeColor()}};  width: 100px; height: 100px; text-align: center ">
+                            <span class=""
+                                  style="color: {{$CV->User->getTextColor()}};font-size:60pt;">
+                                {{substr(trim($CV->User->Name), 0, 1)}}
+                            </span>
+                        </div>
+                    @endif
+                </td>
+
+            </tr>
+
+            <tr class="">
+                <td style="width:15%; font-weight: 700;">Ngày sinh</td>
+                <td>{{$CV->User->Birthday}} （満 {{$CV->User->Age}}歳） {{$CV->User->JGender}}</td>
 
             </tr>
             <tr class="">
-                <td style="width:10%;"> Tên thường gọi</td>
-                <td>{{$CV->User->Furigana_name}} </td>
-
-            </tr>
-
-            <tr class="">
-                <td style="width:10%;">Ngày sinh</td>
-                <td>{{$CV->User->Birthday}} {{$CV->User->Age}} {{$CV->User->JGender}}</td>
-
+                <td style="width:15%; font-weight: 700;">Email</td>
+                <td>{{$CV->User->email}} </td>
+                <!-- <td style="width:23%;"></td> -->
             </tr>
             <tr class="">
-                <td style="width:10%;"> Địa chỉ</td>
+                <td style="width:15%; font-weight: 700;">Địa chỉ</td>
+
                 <td>{{$CV->User->Address}} </td>
-                <td style="width:23%;">Phone: {{$CV->User->Phone}}</td>
+                <td style="width:23%;"></td>
             </tr>
             <tr class="">
-                <td style="width:10%;">Giới thiệu bản thân</td>
-                <td>{{$CV->User->Contact_information}} </td>
+                <td style="width:15%; font-weight: 700;">Điện thoại</td>
+                <td>{{$CV->User->Phone}} </td>
                 <td style="width:23%;"></td>
             </tr>
             </tbody>
@@ -114,7 +126,7 @@
         <table class="table-bordered table table-striped" style="width: 100%;">
             <thead>
             <tr class="">
-                <th colspan="4">School history</th>
+                <th colspan="4">Quá trình học tập</th>
             </tr>
             <tr class="">
                 <th style="width:7%;"> #</th>
@@ -173,7 +185,7 @@
         <table class=" table-bordered table table-striped" style="width: 100%;">
             <thead>
             <tr class="">
-                <th colspan="4">Work history</th>
+                <th colspan="4">Kinh nghiệm làm việc</th>
             </tr>
             <tr class="">
                 <th style="width:7%;"> #</th>
@@ -226,7 +238,7 @@
         <table class="table-bordered table table-striped" style="width: 100%;">
             <thead>
             <tr class="">
-                <th colspan="2" style="text-align: right;">Self -intro</th>
+                <th colspan="2" style="text-align: left;">Vị trí ứng tuyển</th>
 
             </tr>
 
@@ -234,11 +246,30 @@
             </thead>
             <tbody>
             <tr class="">
-                <td style="width:10%;"> Self -intro</td>
-                <td>{{$CV->User->Self_intro}} 　{{$CV->User->Self_intro}}</td>
+                <td style="width:20%;">Vị trí ứng tuyển</td>
+                <td>{{$CV->positionCv->NamePosition}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </li>
+    <li>
+        <table class="table-bordered table table-striped" style="width: 100%;">
+            <thead>
+            <tr class="">
+                <th colspan="2" style="text-align: left;">Giới thiệu bản thân</th>
+
+            </tr>
+
+
+            </thead>
+            <tbody>
+            <tr class="">
+                <td style="width:20%;">Giới thiệu bản thân</td>
+                <td>{{$CV->User->Self_intro}}</td>
             </tr>
             <tr class="">
-                <td style="width:10%;"> 希望</td>
+                <td style="width:20%;">Nguyện vọng</td>
                 <td>Etomnis eaillum illid　{{$CV->Request}}  </td>
             </tr>
 

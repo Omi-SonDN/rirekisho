@@ -165,6 +165,24 @@
                         <table class="table table-sm table-hover table-show">
                             <thead>
                             <tr>
+                                <th colspan="100%"><h2 style="text-align: left;">Vị trí ứng tuyển</h2></th>
+                            </tr>
+                            </thead>
+                            @if ($CV->positionCv->NamePosition)
+                                <tr>
+                                    <td class="col-lg-12">{{$CV->positionCv->NamePosition}} </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td class="col-lg-12">Chưa có thông tin mô tả nào</td>
+                                </tr>
+                            @endif
+                        </table>
+                    </li>
+                    <li>
+                        <table class="table table-sm table-hover table-show">
+                            <thead>
+                            <tr>
                                 <th colspan="100%"><h2 style="text-align: left;">Nguyện vọng</h2></th>
                             </tr>
                             </thead>

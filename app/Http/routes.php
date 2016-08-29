@@ -37,11 +37,9 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
     Route::get('CV/statistic', 'CVController@statistic');
     Route::post('CV/statisticSearch', 'CVController@statisticSearch');
     Route::post('CV/statisticStatus', 'CVController@statisticStatus');
-
-    // dang dung o dau
-    Route::get('CV/downloadCV/{type}', 'CVController@downloadCV');
-
     Route::get('user/search/nguoi-gioi-thieu', ['as'=>'user.search.email', 'uses' =>'UsersController@getSearchEmail']);
+
+    Route::get('downloadCV/{type}', 'CVController@downloadCV');
 
 });
 

@@ -44,4 +44,8 @@ class Status extends Model
         return $this->infor?explode(',',$this->infor):array();
     }
 
+    public function getStatusNameAttribute(){
+        return $this->status;
+    }
+
 }
