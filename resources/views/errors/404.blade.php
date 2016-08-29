@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Xin lỗi, chúng tôi không tìm thấy trang</title>
+@section('title') Xin lỗi, chúng tôi không tìm thấy trang @endsection
 @section('content')
 
     <style>

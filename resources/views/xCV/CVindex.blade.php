@@ -1,5 +1,6 @@
 @extends('xCV.template')
-<title>Danh sách</title>
+@section('title')Danh sách @endsection
+
 @section('content')
 
     <div id="list_table" data-table="table-resume">

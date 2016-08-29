@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Quản lý nhóm</title>
+@section('title')Quản lý nhóm @endsection
 @section('content')
     <div class="row">
         <a class="btn btn-primary open-modal" style="font-weight: bold; color: white;" href="{{route('group.create')}}">Create</a>

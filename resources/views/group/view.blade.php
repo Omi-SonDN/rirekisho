@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Xem thông tin nhóm</title>
+@section('title')Xem thông tin nhóm @endsection
 
 @section('content')
     <form method="post">

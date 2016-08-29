@@ -1,5 +1,6 @@
 @extends('xCV.template')
-<title>Xem hồ sơ {{$CV->name_cv}}</title>
+@section('title')Xem hồ sơ {{$CV->name_cv}} @endsection
+
 @section('content')
 
     <div class="p-box" style="height: 700px;">

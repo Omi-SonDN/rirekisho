@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Thêm thông tin vị trí tuyển dụng</title>
+@section('title')Thêm thông tin vị trí tuyển dụng @endsection
 
 @section('content')
     <form action="{{route('position::postaddposition')}}" method="post" class="my-forms" id="profile-forms"

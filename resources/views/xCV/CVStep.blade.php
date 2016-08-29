@@ -1,5 +1,6 @@
 @extends('xCV.template')
-<title>@if(isset($isCreate)) {{isset($isUpload) ? 'Tạo CV có file đính kèm' : 'Tạo CV từng bước'}} @else {{isset($isUploadedit) ? 'Sửa CV có file đính kèm' : 'Sửa CV từng bước'}} @endif</title>
+@section('title') @if(isset($isCreate)) {{isset($isUpload) ? 'Tạo CV có file đính kèm' : 'Tạo CV từng bước'}} @else {{isset($isUploadedit) ? 'Sửa CV có file đính kèm' : 'Sửa CV từng bước'}} @endif @endsection
+
 @section('content')
     <div class="box_white block_ntv_dangnhap">
         @include('includes.flash-alert')

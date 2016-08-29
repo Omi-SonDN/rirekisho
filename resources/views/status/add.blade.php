@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Thêm trạng thái</title>
+@section('title')Thêm trạng thái @endsection
 
 @section('content')
     </ul>

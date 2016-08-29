@@ -1,6 +1,5 @@
 @extends('xCV.template')
-<title>Sửa trạng thái</title>
-
+@section('title')Sửa trạng thái @endsection
 @section('content')
     <form class="form-horizontal" action="{{route('status::update', $Status->id)}}" method="post" class="my-forms" id="profile-forms"
           enctype="multipart/form-data">

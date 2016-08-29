@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Chỉnh sửa thông tin người dùng</title>
+@section('title')Chỉnh sửa thông tin người dùng @endsection
 
 @section('content')
     <form action="{{route('User.update',[$user->hash])}}" method="post" class="my-forms" enctype="multipart/form-data">

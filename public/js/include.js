@@ -791,7 +791,7 @@ function txtBoxAddUser(obj, idBoxSearch, idBtnAddCeo, idField, idCeo_CV, idsearc
     if (id_User) {
         var name_User = obj.options[obj.selectedIndex].text;
         var img_url = obj.options[obj.selectedIndex].style.cssText;
-        var _style = img_url + ' width: 177px; background-repeat: no-repeat; background-size: 25px;';
+        var _style = img_url + ' width: 180px; background-repeat: no-repeat; background-size: 25px;';
         var nameFunc = 'addUserCeo(\''+idBoxSearch+'\', \''+ idCeo_CV +'\', \''+ idBtnAddCeo +'\', \''+ idField +'\', \'' + idsearchclear +'\')';
 
         $('#' + idBoxSearch).attr({'style': _style, 'valId': id_User});
