@@ -27,21 +27,18 @@
                         @if (Auth::check())
                             @can('Admin')
                             <li class="{{(URL::current() == url('User')) ? 'active' : ''}}"><a
-                                        href="{{url('User')}}">User</a></li>
+                                        href="{{url('User')}}">Quản lý tài khoản</a></li>
+                            <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
+
                             @endcan
                             @can('Visitor')
-                            <li class="{{(URL::current() == url('CV')) ? 'active' : ''}}"><a href="{{url('CV')}}">Quản
+                            <li class="{{(URL::current() == url('CV')) ? 'active' : ''}}"><a href="{{url('CV')}}" style="color: #f36f21;">Quản
                                     lý CV</a></li>
                             @endcan
                             @can('Applicant')
-                            <li class="{{(URL::current() == url('CV/info')) ? 'active' : ''}}"><a href="CV/info">Danh
-                                    sách CV</a></li>
-                            @endcan
+                            <li class="{{(URL::current() == url('CV/info')) ? 'active' : ''}}"><a href="CV/info">CV của tôi</a></li>
 
-                            {{--<li><a href="#">Events</a></li>--}}
-                            {{--<li><a href="#">Gallery</a></li>--}}
-                            {{--<li><a href="#">Blog</a></li>--}}
-                            {{--<li><a href="about">Contact</a></li>--}}
+                            @endcan
                             <li class="dropdown fixavatar">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">
@@ -51,14 +48,13 @@
                                         @else
                                         src="{!! asset('/frontend/img/no-avatar.jpg') !!}"
                                         @endif
-                                        title="{{Auth::user()->userName}}" width="44" height="44" border="0"><span
-                                            class="caret"></span></a>
+                                        title="{{Auth::user()->userName}}" width="44" height="44" border="0">
+                                        <span class="caret" style="color: #f36f21;"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="profile">Cài đặt tài khoản</a></li>
+                                    <li><a href="profile">Thông tin cá nhân</a></li>
                                     @can('SuperAdmin')
                                     <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                                     <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>
-                                    <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
                                     @endcan
                                     @can('Applicant')
 
@@ -102,8 +98,8 @@
                                 </ul>
                             </li>
                         @else
-                            <li><a href="{{\URL('auth/login')}}">Đăng nhập</a></li>
-                            <li><a href="{{\URL('auth/register')}}">Đăng ký</a></li>
+                            <li><a href="{{\URL('auth/login')}}" style="color: #f36f21;">Đăng nhập</a></li>
+                            <li><a href="{{\URL('auth/register')}}" style="color: #f36f21;">Đăng ký</a></li>
                         @endif
                     </ul>
                 </div>

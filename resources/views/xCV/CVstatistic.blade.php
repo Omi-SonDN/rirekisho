@@ -30,6 +30,23 @@
                         </li>
                     </ul>
                 </div>
+
+                <div>
+                    <div id="">
+                        <!-- <form method="get" action="{{ url('CV/downloadCV/pdf') }}">    -->  
+                            <ul class="menu_download" >
+                                <li class="list_do" export-type='pdf'>  
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                    DownLoad PDF
+                                </li>
+                                <li class="list_do" export-type='xlsx'>
+                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i> 
+                                    Download Excel
+                                </li>
+                            </ul>
+                       <!--  </form> -->
+                    </div>
+                </div>
             
                 <!-- END MENU -->
             </div>

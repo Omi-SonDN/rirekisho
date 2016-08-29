@@ -9,13 +9,13 @@
                 <div class="profile-picture ">
                     <?php ?>
                     @if(isset($image)&&($image!=""))
-                            <img style="height: 200px; width: 200px;"
+                            <img style="height: 100px; width: 100px;"
                                  src=<?php echo "/img/thumbnail/thumb_" . $image;?>>
                     @else
                         <div class="dropzone-text-place"
                              style="background-color:{{$CV->User->getThemeColor()}} ">
                             <span class="dropzone-text letter-avatar"
-                                  style="color: {{$CV->User->getTextColor()}};font-size:120px;">
+                                  style="color: {{$CV->User->getTextColor()}};font-size:55px;">
                                 {{substr(trim($CV->User->Name), 0, 1)}}
                             </span>
                         </div>
@@ -98,55 +98,9 @@
                 <div class="profile-link">
                     <a href=""></a>
                 </div>
-                @can('Visitor')
-                <div class="clear-fix"></div>
-                <table class="imagetable">
-                    <th><span>@can('Admin')Duyệt CV -@endcan Ghi chú</span> <span
-                                class="fa fa-remove pull-right rm-text" onclick="clearContents('txt_{{$CV->hash}}')"
-                                title="Xóa hết ghi chú"></span></th>
-                    <tr>
-                        @can('Admin')
-                        <td>
-                            <div class="fix-info-cv pull-left">{{$CV->Checkcv}} &nbsp; &nbsp;</div>
-                            <div class="onoffswitch pull-right">
-                                <input type="checkbox" name="check_{{($CV->id)}}"
-                                       onclick="isChanges(this.id)" class="onoffswitch-checkbox"
-                                       id="myCheck_{{$CV->hash}}" {{($CV->Active == 1) ? 'checked' : ''}} />
-                                <label class="onoffswitch-label" for="myCheck_{{$CV->hash}}">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                </label>
-                            </div>
-                        </td>
-                        @endcan
-                    </tr>
-                    <tr>
-                        <td style="width: 100%; padding: 0">
-                            <textarea id="txt_{{$CV->hash}}" rows="8" name="txtNotes"
-                                      style="resize: vertical; width: 100%" onchange="isChanges(this.id)">{!! old('txtNotes', isset($CV) ? $CV->notes : '') !!}</textarea>
-                            <button type="button"
-                                    onclick="upActNotee('{{$CV->hash }}', 'myCheck_{{$CV->hash}}', 'txt_{{$CV->hash}}')"
-                                    class="btn btn-default btn-sm btn-ac-note btn-{{$CV->hash}}">submit
-                            </button>
-                            @can('Admin')
-                            <button type="button" onclick="getDeleteCV('{{$CV->hash }}', '{{$CV->type_cv}}')"
-                                    title="Xóa CV {{$CV->name_cv}}"
-                                    class="btn btn-default btn-sm btn-ac-note btn-{{$CV->hash}}">Delete
-                            </button>
-                            @endcan
-                            <button type="button" title="Trang chủ" onclick="returnHome()"
-                                    class="btn btn-default btn-sm btn-ac-note">Cancel
-                            </button>
-                            <div class="wait-modal-load"></div>
-                        </td>
-                    </tr>
-                </table>
-                @endcan
-                @if (Auth::user()->getRole() == 'Applicant')
-                    <button type="button" title="Trang chủ" onclick="returnHome()"
-                            class="btn btn-default btn-sm btn-ac-note pull-right">Cancel
-                    </button>
-                    @endcan
+
+                @include('includes.CVActManShow')
+
             </div>
 
         </div>
@@ -218,7 +172,7 @@
                                     </thead>
                             @if(!$School->count())
                                         <tr>
-                                            <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                            <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                         </tr>
                             @else
                                         <tr class="tr-show">
@@ -251,7 +205,7 @@
                                 </thead>
                             @if(!$Cert ->count())
                                     <tr>
-                                        <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                        <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                     </tr>
                             @else
                                     <tr class="tr-show">
@@ -285,7 +239,7 @@
                             </thead>
                             @if(!$Work ->count())
                                 <tr>
-                                    <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                    <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                 </tr>
                             @else
                                 <tr class="tr-show">
@@ -315,12 +269,12 @@
                             <table class="table table-hover table-show">
                                 <thead>
                                 <tr class="tr-show">
-                                    <th colspan="100%"><h2>Language</h2></th>
+                                    <th colspan="100%"><h2>Ngoại ngữ</h2></th>
                                 </tr>
                                 </thead>
                                 @if(!$Skill ->count())
                                 <tr>
-                                    <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                    <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                 </tr>
                             @else
                                     <tr class="tr-show">
@@ -342,7 +296,7 @@
                         <table class="table table-hover table-show">
                             <thead>
                             <tr class="tr-show">
-                                <th colspan="100%"><h2>Programing language</h2></th>
+                                <th colspan="100%"><h2>Ngôn ngữ</h2></th>
                             </tr>
                             </thead>
                             <?php
@@ -351,8 +305,8 @@
                             });
                             ?>
                             @if(!$Skill->count())
-                                <tr>
-                                    <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                <tr>=
+                                    <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                 </tr>
                             @else
                                 <tr class="tr-show">
@@ -383,7 +337,7 @@
 
                                 @if(!$Skill ->count())
                                 <tr>
-                                    <td colspan="100%" style="color: gray;">There are no records to display</td>
+                                    <td colspan="100%" style="color: gray;">Không có thông tin</td>
                                 </tr>
                             @else
                                     <tr class="tr-show">
@@ -411,6 +365,24 @@
                             @if ($CV->User->Self_intro)
                                 <tr>
                                     <td class="col-lg-12">{{$CV->User->Self_intro}} </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td class="col-lg-12">Chưa có thông tin mô tả nào</td>
+                                </tr>
+                            @endif
+                        </table>
+                    </li>
+                    <li>
+                        <table class="table table-sm table-hover table-show">
+                            <thead>
+                            <tr>
+                                <th colspan="100%"><h2 style="text-align: left;">Vị trí ứng tuyển</h2></th>
+                            </tr>
+                            </thead>
+                            @if ($CV->positionCv->NamePosition)
+                                <tr>
+                                    <td class="col-lg-12">{{$CV->positionCv->NamePosition}} </td>
                                 </tr>
                             @else
                                 <tr>

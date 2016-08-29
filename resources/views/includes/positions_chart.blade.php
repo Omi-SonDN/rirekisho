@@ -24,8 +24,9 @@
             	$('.button_print').show();
             	if(status != 'position'){
             		$('#hightchart_1').show();
-            		// var chart2 = new Highcharts.Chart({ 
-            		 $('#chart').highcharts({ 
+
+            		//var chart2 = new Highcharts.Chart({ 
+            		$('#chart').highcharts({
 			            chart: { 
 			                // renderTo: 'chart',
 			                type: 'column',

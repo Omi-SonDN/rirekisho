@@ -6,7 +6,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="PUT">
         <fieldset id="field-box">
-            <label slide-header="true"><h3>Edit About </h3></label>
+            <label slide-header="true"><h3>Sửa thông tin tài khoản</h3></label>
             @include('includes.flash-alert')
             <hr>
 
@@ -23,7 +23,7 @@
                                 <label class="icon-right" for="txtName">
                                     <i class="fa fa-user"></i>
                                 </label>
-                                <input type="text" class="input-right" name="txtName"
+                                <input type="text" class="input-right" name="txtName" maxlength="15"
                                        value="{{old('txtName', isset($user->userName) ? $user->userName : '')}}">
                                 @if ($errors->has('txtName'))
                                     <span class="help-block">
@@ -54,14 +54,14 @@
                     <div class="col-lg-6">
                         <li class="bottom_20px">
                             <div class="float_right ">
-                                <label class="title">Old Password</label>
+                                <label class="title"> Mật khẩu cũ </label>
 
                                 <div class="input">
                                     <label class="icon-right" for="oldPass">
                                         <i class="fa fa-key"></i>
                                     </label>
                                     <input type="password" class="input-right" name="oldPass"
-                                           placeholder="Old Password"
+                                           placeholder="Mật khẩu cũ"
                                            value="">
                                     @if ($errors->has('oldPass'))
                                         <span class="help-block">
@@ -73,14 +73,14 @@
                         </li>
                         <li class="bottom_20px">
                             <div class="float_right">
-                                <label class="title"> New Password </label>
+                                <label class="title"> Mật khẩu mới </label>
 
                                 <div class="input">
                                     <label class="icon-right" for="txtNewPass">
                                         <i class="fa fa-key"></i>
                                     </label>
                                     <input type="password" class="input-right" name="txtNewPass"
-                                           placeholder="New Password"
+                                           placeholder="Mật khẩu mới"
                                            value="">
                                     @if ($errors->has('txtNewPass'))
                                         <span class="help-block">
@@ -199,12 +199,12 @@
             </div>
             <div class="col-lg-4 mt20">
                 <label class="title" for="txtSdt">Số điện thoại di động
-                    <small><i>0*|(+84)*-xxx-xxxx</i></small>
+                    <small><i>(+84)xx-xxx-xxxx</i></small>
                     <i style="color: red;">*</i></label>
 
                 <div class="input">
                     <label class="icon-right" for="txtSdt"><i class="fa fa-phone"></i></label>
-                    <input required="required" type="text" placeholder="(+84)98-123-1234" class="input-right"
+                    <input id="phone-number" required="required" type="text" placeholder="(+84)98-123-1234" class="input-right"
                            name="txtSdt" value="{!! old('txtSdt', isset($user->Phone) ? $user->Phone : '') !!}">
                     @if ($errors->has('txtSdt'))
                         <span class="help-block">
@@ -261,8 +261,17 @@
                     <li class="cancel">
                         <input type="submit" value="Thay đổi"
                                class="b-purple">
-                        <input type="button" value="Cancel"
-                               class="b-purple" onclick="window.location='{{\URL('/')}}'">
+                        <input type="button"
+                               @if(Auth::user()->getRole() == 'Applicant' || Auth::user()->getRole() == 'Visitor')
+                                    onclick="window.location='{{\URL('/profile')}}'"
+                               @else
+                                   @if(Auth::user()->id == $user->id)
+                                        onclick="window.location='{{\URL('/profile')}}'"
+                                    @else
+                                        onclick="window.location='{{\URL::route('User.index')}}'"
+                                    @endif
+                               @endif
+                               value="Cancel" class="b-purple">
                     </li>
 
             </ul>

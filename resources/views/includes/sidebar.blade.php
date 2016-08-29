@@ -2,10 +2,11 @@
     <ul class="">
         @can('Applicant')
         <li class="nav-link"></li>
-        <li class="nav-link"><a href="#" data-toggle="collapse" data-target="#submenu1">Danh sách hồ sơ <i
-                        class="fa fa-angle-down"></i></a>
+        <li class="nav-link">
+            <a class="have-submenu" href="{{action('CVController@getInfo')}}">CV của tôi</a>
+            <i class="fa fa-angle-down pull-right add-submenu" data-toggle="collapse" data-target="#submenu1"></i>
             <ul class="nav collapse" id="submenu1">
-                <li class=""><a href="{{action('CVController@getInfo')}}">Quản lý hồ sơ</a></li>
+                {{--<li class=""><a href="{{action('CVController@getInfo')}}">Danh sách CV của tôi</a></li>--}}
                 @if (count($CV))
                     @if(count($CV) > 1)
                         @foreach($CV as $items)
@@ -60,15 +61,16 @@
                 </label>
             </li>
         @endforeach
-        <li class="active nav-link"><a href="{{url('CV')}}">Danh sách CV</a>
-        </li>
         @endcan
-        <li class="nav-link">
-            <a href="{{url('User',[Auth::User()->hash])}}">Quản lý tài khoản</a>
-        </li>
+        @can('Admin')
+            <li class="{{(URL::current() == url('User')) ? 'active' : ''}} nav-link"><a
+                    href="{{url('User')}}">Quản lý tài khoản</a></li>
+            <li class="nav-link"><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
+        @endcan
         @can('SuperAdmin')
-        <li class="nav-link"><a href="#" data-toggle="collapse" data-target="#submenu-sa">Cài đặt <i
-                        class="fa fa-angle-down"></i></a>
+        <li class="nav-link"><a href="#" >Cài đặt </a>
+            {{--<i class="fa fa-angle-down"></i>--}}
+            <i class="fa fa-angle-down pull-right add-submenu" data-toggle="collapse" data-target="#submenu-sa"></i>
             <ul class="nav collapse" id="submenu-sa">
                 
                 <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
@@ -78,8 +80,9 @@
             </ul>
         </li>
         <li class="nav-link">
-            <a data-toggle="collapse" data-target="#submenu-fr">Frontend <i
-                class="fa fa-angle-down"></i></a>
+            <a href="#">Frontend </a>
+            <i class="fa fa-angle-down pull-right add-submenu" data-toggle="collapse" data-target="#submenu-fr"></i>
+            {{--<i class="fa fa-angle-down"></i>--}}
             <ul class="nav collapse" id="submenu-fr">
                 <li><a href="{{url('fgeneral')}}">Thông tin chung</a></li>
                 <li><a href="{{url('slide/list')}}">Slider</a></li>

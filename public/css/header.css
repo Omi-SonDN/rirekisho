@@ -94,7 +94,7 @@
     color: #666699;
     margin-bottom: 1px;
 }
-cho
+
 .nav li {
     /*border-left: 1px solid #6a5b91;*/
     margin-bottom: 1px;
@@ -105,8 +105,8 @@ cho
     color: white;
 }
 
-.nav li a:hover !important;{
-    background-color: #333;
+.nav li a:hover{
+    background-color: #333 !important;
 }
 .nav a:link, .nav a:visited {
     text-decoration: none;
@@ -193,3 +193,27 @@ cho
     background: #fafafa;
 }
 
+#new_CV {
+    overflow: scroll;
+    transform: translate(-165px,0);
+    width: 300px;
+    height: 350px;
+    opacity: 1;
+}
+.number_tb{
+    height: 20px;
+    background-color: red;
+    transform: translate(80px, -30px);
+    width: 18px;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.dropdown-menu li{
+    border-bottom: 1px solid #ccc;
+}
+
+.notes-cv {
+    color: chocolate;
+}

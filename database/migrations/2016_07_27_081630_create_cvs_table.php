@@ -17,18 +17,8 @@ class CreateCvsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->char('name_cv');
-            //$table->char('First_name');
-            //$table->char('Last_name');
-            //$table->char('Furigana_name');
             $table->char('email');
             $table->text('Photo');
-            //$table->date('Birth_date');
-            //$table->tinyInteger('Gender');
-            //$table->text('Address');
-            //$table->text('Contact_information');
-            //$table->char('Phone');
-            //$table->text('Self_intro');
-            //$table->tinyInteger('Marriage');
             $table->text('Request');
             $table->string('positions');
             $table->text('Memo');
@@ -44,6 +34,7 @@ class CreateCvsTable extends Migration
             $table->string('github');
             $table->string('linkedin');
             $table->integer('active_by')->unsigned();
+            $table->integer('user_gioi_thieu')->default(0);
             $table->timestamps();
         });
     }

@@ -26,15 +26,15 @@
                     @endforeach
 
                 </select>
-                <input id="submitSearch" type="submit" name="submit" value="Search">
+                <input id="submitSearch" type="submit" name="submit" value="Tìm kiếm">
                 <!--</form>-->
             </div>
             
             <!--advance search-->
         <div class="box_search">
             <div style="float: left; width: 200px">
-                <div style="float: left; width: 50px">Show</div>
-                <div style="float: left; width: 70px">
+                <div style="float: left; width: 60px">Hiển thị</div>
+                <div style="float: left; width: 60px">
                     <select class="set_{{\Auth::user()->hash}}" id="show_entries" name="show_entries"
                             style="height: 25px; width : 50px; float: left" onchange="onclickSetData(this);">
                         @foreach(config('app.list_per_page') as $its)
@@ -43,7 +43,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div style="float: left; width: 70px">entries</div>
+                <div style="float: left; width: 70px">mục</div>
             </div>
             <div class="clearfix"></div>
             <div class="box_white block_ntv_dangnhap" style="background-image: linear-gradient(to bottom, #fff 0px, #e0e0e0 100%); background-repeat: repeat-x; ">
@@ -182,7 +182,7 @@
                     </th>
                     @endcan
                     @can('Admin')
-                    <th style="width: 30px;color: #666699;font-size: 13pt;">Hành động</th>
+                    <th class="ab" style="width: 30px;color: #666699;font-size: 13pt;">Hành động</th>
                     @endcan
 
                 </tr>

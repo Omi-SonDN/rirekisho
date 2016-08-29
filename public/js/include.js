@@ -1,11 +1,9 @@
 $(document).ready(function () {
     $('#startDate').datepicker();
     $('#endDate').datepicker();
-    $("cv-forms").each(function () {
-        $(this).data("validator").settings.success = false;
-    })
-    if ($('#faicon').length >0 )
-    $('#faicon').iconpicker();
+
+    if($('#faicon').length>0)
+        $('#faicon').iconpicker();
     /*************************fix navbar*************************************/
 
     tinymce.init({
@@ -20,13 +18,8 @@ $(document).ready(function () {
     $('.date-picker').datepicker();
     $('#stardate').datepicker();
     $('#enddate').datepicker();
-    $("cv-forms").each(function () {
-        $(this).data("validator").settings.success = false;
-    });
 
-    $("cv-forms").each(function () {
-        $(this).data("validator").settings.success = false;
-    });
+
     /*************************fix navbar*************************************/
 
     var nav = $('.navbar');
@@ -87,64 +80,13 @@ $(document).ready(function () {
             content.slideToggle(800);
         }
     });
-    /***************Auto-submit*******************************/
-        //TODO: type=text
-    $("[editable=Rirekisho]").click(function () {
-        var key = $(this).attr('id');
-        var name = $(this).attr("name");
-        var sucess_status = $("#s_" + name + "_" + key);
-        sucess_status.hide();
-    }).change(function () {
-        var key = $(this).attr('id');
-        var name = $(this).attr("name");
-        var sucess_status = $("#s_" + name + "_" + key);
-        if (validator.element($(this)))
-            $.ajax({
-                type: "PUT",
-                url: "/CV/" + key,
-                data: $(this).serialize(),
-                cache: false,
-                success: function (html) {
-                    sucess_status.show(20);
-                }
-            });
-
-    });
-    /******************radio button********************/
-    $('input[type=radio][editable=Rirekisho]').change(function () {
-        var name = $(this).attr("name");
-        var dataString = name + '=' + this.value;
-        $.ajax({
-            type: "PUT",
-            url: "/CV/" + $(this).attr('id'),
-            data: dataString,
-            success: function (html) {
-            }
-        });
-    });
-
-    $('input[type=checkbox][editable=Rirekisho]').change(switchInput);
-    function switchInput() {
-        var name = $(this).attr("name");
-        var active = 0;
-        if ($(this).is(":checked")) {
-            active = 1;
-        }
-
-        $.ajax({
-            type: "PUT",
-            url: "/CV/" + $(this).attr('id'),
-            data: name + "=" + active,
-            success: function (html) {
-            }
-        });
-    }
 
     $('.apply_to').click(function () {
         var key = $(this).attr('id');
         var name = $(this).attr("name");
         var sucess_status = $("#s_" + name + "_" + key);
         sucess_status.hide();
+
     }).change(function () {
         var key = $(this).attr('id');
         var name = $(this).attr("name");
@@ -162,9 +104,9 @@ $(document).ready(function () {
 
     });
 
-    $('input[name="attach"]').change(function (e) {
+    $('body').on('change', 'input[name="attach"]', function (e) {
         e.preventDefault();
-        var self = $(this);
+        //var self = $(this);
         var data = new FormData();
         data.append('_token', $('input[name=_token]').val());
         data.append('attach', $('input[type=file]')[0].files[0]);
@@ -316,210 +258,6 @@ $(document).ready(function () {
             });
         }
 
-    }
-
-    /********************************** validate ***********************************/
-    var currentTime = new Date();
-    var year = currentTime.getFullYear();
-    var validator = $("#cv-forms").validate(
-        {
-            rules: {
-                Year: {
-                    required: true,
-                    digits: true,
-                    range: [1950, year]
-                },
-                Month: {
-                    required: true,
-                    digits: true,
-                    range: [1, 12]
-
-                },
-                Content: {
-                    required: true
-                },
-                "study_time": {
-                    required: true,
-                    digits: true,
-                    min: 1
-                },
-                "work_time": {
-                    required: true,
-                    digits: true,
-                    min: 1
-                },
-                name: {
-                    required: true
-                },
-                github: {
-                    url: true
-                },
-                linkedin: {
-                    url: true
-                }
-            },
-            messages: {
-                Year: {
-                    range: jQuery.validator.format("Năm phải lớn hơn {0} và nhỏ hơn số năm hiện tại "),
-                    required: "Bạn chưa điền đủ thông tin cho trường năm"
-                },
-                Content: {
-                    required: "Bạn chưa điền đủ thông tin cho các trường  "
-                },
-                Month: {
-                    required: "Bạn chưa điền đủ thông tin cho trường tháng "
-                },
-                name: {
-                    required: "Bạn chưa điền đủ thông tin cho trường tên kĩ năng "
-                },
-                study_time: {
-                    required: "Bạn chưa điền đủ thông tin cho trường thời gian học  "
-                },
-                work_time: {
-                    required: "Bạn chưa điền đủ thông tin cho trường thời gian làm việc "
-                }
-            },
-            errorElement: "div",
-            errorPlacement: function (error, element) {
-                var react = element.closest('tbody').attr('data-response');
-                if (element.attr("name") == "Year" || element.attr("name") == "Month" || element.attr("name") == "Content" || element.attr("name") == "study_time" || element.attr("name") == "work_time" || element.attr("name") == "name") {
-                    error.insertAfter("#" + react + "_0");
-                } else if (element.attr("name") == "github" || element.attr("name") == "linkedin") {
-                    var name = element.attr('name');
-                    error.insertAfter("#" + name + "-error");
-                } else {
-                    error.insertAfter(element);
-                }
-            }
-        });
-
-    //noinspection SpellCheckingInspection
-    jQuery.extend(jQuery.validator.messages, {
-        required: "Bạn chưa điền đủ thông tin",
-        remote: "Please fix this field.",
-        email: "Please enter a valid email address.",
-        url: "Please enter a valid URL.",
-        date: "Please enter a valid date.",
-        dateISO: "Please enter a valid date (ISO).",
-        number: "Bạn phải điền số .",
-        digits: "Bạn phải điền số.",
-        ditcard: "Please enter a valid credit card number.",
-        equalTo: "Please enter the same value again.",
-        accept: "Please enter a value with a valid extension.",
-        maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
-        minlength: jQuery.validator.format("Please enter at least {0} characters."),
-        rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
-        range: jQuery.validator.format("Điền số trong khoảng {0} đến {1}."),
-        max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
-        min: jQuery.validator.format("Bạn phải điền số lớn hơn {0}.")
-    });
-    /******************Editable Table********************/
-        // records table
-    $(document).mouseup(function () {
-        $(".editbox").hide();
-        $(".jShow").show();
-    });
-
-    function resetTable() {
-        //prevent repeat binding or bind only local element
-        $('[name=increase]')
-            .unbind("click", Add)
-            .bind("click", Add);
-        $('[name=delete]')
-            .unbind("click", Delete)
-            .bind("click", Delete);
-        $('[name=edit]')
-            .unbind("click", editCell)
-            .bind("click", editCell);
-    }
-
-
-    resetTable();
-    function editCell() {
-        var ID = $(this).closest('tr').attr('id');//record/skill id
-        var url = $(this).attr('data-table');
-        var cell = $(this).find("#cell_input_" + ID);
-        var cellContent = $(this).children('#cell_' + ID);
-        cellContent.hide();
-        cell.show();
-        $(this).change(function () {
-            if (validator.element(cell)) {
-
-                $.ajax({
-                    type: "PUT",
-                    url: "/" + url + "/" + ID,
-                    data: cell.serialize(),
-                    cache: false,
-                    success: function (html) {
-                        cellContent.html(cell.val());
-                        cell.hide();
-                        cellContent.show();
-
-                    }
-                });
-            }
-
-        });
-
-    }
-
-
-    function Add(e) {
-
-        var elements = $(this).closest('tr').next().clone();
-        var dataReact = elements.attr('data-react');
-        elements.appendTo('.editable-table tbody[data-response=' + dataReact + ']');
-        elements.show();
-        elements.find("[name=save]").bind("click", Save);
-        $(this).unbind("click", Add);
-    }
-
-    function Save() {
-
-        var tr_e = $(this).closest('tr');
-        var url = tr_e.attr('newrow');
-        var tds = tr_e.children("td");
-        var input1 = tds.eq(1).children("input[type=text]");//year
-        var inputs = tr_e.find("td input[type=text]");
-        var dataString = inputs.serialize()
-            + "&id=" + tr_e.attr('id') + "&data-react=" + tr_e.attr('data-react');
-        //id - cv
-        var t = 1;
-        inputs.each(function () {
-            if (validator.element($(this)) == false) t = false;
-        });
-        if (t) {
-            $.ajax({
-                type: "POST",
-                url: "/" + url,
-                data: dataString,
-                cache: false,
-                success: function (react) {
-                    $(" #" + react).load(location.href + " #" + react + ">*", function () {
-                        resetTable();
-                    });
-                }
-            });
-        }
-    }
-
-    function Delete() {
-        var tr_e = $(this).closest('tr'); //tr
-        var ID = tr_e.attr('id');//record id
-        var url = $(this).closest('td').prev().attr('data-table');
-        $.ajax({
-            type: "DELETE",
-            url: "/" + url + "/" + ID,
-            data: "",
-            cache: false,
-            success: function (react) {
-                $(" #" + react).load(location.href + " #" + react + ">*", function () {
-                    resetTable();
-                });
-
-
-            }
-        });
     }
 
     /***************User profile**********************/
@@ -728,15 +466,21 @@ $(document).ready(function () {
 });
 
 // dang ky cv cac truong thong tin bat buoc
-function submitCVRule() {
+function submitCVRule(ischeck = null) {
     $.ajax({
         type: 'POST',
         url: $('#cv-rule').attr('action'),
-        data: $('#cv-rule').serialize(),
-        dataType: 'json',
+        data: $('#cv-rule').serialize() + '&checkcrete=' + ischeck,
         cache: false,
-        success: function (data) {
-            redirect(data['url']);
+        success: function (html) {
+            if (ischeck) {
+                alert(html['notes']);
+            } else {
+                //$("#idEditCv").html('<button  data-toggle="modal" data-target="#modalCvCreate" type="button" class="btn btn-primary">CHỈNH SỬA</button>');
+
+                $("#modalDataContent").html(html);
+                $('#modalData').modal('show');
+            }
         },
         error: function (xhr, status, errorThrown) {
             //if (xhr.status === 422) {
@@ -827,27 +571,35 @@ function getDeleteCV(id, type) {
 }
 
 // cap nhap lai active + notes cv
-function upActNotee(is, act, note) {
-    var is_check = document.getElementById("myCheck_" + is);
-    var _notes = document.getElementById("txt_" + is).value;
+function upActNotee(idCV, idAct, idNote, idUserCeo) {
+    var is_check = document.getElementById("myCheck_" + idCV);
+    var _notes = document.getElementById("txt_" + idCV).value;
+    var is_ceo = document.getElementById("textarea_ceo_" + idCV);
+    if (is_ceo) {
+        var _ceo = is_ceo.attributes['valuser'].nodeValue;
+    } else {
+        var _ceo = '';
+    }
     if (is_check == undefined || !is_check.checked) {
         var _check = 0;
     } else {
         var _check = 1;
     }
 
-    if (getChanges(act) || getChanges(note)) {
+    if (getChanges(idAct) || getChanges(idNote) || getChanges(idUserCeo)) {
         $.ajax({
             type: "POST",
-            url: "/cv/actnotes/" + is,
-            data: 'txtAction=' + _check + "&txtNotes=" + _notes,
+            url: "/cv/actnotes/" + idCV,
+            data: 'txtAction=' + _check + "&txtNotes=" + _notes + '&txtCeo=' + _ceo,
             cache: false,
             beforeSend: function () {
                 $('.wait-modal-load').addClass("loading");
             },
             success: function (data) {
                 alert(data['info']);
-                removeKey([act, note]);
+
+                removeKey([idAct, idNote, idUserCeo]);
+                $('.btn-submit-' + idCV).attr('disabled', true);
             },
             ajaxStop: function () {
                 $('.wait-modal-load').removeClass("loading");
@@ -866,11 +618,12 @@ function returnHome() {
 var arr__ActNotes = [];
 
 // is changes
-function isChanges(key, calfunc) {
+function isChanges(key, idCV, calfunc) {
     arr__ActNotes[key] = document.getElementById(key).value;
     if (calfunc) {
         returnHome();
     }
+    $('.btn-submit-' + idCV).attr('disabled', false);
 }
 
 function getChanges(getkey) {
@@ -891,9 +644,11 @@ function removeKey(rmarray) {
 
 // xoa notes cv
 function clearContents(id) {
+    var idCV = id.substr(4, id.length);
     if (document.getElementById(id).value.length >= 1) {
         document.getElementById(id).value = "";
         arr__ActNotes[id] = true;
+        $('.btn-submit-' + idCV).attr('disabled', false);
     }
 }
 
@@ -901,6 +656,7 @@ function clearContents(id) {
 // thay doi CV truc tuyen hay khong
 function getChangeLiveCv(element, id) {
     var liveCv = (document.getElementById(element).checked) ? 1 : 0;
+
     $.ajax({
         type: "PUT",
         url: "/CV/" + id,
@@ -908,7 +664,14 @@ function getChangeLiveCv(element, id) {
         cache: false,
         success: function (data) {
             //alert('Đã cập nhập thành công');
-            redirect(data);
+            //redirect(data);
+            $('input[name="txtLiveCv"]').each(function (key, value) {
+                if (element != $(value).attr('id')) {
+                    $('#' + $(value).attr('id')).attr("checked", false);
+                } else if (liveCv) {
+                    $('#' + element).attr("checked", true);
+                }
+            });
         }
     });
 }
@@ -930,7 +693,7 @@ $('#searchStatistics').on('click', function(){
             data : {
                 'startDate' : $('#startDate').val(),
                 'endDate' : $('#endDate').val(),
-                'key_search' : $key_search,
+                'key_search': $key_search
             },
             cache: false,
             success: function (data) {
@@ -968,9 +731,7 @@ $('#status_statistic li a').on('click', function(){
 });
 
 function phonenumber(obj) {
-    var phoneno = /^(?:0|\(\+84\))[1-9]{1}[0-9]{1,2}[- .]\d{3}[- .]\d{4}$/;
-    //var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-
+    var phoneno = /^\(\+84\)[0-9]{2,3}[-]\d{3}[-]\d{4}$/;
     if (obj.value.match(phoneno)) {
         obj.style.border = '1px solid green';
 
@@ -988,8 +749,191 @@ function redirect(_url) {
 }
 
 // call function login
-
 function callLogin(){
     var newURL = window.location.protocol + "//" + window.location.host + "/auth/login";
     window.location = newURL;
 }
+
+
+// mask  phone-number vn (+84) xx-xxx-xxxx OR (+84) xxx-xxx-xxxx
+var options;
+options = {
+    onKeyPress: function (cep, e, field, options) {
+        var masks = ['(+84)000-000-0000', '(+84)00-000-00000'];
+        mask = (cep.length > 16) ? masks[0] : masks[1];
+
+        $('#phone-number').mask(mask, options);
+    }
+};
+
+$('#phone-number').mask('(+84)00-000-0000', options);
+
+
+// validate email
+function isEmail(email) {
+    var regex = /^[a-z0-9._%-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    return regex.test(email);
+}
+// them user gioi thieu vao o tim kiem email
+/* tham so
+ * this
+ *  id cua search box
+ *  id cua btn add
+ *  id cua do du lieu
+ *  id cua ceo_cv
+ */
+function txtBoxAddUser(obj, idBoxSearch, idBtnAddCeo, idField, idCeo_CV, idsearchclear) {
+    var id_User = parseInt($(obj).val());
+    if (id_User) {
+        var name_User = obj.options[obj.selectedIndex].text;
+        var img_url = obj.options[obj.selectedIndex].style.cssText;
+        var _style = img_url + ' width: 177px; background-repeat: no-repeat; background-size: 25px;';
+        var nameFunc = 'addUserCeo(\''+idBoxSearch+'\', \''+ idCeo_CV +'\', \''+ idBtnAddCeo +'\', \''+ idField +'\', \'' + idsearchclear +'\')';
+
+        $('#' + idBoxSearch).attr({'style': _style, 'valId': id_User});
+        $('#' + idBoxSearch).val(name_User);
+
+        $('#' + idBtnAddCeo).attr({'onclick': nameFunc, 'disabled': false});
+    }
+    $(obj).remove();
+}
+
+// add user user vao cv
+function addUserCeo(idBoxSearch, idCeo_CV, idBtnAddCeo, idField, idsearchclear) {
+    var $idBoxSearch = $('#'+idBoxSearch);
+    var is_idCV = myCompare(idBoxSearch, idField, '_');
+    var valUserCeo = $idBoxSearch.attr('valid');
+    var url_img = '';
+    var showhtml = '<div class="textarea" contenteditable="false"';
+    if (valUserCeo) {
+        $idBoxSearch.attr('style').split(/.*\("|"\).*/).forEach(function (items) {
+            if (items) {
+                url_img = items;
+            }
+        });
+        var textUser = $idBoxSearch.val();
+        var set_img = '<img src="' + url_img + '"/> ' + textUser;
+        showhtml += ' name="txtAddCeo" id="textarea_' + idCeo_CV + '" valUser="' + valUserCeo + '"> ' + set_img + '</div>';
+    } else {
+        showhtml += '/></div>';
+    }
+    $('#box_' + idCeo_CV).html(showhtml);
+
+    arr__ActNotes['textarea_' + idCeo_CV ] = valUserCeo;
+    // sau khi them thanh cong
+    // tra ve mac dinh <=> chi cho phep 1 nguoi gioi thieu
+    clearBoxSearch(idsearchclear, idBoxSearch, idField, idBtnAddCeo);
+    $('#' + idBoxSearch).attr('disabled', true);
+
+    if(is_idCV) {
+        $('.btn-submit-' + is_idCV).attr('disabled', false);
+    }
+}
+
+// xoa gia tri trong the input tim kiem nguoi gioi thieu
+function clearBoxSearch (idClearBoxSearch, idBoxSearch, idField, idBtnAddCeo) {
+    $('#' + idClearBoxSearch).css('display', 'none');
+    $('#' + idBoxSearch).removeAttr('style');
+    $('#' + idBoxSearch).val('');
+    $('#' + idField).hide();
+    $('#'+idBtnAddCeo).attr('disabled', true);
+}
+
+// xoa nguoi gioi thieu
+function clearBoxUserCeo(idBoxSearch, idUserCeo){
+   // tim kiem idCV
+    var is_idCV = myCompare(idBoxSearch, idUserCeo, '_');
+
+    // neu ton tai co nguoi gioi thieu
+    // xoa nguoi gioi thieu
+    if ($('#' +idUserCeo).length) {
+        $('#' + idBoxSearch).attr('disabled', false);
+        $('#' + idUserCeo).remove();
+        arr__ActNotes[idUserCeo] = true;
+
+        if(is_idCV) {
+            $('.btn-submit-' + is_idCV).attr('disabled', false);
+        }
+    }
+}
+
+/* so sanh chuoi
+ * input: String
+ * output: String compare first
+ */
+function myCompare(str1, str2, s = ' '){
+    var result = '';
+    if (str1 && str2) {
+        var tmpStr1 = str1.split(s);
+        var tmpStr2 = str2.split(s);
+
+        for (var key1 in tmpStr1) {
+            var _temp = tmpStr1[key1];
+            for (var key2 in tmpStr2) {
+                if (_temp == tmpStr2[key2]) {
+                    result = _temp;
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+$('.menu_download .list_do').on('click', downloadCV);
+//$('.reaction-box li').on('click', downloadCV);
+
+function downloadCV(){
+    var export_type = $(this).attr('export-type');
+    var status = $('#status_statistic li.active').attr('id');
+
+    var startDate = $('#startDate').val();
+    var endDate = $('#endDate').val();
+
+    if(status == 'position'){
+        var day = new Date().toJSON().slice(0,10);
+        if(startDate > endDate || endDate > day){
+            $('#error_date').show();
+            $('#error_date').text('Nhập sai ngày tháng!');
+        } else {
+            $('#error_date').hide();
+            $.ajax({
+                type: "GET",
+                url: "/downloadCV/" + export_type,
+                data : {
+                    'status' : status,
+                    'startDate' : startDate,
+                    'endDate' : endDate,
+                    'key_search' : $('#positionsSearch').val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data.path);
+                    var path = data.path;
+                    //download file
+                    location.href = path;
+                }
+            });
+        }
+    }else{
+        $('#error_date').hide();
+        $.ajax({
+        type: "GET",
+            url: "/downloadCV/" + export_type,
+            data : {
+                'status' : status,
+                'startDate' : startDate,
+                'endDate' : endDate,
+                'key_search' : $('#positionsSearch').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data.path);
+                var path = data.path;
+                //download file
+                location.href = path;
+            }
+        });
+    }
+}
+

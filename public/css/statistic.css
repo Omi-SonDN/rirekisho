@@ -118,6 +118,19 @@
     width: 150px;
 }
 
+.search_po_sa select#statusSearch_ {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color #e7e7e7 -moz-use-text-color -moz-use-text-color;
+    border-image: none;
+    border-style: none solid none none;
+    border-width: medium 1px medium medium;
+    height: 100%;
+    width: 150px;
+}
+
 .search_po_sa input#searchStatistics {
     border: 0 none;
     height: 100%;
@@ -252,18 +265,4 @@
 #box_tb{
     color: #666699;
     transform: translate(0,10px);
-}
-
-.number_tb{
-    height: 20px;
-    background-color: red;
-    transform: translate(80px, -30px);
-    width: 18px;
-    color: #fff;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.dropdown-menu li{
-    border-bottom: 1px solid #ccc;
 }

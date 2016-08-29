@@ -1,7 +1,7 @@
 @if(!$count)
     <tr class="no-record">
         <td colspan="100%">
-            <div style="text-align: center;">There are no records to display</div>
+            <div style="text-align: center;">Chưa có thông tin nào mô tả</div>
         </td>
     </tr>
 @else
@@ -82,12 +82,24 @@
                             @endif
                         </td>
                         <td>
-                            <a href="javascript:void(0);" onclick="getDeleteCV('{{$CV->hash}}', {{$CV->type_cv}});" title="Xóa CV tên: {{$CV->name_cv }}">
+                            <a href="javascript:void(0);" onclick="getDeleteCV('{{$CV->hash}}', '{{$CV->type_cv}}');" title="Xóa CV tên: {{$CV->name_cv }}">
                                 <span class="fa fa-trash-o" aria-hidden="true"></span>
-                                {{--<input type="checkbox" name="checkDelCV" />--}}
                             </a>
                         </td>
                     </tr>
+                    @can('SuperAdmin')
+                    <tr>
+                        <td colspan="100%" style="text-align: center;">
+                            <img
+                                @if ($CV->live)
+                                    src="{{asset('/admin/img'). '/users_online.gif' }}"
+                                @else
+                                    src="{{asset('/admin/img'). '/users_offline.gif' }}"
+                                @endif
+                            alt=""/>
+                        </td>
+                    </tr>
+                    @endcan
                 </table>
             </td>
 

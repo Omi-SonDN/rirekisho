@@ -138,16 +138,15 @@ $(document).ready(function ($) {
                     sorter: false
                 },
                 1: {sorter: "text"},
-                2: {sorter: "text"},
-                3: {sorter: "email"},
-                4: {sorter: "text"},
+                2: {sorter: "email"},
+                3: {sorter: "text"},
+                4: {sorter: "shortDate"},
                 5: {
-                    sorter: "shortDate"
+                    sorter: "number"
                 },
                 6: {},
                 7: {},
-                8: {},
-                9: {
+                8: {
                     sorter: false,
                     filter: false
                 }
@@ -166,7 +165,7 @@ $(document).ready(function ($) {
             sortForce: null,
             // initial sort order of the columns
             // [[columnIndex, sortDirection], ... ]
-            sortList: [[8, 1]],
+            //sortList: [[7, 1]],
             // default sort that is added to the end of the users sort
             // selection.
             sortAppend: null,
@@ -229,7 +228,7 @@ $(document).ready(function ($) {
                 zebra: ["even", "odd"],
                 filter_startsWith: false,
                 filter_childRows: true,
-                resizable_widths: ['5%', '15%', '12%', '5%', '5%', '13%', '12%', '5%', '12%', '10%']
+                resizable_widths: ['1%', '15%', '13%', '7%', '10%', '20%', '7%', '5%', '5%']
             },
             // Add select box to 4th column (zero-based index)
             // each option has an associated function that returns a boolean
@@ -260,7 +259,7 @@ $(document).ready(function ($) {
         .tablesorterPager({
             container: $('.pager'),
             size: per_page_local,
-            output: 'showing: {startRow} to {endRow} of {totalRows} rows',
+            output: 'Hiển thị: {startRow} tới {endRow} trong {totalRows} bảng ghi',
 
             //
             //    // if true, the table will remain the same height no matter how many

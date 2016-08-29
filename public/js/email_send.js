@@ -32,6 +32,7 @@ $(document).ready(function ($) {
             }
         });
     });
+
      $('#myModal').on('click','button[name=preview]',function(e){
         e.preventDefault();
         var form = new FormData($('#myModal form')[0]);

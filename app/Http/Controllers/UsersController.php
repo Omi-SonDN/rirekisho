@@ -433,15 +433,15 @@ class UsersController extends Controller
      *  output: get message error width func setErrorsAddEdit()
     */
     protected $rulesAddEdit = array(
-        'txtName' => 'required|min:4|regex:/^[a-z0-9]*$/|unique:users,userName',
+        'txtName' => 'required|min:4|max:15|regex:/^[a-z0-9]*$/|unique:users,userName',
         'txtEmail' => 'required|regex:/^[a-z][a-z0-9]*(_[a-z0-9]+)*(\.[a-z0-9]+)*@[a-z0-9]([a-z0-9-][a-z0-9+)*(\.[a-z]{2,4}){1,2}$/|unique:users,email',
         'txtPass' => 'min:6',
         'txtRePass' => 'same:txtPass',
         'txtImage' => 'mimes:jpg,jpeg,bmp,png',
         'txtHo' => 'required',
         'txtTen' => 'required',
-        'txtNsinh' => 'required|before:-13 years|after:-60 years',
-        'txtSdt' => ['required' ,'regex:/^(?:0|\(\+84\))[1-9]{1}[0-9]{1,2}[- .]\d{3}[- .]\d{4}$/'],
+        'txtNsinh' => 'required|before:-18 years|after:-60 years',
+        'txtSdt' => ['required' ,'regex:/^\(\+84\)[0-9]{2,3}[-]\d{3}[-]\d{4}$/'],
         'txtAddres' => 'required',
         'oldPass'   =>  'min:6',
         'txtNewPass' => 'min:6'
@@ -450,6 +450,7 @@ class UsersController extends Controller
     protected $messagesAddEdit = array(
         'txtName.required' => 'Vui lòng nhập tên.',
         'txtName.min' => 'Tài khoàn tối thiểu 4 kí tự',
+        'txtName.max' => 'Tài khoàn tối đa 15 kí tự',
         'txtName.unique' => 'Tài khoàn đã tồn tại',
         'txtName.regex' => 'Tài khoản chỉ được dùng chữ thường và số',
         'txtEmail.unique' => 'Email đã tồn tại.',
@@ -465,7 +466,7 @@ class UsersController extends Controller
         'txtHo.required' => 'Vùi lòng nhập họ của bạn',
         'txtTen.required' => 'Vùi lòng nhập tên của bạn',
         'txtNsinh.required' => 'Vùi lòng nhập ngày thành năm sinh',
-        'txtNsinh.before' => 'Bạn chưa đủ độ tuổi đi làm việc',
+        'txtNsinh.before' => 'Bạn chưa đủ 18 tuổi đi làm việc',
         'txtNsinh.after' => 'Bạn đã đến lúc nghỉ hưu theo chế độ',
         'txtNsinh.required' => 'Vui nhập số điện thoại',
         'txtSdt.regex' => 'Vui nhập đúng định dạng số điện thoại',
@@ -521,11 +522,37 @@ class UsersController extends Controller
 
     public function getUserLogout(){
         Auth::logout();
+        Session::flush();
         return '';
     }
 
     public function profile()
     {
         return view('about');
+    }
+
+    public function getSearchEmail(Request $request)
+    {
+        if ($request->ajax()){
+            $dtU = User::select('id', 'userName', 'image')
+                ->searchemail('email', $request->input('email'))
+                ->take(5)
+                ->get();
+            $data = [];
+            foreach ($dtU as $key => $val){
+                if ($val->image) {
+                    $img = 'thumb_' . $val->image;
+                } else {
+                    $img = 'no-avatar.jpg';
+                }
+
+                $data[] = [
+                    'userId' => $val->id,
+                    'userName' => $val->userName,
+                    'image' => asset('img/thumbnail').'/'. $img,
+                ];
+            }
+            return json_encode($data, true);
+        }
     }
 }

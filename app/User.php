@@ -86,7 +86,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     /*******rules ********/
     public static $rules = array(
-        'userName' => 'required|max:255|regex:/^[a-z0-9]*$/|unique:users,userName',
+        'userName' => 'required|max:15|regex:/^[a-z0-9]*$/|unique:users,userName',
         'email' => 'required|email|max:255|unique:users',
         'password' => 'required|min:4',
         'password_confirmation' => 'same:password',
@@ -94,7 +94,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /*******rules ********/
     public static $messageRegister = array(
         'userName.required' => 'Vùi lòng nhập tên tài khoản',
-        'userName.max' => 'Độ dài tên đăng nhập tối đa 255 kí tự',
+        'userName.max' => 'Độ dài tên đăng nhập tối đa 15 kí tự',
         'userName.min' => 'Tên tài khoản tối thiểu 4 kí tự',
         'userName.unique' => 'Tên tài khoản đã tồn tại',
         'userName.regex' => 'Tên tài khoản chỉ cho phép chữ thường và số',
@@ -200,5 +200,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         } else return "Đã kết hôn";
 
     }
+    // search in one column
+    public function scopeSearchEmail( $query, $field, $value) {
+        return $query->where($field, 'LIKE', "%$value%");
+    }
 
+    public function scopeUserCeo($query, $idUser_Ceo)
+    {
+        if ($idUser_Ceo){
+            return $query->where(function($query) use ($idUser_Ceo){
+                $query->where('users.id', $idUser_Ceo);
+            });
+        }
+    }
 }

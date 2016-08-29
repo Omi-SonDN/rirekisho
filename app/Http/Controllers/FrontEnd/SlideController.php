@@ -39,6 +39,7 @@ class SlideController extends Controller
      */
     public function add()
     {
+
         return View('FrontEnd.slide.add');
     } 
 

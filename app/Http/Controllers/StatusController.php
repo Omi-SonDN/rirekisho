@@ -87,7 +87,7 @@ class StatusController extends Controller
         }
 
         return redirect()
-            ->route('status::getaddstatus')
+            ->route('status::list')
             ->with(
                 [
                     'flash_level' => 'success',
