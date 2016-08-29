@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(companies::class);
         $this->call(f_general::class);
         $this->call(f_slide::class);
-        $this->call(group::class);
+        $this->call(group_user::class);
         Model::reguard();
     }
 }
@@ -365,7 +365,7 @@ class f_slide extends Seeder
     }
 }
 
-class group extends Seeder
+class group_user extends Seeder
 {
     /**
      * Run the database seeds.
@@ -375,19 +375,19 @@ class group extends Seeder
     public function run()
     {
         //
-        DB::table('group')->insert([
+        DB::table('group_user')->insert([
             'name'=>'Super Admin',
             'parent' => 'NULL'
             ]);
-        DB::table('group')->insert([
+        DB::table('group_user')->insert([
             'name'=>'Admin',
             'parent' => '1'
             ]);
-        DB::table('group')->insert([
+        DB::table('group_user')->insert([
             'name'=>'Visitor',
             'parent' => '2'
             ]);
-        DB::table('group')->insert([
+        DB::table('group_user')->insert([
             'name'=>'Applicant',
             'parent' => '3'
             ]);

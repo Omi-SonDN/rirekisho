@@ -101,7 +101,7 @@
                             <div class="col-lg-12">
                                 <select name="group" style="width:100%;" class="form-control">
                                     <option value="" @if(old('group',$user->group)=='') selected @endif >--Không có--</option>
-                                    @foreach( App\Group::all() as $group )
+                                    @foreach( App\Group_user::all() as $group )
                                         <option value="{{$group->id}}" @if(old('group',$user->group)==$group->id) selected @endif>{{$group->name}}</option>
                                     @endforeach
                                 </select>
