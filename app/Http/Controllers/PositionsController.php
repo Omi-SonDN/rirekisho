@@ -137,6 +137,9 @@ class PositionsController extends Controller
             abort(403);
         }
         $position = Positions::findorfail($id);
+        if (empty($position)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
         $rules = array(
             'active' => 'required',
             'description' => 'required'
@@ -184,7 +187,9 @@ class PositionsController extends Controller
         }
 
         $position = Positions::findorfail($id);
-
+        if (empty($position)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
         $position->delete();
         return redirect()
             ->route('position::list')

@@ -59,6 +59,30 @@ Route::group(['middleware' => ['auth']], function () {
         }
         return Redirect::action('CVController@index');
     });
+    Route::bind('status', function ($id) {
+        if (count(Hashids::decode($id)) == 0) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
+        return Hashids::decode($id)[0];
+    });
+    Route::bind('position', function ($id) {
+        if (count(Hashids::decode($id)) == 0) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
+        return Hashids::decode($id)[0];
+    });
+    Route::bind('slide', function ($id) {
+        if (count(Hashids::decode($id)) == 0) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
+        return Hashids::decode($id)[0];
+    });
+    Route::bind('fgeneral', function ($id) {
+        if (count(Hashids::decode($id)) == 0) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
+        return Hashids::decode($id)[0];
+    });
 
     //every one see different page 
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
@@ -81,8 +105,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/list', ['as' => 'list', 'uses' => 'FrontEnd\SlideController@index']);
         Route::get('/add', ['as' => 'addSlide', 'uses' => 'FrontEnd\SlideController@add']);
         Route::post('/add', ['as' => 'postSlide', 'uses' => 'FrontEnd\SlideController@create']);
-        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'FrontEnd\SlideController@edit']);
-        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'FrontEnd\SlideController@update']);
+        Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'FrontEnd\SlideController@edit'])->where(['id'=>'[0-9]+']);
+        Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'FrontEnd\SlideController@update'])->where(['id'=>'[0-9]+']);
     });
     Route::group(['prefix' => 'fgeneral','as'=>'fgeneral::'], function () {
         Route::get('/', ['as' => 'list', 'uses' => 'FrontEnd\FGeneralController@index']);
@@ -147,9 +171,6 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'emails.sendEmail1',
         'uses' => 'EmailsController@sendEmail1',
     ]);
-
-
-
 });
 
 Route::get('auth/login', 'Auth\AuthController@getLogin');
