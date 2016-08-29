@@ -30,7 +30,7 @@
 
                             <h3>{{$CV->User->Furigana_name}}
                                 @can('Visitor')
-                                <a data-action="bookmark" data-bookmark-id="{{$CV->user->hash}}"
+                                <a class="bookmark-btn" data-action="bookmark" data-bookmark-id="{{$CV->user->hash}}"
                                    style='color:#efa907;' title="Bookmark this user!">
                                     @if($bookmark)
                                         <i class="fa fa-star"></i>
