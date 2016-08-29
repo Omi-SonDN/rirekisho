@@ -1,6 +1,6 @@
 <?php
     function options_list($group,$groups){
-        $all = App\Group::where('parent',$group->id)->get();
+        $all = App\Group_user::where('parent',$group->id)->get();
         foreach ($all as $item ){
             if(in_array($item,$groups)) continue;
             else{
@@ -39,7 +39,7 @@
                         <?php $groups = array(); ?>
                         <?php $group = Auth::user()->group;?>
                         @if($group)
-                            <?php $group = App\Group::find($group); ?>
+                            <?php $group = App\Group_user::find($group); ?>
                             <option value="{{$group->name}}">{{$group->name}}</option>
                             <?php array_push($groups, $group); ?>
                             {!! options_list($group,$groups) !!}

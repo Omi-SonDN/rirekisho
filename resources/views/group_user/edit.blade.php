@@ -32,8 +32,8 @@
                                 <select name="parent" class="form-control">
                                     <option value="NULL">-- Không có --</option>
                                     @foreach( App\Group_user::all() as $grp )
-                                    @if($grp->id==$Group_user->id) <?php continue; ?> @endif;
-                                    <option @if($grp->id) selected @endif value="{{$grp->id}}">{{$grp->name}}</option>
+                                    @if($grp->id==$Group_user->id) <?php continue; ?> @endif
+                                    <option value="{{$grp->id}}" @if($grp->id==$Group_user->parent) selected @endif>{{$grp->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
