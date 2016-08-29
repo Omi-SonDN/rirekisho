@@ -92,8 +92,24 @@
                         </li>
                     </div>
                 </ul>
-
-
+                <div class="clearfix"></div>
+                <div class="form-inline mt8 role-control col-lg-12">
+                    @can('Admin')
+                    @if (Auth::user()->id != $user->id)
+                        <div class="row">
+                            <label class="title col-lg-12">Group:</label>
+                            <div class="col-lg-12">
+                                <select name="group" style="width:100%;" class="form-control">
+                                    <option value="" @if(old('group',$user->group)=='') selected @endif >--Không có--</option>
+                                    @foreach( App\Group::all() as $group )
+                                        <option value="{{$group->id}}" @if(old('group',$user->group)==$group->id) selected @endif>{{$group->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+                    @endcan
+                </div>
                 <div class="clearfix"></div>
                 <div class="form-inline mt8 role-control col-lg-12">
                     @can('Admin')

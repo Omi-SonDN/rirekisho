@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(companies::class);
         $this->call(f_general::class);
         $this->call(f_slide::class);
+        $this->call(group::class);
         Model::reguard();
     }
 }
@@ -255,40 +256,40 @@ class PositionsTableSeeder extends Seeder
     public function run()
     {
         DB::table('positions')->insert([
-            'name' => 'game development',
+            'name' => 'Game Development',
             'icon' => 'fa-gamepad',
             'active' => 1,
-            'description' => 'GAME DEVELOPMENT',
+            'description' => 'Game development',
         ]);
         DB::table('positions')->insert([
-            'name' => 'smartphone applications',
+            'name' => 'Smartphone Applications',
             'icon' => 'fa-mobile-phone',
             'active' => 1,
-            'description' => 'SMARTPHONE APPLICATIONS',
+            'description' => 'Smartphone Applications',
         ]);
         DB::table('positions')->insert([
-            'name' => 'web applications',
+            'name' => 'Web Applications',
             'icon' => 'fa-cogs',
             'active' => 1,
-            'description' => 'WEB APPLICATIONS',
+            'description' => 'Web Applications',
         ]);
         DB::table('positions')->insert([
-            'name' => 'maintenance',
+            'name' => 'Maintenance',
             'icon' => 'fa-cog',
             'active' => 1,
-            'description' => 'MAINTENANCE',
+            'description' => 'Maintenance',
         ]);
         DB::table('positions')->insert([
-            'name' => 'dedicated team',
+            'name' => 'Dedicated Team',
             'icon' => 'fa-user',
             'active' => 1,
-            'description' => 'DEDICATED TEAM',
+            'description' => 'Dedicated Team',
         ]);
         DB::table('positions')->insert([
-            'name' => 'portfolio',
+            'name' => 'Portfolio',
             'icon' => 'fa-trophy',
             'active' => 1,
-            'description' => 'PORTFOLIO',
+            'description' => 'Portfolio',
         ]);
     }
 }
@@ -366,6 +367,35 @@ class f_slide extends Seeder
             'image'=>'public/upload/img/slide2.jpg',
             'text'=>'we create the next values',
             'order'=>'2',
+            ]);
+    }
+}
+
+class group extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+        DB::table('group')->insert([
+            'name'=>'Super Admin',
+            'parent' => 'NULL'
+            ]);
+        DB::table('group')->insert([
+            'name'=>'Admin',
+            'parent' => '1'
+            ]);
+        DB::table('group')->insert([
+            'name'=>'Visitor',
+            'parent' => '2'
+            ]);
+        DB::table('group')->insert([
+            'name'=>'Applicant',
+            'parent' => '3'
             ]);
     }
 }

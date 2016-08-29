@@ -65,12 +65,12 @@
                                     @endif
                                 </div>
                             </td>
-                            <td class="name"><i class="fa fa-pencil fa-fw"></i>&nbsp<a href="{{url('User',$row->hash)}}"
+                            <td class="name" style="padding-left: 10px; padding-right: 10px;"><i class="fa fa-pencil fa-fw"></i>&nbsp<a href="{{url('User',$row->hash)}}"
                                                                                        title="Edit {{ $row->userName }}">{{ $row->userName }} </a>
                             </td>
                             <td class="name">{{ $row->email }}  </td>
                             <td>{{$row->JGender}}</td>
-                            <td>{{$row->Age}}</td>
+                            <td style="text-align:center;">{{$row->Age}}</td>
                             <td>{{$row->Birthday}}</td>
                             <td>{{$row->Phone}}</td>
                             <td>{{$row->CV->count()}}</td>

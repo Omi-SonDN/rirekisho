@@ -107,6 +107,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/add', ['as' => 'postSlide', 'uses' => 'FrontEnd\SlideController@create']);
         Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'FrontEnd\SlideController@edit'])->where(['id'=>'[0-9]+']);
         Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'FrontEnd\SlideController@update'])->where(['id'=>'[0-9]+']);
+        Route::get('/{id}/view',['as'=>'view','uses'=>'FrontEnd\SlideController@view'])->where(['id'=>'[0-9]+']);
     });
     Route::group(['prefix' => 'fgeneral','as'=>'fgeneral::'], function () {
         Route::get('/', ['as' => 'list', 'uses' => 'FrontEnd\FGeneralController@index']);
@@ -141,6 +142,12 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::resource('status', 'StatusController');
+
+    Route::group(['prefix' => 'group','as'=>'group::'], function () {
+    Route::get('/{id}/delete',['as'=>'delete','uses'=>'GroupController@delete'])->where(['id'=>'[0-9]+']);
+    });
+
+    Route::resource('group', 'GroupController');
     // thong ke user
     Route::resource('statistics/user', 'StatisticsUserController');
 

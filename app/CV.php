@@ -30,6 +30,7 @@ class CV extends Model
         'attach',
         'github',
         'linkedin',
+        'group',
         'active_by'
     ];
 
@@ -51,6 +52,10 @@ class CV extends Model
     public function positionCv()
     {
         return $this->belongsTo('App\Positions', 'apply_to', 'id');
+    }
+    public function theGroup(){
+        return $this->hasOne('App\Group','id','group');
+        //return App\Group::find($this->group);
     }
     public function status()
     {
