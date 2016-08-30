@@ -152,7 +152,9 @@ div.content:hover, div.content:active, div.content:focus {
     border-right: 1px solid #ddd;
     overflow: scroll;
 }
-
+a.bookmark-btn {
+    cursor: pointer;
+}
 .profile-nav {
     /*padding: 0 25px;*/
     line-height: 40px;
