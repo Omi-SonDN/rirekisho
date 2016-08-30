@@ -70,7 +70,7 @@
                             <div class="input col-xs-9">
                                 <select name="prev_status[]" id="prev_status" multiple="multiple" style="width: 100%;">
                                     @foreach( \App\Status::all() as $stt )
-                                        <option @if(in_array($stt->id,$Status->previous_status)) selected @endif value="{{$stt->id}}">{{$stt->id}} : {{$stt->status}}</option>
+                                        <option @if(in_array($stt->id, $Status->previous_status)) selected @endif value="{{$stt->id}}">{{$stt->id}} : {{$stt->status}}</option>
                                     @endforeach
                                 </select>
                             </div>

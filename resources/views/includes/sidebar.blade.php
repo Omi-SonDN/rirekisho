@@ -72,11 +72,9 @@
             {{--<i class="fa fa-angle-down"></i>--}}
             <i class="fa fa-angle-down pull-right add-submenu" data-toggle="collapse" data-target="#submenu-sa"></i>
             <ul class="nav collapse" id="submenu-sa">
-                
                 <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                 <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>
                 <li><a href="{{url('group_user')}}">Quản lý nhóm người dùng</a></li>
-                <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
             </ul>
         </li>
         <li class="nav-link">

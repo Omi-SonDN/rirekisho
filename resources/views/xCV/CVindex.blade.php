@@ -6,10 +6,7 @@
     <div id="list_table" data-table="table-resume">
 
     <div class="controlle-search col-md-12 box_white block_ntv_dangnhap">
-        {{--<p id="advancedSearch" style="float: right">Advanced search</p>--}}
-        <!--advance search-->
         <div id="adSearch">
-        <!--<form id="search" method="POST" action="{{-- url('CV/adSearch') --}}">-->
             <input id = "nameSearch" class="set_{{\Auth::user()->hash}}" type="text" placeholder="Name" name="name" value="{{ (Request::has('search')) ? Request::input('search') : ''}}" onkeyup="onclickSetData(this, this.name)">
             <select id = "positionsSearch" class="set_{{\Auth::user()->hash}}" name="positions" onchange="onclickSetData(this);">
                 <option value="">--Vị trí tuyển dụng--</option>
@@ -28,10 +25,8 @@
 
                 </select>
                 <input id="submitSearch" type="submit" name="submit" value="Tìm kiếm">
-                <!--</form>-->
             </div>
             
-            <!--advance search-->
         <div class="box_search">
             <div style="float: left; width: 200px">
                 <div style="float: left; width: 60px">Hiển thị</div>
@@ -103,7 +98,8 @@
             <table id="example" class="dataTable" data-sort="" data-field="">
                 <thead>
                 <tr>
-                    <th class="ab set_{{\Auth::user()->hash}}" data-sort="" data-field="" style="width: 90px">Ảnh</th>
+                    <th class="ab none-sort set_{{\Auth::user()->hash}}" data-sort="" data-field="" style="width: 75px">Ảnh</th>
+                    <th class="ab none-sort" style="width: 100px">Tên tài khoản</th>
                     <th @if (Request::has('data-field') && Request::has('data-sort'))
                         @if(Request::input('data-field') == 'name')
                             @if (Request::input('data-sort') == 'asc ')
@@ -117,7 +113,7 @@
                                 @else
                                 class="sorting" data-sort="asc"
                                 @endif
-                                onclick="onclickSetData(this);" data-field="name" style="width: 150px">Họ và tên
+                                onclick="onclickSetData(this);" data-field="name" style="width: 120px">Họ và tên
                     </th>
                     <th @if (Request::has('data-field') && Request::has('data-sort'))
                         @if(Request::input('data-field') == 'Gender')
@@ -132,7 +128,7 @@
                                 @else
                                 class="sorting" data-sort="asc"
                                 @endif
-                                onclick="onclickSetData(this);" data-field="Gender"  style="width: 100px">G.Tính
+                                onclick="onclickSetData(this);" data-field="Gender"  style="width: 70px">G.Tính
                     </th>
                     <th @if (Request::has('data-field') && Request::has('data-sort'))
                         @if(Request::input('data-field') == 'Birth_date')
@@ -163,7 +159,7 @@
                                 @else
                                 class="sorting" data-sort="asc"
                                 @endif
-                                onclick="onclickSetData(this);" data-field="positions" style="width: 110px">Ví trí tuyển
+                                onclick="onclickSetData(this);" data-field="positions" style="width: 120px">Ví trí tuyển
                         dụng
                     </th>
                     <th @if (Request::has('data-field') && Request::has('data-sort'))
@@ -179,11 +175,11 @@
                                 @else
                                 class="sorting" data-sort="asc"
                                 @endif
-                                onclick="onclickSetData(this);" data-field="Status" style="width: 180px">Trạng thái
+                                onclick="onclickSetData(this);" data-field="Status" style="width: 200px">Trạng thái
                     </th>
                     @endcan
                     @can('Admin')
-                    <th class="ab" style="width: 30px;color: #666699;font-size: 13pt;">Hành động</th>
+                    <th class="ab none-sort" style="width: 30px;color: #666699;font-size: 13pt;">Hành động</th>
                     @endcan
 
                 </tr>

@@ -499,7 +499,7 @@ class CVController extends Controller
             $CV->old_status = $CV->Status;
         else{
             $arrs = explode(',', $CV->old_status);
-            if( !in_array($CV->Status,$arrs) ){
+            if( !in_array($CV->Status, $arrs) ){
                 array_push($arrs, $CV->Status);
             }
             $CV->old_status = implode(',', $arrs);
@@ -518,15 +518,33 @@ class CVController extends Controller
         $status = \App\Status::find($request->status);
         $CV->allow_sendmail = $status->allow_sendmail;
         //Get next status
-        $next_status = array();
-        foreach(\App\Status::all() as $status ){
-            if( in_array($request->status,$status->previous_status) ){
-                $next_status[] = $status->id;
+        $old_status = $next_status = array();
+
+        //bqn fix voi role ACL
+        if (Auth::user()->getrole() === 'Visitor') {
+            $_Status = Status::where('role_VisitorStatus', 1)->get();
+        } else {
+            $_Status = Status::all();
+        }
+
+        $arrOldStt = explode(',', $CV->old_status);
+        foreach($_Status as $status ){
+            if( in_array($request->status, $status->previous_status) ){
+                $next_status[] = ['id' => $status->id, 'nameStatus' => $status->StatusName];
+            }
+            if( in_array($status->id, $arrOldStt)){
+                $old_status[] = ['id' => $status->id, 'nameStatus' => $status->StatusName];
             }
         }
         $CV->next_status = $next_status;
-        $CV->old_status  = array_map('intval', explode(',', $CV->old_status));
-        
+        $CV->old_status = $old_status;
+
+//        foreach(\App\Status::all() as $status ){
+//            if( in_array($request->status, $status->previous_status) ){
+//                $next_status[] = $status->id;
+//            }
+//        }
+//        $CV->old_status  = array_map('intval', explode(',', $CV->old_status));
 
         return \Illuminate\Support\Facades\Response::json($CV);
     }

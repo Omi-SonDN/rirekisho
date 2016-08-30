@@ -32,7 +32,7 @@
 
                             @endcan
                             @can('Visitor')
-                            <li class="{{(URL::current() == url('CV')) ? 'active' : ''}}"><a href="{{url('CV')}}" style="color: #f36f21;">Quản
+                            <li class="{{(URL::current() == url('CV')) ? 'active' : ''}}"><a href="{{url('CV')}}">Quản
                                     lý CV</a></li>
                             @endcan
                             @can('Applicant')

@@ -947,4 +947,3 @@ function downloadCV(){
         });
     }
 }
-
