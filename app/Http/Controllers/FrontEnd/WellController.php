@@ -4,6 +4,8 @@ namespace app\Http\Controllers\FrontEnd;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -13,6 +15,7 @@ use App\Slide;
 use App\Positions;
 use App\CV;
 use App\Fgeneral;
+use Validator;
 
 class WellController extends Controller
 {
@@ -107,24 +110,35 @@ class WellController extends Controller
     }
 
     public function sendMailContact(Request $request){
-        $email = $request->email;
-        $name = $request->name;
-        $message = $request->message;
-        $settings = Fgeneral::all()->keyBy('key');
-        $to = $settings->get('email')->value;
+        $rules = array(
+            'name'=> 'required',
+            'email' => 'required|email',
+            'message' => 'required|min:20|max:256'
+        );
+        $validator = Validator::make($request->all(),$rules);
+        if( $validator->fails() ){
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $email = $request->email;
+            $name = $request->name;
+            $message = $request->message;
+            $settings = Fgeneral::all()->keyBy('key');
+            $to = $settings->get('email')->value;
 
-        \Mail::send('emails.contact', ['mymessage' => $message], function ($m) use ($request, $email, $name, $message, $to) {
-            $m->from($email,$name);
-            $m->to($to)->subject('[Contact] Contact me now!');
-        });
-        return redirect()
-            ->back()
-            ->with(
-                [
-                    'flash_level' => 'success',
-                    'message' => 'Đã gửi thành công'
-                ]
-            );
-    }
+            \Mail::send('emails.contact', ['mymessage' => $message,'email'=>$email,'name'=>$name], function ($m) use ($request, $email, $name, $message, $to) {
+                $m->from($email,$name);
+                $m->to($to)->subject('[Contact] Contact me now!');
+            });
+            return redirect()
+                ->back()
+                ->with(
+                    [
+                        'flash_level' => 'success',
+                        'message' => 'Cảm ơn bạn đã gửi message đến cho chúng tôi! Chúc bạn luôn thành công!'
+                    ]
+                );
+            }
+        }
+            
 }
 

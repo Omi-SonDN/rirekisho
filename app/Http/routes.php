@@ -2,6 +2,14 @@
 
 use Vinkla\Hashids\Facades\Hashids;
 
+Route::get('auth/logout', 'Auth\AuthController@getLogout')->after('invalidate-browser-cache');
+
+Route::filter('invalidate-browser-cache', function($request, $response)
+{
+    $response->headers->set('Cache-Control','nocache, no-store, max-age=0, must-revalidate');
+    $response->headers->set('Pragma','no-cache');
+    $response->headers->set('Expires','Fri, 01 Jan 1990 00:00:00 GMT');
+});
 Route::controllers([
     'auth' => '\App\Http\Controllers\Auth\AuthController',
     'password' => '\App\Http\Controllers\Auth\PasswordController',
@@ -10,7 +18,7 @@ Route::controllers([
 Route::group(['middleware' => ['auth', 'App\Http\Middleware\ApplicantMiddleware']], function () {
     Route::resource('CV', 'CVController', ['except' => ['index', 'show']]);
 
-    Route::get('CV/info', 'CVController@getInfo');
+    Route::get('CV/info', ['as'=>'cv.info', 'uses' =>'CVController@getInfo']);
     // show create cv no id, or show cv upload with id
     Route::get('CV/create/upload/', 'CVController@getCreateUpload');
     Route::get('CV/upload/{id}/edit', 'CVController@getEditUpload');
@@ -22,7 +30,6 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
     //Route::get('CV/search1', 'CVController@search1');
 
     Route::get('CV', 'CVController@index');
-    Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
     Route::post('CV/changeStatus', 'CVController@changeStatus');
     Route::post('CV/adSearch', 'CVController@adSearch');
     Route::post('cv/actnotes/{id}', ['as'=>'cv.active.notes', 'uses' => 'CVController@postActNotes']);
@@ -30,7 +37,11 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
     Route::get('CV/statistic', 'CVController@statistic');
     Route::post('CV/statisticSearch', 'CVController@statisticSearch');
     Route::post('CV/statisticStatus', 'CVController@statisticStatus');
+    Route::get('user/search/nguoi-gioi-thieu', ['as'=>'user.search.email', 'uses' =>'UsersController@getSearchEmail']);
+
     Route::get('downloadCV/{type}', 'CVController@downloadCV');
+    Route::get('CV/search_ab', 'CVController@search_ab');
+
 });
 
 Route::group(['middleware' => ['auth']], function () {
@@ -62,9 +73,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     //every one see different page 
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
-    Route::get('CV/show/{id}', 'CVController@show1');
+    //Route::get('CV/show/{id}', 'CVController@show');
     Route::get('CV/upload/{id}', 'CVController@getShowUpload');
     Route::get('Record/index/{type}', 'RecordController@index');
+    Route::get('CV/{CV}/getPDF', 'CVController@getPDF');
+    // logout sau khi thay doi mat khau
     Route::get('User/logout', 'UsersController@getUserLogout');
 
     Route::group(['prefix' => 'position','as'=>'position::'], function () {
@@ -85,8 +98,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'FrontEnd\SlideController@update']);
     });
     Route::group(['prefix' => 'fgeneral','as'=>'fgeneral::'], function () {
-        Route::get('/', ['as' => 'list', 'uses' => 'FrontEnd\FGeneralController@index']);
-        Route::post('/', ['as' => 'update', 'uses' => 'FrontEnd\FGeneralController@update']);
+        Route::get('/list', ['as' => 'list', 'uses' => 'FrontEnd\FGeneralController@index']);
+        Route::post('/update', ['as' => 'update', 'uses' => 'FrontEnd\FGeneralController@update']);
     });
     Route::resource('groups', 'GroupsController');
     Route::post('/groups/getUsername', [
@@ -98,7 +111,6 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'GroupsController@updateListMember',
     ]);
 
-    //admin only
     Route::get('User/search', 'UsersController@search');
 
     Route::resource('User', 'UsersController', ['except' => ['create']]);
@@ -117,6 +129,18 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::resource('status', 'StatusController');
+
+    Route::group(['prefix' => 'group','as'=>'group::'], function () {
+    //     Route::get('/list/{id?}',['as' => 'list','uses' =>'GroupController@index']);
+    //     Route::get('/add', ['as' => 'create', 'uses' => 'GroupController@add']);
+    //     Route::post('/add', ['as' => 'store', 'uses' => 'GroupController@create']);
+    //     Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'GroupController@edit'])->where(['id'=>'[0-9]+']);
+    //     Route::post('/{id}/edit', ['as' => 'update', 'uses' => 'GroupController@update'])->where(['id'=>'[0-9]+']);
+    Route::get('/{id}/delete',['as'=>'delete','uses'=>'GroupController@delete'])->where(['id'=>'[0-9]+']);
+    //     Route::get('/{id}/view',['as'=>'view','uses'=>'GroupController@view'])->where(['id'=>'[0-9]+']);
+    });
+
+    Route::resource('group', 'GroupController');
     // thong ke user
     Route::resource('statistics/user', 'StatisticsUserController');
 
@@ -148,15 +172,7 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'EmailsController@sendEmail1',
     ]);
 
-
-
 });
-
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@myLogout');
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //FrontEnd
 route::get('/', 'FrontEnd\WellController@index');

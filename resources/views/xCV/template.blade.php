@@ -47,6 +47,7 @@
 
     <!-- Css preson profile -->
     <link href="{{ URL::asset('/frontend/css/style-profile.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/wickedpicker.min.css') }}" rel="stylesheet">
 {{--    <link href="{{ URL::asset('/frontend/css/abc.css') }}" rel="stylesheet">--}}
 
     <script type="text/javascript"> (function () {
@@ -63,6 +64,8 @@
 
     </script>
     <script type="text/javascript" src="{{ URL::asset('/admin/js/jquery-1.12.2.min.js')}}"></script>
+
+    <script src="{{ asset('js/wickedpicker.min.js') }}" type="text/javascript"></script>
     <!-- thong ke -->
     <script type="text/javascript" src="{{asset('/hightchart/js/highcharts.js')}}"></script>
     <script type="text/javascript" src="{{asset('/hightchart/js/exporting.js')}}"></script>
@@ -70,6 +73,7 @@
     <script type="text/javascript" src="{{asset('/hightchart/js/export-csv.js')}}"></script>
     <!-- <script type="text/javascript" src="{{asset('/hightchart/js/jspdf.js')}}"></script> -->
     <script type="text/javascript" src="{{asset('/hightchart/js/highcharts-export-clientside.js')}}"></script>
+
 
 </head>
 <body>
@@ -95,8 +99,6 @@
 
     </div>
 
-    <!---  jQuery-->
-
     <!---  bootstrap-->
     <script type="text/javascript" src="{{ URL::asset('/admin/js/3.3.5-bootstrap.min.js')}}"></script>
     <!-- validate -->
@@ -106,7 +108,7 @@
     <script type="text/javascript" src="{{asset('js/fontawesome-iconpicker.min.js')}}" async></script>
     <script type="text/javascript" src="{{asset('/admin/js/wz_tooltip.js')}}"></script>
 
-
+    <script type="text/javascript" src="{{asset('/js/jquery.mask.js')}}"></script>
 
     <script type="text/javascript" src="{{asset('/js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/js/select2.full.min.js')}}"></script>

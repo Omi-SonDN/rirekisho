@@ -9,7 +9,7 @@ if (!empty($field)) {
 @if(!$filtered->count())
     <tr class="no-record">
         <td colspan="5">
-            <div style="text-align: center;">There are no records to display</div>
+            <div style="text-align: center;">Chưa có thông tin mô tả nào</div>
         </td>
     </tr>
 @else

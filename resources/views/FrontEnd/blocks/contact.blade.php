@@ -32,21 +32,35 @@
                     <p><img src="{{ URL::asset('/frontend/img/globe.png') }}" alt="icon 3"/><a class="link_orange"
                                                                                                href="#"><span
                                     class="txt_orange">@if($dtCp){!! $dtCp->nameCompany !!}@endif</span></a></p>
-
-                    <form class="form-horizontal" action="{{url('contact')}}" method="post">
+                                    @include('includes.flash-alert')
+                    <form class="form-horizontal" action="{{url('contact').'#templatemo-contact'}}" method="post" >
                         <div class="form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Your Name..." maxlength="40"/>
+                            <input type="text" class="form-control" name="name" placeholder="Your Name..." maxlength="40" value="{!! old('name') !!}" />
+                            @if ($errors->has('name'))
+                                <span style="color:red;" class="help-block">
+                                    {{ $errors->first('name') }}
+                                </span>
+                            @endif
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="Your Email..." maxlength="40"/>
+                            <input type="email" class="form-control" name="email" placeholder="Your Email..." maxlength="40" value="{!! old('email') !!}"/>
+                            @if ($errors->has('email'))
+                                <span style="color:red;" class="help-block">
+                                    {{ $errors->first('email') }}
+                                </span>
+                            @endif
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" style="height: 130px;"
-                                      placeholder="Write down your message..." name="message"></textarea>
+                                      placeholder="Write down your message..." name="message">{!! old('message') !!}</textarea>
+                                      @if ($errors->has('message'))
+                                <span style="color:red;" class="help-block">
+                                    {{ $errors->first('message') }}
+                                </span>
+                            @endif
                         </div>
                         <button type="submit" class="btn btn-orange pull-right">SEND</button>
                     </form>
-
                 </div>
             </div>
             <!-- /.row -->

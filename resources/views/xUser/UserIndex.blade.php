@@ -5,8 +5,8 @@
         <div class="table_action">
             <div class="top_action"></div>
             <div class="bottom_action">
-                <a class="btn btn-primary" style="color:white;" href="{{route('getadduser')}}"><i class="fa fa-user-plus" style="margin: 0 auto;">
-                </i> Thêm User</a>
+                    <a href="{{route('getadduser')}}" class='btn btn-primary' style="color: #fff"><i class="fa fa-user-plus" style="margin: 0 auto;">
+                        </i> Thêm tài khoản</a>
                 <span class="active-del"></span>
 
                 <div class="wait-modal-load"></div>
@@ -30,9 +30,8 @@
                     <th class="sort-tb" data-field="name"><a>Tên tài khoản</a></th>
                     <th class="sort-tb" data-field="email"><a>Email</a></th>
                     <th class="header-none-sort sort-tb filter-select" filter-false>G.Tính</th>
-                    <th class="header-none-sort sort-tb">Tuổi</th>
                     <th class="header-none-sort sort-tb">Sinh nhật</th>
-                    <th class="header-none-sort sort-tb">S.Đ.Thoại</th>
+                    <th class="header-none-sort sort-tb">Số điện thoại</th>
                     <th class="header-none-sort sort-tb filter-select">Số CV</th>
                     <th class="first-name sort-tb filter-select" data-placeholder="Select a type">Type</th>
                     <th class="header-none-sort filter-false"><input class="fix-class-check checkAll" type="checkbox"/>
@@ -43,16 +42,16 @@
                 @if(!count($users))
                     <tr class="no-record">
                         <td colspan="100%">
-                            <div style="text-align: center;">There are no records to display</div>
+                            <div style="text-align: center;">Chưa có thông tin mô tả nào</div>
                         </td>
                     </tr>
                 @else
                     @foreach ($users as $key => $row)
                         <tr class="data">
                             <td class="image">
-                                <div style=" position: relative;height: 100px;width: 100px;">
+                                <div style=" position: relative;height: 50px;width: 50px;">
                                     @if($row->image!="")
-                                        <img style="height: 100px; width: 100px;"
+                                        <img style="height: 50px; width: 50px;"
                                              src=<?php echo "/img/thumbnail/thumb_" . $row->image;?>>
                                     @else
                                         <div class="dropzone-text-place"
@@ -65,12 +64,10 @@
                                     @endif
                                 </div>
                             </td>
-                            <td class="name"><i class="fa fa-pencil fa-fw"></i>&nbsp<a href="{{url('User',$row->hash)}}"
-                                                                                       title="Edit {{ $row->userName }}">{{ $row->userName }} </a>
+                            <td class="name"><a href="{{url('User',$row->hash)}}" title="Sửa {{ $row->userName }}">{{ $row->userName }} </a>
                             </td>
                             <td class="name">{{ $row->email }}  </td>
                             <td>{{$row->JGender}}</td>
-                            <td>{{$row->Age}}</td>
                             <td>{{$row->Birthday}}</td>
                             <td>{{$row->Phone}}</td>
                             <td>{{$row->CV->count()}}</td>
@@ -82,10 +79,18 @@
                                            name="arrDel[]">
                                 </div>
                                 <div class="col-lg-12 mt8">
-                                    <a href="{{route('getdeluser', $row->hash)}}"
-                                       onclick="return xacnhanxoa('Bạn có chắc là xóa không!')"
-                                       title="Delete {{$row->userName}}">
-                                        Delete</a>
+                                    <table style="margin: 0 auto">
+                                        <tr>
+                                            <td>
+                                                <a href="{{url('User',$row->hash)}}" title="Sửa {{ $row->userName }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                            </td>
+                                            <td>
+                                                <a href="{{route('getdeluser', $row->hash)}}" onclick="return xacnhanxoa('Bạn có chắc là xóa không!')" title="Xóa {{$row->userName}}">
+                                                    <span class="fa fa-trash-o" aria-hidden="true"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </td>
                         </tr>
@@ -98,7 +103,7 @@
             <!-- pagination jquery lib tablesorter -->
             <div id="" class="pager pages-tablesorter">
                 <span class="left">
-                    # per page:
+                    Số bảng ghi:
                     @foreach(config('app.list_per_page') as $items)
 {{--                        <a href="#" class="{{$items == config('app.per_page') ? 'current' : ''}}">{{$items}}</a> |--}}
                         <a href="#" class="">{{$items}}</a> |

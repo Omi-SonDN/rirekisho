@@ -96,6 +96,7 @@
                 </td>
 
             </tr>
+
             <tr class="">
                 <td style="width:15%; font-weight: 700;">Ngày sinh</td>
                 <td>{{$CV->User->Birthday}} （満 {{$CV->User->Age}}歳） {{$CV->User->JGender}}</td>
@@ -108,6 +109,7 @@
             </tr>
             <tr class="">
                 <td style="width:15%; font-weight: 700;">Địa chỉ</td>
+
                 <td>{{$CV->User->Address}} </td>
                 <td style="width:23%;"></td>
             </tr>
@@ -201,7 +203,7 @@
             @if(!$Work->count())
                 <tr>
                     <td colspan="5">
-                        <center>There are no records to display</center>
+                        <center>Chưa có thông tin mô tả nào</center>
                     </td>
                 </tr>
             @else

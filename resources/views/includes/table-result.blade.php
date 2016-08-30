@@ -1,14 +1,14 @@
 @if(!$count)
     <tr class="no-record">
         <td colspan="100%">
-            <div style="text-align: center;">There are no records to display</div>
+            <div style="text-align: center;">Chưa có thông tin nào mô tả</div>
         </td>
     </tr>
 @else
 
     @foreach($CVs as $key => $CV)
         <tr class="data{{++$key}}">
-            <td class="image" style="width: 90px">
+            <td class="image" style="width: 90px;">
                 <div style=" position: relative;height: 100px;width: 100px; cursor: pointer" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
                     <?php $image = $CV->User->image;?>
                     @if($image!="")
@@ -44,16 +44,13 @@
                     @can('Admin')
                         <input type="hidden" value="{{ $CV->id}}" id="id"/>
                         <input type="hidden" value="{{ ($CV->User->email)}}" id="email"/>
-
+                        <div class="btn_send_mail">
                         @if(!empty($CV->status))
-                            @if($CV->status->allow_sendmail)
+                            @if($CV->status->allow_sendmail == 1)
                                 <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary btn-send-email col-lg-12" value="{{ $CV->Status }}">Send Email</button>
-                            @else
-                            <button id="btn_send_email{{ $CV->id}}"></button>
                             @endif
-                        @else
-                            <!-- <button id="btn_send_email{{ $CV->id}}" class="btn btn-primary disabled btn-send-email col-lg-12" value="">Send Email </button> -->
                         @endif
+                        </div>
                     @endcan
                 </div>
             </td>
@@ -85,12 +82,24 @@
                             @endif
                         </td>
                         <td>
-                            <a href="javascript:void(0);" onclick="getDeleteCV('{{$CV->hash}}', {{$CV->type_cv}});" title="Xóa CV tên: {{$CV->name_cv }}">
+                            <a href="javascript:void(0);" onclick="getDeleteCV('{{$CV->hash}}', '{{$CV->type_cv}}');" title="Xóa CV tên: {{$CV->name_cv }}">
                                 <span class="fa fa-trash-o" aria-hidden="true"></span>
-                                {{--<input type="checkbox" name="checkDelCV" />--}}
                             </a>
                         </td>
                     </tr>
+                    @can('SuperAdmin')
+                    <tr>
+                        <td colspan="100%" style="text-align: center;">
+                            <img
+                                @if ($CV->live)
+                                    src="{{asset('/admin/img'). '/users_online.gif' }}"
+                                @else
+                                    src="{{asset('/admin/img'). '/users_offline.gif' }}"
+                                @endif
+                            alt=""/>
+                        </td>
+                    </tr>
+                    @endcan
                 </table>
             </td>
 

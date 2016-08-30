@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CheckFormEmailRequest;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -209,9 +208,9 @@ class EmailsController extends Controller
         $message = str_replace('[First_name]', ($data['cv']->User)?$data['cv']->User->First_name:'', $message);
         $message = str_replace('[Positions]', ($data['cv']->positionCv)?$data['cv']->positionCv->name:'' , $message);
         if( in_array('Time',$status->info))
-        $message = str_replace('[Time]', $request->time, $message);
+        $message = str_replace('[Time]', Carbon::createFromFormat('h : i A',$request->time)->format('H:i'), $message);
         if( in_array('Date',$status->info))
-        $message = str_replace('[Date]', Carbon::createFromFormat('Y-m-d',$request->date)->format('d/m/Y'), $message);
+        $message = str_replace('[Date]', Carbon::createFromFormat('Y/m/d',$request->date)->format('d/m/Y'), $message);
         if( in_array('Address',$status->info))
         $message = str_replace('[Address]', $request->address, $message);
         $data['email_content'] = $message;

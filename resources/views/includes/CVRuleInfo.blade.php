@@ -53,10 +53,10 @@
                             </div>
                         </div>
                         <div class=" float_left" style="width: 50%;">
-                            <label class="label" for="name">Điện thoại <small><i>0*|(+84)*-xxx-xxxx</i></small> <i style="color:red">*</i></label>
+                            <label class="label" for="name">Điện thoại <small><i>(+84)xx-xxx-xxxx</i></small> <i style="color:red">*</i></label>
                             <div class="input">
                                 <label class="icon-left" for="text"><i class="fa fa-phone"></i></label>
-                                <input onkeyup="phonenumber(this)" style="width: 60%;" required name="txtPhone" type="tel" class="input-left float_left" placeholder="some text" value="{!! old('txtPhone', isset($uCV) ? $uCV->Phone : '') !!}">
+                                <input id="phone-number" onkeyup="phonenumber(this)" style="width: 60%;" required name="txtPhone" type="tel" class="input-left float_left" placeholder="some text" value="{!! old('txtPhone', isset($uCV) ? $uCV->Phone : '') !!}">
                                 <div class="txtPhone"></div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                     </li>
                     <li class="">
                         <div class="float_left" style="width: 100%;">
-                            <label class="label" for="apply_to">Vị trí ứng tuyển <i style="color:red">*</i></label>
+                            <label class="label" for="txtApply_to">Vị trí ứng tuyển <i style="color:red">*</i></label>
                             <div class="input">
                                 <div class="">
                                     <?php $positions = \App\Positions::where('active',1)->get(); ?>
@@ -130,11 +130,22 @@
                         </div>
                     </li>
                     @if (count($CV))
-                        <li> <button type="button" onclick="submitCVRule()" class="btn btn-primary">CẬP NHẬT</button></li>
+                        <li> <button type="button" onclick="submitCVRule(1)" class="btn btn-primary">CẬP NHẬT</button></li>
                     @else
-                        <li><button type='button' onclick="submitCVRule()" class="btn btn-primary">TẠO HỒ SƠ</button></li>
+                        <li><button type='button' onclick="submitCVRule(0)" class="btn btn-primary">TẠO HỒ SƠ</button></li>
                     @endif
+                    <li> <div id="idEditCv"></div></li>
                 </ul>
             </div>
         </form>
+    </div>
+
+
+
+    <!-- DATA -->
+    <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" id="modalData" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="modalDataContent">
+            </div>
+        </div>
     </div>

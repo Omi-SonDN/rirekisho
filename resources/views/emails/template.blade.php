@@ -43,6 +43,7 @@
     <!--tinyMCE-->
     <script type="text/javascript" src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     <script src="{{ url('js/emails_tiniMCE.js') }}" type="text/javascript"></script>
+    <script src="{{ url('js/jquery.datetimepicker.min.js') }}" type="text/javascript" async></script>
 </head>
 <body>
 

@@ -13,11 +13,11 @@
                     <div class="single_footer_widget">
                         <h3>Thông tin công ty</h3>
                         <ul  class="footer_widget_nav">
-                            <li><a href="#">Lịch sử</a></li>
-                            <li><a href="#">Vì sao chọn chúng tôi?</a></li>
+                            <li><a href="#introduction">Giới thiệu về công ty</a></li>
                             <li><a href="#">Sứ mạng</a></li>
                             <li><a href="#">Lãnh đạo</a></li>
                             <li><a href="#">Thư viện ảnh</a></li>
+                            <li><a href="#templatemo-contact">Google Map</a></li>
                         </ul>
                     </div>
                 </div>
@@ -37,11 +37,10 @@
                     <div class="single_footer_widget">
                         <h3>Social Links</h3>
                         <ul class="footer_social">
-                            <li><a data-toggle="tooltip" data-placement="top" title="Facebook" class="soc_tooltip" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a data-toggle="tooltip" data-placement="top" title="Twitter" class="soc_tooltip"  href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a data-toggle="tooltip" data-placement="top" title="Google+" class="soc_tooltip"  href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a data-toggle="tooltip" data-placement="top" title="Linkedin" class="soc_tooltip"  href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a data-toggle="tooltip" data-placement="top" title="Youtube" class="soc_tooltip"  href="#"><i class="fa fa-youtube"></i></a></li>
+                            <li><a data-toggle="tooltip" data-placement="top" title="Facebook" class="soc_tooltip" href="https://www.facebook.com/ominext"><i class="fa fa-facebook"></i></a></li>
+                            <li><a data-toggle="tooltip" data-placement="top" title="Twitter" class="soc_tooltip"  href="https://twitter.com/OminextSoftware"><i class="fa fa-twitter"></i></a></li>
+                            <li><a data-toggle="tooltip" data-placement="top" title="Linkedin" class="soc_tooltip"  href="https://www.linkedin.com/company/ominext-jsc"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a data-toggle="tooltip" data-placement="top" title="Contact" class="soc_tooltip"  href="#templatemo-contact"><i class="fa fa-envelope"></i></a></li>
                         </ul>
                     </div>
                 </div>

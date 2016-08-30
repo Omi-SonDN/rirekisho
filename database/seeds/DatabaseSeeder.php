@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(companies::class);
         $this->call(f_general::class);
         $this->call(f_slide::class);
+        $this->call(group::class);
         Model::reguard();
     }
 }
@@ -77,8 +78,6 @@ class CVTableSeeder extends Seeder
     {
         DB::table('cvs')->delete();
         $faker = Faker::create('vi_VN');
-        $faker1 = Faker::create();
-        $faker2 = Faker::create('ja_JP');
         $users = DB::table('users')->where('role', 0)->get();
         $abc1 = DB::table('positions')->get();
         $abc2 = DB::table('status')->get();
@@ -92,14 +91,10 @@ class CVTableSeeder extends Seeder
 
         foreach ($users as $v) {
             DB::table('cvs')->insert([
-                //'First_name' => $faker->middleName.' '.$faker->firstName,
-                //'Last_name' => $faker->lastName,
-                //'Gender' => 1,
-                //'Address' => $faker->city,
-                'name_cv' => $faker->text,
+                'name_cv' => substr($faker->text, 255),
                 'user_id' => $v->id,
-                //'created_at' => $faker->date($format = 'Y-m-d', $max = '1995-11-03'),
-                'created_at' => $faker->dateTimeBetween('-3 years', 'now'),
+                'email' => $v->email,
+                'created_at' => $faker->dateTimeBetween('-10 years', 'now'),
                 'apply_to' => array_rand($key_positions),
                 'Status' => array_rand($key_status),
                 'Status' => 1,
@@ -366,6 +361,35 @@ class f_slide extends Seeder
             'image'=>'public/upload/img/slide2.jpg',
             'text'=>'we create the next values',
             'order'=>'2',
+            ]);
+    }
+}
+
+class group extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+        DB::table('group')->insert([
+            'name'=>'Super Admin',
+            'parent' => 'NULL'
+            ]);
+        DB::table('group')->insert([
+            'name'=>'Admin',
+            'parent' => '1'
+            ]);
+        DB::table('group')->insert([
+            'name'=>'Visitor',
+            'parent' => '2'
+            ]);
+        DB::table('group')->insert([
+            'name'=>'Applicant',
+            'parent' => '3'
             ]);
     }
 }

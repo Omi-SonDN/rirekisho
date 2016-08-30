@@ -42,12 +42,13 @@
 
                         <div class="blockrow member_blockrow">
                             <?php
-                                $date = date_create(Auth::User()->created_at);
-                                $date = date_format($date, 'd-m-Y');
+                                $date = Auth::User()->created_at;
+                                // $date = date_format($date, 'd-m-Y H:i');
+                                $date = date('d-m-Y H:i A',strtotime($date))
                             ?>
 
                             <dl class="stats">
-                                <dt>Ngày tham gia</dt>
+                                <dt>Ngày tham gia:</dt>
                                 <dd>{{$date}}</dd>
                             </dl>
 
