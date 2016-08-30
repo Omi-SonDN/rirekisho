@@ -68,7 +68,7 @@
     <!-- thong ke -->
     <script type="text/javascript" src="{{asset('/hightchart/js/highcharts.js')}}"></script>
     <script type="text/javascript" src="{{asset('/hightchart/js/exporting.js')}}"></script>
-    <!-- <script type="text/javascript" src="{{asset('/hightchart/js/canvas-tools.js')}}"></script> -->
+    <script type="text/javascript" src="{{asset('/hightchart/js/canvas-tools.js')}}"></script>
     <script type="text/javascript" src="{{asset('/hightchart/js/export-csv.js')}}"></script>
     <!-- <script type="text/javascript" src="{{asset('/hightchart/js/jspdf.js')}}"></script> -->
     <script type="text/javascript" src="{{asset('/hightchart/js/highcharts-export-clientside.js')}}"></script>

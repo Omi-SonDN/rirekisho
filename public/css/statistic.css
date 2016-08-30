@@ -71,10 +71,12 @@
     float: left;
     position: relative;
     margin: auto;
-    margin-left: 60px;
     margin-bottom: 30px;
     height: 40px;
    
+}
+.search_po_sa label{
+    transform: translate(0,-8px);
 }
 .search_po_sa input#startDate {
     -moz-border-bottom-colors: none;
@@ -87,8 +89,9 @@
     border-width: 0 1px 0 0;
     line-height: 32px;
     margin: 0 auto;
-    padding-left: 10px;
-    width: 130px;
+    padding-left: 5px;
+    width: 90px;
+    transform: translate(0,-8px);
 }
 .search_po_sa input#endDate {
     -moz-border-bottom-colors: none;
@@ -102,10 +105,26 @@
     line-height: 32px;
     margin: 0 auto;
     padding-left: 10px;
-    width: 130px;
+    width: 90px;
+    transform: translate(0,-8px);
+}
 }
 
-.search_po_sa select#positionsSearch {
+.search_po_sa select#positionsSearch{
+   --moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color #e7e7e7 -moz-use-text-color -moz-use-text-color;
+    border-image: none;
+    border-style: none solid none none;
+    border-width: medium 1px medium medium;
+    height: 36px;
+    width: 150px;
+     /*transform: translate(0,5px);*/
+}
+
+.search_po_sa select#statusSearch_, .search_po_sa select#statusSearch1_ {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
@@ -114,21 +133,9 @@
     border-image: none;
     border-style: none solid none none;
     border-width: medium 1px medium medium;
-    height: 100%;
+    height: 34px;
     width: 150px;
-}
-
-.search_po_sa select#statusSearch_ {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    border-color: -moz-use-text-color #e7e7e7 -moz-use-text-color -moz-use-text-color;
-    border-image: none;
-    border-style: none solid none none;
-    border-width: medium 1px medium medium;
-    height: 100%;
-    width: 150px;
+     transform: translate(0,2px);
 }
 
 .search_po_sa input#searchStatistics {
@@ -136,6 +143,14 @@
     height: 100%;
     margin-left: -4px;
     width: 5em;
+    transform: translate(0,-8px);
+}
+.search_po_sa input#search_Sta {
+    border: 0 none;
+    height: 100%;
+    margin-left: -4px;
+    width: 5em;
+    transform: translate(0,-8px);
 }
 
 /*  CSS download statistic CV cho từng hightchart */

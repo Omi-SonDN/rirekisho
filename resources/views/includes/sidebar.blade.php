@@ -49,7 +49,9 @@
                 </a>
             </div>
         </li>
+
         @foreach($list as $item)
+            @if($item->live)
             <li class="track-list">
                 <label style="display: table;width:100%;">
                     <span style="display: table-cell;width: 30px;"></span>
@@ -60,6 +62,7 @@
                            class="plus-button" type="button" style="display: table-cell;width: 25px;" value="Xoá ">
                 </label>
             </li>
+            @endif
         @endforeach
         @endcan
         @can('Admin')

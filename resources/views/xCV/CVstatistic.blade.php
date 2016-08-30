@@ -34,7 +34,7 @@
 
                 <div>
                     <div id="">
-                        <!-- <form method="get" action="{{ url('CV/downloadCV/pdf') }}">    -->  
+                        <!-- <form method="get" action="{{ url('CV/downloadCV/pdf') }}">      -->
                             <ul class="menu_download" >
                                 <li class="list_do" export-type='pdf'>  
                                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
@@ -45,7 +45,7 @@
                                     Download Excel
                                 </li>
                             </ul>
-                       <!--  </form> -->
+                        <!-- </form> -->
                     </div>
                 </div>
             
@@ -62,6 +62,7 @@
                         
                         <?php
                             $id = DB::select('select * from positions');
+                            $status = DB::select('select * from status');
                         ?>
 
                         <div id="error_date"></div>
@@ -75,20 +76,36 @@
 
                         ?>
 
-                            <div class="search_po_sa" style="display: none">
+                            <div class="search_po_sa" id="but_search_po" style="display: none">
                                     <label>From: </label>
                                     <input id="startDate" data-date-format="yyyy-mm-dd" name="startDate" value="{{$dateStart}}">
                                     <label>To: </label>
                                     <input id="endDate"  data-date-format="yyyy-mm-dd" name="endDate" value="{{$day}}">
-                                    <select id = "positionsSearch" name="position">
+                                    <select id = "positionsSearch" name="position" style="border: none; height: 36px; transform: translate(0,-7px);">
                                         <option value="">Vị trí tuyển dụng</option>
                                         @foreach ($id as $position)
                                             <option value="{{$position->id}}">{{$position->name}}</option>
                                         @endforeach
 
                                     </select>
+                                    <select id = "statusSearch1_" name="status[]" multiple="multiple">
+                                        @foreach ($status as $sta_)
+                                            <option value="{{$sta_->id}}">{{$sta_->status}}</option>
+                                        @endforeach
+                                    </select>
                                     <input type="submit" name="Search" id="searchStatistics" value="Search">
 
+                            </div>
+                           
+                            <div class="search_po_sa" id="but_search_sa" style="margin-left: 60px">
+                                <!-- <form method="GET" action="/CV/search_ab"> -->
+                                    <select id = "statusSearch_" name="status[]" multiple="multiple">
+                                        @foreach ($status as $sta_)
+                                            <option value="{{$sta_->id}}">{{$sta_->status}}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="submit" name="Search" id="search_Sta" value="Search">
+                                <!-- </form> -->
                             </div>
                 
                             <div class="row">

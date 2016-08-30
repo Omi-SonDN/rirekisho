@@ -39,7 +39,6 @@ class AppServiceProvider extends ServiceProvider
                         }
                     }
                 }
-
                 // kiem tra bookmark
                 // Admin: xoa bo nhung cv chua cho phep tuyen dung tim kiem
                 if(Auth::user()->getRole() == 'Admin') {

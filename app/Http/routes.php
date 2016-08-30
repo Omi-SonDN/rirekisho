@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
     Route::get('user/search/nguoi-gioi-thieu', ['as'=>'user.search.email', 'uses' =>'UsersController@getSearchEmail']);
 
     Route::get('downloadCV/{type}', 'CVController@downloadCV');
+    Route::get('CV/search_ab', 'CVController@search_ab');
 
 });
 

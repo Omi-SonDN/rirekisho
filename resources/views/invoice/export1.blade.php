@@ -28,7 +28,7 @@
                 
 
                 @foreach($apply_to as $po)
-                <td style="background-color:#666699">{{ $po->name }}</td>
+                <td style="background-color:#666699; width: 15px">{{ $po->name }}</td>
                 @endforeach
 
                 @foreach($cv as $cv_)

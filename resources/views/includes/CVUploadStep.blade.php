@@ -2,7 +2,7 @@
     <div class="col-md-12 header-createcv">
         <blockquote>
         <p>Bạn đã tạo thành công CV đính kèm file. </p>
-        <p>Bạn có muốn gây ấn tượng tốt với nhà tuyển dụng, vui lòng điền thông tin bên dưới đây.</p>
+        <p>Bạn có muốn gây ấn tượng tốt với nhà tuyển dụng, vui lòng upload CV bên dưới đây.</p>
         </blockquote>
     </div>
 @endif

@@ -49,7 +49,7 @@
                                         src="{!! asset('/frontend/img/no-avatar.jpg') !!}"
                                         @endif
                                         title="{{Auth::user()->userName}}" width="44" height="44" border="0">
-                                        <span class="caret" style="color: #f36f21;"></span></a>
+                                        <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="profile">Thông tin cá nhân</a></li>
                                     @can('SuperAdmin')
@@ -98,8 +98,8 @@
                                 </ul>
                             </li>
                         @else
-                            <li><a href="{{\URL('auth/login')}}" style="color: #f36f21;">Đăng nhập</a></li>
-                            <li><a href="{{\URL('auth/register')}}" style="color: #f36f21;">Đăng ký</a></li>
+                            <li><a href="{{\URL('auth/login')}}">Đăng nhập</a></li>
+                            <li><a href="{{\URL('auth/register')}}">Đăng ký</a></li>
                         @endif
                     </ul>
                 </div>
