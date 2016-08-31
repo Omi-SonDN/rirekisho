@@ -98,9 +98,10 @@ class SlideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function view($id)
     {
-        //
+        $slide = Slide::findorfail($id);
+        return view('FrontEnd.slide.view')->with('slide', $slide);
     }
 
     /**

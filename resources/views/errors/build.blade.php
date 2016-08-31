@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Đường dẫn không tồn tại hoặc đang được cập nhật</title>
+@section('title')Đường dẫn không tồn tại hoặc đang được cập nhật @endsection
 @section('content')
 <style>
     .setspan{

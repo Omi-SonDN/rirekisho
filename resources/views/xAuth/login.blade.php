@@ -1,5 +1,6 @@
 @extends('xAuth.begin')
-<title>Đăng nhập</title>
+@section('title')Đăng nhập @endsection
+
 @section('content')
     <!--div  class="page-title"><h3>Tạo CV mới</h3></div-->
 

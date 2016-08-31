@@ -1,12 +1,13 @@
 @extends('xCV.template')
-<title>Danh sách người dùng</title>
+@section('title')Danh sách người dùng @endsection
+
 @section('content')
     <div id="list_table" data-table="table-user">
         <div class="table_action">
             <div class="top_action"></div>
             <div class="bottom_action">
-                    <a href="{{route('getadduser')}}" class='btn btn-primary' style="color: #fff"><i class="fa fa-user-plus" style="margin: 0 auto;">
-                        </i> Thêm tài khoản</a>
+                <a href="{{route('getadduser')}}" class='btn btn-primary' style="color: #fff"><i class="fa fa-user-plus" style="margin: 0 auto;">
+                    </i> Thêm tài khoản</a>
                 <span class="active-del"></span>
 
                 <div class="wait-modal-load"></div>

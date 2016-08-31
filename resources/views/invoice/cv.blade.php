@@ -81,13 +81,12 @@
                 <td>{{$CV->User->name}} </td>
                 <td rowspan="3" style="" >
                     <?php $image = $CV->User->image;
-                        // $image = $image.$serve;
+                        $image = $serve.$image;
                     ?>
                     @if(isset($image)&&($image!=""))
                         
-                        <img style="height: 100px; width: 100px;" src='http://localhost:8000/img/thumbnail/thumb_2016-08-18-07-47-08-223.jpg' >
-                        <!-- <img style="height: 100px; width: 100px;"
-                             src=<?php //echo "/img/thumbnail/thumb_" . $image;?> > -->
+                        <img style="height: 100px; width: 100px;"
+                             src='{{$image}}' >
                     @else
     
                         <div class="dropzone-text-place"

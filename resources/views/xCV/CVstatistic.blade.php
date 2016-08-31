@@ -1,5 +1,6 @@
 @extends('xCV.template')
-<title>Statistic CV</title>
+@section('title')Statistic CV @endsection
+
 @section('content')
 
     <div class="row statisic" style="position: relative">

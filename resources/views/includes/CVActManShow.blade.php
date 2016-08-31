@@ -132,7 +132,7 @@
                         var option = '<select name="" onclick="txtBoxAddUser(this, \'' + idBoxSearch + '\', \'' + idBtnAddCeo + '\', \'' + idField + '\', \'' + idCeo_CV + '\', \'' + idsearchclear + '\')" id="myautocomplete" size="' + setZise + '">';
                         if (data.length) {
                             for (var key in data) {
-                                option += '<option value="' + data[key]['userId'] + '" set="img" style="background-image:url(' + data[key]['image'] + '); padding-left: 25px;"> &nbsp' + data[key]['userName'] + '</option>';
+                                option += '<option value="' + data[key]['userId'] + '" set="img" style="background-image:url(' + data[key]['image'] + '); background-size: 25px 30px; padding-left: 25px;"> &nbsp' + data[key]['userName'] + '</option>';
                             }
                         } else {
                             option += '<option value="0">Không tìm thấy</option>'

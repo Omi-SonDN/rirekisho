@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Thông tin cá nhân</title>
+@section('title')Thông tin cá nhân @endsection
 @section('content')
 
     <div class="member_content userprof fullwidth" style="display:block;" id="member_content">

@@ -1,5 +1,6 @@
 @extends('xCV.template')
-<title>Hiện tại Server không có phản hồi</title>
+@section('title')Hiện tại Server không có phản hồi @endsection
+
 @section('content')
     <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 

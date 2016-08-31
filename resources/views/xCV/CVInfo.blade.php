@@ -1,5 +1,6 @@
 @extends('xCV.template')
-<title>Quản lý hồ sơ</title>
+@section('title')Quản lý hồ sơ @endsection
+
 @section('content')
 
 <div class="form-group col-lg-12">

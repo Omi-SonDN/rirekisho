@@ -1,8 +1,9 @@
 @extends('xCV.template')
-<title>Quản lý nhóm</title>
+@section('title')Quản lý nhóm người dùng @endsection
+
 @section('content')
     <div class="row">
-        <a class="btn btn-primary open-modal" style="font-weight: bold; color: white;" href="{{route('group.create')}}">Create</a>
+        <a class="btn btn-primary open-modal" style="font-weight: bold; color: white;" href="{{route('group_user.create')}}">Create</a>
         <hr>
     </div>
     <div class="row">
@@ -16,7 +17,7 @@
                 </thead>
                 @include('includes.flash-alert')
                 <tbody>
-                @foreach($Group as $key=>$stt)
+                @foreach($Group_user as $key=>$stt)
                     <tr id="pos{{ $stt->id }}">
                         <td>
                             {{$stt->id }}
@@ -28,16 +29,16 @@
                             {{ ($stt->parent)?($stt->theParent()->name):'' }}
                         </td>
                         <td>
-                            <a style="font-weight: bold; color: white;" href="{{route('group.show',[$stt])}}" class="btn ink-reaction btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin trạng thái CV"><span class="glyphicon glyphicon-eye-open"></span></a>
-                            <a style="font-weight: bold; color: white;" href="{{url('group',[$stt->id ,'edit'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                            <a style="font-weight: bold; color: white;" href="{{url('group',[$stt->id ,'delete'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a style="font-weight: bold; color: white;" href="{{route('group_user.show',[$stt])}}" class="btn ink-reaction btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin nhóm người dùng"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a style="font-weight: bold; color: white;" href="{{url('group_user',[$stt->id ,'edit'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a style="font-weight: bold; color: white;" href="{{url('group_user',[$stt->id ,'delete'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-remove"></span></a>
                         </td>
 
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-            {!! $Group->render() !!}
+            {!! $Group_user->render() !!}
         </div>
     </div>
 

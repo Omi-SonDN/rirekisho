@@ -1,6 +1,5 @@
 @extends('FrontEnd.master')
-<title>Chào mừng bạn đến trang website Ominext</title>
-
+@section('title')Chào mừng bạn đến trang website Ominext @endsection
 
 @section('content')
     <div class="clearfix"></div>

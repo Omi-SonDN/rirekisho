@@ -1,4 +1,3 @@
-<body>
 <div class="header">
     <div class="navbar">
         <div class="nav_area">
@@ -75,7 +74,3 @@
     </div>
     <!--hr /-->
 </div>
-
-
-</body>
-</html>

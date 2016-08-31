@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Quản lý Slide</title>
+@section('title')Quản lý Slide @endsection
 @section('content')
     <div class="row">
         <a class="btn btn-primary open-modal" style="font-weight: bold; color: white;"  href="{{route('slide::addSlide')}}">Create</a>
@@ -33,7 +33,7 @@
                             {{$slide->order}}
                         </td>
                         <td>
-                            <a style="font-weight: bold; color: white;" href="{{url('slide',[$slide ,'view'])}}" class="btn ink-reaction btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin vị trí tuyển dụng"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a style="font-weight: bold; color: white;" href="{{url('slide',[$slide ,'view'])}}" class="btn ink-reaction btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin slide"><span class="glyphicon glyphicon-eye-open"></span></a>
                             <a style="font-weight: bold; color: white;" href="{{url('slide',[$slide ,'edit'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                             <a style="font-weight: bold; color: white;" href="{{url('slide',[$slide ,'delete'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-remove"></span></a>
                         </td>

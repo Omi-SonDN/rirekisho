@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Thêm Slide</title>
+@section('title')Thêm Slide @endsection
 
 @section('content')
     <form action="{{route('slide::postSlide')}}" method="post" class="my-forms" id="profile-forms"

@@ -32,7 +32,7 @@
 
                             @endcan
                             @can('Visitor')
-                            <li class="{{(URL::current() == url('CV')) ? 'active' : ''}}"><a href="{{url('CV')}}" style="color: #4060a5;">Quản
+                            <li class="{{(URL::current() == url('CV')) ? 'active' : ''}}"><a href="{{url('CV')}}">Quản
                                     lý CV</a></li>
                             @endcan
                             @can('Applicant')
@@ -98,8 +98,8 @@
                                 </ul>
                             </li>
                         @else
-                            <li><a href="{{\URL('auth/login')}}" style="color: #f36f21;">Đăng nhập</a></li>
-                            <li><a href="{{\URL('auth/register')}}" style="color: #f36f21;">Đăng ký</a></li>
+                            <li><a href="{{\URL('auth/login')}}">Đăng nhập</a></li>
+                            <li><a href="{{\URL('auth/register')}}">Đăng ký</a></li>
                         @endif
                     </ul>
                 </div>

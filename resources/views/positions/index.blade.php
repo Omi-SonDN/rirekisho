@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Quản lý ví trí tuyển dụng</title>
+@section('title')Quản lý ví trí tuyển dụng @endsection
 @section('content')
     <div class="row">
         <a class="btn btn-primary open-modal" style="font-weight: bold; color: white;"  href="{{route('position::getaddposition')}}">Create</a>

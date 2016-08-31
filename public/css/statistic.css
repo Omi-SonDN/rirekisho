@@ -169,11 +169,11 @@
     border-radius: 2px;
 }
 
-.printcv:hover .reaction-box1, .printcv:hover .reaction-box2{
-  display: block;  
+.printCV:hover .reaction-box1, .printCV:hover .reaction-box2{
+  display: block;
+  cursor: pointer;
 }
-
-.printcv .reaction-box1, .printcv .reaction-box2 {
+.printCV .reaction-box1, .printCV .reaction-box2 {
     width: 150px; height: 150px;
     display: none;
     position: static;
@@ -181,13 +181,13 @@
     border: 0;
 }
 
-.printcv:hover .reaction-box1 .reaction-icon:hover, .printcv:hover .reaction-box2 .reaction-icon:hover{
+.printCV:hover .reaction-box1 .reaction-icon:hover, .printCV:hover .reaction-box2 .reaction-icon:hover{
     background: #ddd;
     cursor: pointer;
     z-index: 1;
 }
 
-.printcv .reaction-box1 .reaction-icon, .printcv .reaction-box2 .reaction-icon {
+.printCV .reaction-box1 .reaction-icon, .printCV .reaction-box2 .reaction-icon {
     width: 150px; height: 25px;
     font-size: 9pt;
     padding-top: 5px;
@@ -199,7 +199,7 @@
     background-color: #fff;
 }
 
-.printcv:hover .reaction-box1 .reaction-icon .fa,.printcv:hover .reaction-box2 .reaction-icon .fa{
+.printCV:hover .reaction-box1 .reaction-icon .fa,.printCV:hover .reaction-box2 .reaction-icon .fa{
     float: left;
     margin-top: 0px;
     margin-left: 10px;

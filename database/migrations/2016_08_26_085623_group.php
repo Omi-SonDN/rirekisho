@@ -12,7 +12,7 @@ class Group extends Migration
      */
     public function up()
     {
-        Schema::create('group', function (Blueprint $table) {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('parent')->unsigned()->nullable();
@@ -27,6 +27,6 @@ class Group extends Migration
      */
     public function down()
     {
-        Schema::drop('group');
+        Schema::drop('group_user');
     }
 }

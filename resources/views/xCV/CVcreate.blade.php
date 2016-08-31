@@ -1,5 +1,6 @@
 @extends('xCV.template',['CV' => $CV])
-<title>Tạo CV</title>
+@section('title')Tạo CV @endsection
+
 @section('content')
     <!--div  class="page-title"><h3>Tạo CV mới</h3></div-->
     <?php $key = $CV->hash;?>

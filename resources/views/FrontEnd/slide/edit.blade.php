@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Sửa Slide</title>
+@section('title')Sửa Slide @endsection
 
 @section('content')
     <form action="{{route('slide::update',['id'=>$slide->id])}}" method="post" class="my-forms" id="profile-forms"

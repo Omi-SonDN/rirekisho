@@ -37,11 +37,11 @@ class Status extends Model
     }
     public function getPreviousStatusAttribute(){
 
-        return $this->prev_status?explode(',',$this->prev_status):array();
+        return $this->prev_status ? explode(',', $this->prev_status) : array();
     }
 
     public function getInfoAttribute(){
-        return $this->infor?explode(',',$this->infor):array();
+        return $this->infor ? explode(',', $this->infor): array();
     }
 
     public function getStatusNameAttribute(){

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Group;
+use App\Group_user;
 use Gate;
 use Illuminate\Support\Facades\Response;
 use Input;
@@ -14,7 +14,7 @@ use Session;
 use Validator;
 use DB;
 
-class GroupController extends Controller
+class Group_UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,11 +27,11 @@ class GroupController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        $group = Group::paginate(10);
+        $group = Group_user::paginate(10);
         $data = array(
-            'Group' => $group,
+            'Group_user' => $group,
         );
-        return view('group.index',isset($data)?$data:NULL)->with($data);
+        return view('group_user.index',isset($data)?$data:NULL)->with($data);
     }
 
     /**
@@ -44,7 +44,7 @@ class GroupController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        return view('group.add');
+        return view('group_user.add');
     }
 
     /**
@@ -61,23 +61,23 @@ class GroupController extends Controller
 
         global $request;
         $rules = array(
-            'name' => 'required|unique:group,name'
+            'name' => 'required|unique:group_user,name'
         );
          $validator = Validator::make($request->all(),$rules);
         if( $validator->fails() ){
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $group = new Group();
+            $group = new Group_user();
             $group->name = $request->name;
             $group->parent = $request->parent;
             $group->save();
         }
         return redirect()
-        ->route('group.create')
+        ->route('group_user.index')
         ->with(
             [
                 'flash_level' => 'success',
-                'message' => 'Đã thêm trạng thái thành công!'
+                'message' => 'Đã thêm nhóm người dùng thành công!'
             ]
         );
     }
@@ -90,8 +90,8 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        $group = Group::findorfail($id);
-        return view('group.view')->with('Group', $group);
+        $group = Group_user::findorfail($id);
+        return view('group_user.view')->with('Group_user', $group);
     }
 
     /**
@@ -105,8 +105,8 @@ class GroupController extends Controller
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        $group = Group::findorfail($id);
-        return view('group.edit')->with('Group', $group);
+        $group = Group_user::findorfail($id);
+        return view('group_user.edit')->with('Group_user', $group);
     }
 
     /**
@@ -122,11 +122,11 @@ class GroupController extends Controller
             abort(403);
         }
 
-        $group = Group::findorfail($id);
+        $group = Group_user::findorfail($id);
 
         $rules = array();
         if( $group->name != $request->name){
-            $rules['status'] = 'required|unique:group,name';
+            $rules['name'] = 'required|unique:group_user,name';
         }
         $validator = Validator::make($request->all(),$rules);
         if( $validator->fails() ){
@@ -137,11 +137,11 @@ class GroupController extends Controller
         }
         $group->save();
         return redirect()
-        ->route('group.index')
+        ->route('group_user.index')
         ->with(
             [
                 'flash_level' => 'success',
-                'message' => 'Đã sửa nhóm thành công'
+                'message' => 'Đã sửa nhóm người dùng thành công'
             ]
         );
     }
@@ -159,19 +159,19 @@ class GroupController extends Controller
         }
 
         //remove parent
-        $groups = Group::where('parent',$id)->get();
+        $groups = Group_user::where('parent',$id)->get();
         foreach($groups as $group){
             $group->parent = null;
             $group->save();
         }
-        Group::destroy($id);
+        Group_user::destroy($id);
 
         return redirect()
-        ->route('group.index')
+        ->route('group_user.index')
         ->with(
             [
                 'flash_level' => 'success',
-                'message' => 'Đã xóa nhóm thành công'
+                'message' => 'Đã xóa nhóm người dùng thành công'
             ]
         );
     }

@@ -329,6 +329,9 @@ a.bookmark-btn {
     right: 0;
     bottom: 0;
     left: 0;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
 }
 
 #dropzone img {
