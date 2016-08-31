@@ -134,7 +134,7 @@
 <div class="button_print" id="hightchart_1" style="width: 27px; height: 27px;float: right">
     <div class="printCV">
         
-        <ul class="reaction-box2">
+        <ul class="reaction-box2" data-toggle="dropdown">
             <li class="reaction-icon" export-type='' data-type="image/jpeg">  
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>
                 DownLoad PNG

@@ -39,22 +39,21 @@ class CVController extends Controller
             $s_name = '';
         }
 
-        if ($request->has('positions') ) {
+        if ($request->has('positions')) {
             $positions = (int)$request->get('positions');
-        }else {
+        } else {
             $positions = null;
-
         }
 
         if ($request->has('status')) {
             $status = (int)$request->get('status');
-        }else {
+        } else {
             $status = '';
         }
 
         if ($request->has('data-field')) {
             $_field = $request->get('data-field');
-        }else {
+        } else {
             $_field = 'updated_at';
         }
 
@@ -271,9 +270,11 @@ class CVController extends Controller
         $Records = $CV->Record;
         $Records = $Records->sortBy("Date");
 
+        $serve = public_path('/img/thumbnail') .'/thumb_';
+    
         $html = View::make('invoice.cv')
-            ->with('CV', $CV)->with('Records', $Records)->render();
-        //$html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+            ->with('CV', $CV)->with('Records', $Records)->with('serve', $serve)->render();
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
 
         $dompdf = PDF::loadHTML($html);
         $dompdf->getDomPDF()->set_option('enable_font_subsetting', true);
@@ -1035,31 +1036,6 @@ class CVController extends Controller
             }
             return $listPo;
         } else return $key;
-    }
-
-    public function search_ab(Request $request)
-    {
-        if (Gate::denies('Admin')) {
-            abort(403);
-        }
-        $key = $request->input('ox');
-        if($key != null){
-            $listPo = array();
-            for($i = 0; $i < count($key); $i++) {
-                $apply = DB::table('status')
-                 ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
-                $listPo[] = $apply[0];
-            }
-        }
-        list($cv, $text) = $this->sta_month_applyTo11($listPo);
-        $apply = '';
-        list($cv_upload, $ox) = $this->toArrayCV($cv); 
-
-        $listPo = $this->_statisticPo($listPo, $cv);
-        $apply = $this->_statistic($cv);
-       
-        return View::make('includes.positions_chart')->with('ox', $ox)->with('cv_upload', $cv_upload)
-            ->with('text', $text)->with('listPo', $listPo)->with('apply', $apply)->with('listPo', $listPo);
     }
 
     //view satistic theo month quarter month apply

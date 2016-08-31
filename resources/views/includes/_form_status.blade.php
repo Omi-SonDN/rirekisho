@@ -9,7 +9,7 @@
                     <?php continue; ?>
                 @endif
             @endif
-            @if($status->id === $CV->Status))
+            @if($status->id === $CV->Status)
                 <option value="{{$status->id}}" selected="select" >{{$status->status}}</option>
             @else
                 @if( in_array($CV->Status, $status->previous_status) )

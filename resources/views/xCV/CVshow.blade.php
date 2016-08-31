@@ -86,7 +86,7 @@
                         </li>
 
                         <li class="p-link">
-                            <a href="{{url('CV',[$CV ,'getPDF'])}}" name="">
+                            <a target="_blank" href="{{url('CV',[$CV ,'getPDF'])}}" name="">
                                 <i class="fa fa-download "></i>
 
                                 <div class="li-text">Download CV</div>

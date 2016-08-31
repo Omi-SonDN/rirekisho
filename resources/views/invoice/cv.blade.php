@@ -80,15 +80,19 @@
                 <td style="width:15%; font-weight: 700;">Họ và Tên</td>
                 <td>{{$CV->User->name}} </td>
                 <td rowspan="3" style="" >
-                    <?php $image = $CV->User->image;?>
+                    <?php $image = $CV->User->image;
+                        $image = $serve.$image;
+                    ?>
                     @if(isset($image)&&($image!=""))
-                            <img style="height: 100px; width: 100px; padding-left: 15px;"
-                                 src=<?php echo "/img/thumbnail/thumb_" . $image;?>>
+                        
+                        <img style="height: 100px; width: 100px;"
+                             src='{{$image}}' >
                     @else
-                        <div class=""
-                             style="background-color:{{$CV->User->getThemeColor()}};  width: 100px; height: 100px; text-align: center ">
-                            <span class=""
-                                  style="color: {{$CV->User->getTextColor()}};font-size:60pt;">
+    
+                        <div class="dropzone-text-place"
+                             style="background-color:{{$CV->User->getThemeColor()}};width: 100px; height: 100px;">
+                            <span class="dropzone-text letter-avatar"
+                                  style=" font-size: 15pt; color: {{$CV->User->getTextColor()}}; margin: 0 auto">
                                 {{substr(trim($CV->User->Name), 0, 1)}}
                             </span>
                         </div>

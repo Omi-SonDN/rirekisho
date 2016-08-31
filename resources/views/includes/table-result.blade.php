@@ -12,7 +12,7 @@
                 <div style=" position: relative;height: 75px;width: 75px; cursor: pointer" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
                     <?php $image = $CV->User->image;?>
                     @if($image!="")
-                        <img style="height: 100px; width: 100px;"
+                        <img style="height: 75px; width: 75px;"
                              src=<?php echo "/img/thumbnail/thumb_" . $image;?> >
                     @else
                         <div class="dropzone-text-place"
