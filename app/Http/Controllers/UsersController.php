@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\View;
 use Intervention\Image\Facades\Image;
 use Validator;
 use Vinkla\Hashids\Facades\Hashids;
+use \App\MyLibrary\myFunction;
 
 class UsersController extends Controller
 {
@@ -526,9 +527,24 @@ class UsersController extends Controller
         return '';
     }
 
-    public function profile()
+    public function profile($id)
     {
-        return view('about');
+        $idUser = myFunction::decodeHashId($id);
+        if (empty($idUser)) {
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
+
+        $dtUser = User::find($idUser);
+
+        if (Gate::denies('getAbout', $idUser)) {
+            abort(403);
+        }
+
+        if (empty($dtUser)){
+            abort(404, 'Lỗi, Không tìm thấy trang');
+        }
+
+        return view('about', compact('dtUser'));
     }
 
     public function getSearchEmail(Request $request)

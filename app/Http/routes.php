@@ -62,7 +62,9 @@ Route::group(['middleware' => ['auth']], function () {
         }
         return Hashids::decode($id)[0];
     });
-    Route::get('profile', 'UsersController@profile');
+
+    Route::get('profile/{id}', 'UsersController@profile');
+
     Route::get('/', function () {
         if (Auth::user()->getRole() === 'Applicant'){
             return view('xCV.CVInfo');

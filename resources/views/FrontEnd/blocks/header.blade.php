@@ -43,15 +43,15 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">
                                     <img
-                                    @if(Auth::user()->image)
-                                        src="{!! asset('/img/thumbnail/thumb_'.Auth::user()->image) !!}"
+                                        @if(Auth::user()->image != "" && file_exists(public_path($path = '/img/thumbnail/thumb_'.Auth::user()->image)))
+                                            src="{{ asset($path) }}"
                                         @else
-                                        src="{!! asset('/frontend/img/no-avatar.jpg') !!}"
+                                            src="{!! asset('/frontend/img/no-avatar.jpg') !!}"
                                         @endif
                                         title="{{Auth::user()->userName}}" width="44" height="44" border="0">
                                         <span class="caret" style="color: #f36f21;"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="profile">Thông tin cá nhân</a></li>
+                                    <li><a href="{{url('profile/'. Auth::User()->hash)}}">Thông tin cá nhân</a></li>
                                     @can('SuperAdmin')
                                     <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                                     <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>

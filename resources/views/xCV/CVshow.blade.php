@@ -8,10 +8,9 @@
         <div class="top-card " style="">
             <div class="profile">
                 <div class="profile-picture ">
-                    <?php ?>
                     @if(isset($image)&&($image!=""))
                             <img style="height: 100px; width: 100px;"
-                                 src=<?php echo "/img/thumbnail/thumb_" . $image;?>>
+                                 src="{{asset('/img/thumbnail').'/thumb_'.$CV->User->image }}" >
                     @else
                         <div class="dropzone-text-place"
                              style="background-color:{{$CV->User->getThemeColor()}} ">
@@ -86,7 +85,7 @@
                         </li>
 
                         <li class="p-link">
-                            <a href="{{url('CV',[$CV ,'getPDF'])}}" name="">
+                            <a target="_blank"  href="{{url('CV',[$CV ,'getPDF'])}}" name="">
                                 <i class="fa fa-download "></i>
 
                                 <div class="li-text">Download CV</div>

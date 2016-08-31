@@ -10,10 +10,8 @@
         <tr class="data{{++$key}}">
             <td class="image" style="width: 75px;">
                 <div style=" position: relative;height: 75px;width: 75px; cursor: pointer" onmouseover="topxTip(document.getElementById('tip_{{$CV->hash}}').innerHTML)" onmouseout="UnTip()">
-                    <?php $image = $CV->User->image;?>
-                    @if($image!="")
-                        <img style="height: 100px; width: 100px;"
-                             src=<?php echo "/img/thumbnail/thumb_" . $image;?> >
+                    @if($CV->User->image != "" && file_exists(public_path($path = '/img/thumbnail/thumb_'.$CV->User->image)))
+                        <img style="height: 75px; width: 75px;" src="{{ asset($path) }}">
                     @else
                         <div class="dropzone-text-place"
                              style="background-color:{{$CV->User->getThemeColor()}} ">
@@ -25,7 +23,7 @@
                     @endif
                 </div>
             </td>
-            <td>{!! $CV->User->userName !!}</td>
+            <td><a href="{{url('profile/'. $CV->User->hash)}}">{!! $CV->User->userName !!}</a></td>
             <td class="name">
                 @if ($CV->type_cv)
                     <a href="{{ \URL('CV/upload/'. $CV->hash) }}" title="Xem CV {{$CV->name_cv}}">{{ $CV->User->Name }} </a>

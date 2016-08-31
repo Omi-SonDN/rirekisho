@@ -51,9 +51,8 @@
                         <tr class="data">
                             <td class="image">
                                 <div style=" position: relative;height: 50px;width: 50px;">
-                                    @if($row->image!="")
-                                        <img style="height: 50px; width: 50px;"
-                                             src=<?php echo "/img/thumbnail/thumb_" . $row->image;?>>
+                                    @if($row->image!="" && file_exists(public_path($path = '/img/thumbnail/thumb_'.$row->image)))
+                                        <img style="height: 50px; width: 50px;" src="{{asset($path)}}">
                                     @else
                                         <div class="dropzone-text-place"
                                              style="background-color:{{$row->getThemeColor()}} ">

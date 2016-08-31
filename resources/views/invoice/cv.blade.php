@@ -65,7 +65,7 @@
 <body>
 <?php $key = $CV;?>
 <h1 style="text-align: center">
-    SƠ YẾU LÝ LICH
+    SƠ YẾU LÝ LỊCH
 </h1>
 
 <ul class="list">
@@ -80,13 +80,12 @@
                 <td style="width:15%; font-weight: 700;">Họ và Tên</td>
                 <td>{{$CV->User->name}} </td>
                 <td rowspan="3" style="" >
-                    <?php $image = $CV->User->image;?>
-                    @if(isset($image)&&($image!=""))
-                            <img style="height: 100px; width: 100px; padding-left: 15px;"
-                                 src=<?php echo "/img/thumbnail/thumb_" . $image;?>>
+                    @if(isset($CV->User->image) && ($CV->User->image != ""))
+                            <img style="height: 130px; width: 120px; padding-left: 15px;"
+                                 src="{{public_path('/img/thumbnail').'/thumb_'. ($CV->User->image) }}" >
                     @else
                         <div class=""
-                             style="background-color:{{$CV->User->getThemeColor()}};  width: 100px; height: 100px; text-align: center ">
+                             style="background-color:{{$CV->User->getThemeColor()}};  width: 120px; height: 130px; text-align: center ">
                             <span class=""
                                   style="color: {{$CV->User->getTextColor()}};font-size:60pt;">
                                 {{substr(trim($CV->User->Name), 0, 1)}}
@@ -144,7 +143,7 @@
             @if(!$School->count())
                 <tr>
                     <td colspan="4">
-                        <center>There are no records to display</center>
+                        <center>Không có thông tin</center>
                     </td>
                 </tr>
             @else
@@ -202,8 +201,8 @@
             ?>
             @if(!$Work->count())
                 <tr>
-                    <td colspan="5">
-                        <center>Chưa có thông tin mô tả nào</center>
+                    <td colspan="4">
+                        <center>Không có thông tin</center>
                     </td>
                 </tr>
             @else
