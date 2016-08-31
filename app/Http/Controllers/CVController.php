@@ -271,9 +271,11 @@ class CVController extends Controller
         $Records = $CV->Record;
         $Records = $Records->sortBy("Date");
 
+        $serve = 'http://'.$_SERVER['HTTP_HOST'].'/img/thumbnail/thumb_';
+
         $html = View::make('invoice.cv')
-            ->with('CV', $CV)->with('Records', $Records)->render();
-        //$html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+            ->with('CV', $CV)->with('Records', $Records)->with('serve', $serve)->render();
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
 
         $dompdf = PDF::loadHTML($html);
         $dompdf->getDomPDF()->set_option('enable_font_subsetting', true);
