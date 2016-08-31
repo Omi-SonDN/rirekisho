@@ -1,8 +1,8 @@
 <div class="dropzone-container">
     <div id="dropzone">
         <div class="fixed-img">
-            @if($user->image!="")
-                <img src=<?php echo "/img/thumbnail/thumb_" . $user->image;?> >
+            @if($user->image != "" && file_exists(public_path($path = '/img/thumbnail/thumb_'.$user->image)))
+                <img style="height: 75px; width: 75px;" src="{{ asset($path) }}">
             @else
                 <div class="dropzone-text-place">
                     <span class="dropzone-text">Tải hình ảnh</span>

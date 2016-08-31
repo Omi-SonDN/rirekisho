@@ -261,10 +261,10 @@
                                class="b-purple">
                         <input type="button"
                                @if(Auth::user()->getRole() == 'Applicant' || Auth::user()->getRole() == 'Visitor')
-                                    onclick="window.location='{{\URL('/profile')}}'"
+                                    onclick="window.location='{{\URL('profile/'. Auth::user()->hash)}}'"
                                @else
                                    @if(Auth::user()->id == $user->id)
-                                        onclick="window.location='{{\URL('/profile')}}'"
+                                        onclick="window.location='{{\URL('profile/'. Auth::user()->hash)}}'"
                                     @else
                                         onclick="window.location='{{\URL::route('User.index')}}'"
                                     @endif

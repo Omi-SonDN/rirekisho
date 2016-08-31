@@ -8,9 +8,8 @@
         <div class="top-card " style="">
             <div class="profile">
                 <div class="profile-picture ">
-                    @if(isset($image)&&($image!=""))
-                        <img style="height: 100px; width: 100px;"
-                             src="{{asset('/img/thumbnail').'/thumb_'.$CV->User->image }}">
+                    @if($CV->User->image != "" && file_exists(public_path($path = '/img/thumbnail/thumb_'.$CV->User->image)))
+                        <img style="height: 100px; width: 100px;" src="{{ asset($path) }}">
                     @else
                         <div class="dropzone-text-place"
                              style="background-color:{{$CV->User->getThemeColor()}} ">
