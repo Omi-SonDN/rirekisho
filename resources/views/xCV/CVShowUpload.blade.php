@@ -9,7 +9,7 @@
                 <div class="profile-picture ">
                     <?php ?>
                     @if(isset($image)&&($image!=""))
-                        <img style="height: 100px; width: 100px;" src=<?php echo "/img/thumbnail/thumb_" . $image;?> >
+                        <img style="height: 100px; width: 100px;"   src="{{asset('/img/thumbnail').'/thumb_'.$CV->User->image }}" >
                     @else
                         <div class="dropzone-text-place"
                              style="background-color:{{$CV->User->getThemeColor()}} ">
@@ -63,7 +63,13 @@
                         </li>
 
                         <li class="p-link">
-                            <a href="{{($CV->attach) ? '/files/'.$CV->attach : '#'}}" title="{{$CV->name_cv}}" target="_blank">
+                            <a
+                                @if ($CV->attach &&  file_exists($path = '/files/'.$CV->attach))
+                                    href="{{ $path }}"
+                                @else
+                                    href="#"
+                                @endif
+                                 title="{{$CV->name_cv}}" target="_blank">
                                 <i class="fa fa-download "></i><div class="li-text">Download CV</div>
                             </a>
                         </li>
@@ -134,8 +140,8 @@
                             <th colspan="100%"><h2 style="text-align: left;">File đính kèm </h2></th>
                             <tr>
                                 <td style="width: 100%; padding: 0">
-                                @if ($CV->attach)
-                                    <iframe src="{{'/files/' . $CV->attach}}" class="mt8 fix-file-view" style="margin-bottom: 30px; height:450px;" frameborder="0"></iframe>
+                                @if ($CV->attach &&  file_exists($path = '/files/'.$CV->attach))
+                                    <iframe src="{{$path}}" class="mt8 fix-file-view" style="margin-bottom: 30px; height:450px;" frameborder="0"></iframe>
                                 @else
                                     Chưa có file đính kèm
                                 @endif

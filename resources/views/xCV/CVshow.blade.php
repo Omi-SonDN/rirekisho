@@ -8,10 +8,9 @@
         <div class="top-card " style="">
             <div class="profile">
                 <div class="profile-picture ">
-                    <?php ?>
                     @if(isset($image)&&($image!=""))
-                            <img style="height: 100px; width: 100px;"
-                                 src=<?php echo "/img/thumbnail/thumb_" . $image;?>>
+                        <img style="height: 100px; width: 100px;"
+                             src="{{asset('/img/thumbnail').'/thumb_'.$CV->User->image }}">
                     @else
                         <div class="dropzone-text-place"
                              style="background-color:{{$CV->User->getThemeColor()}} ">
@@ -24,11 +23,9 @@
                 </div>
                 <div class="clear-fix"></div>
                 <div class="profile-overview ">
-
                     <ul class="profile-nav skippable">
                         <li class="title">
                             <h2> {{$CV->User->Last_name}} {{$CV->User->First_name}}</h2>
-
                             <h3>{{$CV->User->Furigana_name}}
                                 @can('Visitor')
                                 <a class="bookmark-btn" data-action="bookmark" data-bookmark-id="{{$CV->user->hash}}"
@@ -39,34 +36,25 @@
                                         <i class="fa fa-star-o "></i>
                                     @endif
                                 </a>
-
                                 @endcan
                             </h3>
                         </li>
-
                         <li class="p-link">
                             <a class="" href="#S-info">
                                 <i class="fa fa-user " id="p-active"></i>
-
                                 <div class="li-text">Thông tin cá nhân</div>
-
                             </a>
                         </li>
-
                         <li class="p-link">
                             <a class="" href="#S-school">
                                 <i class="fa fa-graduation-cap"></i>
-
                                 <div class="">Chứng chỉ・Bằng cấp</div>
-
                             </a>
                         </li>
                         <li class="p-link">
                             <a href="#S-work">
                                 <i class="fa fa-history "></i>
-
                                 <div class="li-text">Kinh nghiệm làm việc</div>
-
                             </a>
                         </li>
                         <li class="p-link">
@@ -79,18 +67,13 @@
                         <li class="p-link">
                             <a class="" href="#S-selfintro">
                                 <i class="fa fa-file-text "></i>
-
                                 <div class="li-text">Pro・Nguyện vọng</div>
-
                             </a>
                         </li>
-
                         <li class="p-link">
                             <a target="_blank" href="{{url('CV',[$CV ,'getPDF'])}}" name="">
                                 <i class="fa fa-download "></i>
-
                                 <div class="li-text">Download CV</div>
-
                             </a>
                         </li>
 
@@ -103,14 +86,9 @@
                 @include('includes.CVActManShow')
 
             </div>
-
         </div>
-
         <div class="basic-info">
-            <div class="hd">
-
-            </div>
-
+            <div class="hd"></div>
             <div class="bd">
                 <ul>
                     <li id="S-info">
@@ -121,17 +99,14 @@
                             <tr>
                                 <th><h4>Ngày sinh</h4></th>
                                 <td>{{$CV->User->Birthday}} （{{$CV->User->Age}} tuổi）</td>
-
                             </tr>
                             <tr>
                                 <th><h4>Giới tính</h4></th>
                                 <td> {{$CV->User->Jgender}} </td>
                             </tr>
-
                             <tr>
                                 <th><h4>Tình trạng hôn nhân</h4></th>
                                 <td>{{$CV->User->Jmarriage}} </td>
-
                             </tr>
                         </table>
                     </li>
@@ -144,17 +119,14 @@
                             <tr>
                                 <th><h4>Điện thoại</h4></th>
                                 <td>{{$CV->User->Phone}}</td>
-
                             </tr>
                             <tr>
                                 <th><h4>Địa chỉ hiện tại</h4></th>
                                 <td>{{$CV->User->Address}}</td>
-
                             </tr>
                             <tr>
                                 <th><h4>Địa chỉ liên hệ</h4></th>
                                 <td>{{$CV->User->Contact_information}}</td>
-
                             </tr>
                         </table>
                     </li>
@@ -191,7 +163,6 @@
                             @endif
                         </table>
                     </li>
-
                     <li>
                         <?php
                         $Cert = $Records->filter(function ($item) {
@@ -258,39 +229,37 @@
                                 @endforeach
                             @endif
                         </table>
-
                     </li>
-
                     <li>
                         <?php
                         $Skill = $skills->filter(function ($item) {
                             return $item->getRole() == "Language";
                         });
                         ?>
-                            <table class="table table-hover table-show">
-                                <thead>
+                        <table class="table table-hover table-show">
+                            <thead>
+                            <tr class="tr-show">
+                                <th colspan="100%"><h2>Ngoại ngữ</h2></th>
+                            </tr>
+                            </thead>
+                            @if(!$Skill ->count())
+                            <tr>
+                                <td colspan="100%" style="color: gray;">Không có thông tin</td>
+                            </tr>
+                        @else
                                 <tr class="tr-show">
-                                    <th colspan="100%"><h2>Ngoại ngữ</h2></th>
+                                    <td class="title col-lg-3">Tên ngôn ngữ</td>
+                                    <td class="title col-lg-3">Thời gian tự học</td>
+                                    <td class="title col-lg-3">Thời gian làm việc</td>
                                 </tr>
-                                </thead>
-                                @if(!$Skill ->count())
+                            @foreach ($Skill as $Record)
                                 <tr>
-                                    <td colspan="100%" style="color: gray;">Không có thông tin</td>
+                                    <td class="show-dt">{{$Record->name}}</td>
+                                    <td class="show-dt">{{$Record->study_time}}</td>
+                                    <td class="show-dt">{{$Record->work_time}}</td>
                                 </tr>
-                            @else
-                                    <tr class="tr-show">
-                                        <td class="title col-lg-3">Tên ngôn ngữ</td>
-                                        <td class="title col-lg-3">Thời gian tự học</td>
-                                        <td class="title col-lg-3">Thời gian làm việc</td>
-                                    </tr>
-                                @foreach ($Skill as $Record)
-                                    <tr>
-                                        <td class="show-dt">{{$Record->name}}</td>
-                                        <td class="show-dt">{{$Record->study_time}}</td>
-                                        <td class="show-dt">{{$Record->work_time}}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
+                            @endforeach
+                        @endif
                         </table>
                     </li>
                     <li id="S-skill">

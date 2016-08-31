@@ -37,21 +37,21 @@ class BookmarkController extends Controller
         }
 
         // kiem tra bookmark
-        // Visitor: xoa bo nhung cv chua duoc kich hoat
-        // hoac cv cho phep chu nha tuyen dung tim kiem
-        if(Auth::user()->getRole() == 'Visitor') {
-            foreach ($list as $kr => $its){
-                if ($its->Active == 0 || $its->live == 0) {
+        // Admin: xoa bo nhung cv chua cho phep tuyen dung tim kiem
+        if(Auth::user()->getRole() == 'Admin') {
+            foreach ($list as $kr => $its) {
+                if ($its->live == 0) {
                     unset($list[$kr]);
                 }
             }
         }
 
         // kiem tra bookmark
-        // Admin: xoa bo nhung cv chua cho phep tuyen dung tim kiem
-        if(Auth::user()->getRole() == 'Admin') {
-            foreach ($list as $kr => $its) {
-                if ($its->live == 0) {
+        // Visitor: xoa bo nhung cv chua duoc kich hoat
+        // hoac cv cho phep chu nha tuyen dung tim kiem
+        if(Auth::user()->getRole() == 'Visitor') {
+            foreach ($list as $kr => $its){
+                if ($its->Active == 0 || $its->live == 0) {
                     unset($list[$kr]);
                 }
             }
