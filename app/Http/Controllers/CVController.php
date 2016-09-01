@@ -271,7 +271,8 @@ class CVController extends Controller
         $Records = $CV->Record;
         $Records = $Records->sortBy("Date");
 
-        $serve = 'http://'.$_SERVER['HTTP_HOST'].'/img/thumbnail/thumb_';
+        // $serve = 'http://'.$_SERVER['HTTP_HOST'].'/img/thumbnail/thumb_';
+        $serve = public_path().'/img/thumbnail/thumb_';
 
         $html = View::make('invoice.cv')
             ->with('CV', $CV)->with('Records', $Records)->with('serve', $serve)->render();

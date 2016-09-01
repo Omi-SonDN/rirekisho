@@ -32,7 +32,7 @@
                 @foreach($cv_ as $cv1)
                     <tr>
                         <td style="">{{$i++}}</td>
-                        <td style="">{{$cv1->User->Name}}</td>
+                        <td style="width: 20px">{{$cv1->User->Name}}</td>
                         <td style="">{{$cv1->User->email}}</td>
                         <td style="">{{$cv1->positionCv->NamePosition}}</td>
                         <td style="">{{$cv1->status->StatusName}}</td>
