@@ -40,7 +40,6 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
     Route::get('user/search/nguoi-gioi-thieu', ['as'=>'user.search.email', 'uses' =>'UsersController@getSearchEmail']);
 
     Route::get('downloadCV/{type}', 'CVController@downloadCV');
-
 });
 
 Route::group(['middleware' => ['auth']], function () {
@@ -62,7 +61,9 @@ Route::group(['middleware' => ['auth']], function () {
         }
         return Hashids::decode($id)[0];
     });
-    Route::get('profile', 'UsersController@profile');
+
+    Route::get('profile/{id}', 'UsersController@profile');
+
     Route::get('/', function () {
         if (Auth::user()->getRole() === 'Applicant'){
             return view('xCV.CVInfo');
@@ -72,7 +73,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     //every one see different page 
     Route::get('CV/{CV}', 'CVController@show')->where('id', '^(?!search).*');
-    //Route::get('CV/show/{id}', 'CVController@show');
     Route::get('CV/upload/{id}', 'CVController@getShowUpload');
     Route::get('Record/index/{type}', 'RecordController@index');
     Route::get('CV/{CV}/getPDF', 'CVController@getPDF');

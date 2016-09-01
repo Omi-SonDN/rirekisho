@@ -1,4 +1,3 @@
-<body>
 <div class="header">
     <div class="navbar">
         <div class="nav_area">
@@ -30,7 +29,7 @@
                                     )
                                     ->where('cvs.Active', '=', 0)
                                     ->where('cvs.live', '=', 1)
-                                    ->orderBy('cvs.created_at')
+                                    ->orderBy('cvs.created_at', 'asc')
                                     ->get();
                                 ?>
                                 @if($cv_active != null)
@@ -59,7 +58,7 @@
                                     <li class="{{(\Request::path() == 'User/'.\Auth::user()->hash) ? 'active' : ''}}"><a
                                     href="{{url('User',[Auth::User()->hash])}}" style="border: 1px solid transparent;" >Chỉnh sửa tài khoản</a>
                                     </li>
-                                    <li><a href="{{url('profile')}}">Thông tin tài khoản</a></li>
+                                    <li><a href="{{url('profile/'. Auth::User()->hash)}}">Thông tin tài khoản</a></li>
                                 </ul>
                         </li>
                         
@@ -75,7 +74,3 @@
     </div>
     <!--hr /-->
 </div>
-
-
-</body>
-</html>

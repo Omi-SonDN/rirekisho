@@ -220,19 +220,6 @@ $(document).ready(function () {
                 }
             }
         });
-        /*
-         interval = window.setTimeout(function () {
-         if (window_focus) {
-         check();
-         }
-         }, 3000);*/
-        /*
-         $(document).on('click', function () {
-         if (window_focus) {
-         check();
-         }
-         });*/
-
     }
 
     function check() {
@@ -242,6 +229,7 @@ $(document).ready(function () {
             refresh();
         var star = $('[data-action=bookmark]');
         //if star does exist
+
         if (star.length) {
             $.ajax({
                 type: "GET",
@@ -683,12 +671,14 @@ function getChangeLiveCv(element, id) {
     });
 }
 
+//statisticSearch
 $('#searchStatistics').on('click', function(){
-    $key_search = $('#positionsSearch').val();
-
+    var key_search = $('#positionsSearch').val();
+    var key_sta = $('#statusSearch1_').val();
     var day = new Date().toJSON().slice(0,10);
     var startDate = $('#startDate').val();
     var endDate = $('#endDate').val();
+    var ox = $('#status_statistic li.active').attr('id');
     if(startDate > endDate || endDate > day){
         $('#error_date').show();
         $('#error_date').text('Nhập sai ngày tháng!');
@@ -696,11 +686,14 @@ $('#searchStatistics').on('click', function(){
         $('#error_date').hide();
         $.ajax({
             type: "POST",
-            url: "/CV/statisticSearch",
+            url: "/CV/statisticStatus",
             data : {
                 'startDate' : $('#startDate').val(),
                 'endDate' : $('#endDate').val(),
-                'key_search': $key_search
+                'key_search': key_search,
+                'key_sta' :  key_sta,
+                'ox' : ox,
+                'key_po': $('#positionsSearch').val(),
             },
             cache: false,
             success: function (data) {
@@ -711,25 +704,50 @@ $('#searchStatistics').on('click', function(){
     
 });
 
+$('#search_Sta').on('click', function(){
+    var key_search = $('#statusSearch_').val();
+    var ox = $('#status_statistic li.active').attr('id');
+    $.ajax({
+        type: "POST",
+        url: "/CV/statisticStatus",
+        data : {
+            'key_search' : key_search,
+            'ox': ox,
+        },
+        cache: false,
+        success: function (data) {
+            $('#container2').html(data);
+        }
+    });
+});
+
 $('#status_statistic li a').on('click', function(){
     var ox = $(this).attr('status');
+    var key_search = $('#statusSearch_').val();
     $('#error_date').hide();
 
     $('#status_statistic li.active').removeClass();
     $(this).parent().addClass('active');
 
     if(ox == 'position'){
-        $('.search_po_sa').show();
+        $('#but_search_po').show();
+        $('#but_search_sa').hide();
     } else {
-        $('.search_po_sa').hide();
+        $('#but_search_po').hide();
+        $('#but_search_sa').show();
     }
     var startDate = $('#startDate').val();
     var endDate = $('#endDate').val();
-    var dataString = "ox=" + ox + '&startDate=' + startDate + '&endDate=' + endDate;
     $.ajax({
         type: "POST",
         url: "/CV/statisticStatus",
-        data: dataString,
+        data: {
+            'startDate' : startDate,
+            'endDate' : endDate,
+            'key_search' : key_search,
+            'ox' : ox,
+            'key_po': $('#positionsSearch').val(),
+        },
         cache: false,
         success: function (data) {
             $('#container2').html(data);
@@ -794,7 +812,7 @@ function txtBoxAddUser(obj, idBoxSearch, idBtnAddCeo, idField, idCeo_CV, idsearc
     if (id_User) {
         var name_User = obj.options[obj.selectedIndex].text;
         var img_url = obj.options[obj.selectedIndex].style.cssText;
-        var _style = img_url + ' width: 177px; background-repeat: no-repeat; background-size: 25px;';
+        var _style = img_url + ' width: 180px; background-repeat: no-repeat; background-size: 25px;';
         var nameFunc = 'addUserCeo(\''+idBoxSearch+'\', \''+ idCeo_CV +'\', \''+ idBtnAddCeo +'\', \''+ idField +'\', \'' + idsearchclear +'\')';
 
         $('#' + idBoxSearch).attr({'style': _style, 'valId': id_User});
@@ -892,15 +910,17 @@ function myCompare(str1, str2, s){
 }
 
 $('.menu_download .list_do').on('click', downloadCV);
-//$('.reaction-box li').on('click', downloadCV);
+// $('.reaction-box1 li').on('click', downloadCV{
 
 function downloadCV(){
     var export_type = $(this).attr('export-type');
     var status = $('#status_statistic li.active').attr('id');
+    var key_sta = $('#statusSearch_').val();
+    var key_po = $('#positionsSearch').val();
+    var key_sta_po = $('#statusSearch1_').val();
 
     var startDate = $('#startDate').val();
     var endDate = $('#endDate').val();
-
     if(status == 'position'){
         var day = new Date().toJSON().slice(0,10);
         if(startDate > endDate || endDate > day){
@@ -912,10 +932,13 @@ function downloadCV(){
                 type: "GET",
                 url: "/downloadCV/" + export_type,
                 data : {
+                    'key_sta' : key_sta,
                     'status' : status,
                     'startDate' : startDate,
                     'endDate' : endDate,
-                    'key_search' : $('#positionsSearch').val()
+                    'key_po' : key_po,
+                    'key_sta_po' : key_sta_po,
+                    
                 },
                 dataType: 'json',
                 success: function (data) {
@@ -932,10 +955,12 @@ function downloadCV(){
         type: "GET",
             url: "/downloadCV/" + export_type,
             data : {
+                'key_sta' : key_sta,
                 'status' : status,
                 'startDate' : startDate,
                 'endDate' : endDate,
-                'key_search' : $('#positionsSearch').val()
+                'key_po' : key_po,
+                'key_sta_po' : key_sta_po,
             },
             dataType: 'json',
             success: function (data) {
@@ -947,4 +972,3 @@ function downloadCV(){
         });
     }
 }
-

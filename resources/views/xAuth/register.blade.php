@@ -1,5 +1,6 @@
 @extends('xAuth.begin')
-<title>Đăng ký</title>
+@section('title')Đăng ký @endsection
+
 @section('content')
 
     <form id="register" class="form-horizontal my-forms m-top-50"

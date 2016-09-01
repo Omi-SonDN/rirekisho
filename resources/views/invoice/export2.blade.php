@@ -34,16 +34,14 @@
                     <?php $list = $listCV->listCV; ?>
                     @foreach($list as $list_)
                         @if($list_ != null)
-                                @foreach($list as $list_)
-                                <tr>
-                                    <td style="">{{ $cv_->ox }} </td>
-                                    <td style="">{{$list_->User->Name}}</td>
-                                    <td style="">{{$list_->User->email}}</td>
-                                    <td style="">{{$list_->positionCv->NamePosition}}</td>
-                                    <td style="">{{$list_->status->StatusName}}</td>
-                                    
-                                </tr>
-                                @endforeach
+                            <tr>
+                                <td style="">{{ $cv_->ox }} </td>
+                                <td style="">{{$list_->User->Name}}</td>
+                                <td style="">{{$list_->User->email}}</td>
+                                <td style="">{{$list_->positionCv->NamePosition}}</td>
+                                <td style="">{{$list_->status->StatusName}}</td>
+                                
+                            </tr>
                             
                         @endif
                     @endforeach

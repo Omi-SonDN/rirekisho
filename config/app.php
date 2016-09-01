@@ -177,7 +177,6 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        //Collective\Bus\BusServiceProvider::class,
         /*
         *
         */

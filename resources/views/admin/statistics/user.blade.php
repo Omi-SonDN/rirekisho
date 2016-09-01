@@ -1,5 +1,5 @@
 @extends('dashboard')
-<title>Thông kê tài khoản</title>
+@section('title')Thông kê tài khoản @endsection
 @section('content')
     <div class="col-lg-12">
         <div class="col-lg-6">

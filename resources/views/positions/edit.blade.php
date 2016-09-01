@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Sửa thông tin vị trí tuyển dụng</title>
+@section('title')Sửa thông tin vị trí tuyển dụng @endsection
 
 @section('content')
     <form action="{{route('position::update', $Positions->id)}}" method="post" class="my-forms" id="profile-forms"

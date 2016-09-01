@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Xem thông tin vị trí tuyển dụng</title>
+@section('title')Xem thông tin vị trí tuyển dụng @endsection
 
 @section('content')
     <form method="post">

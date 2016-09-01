@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Thêm thông tin người dùng</title>
+@section('title')Thêm thông tin người dùng @endsection
 
 @section('content')
     <form action="{{action('UsersController@postAddUser')}}" method="POST" class="my-forms" id="profile-forms"

@@ -11,7 +11,6 @@
 	    	$('g.highcharts-button').css('display', 'none');
 	    	var ox = <?php echo $ox; ?>;
             var cv_upload = <?php echo $cv_upload; ?>;
-            var cv_pass = <?php echo $cv_pass; ?>;
             var status = $('#status_statistic li.active').attr('id');
          
 			var text = '<?php echo $text; ?>';
@@ -87,10 +86,16 @@
 		            series: [{
 		                name: 'CV upload',
 		                data: cv_upload
-		            },{
-		                name: 'CV pass',
-		                data: cv_pass
-		            }]
+		            },
+		            <?php
+	            		
+	            		if($listPo != null)
+		            		foreach ($listPo as $po) {
+		            		echo '{ name : '.'\''.$po->status.'\''.',
+		            				data : '.$po->listPo.'},';
+		            		}
+	            	?>
+	            	]
 		        });
             }
 			$('.reaction-box2 li').on('click', function(){
@@ -115,21 +120,9 @@
     <div class="printCV">
         
         <ul class="reaction-box1" data-toggle="dropdown">
-            <li class="reaction-icon" export-type='pdf' data-type="application/pdf">  
-                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                DownLoad PDF
-            </li>
-            <li class="reaction-icon" export-type='xlsx' data-type="application/vnd.ms-excel">
-                Download Excel
-                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-            </li>
             <li class="reaction-icon" export-type='' data-type="image/jpeg">  
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>
                 DownLoad PNG
-            </li>
-            <li class="reaction-icon" export-type='' data-type="image/png">
-                Download JPEG
-                <i class="fa fa-file-image-o" aria-hidden="true"></i>
             </li>
         </ul>
         
@@ -141,22 +134,10 @@
 <div class="button_print" id="hightchart_1" style="width: 27px; height: 27px;float: right">
     <div class="printCV">
         
-        <ul class="reaction-box2">
-            <li class="reaction-icon" export-type='pdf' data-type="application/pdf">  
-                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                DownLoad PDF
-            </li>
-            <li class="reaction-icon" export-type='xlsx' data-type="application/vnd.ms-excel">
-                Download Excel
-                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-            </li>
+        <ul class="reaction-box2" data-toggle="dropdown">
             <li class="reaction-icon" export-type='' data-type="image/jpeg">  
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>
                 DownLoad PNG
-            </li>
-            <li class="reaction-icon" export-type='' data-type="image/png">
-                Download JPEG
-                <i class="fa fa-file-image-o" aria-hidden="true"></i>
             </li>
         </ul>
         

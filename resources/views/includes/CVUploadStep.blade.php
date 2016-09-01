@@ -2,7 +2,7 @@
     <div class="col-md-12 header-createcv">
         <blockquote>
         <p>Bạn đã tạo thành công CV đính kèm file. </p>
-        <p>Bạn có muốn gây ấn tượng tốt với nhà tuyển dụng, vui lòng điền thông tin bên dưới đây.</p>
+        <p>Bạn có muốn gây ấn tượng tốt với nhà tuyển dụng, vui lòng upload CV bên dưới đây.</p>
         </blockquote>
     </div>
 @endif
@@ -13,7 +13,7 @@
 <ul slide-toggle=true>
     <li>
         <div class="hasfile">
-            @if ($CV->attach)
+            @if($CV->attach && file_exists(public_path($path = '/files/'.$CV->attach)))
                 Hiên tại bạn đã có CV trên hệ thống <a href="/" title="Ominext JSC" target="_blank">Ominext JSC</a>:
                 <a href="{{'/files/' . $CV->attach}}" target="_blank" download="{{$CV->attach}}" title="File CV: {{$CV->attach}}">{{$CV->attach}}</a>
 

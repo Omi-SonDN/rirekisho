@@ -138,7 +138,6 @@ class CV extends Model
     {
         $position = $this->positions;
         return $position;
-
     }
 
     /*******rules ********/

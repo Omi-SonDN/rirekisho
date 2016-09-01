@@ -39,22 +39,21 @@ class CVController extends Controller
             $s_name = '';
         }
 
-        if ($request->has('positions') ) {
+        if ($request->has('positions')) {
             $positions = (int)$request->get('positions');
-        }else {
+        } else {
             $positions = null;
-
         }
 
         if ($request->has('status')) {
             $status = (int)$request->get('status');
-        }else {
+        } else {
             $status = '';
         }
 
         if ($request->has('data-field')) {
             $_field = $request->get('data-field');
-        }else {
+        } else {
             $_field = 'updated_at';
         }
 
@@ -271,9 +270,11 @@ class CVController extends Controller
         $Records = $CV->Record;
         $Records = $Records->sortBy("Date");
 
+        $serve = public_path('/img/thumbnail') .'/thumb_';
+    
         $html = View::make('invoice.cv')
-            ->with('CV', $CV)->with('Records', $Records)->render();
-        //$html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+            ->with('CV', $CV)->with('Records', $Records)->with('serve', $serve)->render();
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
 
         $dompdf = PDF::loadHTML($html);
         $dompdf->getDomPDF()->set_option('enable_font_subsetting', true);
@@ -499,7 +500,7 @@ class CVController extends Controller
             $CV->old_status = $CV->Status;
         else{
             $arrs = explode(',', $CV->old_status);
-            if( !in_array($CV->Status,$arrs) ){
+            if( !in_array($CV->Status, $arrs) ){
                 array_push($arrs, $CV->Status);
             }
             $CV->old_status = implode(',', $arrs);
@@ -518,15 +519,33 @@ class CVController extends Controller
         $status = \App\Status::find($request->status);
         $CV->allow_sendmail = $status->allow_sendmail;
         //Get next status
-        $next_status = array();
-        foreach(\App\Status::all() as $status ){
-            if( in_array($request->status,$status->previous_status) ){
-                $next_status[] = $status->id;
+        $old_status = $next_status = array();
+
+        //bqn fix voi role ACL
+        if (Auth::user()->getrole() === 'Visitor') {
+            $_Status = Status::where('role_VisitorStatus', 1)->get();
+        } else {
+            $_Status = Status::all();
+        }
+
+        $arrOldStt = explode(',', $CV->old_status);
+        foreach($_Status as $status ){
+            if( in_array($request->status, $status->previous_status) ){
+                $next_status[] = ['id' => $status->id, 'nameStatus' => $status->StatusName];
+            }
+            if( in_array($status->id, $arrOldStt)){
+                $old_status[] = ['id' => $status->id, 'nameStatus' => $status->StatusName];
             }
         }
         $CV->next_status = $next_status;
-        $CV->old_status  = array_map('intval', explode(',', $CV->old_status));
-        
+        $CV->old_status = $old_status;
+
+//        foreach(\App\Status::all() as $status ){
+//            if( in_array($request->status, $status->previous_status) ){
+//                $next_status[] = $status->id;
+//            }
+//        }
+//        $CV->old_status  = array_map('intval', explode(',', $CV->old_status));
 
         return \Illuminate\Support\Facades\Response::json($CV);
     }
@@ -826,28 +845,13 @@ class CVController extends Controller
     /* STATISTIC CV VIEW */
     public function statistic(Request $request)
     {
-        list($cv, $text) = $this->sta_month_applyTo();
+        list($cv, $text) = $this->sta_month_applyTo('');
         $apply = $this->_statistic($cv);
 
-        list($cv_upload, $cv_pass, $ox) = $this->toArrayCV($cv);
+        list($cv_upload, $ox) = $this->toArrayCV($cv);
+        $listPo = '';
         return view('xCV.CVstatistic')->with('ox', $ox)->with('cv_upload', $cv_upload)
-            ->with('cv_pass', $cv_pass)->with('text', $text)->with('apply', $apply);
-
-        // list($cv, $text) = $this->sta_month_applyTo();
-        // // //$apply = $this->_statistic($cv);
-        // // $listCV = $cv[0]->apply_to;
-        // // return $listCV;
-        // foreach($cv as $cv_)
-        //     $apply_to = $cv_->apply_to;
-                
-        //             $list = $apply_to[4]->listCV;
-        //          // return $list;
-        //             if($list != null)
-        //             foreach($list as $list_)
-        //             //return $list[0]->email;
-        //         //         
-        //                 return $list_-ge;
-        //                     //return $list_[0]->email;
+            ->with('text', $text)->with('apply', $apply)->with('listPo', $listPo);
     }
 
     // return số lượng cv_pass, cv_upload trong năm hiện tại
@@ -861,22 +865,6 @@ class CVController extends Controller
             ->orderBy('created_at')
             ->groupBy(DB::raw('year(created_at)'))
             ->get();
-
-        foreach ($cv3 as $cv) {
-            $year = $cv->ox;
-            $year1 = $year + 1;
-            $datestart = $year.'-01-01 00:00:00';
-            $dateend = $year1.'-01-01 00:00:00';
-            $cv1 = CV::select(DB::raw("count(id) as count"))
-                ->where('created_at', '>=', $datestart)
-                ->where('created_at', '<', $dateend)
-                ->where('Status', '=', 20)
-                ->orderBy('created_at')
-                ->get();
-            if($cv1 != null)
-                $cv->count_pass = $cv1[0]->count;
-            else $cv->count_pass = 0;
-        }
 
         $text = 'năm';
         return array($cv3,$text);
@@ -901,21 +889,6 @@ class CVController extends Controller
             ->groupBy(DB::raw('quarter(created_at)'))
             ->get();
         foreach ($cv as $cv1) {
-            $_quarter = $cv1->ox;
-            $month = $_quarter*3 + 1;
-            $month1 = $month - 3;
-            $datestart = $year.'-'.$month1.'-01 00:00:00';
-            $dateend = $year.'-'.$month.'-01 00:00:00';
-            $cv2 = CV::select(DB::raw("count(id) as count"))
-            ->where('Status', '=', 20)
-            ->where('created_at', '>=', $datestart)
-            ->where('created_at', '<', $dateend)
-            ->orderBy('created_at')
-            ->get();
-
-            if($cv2 != null)
-                $cv1->count_pass = $cv2[0]->count;
-            else $cv1->count_pass = 0;
             $cv1->ox = 'Quý '.$cv1->ox;
         }
 
@@ -942,18 +915,6 @@ class CVController extends Controller
             ->groupBy(DB::raw('month(created_at)'))
             ->get();
         foreach ($cv as $cv1) {
-            $datestart = $year.'-'.$cv1->ox.'-01 00:00:00';
-            $month1 = $cv1->ox + 1;
-            $dateend = $year.'-'.$month1.'-01 00:00:00';
-            $cv2 = CV::select(DB::raw("count(id) as count"))
-            ->where('Status', '=', 20)
-            ->where('created_at', '>=', $datestart)
-            ->where('created_at', '<', $dateend)
-            ->orderBy('created_at')
-            ->get();
-            if($cv2 != null)
-                $cv1->count_pass = $cv2[0]->count;
-            else $cv1->count_pass = 0;
             $cv1->ox = 'Tháng '.$cv1->ox;
         }
 
@@ -962,63 +923,72 @@ class CVController extends Controller
     }
 
     // return số lượng cv_pass, cv_upload trong tháng hiện tại theo vị trí apply
-    public function statisticPositions($datestart, $dateend,$key)
+    public function statisticPositions($datestart, $dateend,$key_po, $key_sta)
     {
         if (Gate::denies('Admin')) {
             abort(403);
         }
-        if($key == ''){
+        if($key_po == ''){
             $cv = CV::select(DB::raw("apply_to as ox, count(id) as count"))
                 ->where('created_at', '>=', $datestart)
                 ->where('created_at', '<=', $dateend)
                 ->groupBy(DB::raw('apply_to'))
                 ->get();
-            
             foreach ($cv as $cv1) {
-                $cv2 = CV::select(DB::raw("count(id) as count"))
-                ->where('created_at', '>=', $datestart)
-                ->where('created_at', '<=', $dateend)
-                ->where('Status', '=', 20)
-                ->where('apply_to', '=', $cv1->ox)
-                ->get();
-                if($cv2 != null)
-                    $cv1->count_pass = $cv2[0]->count;
-                else $cv1->count_pass = 0;
-                if($cv1->ox != null){
-                    $name = DB::table('positions')
+                $cv1->listPo = $this->sta_listSta_po($cv1, $key_sta, $datestart, $dateend);
+                $name = DB::table('positions')
                     ->where('id', '=', $cv1->ox)->get();
-                    $cv1->ox = $name[0]->name;
-                }
+                $cv1->ox = $name[0]->name;
+                $cv1 = array();
             }
+            $cv_ = CV::where('created_at', '>=', $datestart)
+                ->where('created_at', '<=', $dateend)
+                ->orderBy('positions')
+                ->orderBy('apply_to')
+                ->get();
         } else {
-            $cv = CV::select(DB::raw("apply_to ox, count(id) as count"))
+            $cv = CV::select(DB::raw("apply_to as ox,count(id) as count"))
                 ->where('created_at', '>=', $datestart)
                 ->where('created_at', '<=', $dateend)
-                ->where('apply_to', '=', $key)
+                ->where('apply_to', '=', $key_po)
                 ->get();
-    
             foreach ($cv as $cv1) {
-                $cv2 = CV::select(DB::raw("count(id) as count"))
-                ->where('created_at', '>=', $datestart)
-                ->where('created_at', '<=', $dateend)
-                ->where('Status', '=', 20)
-                ->where('apply_to', '=', $key)
-                ->get();
-                if($cv2 != null)
-                    $cv1->count_pass = $cv2[0]->count;
-                else $cv1->count_pass = 0;
-                if($cv1->ox != null){
-                    $name = DB::table('positions')
-                    ->where('id', '=', $cv1->ox)->get();
-                    $cv1->ox = $name[0]->name;
-                }
+                $cv1->listPo = $this->sta_listSta_po($cv1, $key_sta, $datestart, $dateend);
+                $name = DB::table('positions')
+                    ->where('id', '=', $key_po)->get();
+                $cv1->ox = $name[0]->name;
+                $cv1 = array();
             }
+            $cv_ = CV::where('created_at', '>=', $datestart)
+                ->where('created_at', '<=', $dateend)
+                ->orderBy('positions')
+                ->orderBy('apply_to')
+                ->where('apply_to', '=', $key_po)
+                ->get();
         }
 
         $text = 'Vị trí apply to';
-        return array($cv,$text);
+        return array($cv, $text,$cv_);
     }
 
+    public function sta_listSta_po($cv1, $apply_to, $datestart, $dateend)
+    {
+        $temp_arr1 = array();
+        if($apply_to != null){
+            for($i =0; $i < count($apply_to); $i++) {
+                $cv2 = CV::where('created_at', '>=', $datestart)
+                    ->where('created_at', '<=', $dateend)
+                    ->where('Status', '=', $apply_to[$i]->id)
+                    ->where('apply_to', '=', $cv1->ox)
+                    ->get();
+                $temp_arr1[$i]['datestart'] = $datestart;
+                $temp_arr1[$i]['count'] = count($cv2);
+                $temp_arr1[$i]['id'] = $apply_to[$i]->id;
+                $temp_arr1[$i]['status'] = $apply_to[$i]->status;
+            }
+        }
+        return $temp_arr1;
+    }
 
     public function toArrayCV($cv)
     {
@@ -1026,34 +996,46 @@ class CVController extends Controller
 
         $cv_upload = array_column($cv, 'count');
         $ox = array_column($cv,'ox');
-        $cv_pass = array_column($cv, 'count_pass');
+        // $cv_pass = array_column($cv, 'count_pass');
 
         $cv_upload = json_encode($cv_upload,JSON_NUMERIC_CHECK);
-        $cv_pass = json_encode($cv_pass,JSON_NUMERIC_CHECK);
+        // $cv_pass = json_encode($cv_pass,JSON_NUMERIC_CHECK);
         $ox = json_encode($ox,JSON_NUMERIC_CHECK);
-        return array($cv_upload, $cv_pass,$ox);
+        return array($cv_upload,$ox);
     }
 
-    //thống kê cv theo thời gian và theo vị trí apply
-    public function statisticSearch(Request $request)
+    public function _statisticPo($key, $cv){
+        if($key != null){
+            for($i = 0; $i < count($key); $i++) {
+                $vt = '';
+                for($j = 0 ; $j < count($cv); $j++) {
+                    $apply_to = $cv[$j]->listPo;
+                    if($j == 0)
+                        $vt .= '['.$apply_to[$i]['count'];
+                    else{
+                        if($j == count($cv) -1 )
+                            $vt .= ','.$apply_to[$i]['count'].']';
+                        else $vt .= ','.$apply_to[$i]['count'];
+                    }
+                    if(count($cv) == 1) $vt.=']';
+                }
+                $key[$i]->listPo = $vt;   
+            }
+        return $key;
+        } else return '';
+    }
+
+    public function statusList($key)
     {
-        if (Gate::denies('Admin')) {
-            abort(403);
-        }
-        $datestart = $request->input('startDate');
-        $datestart = $datestart.' 00:00:00';
-
-        $dateend = $request->input('endDate');
-        $dateend = $dateend.' 23:59:59';
-        $key = $request->input('key_search');
-    
-        list($cv,$text) = $this->statisticPositions($datestart, $dateend,$key);
-        $apply = '';
-        list($cv_upload, $cv_pass, $ox) = $this->toArrayCV($cv);   
-
-        return View::make('includes.positions_chart')
-            ->with('ox', $ox)->with('cv_upload', $cv_upload)
-            ->with('cv_pass', $cv_pass)->with('text', $text)->with('apply', $apply);
+        if($key != null){
+            $listPo = array();
+            for($i = 0; $i < count($key); $i++) {
+                $apply = DB::table('status')
+                 ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
+                $listPo[] = $apply[0];
+            }
+            return $listPo;
+        } else return $key;
     }
 
     //view satistic theo month quarter month apply
@@ -1063,18 +1045,25 @@ class CVController extends Controller
             abort(403);
         }
         $ox1 = $request->input('ox');
+        $key = $request->input('key_search');
         switch ($ox1) {
             case 'month':
-                list($cv, $text) = $this->sta_month_applyTo();
+                $listPo = $this->statusList($key);
+                list($cv, $text) = $this->sta_month_applyTo($listPo);
+                $listPo = $this->_statisticPo($listPo, $cv);
                 $apply = $this->_statistic($cv);
                 break;
             case 'quarter':
-                list($cv, $text) = $this->sta_quarter_applyTo();
+                $listPo = $this->statusList($key);
+                list($cv, $text) = $this->sta_quarter_applyTo($listPo);
                 $apply = $this->_statistic($cv);
+                $listPo = $this->_statisticPo($listPo, $cv);
                 break;
             case 'year':
-                list($cv, $text) = $this->sta_year_applyTo();
+                $listPo = $this->statusList($key);
+                list($cv, $text) = $this->sta_year_applyTo($listPo);
                 $apply = $this->_statistic($cv);
+                $listPo = $this->_statisticPo($listPo, $cv);
                 break;
             case 'position':
                 $datestart = $request->input('startDate');
@@ -1082,18 +1071,22 @@ class CVController extends Controller
 
                 $dateend = $request->input('endDate');
                 $dateend = $dateend.' 23:59:59';
-                list($cv,$text) = $this->statisticPositions($datestart, $dateend,'');
+
+                $key_sta = $request->input('key_sta');
+                $listPo = $this->statusList($key_sta);
+                $key_po = $request->input('key_po');
+                list($cv,$text,$cv_) = $this->statisticPositions($datestart, $dateend,$key_po,$listPo);
                 $apply = '';
+                $listPo = $this->_statisticPo($listPo, $cv);
                 break;
         }
-        list($cv_upload, $cv_pass, $ox) = $this->toArrayCV($cv);
-        return View::make('includes.positions_chart')
-            ->with('ox', $ox)->with('cv_upload', $cv_upload)
-            ->with('cv_pass', $cv_pass)->with('text', $text)->with('apply', $apply);
+        list($cv_upload, $ox) = $this->toArrayCV($cv);
+        return View::make('includes.positions_chart')->with('ox', $ox)->with('cv_upload', $cv_upload)
+            ->with('text', $text)->with('listPo', $listPo)->with('apply', $apply)->with('listPo', $listPo);
     }
 
     //thống kê CV oderby year and oderby apply
-    public function sta_year_applyTo()
+    public function sta_year_applyTo($listPo)
     {
         list($cv,$text) = $this->statisticYear();
         foreach ($cv as $cv1) {
@@ -1101,16 +1094,19 @@ class CVController extends Controller
             $year1 = $year + 1;
             $datestart = $year.'-01-01 00:00:00';
             $dateend = $year1.'-01-01 00:00:00';
-            $cv1 = $this->sta_status($cv1,$datestart, $dateend);
+            $this->sta_status($cv1,$datestart, $dateend);
+            $cv1->listPo = $this->sta_listPo($cv1, $listPo, $datestart, $dateend);
+            $cv1 = array();
         }
         return array($cv, $text);
     }
 
-     //thống kê CV oderby month and oderby apply
-    public function sta_month_applyTo()
+     public function sta_month_applyTo($listPo)
     {
         list($cv,$text) = $this->statisticMonth();
-        foreach ($cv as $cv1) {
+
+        foreach ($cv as $key => $cv1) {
+
             $day = date('Y-m-d H:i:s');
             $year = getYear($day);
 
@@ -1119,16 +1115,20 @@ class CVController extends Controller
             $month = substr($cv1->ox, $end + 1);
             $month1 = $month + 1;
 
-            $datestart = $year.'-'.$month.'-01-01 00:00:00';
-            $dateend = $year.'-'.$month1.'-01-01 00:00:00';
+            $datestart = $year.'-'.$month.'-01 00:00:00';
+            $dateend = $year.'-'.$month1.'-01 00:00:00';
+            $cv1->anhbang = $datestart;
 
-            $cv1 = $this->sta_status($cv1,$datestart, $dateend);
+            $this->sta_status($cv1, $datestart, $dateend);
+            $cv1->listPo = $this->sta_listPo($cv1, $listPo, $datestart, $dateend);
+            $cv1 = array();
         }
+
         return array($cv,$text);
     }
 
      //thống kê CV oderby quarter and oderby apply
-    public function sta_quarter_applyTo()
+    public function sta_quarter_applyTo($listPo)
     {
         list($cv,$text) = $this->statisticQuarter();
         foreach ($cv as $cv1) {
@@ -1145,6 +1145,8 @@ class CVController extends Controller
             $dateend = $year.'-'.$month.'-01 00:00:00';
 
             $cv1 = $this->sta_status($cv1,$datestart, $dateend);
+            $cv1->listPo = $this->sta_listPo($cv1, $listPo, $datestart, $dateend);
+            $cv1 = array();
         }
         return array($cv,$text);
     }
@@ -1153,24 +1155,36 @@ class CVController extends Controller
     {
         $apply_to = DB::table('positions')
                 ->select('id', 'name')->get();
-            for($i =0; $i < count($apply_to); $i++) {
-                $cv2 = CV::select(DB::raw("count(id) as count"))
-                    ->where('created_at', '>=', $datestart)
-                    ->where('created_at', '<', $dateend)
-                    ->where('apply_to', '=', $apply_to[$i]->id)
-                    ->get();
-                if($cv2 != null)
-                    $apply_to[$i]->count = $cv2[0]->count;
-                else $apply_to[$i]->count = 0;
 
+            for($i =0; $i < count($apply_to); $i++) {
                 $cv2 = CV::where('created_at', '>=', $datestart)
                     ->where('created_at', '<', $dateend)
                     ->where('apply_to', '=', $apply_to[$i]->id)
                     ->get();
+
+                $apply_to[$i]->count = count($cv2);
                 $apply_to[$i]->listCV = $cv2;
             }
             $cv1->apply_to = $apply_to;
+
             return $cv1;
+    }
+    public function sta_listPo($cv1, $apply_to, $datestart, $dateend)
+    {
+        $temp_arr1 = array();
+        if($apply_to != null)
+        for($i =0; $i < count($apply_to); $i++) {
+             
+            $cv2 = CV::where('created_at', '>=', $datestart)
+                ->where('created_at', '<', $dateend)
+                ->where('Status', '=', $apply_to[$i]->id)
+                ->get();
+            $temp_arr1[$i]['datestart'] = $datestart;
+            $temp_arr1[$i]['count'] = $cv2->count();
+            $temp_arr1[$i]['id'] = $apply_to[$i]->id;
+            $temp_arr1[$i]['status'] = $apply_to[$i]->status;
+        }
+        return $temp_arr1;
     }
 
     // xu ly kich hoat CV - Ghi chu - Them nguoi gioi thieu
@@ -1239,16 +1253,19 @@ class CVController extends Controller
             abort(403);
         }
         $ox = $request->input('status');
+        $key = $request->input('key_sta');
         switch ($ox) {
             case 'month':
-                //list($cv,$text) = $this->statisticMonth();
-                list($cv1,$text) = $this->sta_month_applyTo();
+                $listPo = $this->statusList($key);
+                list($cv, $text) = $this->sta_month_applyTo($listPo);
                 break;
             case 'quarter':
-                list($cv1,$text) = $this->sta_quarter_applyTo();
+                $listPo = $this->statusList($key);
+                list($cv,$text) = $this->sta_quarter_applyTo($listPo);
                 break;
             case 'year':
-                list($cv1,$text) = $this->sta_year_applyTo();
+                $listPo = $this->statusList($key);
+                list($cv,$text) = $this->sta_year_applyTo($listPo);
                 break;
             case 'position':
                 
@@ -1257,38 +1274,56 @@ class CVController extends Controller
                 $datestart = $datestart.' 00:00:00';
                 $dateend = $request->input('endDate');
                 $dateend = $dateend.' 23:59:59';
-                
-                list($cv1,$text) = $this->statisticPositions($datestart, $dateend,$key);
+
+                $key_sta_po = $request->input('key_sta_po');
+                $listPo = $this->statusList($key_sta_po);
+                $key_po = $request->input('key_po');
+                list($cv,$text, $cv_) = $this->statisticPositions($datestart, $dateend,$key_po,$listPo);
                 break;
         }
-        Excel::create('StatisticCV', function($excel) use ($cv1,$text,$ox) {
-            $excel->sheet('mySheet', function($sheet) use ($cv1,$text){
-                $sheet->setAllBorders('thin');
-                $sheet->loadView('invoice.export')
-                  ->with('data', $cv1)->with('text', $text);
-            });
-            if($ox != 'position'){
-                $excel->sheet('mySheet1', function($sheet) use ($cv1,$text){
-                    // $sheet->fromArray($data, null, 'A1', false, false);
-                    // $sheet->setStyle(array(
-                    //     'font' => array(
-                    //        // 'family'     => 'Calibri',
-                    //         'size'      =>  12,
-                    //     ),
-                    // ));
+        
+        if($ox == 'position'){
+            Excel::create('StatisticCV', function($excel) use ($cv, $text, $ox, $cv_) {
+                $excel->sheet('mySheet', function($sheet) use ($cv, $text, $cv_){
                     $sheet->setAllBorders('thin');
-                    $sheet->loadView('invoice.export1')
-                      ->with('data', $cv1)->with('text', $text);
+                    $sheet->loadView('invoice.export')
+                      ->with('data', $cv)->with('text', $text);
                 });
 
-                $excel->sheet('mySheet2', function($sheet) use ($cv1,$text){
+                $excel->sheet('mySheet', function($sheet) use ($cv, $text, $cv_){
+                    $sheet->setAllBorders('thin');
+                    $sheet->loadView('invoice.export3')
+                      ->with('data', $cv)->with('text', $text)->with('cv_', $cv_);
+                });
+            })->store($type, 'downloadCV'); 
+        } else {
+            Excel::create('StatisticCV', function($excel) use ($cv, $text, $ox) {
+                $excel->sheet('mySheet', function($sheet) use ($cv, $text){
+                    $sheet->setAllBorders('thin');
+                    $sheet->loadView('invoice.export')
+                      ->with('data', $cv)->with('text', $text);
+                });
+                $excel->sheet('mySheet1', function($sheet) use ($cv,$text){
+                        // $sheet->fromArray($data, null, 'A1', false, false);
+                        // $sheet->setStyle(array(
+                        //     'font' => array(
+                        //        // 'family'     => 'Calibri',
+                        //         'size'      =>  12,
+                        //     ),
+                        // ));
+                        $sheet->setAllBorders('thin');
+                        $sheet->loadView('invoice.export1')
+                          ->with('data', $cv)->with('text', $text);
+                    });
+
+                $excel->sheet('mySheet2', function($sheet) use ($cv,$text){
                     $sheet->setAllBorders('thin');
                     $sheet->loadView('invoice.export2')
-                      ->with('data', $cv1)->with('text', $text);
+                      ->with('data', $cv)->with('text', $text);
                 });
-            }
-
-        })->store($type, 'downloadCV');
+            })->store($type, 'downloadCV'); 
+        } 
+        
         //CV/downloadCV => url đến file
         //nameFile download : StatisticCV
         //Request::server('HTTP_HOST') ==  $_SERVER['HTTP_HOST'];

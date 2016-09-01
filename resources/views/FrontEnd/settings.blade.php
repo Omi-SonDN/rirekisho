@@ -1,6 +1,5 @@
 @extends('xCV.template')
-<title>Cài đặt thông tin chung</title>
-
+@section('title')Cài đặt thông tin chung @endsection
 @section('content')
     <form action="{{route('fgeneral::update')}}" method="post" class="my-forms" id="profile-forms"
           enctype="multipart/form-data">

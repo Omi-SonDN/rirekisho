@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Thêm nhóm người dùng</title>
+@section('title')Thêm nhóm người dùng @endsection
 
 @section('content')
     </ul>

@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Thông tin cá nhân</title>
+@section('title')Thông tin cá nhân @endsection
 @section('content')
 
     <div class="member_content userprof fullwidth" style="display:block;" id="member_content">
@@ -9,19 +9,19 @@
                 <h1 class="blocksubhead prof_blocksubhead">
 
 				<span id="userinfo">
-					<span class="member_username" ><font color="#996633 ">{{Auth::User()->userName}}</font></span>
+					<span class="member_username"><font color="#996633 ">{{$dtUser->userName}}</font></span>
 					<span class="member_status">
                     </span>
 
                         <div style="width: 210px; height: 150px; margin-top: 20px;">
-                        @if(Auth::User()->image!="")
-                            <img style="width: 210px; height: 150px" src=<?php echo "/img/thumbnail/thumb_" .Auth::User()->image;?> >
+                        @if($dtUser->image != "" && file_exists(public_path($path = '/img/thumbnail/thumb_'.$dtUser->image)))
+                            <img style="height: 150px; width: 210px;" src="{{ asset($path) }}">
                         @else
                             <div class="dropzone-text-place"
-                                 style="background-color:{{Auth::User()->getThemeColor()}} ">
+                                 style="background-color:{{$dtUser->getThemeColor()}} ">
                                 <span class="dropzone-text letter-avatar"
-                                      style="color: {{Auth::User()->getTextColor()}};">
-                                    {{substr(trim(Auth::User()->Name), 0, 1)}}
+                                      style="color: {{$dtUser->getTextColor()}};">
+                                    {{substr(trim($dtUser->Name), 0, 1)}}
                                 </span>
                             </div>
                         @endif
@@ -42,20 +42,19 @@
 
                         <div class="blockrow member_blockrow">
                             <?php
-                                $date = Auth::User()->created_at;
-                                // $date = date_format($date, 'd-m-Y H:i');
+                            $date = $dtUser->created_at;
                                 $date = date('d-m-Y H:i A',strtotime($date))
                             ?>
 
                             <dl class="stats">
                                 <dt>Ngày tham gia:</dt>
-                                <dd>{{$date}}</dd>
+                                <dd> {{$date}}</dd>
                             </dl>
 
 
                             <dl class="stats">
                                 <dt>Vị trí: </dt>
-                                <dd>{{Auth::User()->getRole()}}</dd>
+                                <dd> {{$dtUser->getRole()}}</dd>
                             </dl>
 
                         </div>
@@ -90,62 +89,44 @@
                     <!-- / activitystream -->
                 </div>
                 <div id="view-aboutme" class="view_section">
-
-
                     <div class="box_user_pro">
-
-                        <!-- basic information -->
                             <p class="title_pro">Thông tin cơ bản</p>
                             <ul class="userProfile">
                                 <?php
-                                    $date = date_create(Auth::User()->created_at);
-                                    $date = date_format($date, 'd-m-Y');
+                                    //$date = date_create($dtUser->created_at);
+                                    //$date = date_format($date, 'd-m-Y');
                                 ?>
-                        
                                 <li class="user_pro_">
                                     <dt style="float: left">Họ và tên: </dt>
-                                    <dd style="float: left">{{Auth::user()->Name}}</dd>
+                                    <dd style="float: left"> {{$dtUser->Name}}</dd>
                                 </li>
-
-
                                 <li class="user_pro_">
                                     <dt>Email: </dt>
-                                    <dd>{{Auth::user()->email}}</dd>
+                                    <dd> {{$dtUser->email}}</dd>
                                 </li>
-
-
                                 <li class="user_pro_">
                                     <dt>Ngày sinh:</dt>
-                                    <dd>{{Auth::user()->Birthday}}</dd>
+                                    <dd> {{$dtUser->Birthday}}</dd>
                                 </li>
                                 <li class="user_pro_">
                                     <dt>Giới tính:</dt>
-                                    <dd>{{Auth::user()->JGender}}</dd>
+                                    <dd> {{$dtUser->JGender}}</dd>
                                 </li>
                                 <li class="user_pro_">
                                     <dt>Địa chỉ:</dt>
-                                    <dd>{{Auth::user()->Address}}</dd>
+                                    <dd> {{$dtUser->Address}}</dd>
                                 </li>
                             </ul>
-
                     </div>
-
                     <div class="box_user_pro" style="height: 150px">
-
-                        <!-- basic information -->
-                            <p class="title_pro">Giới Thiệu bản thân</p>
+                        <p class="title_pro">Giới Thiệu bản thân</p>
                             <ul class="userProfile">
-                            
                                 <li class="user_pro_">
-                                    <dd style="float: left">{{Auth::user()->Self_intro}}</dd>
+                                    <dd style="float: left"> {{$dtUser->Self_intro}}</dd>
                                 </li>
-                       
                             </ul>
-
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>

@@ -329,6 +329,9 @@ a.bookmark-btn {
     right: 0;
     bottom: 0;
     left: 0;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
 }
 
 #dropzone img {
@@ -994,6 +997,7 @@ label.title {
 }
 .imagetable .searchbox-user {
     padding: 5px 0 7px 5px;
+    width: 180px;
 }
 /* ------------ css table show cv -------------- */
 .bd table.table-show td{

@@ -1,5 +1,5 @@
 @extends('xCV.template')
-<title>Sửa nhóm</title>
+@section('title')Sửa nhóm @endsection
 
 @section('content')
     <form class="form-horizontal" action="{{route('group_user.update', $Group_user->id)}}" method="post" class="my-forms" id="profile-forms"
