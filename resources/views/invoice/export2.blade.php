@@ -36,7 +36,7 @@
                         @if($list_ != null)
                             <tr>
                                 <td style="">{{ $cv_->ox }} </td>
-                                <td style="">{{$list_->User->Name}}</td>
+                                <td style="width: 20px">{{$list_->User->Name}}</td>
                                 <td style="">{{$list_->User->email}}</td>
                                 <td style="">{{$list_->positionCv->NamePosition}}</td>
                                 <td style="">{{$list_->status->StatusName}}</td>
