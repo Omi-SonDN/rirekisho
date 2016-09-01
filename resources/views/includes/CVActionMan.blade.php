@@ -26,8 +26,8 @@
             @endif
             <a href="javascript:void(0);" class="btn btn-grey ml_8" title="Xóa CV {{$items->name_cv}}" onclick="getDeleteCV('{{$items->hash}}', '{{$items->type_cv}}');"><i class="fa fa-trash-o icon_24 icon-24"></i> XÓA</a>
             @if ($items->type_cv)
-                @if ($items->attach)
-                    <a  target="_blank" href="/files/{{$items->attach}}" class="btn appendflie"><i class="fa fa-cloud-download icon_24 icon-24"></i> TẢI VỀ</a>
+                @if($items->attach && file_exists(public_path($path = '/files/'.$items->attach)))
+                    <a target="_blank" href="{{$path}}" class="btn appendflie"><i class="fa fa-cloud-download icon_24 icon-24"></i> TẢI VỀ</a>
                 @else
                     <a class="appendflie"></a>
                 @endif

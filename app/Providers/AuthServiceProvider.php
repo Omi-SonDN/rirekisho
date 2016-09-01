@@ -47,7 +47,7 @@ class AuthServiceProvider extends ServiceProvider
         // @param $id
         $gate->define('update-cv', function ($user, $id) {
 
-            if($user->getRole() === 'SuperAdmin')
+            if ($user->getRole() === 'SuperAdmin')
                 return true;
 
             if ($user->getRole() == "Applicant") {
@@ -59,7 +59,7 @@ class AuthServiceProvider extends ServiceProvider
         /* profile 
         */
         $gate->define('profile', function ($user, $id) {
-            if($user->getRole() === 'SuperAdmin')
+            if ($user->getRole() === 'SuperAdmin')
                 return true;
 
             if ($user->getRole() == "Applicant" || $user->getRole() == "Visitor") {
@@ -71,13 +71,13 @@ class AuthServiceProvider extends ServiceProvider
         *   
         */
         $gate->define('view-cv', function ($user, $cv) {
-            if($user->getRole() === 'SuperAdmin')
+            if ($user->getRole() === 'SuperAdmin')
                 return true;
             if ($user->getRole() == "Applicant") {
                 if (count($cv)) {
                     return $user->id == $cv->user_id;
                 } else {
-                     return false;
+                    return false;
                 }
             } else
                 return true;
@@ -88,7 +88,7 @@ class AuthServiceProvider extends ServiceProvider
         *   use  in AppServiceProvider
         */
         $gate->define('get-cv', function ($user, $cv) {
-            if($user->getRole() === 'SuperAdmin')
+            if ($user->getRole() === 'SuperAdmin')
                 return true;
 
             if ($user->getRole() == "Applicant" || $user->getRole() == "Admin") {
@@ -152,12 +152,12 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
-         /*
-         * Kiem show CV UPLOAD FILE
-         * UngVien: chi co quyen
-         * Visitor:
-         * Admin:
-         */
+        /*
+        * Kiem show CV UPLOAD FILE
+        * UngVien: chi co quyen
+        * Visitor:
+        * Admin:
+        */
         $gate->define('show-cv-upload', function ($user, $cv) {
             if ($user->getRole() == "Applicant") {
                 if (count($cv)) {
@@ -207,12 +207,12 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
-            /*
-         * Kiem tra edit voi CV UPLOAD FILE
-         * UngVien: chi sua vc ban than
-         * Visitor: khong duoc sua cv nao
-         * Admin:  true
-         */
+        /*
+     * Kiem tra edit voi CV UPLOAD FILE
+     * UngVien: chi sua vc ban than
+     * Visitor: khong duoc sua cv nao
+     * Admin:  true
+     */
         $gate->define('edit-cv-upload', function ($user, $cv) {
             if ($user->getRole() == "Applicant") {
                 if (count($cv)) {
@@ -231,6 +231,18 @@ class AuthServiceProvider extends ServiceProvider
             } else {
                 return true;
             }
+        });
+
+
+        // Applicant khong cho phep xem cac profile khac
+        $gate->define('getAbout', function ($user, $id) {
+            if ($user->getRole() === 'SuperAdmin')
+                return true;
+
+            if ($user->getRole() == "Applicant") {
+                return $user->id == $id;
+            } else return ($user->getRole() == "Admin");
+
         });
     }
 }

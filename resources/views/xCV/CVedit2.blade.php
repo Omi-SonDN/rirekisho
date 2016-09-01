@@ -38,22 +38,3 @@
     </div><!-- End table reload-->
 
 </li>
-<li class="">
-    <div class=" float_left" style="width: 100%;">
-        <label class="label" for="Request">Lời nhắn đến nhà tuyển dụng</label>
-        <div class="input">
-            <label class="icon-left" for="Request">
-                <i class="fa fa-mail-forward "></i>
-            </label>
-            <!-- editable="Rirekisho" name=field_name  -->
-            <input id="{{$key}}" editable="Rirekisho" style="width: 90%;" name="Request"
-                   type="text" class="input-left float_left" placeholder="Lời nhắn đến nhà tuyển dụng"
-                   value=" {{ $CV->Request }}">
-            <!-- s_field_name_$key-->
-            <div class="success-status float_left" id="s_Request_{{$key}}" style="display:none;">
-                <i class="fa fa-pencil-square-o"></i>
-            </div>
-        </div>
-    </div>
-
-</li>

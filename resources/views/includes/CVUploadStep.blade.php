@@ -13,7 +13,7 @@
 <ul slide-toggle=true>
     <li>
         <div class="hasfile">
-            @if ($CV->attach)
+            @if($CV->attach && file_exists(public_path($path = '/files/'.$CV->attach)))
                 Hiên tại bạn đã có CV trên hệ thống <a href="/" title="Ominext JSC" target="_blank">Ominext JSC</a>:
                 <a href="{{'/files/' . $CV->attach}}" target="_blank" download="{{$CV->attach}}" title="File CV: {{$CV->attach}}">{{$CV->attach}}</a>
 

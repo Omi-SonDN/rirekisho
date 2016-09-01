@@ -51,7 +51,7 @@
         </li>
 
         @foreach($list as $item)
-            @if($item->live)
+            @if($item ->live)
             <li class="track-list">
                 <label style="display: table;width:100%;">
                     <span style="display: table-cell;width: 30px;"></span>

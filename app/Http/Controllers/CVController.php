@@ -39,22 +39,21 @@ class CVController extends Controller
             $s_name = '';
         }
 
-        if ($request->has('positions') ) {
+        if ($request->has('positions')) {
             $positions = (int)$request->get('positions');
-        }else {
+        } else {
             $positions = null;
-
         }
 
         if ($request->has('status')) {
             $status = (int)$request->get('status');
-        }else {
+        } else {
             $status = '';
         }
 
         if ($request->has('data-field')) {
             $_field = $request->get('data-field');
-        }else {
+        } else {
             $_field = 'updated_at';
         }
 
@@ -271,9 +270,8 @@ class CVController extends Controller
         $Records = $CV->Record;
         $Records = $Records->sortBy("Date");
 
-        // $serve = 'http://'.$_SERVER['HTTP_HOST'].'/img/thumbnail/thumb_';
-        $serve = public_path().'/img/thumbnail/thumb_';
-
+        $serve = public_path('/img/thumbnail') .'/thumb_';
+    
         $html = View::make('invoice.cv')
             ->with('CV', $CV)->with('Records', $Records)->with('serve', $serve)->render();
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
@@ -1030,13 +1028,26 @@ class CVController extends Controller
     public function statusList($key)
     {
         if($key != null){
-            $listPo = array();
-            for($i = 0; $i < count($key); $i++) {
-                $apply = DB::table('status')
-                 ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
-                $listPo[] = $apply[0];
+            if($key[0] != null){
+                $listPo = array();
+                for($i = 0; $i < count($key); $i++) {
+                    $apply = DB::table('status')
+                     ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
+                    $listPo[] = $apply[0];
+                }
+                return $listPo;
+            } else {
+                if(count($key) != 1){
+                    $listPo = array();
+                    for($i = 1; $i < count($key); $i++) {
+                        $apply = DB::table('status')
+                         ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
+                        $listPo[] = $apply[0];
+                    }
+                    return $listPo;
+                } else return '';
             }
-            return $listPo;
+            
         } else return $key;
     }
 
