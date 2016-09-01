@@ -49,7 +49,9 @@
                 </a>
             </div>
         </li>
+
         @foreach($list as $item)
+            @if($item ->live)
             <li class="track-list">
                 <label style="display: table;width:100%;">
                     <span style="display: table-cell;width: 30px;"></span>
@@ -60,6 +62,7 @@
                            class="plus-button" type="button" style="display: table-cell;width: 25px;" value="Xoá ">
                 </label>
             </li>
+            @endif
         @endforeach
         @endcan
         @can('Admin')
@@ -72,11 +75,9 @@
             {{--<i class="fa fa-angle-down"></i>--}}
             <i class="fa fa-angle-down pull-right add-submenu" data-toggle="collapse" data-target="#submenu-sa"></i>
             <ul class="nav collapse" id="submenu-sa">
-                
                 <li><a href="{{url('positions')}}">Quản lý vị trí tuyển dụng</a></li>
                 <li><a href="{{url('status')}}">Quản lý trạng thái</a></li>
                 <li><a href="{{url('group_user')}}">Quản lý nhóm người dùng</a></li>
-                <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
             </ul>
         </li>
         <li class="nav-link">
