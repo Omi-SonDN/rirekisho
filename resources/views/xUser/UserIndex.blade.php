@@ -58,7 +58,7 @@
                                              style="background-color:{{$row->getThemeColor()}} ">
                                             <span class="dropzone-text letter-avatar"
                                                   style="color: {{$row->getTextColor()}};">
-                                                {{substr(trim($row->name), 0, 1)}}
+                                                {{substr(trim($row->userName), 0, 1)}}
                                             </span>
                                         </div>
                                     @endif
