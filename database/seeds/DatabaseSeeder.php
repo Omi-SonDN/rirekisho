@@ -338,6 +338,10 @@ class f_general extends Seeder
             'key'=>'email',
             'value'=>'phamthituoi1112@gmail.com',
             ]);
+            DB::table('f_general')->insert([
+            'key'=>'logo',
+            'value'=>'public/frontend/img/logo.png',
+            ]);
     }
 }
 class f_slide extends Seeder

@@ -17,16 +17,16 @@
                     {{-- <a class="navbar-brand" href="/"><span>Ominext JSC</span></a> --}}
 
                     <!-- IMG BASED LOGO  -->
-                    <a class="navbar-brand" href="/"><img src="{{asset('frontend/img/logo.png')}}" alt="logo"></a>
+                    <a class="navbar-brand" href="/"><img src="{{asset($settings->get('logo')->value)}}" alt="logo"></a>
 
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul id="top-menu" class="nav navbar-nav navbar-right main-nav top_header_">
-                        <li class="{{(URL::current() == url('/')) ? 'active' : ''}}"><a href="{{url('/')}}">Trang
+                        <li class="{{(\URL::current() == url('/')) ? 'active' : ''}}"><a href="{{url('/')}}">Trang
                                 chủ</a></li>
                         @if (Auth::check())
                             @can('Admin')
-                            <li class="{{(URL::current() == url('User')) ? 'active' : ''}}"><a
+                            <li class="{{(\URL::current() == url('User')) ? 'active' : ''}}"><a
                                         href="{{url('User')}}">Quản lý tài khoản</a></li>
                             <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
 

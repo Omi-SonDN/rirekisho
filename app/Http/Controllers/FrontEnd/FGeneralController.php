@@ -34,6 +34,7 @@ class FGeneralController extends Controller
         $rules = array(
             'email'=> 'required|email',
             'ominext' => 'required',
+            'logo' => 'required',
         );
         $validator = Validator::make($request->all(),$rules);
         if( $validator->fails() ){
@@ -41,6 +42,15 @@ class FGeneralController extends Controller
         } else {
             \DB::table("f_general")->where('key','email')->update(['value'=>$request->email]);
             \DB::table("f_general")->where('key','ominext')->update(['value'=>$request->ominext]);
+            
+            if ($request->file('logo')->isValid()) {
+                $arr['logo'] = $_FILES['logo']['name'];
+                $url = 'public/frontend/img/'.$_FILES['logo']['name'];
+                $request->file('logo')->move('public/frontend/img/', $_FILES['logo']['name']);
+                DB::table('f_general')->where('key','logo')->update(['value'=>$url]);
+            } else{
+                Session::flash('error','Anh khong dung dinh dang');
+            }
         }
         return redirect()
             ->route('fgeneral::list')

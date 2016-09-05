@@ -38,6 +38,17 @@
                         </div>
                     </li>
                 </ul>
+                <li class="bottom_20px">
+                        <div class="form-group">
+                            <label class="title">Logo<i style="color: red;">*</i></label>
+                                <input type="file" name='logo'/>
+                                @if ($errors->has('logo'))
+                                    <span class="help-block">
+                                        {{ $errors->first('logo') }}
+                                    </span>
+                                @endif
+                        </div>
+                    </li>
                 <ul>
                     <li class="cancel">
                         <input type="submit" form="profile-forms" name="submit1" value="Cập nhật"
@@ -45,8 +56,6 @@
                     </li>
                 </ul>
             </div>
-        </fieldset>
-        <fieldset class="tbFooter">
         </fieldset>
     </form>
 @stop

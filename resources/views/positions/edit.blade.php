@@ -72,7 +72,5 @@
                 </ul>
             </div>
         </fieldset>
-        <fieldset class="tbFooter">
-        </fieldset>
     </form>
 @stop
