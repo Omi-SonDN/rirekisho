@@ -3,16 +3,15 @@
         @can('Applicant')
         <li class="nav-link"></li>
         <li class="nav-link">
-            <a class="have-submenu" href="{{action('CVController@getInfo')}}">CV của tôi</a>
+            <a class="have-submenu" href="#" data-toggle="collapse" data-target="#submenu1">CV của tôi</a>
             <i class="fa fa-angle-down pull-right add-submenu" data-toggle="collapse" data-target="#submenu1"></i>
             <ul class="nav collapse" id="submenu1">
-                {{--<li class=""><a href="{{action('CVController@getInfo')}}">Danh sách CV của tôi</a></li>--}}
+                <li class=""><a href="{{action('CVController@getInfo')}}">Thông tin CV của tôi</a></li>
                 @if (count($CV))
                     @if(count($CV) > 1)
                         @foreach($CV as $items)
                             @if ($items->type_cv)
-                                <li class=""><a href="{{\URL('CV/upload/'.$items->Hash)}}">Xem CV đính kèm</a>
-                                </li>
+                                <li class=""><a href="{{\URL('CV/upload/'.$items->Hash)}}">Xem CV đính kèm</a></li>
                             @else
                                 <li class=""><a href="{{url('CV',[$items->hash])}}">Xem CV từng bước</a></li>
                             @endif
@@ -40,18 +39,15 @@
         @can('Visitor')
         <li class="bookmark-link">
             <div style="display: table;width:90%; ">
-                <a href="#" style="display: table-cell;width: auto;">
-                    Bookmark
-                </a>
-                <a data-action="reload" style="display: table-cell;color:gray;width: 10%; font-weight: 200;"
-                   class="moving">
+                <a href="#" style="display: table-cell;width: auto;"> Bookmark </a>
+                <a data-action="reload" style="display: table-cell;color:gray;width: 10%; font-weight: 200;" class="moving">
                     <i class="fa fa-refresh"></i>
                 </a>
             </div>
         </li>
 
         @foreach($list as $item)
-            @if($item ->live)
+            @if ($item ->live)
             <li class="track-list">
                 <label style="display: table;width:100%;">
                     <span style="display: table-cell;width: 30px;"></span>
@@ -71,7 +67,7 @@
             <li class="nav-link"><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
         @endcan
         @can('SuperAdmin')
-        <li class="nav-link"><a href="#" >Cài đặt </a>
+        <li class="nav-link"><a href="#" data-toggle="collapse" data-target="#submenu-sa">Cài đặt </a>
             {{--<i class="fa fa-angle-down"></i>--}}
             <i class="fa fa-angle-down pull-right add-submenu" data-toggle="collapse" data-target="#submenu-sa"></i>
             <ul class="nav collapse" id="submenu-sa">
@@ -81,7 +77,7 @@
             </ul>
         </li>
         <li class="nav-link">
-            <a href="#">Frontend </a>
+            <a href="#" data-toggle="collapse" data-target="#submenu-fr">Frontend </a>
             <i class="fa fa-angle-down pull-right add-submenu" data-toggle="collapse" data-target="#submenu-fr"></i>
             {{--<i class="fa fa-angle-down"></i>--}}
             <ul class="nav collapse" id="submenu-fr">

@@ -34,7 +34,7 @@ class CreateCvsTable extends Migration
             $table->string('github');
             $table->string('linkedin');
             $table->integer('active_by')->unsigned();
-            $table->integer('user_gioi_thieu')->default(0);
+            $table->text('user_gioi_thieu')->default(null);
             $table->timestamps();
         });
     }

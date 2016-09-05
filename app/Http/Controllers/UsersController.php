@@ -523,7 +523,7 @@ class UsersController extends Controller
 
     public function getUserLogout(){
         Auth::logout();
-        Session::flush();
+        \Session::flush();
         return '';
     }
 

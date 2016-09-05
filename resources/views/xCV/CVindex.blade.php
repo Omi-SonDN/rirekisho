@@ -99,7 +99,6 @@
                 <thead>
                 <tr>
                     <th class="ab none-sort set_{{\Auth::user()->hash}}" data-sort="" data-field="" style="width: 75px">Ảnh</th>
-                    <th class="ab none-sort" style="width: 100px">Tên tài khoản</th>
                     <th @if (Request::has('data-field') && Request::has('data-sort'))
                         @if(Request::input('data-field') == 'name')
                             @if (Request::input('data-sort') == 'asc ')
@@ -177,6 +176,7 @@
                                 @endif
                                 onclick="onclickSetData(this);" data-field="Status" style="width: 200px">Trạng thái
                     </th>
+                    <th class="ab none-sort" style="width: 50px; text-align: center">Người giới thiệu</th>
                     @endcan
                     @can('Admin')
                     <th class="ab none-sort" style="width: 30px;color: #666699;font-size: 13pt;">Hành động</th>

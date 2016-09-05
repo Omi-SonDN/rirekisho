@@ -446,7 +446,7 @@ function rmListElement() {
 }
 
 function addBtDel() {
-    return $('.active-del').html('<button class="btn btn-primary" onclick="multi_del_use()"><i class="fa  fa-trash-o" style="margin: 0 auto;"></i> Delete selected</button>');
+    return $('.active-del').html('<button class="btn btn-primary" onclick="multi_del_use()"><i class="fa  fa-trash-o" style="margin: 0 auto;"></i> Xóa tài khoản đã chọn</button>');
 }
 
 function rmBtDel() {

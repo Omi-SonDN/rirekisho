@@ -167,4 +167,22 @@ class CV extends Model
         return Hashids::encode($this->getKey());
     }
 
+//    /************* scope nguoi gioi thieu ket hop voi email *********************/
+//    public function getUserInfoAttribute()
+//    {
+//        $_us = \DB::table('users')->where('id',$this->user_gioi_thieu)->first();
+//        if(count($_us) && $_us->First_name) {
+//            return $_us->Last_name . " " . $_us->First_name;
+//        } else {
+//            return '-';
+//        }
+//    }
+    public function getUserInfoAttribute()
+    {
+        if($this->user_gioi_thieu) {
+            return $this->user_gioi_thieu;
+        } else {
+            return '-';
+        }
+    }
 }

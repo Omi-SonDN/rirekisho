@@ -23,7 +23,6 @@
                     @endif
                 </div>
             </td>
-            <td><a href="{{url('profile/'. $CV->User->hash)}}">{!! $CV->User->userName !!}</a></td>
             <td class="name">
                 @if ($CV->type_cv)
                     <a href="{{ \URL('CV/upload/'. $CV->hash) }}" title="Xem CV {{$CV->name_cv}}">{{ $CV->User->Name }} </a>
@@ -54,7 +53,7 @@
             </td>
             @endcan
             @can('Admin')
-
+            <td style="text-align: center">{!! $CV->UserInfo !!}</td>
             <td style="text-align: center">
                 <table style="margin: 0 auto">
                     <tr>

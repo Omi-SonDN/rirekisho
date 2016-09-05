@@ -569,12 +569,14 @@ function getDeleteCV(id, type) {
 function upActNotee(idCV, idAct, idNote, idUserCeo) {
     var is_check = document.getElementById("myCheck_" + idCV);
     var _notes = document.getElementById("txt_" + idCV).value;
-    var is_ceo = document.getElementById("textarea_ceo_" + idCV);
-    if (is_ceo) {
-        var _ceo = is_ceo.attributes['valuser'].nodeValue;
-    } else {
-        var _ceo = '';
-    }
+    var _ceo = document.getElementById("textarea_ceo_" + idCV).value;
+    //var is_ceo = document.getElementById("textarea_ceo_" + idCV);
+    //if (is_ceo) {
+    //    var _ceo = is_ceo.attributes['valuser'].nodeValue;
+    //} else {
+    //    var _ceo = '';
+    //}
+
     if (is_check == undefined || !is_check.checked) {
         var _check = 0;
     } else {
@@ -872,8 +874,9 @@ function clearBoxUserCeo(idBoxSearch, idUserCeo){
     // neu ton tai co nguoi gioi thieu
     // xoa nguoi gioi thieu
     if ($('#' +idUserCeo).length) {
-        $('#' + idBoxSearch).attr('disabled', false);
-        $('#' + idUserCeo).remove();
+        //$('#' + idBoxSearch).attr('disabled', false);
+        //$('#' + idUserCeo).remove();
+        $('#' + idUserCeo).val(' ');
         arr__ActNotes[idUserCeo] = true;
 
         if(is_idCV) {
