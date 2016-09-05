@@ -60,9 +60,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function getRole()
     {
-        if ($this->role == 0) $Role = "Applicant";
+        if ($this->role == 0) $Role = "Ứng viên";//Applicant
         elseif ($this->role == 1) {
-            $Role = "Visitor";
+            $Role = "Duyệt CV";//Visitor
         } elseif ($this->role == 2) {
             $Role = "Admin";
         } elseif ($this->role == 3) {

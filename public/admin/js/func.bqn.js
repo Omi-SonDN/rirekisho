@@ -228,7 +228,7 @@ $(document).ready(function ($) {
                 zebra: ["even", "odd"],
                 filter_startsWith: false,
                 filter_childRows: true,
-                resizable_widths: ['1%', '15%', '13%', '7%', '10%', '20%', '7%', '5%', '5%']
+                resizable_widths: ['1%', '15%', '13%', '7%', '10%', '20%', '7%', '10%', '5%']
             },
             // Add select box to 4th column (zero-based index)
             // each option has an associated function that returns a boolean

@@ -16,7 +16,7 @@
                         <label class="search_icon" for="text">
                             <i class="fa fa-search"></i>
                         </label>
-                        <input id="table-search" class="list_search " placeholder="Search " type="text">
+                        <input id="table-search" class="list_search " placeholder="Tìm kiếm tên tài khoản" type="text">
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <th class="header-none-sort sort-tb">Sinh nhật</th>
                     <th class="header-none-sort sort-tb">Số điện thoại</th>
                     <th class="header-none-sort sort-tb filter-select">Số CV</th>
-                    <th class="first-name sort-tb filter-select" data-placeholder="Select a type">Type</th>
+                    <th class="first-name sort-tb filter-select" data-placeholder="">Loại tài khoản</th>
                     <th class="header-none-sort filter-false"><input class="fix-class-check checkAll" type="checkbox"/>
                     </th>
                 </tr>
