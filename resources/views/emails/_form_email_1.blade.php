@@ -49,7 +49,7 @@
 
                 <div class="form-group">
                     <label for="subject" class="label label-primary">Subject: <i style="color:red">*</i> </label>
-                    <input name="subject" class="form-control" placeholder="Subject" value="[Thông báo] {{$status->status}}"/>
+                    <input name="subject" class="form-control" placeholder="Subject" value="[Thông báo từ Công ty cổ phần Ominext] {{$status->status}}"/>
                 </div>
                 @if(count($status->info))
                 <hr>

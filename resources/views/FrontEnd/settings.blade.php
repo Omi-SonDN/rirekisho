@@ -15,7 +15,7 @@
                             <label class="label" for="email">Email <i style="color: red;">*</i></label>
                             <div class="input">
                                 <input type="text" class="input-right form-data"
-                                       name="email" value="{!! old('email')?old('email'):$setting->get('email')->value !!}">
+                                       name="email" value="{!! old('email')?old('email'): $setting->get('email')->value !!}">
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         {{ $errors->first('email') }}
@@ -38,6 +38,20 @@
                         </div>
                     </li>
                 </ul>
+                <li class="bottom_20px">
+                        <div class="form-group">
+                            <label class="title">Logo<i style="color: red;">*</i></label>
+                                <input type="file" name='logo'/>
+                                @if ($errors->has('logo'))
+                                    <span class="help-block">
+                                        {{ $errors->first('logo') }}
+                                    </span>
+                                @endif
+                        </div>
+                        @if ($setting->get('logo')->value && file_exists(public_path($setting->get('logo')->value)) )
+                            <img height="35px" width="100px" src="{{asset($setting->get('logo')->value)}}" alt="logo"/>
+                        @endif
+                    </li>
                 <ul>
                     <li class="cancel">
                         <input type="submit" form="profile-forms" name="submit1" value="Cập nhật"
@@ -45,8 +59,6 @@
                     </li>
                 </ul>
             </div>
-        </fieldset>
-        <fieldset class="tbFooter">
         </fieldset>
     </form>
 @stop

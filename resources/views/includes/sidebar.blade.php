@@ -81,7 +81,7 @@
             <i class="fa fa-angle-down pull-right add-submenu" data-toggle="collapse" data-target="#submenu-fr"></i>
             {{--<i class="fa fa-angle-down"></i>--}}
             <ul class="nav collapse" id="submenu-fr">
-                <li><a href="{{url('fgeneral')}}">Thông tin chung</a></li>
+                <li><a href="{{url('fgeneral/list')}}">Thông tin chung</a></li>
                 <li><a href="{{url('slide/list')}}">Slider</a></li>
             </ul>
         </li>

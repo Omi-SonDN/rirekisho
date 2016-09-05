@@ -89,9 +89,17 @@
                         <td colspan="100%" style="text-align: center;">
                             <img
                                 @if ($CV->live)
-                                    src="{{asset('/admin/img'). '/users_online.gif' }}"
+                                    @if (file_exists(public_path('/admin/img/users_online.gif')))
+                                        src="{{asset('/admin/img'). '/users_online.gif' }}"
+                                    @else
+                                        Online
+                                     @endif
                                 @else
-                                    src="{{asset('/admin/img'). '/users_offline.gif' }}"
+                                    @if (file_exists(public_path('/admin/img/users_offline.gif')))
+                                        src="{{asset('/admin/img'). '/users_offline.gif' }}"
+                                    @else
+                                        Offline
+                                    @endif
                                 @endif
                             alt=""/>
                         </td>

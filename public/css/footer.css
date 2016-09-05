@@ -2,8 +2,8 @@
 .footer {
     padding: 30px;
     background: #d7e3e7;
+    bottom:0;
 }
-
 .footer .leter_icon {
     width: 30px;
     height: 30px;
@@ -184,6 +184,7 @@
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #push {
+    min-height: 80vh;
     transition: margin-left .5s;
 }
 

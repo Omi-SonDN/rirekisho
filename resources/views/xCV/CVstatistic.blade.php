@@ -89,6 +89,7 @@
 
                                     </select>
                                     <select id = "statusSearch1_" name="status[]" multiple="multiple">
+                                        <option value="">Trạng thái</option>
                                         @foreach ($status as $sta_)
                                             <option value="{{$sta_->id}}">{{$sta_->status}}</option>
                                         @endforeach
@@ -100,6 +101,7 @@
                             <div class="search_po_sa" id="but_search_sa" style="margin-left: 60px">
                                 <!-- <form method="GET" action="/CV/search_ab"> -->
                                     <select id = "statusSearch_" name="status[]" multiple="multiple">
+                                        <option value="">Trạng thái</option>
                                         @foreach ($status as $sta_)
                                             <option value="{{$sta_->id}}">{{$sta_->status}}</option>
                                         @endforeach

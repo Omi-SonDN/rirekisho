@@ -3,21 +3,20 @@
 @section('content')
     <div class="row">
         <a class="btn btn-primary open-modal" style="font-weight: bold; color: white;"  href="{{route('position::getaddposition')}}">Create</a>
-        <hr>
     </div>
     <div class="row">
         <div class='col-lg-12'>
-            <table class="table table-hover table-responsive" id="pos-list">
+            <table class="dataTable table table-hover table-responsive" id="pos-list">
                 <thead>
-                <th>STT</th>
-                <th>Vị trí</th>
-                <th>Kích hoạt</th>
-                <th>Icon</th>
-                <th>Mô tả</th>
-                <th>Hành động</th>
+                <th class="ab">STT</th>
+                <th class="ab">Vị trí</th>
+                <th class="ab">Kích hoạt</th>
+                <th class="ab">Icon</th>
+                <th class="ab">Mô tả</th>
+                <th class="ab">Hành động</th>
                 </thead>
                 @include('includes.flash-alert')
-                <tbody>
+                <tbody id="list-table-body">
                 @foreach($positions as $key=>$position)
                     <tr id="pos{{ $position->id }}">
                         <td>
@@ -36,16 +35,19 @@
                             {{$position->description}}
                         </td>
                         <td>
-                            <a style="font-weight: bold; color: white;" href="{{url('position',[$position ,'view'])}}" class="btn ink-reaction btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin vị trí tuyển dụng"><span class="glyphicon glyphicon-eye-open"></span></a>
-                            <a style="font-weight: bold; color: white;" href="{{url('position',[$position ,'edit'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                            <a style="font-weight: bold; color: white;" href="{{url('position',[$position ,'delete'])}}" class="btn ink-reaction btn-primary"><span class="glyphicon glyphicon-remove"></span></a>
+                            <table style="margin:0 auto">
+                                <tr>
+                                    <td><a href="{{url('position',[$position ,'view'])}}" data-toggle="tooltip" data-placement="top" data-original-title="Thông tin vị trí tuyển dụng"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                                    <td><a href="{{url('position',[$position ,'edit'])}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                                    <td><a href="{{url('position',[$position ,'delete'])}}"><span class="fa fa-trash-o" aria-hidden="true"></span></a></td>
+                                </tr>
+                            </table>
                         </td>
-
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-            {!! $positions->render() !!}
+            <div style="float:right;">{!! $positions->render() !!}</div>
         </div>
     </div>
 @endsection

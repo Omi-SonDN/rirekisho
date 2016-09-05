@@ -98,7 +98,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{id}/view',['as'=>'view','uses'=>'FrontEnd\SlideController@view'])->where(['id'=>'[0-9]+']);
     });
     Route::group(['prefix' => 'fgeneral','as'=>'fgeneral::'], function () {
-        Route::get('/', ['as' => 'list', 'uses' => 'FrontEnd\FGeneralController@index']);
         Route::get('/list', ['as' => 'list', 'uses' => 'FrontEnd\FGeneralController@index']);
         Route::post('/update', ['as' => 'update', 'uses' => 'FrontEnd\FGeneralController@update']);
     });

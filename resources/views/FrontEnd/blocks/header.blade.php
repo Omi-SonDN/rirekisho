@@ -12,21 +12,23 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!-- LOGO -->
-                    <!-- TEXT BASED LOGO -->
-                    {{-- <a class="navbar-brand" href="/"><span>Ominext JSC</span></a> --}}
-
                     <!-- IMG BASED LOGO  -->
-                    <a class="navbar-brand" href="/"><img src="{{asset('frontend/img/logo.png')}}" alt="logo"></a>
-
+                    <?php $logo = DB::table('f_general')->where('key', 'logo')->lists('value');?>
+                    @if (! empty($logo))
+                        @if ($logo[0] && file_exists(public_path($logo[0])) )
+                            <a class="navbar-brand" href="/"><img src="{{asset($logo[0])}}" alt="logo"/></a>
+                        @endif
+                    @else
+                        <a class="navbar-brand" href="/"><span style="color: #152f56e3"> Ominext JSC</span></a>
+                    @endif
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul id="top-menu" class="nav navbar-nav navbar-right main-nav top_header_">
-                        <li class="{{(URL::current() == url('/')) ? 'active' : ''}}"><a href="{{url('/')}}">Trang
+                        <li class="{{(\URL::current() == url('/')) ? 'active' : ''}}"><a href="{{url('/')}}">Trang
                                 chủ</a></li>
                         @if (Auth::check())
                             @can('Admin')
-                            <li class="{{(URL::current() == url('User')) ? 'active' : ''}}"><a
+                            <li class="{{(\URL::current() == url('User')) ? 'active' : ''}}"><a
                                         href="{{url('User')}}">Quản lý tài khoản</a></li>
                             <li><a href="{{\URL('CV/statistic')}}">Thống kê</a></li>
 

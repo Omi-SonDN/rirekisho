@@ -92,13 +92,7 @@
             </div>
 
         </div>
-
-        <div class="footer col-lg-12">
-            @include('includes.footer')
-        </div>
-
     </div>
-
     <!---  bootstrap-->
     <script type="text/javascript" src="{{ URL::asset('/admin/js/3.3.5-bootstrap.min.js')}}"></script>
     <!-- validate -->
@@ -133,5 +127,7 @@
     <script type="text/javascript" src="{{ URL::asset('/admin/js/func.bqn.js')}}"></script>
 
 </body>
-
+<div class="footer col-lg-12">
+    @include('includes.footer')
+</div>
 </html>

@@ -1028,13 +1028,26 @@ class CVController extends Controller
     public function statusList($key)
     {
         if($key != null){
-            $listPo = array();
-            for($i = 0; $i < count($key); $i++) {
-                $apply = DB::table('status')
-                 ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
-                $listPo[] = $apply[0];
+            if($key[0] != null){
+                $listPo = array();
+                for($i = 0; $i < count($key); $i++) {
+                    $apply = DB::table('status')
+                     ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
+                    $listPo[] = $apply[0];
+                }
+                return $listPo;
+            } else {
+                if(count($key) != 1){
+                    $listPo = array();
+                    for($i = 1; $i < count($key); $i++) {
+                        $apply = DB::table('status')
+                         ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
+                        $listPo[] = $apply[0];
+                    }
+                    return $listPo;
+                } else return '';
             }
-            return $listPo;
+            
         } else return $key;
     }
 

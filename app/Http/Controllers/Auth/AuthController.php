@@ -103,7 +103,8 @@ class AuthController extends Controller
             Cache::flush();
             Auth::logout();
 
-            return redirect()->action('FrontEnd\WellController@index');
+            //return redirect()->action('FrontEnd\WellController@index');
+            return response()->redirectTo('/',302,array("Cache-Control: no-cache, must-revalidate","Expires: Sat, 26 Jul 1997 05:00:00 GMT"));
         } else
             return redirect()->action('FrontEnd\WellController@index');
 //            return redirect()->action('Auth\AuthController@getLogin');
@@ -117,7 +118,8 @@ class AuthController extends Controller
             Cache::flush();
             Auth::logout();
 
-            return redirect()->action('FrontEnd\WellController@index');
+            //return redirect()->action('FrontEnd\WellController@index');
+            return response()->redirectTo('/',200,array("Cache-Control: no-cache, must-revalidate"));
         } else
             return redirect()->action('FrontEnd\WellController@index');
     }
