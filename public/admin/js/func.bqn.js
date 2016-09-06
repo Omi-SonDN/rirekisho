@@ -113,7 +113,7 @@ $(document).ready(function ($) {
         .tablesorter({
             // input search ///
             // bootstrap default blue green jui dropbox grey dark
-            theme: 'bootstrap',
+            theme: 'blue',
             widgets: ['zebra', 'filter', 'numbering', 'resizable'],
             // *** Appearance ***
             // fix the column widths

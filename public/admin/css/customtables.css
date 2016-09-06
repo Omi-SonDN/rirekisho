@@ -60,6 +60,7 @@ table.tablesorter tr.data {
     width: 0;
     font-size: 11pt;
     text-align: start;
+    color: #666699;
 }
 
 table.tablesorter tr.data:hover {

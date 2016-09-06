@@ -31,25 +31,25 @@
             <td>{{$row->CV->count()}}</td>
             <td> {{ $row->getRole() }}</td>
             <td>
-                <div class="col-lg-12">
-                    <input class="fix-class-check cb-element" type="checkbox"
-                           value="{{$row->hash}}"
-                           name="arrDel[]">
-                </div>
-                <div class="col-lg-12 mt8">
-                    <table style="margin: 0 auto">
-                        <tr>
-                            <td>
-                                <a href="{{url('User',$row->hash)}}" title="Sửa {{ $row->userName }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                            </td>
-                            <td>
-                                <a href="{{route('getdeluser', $row->hash)}}" onclick="return xacnhanxoa('Bạn có chắc là xóa không!')" title="Xóa {{$row->userName}}">
-                                    <span class="fa fa-trash-o" aria-hidden="true"></span>
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                <table style="margin: 0 auto">
+                    <tr>
+                        <td colspan="100%" style="text-align: center;">
+                            <input class="fix-class-check cb-element" type="checkbox"
+                                   value="{{$row->hash}}"
+                                   name="arrDel[]">
+                        </td>
+                        <td>
+                            <a href="{{url('User',$row->hash)}}" title="Sửa {{ $row->userName }}"><span
+                                        class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                        </td>
+                        <td>
+                            <a href="{{route('getdeluser', $row->hash)}}"
+                               onclick="return xacnhanxoa('Bạn có chắc là xóa không!')" title="Xóa {{$row->userName}}">
+                                <span class="fa fa-trash-o" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
     @endforeach

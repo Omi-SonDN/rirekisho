@@ -532,7 +532,7 @@ div#adSearch {
     position: relative;
 }
 
-#adSearch input#nameSearch {
+.list_search, #adSearch input#nameSearch {
     width: 20em;
     margin: 0 auto;
     line-height: 32px;
@@ -558,6 +558,11 @@ div#adSearch {
     margin-left: -4px;
 }
 .source { margin: 5px; }
+
+.search-forms > input:hover, .search-forms > input:focus {
+    border: none;
+
+}
 
 /*********************** pagination ***************** */
 
@@ -825,6 +830,16 @@ button.btn-send-email {
     font-size: 16px;
     line-height: 15px;
 }
+.bottom_action  a.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.bottom_action a.btn-primary:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
 /*  -------------Custom by tooltip cv-------------*/
 #WzBoDy {
     width: 900px;
@@ -962,6 +977,7 @@ input.fix-class-check {
     -o-transform: scale(1.5);
     margin: 0 auto;
     cursor: pointer;
+    margin-top: 7px;
 }
 
 /*fix check box in CVAct*/
