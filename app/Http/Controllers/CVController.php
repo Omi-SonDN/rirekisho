@@ -1029,25 +1029,40 @@ class CVController extends Controller
     {
         if($key != null){
             if($key[0] != null){
-                $listPo = array();
-                for($i = 0; $i < count($key); $i++) {
-                    $apply = DB::table('status')
-                     ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
-                    $listPo[] = $apply[0];
-                }
-                return $listPo;
-            } else {
-                if(count($key) != 1){
+                if($key[0] != 'allStatus'){
                     $listPo = array();
-                    for($i = 1; $i < count($key); $i++) {
+                    for($i = 0; $i < count($key); $i++) {
                         $apply = DB::table('status')
                          ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
                         $listPo[] = $apply[0];
                     }
+                } else {
+                    $liststa = Status::select('id', 'status')->get();
+                    $listPo = array();
+                    for($i = 0; $i < count($liststa); $i++) {
+                        $listPo[] = $liststa[$i];
+                    }
+                }
+                 return $listPo;
+            } else {
+                if(count($key) != 1){
+                    if($key[1] != 'allStatus'){
+                        $listPo = array();
+                        for($i = 1; $i < count($key); $i++) {
+                            $apply = DB::table('status')
+                             ->select('id', 'status')->where('id', '=', $key[$i])->get(); 
+                            $listPo[] = $apply[0];
+                        }
+                    } else{
+                        $liststa = Status::select('id', 'status')->get();
+                        $listPo = array();
+                        for($i = 0; $i < count($liststa); $i++) {
+                            $listPo[] = $liststa[$i];
+                        }
+                    }
                     return $listPo;
                 } else return '';
             }
-            
         } else return $key;
     }
 
@@ -1294,46 +1309,66 @@ class CVController extends Controller
                 list($cv,$text, $cv_) = $this->statisticPositions($datestart, $dateend,$key_po,$listPo);
                 break;
         }
+        $setWidth = array(
+                        'A'     =>  20,
+                        'B'     =>  20,
+                        'C'     =>  20,
+                        'D'     =>  20,
+                        'E'     =>  20,
+                        'F'     =>  20,
+                        'G'     =>  20,
+                        'H'     =>  20,
+                        'I'     =>  20,
+                        'J'     =>  20,
+                        'K'     =>  20,
+                        'L'     =>  20,
+                    );
         
         if($ox == 'position'){
-            Excel::create('StatisticCV', function($excel) use ($cv, $text, $ox, $cv_) {
-                $excel->sheet('mySheet', function($sheet) use ($cv, $text, $cv_){
+            Excel::create('StatisticCV', function($excel) use ($cv, $text, $ox, $cv_, $setWidth) {
+                $excel->sheet('Trạng thái', function($sheet) use ($cv, $text, $cv_, $setWidth){
                     $sheet->setAllBorders('thin');
                     $sheet->loadView('invoice.export')
                       ->with('data', $cv)->with('text', $text);
+                    $sheet->setWidth($setWidth);
                 });
 
-                $excel->sheet('mySheet', function($sheet) use ($cv, $text, $cv_){
+                $excel->sheet('Chi Tiết', function($sheet) use ($cv, $text, $cv_, $setWidth){
                     $sheet->setAllBorders('thin');
                     $sheet->loadView('invoice.export3')
                       ->with('data', $cv)->with('text', $text)->with('cv_', $cv_);
+                    $sheet->setWidth($setWidth);
                 });
             })->store($type, 'downloadCV'); 
         } else {
-            Excel::create('StatisticCV', function($excel) use ($cv, $text, $ox) {
-                $excel->sheet('mySheet', function($sheet) use ($cv, $text){
+            Excel::create('StatisticCV', function($excel) use ($cv, $text, $ox, $setWidth) {
+                $excel->sheet('Trạng thái', function($sheet) use ($cv, $text, $setWidth){
                     $sheet->setAllBorders('thin');
                     $sheet->loadView('invoice.export')
                       ->with('data', $cv)->with('text', $text);
+                    // $sheet->setWidth($setWidth);
                 });
-                $excel->sheet('mySheet1', function($sheet) use ($cv,$text){
+                $excel->sheet('Vị trí', function($sheet) use ($cv,$text, $setWidth){
                         // $sheet->fromArray($data, null, 'A1', false, false);
-                        // $sheet->setStyle(array(
-                        //     'font' => array(
-                        //        // 'family'     => 'Calibri',
-                        //         'size'      =>  12,
-                        //     ),
-                        // ));
+                        $sheet->setStyle(array(
+                            'font' => array(
+                               // 'family'     => 'Calibri',
+                                'size'      =>  12,
+                            ),
+                        ));
                         $sheet->setAllBorders('thin');
                         $sheet->loadView('invoice.export1')
                           ->with('data', $cv)->with('text', $text);
-                    });
+                        // $sheet->setWidth($setWidth);
+                });
 
-                $excel->sheet('mySheet2', function($sheet) use ($cv,$text){
+                $excel->sheet('Thống kê chi tiết', function($sheet) use ($cv, $text, $setWidth){
                     $sheet->setAllBorders('thin');
                     $sheet->loadView('invoice.export2')
                       ->with('data', $cv)->with('text', $text);
+                    // $sheet->setWidth($setWidth);
                 });
+
             })->store($type, 'downloadCV'); 
         } 
         

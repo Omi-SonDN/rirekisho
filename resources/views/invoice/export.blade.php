@@ -20,7 +20,7 @@
             <?php $listCV = $cv[0]->listPo?>
             <thead>
                 <tr>
-                    <th colspan="{{count($listCV) + 2 }}" style="text-align: center; height: 30px; background-color: #ddd;"">
+                    <th colspan="{{count($listCV) + 2 }}" style="text-align: center; height: 40px; background-color: #ddd;"">
                     Thống kê số lượng CV theo {{$text}}</th>
                 </tr>
             </thead>

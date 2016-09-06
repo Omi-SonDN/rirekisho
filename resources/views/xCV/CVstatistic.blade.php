@@ -40,7 +40,7 @@
                                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     DownLoad PDF
                                 </li>
-                                <li class="list_do" export-type='xlsx'>
+                                <li class="list_do" export-type='xls'>
                                     <i class="fa fa-file-excel-o" aria-hidden="true"></i> 
                                     Download Excel
                                 </li>
@@ -81,15 +81,17 @@
                                     <input id="startDate" data-date-format="yyyy-mm-dd" name="startDate" value="{{$dateStart}}">
                                     <label>To: </label>
                                     <input id="endDate"  data-date-format="yyyy-mm-dd" name="endDate" value="{{$day}}">
-                                    <select id = "positionsSearch" name="position" style="border: none; height: 36px; transform: translate(0,-7px);">
+                                    <select id = "positionsSearch" name="position" 
+                                    style="border: none; height: 36px; transform: translate(0,-7px); width: 165px">
                                         <option value="">Vị trí tuyển dụng</option>
                                         @foreach ($id as $position)
                                             <option value="{{$position->id}}">{{$position->name}}</option>
                                         @endforeach
 
                                     </select>
-                                    <select id = "statusSearch1_" name="status[]" multiple="multiple">
+                                    <select id = "statusSearch1_" name="status[]" multiple>
                                         <option value="">Trạng thái</option>
+                                        <option value="allStatus">Tất cả trạng thái</option>
                                         @foreach ($status as $sta_)
                                             <option value="{{$sta_->id}}">{{$sta_->status}}</option>
                                         @endforeach
@@ -100,8 +102,9 @@
                            
                             <div class="search_po_sa" id="but_search_sa" style="margin-left: 60px">
                                 <!-- <form method="GET" action="/CV/search_ab"> -->
-                                    <select id = "statusSearch_" name="status[]" multiple="multiple">
+                                    <select id = "statusSearch_" name="status[]" multiple>
                                         <option value="">Trạng thái</option>
+                                        <option value="allStatus">Tất cả trạng thái</option>
                                         @foreach ($status as $sta_)
                                             <option value="{{$sta_->id}}">{{$sta_->status}}</option>
                                         @endforeach
@@ -110,8 +113,8 @@
                                 <!-- </form> -->
                             </div>
                 
-                            <div class="row">
-                                <div class="col-md-10 col-md-offset-1">
+                            <div class="row" style="margin-top: 80px; width: 650px; margin-left: 10px">
+                                <!-- <div class="col-md-10 col-md-offset-1"> -->
                                     <div class="panel panel-default">
                                     <div class="panel-heading" style="height: 40px"></div>
                                         <div class="panel-body">
@@ -120,7 +123,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                         </div>
 
