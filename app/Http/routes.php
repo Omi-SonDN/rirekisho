@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'App\Http\Middleware\VisitorMiddleware']]
     Route::get('user/search/nguoi-gioi-thieu', ['as'=>'user.search.email', 'uses' =>'UsersController@getSearchEmail']);
 
     Route::get('downloadCV/{type}', 'CVController@downloadCV');
+    
 });
 
 Route::group(['middleware' => ['auth']], function () {
@@ -170,3 +171,4 @@ Route::group(['middleware' => ['auth']], function () {
 //FrontEnd
 route::get('/', 'FrontEnd\WellController@index');
 route::post('/contact','FrontEnd\WellController@sendMailContact');
+

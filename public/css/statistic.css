@@ -68,7 +68,8 @@
     border: 1px solid #d9d9d9;
     border-radius: 3px;
     color: #888;
-    float: left;
+    float: right;
+    transform: translate(-14px,0);
     position: relative;
     margin: auto;
     margin-bottom: 30px;
@@ -119,12 +120,12 @@
     border-image: none;
     border-style: none solid none none;
     border-width: medium 1px medium medium;
-    height: 36px;
-    width: 150px;
+    height: 34px;
+    width: 145px;
      /*transform: translate(0,5px);*/
 }
 
-.search_po_sa select#statusSearch_, .search_po_sa select#statusSearch1_ {
+.search_po_sa select#statusSearch_, .search_po_sa select#statusSearch1_{
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
@@ -133,15 +134,22 @@
     border-image: none;
     border-style: none solid none none;
     border-width: medium 1px medium medium;
-    height: 34px;
+    height:  34px;
     width: 150px;
-     transform: translate(0,2px);
+    transform: translate(0,2px);
+}
+
+
+.search_po_sa select#statusSearch_ option, .search_po_sa select#statusSearch1_ option{
+    height: 25px;
+    padding-top: 5px;
+    margin-top: 5px;
 }
 
 .search_po_sa input#searchStatistics {
     border: 0 none;
     height: 100%;
-    margin-left: -4px;
+    dmargin-left: -4px;
     width: 5em;
     transform: translate(0,-8px);
 }

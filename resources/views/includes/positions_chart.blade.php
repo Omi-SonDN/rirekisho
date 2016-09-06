@@ -25,6 +25,18 @@
             		$('#hightchart_1').show();
 
             		//var chart2 = new Highcharts.Chart({ 
+            		Highcharts.theme = {
+					   	colors: [ "#3498db", "#8085e9", "#eeaaee", "#f45b5b",  "#8d4654", "#7798BF",
+					   	"#ff0066", "#55BF3B","#7cb5ec", "#f7a35c", "#90ee7e", "#480505", "#ee1111", "#48ee11",
+					   	"#DF5353", "#1abc9c", "#2ecc71",  "#9b59b6", "#34495e", "#2c3e50", "#aaeeee",
+			            "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#bf80ff", "#8c1aff",
+			            "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#ff66b3",
+			            "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"],
+
+					};
+
+					Highcharts.setOptions(Highcharts.theme);
+
             		$('#chart').highcharts({
 			            chart: { 
 			                // renderTo: 'chart',
@@ -33,6 +45,20 @@
 					            fontFamily: 'verdana, DejaVu Sans, sans-serif'
 					        }
 			            },
+			            tooltip: {
+				            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+				            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+				                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+				            footerFormat: '</table>',
+				            shared: true,
+				            useHTML: true
+				        },
+				        plotOptions: {
+				            column: {
+				                pointPadding: 0.2,
+				                borderWidth: 0
+				            }
+				        },
 			            title: {
 			                text: '',
 			                style: {
@@ -42,7 +68,8 @@
 			                }
 			            },
 			            xAxis: {
-			                categories: ox
+			                categories: ox,
+			                crosshair: true
 			            },
 			            yAxis: {
 			                title: {
@@ -67,6 +94,20 @@
 		                renderTo: 'chart1',
 		                type: 'column'
 		            },
+		            tooltip: {
+			            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+			            footerFormat: '</table>',
+			            shared: true,
+			            useHTML: true
+			        },
+				     plotOptions: {
+				            column: {
+				                pointPadding: 0.2,
+				                borderWidth: 0
+				            }
+				        },
 		            title: {
 		                text: 'Thống kê số lượng CV theo '+ text,
 		                style: {
@@ -76,7 +117,8 @@
 		                }
 		            },
 		            xAxis: {
-		                categories: ox
+		                categories: ox,
+		                crosshair: true
 		            },
 		            yAxis: {
 		                title: {

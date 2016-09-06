@@ -4,11 +4,21 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-       .export > thead > tr > th, .export > tbody > tr > td{
+       .export > thead > tr > th{
             text-align: left;
             font-family: verdana, DejaVu Sans, sans-serif;
             border: 1px solid;
             text-align: left;
+            width: 20px;
+            background-color: #666699
+        }
+        .export > tbody > tr > td{
+            text-align: left;
+            font-family: verdana, DejaVu Sans, sans-serif;
+            border: 1px solid;
+            text-align: left;
+            width: 20px;
+
         }
     </style>
 </head>
@@ -36,7 +46,7 @@
                         @if($list_ != null)
                             <tr>
                                 <td style="">{{ $cv_->ox }} </td>
-                                <td style="width: 20px">{{$list_->User->Name}}</td>
+                                <td style="">{{$list_->User->Name}}</td>
                                 <td style="">{{$list_->User->email}}</td>
                                 <td style="">{{$list_->positionCv->NamePosition}}</td>
                                 <td style="">{{$list_->status->StatusName}}</td>
